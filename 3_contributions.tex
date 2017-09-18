@@ -5,12 +5,34 @@
 Nous avons vu que les \gls{EVC3D} doivent considérer beaucoup de critères pour 
 proposer un système réactif, robuste et permettant le passage à l'échelle en 
 intégrant les contraintes liées à la gestion de données 3D. La dimension 
-collaborative ajoute les problématiques de gestion de données concurrentes. 
-Ce chapitre présente les contributions scientifiques de cette thèse. 
+collaborative ajoute les problématiques de gestion de données concurrentes.
+En s'intéressant d'abord à au rapport des données à la 3D dans le contexte de 
+l'assemblage d'objets 3D dans une scène partagée cela permet de 
+mieux comprendre les fonctionnalités spécifiques à la 3D (transformations), 
+l'historisation des données et leur visualisation. Les ressources nécessaires à la 
+collaboration demandent une haute disponibilité et une forte réactivité. Ces 
+besoins impliquent de mettre en place une architecture de communication 
+répondant aux contraintes fonctionnelles (détection de conflit) et technologiques 
+(web).
 
-Dans un premier temps, on présente le modèle orienté évènements pour la 
+Ce chapitre présente les contributions scientifiques de cette thèse.
+Tout d'abord, on introduit le modèle orienté évènements pour la 
 visualisation et la manipulation d'objets 3D dans un environnement web. La 
-contribution insiste sur l'intégration de la partie métier de la 3D. 
+contribution insiste sur l'intégration de la partie métier de la 3D par l'utilisation de 
+patrons de conception (\gls{DDD}, \gls{CQRS}, \gls{ES}) . La réflexion concernant 
+le découpage des opérations 3D liées à la manipulation d'objets 3D est expliquée 
+dans un premier temps. Dans un second temps, pour procurer plus d'autonomie 
+aux utilisateurs, on propose de déporter le patron \gls{CQRS} uniquement sur le 
+client afin qu'il soit capable de gérer la partie métier seul. La valeur ajoutée par le 
+modèle orienté évènements ne permet pas l'échange entre les utilisateurs bien 
+qu'elle soit pensée pour intégrer les aspects métiers de cette dernière. 
+C'est pourquoi la seconde contribution s'intéresse à l'architecture de 
+communication dans un environnement web. L'architecture hybride proposée 
+repose sur une combinaison de l'architecture client-serveur et l'architecture P2P. 
+Cela tient du fait que la centralisation de l'information est nécessaire dans un 
+contexte industriel et que les propriétés du P2P permettent une haute disponibilité 
+des ressources. Cette contribution est découpée en deux parties. La première 
+concerne 
 
 %%%%%%% SECTION %%%%%%%
 %\section{Modèle évènementiel pour l'intégration du domaine 3D lors de la 
