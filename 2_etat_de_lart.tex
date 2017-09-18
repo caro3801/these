@@ -1,0 +1,380 @@
+%!TEX root = main.tex
+%\chapter{État de l'art}
+
+\section{La visualisation et manipulation 3D collaborative sur web}
+	\subsection{Introduction}
+	\subsection{Les approches centralisées}
+	\subsection{Les approches décentralisées}
+	\subsection{Conclusion}
+
+\section{Systèmes d'édition collaborative}
+	\subsection{Le modèle de cohérence CCI}
+	\subsection{Les approches pour les données 3D}
+	\subsection{Conclusion}
+
+
+\section{Les systèmes évènementiels distribués pour la collaboration}
+
+	\subsection{Introduction}
+	\subsubsection{Les évènements comme base du comportement réactif}
+	\subsubsection{Systèmes Publish / Subscribe}
+	\subsubsection{Outils de monitoring et de benchmark}
+	
+	\subsection{Domain Driven Design : lier le fonctionnel et le code}
+	
+	\gls{DDD} (ou Conception Pilotée par le Domaine) est une approche de 
+	développement logicielle qui a pour objectif de définir une vision et un 
+	\textbf{langage partagé} (\textit{ubiquitous language}) pour les personnes 
+	impliquées dans la construction d'une application \cite{Evans2003}\info{Eric 
+	Evans 
+		Domain-driven Design: Tackling Complexity in the Heart of Software}. 
+	
+	Le but est de mettre l'accent principal d'un projet sur le domaine et la logique du 
+	domaine en basant des conceptions complexes sur un modèle du domaine afin 
+	d'initier une collaboration créative entre les experts techniques et les experts du 
+	domaine pour raffiner itérativement un modèle conceptuel qui relève de 
+	problèmes 
+	spécifiques au domaine.
+	Les différents concepts du \gls{DDD} sont listés en suivant :
+	\begin{description}
+		\item[Le contexte] est le cadre dans lequel un mot apparaît qui détermine sa 
+		signification
+		\item[Le domaine] est une ontologie, une influence, ou une activité. 
+		L'étendue du sujet auquel l'utilisateur applique un programme est le domaine 
+		du logiciel 
+		\item[Le modèle] est un système d'abstraction qui décrit les aspects 
+		sélectionnés du domaine et qui sont utilisés pour résoudre les problèmes liés 
+		à ce domaine
+		\item[Le langage partagé] est un langage structuré autour du modèle du 
+		domaine utilisé par tous les membres de l'équipe pour faire référence aux 
+		activités de l'équipe permettant d'éviter la redondance et les ambigüités dans 
+		un contexte donné.
+	\end{description}
+	Le \gls{DDD} permet de connecter le modèle et son implémentation en offrant 
+	plusieurs avantages:
+	\begin{itemize}
+		\item La plasticité du système est mise en avant par l'expression de règles 
+		et de comportements qui facilitent les changements fréquents.
+		\item L'accent mis sur l'identification des interactions dans le système 
+		encourage la mise en \oe{}uvre d'une interface orientée tâches 
+		(\textit{task-based UI}).
+		\item La testabilité fonctionnelle est intégrée via les règles métier explicitées 
+		et concentrées dans une couche spécifique de l'application. Cela les rend 
+		plus facilement identifiable et testable automatiquement.
+		\item La robustesse est améliorée face aux changements dans le SI.
+	\end{itemize}
+	
+	Les notions plus détaillées qui se rapportent au \gls{DDD} sont présentées dans 
+	\cite{Evans2003} et \cite{Vernon2013}.\info{source: 
+		http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
+	
+	Le \gls{DDD} a également l'avantage de fonctionner en harmonie avec les 
+	principes de l'\gls{ES}. L'approche logicielle \gls{DDD} étant conçue pour refléter 
+	les évènements se déroulant dans la réalité métier qui ne sont pas 
+	interchangeables -- la plupart du temps. L'utilisation d'architectures 
+	basées évènements est naturelle dans ce genre d'environnement. 
+	
+	Les disciplines liées à la 3D dans un contexte industrielles ont besoin de 
+	pouvoir 
+	communiquer sur un langage commun pour permettre à chacun des 
+	intervenants 
+	de s'exprimer dans la création du produit. Par exemple, la \gls{CAO} est très 
+	utile 
+	dans un contexte d'ingénierie par l'utilisation de quatre propriétés fondamentales 
+	telles que l'historique, les fonctionnalités, la paramétrisation et le haut niveau de 
+	contrainte.
+	
+	\paragraph{Programmation réactive}
+	Les différents livres publiés par Vaughn s'attachent également à montrer la 
+	nécessitée pour les différentes branche de l'informatique à proposer des 
+	systèmes 
+	pour robustes et flexibles face aux nouvelles demandent. La publication du 
+	Manifeste Réactif encourage le développement de systèmes \og plus flexibles, 
+	à 
+	couplage faible et extensibles\fg{}.
+	
+	
+	\subsection{Command Query Responsability Segregation : garantir de 
+	l'intégrité 
+	des données }
+\label{sec:CQRS}
+Introduit par Greg Young en 2009 \cite{Young2009}, \gls{CQRS} est un patron de 
+conception qui repose sur le principe de séparation des composants de traitement 
+métier de l'information (écriture) et de la restitution de l'information (lecture). Le 
+cadre offert par ce principe permet de lever certaines contraintes d'architecture 
+comme la (\textit{scalability}) en faisant apparaître de nouvelles forces : la gestion 
+de la concurrence dans la collaboration sur des règles métier propre à la 
+modélisation 3D dans des cadres d'application spécifiques. En effet, selon le type 
+d'application des règles vont régir qui peut effectuer quelle type de modification ou 
+quelles sont les modifications qui peuvent être acceptables dans un cas et non 
+dans un autre.
+Le caractère vicié (\textit{staleness}) d'une donnée dans un environnement 
+collaboratif est récurrent. Une fois que la donnée a été montrée à un utilisateur, la 
+même donnée peut être changée par un autre utilisateur, elle est altérée. 
+\gls{CQRS} pallie cela en répondant aux besoins suivants :
+\begin{itemize}
+	\item En traitement/ écriture : besoins transactionnels, garantie de cohérence 
+	(\textit{consistency}) des données, de normalisation.
+	\item En consultation/lecture: dénormalisation, scalabilité. \info{ajouter au dico}
+\end{itemize}
+
+La plupart des architectures en couches ne font pas explicitement référence à ces 
+problèmes. Le fait de tout sauvegarder dans une base de données centralisée peut 
+être une étape dans la gestion de la collaboration mais l'altération des données est 
+souvent exacerbée par l'utilisation de caches comme accélérateur de performance.
+
+L'\textbf{immuabili\-té} en \gls{CQRS} est un concept clé qui prévient la  
+modification de l'état interne d'une commande ou d'un évènement. Les 
+commandes sont immuables car leur usage nécessite un envoi direct au domaine 
+pour être traitées. Quant aux évènements, ils sont immuables car ils représentent 
+ce qui s'est produit dans le passé (qu'on ne peut donc pas changer). \info{En ce 
+	qui concernent le \gls{CQRS} et l'\gls{ES}  finir la phrase à mettre dans l'ES}
+
+
+	
+	\subsection{Event Sourcing : certifier la fiabilité et traçabilité des données}
+	\label{sec:es}
+	L'\gls{ES} est une approche complémentaire au \gls{CQRS} pour gérer la 
+	concurrence des données et capturer l'intention de l'utilisateur. Ce patron de 
+	conception stocke les évènements en mode ajout seulement 
+	(\textit{append-only}) pour sauvegarder le résultat des commandes sur le 
+	domaine. Cela permet de conserver tous les changements qui ont mené à un 
+	état plutôt qu'uniquement l'état. Ce paradigme permet de recréer n'importe quel 
+	état d'un agrégat à partir de la liste d'évènements qu'on lui a appliqué. Cette 
+	liste représente une base la vérité du système\jp{pas clair}. 
+	\improve{improve}\gls{ES} permet de simplifier les tâches complexes dans des 
+	domaines complexes comme la 3D en ne requérant pas la synchronisation de 
+	modèle de données et du métier. 
+	
+	L'\gls{ES} est souvent présent dans des architecture asynchrones qui ont 
+	l'avantage de pouvoir utiliser des queues de message, plusieurs bases de 
+	données et où la partie lecture est éventuellement consistante.
+	La plupart de la littérature concernant ce patron se trouve en ligne, dans des 
+	billets de blog, des présentations, ou de la documentation logicielle. La 
+	littérature académique est relativement réduite, souvent rapproché des travaux 
+	sur l'évolution de graphes. Cette section fournit un aperçu des différentes 
+	définitions données de l'\gls{ES} et du vocabulaire lié à ce patron de conception.
+	
+	\textbf{Martin Fowler} Martin Fowler a été le premier à utiliser le terme 
+	d'\acrlong{ES} en 2005. Il définit l'\gls{ES} comme \og une série de 
+	changements 
+	de l'état d'une application\fg{}'.  \og série d'évènements capture tout ce qui est 
+	nécessaire à la reconstruction de l'état courant'\fg{}. Il voit les évènements 
+	comme 
+	immuables et le journal d'évènement (\textit{event log}) comme un stockage 
+	linéaire (\textit{append only store}) des évènements. Les évènements ne sont 
+	jamais supprimés, le seul moyen de l'''annuler'' consiste à effectuer générer un 
+	évènement rétroactif. Une fois qu'un évènement rétroactif est ajouté, 
+	l'évènement 
+	rétroactif agit à l'inverse de l'évènement précédent pour compenser ses effets. 
+	Dans ce billet, Fowler n'établit pas clairement la distinction entre les 
+	évènements 
+	et les commandes qui déclenchent ces évènements. Ce problème est 
+	considéré 
+	dans plusieurs travaux.
+	
+	\textbf{Greg Young} Auteur renommé dans le domaine de l'\gls{ES}, Greg 
+	Young décrit l'\gls{ES} comme \og le stockage de l'état courant sous la forme 
+	d'une série d'évènements et la reconstruction de l'état du système en rejouant 
+	cette série d'évènements'\fg{}. D'après lui, le journal d'évènements a également 
+	un comportement linéaire : les évènements qui sont déjà arrivés ne peuvent 
+	être défaits. Ce que Fowler appelle évènements rétroactifs, Young le décrit 
+	comme des actions inverses.
+	
+	\textbf{Udi Dahan} Udi Dahan est également un auteur de billets de blog 
+	prolifique sur les systèmes \gls{ES}. Dans sa définition de l'\gls{ES}, Dahan 
+	insiste sur le fait que ``l'état du modèle du domain est persisté comme un 
+	\textit{flux} d'évènements plutôt qu'un simple instantané''.
+	
+	
+	Les avantages et les inconvénients de l'approche \gls{ES}, incluant et discutant 
+	notamment ceux relevés par \cite{Klamer2013a}.
+	%
+	\begin{figure}[!h]
+		
+		\centering
+		\noindent
+		\begin{tikzpicture}[node distance=2.5cm,
+		every node/.style={ font=\scriptsize}, align=left,text width=5em,
+		text centered,
+		axis/.style={very thick, ->, >=stealth',yshift=-1cm}, draw]
+		% Specification of nodes (position, etc.)
+		
+		\node (e1)		[event]          {Created Scene \\"MyScene" 1};
+		\node (e2)	  	[event, right of=e1]          {Added Mesh "Bunny" 1 \\to Scene 
+		1};
+		\node (e3)	  	[event, right of=e2]          {Added Mesh \\"Teapot" 2  \\to 
+		Scene 1};
+		\node (e4)	  	[eventn, right of=e3]          {Translated \\Mesh 2 to 
+		\{x:0,y:0,z:1\}};
+		\draw[axis] (-1.3,0)  -- (12.5,0) node(xline)[]{~~~~~~~~~~~Temps};
+		
+		\end{tikzpicture}
+		\caption{Transaction en Event-Sourcing}
+		\label{fig:es-transaction}
+	\end{figure}
+	
+	\begin{figure}[!h]
+		\centering
+		\noindent
+		\begin{tikzpicture}[node distance=2.5cm,
+		every node/.style={ font=\scriptsize}, align=center,text width=5em,
+		text centered,
+		axis/.style={very thick, ->, >=stealth',yshift=-1cm}, draw]
+		% Specification of nodes (position, etc.)
+		
+		\node (e1)		[event]          {Created Scene \\"MyScene" 1};
+		\node (e2)	  	[event, right of=e1]          {Added Mesh "Bunny" 1 \\to Scene 
+		1};
+		\node (e3)	  	[event, right of=e2]          {Added Mesh \\"Teapot" 2  \\to 
+		Scene 1};
+		\node (e4)	  	[event, right of=e3]          {Translated \\Mesh 2 to 
+		\{x:0,y:0,z:1\}};
+		\node (e5)	  	[eventc, right of=e4]          {Canceled translation on Mesh 2};
+		\draw[axis] (-1.3,0)  -- (12.5,0) node(xline)[]{~~~~~~~~~~~Temps};
+		\end{tikzpicture}
+		\caption{Transaction avec compensation en Event-Sourcing}
+		\label{fig:es-transaction-delete}
+	\end{figure}
+	
+	
+	\begin{figure}[t]
+		\centering
+		
+		\subfloat[Sans la notion de snapshot]{
+			\includegraphics[width=0.4\textwidth]{without-snapshot.eps}
+			\label{fig:es-without-snapshot}
+		}
+		\subfloat[Avec la notion de snapshot]{
+			\includegraphics[width=0.4\textwidth]{without-snapshot.eps}
+			\label{fig:es-snapshot}
+		}
+		\caption{Snapshot en Event-Sourcing}
+	\end{figure}
+	
+	\subsubsection{Avantages}
+	L'\gls{ES} peut apporter beaucoup d'avantages à une application, notamment 
+	lorsque les besoins en traçabilité de l'information sont importants comme dans 
+	la modélisation collaborative de données 3D.
+	L'historique du système est accessible tout au long de la vie de l'application ce 
+	qui implique qu'il est non seulement possible d'accéder à l'état courant du 
+	système, mais également toutes les actions ayant mené jusqu'à cet état. C'est 
+	un avantage certain pour les système critiques, les applications d'Informatique 
+	Décisionnelle (\gls{BI}) ou les applications collaboratives. La pratique la plus 
+	courante est de proposer un système principal et d'ajouter une multitude de 
+	sous-systèmes qui enregistrent les différentes métriques (analyse d'un ou 
+	plusieurs axes, \textit{reporting} sur une propriété) du système principal. Avec 
+	l'\gls{ES}, il est toujours possible de regarder <<dans le passé>> et récupérer 
+	les données à partir de ce moment. Par comparaison, les avantages de 
+	l'\gls{ES} sur l'Active Record sont:
+	\begin{itemize}
+		\item un journal complet de tous les changements d'état,
+		\item une traçabilité et un débogage efficace,
+		\item de très bonnes performances,
+		\item pas de mapping objet-relationnel (ORM)\info{citer fowler's book}.
+	\end{itemize}
+	
+	
+	\paragraph{Exemple} 
+	Une revue de projet d'une scène est effectuée dans le cadre d'une application 
+	collaborative de modélisation 3D en ligne. Le chef de projet remarque qu'un 
+	objet a subi énormément de modifications par rapport aux autres. Il examine en 
+	particulier cet objet pour en connaître les causes. Voici deux exemples 
+	d'observations possibles : 1/ les spécifications ne sont pas assez claires 2/ 
+	deux collaborateurs sont opposés sur la façon de modifier l'objet. L'origine de 
+	ces changements identifiée, le chef de projet pourra alors intervenir et clarifier 
+	le sujet. \improve{style exemple}
+	
+	\paragraph{Résolution} Avec un système classique, la fonctionnalité doit être 
+	créée pour enregistrer ce traitement puis être testée et implémentée (dans cet 
+	exemple, il en faudrait deux). Seulement après, un rapport pourra être délivré. 
+	Dans un environnement utilisant l'\gls{ES}, tous les évènements existent déjà 
+	donc les données sont déjà disponibles et ont seulement à être analysées 
+	(dans 
+	notre exemples, les informations sont inhérentes aux évènements). De plus, les 
+	évènements étant stockés depuis le début de la vie de l'application\jp{préciser : 
+		début de la vie}, beaucoup plus de données peuvent être analysées. On 
+		pourra par 
+	exemple demander toutes les modifications d'un objet depuis la dernière 
+	connexion d'un utilisateur pour lui communiquer visuellement les différences par 
+	rapport à sa dernière visite.
+	
+	
+	
+	\subsubsection{Inconvénients}
+	Les performances de l'application peuvent être affectées par l'utilisation de 
+	l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Store, il est 
+	nécessaire de le calculer à partir des évènements reçus.
+	A chaque évènement créé (et stocké), ce processus sera alourdi car ils ne 
+	peuvent être supprimés. Plus la pile d'évènements est longue, plus cela prend 
+	du temps (linéaire). On peut considérer d'une part que l'on a besoin des 
+	évènements que lorsque qu'une commande est effectuée\info{rehydratation d'un 
+	agrégat diff avec projection -> eventually consistence (proj = EC /rehy -> 
+	valides}.\unsure{Dans tous les autres cas l'utilisation de \textit{snapshots} 
+	permet de contrer proprement ce problème en offrant une forme dénormalisée 
+	de la donnée.} Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
+	moment qui correspond à l'empilement d'évènements ayant mené à cet état. En 
+	créant un \gls{snapshot}, on évite de reconstruire un état à partir du début de la 
+	vie de l'agrégat; on empile les nouveaux évènements à partir de ce snapshot. 
+	L'utilisation du \gls{snapshot} est intéressante à partir du moment où la pile 
+	d'évènements devient plus lourde que le \gls{snapshot} lui-même. Il est donc 
+	important de bien déterminer la périodicité du déclenchement du \gls{snapshot} 
+	(temporelle ou selon le nombre d'évènements).
+	
+	Le parcours des évènements se fait classiquement du premier au dernier 
+	(\textit{bottom-up}). Si on utilise les \gls{snapshot}, on peut se permettre de les 
+	parcourir dans l'autre sens (\textit{top-bottom}) jusqu'à trouver un \gls{snapshot} 
+	puis appliquer tous les évènements qui sont arrivés entre ce \gls{snapshot} et 
+	l'état courant. Dans le cas où l'on souhaite accéder à des données historiques 
+	plus anciennes que le dernier \gls{snapshot}, le second parcours fonctionne 
+	aussi. Cependant, elle doit être évitée pour ne pas créer de dépendance entre 
+	les \gls{snapshot}. Sans les snapshots le modèle peut encore varier 
+	<<~librement~>> tant que l'on sait comment lui appliquer un évènement passé. 
+	Le fait de travailler avec des \gls{snapshot} crée une dépendance des 
+	snapshots qui doivent intégrer les modifications du domaine. Une solution est 
+	de recalculer les snapshots quand le domaine est modifié mais cela reste 
+	coûteux (et à éviter).\info{versionning event -> retro compatibilité}
+	
+
+\subsubsection{Event sourcing vs command sourcing}
+Les patrons de conception \gls{CS} et \gls{ES} sont strictement déterministes pour 
+avoir une exactitude rigoureuse de ce qui se passe dans le système.
+
+Un évènement représente quelque chose qui est arrivé dans le domaine. Un 
+évènement appliqué sur un état, donne un nouvel état. 
+La condition pour appliquer un pur déterminisme en \gls{ES} est la fonction 
+suivante : \texttt{State $\rightarrow$ Event $\rightarrow$ State}. Cette fonction met 
+en correspondance les (mêmes) entrées avec les (mêmes) sorties, on peut se 
+reposer dessus pour reconstituer un état à n'important quel moment dans le 
+temps. Le déterminisme est appliqué en assurant à l'évènement tous les 
+informations lui permettant de faire la transition (i.e. sans effet de bord). 
+L'évènement est alors considéré comme une encapsulation de toutes les 
+informations pertinentes concernant la transition du système d'un état à l'autre.
+
+Une commande va être déclenchée par l'utilisateur qui veut modifier le domaine. 
+Une commande appliquée sur un état va produire un ou plusieurs évènements (qui 
+ne sont pas forcément appliqués à l'état courant de l'application par la suite): 
+\texttt{State $\rightarrow$ Command $\rightarrow$ Event list}
+
+La différence principale entre un évènement et une commande réside donc dans 
+l'\textbf{intention}. D'un point de vue fonctionnel, le \gls{CS} est un patron de 
+conception lié à une décision qui produit plusieurs évènements, tandis que 
+l'\gls{ES} se contente d'appliquer un changement à l'état courant. De plus, en 
+\gls{ES}, l'évènement stocké a été produit par l'agrégat. 
+La différenciation majeure des deux patrons de conception s'accentue lors 
+l'interaction avec des systèmes externes. L'aspect fonctionnel de l'application de 
+changement d'état de l'\gls{ES} al'avantage de permettre de reconstruire l'état sans 
+effets de bord car elle ne travaille que sur l'état interne de l'application. 
+
+Historiquement, l'\gls{ES} de Fowler dans ses premières versions ressemblait plus 
+à du \gls{CS}. L'évolution de l'\gls{ES} a conduit à revoir ce patron théoriquement 
+sous une forme fonctionnelle pure avec l'apparition de base de données comme 
+EventStore ou le langage de programmation plus adaptés comme F\#.
+
+Les deux patrons peuvent cohabiter si le \gls{CS} a un cadre d'action bien délimité 
+et de les composants de l'architecture ont un couplage lâche afin que seuls les 
+évènements produits par les agrégats ne modifient l'état interne de l'application. 
+
+
+\subsection{Conclusion}
+

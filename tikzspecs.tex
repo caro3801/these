@@ -1,0 +1,57 @@
+\usepackage{tikz}
+
+\usepackage{pgfplots}
+   \usepgfplotslibrary{dateplot}
+ \pgfplotsset{width=7cm,compat=1.3}
+ \usepackage{pgfplotstable}
+   \pgfplotstableset{col sep=comma}
+
+\definecolor{lavander}{cmyk}{0,0.48,0,0}
+\definecolor{violet}{cmyk}{0.79,0.88,0,0}
+\definecolor{burntorange}{cmyk}{0,0.52,1,0}
+\definecolor{lightblue}{cmyk}{0.85,0.5,0,0}
+
+\def\lav{red!80}
+\def\oran{gray!30}
+
+\tikzstyle{peers}=[draw,circle,violet,bottom color=\lav,
+top color= white, text=violet,minimum width=7pt]
+
+\tikzstyle{superpeers}=[draw,circle,burntorange, left color=\oran,
+text=violet,minimum width=17pt]
+
+\tikzstyle{servers}=[draw,circle,blue, left color=lightblue,
+text=black,minimum width=25pt]
+
+\tikzstyle{legendsp}=[rectangle, draw, burntorange,
+thin,bottom color=\oran, top color=white,
+text=black, minimum width=2.5cm]
+
+\tikzstyle{legendp}=[rectangle, draw, violet,  thin,
+bottom color=\lav, top color= white,
+text= black, minimum width= 2.5cm]
+
+\tikzstyle{legends}=[rectangle, draw, violet,  thin,
+bottom color=lightblue, top color= white,
+text= black, minimum width= 2.5cm]
+
+\tikzstyle{legend_general}=[rectangle, 
+minimum width=2.5cm, minimum height=0.8cm]
+
+
+
+\definecolor{bleue}{rgb}{0.32,0.28,82}
+\definecolor{rouge}{rgb}{0.96,0.23,0.37}
+\definecolor{vert}{rgb}{0.28,0.56,0.12}
+\usetikzlibrary{arrows,arrows.meta,chains,calc,trees}
+\tikzset{%
+	>={Latex[width=2mm,length=2mm]},
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,  text centered},
+	rejected/.style = { text=rouge},
+	end/.style = {base, fill=vert!20},
+	process/.style = {base, minimum width=5.5cm},
+	event/.style = {base,minimum height=1.7cm},
+	eventn/.style = {base,minimum height=1.7cm,fill=vert!70},
+	eventc/.style = {base,minimum height=1.7cm, fill=rouge!70}
+}

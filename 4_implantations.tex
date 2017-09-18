@@ -1,0 +1,308 @@
+%!TEX root = main.tex
+%\chapter{Implantation}
+
+3DEvent est à la fois un \gls{framework} et un éditeur 3D pour la visualisation et la 
+manipulation d'objets 3D. La partie \gls{framework} est basée évènement pour 
+répondre à des contraintes liés à la temporalité de l'information traitée via l'éditeur 
+ainsi qu'à la distribution de l'information en terme d'intégrité et de poids. L'éditeur 
+va réagir et interpréter les informations (évènements) fournies par le 
+\gls{framework} pour proposer visualisation et interactions adaptées.
+
+\section{3DEvent : Plateforme web de manipulation et visualisation 
+	collaborative 
+	d'objets 3D}
+
+
+\subsection{Introduction}
+
+3DEvent propose un éditeur permettant de visualiser et manipuler des 
+objets 3D  avec des collaborateurs en temps-réel. L'application 3DEvent est un 
+éditeur 3D reposant sur les principes et les technologies du web qui permet de 
+manipuler des objets 3D de manière 
+collaborative en temps-réel. Les interactions possibles sont : 
+\begin{description}
+	
+	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut 
+	com\-me dans un environnement 3D classique interagir avec la vue en utilisant 
+	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
+	utiliser les commandes clavier et souris pour effectuer des opérations de 
+	translation, rotation et homothétie directement dans le \textit{viewport} ou via le 
+	menu ou via la console du navigateur.
+	\item[Charger des modèles 3D] L'éditeur gère la plupart des formats de fichier 
+	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
+	\item[Changement de référentiel] La modification des coordonnées de 
+	réfé\-ren\-ces (local/global)  pour les différentes transformations possibles
+	\item[Grid snapping] Cette fonctionnalité permet d'aligner les modèles avec la 
+	grille avec un effet de magnétisme sur les intersection de la grille.
+	\item[Changement de point de vue] L'utilisateur peut à tout moment passer de 
+	son point de vue à celui d'un autre utilisateur. Le choix d'implanter ce type de 
+	fonctionnalité s'inscrit dans la perspective de sensibilisation de l'utilisateur au 
+	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre de 
+	point de vue d'un collaborateur, se mettre à sa place, est une manière de 
+	comprendre son point de vue, son fonctionnement et d'imaginer ses 
+	perspectives de conception à travers le point de vue qu'il a choisit.
+\end{description}
+
+
+\subsection{Interface utilisateur}
+Dans le but de proposer une \gls{IU} proche des fonctionnalités métier liées à la 
+modélisation 3D avec une interface orientée tâche. De cette manière, le modèle 
+orienté évènements présenté dans le précédent chapitre est directement orientée 
+métier.
+\subsubsection{Présentation de l'interface}
+
+Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
+(dans un navigateur) qui représente l'espace de travail collaboratif lui permettant 
+d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont le clavier 
+et la souris\info{est ce qu'on parle de mobile?}. Le premier niveau de cette 
+interface est scindée en deux panneaux~: 
+\begin{enumerate}
+	\item L'espace 3D consacré à la visualisation des objets et à leur manipulation 
+	dans l'environnement 3D~;
+	\item La barre d'outils qui contient trois onglets~:~
+	\begin{enumerate}
+		\item "Scene" contient tous les détails de la scène et des maillages qu'elle 
+		inclue~; 
+		\item "Collaboration" fournit les informations liées à la collaboration~;
+		\item "History" liste tous les évènements qui ont eut lieu dans la scène et 
+		leurs  détails. 
+	\end{enumerate}
+\end{enumerate}
+
+L'onglet "Scène" possède un bloc contenant les détails d'un maillage en cours de 
+sélection. Cela permet d'avoir la description des propriétés de l'objet sélectionné et 
+une manipulation de ses paramètres (position, rotation et mise à l'échelle) plus 
+précise que via l'espace 3D avec le cliqué/déplacé .
+
+L'onglet "Collaboration" présente la liste des collaborateurs qui participent à la 
+scène. Chacun d'eux est décrit par son nom, son état  (connecté ou déconnecté) 
+et son rôle (administrateur, éditeur, lecteur ou autre\footnote{Un rôle peut être 
+défini par le biais du \gls{framework} 3DEvent}). En cliquant sur un élément de la 
+liste, l'utilisateur accède au dernier point de vue dans l'espace 3D connu du 
+collaborateur représenté.
+
+L'onglet "History" liste tous les évènements passés dans la scène en fournissant 
+l'accès à leur détail. Pour chaque évènement, le système est capable de montrer 
+dans l'espace 3D la différence entre l'état  après l'évènement cliqué $state_x$ et 
+l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir de 
+<<~revenir en arrière~>> sans perdre les données entre $state_n$ et $state_x$ 
+car dans notre système cela s'effectue par compensation (cf Event-Sourcing 
+Section X)\improve{annulation d'un évènement ou juste ES}.
+
+Dans chaque onglet on trouve donc différent blocs \gls{HTML}, avec des 
+comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
+correspondent aux Views de notre modèle.
+
+\subsubsection{Flexibilité de la visualisation}
+Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
+partir du flux d'évènements. Pour Abdullin, <<la projection est le processus de 
+conversion (ou d'agrégation) d'un flux d'évènement en une représentation 
+structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
+peut être avoir différentes appellations : modèle de lecture persistent, vue ou 
+état.>>\info{footnote abullin prj}
+La partie lecture du modèle (l'affichage sur interface utilisateur) bénéficie des 
+projections en lui permettant de réduire l'afflux des évènements, ne laissant filtrer 
+que ceux qui sont pertinents pour la vue. La projection fournit une vue adaptée 
+(filtrée, enrichie\ldots) du flux d'évènements au client. Elle peut également être 
+utilisée pour mettre en avant des aspects experts (notifications, déclenchement 
+d'action) ou des raisons de confidentialité.
+Une projection peut être créée de manière synchrone (à la volée) au fur et à 
+mesure de la publication des évènements ou de manière asynchrone et donc 
+découplée du flux des évènements. 
+
+
+Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
+paquets réseau de manière ordonnée.
+Par conséquent, les messages pouvant arriver dans n'importe quel ordre, 
+qu'arriverait-il si un évènement A ($eA$) nécessitant un autre évènement B ($eB$) 
+pour être appliqué arrivait avant? Dans cette situation, le système va générer une 
+erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
+d'information sur la hiérarchie d'application des évènements ($eB$ puis $eA$).
+
+Pour pallier ce problème, l'introduction du système de projection permet d'avoir un 
+mécanisme (comme un automate fini) qui défini les transitions nécessaires pour 
+passer d'un état à l'autre et qui réalisent les actions déterminées en fonction des 
+évènements qui arrivent. Par exemple, si on essaie d'ajouter un objet dans une 
+scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
+jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
+jamais utiliser $eA$.
+
+\section{Intergiciel P2P pour l'échange de données 3D}
+
+L'assomption est faite que tous les clients utilisent des navigateurs qui 
+implémentent et supportent le protocole WebSocket et l'\gls{API} 
+RTCDataChannel. 
+
+La topologie de l'architecture de communication repose sur la mise en relation 
+automatique des clients par le biais du serveur pour établir une connexion 
+\gls{WebRTC}. Pour ce faire, chaque client envoie son identifiant (ID) lors de sa 
+première requête au serveur qui le stocke. Selon le paramétrage de la connectivité 
+directe minimum établie préalablement, le serveur recherche aléatoirement l'ID 
+d'autres clients qui satisfont la règle de connectivité. Cette règle de connectivité 
+minimum permet d'ajuster la densité du maillage (connectivité élevée: maillage 
+partiel dense voire complet ; connectivité faible: maillage partiel éparse) et 
+d'obtenir une topologie maillée adaptée aux besoins de l'application en termes de 
+synchronisation (temps-réel ou pas) ou aux capacités des appareils. Il faut noter 
+cependant que plus la connectivité est faible, plus l'information a besoin de « 
+rebondir » pour atteindre tous les pairs et par conséquent le temps de 
+transmission est augmenté (exemple d'une distribution en ligne). 
+
+\subsubsection{De navigateur à serveur}
+La connexion entre un pair (client) et le serveur est établie sur la base du protocole 
+\gls{WebSocket}. Cette connexion bi-directionnelle est initialisée lors de la 
+première requête du client pour récupérer le contenu de l'application. Cette 
+connexion sert à la fois pour la phase de \textit{signaling} lors de l'établissement 
+d'une connexion WebRTC mais également pour que le client puisse envoyer des 
+mises à jours originales à la base de données via le serveur.
+
+\subsubsection{De navigateur à navigateur}
+Lors de la connexion d'un nouveau client à la scène, le serveur effectue la phase 
+de signaling permettant de le mettre en relation avec un autre client. Le 
+mécanisme est répété tant que la règle de connectivité peut s'appliquer. Le client 
+reçoit une notification de l'établissement de la connexion avec un autre client ce 
+qui lui permet de démarrer l'échange de données.
+
+L'API RTCDataChannel permet à chaque pair d'échanger des données arbitraires 
+avec d'autres à partir du navigateur avec des propriétés de livraison 
+personnalisables (fiable ou non fiable, ordonné ou non ordonné) selon le transport 
+sous-jacent\info{GrI13}. Dans 3DEvent, le choix d'avoir un transport fiable 
+\unsure{fiable ou pas fiable et pk...}et non ordonné a été fait pour respectivement 
+garantir l'arrivée d'une donnée émise par l'utilisateur au sein de l'application et 
+permettre des échanges asynchrones.
+\improve{add \S sur "en cas de défaillance? }
+En cas d'arrêt soudain du serveur, si une connexion a été établie préalablement 
+entre les clients et est toujours en cours, elle n'est pas impactée par la défaillance 
+du serveur.
+\subsection{Données d'échange}
+En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
+d'un format de données permettant de faire communiquer des acteurs hétérogènes 
+du système. Le format \gls{JSON}, dérivé de la notation des objets du langage 
+JavaScript, il est lisible et interopérable. 
+%Son pendant binaire est le format \gls{BSON}.
+Le format de fichier \gls{glTF} se base sur la représentation \gls{JSON} afin de 
+décrire une scène 3D.
+Ce type de données est assez abstrait et suffisamment générique pour 
+représenter n'importe quelle donnée. Par exemple le format de fichier 
+\gls{glTF}\info{ref gltf section}se base sur la représentation \gls{JSON} afin de 
+décrire une scène 3D.
+Le format \gls{JSON} est aussi utilisé pour la sérialisation et la désérialisation des 
+objets transmis par RTCDataChannel qui prend n'importe quel format de données.
+
+L'\acrshort{API} RTCDataChannel supporte beaucoup de types de données 
+différents (chaînes de caractères, types binaires : Blob, ArrayBuffer\dots). Dans 
+un environnement multi-utilisateur avec des données hétérogènes (3D, images, 
+informations) tel que 3DEvent cela facilite l'interopérabilité.
+
+
+\section{Synchronisation des données}
+\subsection{Persistance à court terme}
+Le navigateur (client) offre un espace de stockage avec l'interface \textit{Storage} 
+de l'API Web Storage qui donne accès au \texttt{session storage} ou au  
+\texttt{local storage}. Grâce à un système clé/valeur, il est possible d'avoir une 
+persistance des données à travers les sessions du navigateur. Le contenu stocké 
+correspond aux données générées par un utilisateur et par ses collaborateurs. Les 
+répliques stockées sur chaque navigateur permettent à un utilisateur une plus 
+grande 
+autonomie en cas de déconnexion. C'est également un moyen de distribuer les 
+mises à jour générées par les clients entre les clients grâce au protocole de 
+\gls{streaming3D} (cf. \ref{streamingprotocol}) sans passer par le serveur.
+
+Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès aux 
+évènements enregistrés sur le client. La configuration du client est également 
+stockée localement. 
+
+\subsection{Protocole de streaming pour la synchronisation}
+\label{streamingprotocol}
+
+Il existe plusieurs méthodes de transmission de contenu au sein d'un réseau P2P 
+que l'on peut catégoriser selon deux modes : le téléchargement (\textit{download}) 
+et le flux continu (\textit{streaming}). Le téléchargement requière que le contenu 
+soit entièrement téléchargé pour pouvoir être lu. Tandis que le flux continu peut 
+être lu au fur et à mesure de sa récupération. Ce mode est principalement utilisé 
+pour la lecture de vidéo en ligne. En comparaison le mode téléchargement est 
+moins restrictif et relativement simple à mettre en place. Tout comme les 
+systèmes utilisant une architecture client-serveur, la transmission de contenu en 
+P2P peut également être catégorisée selon ces deux modes. Une catégorisation 
+plus précise du flux continu peut être donnée selon quand le contenu est généré : 
+en direct (live) et à la demande (\textit{on-demand}).
+
+
+Le mécanisme de routage que nous avons utilisé dans \cite{Desprat2015a} est 
+proche du routage de GNutella. 
+
+
+%
+%\begin{table}[]
+%	\centering
+%	\caption{Type de messages}
+%	\label{table:messagetype}
+%	\begin{tabular}{ll}
+%		Message                & Description \\ \hline
+%		STREAM\_SYNC\_ASK      &  Demande de synchronisation d'un 
+%		\textit{stream}           \\
+%		CHUNK                  &     Réception d'une donnée \textit{chunk})        
+%		\\
+%		READY\_ASK             &      Prêt pour la démarrer la demande de 
+%		données de 
+%		synchronisation        \\
+%		READY                  &       Prêt pour démarrer la réception de 
+%		données de 
+%		synchronisation      \\
+%		ALL\_EVENTS\_SYNC\_ASK &     Demande de toutes les données 
+%		typées 
+%		évènement           \\
+%		EVENTS\_SYNC           &        Réception de données (en cours de 
+%		synchronisation)       \\
+%		META\_DATA\_ASK        &     Demande de métadonnées       \\
+%		META\_DATA             &      Réception de métadonnées       \\
+%		SYNC                   &      Réception de données (en cours de 
+%		synchronisation)         \\
+%		EVENT                  &     Réception d'une donnée typée 
+%		évènement        \\
+%		END\_SYNC              & Fin de la synchronisation
+%	\end{tabular}
+%\end{table}
+%
+%
+%\begin{table}[]
+%	\centering
+%	\caption{Statut du n\oe ud}
+%	\label{table:nodestatus}
+%	\begin{tabular}{ll}
+%		Message             & Description \\ \hline
+%		ERROR               &             \\
+%		READY               &             \\
+%		META\_DATA\_ASK     &             \\
+%		META\_DATA\_RECEIVE &             \\
+%		CLOSE               &             \\
+%		RECEIVE\_SYNC       &             \\
+%		CONNECTED           &             \\
+%		INIT                &             \\
+%		OK                  &             \\
+%		SEND\_SYNC          &             \\
+%		END\_SYNC           &            
+%	\end{tabular}
+%\end{table}
+
+\subsubsection{Base de données NoSQL}\label{p:nosql} L'évolution de 
+l'utilisation du web en tant que plateforme applicative a encouragé le changement 
+dans le stockage des données pour de nouveaux besoin supportant de larges 
+volumes de données (comme les données 3D). Une base de données \gls{NoSQL} 
+fournie un schéma libre et dynamique ainsi qu'une API de requête riche pour la 
+manipulation de données. De plus, la possibilité d'enrichir un document à la volée 
+facilite l'évolution des objets (3D) et la maintenance.\info{parler de la 
+maintenance?} de l'application.\improve{eventual consistency, scalabilty}
+3DEvent intègre un système de persistance sur le long terme caractérisé par une 
+base de données \gls{NoSQL}.
+
+La base de données (\gls{NoSQL}) conserve tous les évènements qui 
+sont produits dans une scène.\improve{voir ce qu'il faut ajouter éventuellement le 
+	schéma aussi.} 
+La mise en place d'une base de données centralisée apporte de la robustesse au 
+système en lui fournissant un référent sans toutefois le surcharger ainsi qu'une 
+expérience utilisateur transparente limitant les interruptions de service.
+
+\subsection{Introduction}
+\subsection{Interface utilisateur}
+\subsubsection{Présentation de l'interface}
+\subsubsection{Flexibilité de la visualisation}
