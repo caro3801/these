@@ -2,11 +2,272 @@
 \chapter{État de l'art}
 \chaptertable
 
-\section{La visualisation et manipulation 3D collaborative sur web}
-	\subsection{Introduction}
-	\subsection{Les approches centralisées}
-	\subsection{Les approches décentralisées}
-	\subsection{Conclusion}
+%\section{La visualisation et manipulation 3D collaborative sur web}
+
+\section{Modélisation 3D collaborative sur le Web}
+
+L'arrivée du web a bouleversé les usages liés à la collaboration sur des objets 3D. 
+Les principes, les technologies, l'omniprésence du web en ont fait une plateforme 
+de prédilection pour la visualisation et la manipulation d'objet 3D de haut niveau.   
+Pour les projets d'\gls{AIC} ou de \gls{BIM}, la demande de traitement et la fidélité 
+ont tendance à être plus élevés, particulièrement pour la représentation de dessins 
+d'ingénierie ou de modèles d'architecture 3D. 
+Les objets simples (primitives) ou les maillages optimisés pour le rendu temps-réel 
+ne sont ni suffisants ni assez génériques pour être supporté par tous les 
+processus liés à l'élaboration d'un produit. 
+Plus les projets sont gros, plus ils dépendent d'une multitude de logiciels 3D --  
+dont l'interopérabilité n'est pas garantie -- s'adressant chacun aux besoins d'une 
+tâche spécifique. 
+Chaque tâche (ex: modélisation \gls{CAO}, \textit{stress testing}\ldots) possède sa 
+propre représentation des données qui peut varier selon les niveaux de 
+sémantique attachés à la géométrie. 
+Pour garder une trace de ces données et mettre en commun les données 
+générées autour d'un produit, l'utilisation d'un \gls{PDM}/\gls{PLM} est 
+souvent requise. Bien que certains outils de création d'objets 3D (par exemple 
+Autodesk Revit) autorisent la synchronisation de fichier via leur dépôt à distance, 
+ce n'est généralement pas applicable aux générations suivantes. 
+En cela, une plateforme web pour un \gls{PDM}/\gls{PLM} à 
+l'avantage d'être distribuée pour être accessible depuis un navigateur web ; avec 
+un système d'édition hors-ligne, le téléversement peut s'avérer long et fastidieux.
+De plus, les logiciels spécialisés pour la modélisation 3D, contrairement aux jeux 
+multijoueurs, sont traditionnellement dédiés à un utilisateur unique sans 
+représentation visuelle des autres opérateurs dans le même espace 3D. 
+Ici encore, les principes d'accessibilité du web facilitent la création d'un espace 
+virtuel 3D collaboratif pour la visualisation, la manipulation et l'échange de
+données partagées. 
+
+%TODO designing in context
+%\cite{Dobos2015}
+
+La collaboration en temps-réel est de plus en plus présente sur le web pour 
+différents types de documents notamment 3D.
+La revue sur la visualisation distribuée, effectuée par Grimstead et al. en 2005 
+\cite{Grimstead2005}, indique que la plupart des systèmes sont conçus pour 
+moins de cent 
+utilisateurs simultanés et reposent sur un ou plusieurs serveurs pour supporter ces 
+utilisateurs. 
+Ils expliquent ce schéma par la volonté du fournisseur de service d'assurer une 
+qualité de service et la sécurité du système. 
+Les systèmes de \gls{RV} collaboratifs font exception à ce schéma où l'utilisation 
+des réseaux \gls{P2P} est plus répandue pour supporter parfois plus d'un millier 
+d'utilisateurs simultanés. 
+Dans chacun des cas, chaque système a besoin d'un client adapté pour opérer de 
+manière isolée sans inter-opérer avec les autre systèmes. 
+C'est dans ce contexte qu'en 2011, Mouton et al. \cite{Mouton2011} présentent 
+une analyse approfondie de l'état des environnements collaboratifs 3D, ciblant 
+principalement la visualisation collaborative. 
+Ils montrent l'apparition de la tendance à déporter les environnements collaboratifs 
+sur le web grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition du 
+standard HTML5 comprenant un support avancé de l'audio et de la vidéo ainsi que 
+plusieurs \gls{API} de stockage côté client (LocalStorage, IndexedDB). 
+Les applications web revêtent plusieurs avantages par rapport aux applications 
+natives sur mobiles ou aux logiciels autonomes. 
+Cela repose principalement sur le fait que les navigateurs sont présents partout 
+dans nos vies aujourd'hui (2017), incluant les téléphones intelligents et les 
+tablettes qui les rendent indépendants des plateformes utilisées. 
+Le déploiement sur le web ne requiert pas d'installation ou de mises à jour autre 
+que celle du navigateur (en ne considérant que les applications sans greffon). 
+La modification de l'application est gérée de manière centralisée par les serveurs 
+qui distribuent l'application. 
+Les éditeurs peuvent diffuser leur application à l'échelle mondiale instantanément  
+et la mettre à disposition des utilisateurs sans dépendre d'un réseau de distribution 
+autre qu'internet.
+
+%Computer-Aided Engineering (CAE) Collaborative /
+
+
+Parmi les solutions sans greffon (\textit{plugin less}), beaucoup sont développées 
+pour faire de la modélisation 3D  et utilisent l'architecture client-serveur et le 
+protocole 
+\gls{WebSocket} pour effectuer la synchronisation entre les différents les clients 
+collaborateurs. Quelques raisons peuvent expliquer cette situation :
+\begin{enumerate}
+	\item développement : connaissance du standard \gls{WebSocket} par les 
+	développeurs (historique)
+	\item gestion des données : simplification de la synchronisation des données 
+	(centralisé)
+	\item suivi de l'utilisateur : dépendance de l'utilisateur vis à vis de la connexion 
+	au serveur et donc du service (engagement) 
+\end{enumerate}
+
+Parmi les solutions commerciales comme OnShape, Clara.io et TinkerCAD le 
+choix de plateformes web dans l'infonuagique pour la modélisation \gls{CAO} est 
+prépondérant souvent assorti d'un gestionnaire de version et d'une plateforme de 
+diffusion des création.
+OnShape est un service de modélisation 3D très riche dont l'objectif est de 
+proposer une qualité équivalente des fonctionnalités de modeleurs autonomes 
+(\textit{standalone}) professionnels, le tout de manière collaborative. Leur approche 
+de la gestion de version développe le concept de micro version \cite{Baran2015}. 
+Cette approche se retrouve dans les travaux de \cite{Lu2016} qui l'utilise gérer 
+l'évolution de productions participatives liées à des tâches de modélisation 
+3D en utilisant la créativité, l'intelligence et le savoir-faire 
+d'un grand nombre de personnes en sous-traitance (\textit{crowdsourcing}). Le 
+modeleur 3D Clara.io \cite{Houston2013} est plus généraliste. Il s'oriente 
+davantage vers des fonctionnalités avancées de rendu 3D sur le \textit{cloud} en 
+utilisant du lancer de rayons. 
+Les fonctionnalités d'historisation et de collaboration proposées 
+dans Clara.io restent très basiques (seulement annuler~/~refaire). TinkerCAD 
+est aussi une plateforme de publication d'objets 3D pour faciliter l'accès à la 
+conception d'objets 3D. TinkerCAD est une application destinée au grand 
+public pour la conception et l'impression 3D. De ce fait, les fonctionnalités sont 
+limitée à cause du métier, l'impression 3D et de la cible, grand public. La gestion 
+de version est donc plus légère, similaire à celle proposée par Clara.io. 
+OpenJSCAD, Verold Studio, Vectary sont d'autres 
+exemples de modeleurs 3D moins connus avec des fonctionnalités proches de 
+TinkerCAD.
+Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
+données 3D \gls{CAO} (\gls{PLM}) qui possède un système de gestion de version 
+performant et une système d'annotation et de visualisation collaborative.
+Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
+sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
+modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
+Les objets sont alors manipulés comme des géométries de construction de 
+solides avec les opérations booléennes associées. 
+Le Tableau \ref{table:encoding} résume les différents types 
+d'encodage associé au type de modélisation 3D. 
+\improve{tableau comparatif gestion historique ou versionning}
+\improve{tableau comparatif de GrabCAD, OnShape, clara.io}
+%
+%\begin{table}[]
+%	\centering
+%	\caption{Comparaison de fonctionnalités entres modeleurs 3D basés web}
+%	\label{my-label}
+%	\begin{tabular}{@{}cccc@{}}
+%		&  Client serveur & P2P &  Collaboratif\\ \midrule
+%		Claro.io        & c        & g       & o       \\
+%		GrabCAD                  & c        & g       & o       \\
+%		OnShape &          &         &         \\
+%		&          &         &         \\ \bottomrule
+%	\end{tabular}
+%\end{table}
+\begin{table}[h]
+	\centering
+	\caption{Encodage des données transmises}
+	\label{table:encoding}
+	\begin{tabular}{@{}lcc@{}}\hline
+		\textbf{Référence}& \textbf{Modélisation 3D}   & 
+		\begin{tabular}[c]{@{}l@{}}\textbf{Encodage des}\\ 
+			\textbf{modifications}\end{tabular} \\ \midrule
+		\cite{Grasberger2013}        &      Blob (CSG)    & Fonction implicite        \\
+		Clara.io \cite{Houston2013}               & Polygonale       &  Commande 
+		interface     \\
+		\cite{Mouton2014}                  & Polygonale       & Fonction paramétrique     \\
+		OnShape \cite{Baran2015} &    Paramétrique      &     Microversion    \\
+		cSculpt \cite{Calabrese2016} &      Polygonale    &    Fréquence spatiale  \\ 
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+La plateforme web possède certains avantages par rapport à des clients lourds. 
+En effet, le développement de l'infonuagique a permis le développement de 
+meilleures infrastructures de services. Du fait de ce développement, la création de 
+plateformes collaboratives sur le web pour faire de la conception 3D est devenue 
+non seulement faisable en termes de ressources mais également en termes de 
+technologie. Il existe deux types d'approches pour créer du contenu web 2D ou 
+3D. L'approche déclarative et l'approche impérative. La Figure \ref{fig:impdec} 
+montre le pendant 3D pour chaque approche 2D. En 2D, les spécifications 
+déclaratives (\gls{SVG}) et impératives (canvas) sont issues du \gls{HTML}5 alors 
+qu'en 3D, les spécifications sont encore en évolution. 
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{impdec.pdf}
+	\caption{Déclaratif vs Impératif en 2D et en 3D sur le web}
+	\label{fig:impdec}
+\end{figure}
+
+L'approche déclarative (Dec3D) s'intègre au \gls{DOM} et se 
+focalise sur l'utilisation les technologies du web existantes comme CSS3, 
+\gls{HTML}5 et l'Ajax. 
+X3D est ainsi un format de fichier respectant le standard ISO \cite{X3D2011} pour 
+représenter des scènes 3D interactives en XML, rétro-compatible avec VRML97. Il 
+se différencie des formats de fichier type Collada en intégrant le comportement de 
+la scène durant l'exécution en plus de la description du contenu 3D. Les deux 
+bibliothèques les plus noltables dérivées de ce standard sont X3DOM 
+\cite{Behr2010} et XML3D \cite{Sons2010} : toutes les deux sont capables de 
+supporter les récentes avancées de WebGL pour afficher une scène décrite dans 
+le \gls{DOM} à l'intérieur d'un \textit{canvas} \gls{HTML}5. 
+X3DOM essaye de respecter le standard X3D et ses concepts pour en permettre 
+l'intégration du format dans le \gls{DOM}. De plus, X3DOM intègre le support 
+d'élément \gls{HTML}, les évènements \gls{DOM} et de profils \acrshort{CSS} en 
+supplément \cite{Sutter2015}. 
+En comparaison avec X3DOM, XML3D a développé une extension à \gls{HTML}5 
+pour décrire une scène 3D. 
+L'utilisation d'un langage déclaratif basé sur XML comme X3D est bien 
+adapté pour le contenu 3D utilise des données CAO/MAO ou WCS dans des 
+applications \gls{SIG} car il peut être directement transformé (ex. XSLT) d'une 
+représentation à une autre (tout comme le X3D peut être rendu dans un navigateur 
+en utilisant X3DOM). 
+
+L'approche déclarative est utilisée dans de nombreux travaux de visualisation 
+scientifique 3D distribuée \cite{Jung2012} pour des données spatiales 
+\cite{Stein2014} ou du rendu volumique \cite{Becher2012} par exemple. 
+En manipulant directement les objets 3D à partir des éléments \gls{DOM}, grâce à 
+sa structure bien connue, il est alors plus simple lors de la collaboration d'utiliser 
+ces éléments \cite{Gadea2016} ou les évènements du \gls{DOM} \cite{Lowet2009} 
+comme protocole de synchronisation de scènes. 
+L'ajout de nombreux \textit{listeners} sur un document peut affecter les 
+performances de parcours de l'arbre du \gls{DOM} notamment si une scène 
+très peuplée.
+%declarative XML- based languages such as X3D are suited well for SOAs in that 
+%3D content, such as CAD/ CAM data or a given WCS response in a GIS 
+%application, can be directly transformed, e.g. via an XSLT or similar transform, 
+%from one representa- tion to another (such as an X3D world that can be rendered 
+%in 
+%real-time in the web browser using the X3DOM frame- work).
+
+%TODO BIM CAD PLM 
+%TODO Building Information Modeling: The Web3D Application for AEC 
+%\cite{Campbell2007}
+%TODO WEB3D, COLLABORATIVE DESIGN AND PLM Enrico Vezzetti (1), 
+%Maria Grazia Violante (2)
+%\info{webrtc collaborative visual analysis \cite{Li2015} }
+%\info{webrtc medical \cite{Andrikos2015}}
+%\info{webrtc x3dom \cite{Stein2014} \cite{Andrioti2015} }
+%\info{webrtc webgl \cite{Desprat2015} \cite{Desprat2016} SAGE2 
+%\cite{Marrinan2008} }
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{webglstats.eps}
+	\caption{Support de WebGL 1 (2014-2017) et WebGL 2 
+		(2016-2017)}
+	\label{fig:webglstats}
+\end{figure}
+
+Concernant l'approche impérative, la spécification WebGL 1.0 \cite{Khronos2011} 
+proposée par le groupe Khronos permet aux navigateurs d'effectuer un rendu 3D 
+grâce à une \gls{API} JavaScript adaptée de l'\gls{API} d'OpenGL~ES~2.0 
+\cite{Khronos2007} en utilisant l'élément \textit{canvas} d'\gls{HTML}5. Cette 
+spécification est supportée par la plupart des navigateurs traditionnels (Chrome 
+depuis v49, Firefox depuis v52, Safari depuis v9.1, IE 11\footnote{Le contexte 
+	WebGL est accessible depuis <<~\texttt{experimental-webgl}~>> au lieu de 
+	<<~\texttt{webgl}~>>.\label{fn:webglcontext}}, Edge 14\textsuperscript{ 
+	\ref{fn:webglcontext}} et Opera depuis v41) ainsi que les navigateurs mobiles 
+	(iOS 
+Safari depuis v9.3, Android Browser depuis v53 et Chrome for Android depuis v53) 
+à l'exception d'Opera Mini\footnote{Données issues de 
+	\url{http://caniuse.com/\#search=webgl}, consulté le 26/11/2016.}. La 
+	spécification 
+WebGL 2.0 \cite{Khronos2016} basée sur OpenGL~ES~3.0 \cite{Khronos2008}, 
+déjà publiée en tant que brouillon, est en phase 
+expérimentale\footnote{\url{http://caniuse.com/\#feat=webgl2} consulté le 
+	26/11/2016}.\improve{add some example of coviz web} La Figure 
+\ref{fig:webglstats} montre l'évolution du support de WebGL~1 et WebGL~2 durant 
+ces dernières années sur les différentes plateformes possédant un navigateur 
+web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiques 
+	sont collectées à partir de sites partenaires de \url{webglstats.com}. Ces sites 
+	sont en 
+	ciblent des néophytes de la WebGL possédant donc le matériel 
+	dédié à la 3D en général. Consulté le 04/07/2017.}.
+
+
+%
+%
+%	\subsection{Introduction}
+%	\subsection{Les approches centralisées}
+%	\subsection{Les approches décentralisées}
+%	\subsection{Conclusion}
 
 \section{Systèmes d'édition collaborative}
 	\subsection{Le modèle de cohérence CCI}

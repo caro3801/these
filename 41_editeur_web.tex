@@ -1,0 +1,124 @@
+%!TEX root = main.tex
+%\chapter{Implantation}
+%\section{3DEvent : Plateforme web de manipulation et visualisation 
+%	collaborative 
+%	d'objets 3D}
+\subsection{Éditeur 3DEvent}
+3DEvent est à la fois un \gls{framework} et un éditeur 3D pour la visualisation et la 
+manipulation d'objets 3D. La partie \gls{framework} est basée évènement pour 
+répondre à des contraintes liés à la temporalité de l'information traitée via l'éditeur 
+ainsi qu'à la distribution de l'information en terme d'intégrité et de poids. L'éditeur 
+va réagir et interpréter les informations (évènements) fournies par le 
+\gls{framework} pour proposer visualisation et interactions adaptées.
+
+ L'application 3DEvent est un 
+éditeur 3D reposant sur les principes et les technologies du web qui permet de 
+manipuler des objets 3D de manière 
+collaborative en temps-réel. Les interactions possibles sont : 
+\begin{description}
+	
+	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut 
+	com\-me dans un environnement 3D classique interagir avec la vue en utilisant 
+	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
+	utiliser les commandes clavier et souris pour effectuer des opérations de 
+	translation, rotation et homothétie directement dans le \textit{viewport} ou via le 
+	menu ou via la console du navigateur.
+	\item[Charger des modèles 3D] L'éditeur gère la plupart des formats de fichier 
+	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
+	\item[Changement de référentiel] La modification des coordonnées de 
+	réfé\-ren\-ces (local/global)  pour les différentes transformations possibles
+	\item[Grid snapping] Cette fonctionnalité permet d'aligner les modèles avec la 
+	grille avec un effet de magnétisme sur les intersection de la grille.
+	\item[Changement de point de vue] L'utilisateur peut à tout moment passer de 
+	son point de vue à celui d'un autre utilisateur. Le choix d'implanter ce type de 
+	fonctionnalité s'inscrit dans la perspective de sensibilisation de l'utilisateur au 
+	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre de 
+	point de vue d'un collaborateur, se mettre à sa place, est une manière de 
+	comprendre son point de vue, son fonctionnement et d'imaginer ses 
+	perspectives de conception à travers le point de vue qu'il a choisit.
+\end{description}
+
+
+\subsection{Interface utilisateur}
+Dans le but de proposer une \gls{IU} proche des fonctionnalités métier liées à la 
+modélisation 3D avec une interface orientée tâche. De cette manière, le modèle 
+orienté évènements présenté dans le précédent chapitre est directement orientée 
+métier.
+\subsubsection{Présentation de l'interface}
+
+Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
+(dans un navigateur) qui représente l'espace de travail collaboratif lui permettant 
+d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont le clavier 
+et la souris\info{est ce qu'on parle de mobile?}. Le premier niveau de cette 
+interface est scindée en deux panneaux~: 
+\begin{enumerate}
+	\item L'espace 3D consacré à la visualisation des objets et à leur manipulation 
+	dans l'environnement 3D~;
+	\item La barre d'outils qui contient trois onglets~:~
+	\begin{enumerate}
+		\item "Scene" contient tous les détails de la scène et des maillages qu'elle 
+		inclue~; 
+		\item "Collaboration" fournit les informations liées à la collaboration~;
+		\item "History" liste tous les évènements qui ont eut lieu dans la scène et 
+		leurs  détails. 
+	\end{enumerate}
+\end{enumerate}
+
+L'onglet "Scène" possède un bloc contenant les détails d'un maillage en cours de 
+sélection. Cela permet d'avoir la description des propriétés de l'objet sélectionné et 
+une manipulation de ses paramètres (position, rotation et mise à l'échelle) plus 
+précise que via l'espace 3D avec le cliqué/déplacé .
+
+L'onglet "Collaboration" présente la liste des collaborateurs qui participent à la 
+scène. Chacun d'eux est décrit par son nom, son état  (connecté ou déconnecté) 
+et son rôle (administrateur, éditeur, lecteur ou autre\footnote{Un rôle peut être 
+	défini par le biais du \gls{framework} 3DEvent}). En cliquant sur un élément de 
+	la 
+liste, l'utilisateur accède au dernier point de vue dans l'espace 3D connu du 
+collaborateur représenté.
+
+L'onglet "History" liste tous les évènements passés dans la scène en fournissant 
+l'accès à leur détail. Pour chaque évènement, le système est capable de montrer 
+dans l'espace 3D la différence entre l'état  après l'évènement cliqué $state_x$ et 
+l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir de 
+<<~revenir en arrière~>> sans perdre les données entre $state_n$ et $state_x$ 
+car dans notre système cela s'effectue par compensation (cf Event-Sourcing 
+Section X)\improve{annulation d'un évènement ou juste ES}.
+
+Dans chaque onglet on trouve donc différent blocs \gls{HTML}, avec des 
+comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
+correspondent aux Views de notre modèle.
+
+\subsection{Flexibilité de la visualisation}
+Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
+partir du flux d'évènements. Pour Abdullin, <<la projection est le processus de 
+conversion (ou d'agrégation) d'un flux d'évènement en une représentation 
+structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
+peut être avoir différentes appellations : modèle de lecture persistent, vue ou 
+état.>>\info{footnote abullin prj}
+La partie lecture du modèle (l'affichage sur interface utilisateur) bénéficie des 
+projections en lui permettant de réduire l'afflux des évènements, ne laissant filtrer 
+que ceux qui sont pertinents pour la vue. La projection fournit une vue adaptée 
+(filtrée, enrichie\ldots) du flux d'évènements au client. Elle peut également être 
+utilisée pour mettre en avant des aspects experts (notifications, déclenchement 
+d'action) ou des raisons de confidentialité.
+Une projection peut être créée de manière synchrone (à la volée) au fur et à 
+mesure de la publication des évènements ou de manière asynchrone et donc 
+découplée du flux des évènements. 
+
+
+Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
+paquets réseau de manière ordonnée.
+Par conséquent, les messages pouvant arriver dans n'importe quel ordre, 
+qu'arriverait-il si un évènement A ($eA$) nécessitant un autre évènement B ($eB$) 
+pour être appliqué arrivait avant? Dans cette situation, le système va générer une 
+erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
+d'information sur la hiérarchie d'application des évènements ($eB$ puis $eA$).
+
+Pour pallier ce problème, l'introduction du système de projection permet d'avoir un 
+mécanisme (comme un automate fini) qui défini les transitions nécessaires pour 
+passer d'un état à l'autre et qui réalisent les actions déterminées en fonction des 
+évènements qui arrivent. Par exemple, si on essaie d'ajouter un objet dans une 
+scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
+jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
+jamais utiliser $eA$.

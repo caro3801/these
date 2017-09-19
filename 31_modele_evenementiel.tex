@@ -291,23 +291,38 @@ car il dépend entièrement la valeur initiale choisie pour les agrégats du
 
 
 
-\subsection{Cohérence Eventuelle en CQRS}
+\subsection{Cohérence Éventuelle en CQRS}
 
-Linéaire (strong consistency)
-one version replace another -- one parent and one children in the sequence
-each version is immutable 
-each version has an identity
-each new version is a replacement of the previous (earlier)
-directed acyclic graph (eventual consistency)
-each version may have one or more parent
-each parent may have one or more parent
-each parent may have children with different parents
-each version is immutable
-each version has an identity
+La \gls{CE}, ou \textit{eventual consistency} en anglais, propose dans un système 
+distribué contenant plusieurs répliques d'avoir une coordination lâche entre ces 
+répliques. Cela apporte de nombreux avantages en termes de disponibilité, 
+tolérance aux fautes et sécu rité des données et évite l'intégration de protocoles 2 
+phase commit ou de protocoles Paxos (consensus) complexifiant les échanges. 
+La\gls{CE} introduit l'idée que toutes les répliques se réconcilient au bout d'un 
+moment (\textit{forward progression}) pour avoir le même état final. Si le caractère 
+vicié d'une information est détecté, le système doit le \og réparer\fg{} pour obtenir 
+le bon état. 
 
-each version may be viewed as one of many replacement version for its parents
+L'ordre de livraison des évènements durant les mises à jour reste identique lorsque 
+les évènements sont rejoués par la suite car l'ordre de livraison des évènements 
+issus de l'\gls{ES} est déterminée par l'ordonnancement des évènements stockés 
+localement. Au sein d'une réplique, tous les composants \gls{CQRS}
 
-version are immutable and (should) have immutable names
+%Linéaire (strong consistency)
+%one version replace another -- one parent and one children in the sequence
+%each version is immutable 
+%each version has an identity
+%each new version is a replacement of the previous (earlier)
+%directed acyclic graph (eventual consistency)
+%each version may have one or more parent
+%each parent may have one or more parent
+%each parent may have children with different parents
+%each version is immutable
+%each version has an identity
+%
+%each version may be viewed as one of many replacement version for its parents
+%
+%version are immutable and (should) have immutable names
 
 
 %\begin{algorithm}[caption="titi"]

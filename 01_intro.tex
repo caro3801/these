@@ -98,3 +98,163 @@ plus généralement dans des milieux transdisciplinaires concentrés sur la \gls
 L'évolution de ces ressources passent par une visualisation et une manipulation 
 collaborative efficace en terme de chargement de ressources et de transmission 
 des mises à jour.
+
+
+
+
+\section{Problématique}
+
+
+
+
+Cette thèse se situe à l'interface de trois champs de recherches (Figure 
+\ref{fig:problematique}). Le premier concerne les environnements de modélisation 
+3D. Souvent commerciaux (Clara.io, OnShape, Verold Studio), les modeleurs 
+utilisent des technologies supportée par les navigateurs web qui leur permettent 
+d'être disponibles sur la plupart des plateformes. 
+Cependant ces derniers reposent sur une gestion centralisée des données qui rend 
+les utilisateurs très dépendants de la disponibilité de ces plateformes et d'une 
+connexion internet pour la distribution des informations. 
+Mises à part quelques exceptions, les fonctionnalités collaboratives 
+sont souvent présentées comme mineures. Même si le \og partage\fg{} de la 
+visualisation à la manière des \og réseaux sociaux\fg{} est assez courant, l'édition 
+collaborative est souvent complexe à implémenter car les besoins sont nombreux. 
+Parmi eux, on trouve tout d'abord le besoin d'avoir un système distribué 
+conservant la cohérence des modifications de chacun des utilisateurs. Or, 
+le nombre d'utilisateurs ne doit pas affecter l'expérience utilisateur ; le système 
+doit supporter le passage à l'échelle. 
+Le nombre d'utilisateurs élevé implique la mise en place d'un système de 
+distribution de données adapté. Ce système est en plus contraint par la dynamicité
+des arrivées et départs des collaborateurs (\textit{churn}) au cours d'une session. 
+La dynamicité, qui ne permet pas d'avoir de pouvoir compter sur un nombre fixe de 
+ressources, doit s'accorder avec les besoins variables en termes de ressources. 
+Chaque client est porteur de ressources rarement complètement exploitées lors 
+d'épisodes collaboratifs.
+
+La visualisation et la manipulation collaborative d'objets \gls{3D} sont sujettes à 
+plusieurs problématiques telles que la cohérence des ressources manipulées au 
+cours du temps. Dans ce contexte, il existe un fort besoin de gérer l'évolution des 
+versions permettant la revue des modèles \gls{3D}. 
+En s'appuyant sur les ressources à dispositions, tels que les clients (navigateurs 
+web) sur lesquels les utilisateurs manipulent les modèles \gls{3D}, le passage à 
+l'échelle est plus flexible car les ressources augmentent avec le nombre de client 
+et procurant également plus d'autonomie aux utilisateurs utilisant leurs ressources 
+propres.
+L'architecture de communication et les contraintes liées aux architectures 
+distribuées et décentralisée correspond au second axe de recherche. 
+Enfin, le dernier champs 
+s'adresse à la partie que nous appellerons \og métier\fg{} qui se rapporte au 
+domaine de la manipulation d'objets 3D qui inclue la 
+gestion du cycle de vie des données 3D de l'interaction utilisateur à son stockage 
+en passant par sa distribution. Ces aspects se rapportent principalement à 
+l'historique, la traçabilité de l'information et l'expertise embarquée dans le système 
+dans le cadre de cette thèse.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=\columnwidth]{problematique.eps}
+	\caption{Place de la contributions dans les différents champs de recherche}
+	\label{fig:problematique}
+\end{figure}
+
+L'objectif de cette thèse est triple : 
+\begin{enumerate*}[label=(\roman*)]
+	\item extraire les informations liées aux règles métier pour l'affichage et la 
+	manipulation d'objets \gls{3D} en collaboration nécessaires à la traçabilité de 
+	l'information,
+	\item repérer les principales problématiques de gestion des données sur le 
+	réseau pour avoir une transmission efficace et transparente pour l'utilisateur,
+	\item proposer un \gls{framework} pour un \gls{EVC3D} web intégrant ces 
+	contraintes réseau, métier, et \gls{3D} dans un navigateur.
+\end{enumerate*}
+Dans le but d'achever de tels objectifs, voici les cinq Questions de Recherche 
+posées :
+\begin{description}
+	\item[QR 1] Quelle architecture réseau est la plus adaptée pour une gestion 
+	efficace, robuste et temps-réel des données \gls{3D} dans un environnement 
+	web ?
+	
+	\item[QR 2] Quelle architecture logicielle confère une traçabilité des données 
+	conforme aux règles métier liées à la manipulation d'objet \gls{3D} ? 
+	
+	\item[QR 3] Quels sont les mécanismes assurant à l'utilisateur d'être à la fois 
+	autonome tout en ayant la possibilité de collaborer ?
+	
+	
+	\item[QR 4] Comment faciliter l'implémentation d'un tel système en garantissant 
+	le respect des règles métier liés à la manipulation d'objet \gls{3D}?
+	
+	\item[QR 5] Quelles sont les métriques (réseau, collaboration) permettant 
+	d'évaluer un tel système de manière quantitative? qualitative? %Comment les 
+	%utilisateurs recoivent la chose....
+	
+\end{description}
+
+\section{Contributions}
+
+La principale contribution de cette thèse est la définition et l'implémentation d'un 
+ensemble de pratiques dans la gestion des données pour la manipulation d'objets 
+3D de manière collaborative sur web. Cela est très utile pour la gestion de 
+l'historique d'une scène \gls{3D} en utilisant des contenus \gls{3D} de différentes 
+natures. Pour ce faire, j'ai choisi le paradigme événementiel et je l'ai 
+intégré à mon modèle de collaboration grâce à l'utilisation de solutions 
+préexistantes pour le partage et la diffusion de contenus \gls{3D} dans le cadre 
+d'applications collaboratives sur le web.
+
+La force motrice derrière ce travail a été le manque de processus et d'outils qui 
+pourraient réellement supporter la modélisation collaborative \gls{3D} et la 
+visualisation à l'échelle exigée par l'industrie, l'identification de problèmes 
+spécifiques et leur formulation a également été importante. La recherche, 
+cependant, introduit de nouveaux concepts dans le domaine de la gestion de 
+données \gls{3D}. Les contributions de cette thèse peuvent être résumées comme 
+suit.
+
+
+\subsection{Contributions théoriques}
+
+\begin{itemize}
+	\item \improve{réécrire + introduire ref chapitre}Proposition d'un système de 
+	gestion et de visualisation de contenu \gls{3D} avec un historique non linéaire 
+	orienté évènements
+	\item Définition d'une architecture hybride (client serveur et \gls{P2P}) adapté à 
+	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur web en 
+	temps-réelle.
+	\item Introduction des concepts d'évènements métiers liées à la \gls{3D} 
+	comme moyen d'interagir dans une scène  \gls{3D} multi-échelle
+\end{itemize}
+\subsection{Contributions pratiques}
+\begin{itemize}
+	\item \improve{réécrire + introduire ref chapitre}Définition d'une API ouverte et 
+	de l'application cliente utilisation les principes et les technologies du web.
+	\item Implémentation d'un prototype 3DEvent Client et de son évaluation 
+	utilisateur 
+	\item Implémentation d'un prototype 3DEvent Architecture et de son évaluation
+	
+\end{itemize}
+
+%\bibentry{Desprat2017}
+
+\section{Organisation du manuscrit}
+
+%\section*{Organisation du manuscrit}
+La présence de la \gls{3D} et des environnements virtuels collaboratifs \gls{3D} est 
+de plus en plus présents dans l'industrie de la \gls{CAO} nécessitant de nouveaux 
+modèles, outils et méthodes facilitant la mobilité et l'autonomie des utilisateurs. Il 
+est aussi important de noter que le contenu multimédia \gls{3D} est aussi de plus 
+en plus présent dans notre quotidien. Pour tout cela il est important de développer 
+de nouveaux outils pour créer manipuler et partager du contenu \gls{3D}.
+Le chapitre \info{ref chapitre} présente une architecture de communication hybride 
+permettant de faciliter la transmission des objets \gls{3D} en temps réel de 
+manière transparente pour l'utilisateur. La création d'\gls{EVC3D} sur le web à 
+besoin de nouvelles architectures tirant partie des nouveaux standards du 
+\gls{W3C}. Puis, le chapitre \info{ref cqrs} présente deux \info{2 contrib cqrs à 
+	identifier} contributions reposant sur l'architecture cliente de 3DEvent pour 
+manipuler des objets \gls{3D} avec une grande traçabilité et de manière autonome. 
+%La première contribution propose 
+Finalement, le chapitre\info{ref chap final} adresse le problème et la spécificité de 
+la transmission du contenu \gls{3D} lors de session collaborative en temps-réel. 
+En considérant et développant un modèle orienté évènements, 3DEvent dérive 
+des 
+stratégies pour délivrer et obtenir une scène 3D en continu (\textit{streaming} en 
+anglais) en s'appuyant sur les différentes configurations matérielles, utilisateurs, 
+réseaux.
