@@ -1,5 +1,7 @@
 %!TEX root = main.tex
-%\chapter{Implantation}
+
+\chapter{Implantation}
+\chaptertable
 
 3DEvent est à la fois un \gls{framework} et un éditeur 3D pour la visualisation et la 
 manipulation d'objets 3D. La partie \gls{framework} est basée évènement pour 
@@ -12,8 +14,13 @@ va réagir et interpréter les informations (évènements) fournies par le
 	collaborative 
 	d'objets 3D}
 
-
-\subsection{Introduction}
+Cette section présente l'implantation de 3DEvent, la plateforme web de 
+manipulation et visualisation collaborative d'objets 3D réalisée à partir du modèle 
+présenté dans le chapitre précédent. La première partie s'intéresse à l'intégration 
+du framework pour proposer une application d'assemblage d'objets 3D. La seconde 
+partie expose les choix techniques pour l'interface utilisateur et la mise en avant 
+du système de visualisation flexible.
+\subsection{Éditeur 3DEvent}
 
 3DEvent propose un éditeur permettant de visualiser et manipuler des 
 objets 3D  avec des collaborateurs en temps-réel. L'application 3DEvent est un 
@@ -93,7 +100,7 @@ Dans chaque onglet on trouve donc différent blocs \gls{HTML}, avec des
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
 correspondent aux Views de notre modèle.
 
-\subsubsection{Flexibilité de la visualisation}
+\subsection{Flexibilité de la visualisation}
 Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
 partir du flux d'évènements. Pour Abdullin, <<la projection est le processus de 
 conversion (ou d'agrégation) d'un flux d'évènement en une représentation 
@@ -194,8 +201,8 @@ un environnement multi-utilisateur avec des données hétérogènes (3D, images,
 informations) tel que 3DEvent cela facilite l'interopérabilité.
 
 
-\section{Synchronisation des données}
-\subsection{Persistance à court terme}
+\subsection{Synchronisation des données}
+\subsubsection{Persistance à court terme}
 Le navigateur (client) offre un espace de stockage avec l'interface \textit{Storage} 
 de l'API Web Storage qui donne accès au \texttt{session storage} ou au  
 \texttt{local storage}. Grâce à un système clé/valeur, il est possible d'avoir une 
@@ -211,7 +218,7 @@ Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès a
 évènements enregistrés sur le client. La configuration du client est également 
 stockée localement. 
 
-\subsection{Protocole de streaming pour la synchronisation}
+\subsubsection{Protocole de streaming pour la synchronisation}
 \label{streamingprotocol}
 
 Il existe plusieurs méthodes de transmission de contenu au sein d'un réseau P2P 
@@ -284,7 +291,7 @@ proche du routage de GNutella.
 %	\end{tabular}
 %\end{table}
 
-\subsubsection{Base de données NoSQL}\label{p:nosql} L'évolution de 
+\paragraph{Base de données NoSQL}\label{p:nosql} L'évolution de 
 l'utilisation du web en tant que plateforme applicative a encouragé le changement 
 dans le stockage des données pour de nouveaux besoin supportant de larges 
 volumes de données (comme les données 3D). Une base de données \gls{NoSQL} 
@@ -302,7 +309,3 @@ La mise en place d'une base de données centralisée apporte de la robustesse au
 système en lui fournissant un référent sans toutefois le surcharger ainsi qu'une 
 expérience utilisateur transparente limitant les interruptions de service.
 
-\subsection{Introduction}
-\subsection{Interface utilisateur}
-\subsubsection{Présentation de l'interface}
-\subsubsection{Flexibilité de la visualisation}
