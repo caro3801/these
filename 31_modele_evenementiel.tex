@@ -122,16 +122,17 @@ l'occasion de mettre le système à jour.\improve{en remttre une couche}
 
 \subsection{Modèle général}
 La composition de l'architecture s'est effectuée avec en arrière pensée les lignes 
-directrices données par  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
+directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
 Utiliser une architecture orientée évènements pour faire de la modélisation 3D peut 
 sembler non nécessaire. Cependant lorsqu'on s'intéresse aux apports que cela 
 peut générer pour tous les métiers engagés (utilisateurs, développeurs, analystes 
 métier) on peut se demander pourquoi cela n'a pas été plus mis en avant 
-auparavant. La sensibilisation à l'historique des données et aux interactions 
-inter-utilisateurs est partagée  par les utilisateurs et les analystes métier. Quand à 
+auparavant. \improve{qu'est ce que ça fait la}La sensibilisation à l'historique des 
+données et aux interactions 
+inter-utilisateurs est partagée par les utilisateurs et les analystes métier. Quand à 
 la sensibilisation à la distribution des données elles est une composante 
 importante pour les utilisateurs et les développeurs. Concernant les premiers, cela 
-garantie une certaine autonomie dans la création. Pour les seconds, la répartition 
+garantit une certaine autonomie dans la création. Pour les seconds, la répartition 
 de la charge permet de profiter du potentiel computationnel de toutes les parties 
 prenantes du réseau. 
 
@@ -187,27 +188,29 @@ Les évènements produits par un des composants présentée ci-dessus
 peuvent être consommés par d'autres de ces abstractions s'ils partagent un 
 journal d'évènements local ou distribué. 
 
-Un journal d'évènements peut fonctionner sur un seul site ou alors être répliqué sur 
-plusieurs sites. Le site est considéré comme une zone disponible qui accepte 
+Un \textbf{journal d'évènements} peut fonctionner sur un seul site ou être répliqué 
+sur plusieurs sites. 
+Le site est considéré comme une zone disponible qui accepte 
 l'écriture d'un journal d'évènements local même s'il est partitionné sur plusieurs 
-sites. Les journaux d'évènements locaux situés sur plusieurs sites peut être 
+sites. Les journaux d'évènements locaux situés sur plusieurs sites peuvent être 
 connectés par le biais d'un journal d'évènements dit \og repliqué\fg{} qui a pour 
-responsabilité de préserver l'ordre causal des évènements.
+responsabilité de préserver l'ordre causal des évènements.\improve{dessin des 
+journaux}
 
 Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}) ou encore être sur le 
-même nœud mais traités séparément selon les zones disponibles nécessaires au 
-fonctionnement de l'application. Les Acteurs et les Processeurs écrivent 
-cependant toujours sur leur journal d'évènements local. Les composants peuvent 
-soit collaborer sur un journal d'évènements local sur le même site, ou bien au 
-travers d'un journal répliqué sur différents sites.
+même nœud mais traités séparément selon les \improve{c'est quoi}zones 
+disponibles nécessaires au fonctionnement de l'application. 
+Les Acteurs et les Processeurs écrivent cependant toujours sur leur journal 
+d'évènements local. 
+Les composants peuvent soit collaborer sur un journal d'évènements local sur le 
+même site, ou bien au travers d'un journal répliqué sur différents sites.
 
 Il est important de différencier le journal d'évènements de la base de données 
-(côté serveur). 
-La base de données peut ne contenir qu'une partie du journal. Une base de 
-données peut également être considérée comme un élément complémentaire au 
-journal d'évènements, cependant et bien que parfois confondus, ils restent bien 
-distincts conceptuellement.
+(côté serveur) ; la base de données peut ne contenir qu'une partie du journal. 
+Une base de données peut également être considérée comme un élément 
+complémentaire au journal d'évènements, cependant et bien que parfois 
+confondus, ils restent bien distincts conceptuellement.
 
 Le journal d'évènements commun est la base des échanges pour communiquer 
 par le biais d'évènements de collaboration. Ce type d'architecture se retrouve dans 
@@ -216,19 +219,20 @@ différents cas d'utilisation :
 \begin{itemize}
 	\item \textit{Processus métier distribués.} Les acteurs de différents types 
 	utilisent des évènements pour communiquer et parvenir à résoudre un problème 
-	commun. Bien qu'ils jouent des rôles différent dans le processus métier, ils 
+	commun. Bien qu'ils jouent des rôles différents dans le processus métier, ils 
 	réagissent à la réception d'évènements (\textit{reactive programming}) en 
 	mettant à jour l'état de l'application et en produisant de nouveaux évènements. 
 	Cette forme de collaboration est appelée collaboration dirigée par les 
 	évènements.\improve{ref}
-	\item\textit{Réplication d'état d'Acteur.} Les acteurs de même type consomme 
+	\item\textit{Réplication d'état d'Acteur.} Les acteurs de même type consomment 
 	les évènements de chacun pour répliquer l'état interne avec une cohérence 
-	causale. Dans 3DEvent, les opérations concurrentes sont autorisées dans pour 
-	mettre à jour l'état des acteurs répliqués et permettre la résolution interactive de 
-	conflit en cas de mises à jour concurrentes et conflictuelles. \improve{miuex 
+	causale. Dans 3DEvent, les opérations concurrentes sont autorisées dans 
+	l'environnement pour mettre à jour l'état des acteurs répliqués et permettre la 
+	résolution interactive de conflit en cas de mises à jour concurrentes et 
+	conflictuelles. \improve{miuex 
 	expliquer}
 	\item \textit{Agrégation d'évènement.} Les vues et les producteurs agrègent des 
-	évènements a partir d'autres composants pour générer des vues spécifiques à 
+	évènements à partir d'autres composants pour générer des vues spécifiques à 
 	l'application.
 	La collaboration évènementielle apporte de la fiabilité dans la gestion des 
 	données dans un système distribué. Par exemple, si un processus distribué 
@@ -237,19 +241,19 @@ différents cas d'utilisation :
 \end{itemize}
 
 %\paragraph{Bus d'évènement}
-Les composants souscrivent à leur journal d'évènements en s'accrochant au bus 
-d'évènements. 
+Les composants souscrivent à leur journal d'évènements en s'accrochant au 
+\textbf{bus d'évènements}.
 Les évènements nouveaux sont poussés vers les souscripteurs, 
 ce qui leur permet de mettre à jour l'état de l'application avec une latence 
 minimale. 
 Un évènement écrit à un endroit est publié de manière fiable aux souscripteurs sur 
 ce site et aux souscripteurs des sites distants. 
-Par conséquent, les composants qui échanges par le biais d'un 
+Par conséquent, les composants qui échangent par le biais d'un 
 journal d'évènements répliqué communiquent via un bus qui préserve l'ordre causal 
 des évènements de manière durable et tolérant au partitionnement. De ce fait, les 
 services sur les partitions du réseau inter-sites (lien entre les sites) peuvent 
 continuer d'écrire des évènements localement. La livraison des évènements sur 
-les sites distants reprend automatique lorsque les partitions sont à jour.
+les sites distants reprend automatiquement lorsque les partitions sont à jour.
 
 
 Le journal d'évènements répliqué localement et fournit un ordre total des 
@@ -316,10 +320,16 @@ moment (\textit{forward progression}) pour avoir le même état final. Si le car
 vicié d'une information est détecté, le système doit le \og réparer\fg{} pour obtenir 
 le bon état. 
 
-L'ordre de livraison des évènements durant les mises à jour reste identique lorsque 
-les évènements sont rejoués par la suite car l'ordre de livraison des évènements 
-issus de l'\gls{ES} est déterminée par l'ordonnancement des évènements stockés 
-localement. Au sein d'une réplique, tous les composants \gls{CQRS}
+L'ordonnancement des évènements durant les mises à jour reste identique lorsque
+les évènements sont rejoués par la suite car l'ordre est issu de l'\gls{ES} est 
+déterminée par l'ordonnancement des évènements stockés 
+localement. Au sein d'une réplique, tous les composants \gls{CQRS} respectent 
+cet ordonnancement. L’ordre de stockage des évènements répliqués sur des sites 
+distincts est cohérent à cause de l'ordre causal : les évènements liés 
+causalement ont le même ordre sur tous les sites alors que les évènements 
+concurrents peuvent avoir un ordre différent. Cette propriété est important pour 
+obtenir une cohérence causale (forte) dans une application qui respecte le 
+théorème \gls{CAP}.
 
 %Linéaire (strong consistency)
 %one version replace another -- one parent and one children in the sequence

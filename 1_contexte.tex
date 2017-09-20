@@ -1,10 +1,10 @@
 %!TEX root = main.tex
-\chapter{Contexte}
-\chaptertable
+%\chapter{Contexte}
+%\chaptertable
 
 
 
-\section{La collaboration}
+\subsection{La collaboration}
 La collaboration \info{https://wiki.p2pfoundation.net/Collaboration} est souvent 
 définie \info{ref}comme un processus récursif
 \footnote{Le « principe de boucle 
@@ -151,16 +151,194 @@ Le croisement de ces deux dimensions, spatiale et temporelle, implique une
 multiplication des points de vue et donc des données à traiter sur le problème lors 
 de la collaboration.
 
-\subsection{Les systèmes collaboratifs}
-\subsection{Les systèmes d'édition collaboratifs}
-\subsubsection{Modèle d'édition collaborative}
+ 
+% \subsubsection{Les systèmes collaboratifs}
+\subsection{Les environnements virtuels collaboratifs 3D}
 
-\section{La collaboration 3D en accord avec l'évolution du web}
+Un \gls{EVC3D} est un environnement virtuel 3D où plusieurs utilisateurs locaux 
+ou à distance peuvent se rejoindre et partager une expérience collaborative 
+interactive en 3D. La principale caractéristique d'un \gls{EVC3D} est la simulation 
+immersive et interactive 3D d'environnement virtuels, tels que les jeux sérieux ou 
+multijoueurs. \gls{EVC3D} permet à plusieurs utilisateurs d'interagir les uns avec 
+les autres en temps (quasi) réel même s'ils sont situés dans des lieux différents. 
+D'autres fonctionnalités sont proposées par ce type de plateforme comme le 
+partage d'espace, de présence et du temps. Selon Singhal et Zyda 
+\cite{Singhal1999}, \gls{EVC3D} est constitué de quatre composants principaux :
+\begin{enumerate*}[label=(\roman*)]
+	\item un moteur graphique pour l'affichage ;
+	\item des appareils de contrôle et de communication :
+	\item un système de traitement ;
+	\item et un réseau de transmission des données. 
+\end{enumerate*}
 
-\subsection{Introduction}
-\subsection{Le web et le P2P : WebRTC}
-\subsection{Le web et la 3D :  WebGL}
+Ce type d'environnement nécessite également d'impliquer l'utilisateur dans une 
+boucle ac\-tion~/~per\-ception pour lui permettre de sentir (au sens physiologique) 
+que ses actions contribuent à la modification de l'environnement virtuel. Les 
+interactions classiques se font par le biais de d'appareils dédiés.
+Il existe trois catégories d'interactions selon Chris Hand \cite{Hand1997}: la 
+navigation (interaction avec le point de vue de l'utilisateur) ; la manipulation des 
+objets virtuels issus de l'environnement virtuel (sélection d'objet, manipulation 
+d'objet) ; et le contrôle de l'application ( interaction avec une interface 3D pour 
+modifier des paramètres de l'environnement virtuel).
 
-\section{Les architectures évènementielles pour la collaboration}
-\subsection{Sensibilisation lors de la collaboration}
-\subsection{Intégration des contraintes métiers}
+La manipulation d'objet est parmi les interactions les plus fondamentales lorsqu'on 
+aborde la \gls{CAO}/DAO, le \gls{BIM} ou le \gls{PLM}. La manipulation 
+collaborative d'objet virtuels par plusieurs utilisateurs fait ainsi partie des nouveaux 
+besoins liés aux développement de ces activités.
+La manipulation collaborative s'avère indispensable dans plusieurs types 
+d'applications comme le prototypage virtuel, les simulations d'entraînement ou la 
+simulation d'assemblage et de maintenance. L'expérience de modélisation 
+\gls{CAO} collaborative peut être accompagnée de mécanismes ludiques pour 
+intégrer une capture temps-réel de la connaissance \cite{Kosmadoudi2013}.
+Ces lieux virtuels sont l'occasion pour les utilisateurs de participer de manière 
+naturelle et efficace à la création et à la vie de l'objet manipulé dans 
+l'environnement virtuel sans danger et à bas coût. 
+Une autre utilisation des \gls{EVC3D} sert la navigation virtuelle, c'est à dire les 
+visites collaboratives (musées, héritage culturel, les revues de projet 
+architecturaux / urbains, ou encore les jeux collaboratifs (courses, simulateur de 
+jeux collectifs). 
+Les \gls{EVC3D} permettent non seulement aux utilisateurs de communiquer de 
+manière distante mais également d'interagir ensemble en partageant des 
+interactions dans le monde virtuel. 
+Ces interactions peuvent s'appliquer à différents objets, différentes parties du 
+même objet, ou encore sur la même partie (en même temps) d'un objet virtuel 
+partagé.
+Plusieurs problèmes liés aux domaines des systèmes distribués (et les protocoles 
+réseaux) et d'IHM doivent être résolus pour concevoir un 
+\gls{EVC3D} fiable, ergonomique et en temps-réel. 
+
+
+
+
+%\subsubsection{Les systèmes d'édition collaboratifs}
+%
+%\paragraph{Modèle d'édition collaborative}
+%
+%\subsection{La collaboration 3D en accord avec l'évolution du web}
+%
+%\subsubsection{Introduction}
+%\subsubsection{Le web et le P2P : WebRTC}
+%\subsubsection{Le web et la 3D :  WebGL}
+
+\subsection{Les architectures orientées évènements pour la collaboration}
+Un évènement est un élément omniprésent de la vie. Le terme \textit{évènement} 
+existe dans presque tous les champs en science, avec différents sens. Le but de 
+cette section est de répertorier les différentes notions d'évènements. Pour cela, 
+différentes descriptions du terme évènements sont proposées ainsi que leur notion 
+liée à la littérature informatique. \jp{pourquoi ne pas mettre directement la définition 
+qui nous intéresse ?}
+
+Dans la littérature, une variété de définitions du terme évènement existe. 
+Habituellement, un évènement est considéré comme quelque chose qui 
+\og arrive\fg{}, en particulier quelque chose d'inhabituel ou d'important. 
+Cependant la plupart des travaux de la littérature évitent de définir le sens précis 
+des évènements en n'indiquant pas le champ d'application dans lequel ils sont 
+utilisés. 
+Il existe trois entrées pour le terme évènement dans le dictionnaire. 
+La première entrée se réfère à la physique (dans le cadre de la théorie 
+de la relativité) où un évènement est <<~un phénomène considéré comme localisé 
+et instantané, survenant en un point et un instant bien déterminés~>>. La seconde 
+se réfère à la théorie des probabilités,  indiquant qu'un évènement est <<~la partie 
+d'un univers $\Omega$ réalisée quand l'une des éventualités la composant se 
+réalise~>>. La troisième définition se rapporte à la psychologie impliquant <<~tout 
+ce qui est capable de modifier la réalité interne d'un sujet (fait extérieur, 
+représentation, etc.)~>>. Cette dernière définition est très proche de ce qu'on 
+retrouve en informatique comme les changements d'état ou les actions entraînant 
+certaines conséquences. Dans une application, il peut être important de 
+s'intéresser au déplacement d'un objet de quelques unités (\textit{object moved 
+	event}), ou d'apprendre qu'un utilisateur est passé de déconnecté à connecté 
+(\textit{status changed}). On s'applique donc à identifier ce qui modifie l'état 
+intrinsèque d'un objet et sa représentation. Bien que ces différentes descriptions 
+permettent d'avoir une compréhension générale du terme évènement, chaque sous 
+discipline de l'informatique comprends 
+ses propres associations au terme évènement.
+
+L'implantation d'un système orienté évènements nécessite l'instanciation d'une 
+architecture abstraite, 
+le positionnement des composants sur des machines ainsi que des protocoles 
+pour subvenir à l'interaction, en utilisant des technologies et des produits 
+spécifiques. Une telle instance est appelée architecture système. De ce fait, les 
+architectures de systèmes distribués basés évènement doivent 
+répondre aux exigences utilisateur et aux problèmes liés à la nature des 
+plateformes et application. 
+Le passage à l'échelle (nombre de d'utilisateurs, ressources distribuées sur de 
+grandes zones géographiques) génère un grand nombre d'évènements qui doivent 
+être traités de façon efficace. 
+
+Les systèmes complexes distribués sont construits à partir de collections 
+couplées de manière dite \og lâche\fg{} (\textit{loosely coupled}) \footnote{Un 
+	couplage lâche indique que les 
+	composants échangent peu d'information. Contrairement à un couplage fort, où 
+	les 
+	composants ont une faible indépendance fonctionnelle et sont donc peu 
+	réutilisables, le couplage faible s'appui sur l'établissement d'un protocole 
+	d'échange faisant le moins d'a priori sur les composants. Cela permet de fixer 
+	un 
+	cadre d'interaction entre les composants.}, technologiquement neutre 
+et indépendant de la localisation des services. 
+Le développement d'application dirigées par les évènements est un challenge 
+tripartite : la production d'évènement, le traitement des évènements et la 
+consommation des évènements \cite{Chandy2011}.
+Cristea et al. \cite{Cristea2011} présentent un aperçu des architectures distribuées 
+pour les systèmes basés évènements. 
+Cette approche est utilisée dans de nombreuses applications réactives. Souvent 
+appliquées à la finance ou aux systèmes logistiques, de telles solutions peuvent 
+également intégrer les besoins de plateformes distrbuées à grande échelle comme 
+les applications web et le travail collaboratif.
+
+\subsubsection{Sensibilisation et perception du groupe}
+Le travail collaboratif peut également être supporté des modèles basés 
+évènements prenant en compte la sensibilisation au groupe (\textit{awareness}) 
+dans des activités. Ces systèmes sont présents dans la littérature depuis les 
+prémices de la technologie web \cite{Bentley1997,Steinfield1999,You2001}. Ces 
+propositions ont commencé par approcher la sensibilisation à l'espace de travail 
+dans le but d'informer les utiliser des changements se produisant dans l'espace 
+de travail partagé. 
+Des travaux plus récents se sont concentrés sur des 
+nouveaux paradigmes comme les systèmes \gls{P2P} pour proposer des 
+\textit{groupware} décentralisés ubiquitaire et sensibles (perception 
+physiologique). La sensibilisation au sein du groupe n'est pas seulement désignée 
+pour notifier les utilisateurs ; son but est également d'aider dans les processus de 
+groupe pour éviter les problèmes. Ces derniers peuvent prendre différentes 
+formes comme :  l'inefficacité due à une information limitée et la fourniture d'un 
+système de communication; la disponibilité d'informations superflues; la difficulté 
+d'extraire l'information pour surveiller ou faire des rapports; l'utilisation des 
+données issues  des ressources produites par le groupe pour améliorer sa 
+perception des données disponibles. Par exemple, Xhafa et Poulovassilis 
+\cite{Xhafa2010} exposent une approche distribuée basée évènements pour gérer 
+des collecticiels (\textit{groupware}) en \gls{P2P}. 
+\improve{ca veut rien dire}
+Leur méthode permet de développer des applications de collecticiels spécifiques  
+sur les opérations et les services primitifs liés à la sensibilisation. Ces derniers 
+sont directement implémentés dans l'intergiciel \gls{P2P}. Le modèle propose 
+différentes approches dépendant de la plateforme (web ou mobile) avec une 
+granularité différente de l'information 
+d'\textit{awareness}.
+\info{Xhafa2010 parle aussi des mobiles}
+Dans \cite{Brown2003}, les auteurs proposent un mécanisme de distribution de 
+données basé évènements. Le \textit{Battlefield Augmented Reality System} 
+(BARS) se situe dans le contexte de la collaboration sur mobile en réalité 
+augmentée et environnement virtuel. Cet environnement a besoin de conserver 
+une information cohérente au cours du temps, qui plus est de rendre compte de la 
+situation (\textit{situation awareness}) et de permettre la coordination d'équipe sur 
+mobile entre les utilisateurs. Ils définissent \textit{situation awareness} comme le 
+fait que <<~chaque utilisateur doit obtenir une meilleure compréhension de 
+l'environnement~>>. Pour cela, ils se placent dans un cadre où il est nécessaire 
+de gérer plusieurs utilisateurs avec des connexions différentes (bas débit et haut 
+débit) avec des connexions au réseau qui ne sont pas fiables et une réplication 
+partielle des données pour minimiser les évènements non voulus.
+\info{consistency cohérence conflits}
+L'analyse des applications utilisant des systèmes orientés évènements explique 
+qu'ils sont obligés de faire des choix spécifiques au métier lié à l'application 
+\cite{Hinze2009}. Par exemple, dans les applications de jeux vidéo, la distribution 
+des évènements est souvent liées à un mécanisme \gls{PubSub} centralisé qui 
+modifie les souscriptions au fur et à mesure que les joueurs se déplacent dans 
+l'espace. De plus, les évènements dans un jeu doivent être protégés contre 
+l'altération pour éviter la triche ou la dissémination d'évènements faux. Cela 
+s'applique également aux données d'un \gls{EVC3D} destiné à un usage industriel 
+du fait de l'usage de données confidentielles ou critiques.
+
+\subsubsection{Intégration des contraintes métiers}
+Un aspect majeur de cette thèse repose sur l'intégration du métier dans le 
+processus de la manipulation et de la visualisation des objets 3D.\improve{cf old 
+thesis}
