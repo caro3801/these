@@ -2,13 +2,6 @@
 
 # But not these files...
 !.gitignore
-
-
-
-
-!eps/tikz/**.tex
 !**.eps
-
-
 !**.tex
 !*.pdf
