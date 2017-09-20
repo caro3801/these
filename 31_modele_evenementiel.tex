@@ -110,14 +110,14 @@ experte).
 
 
 \subsubsection{Contribution}
-Pour répondre à cette problématique, nous proposons une solution pour la 
+Pour répondre à cette problématique, nous proposons un modèle pour la 
 transmission des données 3D et collaboratives qui permet de  limiter  le nombre 
 de requêtes et la taille des données transmises sans perdre la traçabilité de 
 celles-ci. L'idée est de profiter de la puissance du client pour créer une 
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
 (travaille hors ligne) ou involontaire (coupure). On garantit ainsi à l'utilisateur 
 l'utilisation du système avec un historique performant où chaque connexion est 
-l'occasion de mettre le système à jour.
+l'occasion de mettre le système à jour.\improve{en remttre une couche}
 
 
 \subsection{Modèle général}
@@ -163,7 +163,7 @@ les applications :
 	en mémoire (\textit{in-memory}) et contribue à la partie commande (C) du 
 	CQRS\info{reference à la section}.
 	\item[Vue] Une vue est un acteur qui ne fait que consommer des évènements à 
-	partir du journal d'évènement. L'état interne dérivé à partir des évènements 
+	partir du journal d'évènements. L'état interne dérivé à partir des évènements 
 	consommés est un modèle de lecture en mémoire et contribue à la partie 
 	requête (Q) du CQRS\info{reference à la section}.
 	\item[Producteur] Un producteur est un acteur qui produit des évènements à 
