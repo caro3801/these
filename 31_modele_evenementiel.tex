@@ -1,10 +1,19 @@
 %!TEX root = main.tex
 
 %%%%%%% SECTION %%%%%%%
-\section{Modèle évènementiel pour l'intégration du domaine 3D lors de la 
-manipulation d'objets 3D}
+\section{Modèle évènementiel pour l'intégration du domaine 3D dans les 
+EVC}
 
 %\subsection{Introduction}
+La méthodologie orientée évènements intègre plusieurs aspects souvent laissés 
+de côté dans la littérature concernant le développement les environnements 
+virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. Par 
+exemple, elle a l'avantage de proposer un couplage lâche. Dès lors, la réutilisation 
+des données produite lors de la collaboration peut facilement être réutiliser pour un 
+traitement secondaire comme la sensibilisation aux éléments de l'environnement. 
+Le découpage de la modélisation logicielle et l'abstraction qu'elle apporte est aussi 
+l'occasion de s'intéresser à la façon dont sont générées les données produites par 
+les utilisateurs et la façon dont elles sont affichées. 
 
 L'\gls{EP} occupe, dans le champ de l'informatique, une place centrale dans 
 beaucoup de systèmes comme l'énergie, la santé, l'environnement, les transports, 
@@ -25,53 +34,57 @@ permet de définir les termes et les interprétations communes à différents
 domaines se basant sur le paradigme de l'\gls{EP}. 
 
 
-La méthodologie orientée évènements intègre plusieurs aspects souvent laissés 
-de côté dans la littérature concernant le développement les environnements 
-virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. Par 
-exemple, elle a l'avantage de proposer un couplage lâche. Dès lors, la réutilisation 
-des données produite lors de la collaboration peut facilement être réutiliser pour un 
-traitement secondaire comme la sensibilisation aux éléments de l'environnement. 
 
 %L'intégration de la partie métier L'un des aspects principaux a été de 
 %combiner tous les aspects reliés aux évènements dans le \textit{pipeline} de 
 %visualisation et de manipulation d'objets 3D. 
-Le découpage de la modélisation logicielle et l'abstraction qu'elle apporte est aussi 
-l'occasion de s'intéresser à la façon dont sont générées les données produites par 
-les utilisateurs et la façon dont elles sont affichées. 
+
 
 \subsubsection{Constat}
 
 Par nature, une architecture orientée évènements est extrêmement peu couplée et 
 hautement distribuée. Le créateur de l'évènement sait seulement que l'évènement 
-se produit. 
-Le créateur de l'évènement n'a aucune idée du traitement l'évènement va subir par 
-la suite ou qui cela va concerner. La traçabilité peut donc devenir difficile lorsqu'un 
-évènement empreinte de multiples chemin. C'est pourquoi les architectures 
-orientée évènements sont plus utilisées dans un contexte de flux d'information 
-asynchrone. 
+se produit et n'a aucune idée du traitement l'évènement va subir par 
+la suite ou qui cela va concerner. 
+C'est pourquoi les architectures orientées évènements sont plus utilisées dans un 
+contexte de flux d'information asynchrone. La traçabilité dans ces environnements 
+devient alors un enjeu important. Facilitée par l'empreinte laissée par chaque 
+évènement, elle n'en demeure pas moins complexe selon l'échelle d'évaluation. A 
+l'échelle d'un utilisateur, d'un groupe d'utilisateurs, ou de plusieurs groupes, les 
+acteurs restent des entités assez homogènes dans le cadre de la modélisation 3D 
+collaborative ce qui simplifie la tâche car on reste dans un cadre et un domaine 
+connu.
 
-Il existe différent types de traitement d'évènement : simple, en continu, complexe. 
-Ils peuvent être utilisés ensemble dans le cadre.
-\begin{itemize}
-\item Traitement d'évènement simple. (\textit{simple event processing}). 
-Dans le traitement simple d'évènement, un évènement notable arrive, initiant une 
-cascade d'actions. Le traitement simple d'évènement est généralement utilisé pour 
-orienter un flux temps-réel qui peut prendre un peu de temps, n'entraînant pas de 
-coût sur la partie métier.
-\item Traitement de flux continu d'évènement. (\textit{stream event 
-processing}). 
-\item Traitement d'évènement complexe. (\textit{complex event 
-processing}). 
 
-\end{itemize}
+
+%Il existe différent types de traitement d'évènement : simple, en continu, 
+%complexe. 
+%Ils peuvent être utilisés ensemble dans le cadre d'une même application.
+%\begin{itemize}
+%\item Traitement d'évènement simple. (\textit{simple event processing}). 
+%Dans le traitement simple d'évènement, un évènement notable arrive, initiant 
+%une 
+%cascade d'actions. Le traitement simple d'évènement est généralement utilisé 
+%pour 
+%orienter un flux temps-réel qui peut prendre un peu de temps, n'entraînant pas de 
+%coût sur la partie métier.
+%\item Traitement de flux continu d'évènement. (\textit{stream event 
+%processing}). 
+%\item Traitement d'évènement complexe. (\textit{complex event 
+%processing}). 
+%
+%\end{itemize}
 
 Le choix de baser la gestion des données sur le patron de conception \gls{CQRS} 
-combiné à de l'\gls{ES} repose sur le constat suivant: dans un cadre industriel, le 
-besoin de traçabilité de l'information est très important. 
-
-\gls{CQRS} est principalement utilisé sur des applications \gls{CS} qui sont 
-toujours connectées (pour récupérer les mises à jour). Ce fonctionnement ne 
-permet pas le travail hors ligne.
+combiné à de l'\gls{ES} repose sur le constat suivant : dans un cadre industriel, le 
+besoin de traçabilité de l'information est très important pour suivre l'évolution d'un 
+projet par exemple. 
+Les architectures orientées évènements repose le plus souvent sur 
+communication client-serveur pour faciliter la gestion des données dans le 
+système distribué. C'est pourquoi l'exploitation du patron de conception 
+\gls{CQRS} a originalement été développé avec cette  \gls{CS} qui sont 
+toujours connectées (pour récupérer les mises à jour). 
+Ce fonctionnement ne permet pas le travail hors ligne.
 
 Côté serveur, le stockage des données est de moins en moins cher, on peut donc 
 se permettre de stocker beaucoup de données de manière distante notamment 
@@ -82,15 +95,15 @@ Côté client, la puissance de calcul des machines sur lesquelles sont installé
 navigateurs web évolue rapidement (notamment les appareils mobiles comme les 
 \textit{smartphones} et les tablettes). Les navigateurs suivent cette tendance en 
 puisant dans ces ressources pour effectuer des traitements similaires à ceux que 
-l'on trouve côté serveur traditionnellement et pour proposer des fonctionnalités 
+l'on trouve traditionnellement côté serveur et pour proposer des fonctionnalités 
 avancées telles que le stockage important de données sur le client (IndexedDB, 
 storageAPI), pour l'affichage 3D (WebGL) et pour la communication en \gls{P2P} 
 (\gls{WebRTC}). En déportant ainsi la charge que pourrait subir une architecture 
-traditionnelle client-serveur côté client, les échangent réseaux sont limités car qui 
+client-serveur côté client, les échangent réseaux sont limités car qui 
 sont très coûteux d'un point de vue énergétique pour les appareils mobiles 
 \cite{Koskela2015}. De plus, l'utilisation de la bande passante est onéreuse et 
 parfois limitée voire inexistante, il est donc nécessaire de tirer parti de tous les 
-appareils participants à la collaboration au lieu de tout faire reposer sur le serveur. 
+appareils participant à la collaboration au lieu de tout faire reposer sur le serveur. 
 Chaque appareil participant à la collaboration doit être autonome et le plus 
 indépendant possible en termes de ressources (données, réseaux, validation 
 experte). 

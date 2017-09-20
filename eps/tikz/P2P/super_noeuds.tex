@@ -1,0 +1,32 @@
+\begin{tikzpicture}[auto,thick]
+	% Place super peers and connect them
+	\foreach \place/\name in {{(0,-0.5)/a}, {(2,-0.5)/b}, {(2.5,1.5)/c}, {(0.4,1)/d},
+		{(-1,0.7)/e}}
+	\node[superpeers] (\name) at \place {};
+	\foreach \source/\dest in {a/b, a/c, a/d, b/c, c/d,a/e,d/e}
+	\path (\source) edge (\dest);
+	%
+	% Place normal peers
+	\foreach \pos/\i in {above left of/1, left of/2, below left of/3}
+	\node[peers, \pos = e] (e\i) {};
+	\foreach \speer/\peer in {e/e1,e/e2,e/e3}
+	\path (\speer) edge (\peer);
+	%
+	\foreach \pos/\i in {above right of/1, right of/2, below right of/3}
+	\node[peers, \pos =b ] (b\i) {};
+	\foreach \speer/\peer in {b/b1,b/b2,b/b3}
+	\path (\speer) edge (\peer);
+	%
+	\node[peers, above of=d] (d1){};
+	\path (d) edge (d1);
+	%
+	\foreach \pos/\i in {below left of/1, below of/2}
+	\node[peers, \pos =a ] (a\i) {};
+	\foreach \speer/\peer in {a/a1,a/a2}
+	\path (\speer) edge (\peer);
+	%%%%%%%%
+	% Legends
+	\node[legendsp] at (5,0) {\small{Super-peers}};
+	\node[legendp] at (5,1) {\small{Normal peers}};
+	\node[legend_general] at (2,3) {\small{\textsc{D\'ecentralis\'e avec des super-n\oe uds}}};
+\end{tikzpicture}

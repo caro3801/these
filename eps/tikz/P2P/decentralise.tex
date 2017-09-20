@@ -1,0 +1,11 @@
+\begin{tikzpicture}[auto, thick]
+% Place super peers and connect them
+\foreach \place/\name in {{(0,-1)/a}, {(2,0)/b}, {(2,2)/c}, {(0,2)/d},
+	{(-2,0)/e}}
+\node[peers] (\name) at \place {};
+\foreach \source/\dest in {a/b, a/c, a/d, b/c, c/d,a/e,d/e}
+\path (\source) edge (\dest);
+% Legends
+\node[legendp] at (5,1) {\small{Normal peers}};
+\node[legend_general] at (2,3) {\small{\textsc{D\'ecentralis\'e}}};
+\end{tikzpicture}

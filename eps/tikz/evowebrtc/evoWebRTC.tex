@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+\begin{axis}[
+    date ZERO=2011-05-01,
+    ymin=0,ymax=100,
+    date coordinates in=x,
+    xticklabel=\scriptsize{\year-\month},
+    legend entries={WebRTC,WebSocket},
+    legend pos=north west,
+    xmin={2011-05-01},
+    xmax ={2017-06-01},
+    width=14cm,
+    height=6cm,
+    grid=major,
+    xlabel=Temps (Année-Mois),
+    ylabel=Nombre de hits
+]
+
+\addplot table[x=Mois, y=WebRTC,col sep=comma]{data/webrtcvswebsocket.csv};
+\addplot table[x=Mois, y=WebSocket,col sep=comma]{data/webrtcvswebsocket.csv};
+\end{axis}
+\end{tikzpicture}
