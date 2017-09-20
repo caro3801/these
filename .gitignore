@@ -1,7 +1,4 @@
 *
-
-# But not these files...
-!.gitignore
-!**.eps
 !**.tex
-!*.pdf
+!eps/
+!**.eps
