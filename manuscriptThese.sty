@@ -1,0 +1,242 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{manuscriptThese}[2014/08/04 Extension personnelle, V1.0]
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[frenchb]{babel}
+\RequirePackage{lmodern}
+\RequirePackage{keyval}
+
+
+	
+\newcommand{\stretchy}{1.3}
+
+
+\newcommand{\completetable}{
+	\singlespacing
+	\tableofcontents
+	\setstretch{\stretchy}
+	}
+\newcommand{\completelist}{
+	\singlespacing
+	\listoffigures
+	\adjustmtc
+	\listoftables
+	\adjustmtc
+	\printglossary[title={Liste des abréviations}]
+	\adjustmtc
+	\setstretch{\stretchy}
+}
+
+
+	\newcommand{\chaptertable}{
+	\singlespacing
+	\minitoc
+	\setstretch{\stretchy}
+	\vfill
+	\pagebreak}
+
+\RequirePackage[tight]{minitoc}
+\RequirePackage{setspace}
+
+\RequirePackage[backref,colorlinks=true,citecolor=CadetBlue,linkcolor=MidnightBlue]{hyperref}
+\RequirePackage[toc,translate=babel]{glossaries}
+\RequirePackage{booktabs}
+\RequirePackage{makeidx}
+
+\RequirePackage{bibunits}
+
+
+
+% pour les tableaux
+\RequirePackage{ltxtable}
+\RequirePackage{multirow}
+
+\addto\captionsfrench{\def\tablename{Tableau}}
+\clubpenalty10000
+\widowpenalty10000
+
+\RequirePackage{subfig}
+\RequirePackage{listings}
+\RequirePackage{amsfonts,amsmath, amsthm, amssymb,textcomp}
+\RequirePackage[draft]{graphicx}
+
+\RequirePackage{tocbibind}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Théorème}[section]
+\newtheoremstyle{definition2}% <name>
+{}% <Space above>
+{}% <Space below>
+{}% <Body font>
+{}% <Indent amount>
+{}% <Theorem head font>
+{}% <Punctuation after theorem head>
+{.5em}% <Space after theorem headi>
+{\textbf{\thmname{#1}\thmnumber{ #2}} \thmnote{ (\textit{#3})}}% <Theorem head 
+%spec (can be left empty, meaning `normal')>
+
+\theoremstyle{definition2}
+\newtheorem{defn}[thm]{Définition} 
+\RequirePackage{mathtools}
+\RequirePackage{ifdraft}
+\RequirePackage{etoc}
+
+%\RequirePackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm,marginparwidth=15mm]{geometry}
+\RequirePackage[a4paper,left=3.5cm,right=2.5cm,top=3cm,bottom=3cm,marginparwidth=15mm]{geometry}
+
+\RequirePackage{sectsty}
+\setlength{\headheight}{12.8pt}
+%\allsectionsfont{\bfseries\sffamily}
+\chapterfont{\centering}
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}{
+	\fancyhf{}
+	\fancyfoot[RO,LE]{\thepage}
+	\fancyhead[RO]{	\emph{\nouppercase{\rightmark}}}
+	\fancyhead[LE]{\emph{\nouppercase{\leftmark}}}
+	\renewcommand{\headrulewidth}{0.5pt}
+}
+
+
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+	\fancyfoot[RO,LE]{\thepage}
+	
+}
+
+\RequirePackage[inline]{enumitem}
+
+\RequirePackage{xargs}                      % Use more than one optional parameter in 
+%a new commands
+\RequirePackage[dvipsnames]{xcolor}
+
+\RequirePackage{framed}
+\RequirePackage{tikz}
+
+\usetikzlibrary{trees,patterns,matrix,arrows,backgrounds}
+%\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{everynode}=[draw=black,thick,anchor=west]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+\tikzstyle{optional}=[dashed,fill=gray!50]
+\RequirePackage{pgfplots}
+
+\usepgfplotslibrary{dateplot}
+\pgfplotsset{compat=1.9}
+
+\pgfplotscreateplotcyclelist{test}{%
+	solid, every mark/.append style={solid, fill=orange}, mark=*\\%
+	densely dashdotted,every mark/.append style={solid, 
+	fill=blue},mark=diamond*\\%
+	dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+	loosely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
+	densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+	dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
+	loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
+	densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+	dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+	dasdotdotted, every mark/.append style={solid},mark=star\\%
+}
+\RequirePackage{filecontents}
+\RequirePackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommand{\unsure}[1]{\vphantom{#1}}%[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommand{\change}[1]{\vphantom{#1}}%[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommand{\info}[1]{\vphantom{#1}}%[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommand{\improve}[1]{\vphantom{#1}}%[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommand{\jp}[1]{\vphantom{#1}}%[2][1=]{\todo[linecolor=Yellow,backgroundcolor=Yellow!25,bordercolor=Yellow,#1]{#2}}
+\newcommand{\herve}[1]{\vphantom{#1}}%[2][1=]{\todo[linecolor=Lavender,backgroundcolor=Lavender!25,bordercolor=Lavender,#1]{#2}}
+
+% 
+%\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+% 
+%\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+% 
+%\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+% 
+%\newcommandx{\improve}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+% 
+%\newcommandx{\jp}[2][1=]{\todo[linecolor=Yellow,backgroundcolor=Yellow!25,bordercolor=Yellow,#1]{#2}}
+% 
+%\newcommandx{\herve}[2][1=]{\todo[linecolor=Lavender,backgroundcolor=Lavender!25,bordercolor=Lavender,#1]{#2}}
+%\renewcommand{\sfdefault}{lms}
+%%%%%%%%%%%%%% FAIRE DES ENCARTS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Couleurs :
+
+
+\definecolor{fondtitre}{RGB}{85,85,85}
+\definecolor{fonddeboite}{RGB}{232,232,232}
+\definecolor{shadecolor}{RGB}{232,232,232}
+
+\ProcessOptions
+
+%%%%%%%%%% Boitemagique  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\boitemagique}[2]{
+	\begin{center}
+		\begin{tikzpicture}
+		% la boite
+		\node[rectangle,draw=fondtitre!100,fill=fonddeboite!100,inner sep=10pt, inner 
+		ysep=20pt] (mabox)
+		{
+			\begin{minipage}{12cm}
+			#2
+			\end{minipage}
+		};
+		% le titre de la boite
+		\node[fill=fondtitre!100, text=white, rectangle] at (mabox.north) 
+		{\sffamily\textbf{#1}};
+		\end{tikzpicture}
+	\end{center}
+}
+
+%%%%%% boitesimple 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\boitesimple}[1]{%
+	\begin{center}
+		\begin{minipage}{12cm}
+			\begin{shaded}
+				#1
+			\end{shaded}
+		\end{minipage}
+	\end{center}
+}
+%\newcommand\frontmatter{%
+%	\cleardoublepage
+%	%\@mainmatterfalse
+%	\pagenumbering{roman}}
+%
+%\newcommand\mainmatter{%
+%	\cleardoublepage
+%	% \@mainmattertrue
+%	\pagenumbering{arabic}}
+
+\hyphenation{Web-RTC}
+\hyphenation{Bit-Torrent}
+\hyphenation{co-dé-pen-dan-ce}
+\hyphenation{com-mu-nau-té}
+\hyphenation{con-nais-sent}
+\hyphenation{chaî-ne}
+
+
+\RequirePackage{csquotes}
+
+\newcommand{\inputTikZ}[2]{%  
+	\scalebox{#1}{\input{#2}}  
+}
+
+\RequirePackage[final]{microtype}
+\RequirePackage{epigraph}
+\setlength\epigraphwidth{8cm}
+\setlength\epigraphrule{0pt}
+
+\RequirePackage{etoolbox}
+
+\makeatletter
+\patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
+\makeatother
+
+\RequirePackage{blindtext}
