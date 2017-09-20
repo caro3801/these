@@ -1,18 +1,28 @@
-\documentclass[final,12pt,doubleside]{book}
+\documentclass[final,12pt,oneside]{book}
 \usepackage[]{../these/manuscriptThese}
 
 \graphicspath{{../these/eps/}}
 
-\include{glossaire}
 \include{tikzspecs}
+\makeglossaries
+
+\title{Architecture évènementielle pour les Environnements Virtuels 
+	Collaboratifs 
+	sur le web : Application à la manipulation et à la 
+	visualisation d'objets 3D}
+\author{Caroline Desprat}	
+
 \begin{document}
-\dominitoc
-\frontmatter
-\completetable
-\include{resume}
-\completetable
-\completelist
-\mainmatter
+	\include{glossaire}
+	\maketitle
+	\dominitoc
+	\frontmatter
+	%\include{resume}
+	%\include{remerciements}
+	\completetable
+	%\completelist
+	
+	\mainmatter
 
 %\chapter{Introduction}
 \include{01_intro}

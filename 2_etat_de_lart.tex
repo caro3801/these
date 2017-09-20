@@ -261,6 +261,85 @@ web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiqu
 	ciblent des néophytes de la WebGL possédant donc le matériel 
 	dédié à la 3D en général. Consulté le 04/07/2017.}.
 
+\section{Communication en temps-réel}
+L'expression temps-réel est largement utilisé par des applications requérant une 
+forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
+expérience.
+
+L'exigence vis-à-vis des temps de réponse est de plus en plus 
+grande pour deux raisons principales : les limitations humaines (mémoire et 
+attention limitées 
+à court terme) et les aspirations de l'être humain (besoin d'être en contrôle sur les 
+machines). S'accroissant au gré de la technologie et aux attentes 
+utilisateurs (rétro-compatibilité, temps de 
+chargement), elle varie selon le domaine mais reste très assez prégnante sur le 
+web en général. 
+Par exemple, dans un domaine annexe comme le e-commerce, une étude réalisée 
+en 2006 explique qu’une grande partie des internautes abandonnaient leurs achats 
+en ligne si les pages mettaient 4 secondes ou plus à charger. De nos jours, ce 
+délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
+Nielsen \cite{Nielsen1993} indique trois temps de réponse limites concernant les 
+temps de réponses :
+\begin{itemize}
+	\item \textit{0,1 seconde} donne une sensation de réponse instantanée, comme 
+	si le 
+	résultat avait été produit par l'utilisateur et non l'ordinateur. Ce niveau de temps 
+	de réponse soutient la sensation de manipulation directe.\footnote{En IHM, la 
+		manipulation directe correspond à un mode d'interaction au cours duquel les 
+		utilisateurs font des actions sur les objets d'intérêt affichés dans l'interface 
+		utilisateur en utilisant des actions physiques, incrémentales et réversibles 
+		dont 
+		les effets sont immédiatement visibles sur l'écran.} 
+	\item \textit{1 seconde} garde le flux de pensées de l'utilisateur sans 
+	interuption. 
+	L'utilisateur peut ressentir un délai et par conséquent savoir que c'est la 
+	machine qui génère le résultat ; l'utilisateur a quand même une impression de 
+	contrôle sur l'expérience générale et peut de déplacer librement dans l'interface 
+	sans attendre la machine. Ce degré de réactivité est impératif pour une bonne 
+	navigation.
+	\item \textit{10 secondes} conservent l'attention de l'utilisateur. Entre 1 et 10 
+	secondes, l'utilisateur se sent dépendant de la machine, mais peut faire avec. 
+	Au delà, l'utilisateur va commencer à penser à d'autres choses, rendant difficile 
+	le retour à la tâche une fois que la machine répond.
+\end{itemize} 
+
+Dans le domaine de l'édition et la manipulation collaborative 
+d'objets 3D, les contraintes abordées se situent à divers degrés : au chargement 
+et lors des mises à jour. Le chargement concerne la phase de téléchargement de 
+l'application web et des données relatives mais également d'affichage des 
+modèles 3D sont spécifiques dans ce domaine car ils ont 
+tendance à être lourds (structure de données 3D et métadonnées) à charger 
+(contrairement au texte par exemple). Cette phase peut s'accorder des délais 
+relativement long (1-10s) compte tenu du fait que l'utilisateur connaît en partie ces 
+contraintes liées à la taille des objets 3D. Concernant les mises à jour, l'édition 
+collaborative requiert un temps de réponse raisonnablement court est contraint par 
+l'exactitude des calculs et le temps dans lequel le résultat est produit. Pour les 
+mises à jour internes -- produites par l'utilisateur, actions sur l'interface -- on 
+s'accordera sur un délai inférieur à 0,1 seconde dans cette thèse. 
+Pour les mises à jour externes -- produites par les collaborateurs -- les latences 
+réseaux rentrent en comptes (serveur, pairs\ldots) on s'accordera sur un délai 
+entre 1 et 10 secondes dans cette thèse selon les degrés d'asynchronicité 
+possible. 
+
+Un protocole de communication en temps-réel existe, il s'appelle \gls{RTP} et a 
+été développé dans le but de faciliter la communication en temps-réel sur un 
+réseau. Coexistant avec \gls{RTP}, le protocole \gls{RTCP} est utilisé pour 
+transmettre des informations de contrôle à propos des données en temps-réelles. 
+\gls{RTCP} transporte des données contenant des informations de contrôle et des 
+informations statistiques concernant les flux de données et les connexions des 
+destinataires qui permettent à l'expéditeur d'ajuster le flux en conséquence. Les 
+protocoles \gls{RTP} et \gls{RTCP} sont principalement conçus pour la 
+transmission de flux audio et vidéo, moins pour des données arbitraires comme 
+des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre des 
+\gls{EVC} pour la modélisation 3D. 
+
+Du fait de la variété des \glspl{EVC3D} existants, LE 
+protocole de communication parfait pour tous les types d'environnement n'existe 
+pas. 
+Les besoins en communication qui se formulent souvent en termes de 
+fiabilité de la livraison des messages et de l'ordonnancement des messages sont 
+les variables d'ajustement en fonction des contraintes qu'imposent les limites de 
+temps de réponse et de bande passante.
 
 %
 %
