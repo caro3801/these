@@ -3,4 +3,5 @@
 !eps/
 eps/*
 !**.eps
-
+eps/tikz/
+!eps/tikz/**.tex
