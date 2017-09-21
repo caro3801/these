@@ -313,7 +313,51 @@ sur les opérations et les services primitifs liés à la sensibilisation. Ces d
 sont directement implémentés dans l'intergiciel \gls{P2P}. Le modèle propose 
 différentes approches dépendant de la plateforme (web ou mobile) avec une 
 granularité différente de l'information 
-d'\textit{awareness}.
+d'\textit{awareness} dont :
+
+%Dans les collecticiels évènementiels P2P, les conditions à intégrer dans le 
+%développement de l'intergiciel P2P, pour proposer une sensibilisation au 
+%groupe  -- activité, process, contexte, communication, disponibilité -- sont 
+%nombreuses \cite{Xhafa2010} : 
+\begin{description}
+	\item[La sensibilisation distribuée] A l'inverse d'une approche centralisée, où 
+	l'information de sensibilisation est gérée par un serveur central, dans un 
+	système décentralisé l'information surlaquelle la sensibilisation est construite 
+	est répartie sur les sites des différents pairs. Dans les approches basées 
+	serveur, le traitement des évènements est effectué sur le serveur, qui stocke 
+	les évènements ainsi que la base de données contenant l'historique et fournit 
+	l'interface de requête pour extraire les information d'intérêt. Dans le collecticiel 
+	P2P, le stockage, le traitement et les requêtes d'évènements doivent être faits 
+	de manière répartie.
+	
+	\item[La sensibilisation à la dynamicité des évènements] Les systèmes P2P 
+	sont dynamique par nature (\textit{join/leave} des pairs). La fonctionnalité de 
+	sensibilisation doit prendre en compte cette dynamicité. En effet, la 
+	synchronisation et la cohérence de l'information sur les différents sites sont 
+	cruciales et plus difficiles à mettre en place que dans un système 
+	client-serveur. La sensibilisation sous contrainte de dynamicité du réseau doit 
+	intégrer des mécanismes de propagation et de réplication fournissant le contenu 
+	au groupe. 
+	
+	\item[La généricité des évènements] Un système basé évènements manipule 
+	plusieurs types d'évènement. C'est pourquoi il est nécessaire que les 
+	évènements soient le plus génériques possible pour faciliter la construction de 
+	requêtes à travers un système lâchement couplé.
+	
+	\item[Les mécanismes à empreinte mémoire réduite] L'utilisation de 
+	mécanismes à empreinte mémoire réduite est indispensable dans le but de 
+	réduire la surcharge causé par la génération d'évènements, le traitement des 
+	évènements et les notifications ainsi que pour permettre le support de la 
+	sensibilisation par des pairs qui possèdent des capacités limités.
+
+\end{description}
+%A parallel grid-based implementation for real-time processing of event log data of 
+%collaborative applications
+%\cite{Xhafa2010a}
+%
+%Using mobile-based complex event processing to realize collaborative remote 
+%person monitoring
+%\cite{Stojanovic2014}
 \info{Xhafa2010 parle aussi des mobiles}
 Dans \cite{Brown2003}, les auteurs proposent un mécanisme de distribution de 
 données basé évènements. Le \textit{Battlefield Augmented Reality System} 

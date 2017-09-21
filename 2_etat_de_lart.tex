@@ -279,7 +279,7 @@ Par exemple, dans un domaine annexe comme le e-commerce, une étude réalisée
 en 2006 explique qu’une grande partie des internautes abandonnaient leurs achats 
 en ligne si les pages mettaient 4 secondes ou plus à charger. De nos jours, ce 
 délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
-Nielsen \cite{Nielsen1993} indique trois temps de réponse limites concernant les 
+Nielsen \cite{Nielsen1993a} indique trois temps de réponse limites concernant les 
 temps de réponses :
 \begin{itemize}
 	\item \textit{0,1 seconde} donne une sensation de réponse instantanée, comme 
@@ -334,9 +334,9 @@ transmission de flux audio et vidéo, moins pour des données arbitraires comme
 des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre des 
 \gls{EVC} pour la modélisation 3D. 
 
-Du fait de la variété des \glspl{EVC3D} existants, LE 
-protocole de communication parfait pour tous les types d'environnement n'existe 
-pas. 
+Du fait de la variété des domaines et applications auxquels d'adressent les 
+\glspl{EVC3D} existants, \textit{le} protocole de 
+communication parfait adapté à tous les types d'environnement n'existe pas. 
 Les besoins en communication qui se formulent souvent en termes de 
 fiabilité de la livraison des messages et de l'ordonnancement des messages sont 
 les variables d'ajustement en fonction des contraintes qu'imposent les limites de 
@@ -377,7 +377,13 @@ charge de la synchronisation de contenus édités de manière concurrentes sur l
 différentes instances CoDesign ainsi qu'un module chargé de notifier les 
 architectes de situations de modélisation conflictuelles. Les conflits sont 
 catégorisés de trois manières différentes. 
-	
+
+Eventuate est une plateforme qui se base sur un modèle de programmation 
+événementielle ayant pour but de résoudre les problèmes liés à la gestion de 
+données distribuée inhérents aux architectures microservices en utilisant ES et 
+CQRS. Une de leurs application exemple est un tableau Kanban collaboratif 
+temps-réel construit sur leur 
+plateforme\footnote{https://github.com/eventuate-examples/es-kanban-board}. 
 %	\subsection{Les évènements comme base du comportement réactif}
 	\subsection{Systèmes Publish / Subscribe}
 
@@ -388,10 +394,15 @@ Les \textit{publishers} (ceux qui émettent des messages) et les \textit{subscri
 Autrement dit, le \textit{publisher} n'est pas forcément au courant de l'existence de 
 ses \textit{subscribers} et n'a donc pas de contrainte forte le liant à ces derniers. 
 De son côté, le \textit{subscriber} est souvent indifférent au \textit{publisher} qui lui 
-fournit les évènements qui l'intéressent. 
+fournit les évènements qui l'intéressent. La Figure \ref{fig:pubsub} représente le 
+modèle \gls{PubSub}.
+Le service de notification d'évènement est utilisé comme passe plat d'évènements 
+entre le publisher et les subscribers. Son rôle est de gérer les abonnements 
+(souscription/désinscription) et de notifier les \textit{subscribers} concernés par la 
+publication d'un évènement par un \textit{publisher}.
 %TODO expliquer la figure 
 
-\begin{figure}[h]
+\begin{figure}[t!]
 	\centering
 	\inputTikZ{1}{eps/tikz/pubsub}
 	\caption{Architecture Publish-Subscribe}
@@ -399,8 +410,8 @@ fournit les évènements qui l'intéressent.
 \end{figure}
 
 
-Les modèles utilisant le paradigme 
-\gls{PubSub} supportent naturellement une communication \textit{many-to-many} 
+Les modèles utilisant le paradigme \gls{PubSub} supportent naturellement une 
+communication \textit{many-to-many} 
 entre les \textit{publishers} et les \textit{subscribers}.  De cette manière, on permet 
 un meilleur passage à l'échelle d'une application avec une topologie du réseau plus 
 flexible. 
@@ -445,7 +456,7 @@ comportement au changement, les types peuvent être définis dynamiquement et
 la communication est anonyme. 
 Puis l'apparition de solutions plus avancées sont apparues avec le projet 
 GRYPHON d'IBM \cite{Banavar1999}, SIENA \cite{Carzaniga2000}, REBECA 
-\cite{Parzyjegla2010} et également REDS , JEDI, PADRES présentés plus en 
+\cite{Parzyjegla2010} et également REDS, JEDI, PADRES présentés plus en 
 détails dans \cite{Tarkoma2012}.
 Ces différentes solutions ont été conçues comme des systèmes de gestion avec 
 des gestionnaires d'évènements dédiées. Le passage à l'échelle est 
@@ -457,7 +468,8 @@ A partir des années 2000, les
 systèmes \gls{P2P} ont commencer à émerger avec 
 l'apparition de Gnutella et consorts, les DHTs (Chord, Pastry, Kademlia) et  
 Réseaux non-structurés (Cyclon, Scamp, ADH). Ces systèmes ayant pour 
-objectifs de gérer des réseaux massifs, dynamiques (churn), résistants aux 
+objectifs de gérer des réseaux massifs, dynamiques (\textit{churn}), résistants 
+aux 
 erreurs, et offrants des primitives de communications basiques.
 Les réseaux P2P promettent alors des propriétés intéressantes pour les 
 infrastructures logicielles comme les systèmes PubSub concernant le passage à 
@@ -470,8 +482,164 @@ de trouver une méthode efficace pour gérer la dynamicité.
 
 	
 	
-	\subsubsection{Outils de monitoring et de benchmark}
-	
+\subsubsection{Outils de monitoring et de benchmark}
+Dans un système distribué comme \gls{PubSub}, les outils de comparaisons 
+sont souvent très hétérogènes et ne permettent pas forcément d'évaluer sur une 
+même base la monté en charge. 
+Carzaniga and Wolf \cite{Carzaniga2002} proposent quelques 
+lignes directrices pour concevoir une suite de \textit{benchmark} dans un système 
+\gls{PubSub}, sans fournir de résultat spécifique, dont le but est double : la 
+validation de l'interface et l'évaluation de la performance. 
+La pertinence de l'interface a été définie par une série de questions/réponses 
+posée au développeur. Elle adresse plusieurs aspects de liés à l'\gls{IU} : 
+\begin{itemize}
+	\item le modèle de publication (structure, domaines de valeur, taille des objets);
+	\item le modèle de souscription (portée de l'évaluation d'une publication reçue, 
+	type de langage, expressivité du langage pour la sélection);
+	\item les méthodes d'accès à l'interface (accès local, mémoire partagée) ; 
+	\item la portabilité du système (support multi-plateforme) ;
+	\item le type de service (fiabilité) et les fonctionnalités auxiliaires. 
+\end{itemize}
+
+Pour évaluer la charge de travail d'un système distribué basé évènements, 
+Kounev et al. \cite{Kounev2008} ont utilisé des techniques d'analyse 
+opérationnelle pour caractériser le trafic du système et dériver une approximation 
+de la moyenne des délais de livraison d'évènements. 
+
+%TODO precisier quelles recherches
+Beaucoup de recherches ont été menées dans le but d'améliorer les performance 
+des systèmes collaboratifs utilisant une architecture distribuée. Bien que ces 
+approches permettent de passer à l'échelle de grandes quantités de données, cela 
+requiert de lourds investissement pour installer et maintenir plusieurs serveurs 
+dédiés. Une alternative à bas coût est d'utiliser les différents clients à disposition 
+(qui sont en relation par le biais de la collaboration) pour avoir un traitement réparti 
+des données sur la foule (\textit{crowd computing})\cite{Li2015}. De ce fait, le 
+contenu 3D est distribué par les pairs et non plus par le serveur. En combinant les 
+ressources réseau du serveur et de plusieurs clients, on peut réaliser une 
+distribution des données (évènements) en améliorant les performances du 
+système pendant les sessions de travail collaboratif. 
+
+\subsubsection{La virtualisation des clients}
+\label{virtualisation}
+\todo{mettre ailleurs?}
+Une des problématiques soulevée par la collaboration \gls{P2P} est de permettre 
+la reproductibilité des expérimentations dans un environnement contrôlé et réaliste.
+Réussir à simuler un réseau virtuel de clients en \gls{P2P} en utilisant le protocole 
+\gls{WebRTC} est un défi encore compliqué. Il existe des outils pour simuler des 
+réseaux \gls{P2P} tels que PeerSim \cite{Montresor2009} ou \textit{ns-3} 
+\cite{Riley2010}. Ces outils sont 
+plus orientés sur la façon de distribuer les informations lors de la simulation et leur 
+dissémination au sein du réseau plutôt que de reproduire les protocoles et 
+l'infrastucture de manière réaliste avec des données issues de l'\gls{IU}. Dans de 
+récents travaux utilisant \gls{WebRTC}, les expérimentations ne 
+sont pas encore facilement reproductibles du fait qu'il n'existe pas d'outil facile à 
+prendre en main pour effectuer ce genre de simulation à base d'entrées utilisateur 
+fiables vis à vis des impératifs métier. 
+
+La virtualisation implique également de pouvoir simuler des comportements sur 
+la base d'interactions issues de \gls{IU} \cite{Hu2017} comme on peut le trouver 
+dans la simulation d'\gls{IU} web.
+Dans ce contexte, ce type de tests permet de vérifier la compatibilité et la 
+réactivité des différentes plateformes, versions de navigateurs et types d'appareils 
+en fonction d'entrées utilisateur. C'est également utile pour faire des tests de 
+performance ou de montée en charge 
+concernant l'interface. 
+Le service testRTC\footnote{\url{testrtc.com}. Consulté le 
+	07/07/2017} est un service payant qui propose un outil de test et de monitoring 
+pour un grand banc de machines de sessions audio et vidéo WebRTC .
+
+
+%TODO mettre ailleurs?
+L'intérêt d'utiliser un modèle de réseau \gls{P2P} virtuel comporte plusieurs 
+avantages. En reprenant les points proposés par \cite{Haque2016}, on peut citer : 
+\begin{itemize}
+	\item Pas d'installation nécessaire. Plusieurs outils et logiciels existent pour 
+	simuler des réseaux \gls{P2P} \cite{Montresor2009} ou nécessite encore 
+	l'installation de clients lourds (clients BitTorrent) par les utilisateurs pour réaliser 
+	les mesures. Cela implique le fait de comprendre les principes de base 
+	concernant la configuration réseau (routeurs, pare-feu) et le protocole utilisé 
+	(BitTorrent). Très peu de travaux concernant \gls{WebRTC} ont réussi à 
+	virtualiser les clients participants aux expérimentations.
+	\item Opérabilité et interopérabilité dans un environnement contrôlé.  
+	L'installation d'un client sur une machine requiert certaines autorisations liés à 
+	la politique de l'organisation, la licence logicielle et le support logiciel. Ce type 
+	d'environnement est assez typique dans l'industrie, c'est pourquoi il est 
+	intéressant de proposer un modèle qui puisse s'exécuter sans difficulté grâce à 
+	l'utilisation de clients web. Les navigateurs qui servent de clients web 
+	s'accordent généralement avec les standards proposés par le \gls{W3C}, ce qui 
+	facilite également l'interopérabilité du logiciel souvent déployé dans un parc 
+	hétérogène de machines.
+	\item Indépendance de la situation géographique. Tout comme les 
+	infrastructures \textit{cloud} (souvent un service tiers) qui sont distantes par 
+	l'intermédiaire d'un réseau , généralement internet les utilisateurs peuvent se 
+	connecter sur un réseau virtuel  \gls{P2P} à partir de n'importe quel lieu. 
+	\item Simplification de la maintenance. Les applications, standards et 
+	protocoles autour du \gls{P2P} sont en constante évolution. L'implémentation de 
+	la méthode de distribution des données nécessite par conséquent de fréquente 
+	mises à jour pour être la plus efficace possible. Dans le cas d'une 
+	implémentation d'un client virtuel, la mise à jour qui est distribuée par le serveur 
+	sera automatique et la même sur tous les clients ce qui facilite la maintenance 
+	car c'est le distributeur qui est responsable de la mise à jour et non le client.
+	\item Mobilité et accès au réseau. La mise en place d'un réseau P2P permet de 
+	découpler l'accès à l'information et aux ressources du système. De ce fait, 
+	les clients peuvent travailler directement entre eux sans supervision après mise 
+	en relation et partager leurs ressources avec les autres clients qui en ont 
+	besoin. Le réseau peut évoluer sans que cela ait un fort impact sur la 
+	collaboration. Les clients peuvent être plus mobiles du fait de la grande 
+	disponibilité offerte par cette architecture à moindre coût.
+	\item \gls{NATT} et pare feu. Les applications traditionnelles de P2P comme 
+	BitTorrent ne permettent pas à deux pairs de communiquer directement 
+	lorsqu'ils sont derrière un \gls{NAT}. Grâce à l'utilisation du protocole \gls{ICE} 
+	les appareils peuvent atteindre plus de pairs, augmentant la vitesse d'échange.
+\end{itemize}
+
+Cette liste est un point de départ pour créer un service de virtualisation de clients 
+pour le partage de données (3D) avec WebRTC. 
+La mise à disposition volontaire de ressources (calcul, mémoire) en partage sur le 
+réseau permet d'une part la coopération entre personnes afin de résoudre des 
+problèmes nécessitant un haut degré de computation et d'autre part l'utilisation de 
+ressources qui ne seraient pas ou sous utilisées.
+
+L'optimisation de l'utilisation des ressources peut être effectuée avec WebRTC 
+pour faire des grilles de calcul comme dans browserCloud.js \cite{Dias2015a} ou 
+pour faire des analyses visuelles collaboratives dans un environnement 
+hétérogène \cite{Li2015}.
+
+Dat \cite{Ogden2017} est un protocole de synchronisation de jeu de données qui 
+n'assume pas que le jeu de données soit statique ou que le jeu de données soit 
+entièrement téléchargé. C'est un protocole agnostique\footnote{Indépendant des 
+	protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
+	protocole avec son pair et commence la communication. Cette démarche 
+	apporte 
+	plus de flexibilité et d'interopérabilité au système.} dont la conception 
+repose sur la garantie des principes suivant : intégrité du contenu grâce à 
+l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
+régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
+découvrir automatiquement les pairs et effectuer l'échange de données en essaim, 
+chiffrement des données de bout en bout, versionnage incrémental pour la 
+synchronisation des données. Ce protocole est par exemple utilisé par 
+hashbase.io, un service qui se propose d'être un pair toujours présent pour 
+l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
+pérenne du contenu. 
+
+En 2001, le standard \gls{DDS} est un standard machine-à-machine massif, en 
+temps-réel, hautement performant avec un système d'échange de données 
+interopérables. \gls{DDS} s'adresse principalement à des problématiques 
+d'échanges financiers, de contrôle aérien, et de réseau électrique intelligent 
+(\textit{smart grid}). Il a fortement été promu pour mettre en place des applications 
+liées à l'internet des objets. Les spécifications proposent deux niveaux 
+d'interfaces. Le premier se concentre sur la mise à disposition d'un système 
+\gls{PubSub} bas niveau centré données pour permettre la livraison efficace de la 
+bonne information au bon destinataire. Le second, niveau optionnel, 
+est une couche de reconstruction locale de la donnée permettant une integration 
+plus simple de \gls{DDS} au sein d'une application. \gls{DDS} est donc un 
+intergiciel réseau basé sur une architecture \gls{PubSub} qui gère la livraison 
+de messages sans nécessiter l'intervention d'un utilisateur. Il détermine qui doit 
+recevoir les message, où sont situer les destinataires et ce qu'il se passe si le 
+message n'est pas délivré. En cela, \gls{DDS} permet une gestion plus fine de la 
+qualité de service notamment concernant les paramètres de découverte des pairs.
+
+
 \subsection{Domain Driven Design}
 %\subsection{Domain Driven Design : lier le fonctionnel et le code}
 	
@@ -539,7 +707,7 @@ de trouver une méthode efficace pour gérer la dynamicité.
 	
 	\paragraph{Programmation réactive}
 	Les différents livres publiés par Vaughn s'attachent également à montrer la 
-	nécessitée pour les différentes branche de l'informatique à proposer des 
+	nécessitée pour les différentes branches de l'informatique à proposer des 
 	systèmes 
 	pour robustes et flexibles face aux nouvelles demandent. La publication du 
 	Manifeste Réactif encourage le développement de systèmes \og plus flexibles, 
