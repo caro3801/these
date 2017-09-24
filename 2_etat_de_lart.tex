@@ -268,6 +268,15 @@ forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bon
 expérience. La communication dans un \gls{EVC} particulièrement pour permettre aux utilisateurs de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
 
 
+La communication et la transmission des données lors de la collaboration un des 
+aspects prépondérant dans les \gls{EVC3D} concerne . Que ce soit dans dans un 
+\gls{EV}, un jeu multi-joueur ou un jeu sérieux (\textit{serious game}), les 
+participants interagissent en temps-réel ou quasi-réel alors qu'ils sont situés à 
+différents endroits géographiques. 
+Le développement d'un \gls{EVC3D} nécessite donc des connaissances issues de 
+plusieurs domaines comme la conception et l'implémentation de protocoles 
+réseaux et de réseaux distribués.
+
 Un protocole de communication en temps-réel existe, il s'appelle \gls{RTP} et a 
 été développé dans le but de faciliter la communication en temps-réel sur un 
 réseau. Coexistant avec \gls{RTP}, le protocole \gls{RTCP} est utilisé pour 
@@ -281,13 +290,179 @@ des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre 
 \gls{EVC} pour la modélisation 3D. 
 
 Du fait de la variété des domaines et applications auxquels s'adressent les 
-\glspl{EVC3D} existants, le protocole de 
-communication parfait adapté à tous les types d'environnement n'existe pas. 
+\glspl{EVC3D} existants, il n'existe pas de protocole de 
+communication parfait adapté à tous les types d'environnement. 
 Les besoins en communication qui se formulent souvent en termes de 
 fiabilité de la livraison des messages et de l'ordonnancement des messages sont 
 les variables d'ajustement en fonction des contraintes qu'imposent les limites de 
 temps de réponse et de bande passante.
 
+\subsection{Fiable versus Non Fiable}
+
+La fiabilité d'un protocole de communication définit comment le protocole fait face 
+à la perte ou au retard de données. Un protocole dit \og fiable\fg{} (\textit{reliable}) 
+fait en sorte de rendre sûr le fait que le destinataire recevra éventuellement les 
+données envoyées par l'expéditeur. Lors de la perte d'un paquet, ou lorsqu'il est 
+retenu quelque part dans le réseau, le protocole est au courant et essaye de 
+renvoyer les données concernées. Un protocole dit \og non fiable\fg{}, ne fournit 
+pas ce genre de garantie et n'essaiera pas de transmettre à nouveau les données.
+
+Bien que la fiabilité dans une communication est une propriété habituellement 
+recherchée, cela implique également que le canal doit connaître l'état des données 
+qui transitent. Soit l'expéditeur numérote les paquets en séquence, et dans ce 
+cas, seul le destinataire à la connaissance des paquets manquants (et à 
+renvoyer). Pour indiquer les paquets manquants à l'expéditeur, le destinataire peut 
+envoyer des acquittements (ACKs) pour confirmer leur réception. Ces ACKs 
+peuvent être joints aux messages ou envoyés séparément. En plus des données 
+additionnelles envoyées, un protocole fiable peut aussi générer des latences 
+sévères (dans l'attente d'un paquet perdu ou avec beaucoup de retard). Cela peut 
+impliquer que les \og nouvelles\fg{} données peuvent arrivées et être déjà 
+périmées.
+
+Pour certaines applications qui ne peuvent pas faire face à ces délais potentiels 
+ou ne peuvent pas s'offrir de données additionnelles, les protocoles non fiables 
+sont utilisés. 
+L'expéditeur se repose alors sur le réseau pour délivrer les paquets 
+correctement, mais il n'y a aucune garantie. Les protocoles non fiables ne 
+nécessitent pas de données additionnelles (séquence de nombre ou ACKs). 
+L'expéditeur n'est cependant jamais sûr que le destinataire a reçu toutes ses 
+données. Lorsque le destinataire a une connaissance du type de trafic qu'il reçoit, 
+il peut fournir un retour à l'expéditeur pour qu'il ajuste le flux de paquets. Ce 
+principe est appliqué par le protocole \gls{RTCP}, conjointement avec \gls{RTP}, 
+pour fournir les données statistiques liés à la  connexion à l'expéditeur.
+
+L'utilisation d'un protocole de communication fiable ou non fiable dépendant du 
+type d'application et du type de l'environnement réseau dans lequel il est conçu 
+pour opérer. Si une application dite temps-réel est conçue pour fonction en réseau 
+local -- \gls{LAN} -- l'utilisation d'un protocole fiable est une option recommandée. 
+Les câbles utilisés dans ce contexte sont souvent rapides et stables ; un packets 
+perdu ou corrompu peut rapidement être détecté et retransmis. Dans des 
+environnements réseaux sont moins prévisibles comme les \gls{MAN} ou 
+\gls{WAN}, la nature de l'application a une influence importante sur le type de 
+protocole à utiliser. Selon si la pertinence des données est de courte durée, ou si 
+la perte de données n'est pas aussi importante que le fait de la retarder, alors un 
+protocole non fiable peut être employé.
+
+Dat \cite{Ogden2017} est un protocole de synchronisation de jeu de données qui 
+n'assume pas que le jeu de données soit statique ou que le jeu de données soit 
+entièrement téléchargé. C'est un protocole agnostique\footnote{Indépendant des 
+protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
+protocole avec son pair et commence la communication. Cette démarche 
+apporte plus de flexibilité et d'interopérabilité au système.} dont la conception 
+repose sur la garantie des principes suivant : intégrité du contenu grâce à 
+l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
+régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
+découvrir automatiquement les pairs et effectuer l'échange de données en essaim, 
+chiffrement des données de bout en bout, versionnage incrémental pour la 
+synchronisation des données. Ce protocole est par exemple utilisé par 
+hashbase.io, un service qui se propose d'être un pair toujours présent pour 
+l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
+pérenne du contenu. 
+
+\subsection{Ordonné versus Désordonné}
+Les paquets envoyés par l'expéditeur ne prennent pas forcément tous le même 
+chemin vers l'expéditeur. La réaction des réseaux face à la congestion consiste à 
+modifier les tables de routage afin que les paquets évite le n\oe ud congestionnés. 
+Cela peut altérer l'ordre des paquets à la réception. Le choix du protocole a 
+également une influence sur la gestion de l'ordre d'arrivée des paquets.
+
+Les protocoles dits \og ordonnés\fg{} garantissent que l'ordre dans lequel les 
+paquets sont envoyé est préservé dans l'application lors de la réception de ces 
+données par le destinataire. Même si les paquets arrivent dans le désordre, le 
+protocole peut imposer l'ordonnancement des données à l'aide d'une mémoire 
+tampon en attendant les données précédentes. Cela impose que le protocole 
+(comme pour un protocole fiable) numérote les paquets ou utilise un estampillage 
+pour connaître l'ordre. Cependant la fiabilité n'est pas nécessaire pour la livraison 
+dans l'ordre. Par exemple, dans une conversation vidéo, si une image met trop de 
+temps à arriver, elle sera mise en tampon puis omise au delà d'une limite (taille 
+tampon ou temps).
+
+Forcer à la fois la fiabilité et l'ordonnancement peut causer des latences du côté 
+du destinataire, même lorsqu'une grande partie des données est déjà reçu. Quand 
+un des premiers paquets est perdu ou en retard mais que d'autres données ont 
+déjà été reçues, ces données doivent attendre avant d'être livrées tant que le 
+paquet n'est pas arrivé. 
+
+Les communications non ordonnées sont plus simple à 
+gérer car les données sont délivrées dès qu'elles arrivent. Cela signifie également 
+que la numérotation des paquets n'est pas requise (paquets plus légers). 
+L'application est alors en charge de gérer le fait que les paquets arrivent dans le 
+désordre.
+
+La livraison de paquet ordonnés est souvent une fonctionnalité appréciée dans le 
+cadre des \gls{SEC}, et particulièrement en 3D, afin de respecter l'intention de 
+l'utilisateur car l'ordre des actions détermine le résultat de ces actions. Par 
+exemple l'exécution de deux matrices 3D consécutives n'est pas commutatif.
+
+\subsection{Quel protocole dans quel EVC3D ?}
+\improve{reformuler paragraphe}
+Un des aspects prépondérant dans les \gls{EVC3D} concerne la communication et 
+la transmission des données lors de la collaboration. Que ce soit dans dans un 
+\gls{EV}, un jeu multi-joueur ou un jeu sérieux (\textit{serious game}), les 
+participants interagissent en temps-réel ou quasi-réel alors qu'ils sont situés à 
+différents endroits géographiques. 
+Le développement d'un \gls{EVC3D} nécessite donc des connaissances issues de 
+plusieurs domaines comme la conception et l'implémentation de protocoles 
+réseaux et de réseaux distribués.
+
+Comme l'indique \cite{Roberto2014}, le protocole le plus souvent rencontré dans 
+les \gls{EVC3D} est l'\gls{UDP}. 
+Cette prépondérance s'explique d'après deux situations. Premièrement, dans des 
+réseaux où l'accès est fiable car ces environnements n'ont 
+pas (ou peu) de perte de paquet (ex : \gls{LAN}). Deuxièmement, dans un contexte 
+d'application où la perte de paquet n'est pas critique (ex : jeu vidéo, diffusion en 
+continu de son, vidéo, 3D\dots). 
+\gls{UDP} peut également s'utiliser dans les tout type de réseaux -- \gls{LAN} ou 
+\gls{WAN} (comme internet) --, car il est basé sur des datagrammes. Par ailleurs,  
+le fait qu'il n'effectue pas de vérification de délivrance lui donne un avantage quant 
+à la taille des données envoyées. La responsabilité de vérifier quels sont les 
+paquets qui n'ont pas été délivrés et leur ordre d'arrivée incombe à l'application.
+\gls{TCP} est le protocole qui vient en seconde position. Les \gls{EVC3D} qui sont 
+implémentés sur des réseaux haut-débit ne sont pas affectés par les étapes de 
+vérifications que nécessitent une connexion \gls{TCP}. D'après \cite{Sung2006}, 
+l'utilisation du protocole \gls{TCP} sur internet dans le cadre des \gls{EVC3D} n'est 
+pas recommandée à cause de la taille de l'en-tête et du ACK qui réduisent le débit 
+des paquets.
+Dans ce contexte, le protocole \gls{UDP} obtient de meilleurs résultats dans le cas 
+ou le flux de données est local (\gls{LAN}). 
+Les protocoles les plus adaptés pour communiquer dans un \gls{EVC3D} sont 
+cependant \acrshort{SCTP} et \gls{RTP}/\gls{RTCP}. Ils combinent les 
+fonctionnalités de 
+\gls{TCP} et \gls{UDP} et sont optimisés pour les applications multimédia (flux et 
+temps-réel). \gls{SCTP} offre la possibilité de choisir entre un système de 
+livraison fiable (pour les paquets clés par exemple) ou non fiable (pour des mises 
+à jour normales).
+
+Depuis plusieurs décennies, les architectures \gls{P2P} sont utilisées dans les 
+\gls{EVC} notamment dans l'assistance par les pairs pour le rendu est une 
+méthode qui permet aux pairs hébergés sur des appareils avec des capacités 
+limitées (bande passante, processeur, processeur graphique) de demander une 
+partie du contenu de l'environnement aux autres pairs.
+Des systèmes récents comme celui de Martinez et al. \cite{Martinez2009}, 
+utilisent la 
+localisation d'un utilisateur pour transmettre uniquement les mises à jours à son 
+plus 
+proche voisin. 
+Ce système d'assistance par les pairs peut également être utilisé pour améliorer le 
+rendu dans les environnements virtuels en ajustant la qualité du rendu en fonction 
+du coût de calcul \cite{Zhu2011}.  
+Koskela et al. \cite{Koskela2014} sont allés plus loin dans cette direction en 
+proposant la méthode RADE (\textit{Ressource-Aware P2P-assisted 3D Delivery 
+	Method}). RADE repose sur l'utilisation du \gls{P2P} pour alléger le chargement 
+	et 
+donc réduire le cours d'exploitation des fournisseurs de service. Les 
+clients peuvent également être inclus en tant que fournisseurs de services dans 
+cette architecture. 
+Le système utilise un serveur qui connaît la localisation des ressources et 
+effectue le \textit{load balancing} nécessaire pour distribuer les données en 
+fonction des capacités des clients. L'impact énergétique d'un tel système a été 
+évalué sur les mobiles ciblant trois optimisations possibles : la qualité visuelle, les 
+performances et la consommation d'énergie. 
+
+En général, les systèmes \gls{P2P} semblent n'être supportés que dans les 
+environnements virtuels 3D. Ce phénomène est probablement dû au lien étroit 
+entre la séparation spatiale de l'utilisateur et le besoin de distribuer les données à 
+tous les participants.  
 %
 %
 %	\subsection{Introduction}
@@ -551,22 +726,6 @@ pour faire des grilles de calcul comme dans browserCloud.js \cite{Dias2015a} ou
 pour faire des analyses visuelles collaboratives dans un environnement 
 hétérogène \cite{Li2015}.
 
-Dat \cite{Ogden2017} est un protocole de synchronisation de jeu de données qui 
-n'assume pas que le jeu de données soit statique ou que le jeu de données soit 
-entièrement téléchargé. C'est un protocole agnostique\footnote{Indépendant des 
-	protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
-	protocole avec son pair et commence la communication. Cette démarche 
-	apporte 
-	plus de flexibilité et d'interopérabilité au système.} dont la conception 
-repose sur la garantie des principes suivant : intégrité du contenu grâce à 
-l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
-régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
-découvrir automatiquement les pairs et effectuer l'échange de données en essaim, 
-chiffrement des données de bout en bout, versionnage incrémental pour la 
-synchronisation des données. Ce protocole est par exemple utilisé par 
-hashbase.io, un service qui se propose d'être un pair toujours présent pour 
-l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
-pérenne du contenu. 
 
 En 2001, le standard \gls{DDS} est un standard machine-à-machine massif, en 
 temps-réel, hautement performant avec un système d'échange de données 
@@ -581,7 +740,7 @@ est une couche de reconstruction locale de la donnée permettant une integration
 plus simple de \gls{DDS} au sein d'une application. \gls{DDS} est donc un 
 intergiciel réseau basé sur une architecture \gls{PubSub} qui gère la livraison 
 de messages sans nécessiter l'intervention d'un utilisateur. Il détermine qui doit 
-recevoir les messages, où sont situé les destinataires et ce qu'il se passe si un 
+recevoir les messages, où sont situés les destinataires et ce qu'il se passe si un 
 message n'est pas délivré. En cela, \gls{DDS} permet une gestion plus fine de la 
 qualité de service notamment concernant les paramètres de découverte des pairs.
 
