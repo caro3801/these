@@ -343,21 +343,6 @@ protocole à utiliser. Selon si la pertinence des données est de courte durée,
 la perte de données n'est pas aussi importante que le fait de la retarder, alors un 
 protocole non fiable peut être employé.
 
-Dat \cite{Ogden2017} est un protocole de synchronisation de jeu de données qui 
-n'assume pas que le jeu de données soit statique ou que le jeu de données soit 
-entièrement téléchargé. C'est un protocole agnostique\footnote{Indépendant des 
-protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
-protocole avec son pair et commence la communication. Cette démarche 
-apporte plus de flexibilité et d'interopérabilité au système.} dont la conception 
-repose sur la garantie des principes suivant : intégrité du contenu grâce à 
-l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
-régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
-découvrir automatiquement les pairs et effectuer l'échange de données en essaim, 
-chiffrement des données de bout en bout, versionnage incrémental pour la 
-synchronisation des données. Ce protocole est par exemple utilisé par 
-hashbase.io, un service qui se propose d'être un pair toujours présent pour 
-l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
-pérenne du contenu. 
 
 \subsection{Ordonné versus Désordonné}
 Les paquets envoyés par l'expéditeur ne prennent pas forcément tous le même 
@@ -381,19 +366,122 @@ Forcer à la fois la fiabilité et l'ordonnancement peut causer des latences du 
 du destinataire, même lorsqu'une grande partie des données est déjà reçu. Quand 
 un des premiers paquets est perdu ou en retard mais que d'autres données ont 
 déjà été reçues, ces données doivent attendre avant d'être livrées tant que le 
-paquet n'est pas arrivé. 
-
-Les communications non ordonnées sont plus simple à 
+paquet n'est pas arrivé. Les communications non ordonnées sont plus simple à 
 gérer car les données sont délivrées dès qu'elles arrivent. Cela signifie également 
 que la numérotation des paquets n'est pas requise (paquets plus légers). 
 L'application est alors en charge de gérer le fait que les paquets arrivent dans le 
-désordre.
-
-La livraison de paquet ordonnés est souvent une fonctionnalité appréciée dans le 
+désordre. La livraison de paquet ordonnés est souvent une fonctionnalité 
+appréciée dans le 
 cadre des \gls{SEC}, et particulièrement en 3D, afin de respecter l'intention de 
 l'utilisateur car l'ordre des actions détermine le résultat de ces actions. Par 
 exemple l'exécution de deux matrices 3D consécutives n'est pas commutatif.
 
+\subsection{Les principaux protocoles de transport}
+Les principes de fiabilité et d'ordonnancement décrits plus haut sont souvent 
+utilisés pour discriminer les différents protocoles de communication. Pour les 
+application en temps-réel, ils sont considérés comme les aspects les plusi 
+important à considérer pour le choix d'un protocole de communication. La 
+présentation succincte des protocoles ci-dessous indique leur propriétés de 
+fiabilité et d'ordonnancement.
+\subsubsection{TCP}
+Le \gls{TCP} est probablement le protocole le plus utilisé sur internet pour 
+transporter des données : navigation web, chat, transfert de fichiers \dots 
+\gls{TCP} est un protocole dit \og orienté connexion\fg{}, ce qui implique que les 
+deux terminaux sur le réseau s'informent et s'accordent chacun sur ce qu'ils 
+veulent envoyer / recevoir de la part de l'autre. 
+Quand cet accord est établit, la connexion \gls{TCP} est ouvert et le flux peut 
+transiter par la connexion. 
+\gls{TCP} envoie des données sous forme de flux continu d'octets qui arrivent de 
+manière fiable et ordonnée. 
+L'application peut lire les données à partir de ce flux.
+
+\gls{TCP} a également un champ de somme de contrôle (\textit{checksum}) afin 
+de vérifier les données dans les cas d'erreurs (mauvais signal, routeur 
+défectueux). 
+Si la somme est incorrecte, la données est écartée et considérée comme perdue. 
+Une nouvelle copie de la donnée est alors attendue à la réception lorsque 
+l'expéditeur détecte qu'il n'a pas reçu le ACK concernant la donnée erronée.
+
+\subsubsection{UDP}
+Le \gls{UDP} est considéré comme l'opposé de \gls{TCP} concernant plusieurs 
+aspects. Premièrement, \gls{UDP} ne nécessite pas, pour établir la connexion, de 
+d'étape configuration et d'accord comme \gls{TCP}. Les deux terminaux doivent 
+configurer un socket \gls{UDP} et écouter ce socket pour récupérer les données 
+entrantes. Du fiat qu'aucun accord n'est établit par les deux terminaux, chacun 
+peut envoyer ou recevoir des données de n'importe quel socket proprement 
+configuré.
+Deuxièmement, \gls{UDP} est un protocole dit \og orienté message\fg{}. Par 
+rapport à \gls{TCP} où il n'y a pas de distinction claire entre les messages du fait 
+de sa nature (flux continu), \gls{UDP} fait une distinction claire entre chaque 
+messages (un message envoyé donne un message reçu, sauf si perte du 
+message). Les messages qui transitent en \gls{UDP} sont envoyés de manière 
+non fiable et désordonnée. L'en-tête \gls{UDP} n'a pas de notion de numérotation, il 
+est plus léger que \gls{TCP} à cet égard.
+
+\gls{UDP} n'a pas de champ pour faire une somme de contrôle pour détecter les 
+potentielles erreurs dans un paquet. Cependant, cette fonctionnalité est optionnelle 
+dans IPv4 qui rapport une somme de contrôle remplie de zéros en cas d'erreur. En 
+IPv6, la somme de contrôle est obligatoire donc même si \gls{UDP} est non fiable, 
+il doit fournir les moyens de vérifier les paquets pour la fiabilité de 
+la transmission.
+
+Même si \gls{UDP} n'est pas fiable et pas ordonné, il est souvent utilisé comme 
+protocole de base sur lequel d'autres protocoles viennent se greffer car il reste très 
+léger. Ces autres protocoles peuvent s'assurer de l'ordonnancement et / ou de la 
+fiabilité à leur manière (re-ordonnancement, retransmission\dots). 
+
+\subsubsection{STCP}
+Le \gls{SCTP} est le plus jeune des trois protocoles présentés. Ce protocole 
+empreinte des fonctionnalités à \gls{TCP} mais utilise une approche orientée 
+message comme \gls{UDP}. Comme \gls{TCP}, la connexion doit être négocier 
+entre les deux terminaux. \gls{SCTP} discute également le nombre de flux utilisés 
+: il autorise le multiplexage de plusieurs flux de données dans une seule 
+connexion \gls{SCTP}. En comparaison, \gls{TCP} sépare chaque flux dans une 
+connexion différente : le support de plusieurs flux est gérer à plus haut niveau.
+
+\gls{SCTP} a été conçu comme un protocole fiable avec une option pour envoyer 
+les messages de manière ordonnée ou non ordonnée. L'ordonnancement choisi est 
+signifié par un \textit{bit-flag} dans l'en-tête associée au message. La fiabilité peut 
+aussi être configurée par l'utilisateur (temps d'attente ou nombre de tentatives 
+avant retransmission). Cependant, seul l'expéditeur est au courant du niveau de 
+fiabilité des données. Lorsque le destinataire remarque des données manquantes, 
+il envoie à l'expéditeur des acquittements sélectifs (SACKs). Un SACKs contient 
+les séquences de messages reçus et manquants et c'est à l'expediteur de vérifier 
+la configuration de la fiabilité des messages. Pour les messages marqués non 
+fiables, l'expéditeur génère un nouveau paquet pour notifier le destinataire qu'il 
+peut les \og oublier\fg{} et avancer sa séquence de nombre à la valeur données 
+dans le nouveau paquet. 
+
+Le champ de vérification de somme dans l'entête \gls{SCTP} est deux fois plus 
+grand que pour \gls{UDP} ou \gls{TCP} : 32 bits. Cela est dû au support des 
+fonctionnalités comme le multiplexage qui introduit de nombreuses sous entêtes 
+par exemple.
+
+L'adoption de ce protocole est ralentie par le fait que l'implantation de \gls{SCTP} 
+n'est pas supportée par tous les systèmes d'exploitation notamment 
+Windows\cite{Hogg}. 
+
+\begin{table}
+	\caption{Aperçu des procotoles de transport}
+	\noindent\small
+	\begin{tabular}{cccc}
+		& \textbf{Fiabilité} & \textbf{Ordonnancement} & \textbf{Error-free} \\ 
+		\hline 
+		\textbf{TCP} & Oui & Oui & Oui \\ 
+		\hline 
+		\textbf{UDP} & Non / À plus ht niveau & Non / À plus 
+		ht 
+		niveau & Opt. 
+		(IPv4) / 
+		Oui (IPv6) \\ 
+		\hline 
+		\textbf{STCP} & Configurable & Configurable &  Oui \\ 
+		\hline
+	\end{tabular} 
+\end{table}
+{
+
+}
 \subsection{Quel protocole dans quel EVC3D ?}
 \improve{reformuler paragraphe}
 Un des aspects prépondérant dans les \gls{EVC3D} concerne la communication et 
@@ -462,7 +550,23 @@ performances et la consommation d'énergie.
 En général, les systèmes \gls{P2P} semblent n'être supportés que dans les 
 environnements virtuels 3D. Ce phénomène est probablement dû au lien étroit 
 entre la séparation spatiale de l'utilisateur et le besoin de distribuer les données à 
-tous les participants.  
+tous les participants.
+\paragraph{Autres}
+Dat \cite{Ogden2017} est un protocole de synchronisation de jeu de données qui 
+n'assume pas que le jeu de données soit statique ou que le jeu de données soit 
+entièrement téléchargé. C'est un protocole agnostique\footnote{Indépendant des 
+	protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
+	protocole avec son pair et commence la communication. Cette démarche 
+	apporte plus de flexibilité et d'interopérabilité au système.} dont la conception 
+repose sur la garantie des principes suivant : intégrité du contenu grâce à 
+l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
+régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
+découvrir automatiquement les pairs et effectuer l'échange de données en essaim, 
+chiffrement des données de bout en bout, versionnage incrémental pour la 
+synchronisation des données. Ce protocole est par exemple utilisé par 
+hashbase.io, un service qui se propose d'être un pair toujours présent pour 
+l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
+pérenne du contenu. 
 %
 %
 %	\subsection{Introduction}
@@ -750,17 +854,13 @@ qualité de service notamment concernant les paramètres de découverte des pair
 	
 	\gls{DDD} (ou Conception Pilotée par le Domaine) est une approche de 
 	développement logicielle qui a pour objectif de définir une vision et un 
-	\textbf{langage partagé} (\textit{ubiquitous language}) pour les personnes 
-	impliquées dans la construction d'une application \cite{Evans2003}\info{Eric 
-	Evans 
-		Domain-driven Design: Tackling Complexity in the Heart of Software}. 
-	
+	langage partagé (\textit{ubiquitous language}) pour les personnes 
+	impliquées dans la construction d'une application \cite{Evans2003}.
 	Le but est de mettre l'accent principal d'un projet sur le domaine et la logique du 
 	domaine en basant des conceptions complexes sur un modèle du domaine afin 
 	d'initier une collaboration créative entre les experts techniques et les experts du 
 	domaine pour raffiner itérativement un modèle conceptuel qui relève de 
-	problèmes 
-	spécifiques au domaine.
+	problèmes spécifiques au domaine.
 	Les différents concepts du \gls{DDD} sont listés en suivant :
 	\begin{description}
 		\item[Le contexte] est le cadre dans lequel un mot apparaît qui détermine sa 
@@ -776,39 +876,86 @@ qualité de service notamment concernant les paramètres de découverte des pair
 		activités de l'équipe permettant d'éviter la redondance et les ambigüités dans 
 		un contexte donné.
 	\end{description}
-	Le \gls{DDD} permet de connecter le modèle et son implémentation en offrant 
-	plusieurs avantages:
-	\begin{itemize}
-		\item La plasticité du système est mise en avant par l'expression de règles 
-		et de comportements qui facilitent les changements fréquents.
-		\item L'accent mis sur l'identification des interactions dans le système 
-		encourage la mise en \oe{}uvre d'une interface orientée tâches 
-		(\textit{task-based UI}).
-		\item La testabilité fonctionnelle est intégrée via les règles métier explicitées 
-		et concentrées dans une couche spécifique de l'application. Cela les rend 
-		plus facilement identifiable et testable automatiquement.
-		\item La robustesse est améliorée face aux changements dans le SI.
-	\end{itemize}
+
+\begin{figure}
+	\noindent
+	\centering
+	\includegraphics[width=0.9\columnwidth]{ddd.eps}
+	\caption{Illustration du patron \gls{DDD} et de ses artefacts (figure issue de 
+	\url{http://blog.infosaurus.fr/public/docs/DDDViteFait.pdf})}
+\label{fig:ddd}
+\end{figure}
+
+En \gls{DDD}, il existe des artéfacts qui permettent d'exprimer, créer et stocker un 
+modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se trouvent 
+:
+\begin{itemize}
+	\item L'\textbf{entité} (\textit{entity}) : un objet qui n'est pas définit par ces 
+	attributs 
+	mais plutôt par une continuité et son identité. 
+	Par exemple, chaque une scène possède des maillages qui utilisent des 
+	géométries.Si l'on 
+	considère un maillage comme unique dans chacune des scènes alors chaque 
+	maillage est une entité. Si on considère que ce sont les mêmes maillage qui 
+	sont réutilisés alors une maillage est considérée comme un objet-valeur.
 	
-	Les notions plus détaillées qui se rapportent au \gls{DDD} sont présentées dans 
-	\cite{Evans2003} et \cite{Vernon2013}.\info{source: 
-		http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
+	\item L'\textbf{objet-valeur} (\textit{value object}) : un objet qui contient des 
+	attributs 
+	mais n'a pas d'identité conceptuelle. Il doit être traité comme un objet
+	immuable. Par rapport à l'exemple précédent, on peut considérer que si les 
+	géométries sont réutilisées d'une scène à l'autre, ce sont des objet-valeur qui 
+	ne seront jamais modifié car les utilisateurs ne sont intéressés que par les 
+	informations qu'elles portent.
 	
-	Le \gls{DDD} a également l'avantage de fonctionner en harmonie avec les 
-	principes de l'\gls{ES}. L'approche logicielle \gls{DDD} étant conçue pour refléter 
-	les évènements se déroulant dans la réalité métier qui ne sont pas 
-	interchangeables -- la plupart du temps. L'utilisation d'architectures 
-	basées évènements est naturelle dans ce genre d'environnement. 
-	
-	Les disciplines liées à la 3D dans un contexte industrielles ont besoin de 
-	pouvoir 
-	communiquer sur un langage commun pour permettre à chacun des 
-	intervenants 
-	de s'exprimer dans la création du produit. Par exemple, la \gls{CAO} est très 
-	utile 
-	dans un contexte d'ingénierie par l'utilisation de quatre propriétés fondamentales 
-	telles que l'historique, les fonctionnalités, la paramétrisation et le haut niveau de 
-	contrainte.
+	\item L'\textbf{agrégat} (\textit{aggregate}) : une collection d'objets qui sont 
+	liés 
+	ensemble par une entité commune (\textit{root entity}), connue sous le nom 
+	d'agrégat souche (\textit{aggregate root}). Ce dernier garantit la cohérence des 
+	modifications faites au sein de l'agrégat en interdisant aux objets externes de 
+	faire référence à ses membres. Par exemple, dans une modélisation 3D 
+	collaborative un utilisateur ne peux pas modifier le nom d'un autre utilisateur. Un 
+	maillage n'a également pas d'intéret à connaître les informations des 
+	utilisateurs, c'est la scène qui gère l'interface entre les maillages et les 
+	utilisateurs.
+	\item L'\textbf{évènement du domaine} (\textit{domain event}) : un 
+	évènement auquel 
+	l'expert du domaine s'intéresse. Il est définit par un objet du domaine.
+	\item Le \textbf{dépôt} (\textit{repository}) : les méthodes pour récupérer les 
+	objets du domaine doivent être déléguées à un \textbf{dépôt} spécialisé afin de 
+	faciliter les implantations 
+	alternatives de stockage.
+\end{itemize}
+
+Le \gls{DDD} permet de connecter le modèle et son implémentation en offrant 
+plusieurs avantages:
+\begin{itemize}
+	\item La plasticité du système est mise en avant par l'expression de règles 
+	et de comportements qui facilitent les changements fréquents.
+	\item L'accent mis sur l'identification des interactions dans le système 
+	encourage la mise en \oe{}uvre d'une interface orientée tâches 
+	(\textit{task-based UI}).
+	\item La testabilité fonctionnelle est intégrée via les règles métier explicitées 
+	et concentrées dans une couche spécifique de l'application. Cela les rend 
+	plus facilement identifiable et testable automatiquement.
+	\item La robustesse est améliorée face aux changements dans le SI.
+\end{itemize}
+
+Les notions plus détaillées qui se rapportent au \gls{DDD} sont présentées dans 
+\cite{Evans2003} et \cite{Vernon2013}.\info{source: 
+	http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
+
+Le \gls{DDD} a également l'avantage de fonctionner en harmonie avec les 
+principes de l'\gls{ES}. L'approche logicielle \gls{DDD} étant conçue pour refléter 
+les évènements se déroulant dans la réalité métier qui ne sont pas 
+interchangeables -- la plupart du temps. L'utilisation d'architectures 
+basées évènements est naturelle dans ce genre d'environnement. 
+
+Les disciplines liées à la 3D dans un contexte industrielles ont besoin de pouvoir 
+communiquer sur un langage commun pour permettre à chacun des 
+intervenants de s'exprimer dans la création du produit. Par exemple, la \gls{CAO} 
+est très utile dans un contexte d'ingénierie par l'utilisation de quatre propriétés 
+fondamentales telles que l'historique, les fonctionnalités, la paramétrisation et le 
+haut niveau de contrainte.
 	
 	\paragraph{Programmation réactive}
 	Les différents livres publiés par Vaughn s'attachent également à montrer la 
@@ -912,8 +1059,6 @@ insiste sur le fait que ``l'état du modèle du domain est persisté comme un
 \textit{flux} d'évènements plutôt qu'un simple instantané''.
 
 
-Les avantages et les inconvénients de l'approche \gls{ES}, incluant et discutant 
-notamment ceux relevés par \cite{Klamer2013a}.
 %
 	\begin{figure}[!h]
 		
@@ -976,7 +1121,12 @@ notamment ceux relevés par \cite{Klamer2013a}.
 		}
 		\caption{Snapshot en Event-Sourcing}
 	\end{figure}
-	
+
+Les avantages et les inconvénients de l'approche \gls{ES} sont orientés selon le 
+cadre dans lequel elle est utilisée. En reprenant ceux cités par Klamer 
+\cite{Klamer2013a}, on peut les reprendre sous l'angle de la modélisation 3D 
+collaborative.
+
 \subsubsection{Avantages}
 L'\gls{ES} peut apporter beaucoup d'avantages à une application, notamment 
 lorsque les besoins en traçabilité de l'information sont importants comme dans 
@@ -1061,7 +1211,7 @@ de recalculer les snapshots quand le domaine est modifié mais cela reste
 coûteux (et à éviter).\info{versionning event -> retro compatibilité}
 
 
-\subsubsection{Event sourcing vs command sourcing}
+\subsubsection{Event Sourcing versus Command Sourcing}
 Les patrons de conception \gls{CS} et \gls{ES} sont strictement déterministes pour 
 avoir une exactitude rigoureuse de ce qui se passe dans le système.
 
