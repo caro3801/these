@@ -13,7 +13,7 @@ Pour les projets d'\gls{AIC} ou de \gls{BIM}, la demande de traitement et la fid
 ont tendance à être plus élevés, particulièrement pour la représentation de dessins 
 d'ingénierie ou de modèles d'architecture 3D. 
 Les objets simples (primitives) ou les maillages optimisés pour le rendu temps-réel 
-ne sont ni suffisants ni assez génériques pour être supporté par tous les 
+ne sont ni suffisants ni assez génériques pour être supportés par tous les 
 processus liés à l'élaboration d'un produit. 
 Plus les projets sont gros, plus ils dépendent d'une multitude de logiciels 3D --  
 dont l'interopérabilité n'est pas garantie -- s'adressant chacun aux besoins d'une 
@@ -98,9 +98,9 @@ OnShape est un service de modélisation 3D très riche dont l'objectif est de
 proposer une qualité équivalente des fonctionnalités de modeleurs autonomes 
 (\textit{standalone}) professionnels, le tout de manière collaborative. Leur approche 
 de la gestion de version développe le concept de micro version \cite{Baran2015}. 
-Cette approche se retrouve dans les travaux de \cite{Lu2016} qui l'utilise gérer 
+Cette approche se retrouve dans les travaux de Lu et al.  \cite{Lu2016} qui l'utilisent pour gérer 
 l'évolution de productions participatives liées à des tâches de modélisation 
-3D en utilisant la créativité, l'intelligence et le savoir-faire 
+3D grâce à  la créativité, l'intelligence et le savoir-faire 
 d'un grand nombre de personnes en sous-traitance (\textit{crowdsourcing}). Le 
 modeleur 3D Clara.io \cite{Houston2013} est plus généraliste. Il s'oriente 
 davantage vers des fonctionnalités avancées de rendu 3D sur le \textit{cloud} en 
@@ -208,7 +208,7 @@ sa structure bien connue, il est alors plus simple lors de la collaboration d'ut
 ces éléments \cite{Gadea2016} ou les évènements du \gls{DOM} \cite{Lowet2009} 
 comme protocole de synchronisation de scènes. 
 L'ajout de nombreux \textit{listeners} sur un document peut affecter les 
-performances de parcours de l'arbre du \gls{DOM} notamment si une scène 
+performances de parcours de l'arbre du \gls{DOM} notamment si une scène est
 très peuplée.
 %declarative XML- based languages such as X3D are suited well for SOAs in that 
 %3D content, such as CAD/ CAM data or a given WCS response in a GIS 
@@ -265,62 +265,8 @@ web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiqu
 \section{Communication en temps-réel}
 L'expression temps-réel est largement utilisé par des applications requérant une 
 forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
-expérience.
+expérience. La communication dans un \gls{EVC} particulièrement pour permettre aux utilisateurs de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
 
-L'exigence vis-à-vis des temps de réponse est de plus en plus 
-grande pour deux raisons principales : les limitations humaines (mémoire et 
-attention limitées 
-à court terme) et les aspirations de l'être humain (besoin d'être en contrôle sur les 
-machines). S'accroissant au gré de la technologie et aux attentes 
-utilisateurs (rétro-compatibilité, temps de 
-chargement), elle varie selon le domaine mais reste très assez prégnante sur le 
-web en général. 
-Par exemple, dans un domaine annexe comme le e-commerce, une étude réalisée 
-en 2006 explique qu’une grande partie des internautes abandonnaient leurs achats 
-en ligne si les pages mettaient 4 secondes ou plus à charger. De nos jours, ce 
-délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
-Nielsen \cite{Nielsen1993a} indique trois temps de réponse limites concernant les 
-temps de réponses :
-\begin{itemize}
-	\item \textit{0,1 seconde} donne une sensation de réponse instantanée, comme 
-	si le 
-	résultat avait été produit par l'utilisateur et non l'ordinateur. Ce niveau de temps 
-	de réponse soutient la sensation de manipulation directe.\footnote{En IHM, la 
-		manipulation directe correspond à un mode d'interaction au cours duquel les 
-		utilisateurs font des actions sur les objets d'intérêt affichés dans l'interface 
-		utilisateur en utilisant des actions physiques, incrémentales et réversibles 
-		dont 
-		les effets sont immédiatement visibles sur l'écran.} 
-	\item \textit{1 seconde} garde le flux de pensées de l'utilisateur sans 
-	interuption. 
-	L'utilisateur peut ressentir un délai et par conséquent savoir que c'est la 
-	machine qui génère le résultat ; l'utilisateur a quand même une impression de 
-	contrôle sur l'expérience générale et peut de déplacer librement dans l'interface 
-	sans attendre la machine. Ce degré de réactivité est impératif pour une bonne 
-	navigation.
-	\item \textit{10 secondes} conservent l'attention de l'utilisateur. Entre 1 et 10 
-	secondes, l'utilisateur se sent dépendant de la machine, mais peut faire avec. 
-	Au delà, l'utilisateur va commencer à penser à d'autres choses, rendant difficile 
-	le retour à la tâche une fois que la machine répond.
-\end{itemize} 
-
-Dans le domaine de l'édition et la manipulation collaborative 
-d'objets 3D, les contraintes abordées se situent à divers degrés : au chargement 
-et lors des mises à jour. Le chargement concerne la phase de téléchargement de 
-l'application web et des données relatives mais également d'affichage des 
-modèles 3D sont spécifiques dans ce domaine car ils ont 
-tendance à être lourds (structure de données 3D et métadonnées) à charger 
-(contrairement au texte par exemple). Cette phase peut s'accorder des délais 
-relativement long (1-10s) compte tenu du fait que l'utilisateur connaît en partie ces 
-contraintes liées à la taille des objets 3D. Concernant les mises à jour, l'édition 
-collaborative requiert un temps de réponse raisonnablement court est contraint par 
-l'exactitude des calculs et le temps dans lequel le résultat est produit. Pour les 
-mises à jour internes -- produites par l'utilisateur, actions sur l'interface -- on 
-s'accordera sur un délai inférieur à 0,1 seconde dans cette thèse. 
-Pour les mises à jour externes -- produites par les collaborateurs -- les latences 
-réseaux rentrent en comptes (serveur, pairs\ldots) on s'accordera sur un délai 
-entre 1 et 10 secondes dans cette thèse selon les degrés d'asynchronicité 
-possibles. 
 
 Un protocole de communication en temps-réel existe, il s'appelle \gls{RTP} et a 
 été développé dans le but de faciliter la communication en temps-réel sur un 
@@ -334,8 +280,8 @@ transmission de flux audio et vidéo, moins pour des données arbitraires comme
 des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre des 
 \gls{EVC} pour la modélisation 3D. 
 
-Du fait de la variété des domaines et applications auxquels d'adressent les 
-\glspl{EVC3D} existants, \textit{le} protocole de 
+Du fait de la variété des domaines et applications auxquels s'adressent les 
+\glspl{EVC3D} existants, le protocole de 
 communication parfait adapté à tous les types d'environnement n'existe pas. 
 Les besoins en communication qui se formulent souvent en termes de 
 fiabilité de la livraison des messages et de l'ordonnancement des messages sont 
@@ -635,7 +581,7 @@ est une couche de reconstruction locale de la donnée permettant une integration
 plus simple de \gls{DDS} au sein d'une application. \gls{DDS} est donc un 
 intergiciel réseau basé sur une architecture \gls{PubSub} qui gère la livraison 
 de messages sans nécessiter l'intervention d'un utilisateur. Il détermine qui doit 
-recevoir les message, où sont situer les destinataires et ce qu'il se passe si le 
+recevoir les messages, où sont situé les destinataires et ce qu'il se passe si un 
 message n'est pas délivré. En cela, \gls{DDS} permet une gestion plus fine de la 
 qualité de service notamment concernant les paramètres de découverte des pairs.
 
