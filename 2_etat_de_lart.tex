@@ -6,7 +6,7 @@
 
 \section{Modélisation 3D collaborative}
 
-\subsection{Collaboration et concurrence dans un Environnement Virtuel 3D}
+\subsection{Collaboration et concurrence en 3D}
 Dans un contexte collaboratif, on considère qu'il n'est pas possible pour une 
 personne seule de réaliser la tâche proposée complètement. 
 La modélisation 3D collaborative permet à différents concepteurs de travailler 
@@ -38,6 +38,7 @@ une résolution manuelle ou automatique.
 
 \begin{table}
 	\centering
+	\noindent
 	\caption{Solutions conventionnelles pour les problèmes collaboratifs 
 	\cite{Yu2016}.}
 	
@@ -99,7 +100,27 @@ algorithmes souvent utilisés dans ce cadre sont les algorithmes
 de  transformées opérationnelles -- \gls{OT} -- \cite{Ellis1989} ou les algorithmes 
 de réplication de  données commutatives -- \glspl{CRDT} -- \cite{Shapiro2007} 
 s'orientant de plus en plus vers des solutions décentralisées pour un usage à 
-grande échelle \cite{Weiss2009a}.
+grande échelle \cite{Weiss2009a}. 
+
+L'existence de protocoles agnostiques\footnote{Indépendant des 
+protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
+protocole avec son pair et commence la communication. Cette démarche 
+apporte plus de flexibilité et d'interopérabilité au système.} comme Dat 
+\cite{Ogden2017} permettent également une synchronisation fiable pour des 
+contenus dynamiques. Dat est un protocole de synchronisation de jeu de données 
+qui n'assume pas que le jeu de données soit statique ou que le jeu de données 
+soit entièrement téléchargé. C'est un protocole agnostique dont la conception 
+repose sur la garantie des principes suivant : intégrité du contenu grâce à 
+l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
+régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
+découvrir automatiquement les pairs et effectuer l'échange de données en 
+essaim, chiffrement des données de bout en bout, versionnage incrémental pour la 
+synchronisation des données. Ce protocole est par exemple utilisé par 
+hashbase.io, un service qui se propose d'être un pair toujours présent pour 
+l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
+pérenne du contenu. 
+
+
 \subsection{... sur le web : HTML5 et au delà}
 %TODO designing in context
 %\cite{Dobos2015}
@@ -221,6 +242,23 @@ Les objets sont alors manipulés comme des géométries de construction de
 solides avec les opérations booléennes associées. 
 Le Tableau \ref{table:encoding} résume les différents types 
 d'encodage associé au type de modélisation 3D. 
+\begin{table}[h]
+	\centering
+	\caption{Encodage des données transmises}
+	\label{table:encoding}
+	\begin{tabular}{@{}lcc@{}}\hline
+		\textbf{Référence}& \textbf{Modélisation 3D}   & 
+		\begin{tabular}[c]{@{}l@{}}\textbf{Encodage des}\\ 
+			\textbf{modifications}\end{tabular} \\ \midrule
+		\cite{Grasberger2013}        &      Blob (CSG)    & Fonction implicite        \\
+		Clara.io \cite{Houston2013}               & Polygonale       &  Commande 
+		interface     \\
+		\cite{Mouton2014}                  & Polygonale       & Fonction paramétrique     \\
+		OnShape \cite{Baran2015} &    Paramétrique      &     Microversion    \\
+		cSculpt \cite{Calabrese2016} &      Polygonale    &    Fréquence spatiale  \\ 
+		\bottomrule
+	\end{tabular}
+\end{table}
 \improve{tableau comparatif gestion historique ou versionning}
 \improve{tableau comparatif de GrabCAD, OnShape, clara.io}
 %
@@ -252,7 +290,7 @@ qu'en 3D, les spécifications sont encore en évolution.
 
 \begin{figure}[hbt]
 	\centering
-	\includegraphics[width=0.7\columnwidth]{impdec}
+	\includegraphics[width=0.8\columnwidth]{impdec}
 	\caption{Déclaratif vs Impératif en 2D et en 3D sur le web}
 	\label{fig:impdec}
 \end{figure}
@@ -342,26 +380,6 @@ web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiqu
 	ciblent des néophytes de la WebGL possédant donc le matériel 
 	dédié à la 3D en général. Consulté le 04/07/2017.}.
 
-
-
-\begin{table}[h]
-	\centering
-	\caption{Encodage des données transmises}
-	\label{table:encoding}
-	\begin{tabular}{@{}lcc@{}}\hline
-		\textbf{Référence}& \textbf{Modélisation 3D}   & 
-		\begin{tabular}[c]{@{}l@{}}\textbf{Encodage des}\\ 
-			\textbf{modifications}\end{tabular} \\ \midrule
-		\cite{Grasberger2013}        &      Blob (CSG)    & Fonction implicite        \\
-		Clara.io \cite{Houston2013}               & Polygonale       &  Commande 
-		interface     \\
-		\cite{Mouton2014}                  & Polygonale       & Fonction paramétrique     \\
-		OnShape \cite{Baran2015} &    Paramétrique      &     Microversion    \\
-		cSculpt \cite{Calabrese2016} &      Polygonale    &    Fréquence spatiale  \\ 
-		\bottomrule
-	\end{tabular}
-\end{table}
-
 \section{Communication en temps-réel}
 L'expression temps-réel est largement utilisé par des applications requérant une 
 forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
@@ -389,8 +407,8 @@ transmission de flux audio et vidéo, moins pour des données arbitraires comme
 des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre des 
 \gls{EVC} pour la modélisation 3D. 
 
-Du fait de la variété des domaines et applications auxquels s'adressent les 
-\glspl{EVC3D} existants, il n'existe pas de protocole de 
+La variété des domaines et applications auxquels s'adressent les 
+\glspl{EVC3D} actuels, fait qu'il n'existe pas de protocole de 
 communication parfait adapté à tous les types d'environnement. 
 Les besoins en communication qui se formulent souvent en termes de 
 fiabilité de la livraison des messages et de l'ordonnancement des messages sont 
@@ -466,7 +484,7 @@ Forcer à la fois la fiabilité et l'ordonnancement peut causer des latences du 
 du destinataire, même lorsqu'une grande partie des données est déjà reçu. Quand 
 un des premiers paquets est perdu ou en retard mais que d'autres données ont 
 déjà été reçues, ces données doivent attendre avant d'être livrées tant que le 
-paquet n'est pas arrivé. Les communications non ordonnées sont plus simple à 
+paquet n'est pas arrivé. Les communications non ordonnées sont plus simples à 
 gérer car les données sont délivrées dès qu'elles arrivent. Cela signifie également 
 que la numérotation des paquets n'est pas requise (paquets plus légers). 
 L'application est alors en charge de gérer le fait que les paquets arrivent dans le 
@@ -507,7 +525,7 @@ Le \gls{UDP} est considéré comme l'opposé de \gls{TCP} concernant plusieurs
 aspects. Premièrement, \gls{UDP} ne nécessite pas, pour établir la connexion, de 
 d'étape configuration et d'accord comme \gls{TCP}. Les deux terminaux doivent 
 configurer un socket \gls{UDP} et écouter ce socket pour récupérer les données 
-entrantes. Du fiat qu'aucun accord n'est établit par les deux terminaux, chacun 
+entrantes. Du fait qu'aucun accord n'est établit par les deux terminaux, chacun 
 peut envoyer ou recevoir des données de n'importe quel socket proprement 
 configuré.
 Deuxièmement, \gls{UDP} est un protocole dit \og orienté message\fg{}. Par 
@@ -541,8 +559,10 @@ connexion différente : le support de plusieurs flux est gérer à plus haut niv
 
 \gls{SCTP} a été conçu comme un protocole fiable avec une option pour envoyer 
 les messages de manière ordonnée ou non ordonnée. L'ordonnancement choisi est 
-signifié par un \textit{bit-flag} dans l'en-tête associée au message. La fiabilité peut 
-aussi être configurée par l'utilisateur (temps d'attente ou nombre de tentatives 
+signifié par un \textit{bit-flag} dans l'en-tête associée au message. Une extension 
+du protocole permet de configurer la fiabilité d'un message expédié. La fiabilité 
+partielle peut être établit en fonction de différents paramètres (temps d'attente ou 
+nombre de tentatives 
 avant retransmission). Cependant, seul l'expéditeur est au courant du niveau de 
 fiabilité des données. Lorsque le destinataire remarque des données manquantes, 
 il envoie à l'expéditeur des acquittements sélectifs (SACKs). Un SACKs contient 
@@ -579,9 +599,171 @@ Windows\cite{Hogg}.
 		\hline
 	\end{tabular} 
 \end{table}
-{
 
-}
+\subsection{Web et P2P : WebRTC}
+Le développement de la communication en \gls{P2P} sur le web a 
+débuté en 2011 avec les premiers brouillons du standard \gls{WebRTC} proposé 
+par le \gls{W3C} et l'\gls{IETF}\textsuperscript{\textregistered}. 
+\gls{WebRTC} est une technologie qui fournit aux navigateurs web la possibilité de 
+communiquer en temps-réel (\textit{Real-Time Communications}) via une collection 
+de standards, protocoles et \glspl{API} JavaScript (Figure \ref{fig:protocolstack}). 
+L'un des atouts de cette technologie est de permettre de façon simple et 
+sans module d'extension la capture d'un flux audio et / ou vidéo (ex : 
+applications de VoIP), ainsi que l'échange de données arbitraires entre 
+navigateurs sans nécessiter d'intermédiaires (ex : partage de fichier en 
+P2P).
+
+
+Techniquement, \gls{WebRTC} supporte un canal temps-réel 
+bidirectionnel pour l'échange de données. Contrairement à 
+\gls{WebSocket}, qui est basé sur \gls{TCP}, \gls{WebRTC} se base sur 
+\acrshort{UDP} en intégrant une pile de plusieurs protocoles (Figure 
+\ref{fig:protocolstack}) qui lui offre des fonctionnalités similaires (fiabilité, 
+ordonnancement, sécurité). 
+
+
+Plusieurs projets impliquant les protocoles proposés par \gls{WebRTC} 
+se sont intéressés à l'\gls{API} \textit{MediaStream} (flux continus audio 
+et vidéo) mais très peu utilisent la partie dédiée au transfert de données 
+\textit{DataChannel}. 
+Selon le site officiel de WebRTC\footnote{\url{https://webrtc.org}}, plus d'un milliard 
+d'utilisateurs ont utilisé la technologie \textit{open source} WebRTC. Ericsonn Labs 
+a été parmi les premiers à implémenter une application WebRTC en 2011. 
+La jeunesse du protocole (2011) fait que peu de travaux académiques 
+l'utilisent pour créer des \gls{EVC3D} \cite{Desprat2015a,Steiakaki2016}. 
+Côté commercial, un grand nombre d'applications et de services 
+basés sur ce protocole ont fait leur apparition (par ordre d'importance) : 
+des systèmes d'échanges audio/vidéo (VoIP)\footnote{WebRTCWorld en 
+	liste un peu plus de 140 
+	\url{http://www.webrtcworld.com/webrtc-list.aspx}. Consulté le 
+	07/07/2017.}, des systèmes de partage de fichiers\footnote{WebTorrent 
+	\url{https://github.com/feross/webtorrent}. Consulté le 04/09/2017.} et 
+autres applications (capture d'écran, réalité augmentée, jeux)
+\footnote{Curation de ressources et modules WebRTC 
+	recensant plus de 100 projets 
+	\url{https://github.com/openrtc-io/awesome-webrtc}. Consulté le 
+	07/07/2017.}.
+
+\paragraph{Avantages et inconvénients}
+Les réseaux \gls{P2P} est un changement de paradigme qui peut représenter une 
+barrière d'entrée auprès des développeurs web qui sont habitués aux architectures 
+client-serveur. 
+Cependant, l'implantation de WebRTC, très semblable à WebSocket, rend la 
+technologie facilement abordable dans un premier temps. L'attrait pour les 
+propriétés du \gls{P2P} (distribution, résilience) sont une motivation 
+supplémentaire en plus des implications sociales que cette architecture (partage, 
+coopération, coût) apporte en faveur de l'intégration de WebRTC dans les 
+applications web.
+
+Les machines clientes et les systèmes d'extrémité (\textit{end systems}) 
+sont considérée comme \og les ressources\fg{} dans un réseau 
+\gls{P2P}. 
+En principe, ces ressources sont difficilement administrables à l'échelle 
+dans un réseau non structuré ; la qualité de service peut en pâtir car la 
+synchronisation est plus complexe. C'est également problématique pour simuler 
+ces environnements car il n'existe pas de solution pérenne pour tester WebRTC à 
+l'échelle ; chaque service doit créer son propre système de test. 
+Dans un contexte industriel, il est peu probable d'être confronté à une architecture 
+\gls{P2P} totalement décentralisée (sans serveur). Une solution centralisée permet 
+d'utiliser la partie serveur pour télécharger l'application cliente qui contient la 
+couche intergicielle \gls{P2P}. 
+Les serveurs sont aussi présents pour fournir à l'utilisateur différents services (ex: 
+base de données, service de signalisation). 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{protocol_stack2.eps}
+	\caption{Pile des protocoles IP: TCP vs UDP}
+	\label{fig:protocolstack}
+\end{figure}
+paragraph{Échange de données via RTCDataChannel}
+L'\gls{API} RTCDataChannel ou Data\-Channel, issue de  WebRTC, 
+permet l'échange \gls{P2P} de données arbitraires avec peu de latence et 
+un bon débit sur la base des sessions RTCPeerConnection.
+DataChannel utilise de multiples canaux simultanés avec une gestion de 
+priorité. L'\gls{API} est aussi capable de gérer la fiabilité de la livraison des 
+paquets et sécurise nativement les données avec le protocole 
+\gls{DTLS}. 
+Le contrôle de la congestion des flux et l'ordonnancement éventuel est 
+effectué par les protocoles de sous couche (\gls{STCP}, \gls{RRTCC}). 
+
+%TODO
+%\cite{Eskola}\cite{Singh2013b}
+
+Depuis 2011, les contributeurs du standard WebRTC font beaucoup 
+d'effort pour élargir et maintenir la compatibilité et interopérabilité entre 
+tous les navigateurs \info{ref tableau interop}.
+%TODO \info{parler de edge}\improve{dans CE sens}\info{parler de 
+%ORTC}. 
+Certains navigateurs (comme Chrome) imposent une limite de taille pour 
+l'envoi de messages contenant de la donnée brute. Enfin, la sécurité des 
+communications est encore vulnérable malgré le chiffrement des données 
+par défaut (\gls{DTLS}).
+
+\subsubsection{Mécanisme de signalisation et problématiques réseau}
+Le mécanisme de signalisation (\textit{signaling mecanism} en anglais) 
+permet de coordonner et d'envoyer des message de contrôle durant une 
+session. Le mécanisme de signalisation est utilisé pour échanger trois 
+types d'information : 
+\begin{itemize}
+	\item des messages de contrôle sur la session pour ouvrir ou fermer un 
+	lien de communication et rapporter les erreurs,
+	\item les configurations réseaux telles (ICE candidates, IP ou
+	port de l'ordinateur),\improve{parler de ça} 
+	\item et les capacités média du navigateur (limite de débit, codecs, 
+	résolution, formats de donnée). 
+\end{itemize}
+Un service de signalisation est nécessaire à la mise en relation des 
+différents pairs au cours d'une session collaborative. 
+Pour établir un canal entre deux navigateurs (initialiser une session 
+WebRTC), il faut que chaque client se «~signale~» l'un à l'autre. 
+Techniquement, la connexion est établie en passant par 
+un tiers ou directement entre deux pairs une fois qu'ils ont reçu leurs 
+identifiants de connexion. 
+Une fois que la connexion est établie entre deux pairs, 
+RTCDataChannel est capable, en théorie, d'être le canal de signalisation. 
+Cette solution peut aider à réduire la latence (car les messages sont 
+envoyé directement entre les pairs) mais n'est pas très fiable. L'utilisation 
+d'un tiers (serveur) est, en pratique, quasi systématiquement privilégiée.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=0.8\columnwidth]{turn.eps}
+	\caption{STUN, TURN et signalisation}
+	\label{fig:turn}
+\end{figure} 
+
+La Figure \ref{fig:turn} représente le cas le plus complexe que le l'on peut 
+rencontrer pour établir une connexion WebRTC. Le plus simple des réseaux P2P 
+peut être résumé comme deux machines connectées directement l'une à l'autre. 
+Cette vision un peu utopique ne tient pas compte des routeurs qu'une connexion 
+internet peut rencontrer. 
+Chaque routeur peut posséder un \gls{NAT} afin de faire correspondre 
+les adresse IP à d'autres adresse IP (dans le cas d'un intranet par exemple). 
+Cela permet de faire communiquer des machines non uniques et non routables en 
+faisant semblant d'utiliser des adresses externes, uniques et routables. 
+Pour permettre à un client situé derrière un routeur \gls{NAT} de connaître son 
+adresse IP publique et le type de serveur \gls{NAT} l'utilisation d'un serveur 
+\gls{STUN} est requise. 
+Une fois le client parvenu à récupérer une adresse IP, il peut participer à 
+l'initialisation d'une connexion WebRTC (signalisation). L'utilisation de protocoles 
+tels que \gls{ICE} avec son \gls{ICEF} permet de faciliter la mise en relation des 
+clients derrière un \gls{NAT}. Les pairs peuvent négocier le type point d'entrée 
+(public, privé) souhaité.
+
+
+%Du point de vue sécurité des communications, le standard requiert 
+%obligatoirement le chiffrement pour tous les composants \gls{WebRTC}. 
+%Cependant, les mécanismes de signalisation n'étant pas définis par le standard, 
+%cela signifie que les développeurs sont assez libres d'utiliser les protocoles de 
+%signalisation qu'ils souhaitent (SIP, \gls{WebSocket}, \gls{XHR}, une \gls{API} 
+%externe\dots). Dans le cas où la connexion subit une attaque, la connexion peut 
+%être stoppée, 
+%redirigée ou enregistrée, altérée ou encore subir de l'injection de contenu. Pour 
+%sécuriser la connexion l'utilisation de protocoles sécurisés comme HTTPS ou 
+%\gls{WebSocket} (basé sur \gls{TLS}), assure qu'un message ne peut être 
+%déchiffré.
+
 \subsection{Quel protocole dans quel EVC3D ?}
 \improve{reformuler paragraphe}
 Un des aspects prépondérant dans les \gls{EVC3D} concerne la communication et 
@@ -601,11 +783,12 @@ pas (ou peu) de perte de paquet (ex : \gls{LAN}). Deuxièmement, dans un context
 d'application où la perte de paquet n'est pas critique (ex : jeu vidéo, diffusion en 
 continu de son, vidéo, 3D\dots). 
 \gls{UDP} peut également s'utiliser dans les tout type de réseaux -- \gls{LAN} ou 
-\gls{WAN} (comme internet) --, car il est basé sur des datagrammes. Par ailleurs,  
-le fait qu'il n'effectue pas de vérification de délivrance lui donne un avantage quant 
+\gls{WAN} (comme internet) --, car il est basé sur des datagrammes. Le fait qu'il 
+n'effectue pas de vérification de délivrance lui donne un avantage quant 
 à la taille des données envoyées dans les \glspl{EVC}. La responsabilité de 
 vérifier quels sont les 
 paquets qui n'ont pas été délivrés et leur ordre d'arrivée incombe à l'application.
+
 \gls{TCP} est le protocole qui vient en seconde position. Les \gls{EVC3D} qui sont 
 implémentés sur des réseaux haut-débit ne sont pas affectés par les étapes de 
 vérifications que nécessitent une connexion \gls{TCP}. D'après \cite{Sung2006}, 
@@ -652,22 +835,6 @@ En général, les systèmes \gls{P2P} semblent n'être supportés que dans les
 environnements virtuels 3D. Ce phénomène est probablement dû au lien étroit 
 entre la séparation spatiale de l'utilisateur et le besoin de distribuer les données à 
 tous les participants.
-\paragraph{Autres}
-Dat \cite{Ogden2017} est un protocole de synchronisation de jeu de données qui 
-n'assume pas que le jeu de données soit statique ou que le jeu de données soit 
-entièrement téléchargé. C'est un protocole agnostique\footnote{Indépendant des 
-	protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
-	protocole avec son pair et commence la communication. Cette démarche 
-	apporte plus de flexibilité et d'interopérabilité au système.} dont la conception 
-repose sur la garantie des principes suivant : intégrité du contenu grâce à 
-l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
-régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
-découvrir automatiquement les pairs et effectuer l'échange de données en essaim, 
-chiffrement des données de bout en bout, versionnage incrémental pour la 
-synchronisation des données. Ce protocole est par exemple utilisé par 
-hashbase.io, un service qui se propose d'être un pair toujours présent pour 
-l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
-pérenne du contenu. 
 %
 %
 %	\subsection{Introduction}
@@ -731,7 +898,7 @@ publication d'un évènement par un \textit{publisher}.
 
 \begin{figure}[ht!]
 	\centering
-	\inputTikZ{1.2}{eps/tikz/pubsub}
+	\inputTikZ{1}{eps/tikz/pubsub}
 	\caption{Architecture Publish-Subscribe}
 	\label{fig:pubsub}
 \end{figure}
@@ -1089,7 +1256,7 @@ modifications acceptables et par qui est ce possible.
 \begin{figure}[ht]
 	\noindent
 	\centering
-	\inputTikZ{1.1}{eps/tikz/ddd/dddcqrs}
+	\inputTikZ{1}{eps/tikz/ddd/dddcqrs}
 	\caption{Architecture en 4 couches du DDD (gauche) en miroir avec 
 		l'architecture CQRS 
 		(droite)}
@@ -1108,32 +1275,27 @@ même donnée peut être changée par un autre utilisateur, elle est altérée.
 	\item En consultation/lecture: dénormalisation, scalabilité. \info{ajouter au dico}
 \end{itemize}
 
-
-
 La plupart des architectures en couches ne font pas explicitement référence à ces 
 problèmes. Le fait de tout sauvegarder dans une base de données centralisée peut 
 être une étape dans la gestion de la collaboration mais l'altération des données est 
 souvent exacerbée par l'utilisation de caches comme accélérateur de performance.
-
-
-
-L'\textbf{immuabili\-té} en \gls{CQRS} est un concept clé qui prévient la  
+L'immuabilité en \gls{CQRS} est un concept clé qui prévient la  
 modification de l'état interne d'une commande ou d'un évènement. Les 
 commandes sont immuables car leur usage nécessite un envoi direct au domaine 
 pour être traitées. Quant aux évènements, ils sont immuables car ils représentent 
-ce qui s'est produit dans le passé (qu'on ne peut donc pas changer). \info{En ce 
-qui concernent le \gls{CQRS} et l'\gls{ES}  finir la phrase à mettre dans l'ES}
+ce qui s'est produit dans le passé (qu'on ne peut donc pas changer). 
 
-
-Le Reactive Manifesto est un document important apparu en 2014 qui résume les 
+Le Reactive Manifesto, apparu en 2014, est un document qui résume les 
 propriétés clés liées aux systèmes distribués et encourage notamment le 
 développement de systèmes \og plus flexibles, à couplage faible et 
-extensibles\fg{}\cite{Boner2014} comme l'\gls{ES} et le \gls{CQRS}. 
+extensibles\fg{}\cite{Boner2014TheManifesto} comme le \gls{CQRS} et l'\gls{ES}.
+ 
 
 \subsection{Event Sourcing}
 %\subsection{Event Sourcing : certifier la fiabilité et traçabilité des données}
 \label{sec:es}
-L'\gls{ES} est une approche complémentaire au \gls{CQRS} pour gérer la 
+L'\glsreset{ES}\gls{ES} est une approche complémentaire au \gls{CQRS} pour 
+gérer la 
 concurrence des données et capturer l'intention de l'utilisateur. Ce patron de 
 conception stocke les évènements en mode ajout seulement 
 (\textit{append-only}) pour sauvegarder le résultat des commandes sur le 
@@ -1304,7 +1466,8 @@ rapport à sa dernière visite.
 
 
 \subsubsection{Inconvénients}
-Les performances de l'application peuvent être affectées par l'utilisation de 
+En revanche, les performances de l'application peuvent être affectées par 
+l'utilisation de 
 l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Store, il est 
 nécessaire de le calculer à partir des évènements reçus.
 A chaque évènement créé (et stocké), ce processus sera alourdi car ils ne 
@@ -1371,14 +1534,13 @@ effets de bord car elle ne travaille que sur l'état interne de l'application.
 Historiquement, l'\gls{ES} de Fowler dans ses premières versions ressemblait plus 
 à du \gls{CS}. L'évolution de l'\gls{ES} a conduit à revoir ce patron théoriquement 
 sous une forme fonctionnelle pure avec l'apparition de base de données comme 
-EventStore ou le langage de programmation plus adaptés comme F\#.
-
-Les deux patrons peuvent cohabiter si le \gls{CS} a un cadre d'action bien délimité 
+EventStore ou le langage de programmation plus adaptés comme F\#. Les deux 
+patrons peuvent cohabiter si le \gls{CS} a un cadre d'action bien délimité 
 et de les composants de l'architecture ont un couplage lâche afin que seuls les 
 évènements produits par les agrégats ne modifient l'état interne de l'application. 
 
 
-\subsection{Bilan}\todo{parler de la concurrence} 
+\subsection{Bilan}
 Cette section présente différentes approches pour intégrer une architecture 
 orientée évènements dans un système collaboratif
 respectant les règles liées au métier. Dans un premier temps, 
@@ -1403,10 +1565,10 @@ les lignes du \gls{DDD}. Le flux d'évènements qui est généré par
 \gls{CQRS} est stocké dans un \gls{EventStore} qui correspond à la source de 
 vérité de l'application. On peut connaître l'historique de l'application 
 juste en regarde la pile d'évènements autant que recréé l'état de l'application à 
-partir de l'\gls{EventStore}. 
+partir de l'\gls{EventStore}. \todo{parler de la concurrence} 
 
 \section{Conclusion}
-Ce chapitre présente en trois sections les 
+
 Dans les architectures orientées évènements, le couplage lâche est une propriété 
 qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybride. Elles ont 
 l'avantage de 
