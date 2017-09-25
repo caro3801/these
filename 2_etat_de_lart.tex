@@ -10,28 +10,28 @@
 Dans un contexte collaboratif, on considère qu'il n'est pas possible pour une 
 personne seule de réaliser la tâche proposée complètement. 
 La modélisation 3D collaborative permet à différents concepteurs de travailler 
-ensemble sur une même tâche de manière efficace (en terme de coût temporel et 
+ensemble sur une même tâche de manière efficace (en terme de coûts temporel et 
 financier) et avec un support visuel manipulable, éditable et flexible (proposant 
 différentes possibilités de visualisation). 
 En se complétant, leur travail peut aussi entrer en conflit, se compenser, 
 s'annuler\ldots
 La mise en place de solutions pour ces situations dépend de nombreux facteurs 
-comme le type de collaboration (synchrone, asynchrone) et de cohérence souhaité 
+comme le type de collaboration (synchrone, asynchrone) et de cohérence souhaités 
 (forte, éventuelle) par exemple.
 
-Les différentes solutions pour la conception collaborative peuvent être divisés en 
+Les différentes solutions pour la conception collaborative peuvent être divisées en 
 trois types: 
 \begin{enumerate*}[label=(\roman*)]
-	\item les mécanismes de type autoritaires (requérant des autorisations),
+	\item les mécanismes de type autoritaire (requérant des autorisations),
 	\item les opérations de transformation et 
 	\item les autres solutions synchrones et asynchrones.
 \end{enumerate*}
 Selon leurs comportements face à l'apparition d'un conflit, ces types de 
 collaboration sont classifiés comme pessimistes ou optimistes (Tableau 
 \ref{table:collprobs}). Les solutions de type autoritaire (\og \textit{authoritative}\fg{}) 
-sont comptés parmi les solutions pessimistes car elles préviennent toute 
-occurrence de conflit tandis que les solutions des deux autres types,
-transformées opérationnelles -- \gls{OT} -- et autres (synchrone ou asynchrone), 
+sont comptées parmi les solutions pessimistes car elles préviennent toute 
+occurrence de conflit, tandis que les solutions des deux autres types,
+transformées opérationnelles -- \gls{OT} -- et autres (synchrones ou asynchrones), 
 sont dites optimistes car permissives face à l'apparition de conflits. 
 Dans ce dernier cas, les conflits détectés peuvent, selon les stratégies, amener à 
 une résolution manuelle ou automatique.
@@ -71,15 +71,15 @@ une résolution manuelle ou automatique.
 \end{table}
 
 
-La plupart du temps ce sont des mécanismes autoritaires comme le mécanisme 
+La plupart du temps, ce sont des mécanismes autoritaires comme le mécanisme 
 de verrouillage (\textit{lock mechanism}), des feux de signalement (\textit{traffic 
 light mecanism}) ou requérant des droits ou des permissions temporaires, qui sont 
 proposés dans les solutions collaboratives traditionnelles. Les utilisateurs doivent 
 souscrire aux permissions du système avant de pouvoir effectuer leurs 
 modifications. Ces mécanismes permettent de s'assurer que les opérations sont 
-effectuées de manière séquentielle ce qui assure la cohérence des données à 
+effectuées de manière séquentielle, ce qui assure la cohérence des données à 
 travers le système. Plus simples à mettre en place, ces mécanismes sont plus 
-restrictifs vis à vis de la liberté de création des utilisateurs du système. Par 
+restrictifs vis-à-vis de la liberté de création des utilisateurs du système. Par 
 exemple, Lets3D \cite{Ha2015} est un éditeur collaboratif 3D sur le web dont la 
 gestion de la concurrence repose sur la demande de permission par objet 
 sélectionné (ce qui verrouille l'objet pour les autres utilisateurs lorsqu'elle est 
@@ -89,12 +89,12 @@ accordée).
 premiers à s'intéresser aux problèmes liés à la gestion de la concurrence dans 
 un système distribué au sein d'un collecticiel \cite{Ellis1989,Greenberg1994}. 
 Alors que Duplex \cite{Pacull1994}, un \gls{EVC3D}, est présenté au même 
-moment, se dernier s'intéresse plus spécifiquement aux problématiques de 
-passage à l'échelle en essayant de réduire la taille du contexte partagé pour 
+moment, ce dernier s'intéresse plus spécifiquement aux problématiques de 
+passage à l'échelle, en essayant de réduire la taille du contexte partagé pour 
 limiter les problèmes liés à la concurrence. 
 Les modèles liés à l'annulation (\textit{undo/redo}) dans les éditeurs collaboratifs 
 distribués sont nombreux. Pour les documents textuels, les travaux les plus 
-aboutis dans un environnements distribué collaboratif 
+aboutis dans un environnement distribué collaboratif 
 \cite{Prakash1994,Sun2002,Ressel}. Les 
 algorithmes souvent utilisés dans ce cadre sont les algorithmes 
 de  transformées opérationnelles -- \gls{OT} -- \cite{Ellis1989} ou les algorithmes 
@@ -110,12 +110,12 @@ apporte plus de flexibilité et d'interopérabilité au système.} comme Dat
 contenus dynamiques. Dat est un protocole de synchronisation de jeu de données 
 qui n'assume pas que le jeu de données soit statique ou que le jeu de données 
 soit entièrement téléchargé. C'est un protocole agnostique dont la conception 
-repose sur la garantie des principes suivant : intégrité du contenu grâce à 
+repose sur la garantie des principes suivants : intégrité du contenu grâce à 
 l'utilisation de valeurs de hachage (\textit{hash}) signées, mises à jour 
 régulièrement de manière décentralisée (\textit{decentralized mirroring}) pour 
 découvrir automatiquement les pairs et effectuer l'échange de données en 
 essaim, chiffrement des données de bout en bout, versionnage incrémental pour la 
-synchronisation des données. Ce protocole est par exemple utilisé par 
+synchronisation des données. Ce protocole est, par exemple, utilisé par 
 hashbase.io, un service qui se propose d'être un pair toujours présent pour 
 l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité 
 pérenne du contenu. 
@@ -132,7 +132,7 @@ Pour les projets d'\gls{AIC} ou de \gls{BIM}, la demande de traitement et la fid
 ont tendance à être plus élevés, particulièrement pour la représentation de dessins 
 d'ingénierie ou de modèles d'architecture 3D. 
 Les objets simples (primitives) ou les maillages optimisés pour le rendu temps-réel 
-ne sont ni suffisants ni assez génériques pour être supportés par tous les 
+ne sont ni suffisants, ni assez génériques pour être supportés par tous les 
 processus liés à l'élaboration d'un produit. 
 Plus les projets sont gros, plus ils dépendent d'une multitude de logiciels 3D --  
 dont l'interopérabilité n'est pas garantie -- s'adressant chacun aux besoins d'une 
@@ -145,19 +145,19 @@ générées autour d'un produit, l'utilisation d'un \gls{PDM}/\gls{PLM} est
 souvent requise. Bien que certains outils de création d'objets 3D (par exemple 
 Autodesk Revit) autorisent la synchronisation de fichier via leur dépôt à distance, 
 ce n'est généralement pas applicable aux générations suivantes. 
-En cela, une plateforme web pour un \gls{PDM}/\gls{PLM} à 
+En cela, une plateforme web pour un \gls{PDM}/\gls{PLM} a 
 l'avantage d'être distribuée pour être accessible depuis un navigateur web ; avec 
 un système d'édition hors-ligne, le téléversement peut s'avérer long et fastidieux.
 De plus, les logiciels spécialisés pour la modélisation 3D, contrairement aux jeux 
 multijoueurs, sont traditionnellement dédiés à un utilisateur unique sans 
-représentation visuelle des autres opérateurs dans le même espace 3D. 
+représentation visuelle des autres opérateurs, dans le même espace 3D. 
 Ici encore, les principes d'accessibilité du web facilitent la création d'un espace 
 virtuel 3D collaboratif pour la visualisation, la manipulation et l'échange de
 données partagées. 
 
 
 La collaboration en temps-réel est de plus en plus présente sur le web pour 
-différents types de documents notamment 3D.
+différents types de documents, notamment 3D.
 La revue sur la visualisation distribuée, effectuée par Grimstead et al. en 2005 
 \cite{Grimstead2005}, indique que la plupart des systèmes sont conçus pour 
 moins de cent 
@@ -169,21 +169,21 @@ Les systèmes de \gls{RV} collaboratifs font exception à ce schéma où l'utili
 des réseaux \gls{P2P} est plus répandue pour supporter parfois plus d'un millier 
 d'utilisateurs simultanés. 
 Dans chacun des cas, chaque système a besoin d'un client adapté pour opérer de 
-manière isolée sans inter-opérer avec les autre systèmes. 
+manière isolée, sans inter-opérer avec les autre systèmes. 
 C'est dans ce contexte qu'en 2011, Mouton et al. \cite{Mouton2011} présentent 
 une analyse approfondie de l'état des environnements collaboratifs 3D, ciblant 
 principalement la visualisation collaborative. 
 Ils montrent l'apparition de la tendance à déporter les environnements collaboratifs 
-sur le web grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition du 
-standard HTML5 comprenant un support avancé de l'audio et de la vidéo ainsi que 
+sur le web, grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition du 
+standard HTML5 comprenant un support avancé de l'audio et de la vidéo, ainsi que 
 plusieurs \gls{API} de stockage côté client (LocalStorage, IndexedDB). 
 Les applications web revêtent plusieurs avantages par rapport aux applications 
 natives sur mobiles ou aux logiciels autonomes. 
 Cela repose principalement sur le fait que les navigateurs sont présents partout 
 dans nos vies aujourd'hui (2017), incluant les téléphones intelligents et les 
 tablettes qui les rendent indépendants des plateformes utilisées. 
-Le déploiement sur le web ne requiert pas d'installation ou de mises à jour autre 
-que celle du navigateur (en ne considérant que les applications sans greffon). 
+Le déploiement sur le web ne requiert pas d'installation ou de mises à jour autres 
+que celles du navigateur (en ne considérant que les applications sans greffon). 
 La modification de l'application est gérée de manière centralisée par les serveurs 
 qui distribuent l'application. 
 Les éditeurs peuvent diffuser leur application à l'échelle mondiale instantanément  
@@ -196,21 +196,21 @@ autre qu'internet.
 Parmi les solutions sans greffon (\textit{plugin less}), beaucoup sont développées 
 pour faire de la modélisation 3D  et utilisent l'architecture client-serveur et le 
 protocole 
-\gls{WebSocket} pour effectuer la synchronisation entre les différents les clients 
+\gls{WebSocket} pour effectuer la synchronisation entre les différents clients 
 collaborateurs. Quelques raisons peuvent expliquer cette situation :
 \begin{enumerate}
 	\item développement : connaissance du standard \gls{WebSocket} par les 
 	développeurs (historique)
 	\item gestion des données : simplification de la synchronisation des données 
-	(centralisé)
-	\item suivi de l'utilisateur : dépendance de l'utilisateur vis à vis de la connexion 
+	(centralisée)
+	\item suivi de l'utilisateur : dépendance de l'utilisateur vis-à-vis de la connexion 
 	au serveur et donc du service (engagement) 
 \end{enumerate}
 
-Parmi les solutions commerciales comme OnShape, Clara.io et TinkerCAD le 
+Parmi les solutions commerciales comme OnShape, Clara.io et TinkerCAD, le 
 choix de plateformes web dans l'infonuagique pour la modélisation \gls{CAO} est 
-prépondérant souvent assorti d'un gestionnaire de version et d'une plateforme de 
-diffusion des création.
+prépondérant, souvent assorti d'un gestionnaire de version et d'une plateforme de 
+diffusion des créations.
 OnShape est un service de modélisation 3D très riche dont l'objectif est de 
 proposer une qualité équivalente des fonctionnalités de modeleurs autonomes 
 (\textit{standalone}) professionnels, le tout de manière collaborative. Leur approche 
@@ -227,10 +227,10 @@ dans Clara.io restent très basiques (seulement annuler~/~refaire). TinkerCAD
 est aussi une plateforme de publication d'objets 3D pour faciliter l'accès à la 
 conception d'objets 3D. TinkerCAD est une application destinée au grand 
 public pour la conception et l'impression 3D. De ce fait, les fonctionnalités sont 
-limitée à cause du métier, l'impression 3D et de la cible, grand public. La gestion 
+limitées à cause du métier, l'impression 3D et de la cible, grand public. La gestion 
 de version est donc plus légère, similaire à celle proposée par Clara.io. 
 OpenJSCAD, Verold Studio, Vectary sont d'autres 
-exemples de modeleurs 3D moins connus avec des fonctionnalités proches de 
+exemples de modeleurs 3D moins connus, avec des fonctionnalités proches de 
 TinkerCAD.
 \begin{table}[h]
 	\centering
@@ -253,8 +253,8 @@ TinkerCAD.
 \improve{tableau comparatif de GrabCAD, OnShape, clara.io}
 %
 Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
-données 3D \gls{CAO} (\gls{PLM}) qui possède un système de gestion de version 
-performant et une système d'annotation et de visualisation collaborative.
+données 3D \gls{CAO} (\gls{PLM}), qui possède un système de gestion de version 
+performant et un système d'annotation et de visualisation collaboratives.
 Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
 sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
 modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
@@ -281,12 +281,12 @@ d'encodage associé au type de modélisation 3D.
 La plateforme web possède certains avantages par rapport à des clients lourds. 
 En effet, le développement de l'infonuagique a permis le développement de 
 meilleures infrastructures de services. Du fait de ce développement, la création de 
-plateformes collaboratives sur le web pour faire de la conception 3D est devenue 
-non seulement faisable en termes de ressources mais également en termes de 
+plateformes collaboratives sur le web pour faire de la conception 3D est devenue, 
+non seulement faisable en termes de ressources, mais également en termes de 
 technologie. Il existe deux types d'approches pour créer du contenu web 2D ou 
 3D. L'approche déclarative et l'approche impérative. La Figure \ref{fig:impdec} 
 montre le pendant 3D pour chaque approche 2D. En 2D, les spécifications 
-déclaratives (\gls{SVG}) et impératives (canvas) sont issues du \gls{HTML}5 alors 
+déclaratives (\gls{SVG}) et impératives (canvas) sont issues du HTML5, alors 
 qu'en 3D, les spécifications sont encore en évolution. 
 
 \begin{figure}[hbt]
@@ -299,21 +299,21 @@ qu'en 3D, les spécifications sont encore en évolution.
 L'approche déclarative (Dec3D) s'intègre au \gls{DOM} et se 
 focalise sur l'utilisation les technologies du web existantes comme CSS3, 
 HTML5 et l'Ajax. 
-X3D est ainsi un format de fichier respectant le standard ISO \cite{X3D2011} pour 
-représenter des scènes 3D interactives en XML, rétro-compatible avec VRML97. Il 
-se différencie des formats de fichier type Collada en intégrant le comportement de 
-la scène durant l'exécution en plus de la description du contenu 3D. Les deux 
+X3D est ainsi un format de fichier respectant le standard ISO \cite{X3D2011} permettant de 
+représenter des scènes 3D interactives en XML et rétro-compatible avec VRML97. Il 
+se différencie des formats de fichiers comme Collada en intégrant le comportement de 
+la scène durant l'exécution, en plus de la description du contenu 3D. Les deux 
 bibliothèques les plus notables dérivées de ce standard sont X3DOM 
 \cite{Behr2010} et XML3D \cite{Sons2010} : toutes les deux sont capables de 
 supporter les récentes avancées de WebGL pour afficher une scène décrite dans 
 le \gls{DOM} à l'intérieur d'un \textit{canvas} HTML5. 
 X3DOM essaye de respecter le standard X3D et ses concepts pour en permettre 
 l'intégration du format dans le \gls{DOM}. De plus, X3DOM intègre le support 
-d'élément \gls{HTML}, les évènements \gls{DOM} et de profils \acrshort{CSS} en 
+d'éléments \gls{HTML}, les évènements \gls{DOM} et de profils \acrshort{CSS} en 
 supplément \cite{Sutter2015}. 
 En comparaison avec X3DOM, XML3D a développé une extension à \gls{HTML}5 
 pour décrire une scène 3D. 
-L'utilisation d'un langage déclaratif basé sur XML comme X3D est bien 
+L'utilisation d'un langage déclaratif, basé sur XML comme X3D est bien 
 adapté pour le contenu 3D utilise des données CAO/MAO ou WCS dans des 
 applications \gls{SIG} car il peut être directement transformé (ex. XSLT) d'une 
 représentation à une autre (tout comme le X3D peut être rendu dans un navigateur 
@@ -321,9 +321,9 @@ en utilisant X3DOM).
 
 L'approche déclarative est utilisée dans de nombreux travaux de visualisation 
 scientifique 3D distribuée \cite{Jung2012} pour des données spatiales 
-\cite{Stein2014} ou du rendu volumique \cite{Becher2012} par exemple. 
+\cite{Stein2014} ou du rendu volumique \cite{Becher2012}, par exemple. 
 En manipulant directement les objets 3D à partir des éléments \gls{DOM}, grâce à 
-sa structure bien connue, il est alors plus simple lors de la collaboration d'utiliser 
+sa structure bien connue, il est alors plus simple, lors de la collaboration, d'utiliser 
 ces éléments \cite{Gadea2016} ou les évènements du \gls{DOM} \cite{Lowet2009} 
 comme protocole de synchronisation de scènes. 
 L'ajout de nombreux \textit{listeners} sur un document peut affecter les 
@@ -377,20 +377,18 @@ expérimentale\footnote{\url{http://caniuse.com/\#feat=webgl2} consulté le
 ces dernières années sur les différentes plateformes possédant un navigateur 
 web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiques 
 	sont collectées à partir de sites partenaires de \url{webglstats.com}. Ces sites 
-	sont en 
-	ciblent des néophytes de la WebGL possédant donc le matériel 
-	dédié à la 3D en général. Consulté le 04/07/2017.}.
+	ciblent des néophytes de WebGL possédant  en général le matériel 
+	dédié à la 3D. Consulté le 04/07/2017.}.
 
 \section{Communication en temps-réel}
-L'expression temps-réel est largement utilisé par des applications requérant une 
+L'expression temps-réel est largement utilisée par des applications requérant une 
 forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
 expérience. La communication dans un \gls{EVC} particulièrement pour permettre aux utilisateurs de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
 
 
-La communication et la transmission des données lors de la collaboration un des 
-aspects prépondérant dans les \gls{EVC3D} concerne . Que ce soit dans dans un 
-\gls{EV}, un jeu multi-joueur ou un jeu sérieux (\textit{serious game}), les 
-participants interagissent en temps-réel ou quasi-réel alors qu'ils sont situés à 
+La communication et la transmission des données lors de la collaboration comptent parmi les piliers d'un \gls{EVC3D}. Que ce soit dans dans un 
+\gls{EV}, un jeu multi-joueurs ou un jeu sérieux (\textit{serious game}), les 
+participants interagissent en temps-réel ou quasi-réel, alors qu'ils sont situés à 
 différents endroits géographiques. 
 Le développement d'un \gls{EVC3D} nécessite donc des connaissances issues de 
 plusieurs domaines comme la conception et l'implémentation de protocoles 
@@ -399,7 +397,7 @@ réseaux et de réseaux distribués.
 Un protocole de communication en temps-réel existe, il s'appelle \gls{RTP} et a 
 été développé dans le but de faciliter la communication en temps-réel sur un 
 réseau. Coexistant avec \gls{RTP}, le protocole \gls{RTCP} est utilisé pour 
-transmettre des informations de contrôle à propos des données en temps-réelles. 
+transmettre des informations de contrôle à propos des données en temps-réel. 
 \gls{RTCP} transporte des données contenant des informations de contrôle et des 
 informations statistiques concernant les flux de données et les connexions des 
 destinataires qui permettent à l'expéditeur d'ajuster le flux en conséquence. Les 
@@ -410,9 +408,9 @@ des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre 
 
 La variété des domaines et applications auxquels s'adressent les 
 \glspl{EVC3D} actuels, fait qu'il n'existe pas de protocole de 
-communication parfait adapté à tous les types d'environnement. 
-Les besoins en communication qui se formulent souvent en termes de 
-fiabilité de la livraison des messages et de l'ordonnancement des messages sont 
+communication parfait, adapté à tous les types d'environnements. 
+Les besoins en communication, qui se formulent souvent en termes de 
+fiabilité de la livraison des messages et de l'ordonnancement des messages, sont 
 les variables d'ajustement en fonction des contraintes qu'imposent les limites de 
 temps de réponse et de bande passante.
 
@@ -429,7 +427,7 @@ pas ce genre de garantie et n'essaiera pas de transmettre à nouveau les donnée
 Bien que la fiabilité dans une communication est une propriété habituellement 
 recherchée, cela implique également que le canal doit connaître l'état des données 
 qui transitent. Soit l'expéditeur numérote les paquets en séquence, et dans ce 
-cas, seul le destinataire à la connaissance des paquets manquants (et à 
+cas, seul le destinataire a la connaissance des paquets manquants (et à 
 renvoyer). Pour indiquer les paquets manquants à l'expéditeur, le destinataire peut 
 envoyer des acquittements (ACKs) pour confirmer leur réception. Ces ACKs 
 peuvent être joints aux messages ou envoyés séparément. En plus des données 
@@ -444,19 +442,19 @@ sont utilisés.
 L'expéditeur se repose alors sur le réseau pour délivrer les paquets 
 correctement, mais il n'y a aucune garantie. Les protocoles non fiables ne 
 nécessitent pas de données additionnelles (séquence de nombre ou ACKs). 
-L'expéditeur n'est cependant jamais sûr que le destinataire a reçu toutes ses 
-données. Lorsque le destinataire a une connaissance du type de trafic qu'il reçoit, 
+L'expéditeur n'est cependant jamais sûr que le destinataire a reçu toutes les 
+données envoyées. Lorsque le destinataire a une connaissance du type de trafic qu'il reçoit, 
 il peut fournir un retour à l'expéditeur pour qu'il ajuste le flux de paquets. Ce 
 principe est appliqué par le protocole \gls{RTCP}, conjointement avec \gls{RTP}, 
 pour fournir les données statistiques liés à la  connexion à l'expéditeur.
 
-L'utilisation d'un protocole de communication fiable ou non fiable dépendant du 
+L'utilisation d'un protocole de communication fiable ou non fiable dépend du 
 type d'application et du type de l'environnement réseau dans lequel il est conçu 
 pour opérer. Si une application dite temps-réel est conçue pour fonction en réseau 
 local -- \gls{LAN} -- l'utilisation d'un protocole fiable est une option recommandée. 
-Les câbles utilisés dans ce contexte sont souvent rapides et stables ; un packets 
+Les câbles utilisés dans ce contexte sont souvent rapides et stables ; un paquet 
 perdu ou corrompu peut rapidement être détecté et retransmis. Dans des 
-environnements réseaux sont moins prévisibles comme les \gls{MAN} ou 
+environnements réseaux moins prévisibles comme les \gls{MAN} ou 
 \gls{WAN}, la nature de l'application a une influence importante sur le type de 
 protocole à utiliser. Selon si la pertinence des données est de courte durée, ou si 
 la perte de données n'est pas aussi importante que le fait de la retarder, alors un 
@@ -466,41 +464,41 @@ protocole non fiable peut être employé.
 \subsection{Ordonné versus Désordonné}
 Les paquets envoyés par l'expéditeur ne prennent pas forcément tous le même 
 chemin vers l'expéditeur. La réaction des réseaux face à la congestion consiste à 
-modifier les tables de routage afin que les paquets évite le n\oe ud congestionnés. 
+modifier les tables de routage afin que les paquets évitent le n\oe ud congestionné. 
 Cela peut altérer l'ordre des paquets à la réception. Le choix du protocole a 
 également une influence sur la gestion de l'ordre d'arrivée des paquets.
 
 Les protocoles dits \og ordonnés\fg{} garantissent que l'ordre dans lequel les 
-paquets sont envoyé est préservé dans l'application lors de la réception de ces 
+paquets sont envoyés est préservé dans l'application, lors de la réception de ces 
 données par le destinataire. Même si les paquets arrivent dans le désordre, le 
 protocole peut imposer l'ordonnancement des données à l'aide d'une mémoire 
 tampon en attendant les données précédentes. Cela impose que le protocole 
 (comme pour un protocole fiable) numérote les paquets ou utilise un estampillage 
-pour connaître l'ordre. Cependant la fiabilité n'est pas nécessaire pour la livraison 
+pour connaître l'ordre. Cependant, la fiabilité n'est pas nécessaire pour la livraison 
 dans l'ordre. Par exemple, dans une conversation vidéo, si une image met trop de 
-temps à arriver, elle sera mise en tampon puis omise au delà d'une limite (taille 
+temps à arriver, elle sera mise en tampon, puis omise au-delà d'une limite (taille 
 tampon ou temps).
 
 Forcer à la fois la fiabilité et l'ordonnancement peut causer des latences du côté 
 du destinataire, même lorsqu'une grande partie des données est déjà reçu. Quand 
 un des premiers paquets est perdu ou en retard mais que d'autres données ont 
-déjà été reçues, ces données doivent attendre avant d'être livrées tant que le 
+déjà été reçues, ces données doivent attendre avant d'être livrées, tant que le 
 paquet n'est pas arrivé. Les communications non ordonnées sont plus simples à 
 gérer car les données sont délivrées dès qu'elles arrivent. Cela signifie également 
 que la numérotation des paquets n'est pas requise (paquets plus légers). 
 L'application est alors en charge de gérer le fait que les paquets arrivent dans le 
-désordre. La livraison de paquet ordonnés est souvent une fonctionnalité 
+désordre. La livraison de paquets ordonnés est souvent une fonctionnalité 
 appréciée dans le 
 cadre des \gls{SEC}, et particulièrement en 3D, afin de respecter l'intention de 
 l'utilisateur car l'ordre des actions détermine le résultat de ces actions. Par 
-exemple l'exécution de deux matrices 3D consécutives n'est pas commutatif.
+exemple, l'exécution de deux matrices 3D consécutives n'est pas commutative.
 
 \subsection{Les principaux protocoles de transport}
 Les principes de fiabilité et d'ordonnancement décrits plus haut sont souvent 
-utilisés pour discriminer les différents protocoles de communication. Pour les 
-application en temps-réel, ils sont considérés comme les aspects les plusi 
-important à considérer pour le choix d'un protocole de communication. La 
-présentation succincte des protocoles ci-dessous indique leur propriétés de 
+utilisés pour discriminer les différents protocoles de communication. En ce qui concerne les 
+applications en temps-réel, ces principes sont considérés comme les aspects les plus 
+importants à considérer pour le choix d'un protocole de communication. La 
+présentation succincte des protocoles ci-dessous indique leur propriété de 
 fiabilité et d'ordonnancement.
 \subsubsection{TCP}
 Le \gls{TCP} est probablement le protocole le plus utilisé sur internet pour 
