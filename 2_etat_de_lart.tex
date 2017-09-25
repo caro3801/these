@@ -627,9 +627,9 @@ entre le publisher et les subscribers. Son rôle est de gérer les abonnements
 publication d'un évènement par un \textit{publisher}.
 %TODO expliquer la figure 
 
-\begin{figure}[t!]
+\begin{figure}[ht!]
 	\centering
-	\inputTikZ{1}{eps/tikz/pubsub}
+	\inputTikZ{1.2}{eps/tikz/pubsub}
 	\caption{Architecture Publish-Subscribe}
 	\label{fig:pubsub}
 \end{figure}
@@ -881,10 +881,20 @@ qualité de service notamment concernant les paramètres de découverte des pair
 	\noindent
 	\centering
 	\includegraphics[width=0.9\columnwidth]{ddd.eps}
-	\caption{Illustration du patron \gls{DDD} et de ses artefacts (figure issue de 
-	\url{http://blog.infosaurus.fr/public/docs/DDDViteFait.pdf})}
+	\caption{Illustration du patron \gls{DDD} et de ses artefacts (issue de 
+	\cite{Avram2006} sous licence Creative Commons)}
 \label{fig:ddd}
 \end{figure}
+
+Le \gls{DDD} permet de connecter le modèle et son implémentation en offrant 
+plusieurs avantages. La plasticité du système est mise en avant par l'expression 
+de règles et de comportements qui facilitent les changements fréquents.
+L'accent mis sur l'identification des interactions dans le système encourage la 
+mise en \oe{}uvre d'une interface orientée tâches (\textit{task-based UI}).
+La testabilité fonctionnelle est intégrée via les règles métier explicitées 
+et concentrées dans une couche spécifique de l'application. Cela les rend 
+plus facilement identifiable et testable automatiquement.
+La robustesse est améliorée face aux changements dans le système d'information.
 
 En \gls{DDD}, il existe des artéfacts qui permettent d'exprimer, créer et stocker un 
 modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se trouvent 
@@ -926,22 +936,13 @@ modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se 
 	alternatives de stockage.
 \end{itemize}
 
-Le \gls{DDD} permet de connecter le modèle et son implémentation en offrant 
-plusieurs avantages:
-\begin{itemize}
-	\item La plasticité du système est mise en avant par l'expression de règles 
-	et de comportements qui facilitent les changements fréquents.
-	\item L'accent mis sur l'identification des interactions dans le système 
-	encourage la mise en \oe{}uvre d'une interface orientée tâches 
-	(\textit{task-based UI}).
-	\item La testabilité fonctionnelle est intégrée via les règles métier explicitées 
-	et concentrées dans une couche spécifique de l'application. Cela les rend 
-	plus facilement identifiable et testable automatiquement.
-	\item La robustesse est améliorée face aux changements dans le SI.
-\end{itemize}
+
 
 Les notions plus détaillées qui se rapportent au \gls{DDD} sont présentées dans 
-\cite{Evans2003} et \cite{Vernon2013}.\info{source: 
+\cite{Evans2003} et \cite{Vernon2013}\footnote{Les différents livres publiés par 
+Vernon s'attachent également à montrer la nécessitée pour les différentes 
+branches de l'informatique à proposer des 
+systèmes pour robustes et flexibles face aux nouvelles demandes. }.\info{source: 
 	http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
 
 Le \gls{DDD} a également l'avantage de fonctionner en harmonie avec les 
@@ -956,21 +957,19 @@ intervenants de s'exprimer dans la création du produit. Par exemple, la \gls{CA
 est très utile dans un contexte d'ingénierie par l'utilisation de quatre propriétés 
 fondamentales telles que l'historique, les fonctionnalités, la paramétrisation et le 
 haut niveau de contrainte.
-	
-	\paragraph{Programmation réactive}
-	Les différents livres publiés par Vaughn s'attachent également à montrer la 
-	nécessitée pour les différentes branches de l'informatique à proposer des 
-	systèmes 
-	pour robustes et flexibles face aux nouvelles demandent. La publication du 
-	Manifeste Réactif encourage le développement de systèmes \og plus flexibles, 
-	à 
-	couplage faible et extensibles\fg{}.
-	
+
+
+
 \subsection{Command Query Responsability Segregation}
 %	\subsection{Command Query Responsability Segregation : garantir de 
 %	l'intégrité 
 %	des données }
 \label{sec:CQRS}
+Le Reactive Manifesto est un document important apparu en 2014 qui résume les 
+propriétés clés liées aux systèmes distribués et encourage notamment le 
+développement de systèmes \og plus flexibles, à couplage faible et 
+extensibles\fg{}\cite{Boner2014} comme l'\gls{ES} et le \gls{CQRS}.
+
 Introduit par Greg Young en 2009 \cite{Young2009}, \gls{CQRS} est un patron de 
 conception qui repose sur le principe de séparation des composants de traitement 
 métier de l'information (écriture) et de la restitution de l'information (lecture). Le 
@@ -995,6 +994,15 @@ La plupart des architectures en couches ne font pas explicitement référence à
 problèmes. Le fait de tout sauvegarder dans une base de données centralisée peut 
 être une étape dans la gestion de la collaboration mais l'altération des données est 
 souvent exacerbée par l'utilisation de caches comme accélérateur de performance.
+
+\begin{figure}[ht]
+	\noindent
+	\centering
+	\inputTikZ{1.2}{eps/tikz/ddd/dddcqrs}
+	\caption{Architecture en 4 couches du DDD (gauche) en miroir avec 
+	l'architecture CQRS 
+	(droite)}
+\end{figure}
 
 L'\textbf{immuabili\-té} en \gls{CQRS} est un concept clé qui prévient la  
 modification de l'état interne d'une commande ou d'un évènement. Les 

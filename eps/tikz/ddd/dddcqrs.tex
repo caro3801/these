@@ -1,0 +1,47 @@
+
+	\begin{tikzpicture}[
+	minimum height=10mm,
+	node distance=12mm,
+	rectangle,
+	text width =50mm,
+	text centered,
+	text opacity=1,
+	half/.style={	
+		text width = 20mm
+	},
+col/.style={
+	fill=blue!20,
+	fill opacity=0.9
+}
+	]
+
+\node  [align=left] (DM) {\textbf{Domain Model}};
+\node  [col,below of=DM] (PL) {Presentation Layer};
+\node [col,below of=PL]  (AL) {Application Layer};
+\draw[<->,line width=1pt] (2.3,-1) -- (2.3,-5);
+\node [col,below of=AL](DL) {Domain Layer};
+\node [col,below of=DL](IL) {Infrastructure Layer};
+\draw[->,line width=1pt] (2.3,-4.3) -- (2.3,-5);
+
+
+\node  [right=of DM,align=right] (CQRS) {\textbf{CQRS}};
+
+\draw[dotted,line width=1pt] (6.5,-0.5) -- (6.5,-5.9);
+\node [col,right=of PL](PL2) {Presentation Layer};
+	\node [col,right=of IL,](IL2) {Infrastructure Layer};
+	\node [col,half,below left of=PL2,yshift=-3.5mm,xshift=-6.5mm](AL2) 
+	{Application Layer};
+	
+	\draw[->,line width=1pt] (4,-1) -- (4,-5);
+	\draw[<-,line width=1pt] (8.9,-1) -- (8.9,-5);
+	\node [col,half,below of=AL2](DL2) {Domain 
+		Layer};
+	\node [col,half,above right of= IL2,xshift=6.5mm,yshift=7.5mm] (DA) {Data 
+	\\access\\ + \\DTO};
+
+\node [half,below left of= IL2,xshift=-5mm](Command) {Commands};
+\node [half,below right of = IL2,xshift=5mm](Queries) {Queries};
+%	\node[above of=IL2,draw=black, fit={(DL2) (AL2) (DA)}](TL){};
+	%\draw[->,line width=1.5pt] (4,-2.9) -- (4,-4);
+	
+	\end{tikzpicture}
