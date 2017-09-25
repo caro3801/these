@@ -4,7 +4,105 @@
 
 %\section{La visualisation et manipulation 3D collaborative sur web}
 
-\section{Modélisation 3D collaborative sur le Web}
+\section{Modélisation 3D collaborative}
+
+\subsection{Collaboration et concurrence dans un Environnement Virtuel 3D}
+Dans un contexte collaboratif, on considère qu'il n'est pas possible pour une 
+personne seule de réaliser la tâche proposée complètement. 
+La modélisation 3D collaborative permet à différents concepteurs de travailler 
+ensemble sur une même tâche de manière efficace (en terme de coût temporel et 
+financier) et avec un support visuel manipulable, éditable et flexible (proposant 
+différentes possibilités de visualisation). 
+En se complétant, leur travail peut aussi entrer en conflit, se compenser, 
+s'annuler\ldots
+La mise en place de solutions pour ces situations dépend de nombreux facteurs 
+comme le type de collaboration (synchrone, asynchrone) et de cohérence souhaité 
+(forte, éventuelle) par exemple.
+
+Les différentes solutions pour la conception collaborative peuvent être divisés en 
+trois types: 
+\begin{enumerate*}[label=(\roman*)]
+	\item les mécanismes de type autoritaires (requérant des autorisations),
+	\item les opérations de transformation et 
+	\item les autres solutions synchrones et asynchrones.
+\end{enumerate*}
+Selon leurs comportements face à l'apparition d'un conflit, ces types de 
+collaboration sont classifiés comme pessimistes ou optimistes (Tableau 
+\ref{table:collprobs}). Les solutions de type autoritaire (\og \textit{authoritative}\fg{}) 
+sont comptés parmi les solutions pessimistes car elles préviennent toute 
+occurrence de conflit tandis que les solutions des deux autres types,
+transformées opérationnelles -- \gls{OT} -- et autres (synchrone ou asynchrone), 
+sont dites optimistes car permissives face à l'apparition de conflits. 
+Dans ce dernier cas, les conflits détectés peuvent, selon les stratégies, amener à 
+une résolution manuelle ou automatique.
+
+\begin{table}
+	\centering
+	\caption{Solutions conventionnelles pour les problèmes collaboratifs 
+	\cite{Yu2016}.}
+	
+	\small
+	\label{table:collprobs}
+	\begin{tabular}{ m{0.20\textwidth}  m{0.35\textwidth} m{0.35\textwidth}}\hline
+		\textbf{Type}& \textbf{Mécanismes de Collaboration} & \textbf{Problème 
+		résolu}    \\ \hline
+		\multirow{4}{*}{Autoritaire}                     & Verrou                        & 
+		\multirow{4}{*}{Évitement des conflits}                                          \\
+		& Feux de circulation  
+		&                                                                                  \\
+		& Droits d'accès               
+		&                                                                                  \\
+		& Permission temporaire        
+		&                                                                                  \\ \hline
+		\multirow{2}{0.2\textwidth}{Transformées opérationnelles}                     & 
+		Séquence de transformation                     & Résolution de conflit temps-réel 
+		pour les documents textuels                     \\ \cline{2-3} 
+		& Transformées opérationnelles 3D                 & Résolution de conflit pour 
+		dépendant des modèles 3D                              \\ \hline
+		\multirow{3}{0.2\textwidth}{Autre (synchrone ou asynchrone)} & 
+		Semi-synchrone                               & \multirow{3}{0.3\textwidth}{Détection 
+		de conflit ou résolution avec interaction utilisateur} \\
+		& Signalisation des conflit %(conflict awareness) 
+		&                                                                                  \\
+		& Résolution de conflit créative                 &                      \\ 
+		\bottomrule                                                           
+	\end{tabular}
+\end{table}
+
+
+La plupart du temps ce sont des mécanismes autoritaires comme le mécanisme 
+de verrouillage (\textit{lock mechanism}), des feux de signalement (\textit{traffic 
+light mecanism}) ou requérant des droits ou des permissions temporaires, qui sont 
+proposés dans les solutions collaboratives traditionnelles. Les utilisateurs doivent 
+souscrire aux permissions du système avant de pouvoir effectuer leurs 
+modifications. Ces mécanismes permettent de s'assurer que les opérations sont 
+effectuées de manière séquentielle ce qui assure la cohérence des données à 
+travers le système. Plus simples à mettre en place, ces mécanismes sont plus 
+restrictifs vis à vis de la liberté de création des utilisateurs du système. Par 
+exemple, Lets3D \cite{Ha2015} est un éditeur collaboratif 3D sur le web dont la 
+gestion de la concurrence repose sur la demande de permission par objet 
+sélectionné (ce qui verrouille l'objet pour les autres utilisateurs lorsqu'elle est 
+accordée).
+
+ Avec ceux d'Ellis et Gibbs, les travaux de Greenberg et Marwood sont parmi les 
+premiers à s'intéresser aux problèmes liés à la gestion de la concurrence dans 
+un système distribué au sein d'un collecticiel \cite{Ellis1989,Greenberg1994}. 
+Alors que Duplex \cite{Pacull1994}, un \gls{EVC3D}, est présenté au même 
+moment, se dernier s'intéresse plus spécifiquement aux problématiques de 
+passage à l'échelle en essayant de réduire la taille du contexte partagé pour 
+limiter les problèmes liés à la concurrence. 
+Les modèles liés à l'annulation (\textit{undo/redo}) dans les éditeurs collaboratifs 
+distribués sont nombreux. Pour les documents textuels, les travaux les plus 
+aboutis dans un environnements distribué collaboratif 
+\cite{Prakash1994,Sun2002,Ressel}. Les 
+algorithmes souvent utilisés dans ce cadre sont les algorithmes 
+de  transformées opérationnelles -- \gls{OT} -- \cite{Ellis1989} ou les algorithmes 
+de réplication de  données commutatives -- \glspl{CRDT} -- \cite{Shapiro2007} 
+s'orientant de plus en plus vers des solutions décentralisées pour un usage à 
+grande échelle \cite{Weiss2009a}.
+\subsection{... sur le web : HTML5 et au delà}
+%TODO designing in context
+%\cite{Dobos2015}
 
 L'arrivée du web a bouleversé les usages liés à la collaboration sur des objets 3D. 
 Les principes, les technologies, l'omniprésence du web en ont fait une plateforme 
@@ -35,9 +133,7 @@ représentation visuelle des autres opérateurs dans le même espace 3D.
 Ici encore, les principes d'accessibilité du web facilitent la création d'un espace 
 virtuel 3D collaboratif pour la visualisation, la manipulation et l'échange de
 données partagées. 
-\subsection{HTML5 et au delà}
-%TODO designing in context
-%\cite{Dobos2015}
+
 
 La collaboration en temps-réel est de plus en plus présente sur le web pour 
 différents types de documents notamment 3D.
@@ -140,23 +236,7 @@ d'encodage associé au type de modélisation 3D.
 %		&          &         &         \\ \bottomrule
 %	\end{tabular}
 %\end{table}
-\begin{table}[h]
-	\centering
-	\caption{Encodage des données transmises}
-	\label{table:encoding}
-	\begin{tabular}{@{}lcc@{}}\hline
-		\textbf{Référence}& \textbf{Modélisation 3D}   & 
-		\begin{tabular}[c]{@{}l@{}}\textbf{Encodage des}\\ 
-			\textbf{modifications}\end{tabular} \\ \midrule
-		\cite{Grasberger2013}        &      Blob (CSG)    & Fonction implicite        \\
-		Clara.io \cite{Houston2013}               & Polygonale       &  Commande 
-		interface     \\
-		\cite{Mouton2014}                  & Polygonale       & Fonction paramétrique     \\
-		OnShape \cite{Baran2015} &    Paramétrique      &     Microversion    \\
-		cSculpt \cite{Calabrese2016} &      Polygonale    &    Fréquence spatiale  \\ 
-		\bottomrule
-	\end{tabular}
-\end{table}
+
 
 \subsection{Web 3D : deux approches}
 La plateforme web possède certains avantages par rapport à des clients lourds. 
@@ -261,6 +341,26 @@ web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiqu
 	sont en 
 	ciblent des néophytes de la WebGL possédant donc le matériel 
 	dédié à la 3D en général. Consulté le 04/07/2017.}.
+
+
+
+\begin{table}[h]
+	\centering
+	\caption{Encodage des données transmises}
+	\label{table:encoding}
+	\begin{tabular}{@{}lcc@{}}\hline
+		\textbf{Référence}& \textbf{Modélisation 3D}   & 
+		\begin{tabular}[c]{@{}l@{}}\textbf{Encodage des}\\ 
+			\textbf{modifications}\end{tabular} \\ \midrule
+		\cite{Grasberger2013}        &      Blob (CSG)    & Fonction implicite        \\
+		Clara.io \cite{Houston2013}               & Polygonale       &  Commande 
+		interface     \\
+		\cite{Mouton2014}                  & Polygonale       & Fonction paramétrique     \\
+		OnShape \cite{Baran2015} &    Paramétrique      &     Microversion    \\
+		cSculpt \cite{Calabrese2016} &      Polygonale    &    Fréquence spatiale  \\ 
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 \section{Communication en temps-réel}
 L'expression temps-réel est largement utilisé par des applications requérant une 
@@ -461,7 +561,7 @@ L'adoption de ce protocole est ralentie par le fait que l'implantation de \gls{S
 n'est pas supportée par tous les systèmes d'exploitation notamment 
 Windows\cite{Hogg}. 
 
-\begin{table}
+\begin{table}[h]
 	\caption{Aperçu des procotoles de transport}
 	\noindent\small
 	\begin{tabular}{cccc}
@@ -503,7 +603,8 @@ continu de son, vidéo, 3D\dots).
 \gls{UDP} peut également s'utiliser dans les tout type de réseaux -- \gls{LAN} ou 
 \gls{WAN} (comme internet) --, car il est basé sur des datagrammes. Par ailleurs,  
 le fait qu'il n'effectue pas de vérification de délivrance lui donne un avantage quant 
-à la taille des données envoyées. La responsabilité de vérifier quels sont les 
+à la taille des données envoyées dans les \glspl{EVC}. La responsabilité de 
+vérifier quels sont les 
 paquets qui n'ont pas été délivrés et leur ordre d'arrivée incombe à l'application.
 \gls{TCP} est le protocole qui vient en seconde position. Les \gls{EVC3D} qui sont 
 implémentés sur des réseaux haut-débit ne sont pas affectés par les étapes de 
@@ -610,9 +711,10 @@ CQRS. Une de leurs application exemple est un tableau Kanban collaboratif
 temps-réel construit sur leur 
 plateforme\footnote{https://github.com/eventuate-examples/es-kanban-board}. 
 %	\subsection{Les évènements comme base du comportement réactif}
-	\subsection{Systèmes Publish / Subscribe}
+	\subsection{Systèmes Publish-Subscribe}
 
-Le système \acrlong{PubSub} est un mécanisme basé sur le paradigme des 
+Le système \glsreset{PubSub}\gls{PubSub} est un mécanisme basé sur le 
+paradigme des 
 messages qui est beaucoup utilisé en Event Processing. 
 Les \textit{publishers} (ceux qui émettent des messages) et les \textit{subscribers} 
 (ceux qui souscrivent) sont couplés de manière lâche. 
@@ -965,10 +1067,14 @@ haut niveau de contrainte.
 %	l'intégrité 
 %	des données }
 \label{sec:CQRS}
-Le Reactive Manifesto est un document important apparu en 2014 qui résume les 
-propriétés clés liées aux systèmes distribués et encourage notamment le 
-développement de systèmes \og plus flexibles, à couplage faible et 
-extensibles\fg{}\cite{Boner2014} comme l'\gls{ES} et le \gls{CQRS}.
+Une solution architecturale courante en \gls{DDD} contient quatre 
+couches : l'interface utilisateur (présentation), la couche application (coordination 
+de l'activité de l'application), la couche domaine (c\oe ur du logiciel métier), la 
+couche infrastructure (interface entre les couches, persistance des objets 
+métier\dots). La Figure \ref{fig:dddcqrs} montre que ces quatre couches s'accordent
+bien avec l'architecture \gls{CQRS} qui sépare le flux d'écriture et de lecture dans 
+le logiciel.
+
 
 Introduit par Greg Young en 2009 \cite{Young2009}, \gls{CQRS} est un patron de 
 conception qui repose sur le principe de séparation des composants de traitement 
@@ -977,9 +1083,21 @@ cadre offert par ce principe permet de lever certaines contraintes d'architectur
 comme la (\textit{scalability}) en faisant apparaître de nouvelles forces : la gestion 
 de la concurrence dans la collaboration sur des règles métier propre à la 
 modélisation 3D dans des cadres d'application spécifiques. En effet, selon le type 
-d'application des règles vont régir qui peut effectuer quelle type de modification ou 
-quelles sont les modifications qui peuvent être acceptables dans un cas et non 
-dans un autre.
+d'application, un ensemble de règles régit les droits concernant les types de 
+modifications acceptables et par qui est ce possible.
+
+\begin{figure}[ht]
+	\noindent
+	\centering
+	\inputTikZ{1.1}{eps/tikz/ddd/dddcqrs}
+	\caption{Architecture en 4 couches du DDD (gauche) en miroir avec 
+		l'architecture CQRS 
+		(droite)}
+	\label{fig:dddcqrs}
+\end{figure}
+
+
+
 Le caractère vicié (\textit{staleness}) d'une donnée dans un environnement 
 collaboratif est récurrent. Une fois que la donnée a été montrée à un utilisateur, la 
 même donnée peut être changée par un autre utilisateur, elle est altérée. 
@@ -990,19 +1108,14 @@ même donnée peut être changée par un autre utilisateur, elle est altérée.
 	\item En consultation/lecture: dénormalisation, scalabilité. \info{ajouter au dico}
 \end{itemize}
 
+
+
 La plupart des architectures en couches ne font pas explicitement référence à ces 
 problèmes. Le fait de tout sauvegarder dans une base de données centralisée peut 
 être une étape dans la gestion de la collaboration mais l'altération des données est 
 souvent exacerbée par l'utilisation de caches comme accélérateur de performance.
 
-\begin{figure}[ht]
-	\noindent
-	\centering
-	\inputTikZ{1.2}{eps/tikz/ddd/dddcqrs}
-	\caption{Architecture en 4 couches du DDD (gauche) en miroir avec 
-	l'architecture CQRS 
-	(droite)}
-\end{figure}
+
 
 L'\textbf{immuabili\-té} en \gls{CQRS} est un concept clé qui prévient la  
 modification de l'état interne d'une commande ou d'un évènement. Les 
@@ -1010,6 +1123,12 @@ commandes sont immuables car leur usage nécessite un envoi direct au domaine
 pour être traitées. Quant aux évènements, ils sont immuables car ils représentent 
 ce qui s'est produit dans le passé (qu'on ne peut donc pas changer). \info{En ce 
 qui concernent le \gls{CQRS} et l'\gls{ES}  finir la phrase à mettre dans l'ES}
+
+
+Le Reactive Manifesto est un document important apparu en 2014 qui résume les 
+propriétés clés liées aux systèmes distribués et encourage notamment le 
+développement de systèmes \og plus flexibles, à couplage faible et 
+extensibles\fg{}\cite{Boner2014} comme l'\gls{ES} et le \gls{CQRS}. 
 
 \subsection{Event Sourcing}
 %\subsection{Event Sourcing : certifier la fiabilité et traçabilité des données}
@@ -1143,7 +1262,7 @@ L'historique du système est accessible tout au long de la vie de l'application 
 qui implique qu'il est non seulement possible d'accéder à l'état courant du 
 système, mais également toutes les actions ayant mené jusqu'à cet état. C'est 
 un avantage certain pour les système critiques, les applications d'Informatique 
-Décisionnelle (\gls{BI}) ou les applications collaboratives. La pratique la plus 
+Décisionnelle ou les applications collaboratives. La pratique la plus 
 courante est de proposer un système principal et d'ajouter une multitude de 
 sous-systèmes qui enregistrent les différentes métriques (analyse d'un ou 
 plusieurs axes, \textit{reporting} sur une propriété) du système principal. Avec 
@@ -1259,5 +1378,43 @@ et de les composants de l'architecture ont un couplage lâche afin que seuls les
 évènements produits par les agrégats ne modifient l'état interne de l'application. 
 
 
-\subsection{Conclusion}
+\subsection{Bilan}\todo{parler de la concurrence} 
+Cette section présente différentes approches pour intégrer une architecture 
+orientée évènements dans un système collaboratif
+respectant les règles liées au métier. Dans un premier temps, 
+l'architecture \gls{PubSub}, propose un système de notifications pour les différents 
+n\oe uds d'un réseau de manière lâche. De cette manière la communication est 
+homogénéisée et repose uniquement sur des notifications d'évènement pour les 
+entrées et sorties des participants. Le mécanisme d'abonnement autorise une 
+grande variété de stratégies quant au routage des messages.
+
+Dans un second, différents patrons de conceptions sont présentés. Le \gls{DDD} 
+est plutôt considéré comme un patron de conception stratégique. Ses principes 
+permettent d'avoir une vision centrée métier au logiciel. A partir de ces 
+orientations, \gls{CQRS} vient proposer une discrimination entre la partie écriture 
+(commande) et lecture (requête) dans l'application. Cela a des impacts à différents 
+niveaux. Le passage à l'échelle côté lecture est favorisé grâce à la création de 
+projections des données facilite la restitution des données sans risques d'effets de 
+bord. Côté écriture, le contenu des commandes est validé tout au long de la partie 
+commande, notamment avec l'intégration des les règles métiers dans le modèle 
+du domaine. L'\gls{ES} est le patron qui introduit la notion d'évènement au sens 
+que \og ce qui s'est passé\fg{}. Les évènements sont orientés métiers en suivant 
+les lignes du \gls{DDD}. Le flux d'évènements qui est généré par 
+\gls{CQRS} est stocké dans un \gls{EventStore} qui correspond à la source de 
+vérité de l'application. On peut connaître l'historique de l'application 
+juste en regarde la pile d'évènements autant que recréé l'état de l'application à 
+partir de l'\gls{EventStore}. 
+
+\section{Conclusion}
+Ce chapitre présente en trois sections les 
+Dans les architectures orientées évènements, le couplage lâche est une propriété 
+qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybride. Elles ont 
+l'avantage de 
+proposer une intégration de la partie métier transparente. Dans les différents 
+systèmes de modélisation 3D pour la visualisation ou la manipulation d'objets 3D 
+collaboratifs sur le web, cet aspect est souvent mis de côté. Or, dans le cadre de 
+la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
+prépondérants.\todo{finir en parlant du P2P} 
+
+
 
