@@ -232,16 +232,6 @@ de version est donc plus légère, similaire à celle proposée par Clara.io.
 OpenJSCAD, Verold Studio, Vectary sont d'autres 
 exemples de modeleurs 3D moins connus avec des fonctionnalités proches de 
 TinkerCAD.
-Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
-données 3D \gls{CAO} (\gls{PLM}) qui possède un système de gestion de version 
-performant et une système d'annotation et de visualisation collaborative.
-Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
-sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
-modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
-Les objets sont alors manipulés comme des géométries de construction de 
-solides avec les opérations booléennes associées. 
-Le Tableau \ref{table:encoding} résume les différents types 
-d'encodage associé au type de modélisation 3D. 
 \begin{table}[h]
 	\centering
 	\caption{Encodage des données transmises}
@@ -262,6 +252,17 @@ d'encodage associé au type de modélisation 3D.
 \improve{tableau comparatif gestion historique ou versionning}
 \improve{tableau comparatif de GrabCAD, OnShape, clara.io}
 %
+Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
+données 3D \gls{CAO} (\gls{PLM}) qui possède un système de gestion de version 
+performant et une système d'annotation et de visualisation collaborative.
+Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
+sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
+modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
+Les objets sont alors manipulés comme des géométries de construction de 
+solides avec les opérations booléennes associées. 
+Le Tableau \ref{table:encoding} résume les différents types 
+d'encodage associé au type de modélisation 3D. 
+
 %\begin{table}[]
 %	\centering
 %	\caption{Comparaison de fonctionnalités entres modeleurs 3D basés web}
@@ -630,7 +631,8 @@ Selon le site officiel de WebRTC\footnote{\url{https://webrtc.org}}, plus d'un m
 d'utilisateurs ont utilisé la technologie \textit{open source} WebRTC. Ericsonn Labs 
 a été parmi les premiers à implémenter une application WebRTC en 2011. 
 La jeunesse du protocole (2011) fait que peu de travaux académiques 
-l'utilisent pour créer des \gls{EVC3D} \cite{Desprat2015a,Steiakaki2016}. 
+l'utilisent pour créer des \gls{EVC3D} \cite{Desprat2015a,Steiakaki2016} et 
+optimiser le partage de modèles 3D \cite{Koskela2014}. 
 Côté commercial, un grand nombre d'applications et de services 
 basés sur ce protocole ont fait leur apparition (par ordre d'importance) : 
 des systèmes d'échanges audio/vidéo (VoIP)\footnote{WebRTCWorld en 
@@ -642,10 +644,15 @@ autres applications (capture d'écran, réalité augmentée, jeux)
 \footnote{Curation de ressources et modules WebRTC 
 	recensant plus de 100 projets 
 	\url{https://github.com/openrtc-io/awesome-webrtc}. Consulté le 
-	07/07/2017.}.
+	07/07/2017.}. WebRTC se retrouve également dans le domaine de l'optimisation 
+	de l'utilisation des ressources pour la création de \glspl{CDN} 
+	\cite{Zhang2013b}, de grilles de calcul comme dans
+	browserCloud.js \cite{Dias2015a} ou pour faire des analyses visuelles 
+	collaboratives dans un environnement hétérogène \cite{Li2015}.
 
-\paragraph{Avantages et inconvénients}
-Les réseaux \gls{P2P} est un changement de paradigme qui peut représenter une 
+
+L'utilisation et la gestion de réseaux \gls{P2P} est un changement de paradigme 
+qui peut représenter une 
 barrière d'entrée auprès des développeurs web qui sont habitués aux architectures 
 client-serveur. 
 Cependant, l'implantation de WebRTC, très semblable à WebSocket, rend la 
@@ -676,7 +683,7 @@ base de données, service de signalisation).
 	\caption{Pile des protocoles IP: TCP vs UDP}
 	\label{fig:protocolstack}
 \end{figure}
-paragraph{Échange de données via RTCDataChannel}
+\paragraph{Échange de données via RTCDataChannel}
 L'\gls{API} RTCDataChannel ou Data\-Channel, issue de  WebRTC, 
 permet l'échange \gls{P2P} de données arbitraires avec peu de latence et 
 un bon débit sur la base des sessions RTCPeerConnection.
@@ -691,7 +698,7 @@ effectué par les protocoles de sous couche (\gls{STCP}, \gls{RRTCC}).
 %\cite{Eskola}\cite{Singh2013b}
 
 Depuis 2011, les contributeurs du standard WebRTC font beaucoup 
-d'effort pour élargir et maintenir la compatibilité et interopérabilité entre 
+d'efforts pour élargir et maintenir la compatibilité et interopérabilité entre 
 tous les navigateurs \info{ref tableau interop}.
 %TODO \info{parler de edge}\improve{dans CE sens}\info{parler de 
 %ORTC}. 
@@ -700,7 +707,7 @@ l'envoi de messages contenant de la donnée brute. Enfin, la sécurité des
 communications est encore vulnérable malgré le chiffrement des données 
 par défaut (\gls{DTLS}).
 
-\subsubsection{Mécanisme de signalisation et problématiques réseau}
+\subsubsection{Mécanisme de signalisation et problématiques réseaux}
 Le mécanisme de signalisation (\textit{signaling mecanism} en anglais) 
 permet de coordonner et d'envoyer des message de contrôle durant une 
 session. Le mécanisme de signalisation est utilisé pour échanger trois 
@@ -1013,109 +1020,7 @@ ressources réseau du serveur et de plusieurs clients, on peut réaliser une
 distribution des données (évènements) en améliorant les performances du 
 système pendant les sessions de travail collaboratif. 
 
-\subsubsection{La virtualisation des clients}
-\label{virtualisation}
-\todo{mettre ailleurs?}
-Une des problématiques soulevée par la collaboration \gls{P2P} est de permettre 
-la reproductibilité des expérimentations dans un environnement contrôlé et réaliste.
-Réussir à simuler un réseau virtuel de clients en \gls{P2P} en utilisant le protocole 
-\gls{WebRTC} est un défi encore compliqué. Il existe des outils pour simuler des 
-réseaux \gls{P2P} tels que PeerSim \cite{Montresor2009} ou \textit{ns-3} 
-\cite{Riley2010}. Ces outils sont 
-plus orientés sur la façon de distribuer les informations lors de la simulation et leur 
-dissémination au sein du réseau plutôt que de reproduire les protocoles et 
-l'infrastucture de manière réaliste avec des données issues de l'\gls{IU}. Dans de 
-récents travaux utilisant \gls{WebRTC}, les expérimentations ne 
-sont pas encore facilement reproductibles du fait qu'il n'existe pas d'outil facile à 
-prendre en main pour effectuer ce genre de simulation à base d'entrées utilisateur 
-fiables vis à vis des impératifs métier. 
 
-La virtualisation implique également de pouvoir simuler des comportements sur 
-la base d'interactions issues de \gls{IU} \cite{Hu2017} comme on peut le trouver 
-dans la simulation d'\gls{IU} web.
-Dans ce contexte, ce type de tests permet de vérifier la compatibilité et la 
-réactivité des différentes plateformes, versions de navigateurs et types d'appareils 
-en fonction d'entrées utilisateur. C'est également utile pour faire des tests de 
-performance ou de montée en charge 
-concernant l'interface. 
-Le service testRTC\footnote{\url{testrtc.com}. Consulté le 
-	07/07/2017} est un service payant qui propose un outil de test et de monitoring 
-pour un grand banc de machines de sessions audio et vidéo WebRTC .
-
-
-%TODO mettre ailleurs?
-L'intérêt d'utiliser un modèle de réseau \gls{P2P} virtuel comporte plusieurs 
-avantages. En reprenant les points proposés par \cite{Haque2016}, on peut citer : 
-\begin{itemize}
-	\item Pas d'installation nécessaire. Plusieurs outils et logiciels existent pour 
-	simuler des réseaux \gls{P2P} \cite{Montresor2009} ou nécessite encore 
-	l'installation de clients lourds (clients BitTorrent) par les utilisateurs pour réaliser 
-	les mesures. Cela implique le fait de comprendre les principes de base 
-	concernant la configuration réseau (routeurs, pare-feu) et le protocole utilisé 
-	(BitTorrent). Très peu de travaux concernant \gls{WebRTC} ont réussi à 
-	virtualiser les clients participants aux expérimentations.
-	\item Opérabilité et interopérabilité dans un environnement contrôlé.  
-	L'installation d'un client sur une machine requiert certaines autorisations liés à 
-	la politique de l'organisation, la licence logicielle et le support logiciel. Ce type 
-	d'environnement est assez typique dans l'industrie, c'est pourquoi il est 
-	intéressant de proposer un modèle qui puisse s'exécuter sans difficulté grâce à 
-	l'utilisation de clients web. Les navigateurs qui servent de clients web 
-	s'accordent généralement avec les standards proposés par le \gls{W3C}, ce qui 
-	facilite également l'interopérabilité du logiciel souvent déployé dans un parc 
-	hétérogène de machines.
-	\item Indépendance de la situation géographique. Tout comme les 
-	infrastructures \textit{cloud} (souvent un service tiers) qui sont distantes par 
-	l'intermédiaire d'un réseau , généralement internet les utilisateurs peuvent se 
-	connecter sur un réseau virtuel  \gls{P2P} à partir de n'importe quel lieu. 
-	\item Simplification de la maintenance. Les applications, standards et 
-	protocoles autour du \gls{P2P} sont en constante évolution. L'implémentation de 
-	la méthode de distribution des données nécessite par conséquent de fréquente 
-	mises à jour pour être la plus efficace possible. Dans le cas d'une 
-	implémentation d'un client virtuel, la mise à jour qui est distribuée par le serveur 
-	sera automatique et la même sur tous les clients ce qui facilite la maintenance 
-	car c'est le distributeur qui est responsable de la mise à jour et non le client.
-	\item Mobilité et accès au réseau. La mise en place d'un réseau P2P permet de 
-	découpler l'accès à l'information et aux ressources du système. De ce fait, 
-	les clients peuvent travailler directement entre eux sans supervision après mise 
-	en relation et partager leurs ressources avec les autres clients qui en ont 
-	besoin. Le réseau peut évoluer sans que cela ait un fort impact sur la 
-	collaboration. Les clients peuvent être plus mobiles du fait de la grande 
-	disponibilité offerte par cette architecture à moindre coût.
-	\item \gls{NATT} et pare feu. Les applications traditionnelles de P2P comme 
-	BitTorrent ne permettent pas à deux pairs de communiquer directement 
-	lorsqu'ils sont derrière un \gls{NAT}. Grâce à l'utilisation du protocole \gls{ICE} 
-	les appareils peuvent atteindre plus de pairs, augmentant la vitesse d'échange.
-\end{itemize}
-
-Cette liste est un point de départ pour créer un service de virtualisation de clients 
-pour le partage de données (3D) avec WebRTC. 
-La mise à disposition volontaire de ressources (calcul, mémoire) en partage sur le 
-réseau permet d'une part la coopération entre personnes afin de résoudre des 
-problèmes nécessitant un haut degré de computation et d'autre part l'utilisation de 
-ressources qui ne seraient pas ou sous utilisées.
-
-L'optimisation de l'utilisation des ressources peut être effectuée avec WebRTC 
-pour faire des grilles de calcul comme dans browserCloud.js \cite{Dias2015a} ou 
-pour faire des analyses visuelles collaboratives dans un environnement 
-hétérogène \cite{Li2015}.
-
-
-En 2001, le standard \gls{DDS} est un standard machine-à-machine massif, en 
-temps-réel, hautement performant avec un système d'échange de données 
-interopérables. \gls{DDS} s'adresse principalement à des problématiques 
-d'échanges financiers, de contrôle aérien, et de réseau électrique intelligent 
-(\textit{smart grid}). Il a fortement été promu pour mettre en place des applications 
-liées à l'internet des objets. Les spécifications proposent deux niveaux 
-d'interfaces. Le premier se concentre sur la mise à disposition d'un système 
-\gls{PubSub} bas niveau centré données pour permettre la livraison efficace de la 
-bonne information au bon destinataire. Le second, niveau optionnel, 
-est une couche de reconstruction locale de la donnée permettant une integration 
-plus simple de \gls{DDS} au sein d'une application. \gls{DDS} est donc un 
-intergiciel réseau basé sur une architecture \gls{PubSub} qui gère la livraison 
-de messages sans nécessiter l'intervention d'un utilisateur. Il détermine qui doit 
-recevoir les messages, où sont situés les destinataires et ce qu'il se passe si un 
-message n'est pas délivré. En cela, \gls{DDS} permet une gestion plus fine de la 
-qualité de service notamment concernant les paramètres de découverte des pairs.
 
 
 \subsection{Domain Driven Design}

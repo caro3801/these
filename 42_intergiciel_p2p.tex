@@ -2,6 +2,132 @@
 %\chapter{Implantation}
 %editeur...
 %\section{Intergiciel P2P pour l'échange de données 3D}
+%\subsubsection{La virtualisation des clients}
+%\label{virtualisation}
+%\todo{mettre ailleurs?}
+%Une des problématiques soulevée par la collaboration \gls{P2P} est de permettre 
+%la reproductibilité des expérimentations dans un environnement contrôlé et 
+%réaliste.
+%Réussir à simuler un réseau virtuel de clients en \gls{P2P} en utilisant le 
+%protocole 
+%\gls{WebRTC} est un défi encore compliqué. Il existe des outils pour simuler des 
+%réseaux \gls{P2P} tels que PeerSim \cite{Montresor2009} ou \textit{ns-3} 
+%\cite{Riley2010}. Ces outils sont 
+%plus orientés sur la façon de distribuer les informations lors de la simulation et 
+%leur 
+%dissémination au sein du réseau plutôt que de reproduire les protocoles et 
+%l'infrastucture de manière réaliste avec des données issues de l'\gls{IU}. Dans 
+%de 
+%récents travaux utilisant \gls{WebRTC}, les expérimentations ne 
+%sont pas encore facilement reproductibles du fait qu'il n'existe pas d'outil facile à 
+%prendre en main pour effectuer ce genre de simulation à base d'entrées 
+%utilisateur 
+%fiables vis à vis des impératifs métier. 
+%
+%La virtualisation implique également de pouvoir simuler des comportements sur 
+%la base d'interactions issues de \gls{IU} \cite{Hu2017} comme on peut le trouver 
+%dans la simulation d'\gls{IU} web.
+%Dans ce contexte, ce type de tests permet de vérifier la compatibilité et la 
+%réactivité des différentes plateformes, versions de navigateurs et types 
+%d'appareils 
+%en fonction d'entrées utilisateur. C'est également utile pour faire des tests de 
+%performance ou de montée en charge 
+%concernant l'interface. 
+%Le service testRTC\footnote{\url{testrtc.com}. Consulté le 
+%	07/07/2017} est un service payant qui propose un outil de test et de monitoring 
+%pour un grand banc de machines de sessions audio et vidéo WebRTC .
+%
+%
+%%TODO mettre ailleurs?
+%L'intérêt d'utiliser un modèle de réseau \gls{P2P} virtuel comporte plusieurs 
+%avantages. En reprenant les points proposés par \cite{Haque2016}, on peut citer 
+%: 
+%\begin{itemize}
+%	\item Pas d'installation nécessaire. Plusieurs outils et logiciels existent pour 
+%	simuler des réseaux \gls{P2P} \cite{Montresor2009} ou nécessite encore 
+%	l'installation de clients lourds (clients BitTorrent) par les utilisateurs pour 
+%réaliser 
+%	les mesures. Cela implique le fait de comprendre les principes de base 
+%	concernant la configuration réseau (routeurs, pare-feu) et le protocole utilisé 
+%	(BitTorrent). Très peu de travaux concernant \gls{WebRTC} ont réussi à 
+%	virtualiser les clients participants aux expérimentations.
+%	\item Opérabilité et interopérabilité dans un environnement contrôlé.  
+%	L'installation d'un client sur une machine requiert certaines autorisations liés à 
+%	la politique de l'organisation, la licence logicielle et le support logiciel. Ce type 
+%	d'environnement est assez typique dans l'industrie, c'est pourquoi il est 
+%	intéressant de proposer un modèle qui puisse s'exécuter sans difficulté grâce 
+%à 
+%	l'utilisation de clients web. Les navigateurs qui servent de clients web 
+%	s'accordent généralement avec les standards proposés par le \gls{W3C}, ce 
+%qui 
+%	facilite également l'interopérabilité du logiciel souvent déployé dans un parc 
+%	hétérogène de machines.
+%	\item Indépendance de la situation géographique. Tout comme les 
+%	infrastructures \textit{cloud} (souvent un service tiers) qui sont distantes par 
+%	l'intermédiaire d'un réseau , généralement internet les utilisateurs peuvent se 
+%	connecter sur un réseau virtuel  \gls{P2P} à partir de n'importe quel lieu. 
+%	\item Simplification de la maintenance. Les applications, standards et 
+%	protocoles autour du \gls{P2P} sont en constante évolution. L'implémentation 
+%de 
+%	la méthode de distribution des données nécessite par conséquent de 
+%fréquente 
+%	mises à jour pour être la plus efficace possible. Dans le cas d'une 
+%	implémentation d'un client virtuel, la mise à jour qui est distribuée par le 
+%serveur 
+%	sera automatique et la même sur tous les clients ce qui facilite la 
+%maintenance 
+%	car c'est le distributeur qui est responsable de la mise à jour et non le client.
+%	\item Mobilité et accès au réseau. La mise en place d'un réseau P2P permet 
+%de 
+%	découpler l'accès à l'information et aux ressources du système. De ce fait, 
+%	les clients peuvent travailler directement entre eux sans supervision après 
+%mise 
+%	en relation et partager leurs ressources avec les autres clients qui en ont 
+%	besoin. Le réseau peut évoluer sans que cela ait un fort impact sur la 
+%	collaboration. Les clients peuvent être plus mobiles du fait de la grande 
+%	disponibilité offerte par cette architecture à moindre coût.
+%	\item \gls{NATT} et pare feu. Les applications traditionnelles de P2P comme 
+%	BitTorrent ne permettent pas à deux pairs de communiquer directement 
+%	lorsqu'ils sont derrière un \gls{NAT}. Grâce à l'utilisation du protocole \gls{ICE} 
+%	les appareils peuvent atteindre plus de pairs, augmentant la vitesse d'échange.
+%\end{itemize}
+%
+%Cette liste est un point de départ pour créer un service de virtualisation de 
+%clients 
+%pour le partage de données (3D) avec WebRTC. 
+%La mise à disposition volontaire de ressources (calcul, mémoire) en partage sur 
+%le 
+%réseau permet d'une part la coopération entre personnes afin de résoudre des 
+%problèmes nécessitant un haut degré de computation et d'autre part l'utilisation 
+%de 
+%ressources qui ne seraient pas ou sous utilisées.
+%
+%
+%
+%
+%En 2001, le standard \gls{DDS} est un standard machine-à-machine massif, en 
+%temps-réel, hautement performant avec un système d'échange de données 
+%interopérables. \gls{DDS} s'adresse principalement à des problématiques 
+%d'échanges financiers, de contrôle aérien, et de réseau électrique intelligent 
+%(\textit{smart grid}). Il a fortement été promu pour mettre en place des 
+%applications 
+%liées à l'internet des objets. Les spécifications proposent deux niveaux 
+%d'interfaces. Le premier se concentre sur la mise à disposition d'un système 
+%\gls{PubSub} bas niveau centré données pour permettre la livraison efficace de 
+%la 
+%bonne information au bon destinataire. Le second, niveau optionnel, 
+%est une couche de reconstruction locale de la donnée permettant une integration 
+%plus simple de \gls{DDS} au sein d'une application. \gls{DDS} est donc un 
+%intergiciel réseau basé sur une architecture \gls{PubSub} qui gère la livraison 
+%de messages sans nécessiter l'intervention d'un utilisateur. Il détermine qui doit 
+%recevoir les messages, où sont situés les destinataires et ce qu'il se passe si 
+%un 
+%message n'est pas délivré. En cela, \gls{DDS} permet une gestion plus fine de la 
+%qualité de service notamment concernant les paramètres de découverte des 
+%pairs.
+
+
+
 L'assomption est faite que tous les clients utilisent des navigateurs qui 
 implémentent et supportent le protocole WebSocket et l'\gls{API} 
 RTCDataChannel. 
