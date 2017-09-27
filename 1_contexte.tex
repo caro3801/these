@@ -95,7 +95,7 @@ Dans le cadre de cette thèse, en se référant à cette première classificatio
 aspects centrés sur les activités sont mis en avant. En effet, la collaboration 
 portant sur la modélisation 3D attend un résultat porté sur l'activité de conception. 
 Celle-ci nécessite l'implication de personnes avec différentes compétences / 
-connaissances qui doivent s'entraider pour parvenir à la mise en commun des 
+connaissances qui doivent s'entraider pour mettre en commun des 
 objets 3D et réaliser leur objectif. \info{add figure}
 
 Une seconde classification proposée par Callahan et al. 
@@ -151,8 +151,7 @@ Le croisement de ces deux dimensions, spatiale et temporelle, implique une
 multiplication des points de vue et donc des données à traiter sur le problème lors 
 de la collaboration.
 
- 
-% \subsubsection{Les systèmes collaboratifs}
+
 \subsection{Les environnements virtuels collaboratifs 3D}
 
 Un \gls{EVC3D} est un environnement virtuel 3D où plusieurs utilisateurs locaux 
@@ -198,7 +197,7 @@ visites collaboratives (musées, héritage culturel, les revues de projets
 architecturaux / urbains, ou encore les jeux collaboratifs (courses, simulateur de 
 jeux collectifs). 
 Les \gls{EVC3D} permettent, non seulement aux utilisateurs de communiquer de 
-manière distante, mais également d'interagir ensemble en partageant des 
+manière distante, mais également de partager ensemble des 
 interactions dans le monde virtuel. 
 Ces interactions peuvent s'appliquer à différents objets, différentes parties du 
 même objet, ou encore sur la même partie (en même temps) d'un objet virtuel 
@@ -208,7 +207,83 @@ réseaux) et d'IHM, doivent être résolus pour concevoir un
 \gls{EVC3D} fiable, ergonomique et en temps-réel. 
 
 
+ 
+\subsection{Les systèmes d'édition collaboratifs}
+En 1989, Ellis et Gibbs proposent la définition d'un \textit{groupware}, terme 
+généralement traduit par collecticiel : 
+\textcquote{Ellis1989}{\textit{computer-based systems that support groups of 
+		people engaged in a common task (or goal) and that provide an interface to a 
+		shared environment.}}. 
+Une application collaborative est une application qui accompagne un groupe de 
+participants dans la réalisation d'une tâche ou d'un objectif en fournissant une 
+interface vers un environnement partagé. 
+Cette définition, suffisamment large, englobe un ensemble d'applications 
+permettant le travail collaboratif très hétérogènes. 
 
+Vidot propose de distinguer les différentes catégories de collecticiels en fonction 
+de leur rapport au temps et à l'espace \cite{Vidot2002}. 
+L'aspect temporel se réfère à la synchronicité des interactions. 
+Une synchronicité élevée implique que les actions des utilisateurs sont visibles en 
+temps réel (action synchrone). 
+Au contraire, une synchronicité faible, implique qu'un temps certain s'écoule entre 
+l'action d'un utilisateur et sa visibilité chez les autres (action asynchrone). L'aspect 
+spatial s'intéresse à la répartition géographique des utilisateurs. Les 
+environnements sont dits répartis lorsque les utilisateurs sont physiquement 
+distants. Cette thèse concerne les applications collaboratives appartenant à la 
+catégorie 
+des applications synchrones réparties.
+
+Un modèle d'édition collaborative en temps réel permet à plusieurs utilisateurs de 
+visualiser et d'éditer de manière simultanée le même document (texte, image, 3D) 
+depuis plusieurs sites connectés par un réseau de communication. Un modèle 
+d'édition collaborative est composé d'un nombre connu ou inconnu de répliques. 
+Une réplique est une copie du document partagé modifiable à n'importe quel 
+instant. L'exécution d'une opération de modification se fait localement sur la 
+réplique qui la diffuse ensuite à l'ensemble des répliques. La notification de la 
+modification qui contient l'opération de modification est communiquée de manière 
+asynchrone. Les répliques distantes qui reçoivent cette notification exécutent 
+alors l'opération localement. L'une des difficultés principale de ces systèmes 
+réside dans la maintenance de la cohérence. Il existe différents facteurs pouvant 
+pousser un système à ne plus être cohérent :
+\begin{itemize}
+	\item \textbf{La divergence.} Les opérations peuvent arriver sur plusieurs sites 
+	dans différents ordres provoquant dissemblables résultats sur chaque réplique 
+	participant à l'édition collaborative, à moins que les opérations ne soient 
+	commutatives (ce qui est rarement le cas). Dans les cas d'application où la 
+	cohérence du résultat final est nécessaire, la divergence doit être évitée. Le 
+	problème de divergence peut être évité grâce à l'utilisation d'un protocole de 
+	sérialisation.
+	\item \textbf{La violation de la causalité.} Le fait que la latence dans une 
+	communication 
+	est intrinsèquement non-déterministe peut conduire le système à la violation de 
+	la causalité, i.e. les opérations peuvent arriver et être exécutées dans un ordre 
+	qui ne respecte pas l'ordre causal.
+	\item \textbf{La violation de l'intention.} Suite à la génération d'opérations 
+	concurrentes, 
+	l'effet actuel d'une opération au moment de son exécution peut être différent de 
+	l'intention de cette opération au moment de sa génération.
+\end{itemize}
+%TODO exemple dpour chacun des critères
+Ces trois facteurs d'incohérence sont indépendants. 
+Notamment en ce qui concerne la violation de l'intention et le problème de 
+divergence qui sont deux problèmes d'incohérence dont la nature est différente : 
+le premier facteur peut toujours être résolu en utilisant un protocole de sérialisation 
+alors que le dernier ne peut utiliser un protocole de sérialisation fixé si les 
+opérations sont exécutées sous leurs formes originelles \cite{Sun1997}. 
+Le modèle \gls{CCI} proposé par Sun et al. \cite{Sun1998} propose un modèle de 
+cohérence pour les systèmes d’édition collaborative qui s’adresse à ces facteurs 
+afin d'assurer « la préservation 
+de la convergence, de la causalité et la préservation de l’intention » 
+\cite{Sun1998}. Une majorité de travaux se sont intéressés à ces propriétés sur 
+des documents textuels \cite{Weiss2010}. 
+
+Cette thèse s’intéresse précisément à l’édition collaborative d’espace de travail en 
+3D. 
+Les opérations d’ajout et de suppression d’éléments 3D dans un espace partagé 
+ainsi que les modifications de haut niveau sur ces éléments 3D telles que la 
+translation,rotation et l’homothétie sont considérées ici.
+%Ces différents facteurs ont fait l'objet de 
+%nombreux travaux au sein de la communauté \gls{CSCW}. 
 
 %\subsubsection{Les systèmes d'édition collaboratifs}
 %

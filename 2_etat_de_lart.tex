@@ -4,7 +4,7 @@
 
 %\section{La visualisation et manipulation 3D collaborative sur web}
 
-\section{Modélisation 3D collaborative}
+\section{Modélisation 3D collaborative sur le web}
 
 \subsection{Collaboration et concurrence en 3D}
 Dans un contexte collaboratif, on considère qu'il n'est pas possible pour une 
@@ -165,6 +165,7 @@ utilisateurs simultanés et reposent sur un ou plusieurs serveurs pour supporter
 utilisateurs. 
 Ils expliquent ce schéma par la volonté du fournisseur de service d'assurer une 
 qualité de service et la sécurité du système. 
+
 Les systèmes de \gls{RV} collaboratifs font exception à ce schéma où l'utilisation 
 des réseaux \gls{P2P} est plus répandue pour supporter parfois plus d'un millier 
 d'utilisateurs simultanés. 
@@ -174,9 +175,10 @@ C'est dans ce contexte qu'en 2011, Mouton et al. \cite{Mouton2011} présentent
 une analyse approfondie de l'état des environnements collaboratifs 3D, ciblant 
 principalement la visualisation collaborative. 
 Ils montrent l'apparition de la tendance à déporter les environnements collaboratifs 
-sur le web, grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition du 
-standard HTML5 comprenant un support avancé de l'audio et de la vidéo, ainsi que 
-plusieurs \gls{API} de stockage côté client (LocalStorage, IndexedDB). 
+sur le web, grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition 
+du standard HTML5 comprenant un support avancé de l'audio et de la vidéo, ainsi 
+que plusieurs \gls{API} de stockage côté client (LocalStorage, IndexedDB). 
+
 Les applications web revêtent plusieurs avantages par rapport aux applications 
 natives sur mobiles ou aux logiciels autonomes. 
 Cela repose principalement sur le fait que les navigateurs sont présents partout 
@@ -192,46 +194,60 @@ autre qu'internet.
 
 %Computer-Aided Engineering (CAE) Collaborative /
 
-
 Parmi les solutions sans greffon (\textit{plugin less}), beaucoup sont développées 
-pour faire de la modélisation 3D  et utilisent l'architecture client-serveur et le 
-protocole 
-\gls{WebSocket} pour effectuer la synchronisation entre les différents clients 
-collaborateurs. Quelques raisons peuvent expliquer cette situation :
-\begin{enumerate}
-	\item développement : connaissance du standard \gls{WebSocket} par les 
-	développeurs (historique)
-	\item gestion des données : simplification de la synchronisation des données 
-	(centralisée)
-	\item suivi de l'utilisateur : dépendance de l'utilisateur vis-à-vis de la connexion 
-	au serveur et donc du service (engagement) 
-\end{enumerate}
+pour faire de la modélisation 3D et utilisent l'architecture client-serveur et le 
+protocole \gls{WebSocket} pour effectuer la synchronisation entre les différents 
+clients collaborateurs. Quelques raisons peuvent expliquer cette situation. 
+Historiquement, les développeurs sont plus familier avec les architectures 
+client-serveur et le standard \gls{WebSocket}. Techniquement, la gestion de 
+données est facilité dans un architecture centralisée notamment concernant la 
+synchronisation et la gestion de la concurrence dans un \gls{EVC}. 
+Commercialement, le suivi des données de l'utilisateur est plus simple avec un 
+serveur central qui garantit un engagement de l'utilisateur vis-à-vis du service 
+(voire une dépendance).
 
-Parmi les solutions commerciales comme OnShape, Clara.io et TinkerCAD, le 
-choix de plateformes web dans l'infonuagique pour la modélisation \gls{CAO} est 
-prépondérant, souvent assorti d'un gestionnaire de version et d'une plateforme de 
+
+%
+Le choix de plateformes web dans l'infonuagique pour la modélisation \gls{CAO} 
+est prépondérant pour les solutions commerciales comme OnShape, Clara.io et 
+TinkerCAD. Les fonctionnalités minimums de ces plateformes consistent en la 
+mise en place d'un environnement 3D visualiser un objet 3D accompagnées d'un 
+système d'annulation / refaire et d'une plateforme de 
 diffusion des créations.
 OnShape est un service de modélisation 3D très riche dont l'objectif est de 
 proposer une qualité équivalente des fonctionnalités de modeleurs autonomes 
 (\textit{standalone}) professionnels, le tout de manière collaborative. Leur approche 
 de la gestion de version développe le concept de micro version \cite{Baran2015}. 
-Cette approche est employée dans les travaux de Lu et al. \cite{Lu2016} pour gérer 
-l'évolution de productions participatives liées à des tâches de modélisation 3D 
-en usant de la créativité, de l'intelligence et du savoir-faire 
-d'un grand nombre de personnes en sous-traitance (\textit{crowdsourcing}). Le 
-modeleur 3D Clara.io \cite{Houston2013} est plus généraliste. Il s'oriente 
+Cette approche est employée dans les travaux de Lu et al. \cite{Lu2016} pour 
+gérer l'évolution de productions participatives liées à des tâches de modélisation 
+3D en usant de la créativité, de l'intelligence et du savoir-faire 
+d'un grand nombre de personnes en sous-traitance (\textit{crowdsourcing}). 
+Le modeleur 3D Clara.io \cite{Houston2013} est plus généraliste. Il s'oriente 
 davantage vers des fonctionnalités avancées de rendu 3D sur le \textit{cloud} en 
 utilisant du lancer de rayons. 
 Les fonctionnalités d'historisation et de collaboration proposées 
 dans Clara.io restent très basiques (seulement annuler~/~refaire). TinkerCAD 
 est aussi une plateforme de publication d'objets 3D pour faciliter l'accès à la 
-conception d'objets 3D. TinkerCAD est une application destinée au grand 
+conception d'objets 3D. 
+TinkerCAD est une application destinée au grand 
 public pour la conception et l'impression 3D. De ce fait, les fonctionnalités sont 
 limitées à cause du métier, l'impression 3D et de la cible, grand public. La gestion 
 de version est donc plus légère, similaire à celle proposée par Clara.io. 
 OpenJSCAD, Verold Studio, Vectary sont d'autres 
 exemples de modeleurs 3D moins connus, avec des fonctionnalités proches de 
 TinkerCAD.
+%Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
+%données 3D \gls{CAO} (\gls{PLM}), qui possède un système de gestion de 
+%version 
+%performant et un système d'annotation et de visualisation collaboratives.
+Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
+sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
+modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
+Les objets sont alors manipulés comme des géométries de construction de 
+solides avec les opérations booléennes associées. Le Tableau \ref{table:encoding} 
+résume les différents types 
+d'encodages associés au types de modélisation~3D. 
+
 \begin{table}[h]
 	\centering
 	\caption{Encodage des données transmises}
@@ -249,20 +265,8 @@ TinkerCAD.
 		\bottomrule
 	\end{tabular}
 \end{table}
-\improve{tableau comparatif gestion historique ou versionning}
-\improve{tableau comparatif de GrabCAD, OnShape, clara.io}
-%
-Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
-données 3D \gls{CAO} (\gls{PLM}), qui possède un système de gestion de version 
-performant et un système d'annotation et de visualisation collaboratives.
-Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
-sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
-modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
-Les objets sont alors manipulés comme des géométries de construction de 
-solides avec les opérations booléennes associées. 
-Le Tableau \ref{table:encoding} résume les différents types 
-d'encodage associé au type de modélisation 3D. 
-
+%\improve{tableau comparatif gestion historique ou versionning}
+%\improve{tableau comparatif de GrabCAD, OnShape, clara.io}
 %\begin{table}[]
 %	\centering
 %	\caption{Comparaison de fonctionnalités entres modeleurs 3D basés web}
@@ -275,8 +279,6 @@ d'encodage associé au type de modélisation 3D.
 %		&          &         &         \\ \bottomrule
 %	\end{tabular}
 %\end{table}
-
-
 \subsection{Web 3D : deux approches}
 La plateforme web possède certains avantages par rapport à des clients lourds. 
 En effet, le développement de l'infonuagique a permis le développement de 
@@ -770,7 +772,7 @@ clients derrière un \gls{NAT}. Les pairs peuvent négocier le type point d'entr
 %déchiffré.
 
 \subsection{Quel protocole dans quel EVC3D ?}
-\improve{reformuler paragraphe}
+%\improve{reformuler paragraphe}
 Un des aspects prépondérant dans les \gls{EVC3D} concerne la communication et 
 la transmission des données lors de la collaboration. Que ce soit dans dans un 
 \gls{EV}, un jeu multi-joueur ou un jeu sérieux (\textit{serious game}), les 
@@ -852,13 +854,15 @@ tous les participants.
 %	\subsection{Les approches pour les données 3D}
 %	\subsection{Conclusion}
 
-
 \section{Les systèmes distribués orientés évènements pour la collaboration}
 
 	\subsection{Introduction}
 % old evenements et collaboration
 La plupart des systèmes basés évènements sont très populaires lorsqu'il s'agit de 
-collaboration. On retrouve par exemple la spécification d'évènements composites 
+collaboration\cite{Helmer2011}. Les évènements peuvent être utilisé dans 
+\gls{CSCW}
+On retrouve par exemple la spécification 
+d'évènements composites 
 pour le support de la collaboration dans la conception logicielle \cite{Yuan2002} 
 ou encore la définition de patrons de conception dédiés à la collaboration dans les 
 architectures basées évènement \cite{Verginadis2009}. Dans ce dernier domaine 
@@ -1145,7 +1149,6 @@ métier\dots). La Figure \ref{fig:dddcqrs} montre que ces quatre couches s'accor
 bien avec l'architecture \gls{CQRS} qui sépare le flux d'écriture et de lecture dans 
 le logiciel.
 
-
 Introduit par Greg Young en 2009 \cite{Young2009}, \gls{CQRS} est un patron de 
 conception qui repose sur le principe de séparation des composants de traitement 
 métier de l'information (écriture) et de la restitution de l'information (lecture). Le 
@@ -1154,7 +1157,7 @@ comme la (\textit{scalability}) en faisant apparaître de nouvelles forces : la 
 de la concurrence dans la collaboration sur des règles métier propre à la 
 modélisation 3D dans des cadres d'application spécifiques. En effet, selon le type 
 d'application, un ensemble de règles régit les droits concernant les types de 
-modifications acceptables et par qui est ce possible.
+modifications acceptables et qui est autorisé à le faire.
 
 \begin{figure}[ht]
 	\noindent
@@ -1188,15 +1191,15 @@ commandes sont immuables car leur usage nécessite un envoi direct au domaine
 pour être traitées. Quant aux évènements, ils sont immuables car ils représentent 
 ce qui s'est produit dans le passé (qu'on ne peut donc pas changer). 
 
+\subsection{Event Sourcing}
+%\subsection{Event Sourcing : certifier la fiabilité et traçabilité des données}
+\label{sec:es}
+
 Le Reactive Manifesto, apparu en 2014, est un document qui résume les 
 propriétés clés liées aux systèmes distribués et encourage notamment le 
 développement de systèmes \og plus flexibles, à couplage faible et 
 extensibles\fg{}\cite{Boner2014TheManifesto} comme le \gls{CQRS} et l'\gls{ES}.
- 
 
-\subsection{Event Sourcing}
-%\subsection{Event Sourcing : certifier la fiabilité et traçabilité des données}
-\label{sec:es}
 L'\glsreset{ES}\gls{ES} est une approche complémentaire au \gls{CQRS} pour 
 gérer la 
 concurrence des données et capturer l'intention de l'utilisateur. Ce patron de 
@@ -1247,8 +1250,8 @@ comme des actions inverses.
 
 \textbf{Udi Dahan} Udi Dahan est également un auteur de billets de blog 
 prolifique sur les systèmes \gls{ES}. Dans sa définition de l'\gls{ES}, Dahan 
-insiste sur le fait que ``l'état du modèle du domain est persisté comme un 
-\textit{flux} d'évènements plutôt qu'un simple instantané''.
+insiste sur le fait que \og l'état du modèle du domain est persisté comme un 
+\textit{flux} d'évènements plutôt qu'un simple instantané\fg{}.
 
 
 %
