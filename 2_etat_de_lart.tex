@@ -549,7 +549,7 @@ protocole de base sur lequel d'autres protocoles viennent se greffer car il rest
 léger. Ces autres protocoles peuvent s'assurer de l'ordonnancement et / ou de la 
 fiabilité à leur manière (re-ordonnancement, retransmission\dots). 
 
-\subsubsection{STCP}
+\subsubsection{SCTP}
 Le \gls{SCTP} est le plus jeune des trois protocoles présentés. Ce protocole 
 empreinte des fonctionnalités à \gls{TCP} mais utilise une approche orientée 
 message comme \gls{UDP}. Comme \gls{TCP}, la connexion doit être négocier 
@@ -596,7 +596,7 @@ Windows\cite{Hogg}.
 		(IPv4) / 
 		Oui (IPv6) \\ 
 		\hline 
-		\textbf{STCP} & Configurable & Configurable &  Oui \\ 
+		\textbf{SCTP} & Configurable & Configurable &  Oui \\ 
 		\hline
 	\end{tabular} 
 \end{table}
@@ -692,20 +692,22 @@ priorité. L'\gls{API} est aussi capable de gérer la fiabilité de la livraison
 paquets et sécurise nativement les données avec le protocole 
 \gls{DTLS}. 
 Le contrôle de la congestion des flux et l'ordonnancement éventuel est 
-effectué par les protocoles de sous couche (\gls{STCP}, \gls{RRTCC}). 
+effectué par les protocoles \gls{SCTP} et \gls{RRTCC}. 
 
 %TODO
 %\cite{Eskola}\cite{Singh2013b}
 
 Depuis 2011, les contributeurs du standard WebRTC font beaucoup 
 d'efforts pour élargir et maintenir la compatibilité et interopérabilité entre 
-tous les navigateurs \info{ref tableau interop}.
+tous les navigateurs\info{ref tableau interop}.
 %TODO \info{parler de edge}\improve{dans CE sens}\info{parler de 
 %ORTC}. 
-Certains navigateurs (comme Chrome) imposent une limite de taille pour 
-l'envoi de messages contenant de la donnée brute. Enfin, la sécurité des 
-communications est encore vulnérable malgré le chiffrement des données 
-par défaut (\gls{DTLS}).
+Cependant, certains navigateurs (comme Chrome) imposent une limite de taille 
+pour l'envoi de messages contenant de la donnée brute ce qui contrevient au 
+principe énoncé par le standard.
+%Enfin, la sécurité des 
+%communications est encore vulnérable malgré le chiffrement des données 
+%par défaut (\gls{DTLS}).
 
 \subsubsection{Mécanisme de signalisation et problématiques réseaux}
 Le mécanisme de signalisation (\textit{signaling mecanism} en anglais) 
@@ -752,11 +754,16 @@ faisant semblant d'utiliser des adresses externes, uniques et routables.
 Pour permettre à un client situé derrière un routeur \gls{NAT} de connaître son 
 adresse IP publique et le type de serveur \gls{NAT} l'utilisation d'un serveur 
 \gls{STUN} est requise. 
+L'utilisation d'une \gls{NAT} dynamique impose des restrictionq sur l'adresse de  
+destination. Dans ce cas, le \gls{STUN} est inutile, on utilise un serveur 
+\gls{TURN} qui est considéré comme une extension du \gls{STUN} et fait office de 
+proxy. 
 Une fois le client parvenu à récupérer une adresse IP, il peut participer à 
 l'initialisation d'une connexion WebRTC (signalisation). L'utilisation de protocoles 
 tels que \gls{ICE} avec son \gls{ICEF} permet de faciliter la mise en relation des 
-clients derrière un \gls{NAT}. Les pairs peuvent négocier le type point d'entrée 
-(public, privé) souhaité.
+clients derrière un \gls{NAT}. \gls{ICEF} choisi le chemin le plus cours entre les 
+deux pairs et va utiliser le protocole adapté pour établir la connexion (\gls{STUN} 
+d'abord puis en cas d'échec, \gls{TURN}).
 
 
 %Du point de vue sécurité des communications, le standard requiert 
@@ -918,8 +925,8 @@ communication \textit{many-to-many}
 entre les \textit{publishers} et les \textit{subscribers}.  De cette manière, on permet 
 un meilleur passage à l'échelle d'une application avec une topologie du réseau plus 
 flexible. 
-Hermes \cite{Pietzuch2002} est un intergiciel (\textit{middleware}) distribué basé 
-évènements. 
+
+
 Pour répondre à des besoins de mise à l'échelle, d'interopérabilité, de fiabilité, 
 d'expressivité et d'utilisabilité, il s'appui sur un modèle \gls{PubSub} basé types et 
 attributs. 
@@ -927,15 +934,25 @@ En spécifiant d'abord le type et ensuite en filtrant sur les attributs des
 évènements, ce modèle rend le routage des données intuitif pour le 
 développement d'application distribuées à grande échelle comme le commerce en 
 ligne (\textit{e-commerce}). 
-Dans le cadre de la gestion de groupe, Scribe \cite{Castro2002} propose un 
-système \gls{PubSub} pour gérer des groupes de souscripteurs et une architecture 
-de communication \textit{multicast} nécessaire à grande échelle pour envoyer les 
-évènements à tous les souscripteurs. 
+Scribe \cite{Castro2002} et Hermes \cite{Pietzuch2002} sont des exemples de 
+systèmes \gls{PubSub} basés sur les DHTs. 
+Le premier se concentre sur le sujet (topic-based) tandis que le second 
+supporte la communication orienté sujet et contenu (content-based) en utilisant un 
+filtrage par agrégat. Les deux utilisent un n\oe ud \textit{rendezvous} pour chaque 
+sujet ou type d'évènement dans la couche réseau et construise et maintient la 
+distribution à partir de ce n\oe ud \textit{rendezvous}. TERA \cite{Baldoni2007} 
+propose une dissémination sur deux couches orientée sujet. Le but est d'effectuer 
+une distribution uniforme en fonction des intérêts des n\oe uds. La dissémination 
+se déroule en deux phases. Pendant la première phase, un \textit{random walk} 
+est utilisé sur la couche basse qui connecte les n\oe uds dans le but de localiser 
+le n\oe ud qui a souscrit au sujet. La seconde phase commence lorsqu'un 
+\textit{subscriber} est trouvé pour le connecter au \textit{cluster} correspondant au 
+sujet sur la couche haute. C'est là que l'évènement est disséminé.
 
-En juin 2017, Leonardo Quernozy propose une rétrospective des systèmes 
+En juin 2017, Leonardo Quernozy présente une rétrospective des systèmes 
 \gls{PubSub} en \gls{P2P} massifs lors de la conférence DEBS'2017 à 
 Barcelone. 
-Les premières traces d'une telles architecture remontent à 1987 avec 
+Les premières traces d'une telle architecture remontent à 1987 avec 
 la publication de Birman et Joseph \cite{Birman1987} lorsqu'ils évoquent \og 
 the ''News'' service in the ISIS system\fg{}:
 
