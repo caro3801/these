@@ -6,6 +6,7 @@
  \usepackage{pgfplotstable}
    \pgfplotstableset{col sep=comma}
 
+\usetikzlibrary{arrows,arrows.meta,chains,calc,trees,positioning}
 \definecolor{lavander}{cmyk}{0,0.48,0,0}
 \definecolor{violet}{cmyk}{0.79,0.88,0,0}
 \definecolor{burntorange}{cmyk}{0,0.52,1,0}
@@ -40,18 +41,18 @@ minimum width=2.5cm, minimum height=0.8cm]
 
 
 
-\definecolor{bleue}{rgb}{0.32,0.28,82}
+\definecolor{bleue}{RGB}{66,200,244}
 \definecolor{rouge}{rgb}{0.96,0.23,0.37}
-\definecolor{vert}{rgb}{0.28,0.56,0.12}
-\usetikzlibrary{arrows,arrows.meta,chains,calc,trees}
+\definecolor{vert}{RGB}{78,244,66}
 \tikzset{%
 	>={Latex[width=2mm,length=2mm]},
 	% Specifications for style of nodes:
-	base/.style = {rectangle, rounded corners, draw=black,  text centered},
+	base/.style = {rectangle, rounded corners, draw=black,  text centered,text 
+	opacity=1},
 	rejected/.style = { text=rouge},
 	end/.style = {base, fill=vert!20},
 	process/.style = {base, minimum width=5.5cm},
 	event/.style = {base,minimum height=1.7cm},
-	eventn/.style = {base,minimum height=1.7cm,fill=vert!70},
-	eventc/.style = {base,minimum height=1.7cm, fill=rouge!70}
+	eventn/.style = {base,minimum height=1.7cm,fill=vert!20},
+	eventc/.style = {base,minimum height=1.7cm, fill=rouge!20}
 }
