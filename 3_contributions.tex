@@ -2,22 +2,19 @@
 \chapter{Contributions scientifiques}
 \chaptertable
 \section{Introduction}
-Nous avons vu que les \gls{EVC3D} doivent considérer beaucoup de critères pour 
+Les \gls{EVC3D} doivent considérer beaucoup de critères pour 
 proposer un système réactif, robuste et permettant le passage à l'échelle en 
 intégrant les contraintes liées à la gestion de données 3D. La dimension 
 collaborative ajoute les problématiques de gestion de données concurrentes.
-
 En s'intéressant d'abord à au rapport des données à la 3D dans le contexte de 
 l'assemblage d'objets 3D dans une scène partagée cela permet de 
 mieux comprendre les fonctionnalités spécifiques à la 3D (transformations), 
-l'historisation des données et leur visualisation. Dans ce contexte, les données 
+l'historisation et la visualisation des données. De plus, les données 
 doivent suivre un flux qui permet de vérifier la validité des données générées.
-
-Les ressources nécessaires à la 
-collaboration demandent une haute disponibilité et une forte réactivité. Ces 
-besoins impliquent de mettre en place une architecture de communication 
-répondant aux contraintes fonctionnelles (détection de conflit) et technologiques 
-(web).
+Les ressources nécessaires à la collaboration demandent une haute disponibilité 
+et une forte réactivité qui implique la modélisation d'une architecture 
+de communication répondant aux contraintes fonctionnelles (détection de conflit) 
+et technologiques (web).
 
 Ce chapitre présente les contributions scientifiques de cette thèse.
 Tout d'abord, on présente le modèle orienté évènements pour la 
@@ -30,13 +27,21 @@ aux utilisateurs, on propose de déporter le patron \gls{CQRS} uniquement sur le
 client afin qu'il soit capable de gérer la partie métier seul. La valeur ajoutée par le 
 modèle orienté évènements ne permet pas l'échange entre les utilisateurs bien 
 qu'elle soit pensée pour intégrer les aspects métiers de cette dernière. 
-C'est pourquoi la seconde contribution s'intéresse à l'architecture de 
-communication dans un environnement web. L'architecture hybride proposée 
-repose sur une combinaison de l'architecture client-serveur et l'architecture P2P. 
+
+La seconde contribution s'intéresse à l'architecture de 
+communication dans un environnement web. L'architecture de communication doit 
+permettre au système d'être résilient, léger et transparent. 
+L'architecture hybride proposée repose sur une combinaison de l'architecture 
+client-serveur et l'architecture P2P. 
 Cela tient du fait que la centralisation de l'information est nécessaire dans un 
 contexte industriel et que les propriétés du P2P permettent une haute disponibilité 
 des ressources. Cette contribution est découpée en deux parties. La première 
-concerne 
+concerne la présentation d'une preuve de concept sur la base du modèle présenté 
+dans \cite{Desprat2015a} avec un architecture de communication simple 
+proposant une diffusion des mises à jour par différentiel d'état. La seconde partie 
+tire avantage de la mise en place du framework orienté évènements présenté dans 
+\cite{Desprat2016} et utilise la méthode de distribution des informations présenté 
+dans \cite{Desprat2017} pour améliorer la résilience du système. 
 
 %%%%%%% SECTION %%%%%%%
 %\section{Modèle évènementiel pour l'intégration du domaine 3D lors de la 

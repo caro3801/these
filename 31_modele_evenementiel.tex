@@ -7,10 +7,28 @@ EVC}
 %\subsection{Introduction}
 La méthodologie orientée évènements intègre plusieurs aspects souvent laissés 
 de côté dans la littérature concernant le développement les environnements 
-virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. Par 
-exemple, elle a l'avantage de proposer un couplage lâche. Dès lors, la réutilisation 
-des données produite lors de la collaboration peut facilement être réutiliser pour un 
-traitement secondaire comme la sensibilisation aux éléments de l'environnement. 
+virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. 
+Les évènements peuvent en effet être utilisés dans le cadre de \gls{CSCW} et 
+d'\gls{EVC}, qui ont évolués du simples collecticiels à de plus importantes 
+organisations virtuelles comme on peut le retrouver dans des environnements 
+scientifiques et d'ingénierie. L'idée de partager des ressources communes pour 
+travailler sur un projet commun nécessite des outils spécifiques qui implémentent 
+des modèles de collaborations adaptés aux fonctionnalités spécifiques des 
+systèmes distribués (forums, chats, tableaux blancs partagés \dots). Ces 
+collaborations sont routinières, les motifs de collaboration sont bien connus. Les 
+motifs consistent en des segments de collaborations récurrents qui peuvent être 
+capturés, encapsulés dans des composants distincts et réutilisés comme des 
+solutions pour d'autres problèmes liés à la collaboration. Par exemple, les services 
+de sensibilisation permettent de traiter les évènements et donner des informations 
+à propose du travail collaboratif. En utilisant les évènements suivis, les services 
+d'analyse fournissent des statistiques à propos des collaborations passées et 
+présentes.
+
+
+Un système orienté évènements a l'avantage d'être découplé. Dès 
+lors, la les données produites lors de la collaboration peuvent facilement être 
+réutilisées pour un traitement secondaire comme la sensibilisation aux éléments 
+de l'environnement. 
 Le découpage de la modélisation logicielle et l'abstraction qu'elle apporte est aussi 
 l'occasion de s'intéresser à la façon dont sont générées les données produites par 
 les utilisateurs et la façon dont elles sont affichées. 
@@ -52,8 +70,8 @@ devient alors un enjeu important. Facilitée par l'empreinte laissée par chaque
 évènement, elle n'en demeure pas moins complexe selon l'échelle d'évaluation. A 
 l'échelle d'un utilisateur, d'un groupe d'utilisateurs, ou de plusieurs groupes, les 
 acteurs restent des entités assez homogènes dans le cadre de la modélisation 3D 
-collaborative ce qui simplifie la tâche car on reste dans un cadre et un domaine 
-connu.
+collaborative ce qui simplifie la tâche car le contexte et le domaine sont 
+connus.
 
 
 
@@ -96,7 +114,7 @@ navigateurs web évolue rapidement (notamment les appareils mobiles comme les
 \textit{smartphones} et les tablettes). Les navigateurs suivent cette tendance en 
 puisant dans ces ressources pour effectuer des traitements similaires à ceux que 
 l'on trouve traditionnellement côté serveur et pour proposer des fonctionnalités 
-avancées telles que le stockage important de données sur le client (IndexedDB, 
+avancées telles que le stockage de données sur le client (IndexedDB, 
 storageAPI), pour l'affichage 3D (WebGL) et pour la communication en \gls{P2P} 
 (\gls{WebRTC}). En déportant ainsi la charge que pourrait subir une architecture 
 client-serveur côté client, les échangent réseaux sont limités car qui 
@@ -108,8 +126,7 @@ Chaque appareil participant à la collaboration doit être autonome et le plus
 indépendant possible en termes de ressources (données, réseaux, validation 
 experte). 
 
-
-\subsubsection{Contribution}
+\paragraph{Contribution}
 Pour répondre à cette problématique, nous proposons un modèle pour la 
 transmission des données 3D et collaboratives qui permet de  limiter  le nombre 
 de requêtes et la taille des données transmises sans perdre la traçabilité de 
@@ -117,12 +134,15 @@ celles-ci. L'idée est de profiter de la puissance du client pour créer une
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
 (travaille hors ligne) ou involontaire (coupure). On garantit ainsi à l'utilisateur 
 l'utilisation du système avec un historique performant où chaque connexion est 
-l'occasion de mettre le système à jour.\improve{en remttre une couche}
+l'occasion de mettre à jour le système.\improve{en remttre une couche}
 
 
 \subsection{Modèle général}
-La composition de l'architecture s'est effectuée avec en arrière pensée les lignes 
-directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
+%TODO
+%La composition de l'architecture s'est effectuée avec en arrière pensée les lignes 
+%directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
+%\todo{reprendre 
+%la partie virtualisation dans la partie P2P}
 Utiliser une architecture orientée évènements pour faire de la modélisation 3D peut 
 sembler non nécessaire. Cependant lorsqu'on s'intéresse aux apports que cela 
 peut générer pour tous les métiers engagés (utilisateurs, développeurs, analystes 
@@ -144,8 +164,100 @@ Notons que le contexte de l'application peut faire varier les frontières d'un
 domaine. Le modèle issu du domaine défini permet de mettre en valeur les 
 aspects métiers liés à l'application.
 
+\subsubsection{Spécification des évènements dans le framework}
+Le framework étant orienté évènements, cette section introduit la représentation et 
+le vocabulaire utilisé dans la description des évènements de 3DEvent. 3DEvent 
+reprend la représentation proposée par Tominski \cite{Doktor-ingenieur2006} 
+illustrée par la Figure \ref{fig:representation_event}, et adapte ses propriétés pour 
+la modélisation 3D collaborative (visualisation et manipulation). 
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{eps/event4.eps}
+	\caption{Illustration des notions de évènements du domaine, des types 
+		d'évènements, et des instances d'évènements.}
+	\label{fig:representation_event}
+\end{figure}
+
+Le domaine des évènements \textit{ED} (\textit{Event Domain}) correspond au 
+contexte borné dans 
+lequel les évènements se produisent. \todo{changer instance par agregat}
+Il contient les entités du type d'évènement 
+\textit{ET} (\textit{Event Type}) spécifié. Un \textit{ET} est utilisé pour exprimer un 
+intérêt concret envers les entités d'un \textit{ED}. Les évènements abstraits 
+\textit{aet} (\textit{abstract event type}) sont compatibles avec l'\textit{ED}. Les 
+instances d'évènements \textit{EI} (Event Instances) -- ou simplement 
+évènements -- sont composés du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
+\textit{EP} est l'acronyme pour les paramètres d'évènements (Event Parameter) 
+assignés à un \textit{EI}. La spécification des évènements nécessite de 
+s'intéresser à tous les types d'évènements qui sont utilisés lors de la manipulation 
+et la visualisation d'objets 3D dans un \gls{EVC}. La détection d'évènement est un 
+processus qui permet de récupérer les instances d'évènements d'un \textit{ET} en 
+particulier. Cela peut être utilise pour la visualisation de types particulier par 
+exemple. Dans 3DEvent, la spécification des évènements est calquée sur les 
+comportements observés lors des expérimentations des premiers travaux 
+\cite{Desprat2015a, Desprat2015b}. Le Tableau \ref{tab:extraitevent} ci-dessous, 
+présente les évènements de l'agrégat Maillage -- extrait du Tableau 
+\ref{tab:events} qui résume les 
+différents types d'évènements de bases construits à partir du framework et les 
+agrégats auxquels ils sont associés. 
+Ce tableau permet de donner un exemple qui reprend la description qui vient d'être 
+présentée. L'\textit{ED} correspond donc au \og système de modélisation 3D 
+collaborative\fg{}. 
+Dans ce contexte on retrouve l'agrégat (entité) \og Maillage\fg{}. Chaque agrégat 
+Maillage 
+réagit à un certain nombre de types d'évènements comme \textit{meshAdded}, 
+\textit{meshDropped} \dots Les évènements typés sont produits par l'agrégat en 
+prenant en compte les paramètres nécessaires à leur instanciation. Par exemple, 
+la production d'un évènement \textit{meshTranslated} prend en paramètre le 
+vecteur de translation (x,y,z) et la référence de l'identifiant de la scène à laquelle il 
+appartient.
+
+Plus généralement, le domaine est la représentation des objets 3D d'un point de 
+vue expert.Les objets du domaines représentent les données liées aux 
+manipulations 3D sous une forme abstraite (géométrie, position), indépendante 
+des besoins du rendu (lumière, matériau \dots). Le framework intègre un 
+générateur d'évènements pour faciliter l'implantation de nouveau types 
+d'évènements au plus proche des besoins des utilisateurs dans une application de 
+modélisation 3D collaborative (appuyant la sémantique des manipulations).
+%TODO parler des * dans le tableau comme un exemple
+\begin{table}[t]
+	\centering
+	\caption{Extrait des évènements de 3DEvent (cf Tab. \ref{tab:events}) pour 
+	l'agrégat maillage}
+	\label{tab:extraitevent}
+	\begin{tabular}{lll}
+		\toprule
+		\textbf{Évènement}& \textbf{Nommage} & \textbf{Description} \\ \midrule
+		\textbf{Agrégat Maillage}  &                      &             \\ \hline
+		 Maillage ajouté (*)&     meshAdded                 
+		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
+			partir d'une géométrie\\ de la 
+			bibliothèque \end{tabular}  \\
+		Maillage déposé (*) &     meshDropped               
+		&      \begin{tabular}[c]{@{}l@{}} Un maillage a été déposé dans 
+			\\l'env. 3D de la Scène à 
+			partir \\d'une géométrie de la bibliothèque \end{tabular} \\
+		Maillage supprimé & meshRemoved       &        \begin{tabular}[c]{@{}l@{}} 
+		Un maillage a été 
+			supprimé \\de la Scène \end{tabular}      \\
+		Maillage translaté &   meshTranslated  	 &    \begin{tabular}[c]{@{}l@{}} Un 
+		maillage a 
+			subit une translation \\dans la Scène \end{tabular}              \\
+		Maillage pivoté &      meshRotated                &    
+		\begin{tabular}[c]{@{}l@{}} Un maillage a 
+		subit une rotation \\dans la Scène \end{tabular}           \\
+		Maillage mis à l'échelle &  meshScaled           &     
+		\begin{tabular}[c]{@{}l@{}} Un maillage a 
+		subit une homothétie    \\dans la Scène \end{tabular}    \\ 
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 
+\subsubsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
+%TODO mettre l'image representant le cqrs +  celle de la validation des 
+%commandes
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
 d'une application sous la forme d'une séquence d'évènements. 
 Ces évènements sont conservés dans un journal d'évènements et peuvent être 
@@ -184,19 +296,18 @@ les applications :
 
 %\subsubsection{Collaboration évènementielle}
 
+\paragraph{Le journal d'évènements}
 Les évènements produits par un des composants présentée ci-dessus
 peuvent être consommés par d'autres de ces abstractions s'ils partagent un 
-journal d'évènements local ou distribué. 
-
-Un \textbf{journal d'évènements} peut fonctionner sur un seul site ou être répliqué 
+journal d'évènements local ou distribué. Un journal d'évènements peut 
+fonctionner sur un seul site ou être répliqué 
 sur plusieurs sites. 
 Le site est considéré comme une zone disponible qui accepte 
 l'écriture d'un journal d'évènements local même s'il est partitionné sur plusieurs 
 sites. Les journaux d'évènements locaux situés sur plusieurs sites peuvent être 
 connectés par le biais d'un journal d'évènements dit \og repliqué\fg{} qui a pour 
-responsabilité de préserver l'ordre causal des évènements.\improve{dessin des 
+responsabilité de préserver l'ordre causal des évènements.\todo{dessin des 
 journaux}
-
 Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}) ou encore être sur le 
 même nœud mais traités séparément selon les \improve{c'est quoi}zones 
@@ -205,13 +316,11 @@ Les Acteurs et les Processeurs écrivent cependant toujours sur leur journal
 d'évènements local. 
 Les composants peuvent soit collaborer sur un journal d'évènements local sur le 
 même site, ou bien au travers d'un journal répliqué sur différents sites.
-
 Il est important de différencier le journal d'évènements de la base de données 
 (côté serveur) ; la base de données peut ne contenir qu'une partie du journal. 
 Une base de données peut également être considérée comme un élément 
 complémentaire au journal d'évènements, cependant et bien que parfois 
 confondus, ils restent bien distincts conceptuellement.
-
 Le journal d'évènements commun est la base des échanges pour communiquer 
 par le biais d'évènements de collaboration. Ce type d'architecture se retrouve dans 
 différents cas d'utilisation :
@@ -284,7 +393,18 @@ consommateurs qui lisent les évènements du journal local vont toujours voir le
 effets avant leurs causes.
 
 
-
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
+	\caption[Flux de la collaboration dans le framework 3DEvent entre 3 
+	utilisateurs]{Exemple d'édition collaborative où User A est connecté à User  B, 
+	lui 
+	même connecté à User C. Le cycle montre les différentes étapes du 
+	déclenchement de la commande au rendu visuel en passant par la génération 
+	de l'évènement, la 
+	synchronisation du journal d'évènements et l'impact sur le rendu des autres 
+	utilisateurs pour une translation sur un cube.}
+\end{figure}
 
 \subsection{Mécanisme de gestion de version}
 3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
@@ -310,26 +430,65 @@ car il dépend entièrement la valeur initiale choisie pour les agrégats du
 
 \subsection{Cohérence Éventuelle en CQRS}
 
+
 La \gls{CE}, ou \textit{eventual consistency} en anglais, propose dans un système 
 distribué contenant plusieurs répliques d'avoir une coordination lâche entre ces 
 répliques. Cela apporte de nombreux avantages en termes de disponibilité, 
-tolérance aux fautes et sécu rité des données et évite l'intégration de protocoles 2 
+tolérance aux fautes et sécurité des données et évite l'intégration de protocoles 2 
 phase commit ou de protocoles Paxos (consensus) complexifiant les échanges. 
-La\gls{CE} introduit l'idée que toutes les répliques se réconcilient au bout d'un 
+La \gls{CE} introduit l'idée que toutes les répliques se réconcilient au bout d'un 
 moment (\textit{forward progression}) pour avoir le même état final. Si le caractère 
 vicié d'une information est détecté, le système doit le \og réparer\fg{} pour obtenir 
 le bon état. 
-
+\begin{figure} [ht]
+	\centering
+	\inputTikZ{0.6}{eps/tikz/cap.tex}
+	\caption{Théorème CAP et les algorithmes de compromis}
+\end{figure}
 L'ordonnancement des évènements durant les mises à jour reste identique lorsque
 les évènements sont rejoués par la suite car l'ordre est issu de l'\gls{ES} est 
 déterminée par l'ordonnancement des évènements stockés 
 localement. Au sein d'une réplique, tous les composants \gls{CQRS} respectent 
 cet ordonnancement. L’ordre de stockage des évènements répliqués sur des sites 
-distincts est cohérent à cause de l'ordre causal : les évènements liés 
-causalement ont le même ordre sur tous les sites alors que les évènements 
-concurrents peuvent avoir un ordre différent. Cette propriété est important pour 
-obtenir une cohérence causale (forte) dans une application qui respecte le 
-théorème \gls{CAP}.
+distincts est cohérent sont ordonnés de manière causale \cite{Lamport1978} : les 
+évènements liés causalement ont le même ordre sur tous les sites alors que les 
+évènements concurrents peuvent avoir un ordre différent. Cette propriété est 
+importante pour obtenir une cohérence causale (forte) dans une application qui 
+respecte le théorème \gls{CAP}.  \blockquote[]{	\textit{The largest single 
+benefit about 
+CQRS is when 
+		you start running into 
+		problems 
+		with the CAP theorem}}{
+	\cite{Young2010}
+}.
+Young justifie ensuite que le lien entre \gls{CAP} et \gls{CQRS} est plus ténu qu'il 
+n'y paraît. Même si \gls{CQRS} ne permet pas d'éviter le dilemme de \gls{CAP}, le 
+fait que \gls{CQRS} découpe le système en petites parties permet de les ajuster 
+séparément.
+
+Dans \gls{CQRS}, l'interaction avec plusieurs agents (utilisateurs, services) est 
+découplée et subit un traitement réparti 
+dont résulte la cohérence éventuelle de l'application. 
+Dans la conception d'interaction pour l'interface, la synchronicité peut varier en 
+fonction certains contextes. 
+Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interface.  
+Prenons l'interaction suivante : \texttt{soumission de formulaire -> envoi 
+asynchrone -> 
+message de confirmation}. Si l'utilisateur attends que la soumission soit une 
+requête qui peut probablement échouer l'asynchronisme se justifie. La probabilité 
+d'échec peut être réduite en pré-validant la commande. Si personne d'autre que 
+l'utilisateur travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
+l'asynchronicité rajoute une interaction inutile au flux dans le cas où peut de gens 
+travaille sur la même instance d'agrégat.
+Par exemple, il est intéressant de rendre l'exécution d'une 
+commande est synchrone et la mise à jour de la vue asynchrone. Les modèles de 
+cohérence sont des décisions liées au métier car ils ont un impact direct sur 
+l'expérience utilisateur. 
+
+
+
+
 
 %Linéaire (strong consistency)
 %one version replace another -- one parent and one children in the sequence
