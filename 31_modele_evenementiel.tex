@@ -201,6 +201,42 @@ présente les évènements de l'agrégat Maillage -- extrait du Tableau
 \ref{tab:events} qui résume les 
 différents types d'évènements de bases construits à partir du framework et les 
 agrégats auxquels ils sont associés. 
+
+%TODO parler des * dans le tableau comme un exemple
+\begin{table}[ht]
+	\centering
+	\caption{Évènements de pour 
+		l'agrégat Maillage (extrait de Tab. \ref{tab:events}) }
+	\label{tab:extraitevent}
+	\begin{tabular}{lll}
+		\toprule
+		\textbf{Évènement}& \textbf{Nommage} & \textbf{Description} \\ \midrule
+		%\textbf{Agrégat Maillage}  &                      &             \\ \hline
+		Maillage ajouté (*)&     meshAdded                 
+		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
+			partir d'une géométrie\\ de la 
+			bibliothèque \end{tabular}  \\
+		Maillage déposé (*) &     meshDropped               
+		&      \begin{tabular}[c]{@{}l@{}} Un maillage a été déposé dans 
+			\\l'env. 3D de la Scène à 
+			partir \\d'une géométrie de la bibliothèque \end{tabular} \\
+		Maillage supprimé & meshRemoved       &        \begin{tabular}[c]{@{}l@{}} 
+			Un maillage a été 
+			supprimé \\de la Scène \end{tabular}      \\
+		Maillage translaté &   meshTranslated  	 &    \begin{tabular}[c]{@{}l@{}} Un 
+			maillage a 
+			subit une translation \\dans la Scène \end{tabular}              \\
+		Maillage pivoté &      meshRotated                &    
+		\begin{tabular}[c]{@{}l@{}} Un maillage a 
+			subit une rotation \\dans la Scène \end{tabular}           \\
+		Maillage mis à l'échelle &  meshScaled           &     
+		\begin{tabular}[c]{@{}l@{}} Un maillage a 
+			subit une homothétie    \\dans la Scène \end{tabular}    \\ 
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
 Ce tableau permet de donner un exemple qui reprend la description qui vient d'être 
 présentée. L'\textit{ED} correspond donc au \og système de modélisation 3D 
 collaborative\fg{}. 
@@ -226,6 +262,8 @@ added to Scene event and parameters]
 	"author": "Foo"
 }
 \end{lstlisting}
+
+
 Plus généralement, le domaine est la représentation des objets 3D d'un point de 
 vue expert.Les objets du domaines représentent les données liées aux 
 manipulations 3D sous une forme abstraite (géométrie, position), indépendante 
@@ -233,39 +271,9 @@ des besoins du rendu (lumière, matériau \dots). Le framework intègre un
 générateur d'évènements pour faciliter l'implantation de nouveau types 
 d'évènements au plus proche des besoins des utilisateurs dans une application de 
 modélisation 3D collaborative (appuyant la sémantique des manipulations).
-%TODO parler des * dans le tableau comme un exemple
-\begin{table}[t]
-	\centering
-	\caption{Évènements de pour 
-		l'agrégat Maillage (extrait de Tab. \ref{tab:events}) }
-	\label{tab:extraitevent}
-	\begin{tabular}{lll}
-		\toprule
-		\textbf{Évènement}& \textbf{Nommage} & \textbf{Description} \\ \midrule
-		%\textbf{Agrégat Maillage}  &                      &             \\ \hline
-		 Maillage ajouté (*)&     meshAdded                 
-		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
-			partir d'une géométrie\\ de la 
-			bibliothèque \end{tabular}  \\
-		Maillage déposé (*) &     meshDropped               
-		&      \begin{tabular}[c]{@{}l@{}} Un maillage a été déposé dans 
-			\\l'env. 3D de la Scène à 
-			partir \\d'une géométrie de la bibliothèque \end{tabular} \\
-		Maillage supprimé & meshRemoved       &        \begin{tabular}[c]{@{}l@{}} 
-		Un maillage a été 
-			supprimé \\de la Scène \end{tabular}      \\
-		Maillage translaté &   meshTranslated  	 &    \begin{tabular}[c]{@{}l@{}} Un 
-		maillage a 
-			subit une translation \\dans la Scène \end{tabular}              \\
-		Maillage pivoté &      meshRotated                &    
-		\begin{tabular}[c]{@{}l@{}} Un maillage a 
-		subit une rotation \\dans la Scène \end{tabular}           \\
-		Maillage mis à l'échelle &  meshScaled           &     
-		\begin{tabular}[c]{@{}l@{}} Un maillage a 
-		subit une homothétie    \\dans la Scène \end{tabular}    \\ 
-		\bottomrule
-	\end{tabular}
-\end{table}
+
+
+
 
 
 \subsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
@@ -279,9 +287,30 @@ modélisation 3D collaborative (appuyant la sémantique des manipulations).
 		client dans 3DEvent : la gestion du cycle de vie des données avec 
 		\gls{CQRS} 
 		et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
-		en passant par la synchronisation réseau.}
+		en passant par la synchronisation réseau. Issu de \cite{Desprat2017}.}
 	\label{fig:cqrs-client}
 \end{figure}
+
+La Figure \ref{fig:cqrs-client} montre le déroulement du cycle des opérations du 
+modèle au sein de \gls{CQRS}, de l'action utilisateur à la visualisation de son 
+résultat. 
+Du côté de la partie écriture (partie supérieure -- \textit{write part}), lorsque 
+l'utilisateur déclenche une commande à partir de l'interface, la commande (et ses 
+paramètres) sont récupérés et traités par le domaine pour être validée selon les 
+règles métiers exprimées par ce dernier. Si la modification est validée, le domaine 
+produit ou modifiés l'agrégat concerné. Ces modifications sont converties sous 
+forme d'évènements. Ils sont ensuite transmis à l'Event Store où ils sont stockés 
+avant d'être transférés à l'Event Publisher. L'Event Publisher jour le rôle d'interface 
+entre la partie écriture et la partie lecture. Il est également responsable de la 
+publication des évènements sur le bus d'évènement Event Bus où sont 
+accrochées les différentes projections. Les projections sont nourries a partir des 
+évènements publiés auxquels elles sont abonnées. Enfin, une Vue (composant
+inclus dans l'\gls{IU}) récupère les DTO\todo{add acr Data Transfer Object } 
+contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
+se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
+visualisation 3D des modifications des collabotaeurs en temps réel) ou active -- 
+mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
+
 
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
 d'une application sous la forme d'une séquence d'évènements. 
@@ -422,6 +451,17 @@ effets avant leurs causes.
 
 
 
+\paragraph{Exemple d'interaction dans le framework}
+\todo{ref a la fig et traduction. cote implé?}
+The conflict detection component allows the developer to imple- ment its own 
+conflict resolution rules. It triggers a flag if versions between the received 
+aggregate and the current one are equal (see Figure 4). According to the business 
+logic rules defined, the event is rejected, accepted with or without modifications. 
+From this pro- cess, new events can be generated during the resolution.
+
+Figure 4 describes how the system executes a translation action triggered by a 
+user and how it’s broadcasted to his/her collaborators (scene, cube geometry, and 
+cube mesh should be created before). 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
@@ -434,28 +474,6 @@ effets avant leurs causes.
 	synchronisation du journal d'évènements et l'impact sur le rendu des autres 
 	utilisateurs pour une translation sur un cube.}\label{fig:cqrs-example}
 \end{figure}
-
-\subsection{Mécanisme de gestion de version}
-3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
-de gérer au mieux la cohérence des données. 
-Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
-génération d'un ou plusieurs évènements. Ces évènements sont considérés 
-comme \og soumis\fg{} (\textit{uncomitted}) mais pas encore <<~publiés~>> 
-(\textit{comitted}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
-évènements doit produire une nouvelle version sans être en conflit avec la 
-précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
-est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
-un conflit est levé~: 
-\begin{enumerate}[label=\alph*)]
-	\item \label{i:vi} La version $v_a$ correspond à la valeur d'initialisation
-	\item \label{i:vdiff} La version $v_a$ est différente de la version $v_c$
-\end{enumerate}
-Dans \ref{i:vi}, on s'assure qu'après une action la version initiale de l'agrégat ne 
-peut être la même. Cet item peut sembler évident mais il est important de le noter 
-car il dépend entièrement la valeur initiale choisie pour les agrégats du 
-\gls{framework} (on peut commencer à n'importe quelle valeur -- -1, 0\ldots).
-
-
 
 \subsection{Cohérence Éventuelle en CQRS}
 
@@ -473,6 +491,7 @@ le bon état.
 	\centering
 	\inputTikZ{0.6}{eps/tikz/cap.tex}
 	\caption{Théorème CAP et les algorithmes de compromis}
+	\label{fig:cap}
 \end{figure}
 L'ordonnancement des évènements durant les mises à jour reste identique lorsque
 les évènements sont rejoués par la suite car l'ordre est issu de l'\gls{ES} est 
@@ -483,7 +502,8 @@ distincts est cohérent sont ordonnés de manière causale \cite{Lamport1978} : 
 évènements liés causalement ont le même ordre sur tous les sites alors que les 
 évènements concurrents peuvent avoir un ordre différent. Cette propriété est 
 importante pour obtenir une cohérence causale (forte) dans une application qui 
-respecte le théorème \gls{CAP}.  \blockquote[]{	\textit{The largest single 
+respecte le théorème \gls{CAP} (Figure \ref{fig:cap}).  \blockquote[]{	\textit{The 
+largest single 
 benefit about 
 CQRS is when 
 		you start running into 
@@ -573,7 +593,7 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	temps-réel) sur des plateformes web à cause du coût et de la complexité que 
 	cela peut apporter dans des architectures traditionnelles. 3DEvent peut 
 	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
-	évènements et indiquer les différences entre deux états.
+	évènements et indiquer les différences entre deux états.\todo{acyclic graph}
 	
 	\item[Scenarii et \textit{path recording}] Pour des jeux sérieux, les graphistes 
 	3D ou des études d'ergonomie, cette fonctionnalité est particulièrement 
@@ -605,18 +625,19 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	l'application. Par exemple, si un évènement est anormalement représenté dans 
 	le journal des évènements, on va pouvoir lever une alerte facilement.
 \end{description}
-\begin{figure}[htb]
-	\centering
-	\includegraphics[width=0.3\columnwidth]{gitgraph}
-	\caption{Exemple d'arbre de commits Git}
-	\label{fig:git}
-\end{figure}
+%\begin{figure}[htb]
+%	\centering
+%	\includegraphics[width=0.3\columnwidth]{gitgraph}
+%	\caption{Exemple d'arbre de commits Git}
+%	\label{fig:git}
+%\end{figure}
 \subsection{Bilan}
 
 Le modèle orienté évènement pour la modélisation 3D collaborative présenté dans 
-cette section intègre les besoins métiers par différents aspects. D'une part 
-le suivi des directives liées au \gls{DDD} permet de mieux cerner les règles 
+cette section intègre les besoins métiers par différents aspects. Le suivi des 
+directives liées au \gls{DDD} permet de mieux cerner les règles 
 métiers pour les intégrer dans \gls{CQRS}. 
+
 La description de la typologie des 
 évènements manipulés insiste sur le compartimentage des objets métiers. La 
 modélisation 3D collaborative est passée au crible pour en dégager les quatre 
@@ -628,14 +649,18 @@ contenu des sessions collaboratives\todo{ref section :développé dans implantat
 du framework}.
 Les composants du patron \gls{CQRS} favorisent le découplage de l'application 
 pour obtenir une gestion de la cohérence plus fine. 
+
 La partie \gls{ES} s'intéresse à la sauvegarde des évènements dans un journal 
 d'évènement, et notamment dans le cas des applications distribuées en proposant 
 un mécanisme de synchronisation pour détecter les conflits. La fonction principale 
 de cette partie est de permettre de recréer un état de l'application cohérent en 
 intégrer implicitement une gestion de version des évènements.
+
 Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 3D, il 
 peut être facilement adapté pour différents types d'applications et étendu à 
-d'autres utilisations. Pour mettre en avant l'expertise de chacun et profiter de 
+d'autres utilisations. 
+
+Pour mettre en avant l'expertise de chacun et profiter de 
 toutes les ressources apportées par un utilisateur, une communication efficace de 
 ces évènements pour la collaboration doit désormais être établie entre les 
 collaborateurs.

@@ -239,6 +239,30 @@ known as “offline first”) \cite{Gadea2016}}
 	Dans le cas où un utilisateur est seul connecté, la base de données est la 
 	seule source disponible pour la mise à jour du client. 
 \end{enumerate}
+
+
+\subsection{Mécanisme de gestion de version}
+3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
+de gérer au mieux la cohérence des données. 
+Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
+génération d'un ou plusieurs évènements. Ces évènements sont considérés 
+comme \og soumis\fg{} (\textit{uncomitted}) mais pas encore <<~publiés~>> 
+(\textit{comitted}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
+évènements doit produire une nouvelle version sans être en conflit avec la 
+précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
+est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
+un conflit est levé~: 
+\begin{enumerate}[label=\alph*)]
+	\item \label{i:vi} La version $v_a$ correspond à la valeur d'initialisation
+	\item \label{i:vdiff} La version $v_a$ est différente de la version $v_c$
+\end{enumerate}
+Dans \ref{i:vi}, on s'assure qu'après une action la version initiale de l'agrégat ne 
+peut être la même. Cet item peut sembler évident mais il est important de le noter 
+car il dépend entièrement la valeur initiale choisie pour les agrégats du 
+\gls{framework} (on peut commencer à n'importe quelle valeur -- -1, 0\ldots).
+
+
+
 \subsection{Gestion de la cohérence}
 
 
