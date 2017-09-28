@@ -21,13 +21,13 @@ Les \gls{SEC} ont connu un fort développement avec l'intérêt croissant
 pour le \gls{P2P} dans les années 2000. 
 La base théorique des \glspl{SEC} s'appuie sur les propriétés de 
 convergence, préservation de la 
-()causalité et préservation de l'intention du modèle \acrshort{CCI} 
+causalité et préservation de l'intention du modèle \acrshort{CCI} 
 \cite{Sun1998}. 
 La plupart des travaux liés aux \gls{SEC} \gls{P2P} s'intéressent à 
 l'édition collaborative massive de documents textuels dont les propriétés 
 de commutativité sont plus faciles à gérer (insertion/suppression) en 
 comparaison à celles concernant la 3D (multiplication de matrices de 
-rotation). La génération de conflit en 3D peut vite devenir écrasante. Il est 
+rotation). La génération de conflits en 3D peut vite devenir incontrôlable. Il est 
 donc nécessaire de mettre en place des mécanismes de détection de 
 conflit et de maintient de cohérence au cours des sessions de 
 collaboration. 
@@ -54,13 +54,13 @@ navigateur.
 \paragraph{Constat}
 
 Les systèmes \gls{P2P} qui sont orientés évènements consistent en plusieurs n\oe uds 
-interconnectés qui ont des fonctions similaires et exectuents des tâches 
+interconnectés qui ont des fonctions similaires et exécutent des tâches 
 similaires. Les pairs partagent directement leurs ressources (contenu, CPU, 
 stockage, bande passante) sans nécessiter de serveur central. A la place, les 
 pairs coopèrent aux moyens d'évènements qui prennent la forme de messages 
 échangés entre pairs. Les systèmes \gls{P2P} sont capables de s'adapter aux 
 disfonctionnement et à la dynamicité des pairs tout en maintenant des 
-performances acceptables. Le systèmes \gls{P2P} sont généralement utilisés comme 
+performances acceptables. Les systèmes \gls{P2P} sont généralement utilisés comme 
 soutien aux services de l'application pour la communication et la collaboration, le 
 calcul distribué, la distribution de contenu et pour les services d'intergiciel comme 
 le routage et la localisation, l'anonymat et la confidentialité.
@@ -90,14 +90,14 @@ ordonnancement, sécurité).
 Une architecture de communication hybride en trois parties serveur, persistance, 
 pairs est utilisée dans 3DEvent \cite{Desprat2016}. Cela permet de concilier à la 
 fois les avantages d'une architecture client-serveur et ceux du \gls{P2P} en évitant 
-certains désavantages occasionnés dans ceux-ci (engorgement du serveur, pair 
+certains désavantages occasionnés dans ces derniers (engorgement du serveur, pair 
 seul sur le réseau\dots). Dans le contexte des \gls{EVC} \gls{3D}, le but 
 est d'obtenir une architecture de communication : 
 
 \begin{itemize}
 	\item entièrement basée web ; 
 	\item robuste à l'évolution du nombre de collaborateurs ; 
-	\item efficace en terme de d'accès et distribution de la donnée ; 
+	\item efficace en terme d'accès et distribution de la donnée ; 
 	\item et qui s'adapte à l'échelle selon les besoins de la collaboration.
 \end{itemize}
 
@@ -126,8 +126,7 @@ type de stockage adapté et disponible.
 Un pair est également au courant de son rôle. Le rôle d'un pair permet de 
 distinguer s'il est un super pair, un pair normal, un pair actif, ou un pair passif\dots 
 Le rôle induit les capacités et la configuration de chaque pair, i.e. un pair passif 
-est configuré uniquement pour relayer les données tandis qu'un pair actif sera 
-configurer pour traiter et relayer les données tandis qu'un pair passif ne fait que 
+est configuré uniquement pour relayer les données tandis qu'un pair passif ne fait que 
 stocker et relayer les données.
 
 \begin{figure}[ht]
@@ -150,15 +149,15 @@ serveur.
 La Figure \ref{fig:connexionpairs} représente la séquence d'actions nécessaire à 
 une instance 3DEvent ($idA$) pour rejoindre le réseau contenant déjà d'autres 
 instances 3DEvent. L'action \textit{join} est exécutée lorsqu'un utilisateur envoie 
-ses informations de connexion sur portail de connexion (à partir d'une instance 
+ses informations de connexion sur un portail de connexion (à partir d'une instance 
 web) ou lorsqu'une instance serveur est lancée. Cette action ajoute le nouveau 
-pair à la liste des pairs présents sur le réseau, gérée par le gestionnaire 
+pair à la liste des pairs présents sur le réseau. La liste est gérée par le gestionnaire 
 d'instance, et retourne la liste des pairs avec lesquels le pair doit se connecter. 
-Pour chaque pair $idB$ de la liste retournée $ids$, $idA$ utilisé le mécanisme de 
+Pour chaque pair $idB$ de la liste retournée $ids$, $idA$ utilise le mécanisme de 
 signalisation (offre/demande). Le mécanisme est déclenché par l'instanciation d'un 
 \textit{network bridge}\info{definir} dans l'\textit{event store} \info{definir} de $idA$ 
 puis celui de $idB$. Afin de resynchroniser les deux pairs (après cette série 
-d'échanges asynchrones), $idA$ et $idB$ s'échanges des métadonnées sur la 
+d'échanges asynchrones), $idA$ et $idB$ s'échangent des métadonnées sur la 
 situation respective de leurs \textit{ESM} \info{definir} afin de se synchroniser 
 \info{(see refernece sync mechanism}.
 
@@ -188,15 +187,14 @@ reçoit un évènement de l'instance courante\info{utilisation du terme
 référencé par l'évènement. Alors, la cohérence de la version est vérifiée en 
 comparant la version attendue (exposée dans les métadonnées de l'évènement) 
 et la version actuelle de l'agrégat. Si les deux numéros de versions sont égaux, 
-l'évènement est ajouté à la fin tableau du flux pour être stocké, sinon une 
+l'évènement est ajouté à la fin du tableau du flux pour être stocké, sinon une 
 exception est levée. La gestion des exceptions est expliquée dans \info{détails 
 	exception}. Une fois le stockage effectué dans l'ESM, l'évènement est publié.
 
 
 
 \subsection{Persistance à long terme}\label{sec:persistance-a-long-terme}
-Dans un contexte de collaboration sur le long terme pour des entreprises où le 
-besoin d'information accessible sur le long terme est nécessaire. La persistance à 
+Dans un contexte industriel de collaboration, l'information doit être disponible sur le long terme, facilement accessible par l'entreprise. La persistance à 
 long-terme stocke le journal d'évènement qui est la 
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
@@ -223,7 +221,7 @@ known as “offline first”) \cite{Gadea2016}}
 		\item travail "\textit{serverless}" (en collaboration avec d'autres pairs sans le 
 		serveur) : dans le cas où le serveur est absent, les clients peuvent continuer 
 		de créer en collaborant. Ces données n'étant stockées que sur le client, il est 
-		de les transmettre à la base de données dès qu'une connexion est possible. 
+		nécessaire de les transmettre à la base de données dès qu'une connexion est possible. 
 		Cela peut être fait en une fois ou de manière partagée\improve{ça veut dire 
 			quoi?};
 		
@@ -246,8 +244,8 @@ known as “offline first”) \cite{Gadea2016}}
 de gérer au mieux la cohérence des données. 
 Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
 génération d'un ou plusieurs évènements. Ces évènements sont considérés 
-comme \og soumis\fg{} (\textit{uncomitted}) mais pas encore <<~publiés~>> 
-(\textit{comitted}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
+comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
+(\textit{committed}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
 évènements doit produire une nouvelle version sans être en conflit avec la 
 précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
 est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
@@ -258,7 +256,7 @@ un conflit est levé~:
 \end{enumerate}
 Dans \ref{i:vi}, on s'assure qu'après une action la version initiale de l'agrégat ne 
 peut être la même. Cet item peut sembler évident mais il est important de le noter 
-car il dépend entièrement la valeur initiale choisie pour les agrégats du 
+car il dépend entièrement de la valeur initiale choisie pour les agrégats du 
 \gls{framework} (on peut commencer à n'importe quelle valeur -- -1, 0\ldots).
 
 

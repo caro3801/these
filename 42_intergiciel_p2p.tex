@@ -141,7 +141,7 @@ d'autres clients qui satisfont la règle de connectivité. Cette règle de conne
 minimum permet d'ajuster la densité du maillage (connectivité élevée: maillage 
 partiel dense voire complet ; connectivité faible: maillage partiel éparse) et 
 d'obtenir une topologie maillée adaptée aux besoins de l'application en termes de 
-synchronisation (temps-réel ou pas) ou aux capacités des appareils. Il faut noter 
+synchronisation (temps-réel ou non) ou aux capacités des appareils. Il faut noter 
 cependant que plus la connectivité est faible, plus l'information a besoin de « 
 rebondir » pour atteindre tous les pairs et par conséquent le temps de 
 transmission est augmenté (exemple d'une distribution en ligne). 
@@ -178,13 +178,13 @@ du serveur.
 En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
 d'un format de données permettant de faire communiquer des acteurs hétérogènes 
 du système. Le format \gls{JSON}, dérivé de la notation des objets du langage 
-JavaScript, il est lisible et interopérable. 
+JavaScript, est lisible et interopérable. Le Listing \ref{jsonexemple} montre un exemple d'évènement en format JSON.
 %Son pendant binaire est le format \gls{BSON}.
-Le format de fichier \gls{glTF} se base sur la représentation \gls{JSON} afin de 
-décrire une scène 3D.
+%Le format de fichier \gls{glTF} se base sur la représentation \gls{JSON} afin de 
+%décrire une scène 3D.
 Ce type de données est assez abstrait et suffisamment générique pour 
 représenter n'importe quelle donnée. Par exemple le format de fichier 
-\gls{glTF}\info{ref gltf section}se base sur la représentation \gls{JSON} afin de 
+\gls{glTF}\info{ref gltf section} se base sur la représentation \gls{JSON} afin de 
 décrire une scène 3D.
 Le format \gls{JSON} est aussi utilisé pour la sérialisation et la désérialisation des 
 objets transmis par RTCDataChannel qui prend n'importe quel format de données.
@@ -194,6 +194,20 @@ différents (chaînes de caractères, types binaires : Blob, ArrayBuffer\dots). 
 un environnement multi-utilisateur avec des données hétérogènes (3D, images, 
 informations) tel que 3DEvent cela facilite l'interopérabilité.
 
+\begin{lstlisting}[language=json,firstnumber=1,label=jsonexemple,caption=Mesh 
+added to Scene event and parameters]
+{
+{
+"sceneId": "scene-turbine",
+"meshId":"406514c6-306b-f0f9643a037e",
+"geometryId": "37076875-ea1c-bbd300481345",
+"name": "blade",
+"color": "#963912"
+},
+"version": 17,
+"author": "Foo"
+}
+\end{lstlisting}
 
 \subsection{Synchronisation des données}
 \subsubsection{Persistance à court terme}
@@ -204,8 +218,8 @@ persistance des données à travers les sessions du navigateur. Le contenu stock
 correspond aux données générées par un utilisateur et par ses collaborateurs. Les 
 répliques stockées sur chaque navigateur permettent à un utilisateur une plus 
 grande 
-autonomie en cas de déconnexion. C'est également un moyen de distribuer les 
-mises à jour générées par les clients entre les clients grâce au protocole de 
+autonomie en cas de déconnexion. C'est également un moyen de distribuer entre les clients les 
+mises à jour qu'ils génèrent grâce au protocole de 
 \gls{streaming3D} (cf. \ref{streamingprotocol}) sans passer par le serveur.
 
 Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès aux 
@@ -218,7 +232,7 @@ stockée localement.
 Il existe plusieurs méthodes de transmission de contenu au sein d'un réseau P2P 
 que l'on peut catégoriser selon deux modes : le téléchargement (\textit{download}) 
 et le flux continu (\textit{streaming}). Le téléchargement requière que le contenu 
-soit entièrement téléchargé pour pouvoir être lu. Tandis que le flux continu peut 
+soit entièrement téléchargé pour pouvoir être lu, tandis que le flux continu peut 
 être lu au fur et à mesure de sa récupération. Ce mode est principalement utilisé 
 pour la lecture de vidéo en ligne. En comparaison le mode téléchargement est 
 moins restrictif et relativement simple à mettre en place. Tout comme les 

@@ -6,13 +6,13 @@ EVC}
 
 %\subsection{Introduction}
 La méthodologie orientée évènements intègre plusieurs aspects souvent laissés 
-de côté dans la littérature concernant le développement les environnements 
+de côté dans la littérature concernant le développement des environnements 
 virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. 
 Les évènements peuvent en effet être utilisés dans le cadre de \gls{CSCW} et 
-d'\gls{EVC}, qui ont évolués du simples collecticiels à de plus importantes 
+d'\gls{EVC}, qui ont évolués du simple collecticiel à de plus importantes 
 organisations virtuelles comme on peut le retrouver dans des environnements 
 scientifiques et d'ingénierie. L'idée de partager des ressources communes pour 
-travailler sur un projet commun nécessite des outils spécifiques qui implémentent 
+travailler sur un projet commun nécessite des outils propres qui implémentent 
 des modèles de collaborations adaptés aux fonctionnalités spécifiques des 
 systèmes distribués (forums, chats, tableaux blancs partagés \dots). Ces 
 collaborations sont routinières, les motifs de collaboration sont bien connus. Les 
@@ -20,7 +20,7 @@ motifs consistent en des segments de collaborations récurrents qui peuvent êtr
 capturés, encapsulés dans des composants distincts et réutilisés comme des 
 solutions pour d'autres problèmes liés à la collaboration. Par exemple, les services 
 de sensibilisation permettent de traiter les évènements et donner des informations 
-à propose du travail collaboratif. En utilisant les évènements suivis, les services 
+à propos du travail collaboratif. En utilisant les évènements suivis, les services 
 d'analyse fournissent des statistiques à propos des collaborations passées et 
 présentes.
 
@@ -42,7 +42,7 @@ temps \cite{Chandy2011}. L'\gls{EP} intègre plusieurs fonctionnalités pour :
 \begin{itemize}
 	\item obtenir des données à partir de plusieurs sources en temps (quasi) réel ;
 	\item agréger et analyser ces données pour détecter des motifs qui indiquent la 
-	présence de situation critiques qui nécessitent une réponse ;
+	présence de situations critiques qui nécessitent une réponse ;
 	\item déterminer la réponse la plus adaptée à ces situations ;
 	\item et surveiller (\textit{monitor}) l'exécution de cette réponse.
 \end{itemize}
@@ -62,7 +62,7 @@ domaines se basant sur le paradigme de l'\gls{EP}.
 
 Par nature, une architecture orientée évènements est extrêmement peu couplée et 
 hautement distribuée. Le créateur de l'évènement sait seulement que l'évènement 
-se produit et n'a aucune idée du traitement l'évènement va subir par 
+se produit et n'a aucune idée du traitement que l'évènement va subir par 
 la suite ou qui cela va concerner. 
 C'est pourquoi les architectures orientées évènements sont plus utilisées dans un 
 contexte de flux d'information asynchrone. La traçabilité dans ces environnements 
@@ -98,10 +98,9 @@ combiné à de l'\gls{ES} repose sur le constat suivant : dans un cadre industri
 besoin de traçabilité de l'information est très important pour suivre l'évolution d'un 
 projet par exemple. 
 Les architectures orientées évènements repose le plus souvent sur 
-communication client-serveur pour faciliter la gestion des données dans le 
+la communication client-serveur pour faciliter la gestion des données dans le 
 système distribué. C'est pourquoi l'exploitation du patron de conception 
-\gls{CQRS} a originalement été développé avec cette  \gls{CS} qui sont 
-toujours connectées (pour récupérer les mises à jour). 
+\gls{CQRS} est traditionnellement développée sur la base d'une architecture client-serveur  (pour récupérer les mises à jour). 
 Ce fonctionnement ne permet pas le travail hors ligne.
 
 Côté serveur, le stockage des données est de moins en moins cher, il est possible de stocker beaucoup de données de manière distante notamment 
@@ -116,7 +115,7 @@ l'on trouve traditionnellement côté serveur et pour proposer des fonctionnalit
 avancées telles que le stockage de données sur le client (IndexedDB, 
 storageAPI), pour l'affichage 3D (WebGL) et pour la communication en \gls{P2P} 
 (\gls{WebRTC}). En déportant ainsi la charge que pourrait subir une architecture 
-client-serveur côté client, les échangent réseaux sont limités car qui 
+client-serveur côté client, les échanges réseaux sont limités car ils 
 sont très coûteux d'un point de vue énergétique pour les appareils mobiles 
 \cite{Koskela2015}. De plus, l'utilisation de la bande passante est onéreuse et 
 parfois limitée voire inexistante, il est donc nécessaire de tirer parti de tous les 
@@ -131,7 +130,7 @@ transmission des données 3D et collaboratives qui permet de  limiter  le nombre
 de requêtes et la taille des données transmises sans perdre la traçabilité de 
 celles-ci. L'idée est de profiter de la puissance du client pour créer une 
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
-(travaille hors ligne) ou involontaire (coupure). Je garantis ainsi à l'utilisateur 
+(travail hors ligne) ou involontaire (coupure). Je garantis ainsi à l'utilisateur 
 l'utilisation du système avec un historique performant où chaque connexion est 
 l'occasion de mettre à jour le système.\improve{en remettre une couche}
 
@@ -146,8 +145,7 @@ La mise en place d'une architecture orientée évènements pour faire de la mod�
 métier).
 \improve{qu'est ce que ça fait la}D'une part la sensibilisation à l'historique des 
 données et aux interactions 
-inter-utilisateurs est partagée par les collaborateurs et les analystes métier. Cela cela 
-garantit une certaine autonomie dans la création. D'autre part, 
+inter-utilisateurs est partagée par les collaborateurs et les analystes métier. Les utilisateurs sont mieux informés de l'impact de leurs modifications et ont un aperçu général de l'évolution de la scène. D'autre part, 
 la sensibilisation à la distribution des données est une composante 
 importante pour les utilisateurs et les développeurs. En effet, la répartition 
 de la charge permet de profiter du potentiel computationnel de toutes les parties 
@@ -190,7 +188,7 @@ assignés à un \textit{EI}. La spécification des évènements nécessite de
 s'intéresser à tous les types d'évènements qui sont utilisés lors de la manipulation 
 et la visualisation d'objets 3D dans un \gls{EVC}. La détection d'évènement est un 
 processus qui permet de récupérer les instances d'évènements d'un \textit{ET} en 
-particulier. Cela peut être utilise pour la visualisation de types particulier par 
+particulier. Cela peut être utilisé pour la visualisation de types particulier par 
 exemple. Dans 3DEvent, la spécification des évènements est calquée sur les 
 comportements observés lors des expérimentations des premiers travaux 
 \cite{Desprat2015a, Desprat2015b}. Le Tableau \ref{tab:extraitevent} ci-dessous, 
@@ -262,8 +260,8 @@ added to Scene event and parameters]
 
 
 Plus généralement, le domaine est la représentation des objets 3D d'un point de 
-vue expert.Les objets du domaines représentent les données liées aux 
-manipulations 3D sous une forme abstraite (géométrie, position), indépendante 
+vue expert. Les objets du domaine représentent les données liées aux 
+manipulations 3D sous une forme abstraite (géométrie, position), indépendamment
 des besoins du rendu (lumière, matériau \dots). Le framework intègre un 
 générateur d'évènements pour faciliter l'implantation de nouveau types 
 d'évènements au plus proche des besoins des utilisateurs dans une application de 
@@ -292,12 +290,12 @@ La Figure \ref{fig:cqrs-client} montre le déroulement du cycle des opérations 
 modèle au sein de \gls{CQRS}, de l'action utilisateur à la visualisation de son 
 résultat. 
 Du côté de la partie écriture (partie supérieure -- \textit{write part}), lorsque 
-l'utilisateur déclenche une commande à partir de l'interface, la commande (et ses 
-paramètres) sont récupérés et traités par le domaine pour être validée selon les 
+l'utilisateur déclenche une commande à partir de l'interface, la commande et ses 
+paramètres sont récupérés et traités par le domaine pour être validés selon les 
 règles métiers exprimées par ce dernier. Si la modification est validée, le domaine 
-produit ou modifiés l'agrégat concerné. Ces modifications sont converties sous 
-forme d'évènements. Ils sont ensuite transmis à l'Event Store où ils sont stockés 
-avant d'être transférés à l'Event Publisher. L'Event Publisher jour le rôle d'interface 
+produit ou modifie l'agrégat concerné. Ces modifications sont converties sous 
+forme d'évènements. Les évènements sont ensuite transmis à l'Event Store où ils sont stockés 
+avant d'être transférés à l'Event Publisher. L'Event Publisher joue le rôle d'interface 
 entre la partie écriture et la partie lecture. Il est également responsable de la 
 publication des évènements sur le bus d'évènement Event Bus où sont 
 accrochées les différentes projections. Les projections sont nourries a partir des 
@@ -305,7 +303,7 @@ accrochées les différentes projections. Les projections sont nourries a partir
 inclus dans l'\gls{IU}) récupère les \glspl{DTO}
 contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
 se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
-visualisation 3D des modifications des collabotaeurs en temps réel) ou active -- 
+visualisation 3D des modifications des collaborateurs en temps réel) ou active -- 
 mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
 
 
@@ -351,7 +349,7 @@ les applications :
 
 \paragraph{Le journal d'évènements}
 
-Les évènements produits par un des composants présentée ci-dessus
+Les évènements produits par un des composants présenté ci-dessus
 peuvent être consommés par d'autres de ces abstractions s'ils partagent un 
 journal d'évènements local ou distribué. Un journal d'évènements peut 
 fonctionner sur un seul site ou être répliqué 
@@ -359,9 +357,9 @@ sur plusieurs sites.
 Le site est considéré comme une zone disponible qui accepte 
 l'écriture d'un journal d'évènements local même s'il est partitionné sur plusieurs 
 sites. Les journaux d'évènements locaux situés sur plusieurs sites peuvent être 
-connectés par le biais d'un journal d'évènements dit \og repliqué\fg{} qui a pour 
+connectés par le biais d'un journal d'évènements dit \og répliqué\fg{} (copié sur une autre réplique) qui a pour 
 responsabilité de préserver l'ordre causal des évènements.\todo{dessin des 
-journaux} Les sites peuvent être situés à des endroits géographiquement distincts 
+journaux}  Les sites peuvent être situés à des endroits géographiquement distincts 
 ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}) ou encore être sur le 
 même nœud mais traités séparément selon les \improve{c'est quoi}zones 
@@ -383,7 +381,7 @@ différents cas d'utilisation :
 	\item \textit{Processus métier distribués.} Les acteurs de différents types 
 	utilisent des évènements pour communiquer et parvenir à résoudre un problème 
 	commun. Bien qu'ils jouent des rôles différents dans le processus métier, ils 
-	réagissent à la réception d'évènements (\textit{reactive programming}) en 
+	réagissent à la réception d'évènements (programmation réactive) en 
 	mettant à jour l'état de l'application et en produisant de nouveaux évènements. 
 	Cette forme de collaboration est appelée collaboration dirigée par les 
 	évènements.\improve{ref}
@@ -423,8 +421,7 @@ Le journal d'évènements est répliqué localement et fournit un ordre total de
 évènements stockés et appartient à un site. 
 Le site est une zone de disponibilité qui héberge un ou plusieurs 
 journal d'évènements. Les évènements d'un journal d'évènements sont 
-répliqués de manière asynchrone sur les autres des journaux d'évènements 
-des sites distants. 
+répliqués sur les sites distancts de manière asynchrone. 
 Afin de lier des journaux d'évènements (localisés sur différents sites) à un journal 
 d'évènements répliqué, les 
 journaux d'évènements locaux doivent être accessibles à partir des points 
@@ -478,8 +475,8 @@ cube mesh should be created before).
 La \gls{CE}, ou \textit{eventual consistency} en anglais, propose dans un système 
 distribué contenant plusieurs répliques d'avoir une coordination lâche entre ces 
 répliques. Cela apporte de nombreux avantages en termes de disponibilité, 
-tolérance aux fautes et sécurité des données et évite l'intégration de protocoles 2 
-phase commit ou de protocoles Paxos (consensus) complexifiant les échanges. 
+tolérance aux fautes et sécurité des données et évite l'intégration de protocoles comme \textit{2 
+phase commit} ou de protocoles \textit{Paxos} (consensus) complexifiant les échanges. 
 La \gls{CE} introduit l'idée que toutes les répliques se réconcilient au bout d'un 
 moment (\textit{forward progression}) pour avoir le même état final. Si le caractère 
 vicié d'une information est détecté, le système doit le \og réparer\fg{} pour obtenir 
@@ -491,14 +488,14 @@ le bon état.
 	\label{fig:cap}
 \end{figure}
 L'ordonnancement des évènements durant les mises à jour reste identique lorsque
-les évènements sont rejoués par la suite car l'ordre est issu de l'\gls{ES} est 
+les évènements sont rejoués par la suite car l'ordre issu de l'\gls{ES} est 
 déterminée par l'ordonnancement des évènements stockés 
 localement. Au sein d'une réplique, tous les composants \gls{CQRS} respectent 
 cet ordonnancement. L’ordre de stockage des évènements répliqués sur des sites 
 distincts est cohérent sont ordonnés de manière causale \cite{Lamport1978} : les 
 évènements liés causalement ont le même ordre sur tous les sites alors que les 
 évènements concurrents peuvent avoir un ordre différent. Cette propriété est 
-importante pour obtenir une cohérence causale (forte) dans une application qui 
+importante pour obtenir une cohérence causale forte dans une application qui 
 respecte le théorème \gls{CAP} (Figure \ref{fig:cap}).  \blockquote[]{	\textit{The 
 largest single 
 benefit about 
@@ -524,11 +521,11 @@ asynchrone ->
 message de confirmation}, si l'utilisateur attends que la soumission soit une 
 requête qui peut probablement échouer, alors l'asynchronisme se justifie. La probabilité 
 d'échec peut être réduite en pré-validant la commande. Si personne d'autre que 
-l'utilisateur travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
-l'asynchronicité rajoute une interaction inutile au flux dans le cas où peut de gens 
-travaille sur la même instance d'agrégat.
+l'utilisateur ne travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
+l'asynchronicité rajoute une interaction inutile au flux dans le cas où peu de gens 
+travaillent sur la même instance d'agrégat.
 Par exemple, il est intéressant de rendre l'exécution d'une 
-commande est synchrone et la mise à jour de la vue asynchrone. Les modèles de 
+commande synchrone et la mise à jour de la vue asynchrone. Les modèles de 
 cohérence sont des décisions liées au métier car ils ont un impact direct sur 
 l'expérience utilisateur. 
 
@@ -650,7 +647,7 @@ La partie \gls{ES} s'intéresse à la sauvegarde des évènements dans un journa
 d'évènement, et notamment dans le cas des applications distribuées en proposant 
 un mécanisme de synchronisation pour détecter les conflits. La fonction principale 
 de cette partie est de permettre de recréer un état de l'application cohérent en 
-intégrer implicitement une gestion de version des évènements.
+intégrant implicitement une gestion de version des évènements.
 
 Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 3D, il 
 peut être facilement adapté pour différents types d'applications et étendu à 
