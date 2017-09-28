@@ -417,7 +417,7 @@ les variables d'ajustement en fonction des contraintes qu'imposent les limites d
 temps de réponse et de bande passante.
 
 \subsection{Fiable versus Non Fiable}
-
+\label{sec:fiabilite}
 La fiabilité d'un protocole de communication définit comment le protocole fait face 
 à la perte ou au retard de données. Un protocole dit \og fiable\fg{} (\textit{reliable}) 
 fait en sorte de rendre sûr le fait que le destinataire recevra éventuellement les 
@@ -464,6 +464,7 @@ protocole non fiable peut être employé.
 
 
 \subsection{Ordonné versus Désordonné}
+\label{sec:ordre}
 Les paquets envoyés par l'expéditeur ne prennent pas forcément tous le même 
 chemin vers l'expéditeur. La réaction des réseaux face à la congestion consiste à 
 modifier les tables de routage afin que les paquets évitent le n\oe ud congestionné. 
@@ -1045,7 +1046,8 @@ système pendant les sessions de travail collaboratif.
 \subsection{Domain Driven Design}
 %\subsection{Domain Driven Design : lier le fonctionnel et le code}
 	
-	\gls{DDD} (ou Conception Pilotée par le Domaine) est une approche de 
+	\glsreset{DDD}\gls{DDD} ou Conception Pilotée par le Domaine est une 
+	approche de 
 	développement logicielle qui a pour objectif de définir une vision et un 
 	langage partagé (\textit{ubiquitous language}) pour les personnes 
 	impliquées dans la construction d'une application \cite{Evans2003}.
@@ -1423,8 +1425,7 @@ snapshots qui doivent intégrer les modifications du domaine. Une solution est
 de recalculer les snapshots quand le domaine est modifié mais cela reste 
 coûteux (et à éviter).\info{versionning event -> retro compatibilité}
 
-
-\subsubsection{Event Sourcing versus Command Sourcing}
+\paragraph{Event Sourcing versus Command Sourcing}
 Les patrons de conception \gls{CS} et \gls{ES} sont strictement déterministes pour 
 avoir une exactitude rigoureuse de ce qui se passe dans le système.
 
