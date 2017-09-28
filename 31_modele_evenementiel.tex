@@ -26,7 +26,7 @@ présentes.
 
 
 Un système orienté évènements a l'avantage d'être découplé. Dès 
-lors, la les données produites lors de la collaboration peuvent facilement être 
+lors, les données produites lors de la collaboration peuvent facilement être 
 réutilisées pour un traitement secondaire comme la sensibilisation aux éléments 
 de l'environnement. 
 Le découpage de la modélisation logicielle et l'abstraction qu'elle apporte est aussi 
@@ -38,13 +38,13 @@ beaucoup de systèmes comme l'énergie, la santé, l'environnement, les transpor
 la finance, les services et l'industrie. L'\gls{EP} réunit des méthodes et des outils 
 pour filtrer, transformer, et détecter des motifs dans des évènements, dans le but 
 de réagir à des conditions qui changent, généralement liées à des contraintes de 
-temps \cite{Chandy2011}. L'\gls{EP} intègre plusieurs fonctionnalités:
+temps \cite{Chandy2011}. L'\gls{EP} intègre plusieurs fonctionnalités pour :
 \begin{itemize}
-	\item Obtenir des données à partir de plusieurs sources en temps (quasi) réel
-	\item Agréger et analyser ces données pour détecter des motifs qui indiquent la 
-	présence de situation critiques qui nécessitent une réponse
-	\item Déterminer la réponse la plus adaptée à ces situations
-	\item Surveiller (\textit{monitor}) l'exécution de cette réponse
+	\item obtenir des données à partir de plusieurs sources en temps (quasi) réel ;
+	\item agréger et analyser ces données pour détecter des motifs qui indiquent la 
+	présence de situation critiques qui nécessitent une réponse ;
+	\item déterminer la réponse la plus adaptée à ces situations ;
+	\item et surveiller (\textit{monitor}) l'exécution de cette réponse.
 \end{itemize}
 
 Le panorama d'applications et de technologies proposé par \cite{Hinze2009} 
@@ -104,8 +104,7 @@ système distribué. C'est pourquoi l'exploitation du patron de conception
 toujours connectées (pour récupérer les mises à jour). 
 Ce fonctionnement ne permet pas le travail hors ligne.
 
-Côté serveur, le stockage des données est de moins en moins cher, on peut donc 
-se permettre de stocker beaucoup de données de manière distante notamment 
+Côté serveur, le stockage des données est de moins en moins cher, il est possible de stocker beaucoup de données de manière distante notamment 
 grâce au \gls{cloud}\info{definir le cloud}. Le serveur a une puissance de calcul 
 plus importante (et surtout ajustable).
 
@@ -127,14 +126,14 @@ indépendant possible en termes de ressources (données, réseaux, validation
 experte). 
 
 \paragraph{Contribution}
-Pour répondre à cette problématique, nous proposons un modèle pour la 
+Pour répondre à cette problématique, je propose un modèle pour la 
 transmission des données 3D et collaboratives qui permet de  limiter  le nombre 
 de requêtes et la taille des données transmises sans perdre la traçabilité de 
 celles-ci. L'idée est de profiter de la puissance du client pour créer une 
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
-(travaille hors ligne) ou involontaire (coupure). On garantit ainsi à l'utilisateur 
+(travaille hors ligne) ou involontaire (coupure). Je garantis ainsi à l'utilisateur 
 l'utilisation du système avec un historique performant où chaque connexion est 
-l'occasion de mettre à jour le système.\improve{en remttre une couche}
+l'occasion de mettre à jour le système.\improve{en remettre une couche}
 
 
 \subsection{Modèle général}
@@ -143,16 +142,14 @@ l'occasion de mettre à jour le système.\improve{en remttre une couche}
 %directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
 %\todo{reprendre 
 %la partie virtualisation dans la partie P2P}
-Utiliser une architecture orientée évènements pour faire de la modélisation 3D peut 
-sembler non nécessaire. Cependant lorsqu'on s'intéresse aux apports que cela 
-peut générer pour tous les métiers engagés (utilisateurs, développeurs, analystes 
-métier) on peut se demander pourquoi cela n'a pas été plus mis en avant 
-auparavant. \improve{qu'est ce que ça fait la}La sensibilisation à l'historique des 
+La mise en place d'une architecture orientée évènements pour faire de la modélisation 3D engendre des avantages pour tous les métiers engagés (utilisateurs, développeurs, analystes 
+métier).
+\improve{qu'est ce que ça fait la}D'une part la sensibilisation à l'historique des 
 données et aux interactions 
-inter-utilisateurs est partagée par les utilisateurs et les analystes métier. Quand à 
-la sensibilisation à la distribution des données elles est une composante 
-importante pour les utilisateurs et les développeurs. Concernant les premiers, cela 
-garantit une certaine autonomie dans la création. Pour les seconds, la répartition 
+inter-utilisateurs est partagée par les collaborateurs et les analystes métier. Cela cela 
+garantit une certaine autonomie dans la création. D'autre part, 
+la sensibilisation à la distribution des données est une composante 
+importante pour les utilisateurs et les développeurs. En effet, la répartition 
 de la charge permet de profiter du potentiel computationnel de toutes les parties 
 prenantes du réseau. 
 
@@ -165,7 +162,7 @@ domaine. Le modèle issu du domaine défini permet de mettre en valeur les
 aspects métiers liés à l'application.
 
 \subsubsection{Spécification des évènements dans le framework}
-Le framework étant orienté évènements, cette section introduit la représentation et 
+Le framework étant orienté évènements, cette section de thèse introduit la représentation et 
 le vocabulaire utilisé dans la description des évènements de 3DEvent. 3DEvent 
 reprend la représentation proposée par Tominski \cite{Doktor-ingenieur2006} 
 illustrée par la Figure \ref{fig:representation_event}, et adapte ses propriétés pour 
@@ -305,7 +302,7 @@ entre la partie écriture et la partie lecture. Il est également responsable de
 publication des évènements sur le bus d'évènement Event Bus où sont 
 accrochées les différentes projections. Les projections sont nourries a partir des 
 évènements publiés auxquels elles sont abonnées. Enfin, une Vue (composant
-inclus dans l'\gls{IU}) récupère les DTO\todo{add acr Data Transfer Object } 
+inclus dans l'\gls{IU}) récupère les \glspl{DTO}
 contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
 se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
 visualisation 3D des modifications des collabotaeurs en temps réel) ou active -- 
@@ -422,7 +419,7 @@ continuer d'écrire des évènements localement. La livraison des évènements s
 les sites distants reprend automatiquement lorsque les partitions sont à jour.
 
 
-Le journal d'évènements répliqué localement et fournit un ordre total des 
+Le journal d'évènements est répliqué localement et fournit un ordre total des 
 évènements stockés et appartient à un site. 
 Le site est une zone de disponibilité qui héberge un ou plusieurs 
 journal d'évènements. Les évènements d'un journal d'évènements sont 
@@ -522,10 +519,10 @@ dont résulte la cohérence éventuelle de l'application.
 Dans la conception d'interaction pour l'interface, la synchronicité peut varier en 
 fonction certains contextes. 
 Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interface.  
-Prenons l'interaction suivante : \texttt{soumission de formulaire -> envoi 
+Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de formulaire -> envoi 
 asynchrone -> 
-message de confirmation}. Si l'utilisateur attends que la soumission soit une 
-requête qui peut probablement échouer l'asynchronisme se justifie. La probabilité 
+message de confirmation}, si l'utilisateur attends que la soumission soit une 
+requête qui peut probablement échouer, alors l'asynchronisme se justifie. La probabilité 
 d'échec peut être réduite en pré-validant la commande. Si personne d'autre que 
 l'utilisateur travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
 l'asynchronicité rajoute une interaction inutile au flux dans le cas où peut de gens 
@@ -602,14 +599,13 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	même tâche à réaliser, il est facile de faire la différence entre deux réalisations 
 	pour comparer, analyser et montrer les résultats	pour des raisons 
 	pédagogiques ou pour relever des habitudes (de travail) par exemple. Dans 
-	l'exemple du jeu sérieux, on peut comparer la trace utilisateur à la trace experte 
+	l'exemple du jeu sérieux, il est possible de comparer la trace utilisateur à la trace experte 
 	et permettre de rejouer le même scénario plusieurs fois facilement pour 
 	observer l'évolution. Ce type de fonctionnalité est intrinsèque à 3DEvent. 
 	
 	\item[Traçage utilisateur et \textit{crowdsouring}] 3DEvent peut se révéler être 
 	un bon outil pour enregistrer la trace d'un utilisateur lorsqu'il navigue dans la 
-	scène. Si on choisit d'enregistrer le chemin de la caméra et les actions 
-	utilisateur comme des évènements que l'on considère comme des informations 
+	scène. L'enregistrement du chemin de la caméra et des actions de l'utilisateur sous la forme d'évènements sont des informations 
 	"issues de la foule" (\textit{crowdsouring}). En utilisant un processus 
 	d'apprentissage, il est possible de proposer de meilleurs chemins, repérer des 
 	points d'intérêt, ou même proposer des résumés de scène générés à partir des 
@@ -623,7 +619,7 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	que l'évolution de la conception. Cela peut permettre de repérer (avec du 
 	\gls{CEP}) et corriger certaines fonctionnalités afin d'améliorer l'ergonomie de 
 	l'application. Par exemple, si un évènement est anormalement représenté dans 
-	le journal des évènements, on va pouvoir lever une alerte facilement.
+	le journal des évènements, il sera possible de lever une alerte facilement.
 \end{description}
 %\begin{figure}[htb]
 %	\centering
@@ -640,10 +636,10 @@ métiers pour les intégrer dans \gls{CQRS}.
 
 La description de la typologie des 
 évènements manipulés insiste sur le compartimentage des objets métiers. La 
-modélisation 3D collaborative est passée au crible pour en dégager les quatre 
+modélisation 3D collaborative est minutieusement étudiée pour en dégager les quatre 
 agrégats fondamentaux (la scène, le maillage, la géométrie et l'utilisateur) et les 
-types d'évènements qui leurs sont associés. Cette étapes introduit des différences 
-fines sur les évènements qui se peut produire sur un agrégat. 
+types d'évènements qui leurs sont associés. Cette étape introduit des différences 
+fines sur les évènements qui sont produits à partir d'un agrégat. 
 Cet aspect est notamment intéressant pour l'observation et la surveillance du 
 contenu des sessions collaboratives\todo{ref section :développé dans implantation 
 du framework}.

@@ -31,7 +31,7 @@ rotation). La génération de conflit en 3D peut vite devenir écrasante. Il est
 donc nécessaire de mettre en place des mécanismes de détection de 
 conflit et de maintient de cohérence au cours des sessions de 
 collaboration. 
-Cela passe par la mise en place une architecture de communication 
+Cela passe par la mise en place d'une architecture de communication 
 hybride pour la collaboration. 
 Le terme \og hybride\fg{} invoque un compromis entre la 
 centralisation de l'information nécessaire à la prise de décision globale et 
@@ -53,14 +53,14 @@ navigateur.
 
 \paragraph{Constat}
 
-Les systèmes P2P qui sont orientés évènements consistent en plusieurs n\oe uds 
+Les systèmes \gls{P2P} qui sont orientés évènements consistent en plusieurs n\oe uds 
 interconnectés qui ont des fonctions similaires et exectuents des tâches 
 similaires. Les pairs partagent directement leurs ressources (contenu, CPU, 
 stockage, bande passante) sans nécessiter de serveur central. A la place, les 
 pairs coopèrent aux moyens d'évènements qui prennent la forme de messages 
-échangés entre pairs. Les systèmes P2P sont capables de s'adapter aux 
+échangés entre pairs. Les systèmes \gls{P2P} sont capables de s'adapter aux 
 disfonctionnement et à la dynamicité des pairs tout en maintenant des 
-performances acceptables. Le systèmes P2P sont généralement utilisés comme 
+performances acceptables. Le systèmes \gls{P2P} sont généralement utilisés comme 
 soutien aux services de l'application pour la communication et la collaboration, le 
 calcul distribué, la distribution de contenu et pour les services d'intergiciel comme 
 le routage et la localisation, l'anonymat et la confidentialité.
@@ -75,7 +75,7 @@ L'un des atouts de cette technologie est de permettre de façon simple et
 sans module d'extension la capture d'un flux audio et / ou vidéo (ex : 
 applications de VoIP), ainsi que l'échange de données arbitraires entre 
 navigateurs sans nécessiter d'intermédiaires (ex : partage de fichier en 
-P2P).
+\gls{P2P}).
 Techniquement, \gls{WebRTC} supporte un canal temps-réel 
 bidirectionnel pour l'échange de données. Contrairement à 
 \gls{WebSocket}, qui est basé sur \gls{TCP}, \gls{WebRTC} se base sur 
@@ -95,9 +95,9 @@ seul sur le réseau\dots). Dans le contexte des \gls{EVC} \gls{3D}, le but
 est d'obtenir une architecture de communication : 
 
 \begin{itemize}
-	\item entièrement basée web, 
-	\item robuste à l'évolution du nombre de collaborateurs, 
-	\item efficace en terme de d'accès et distribution de la donnée, 
+	\item entièrement basée web ; 
+	\item robuste à l'évolution du nombre de collaborateurs ; 
+	\item efficace en terme de d'accès et distribution de la donnée ; 
 	\item et qui s'adapte à l'échelle selon les besoins de la collaboration.
 \end{itemize}
 
@@ -109,12 +109,12 @@ résistante aux pannes.
 
 
 \subsection{Présentation générale}
-Un intergiciel (\textit{middleware}) se compose en général d'une API de 
+Un intergiciel (\textit{middleware}) se compose en général d'une \gls{API} de 
 recherche \ref{fig:middleware}.
 Dans notre modèle cette brique est principalement en lien avec le 
-gestionnaire d'instance qui se charge de la recherche. L'API de messagerie 
+gestionnaire d'instance qui se charge de la recherche. L'\gls{API} de messagerie 
 concerne plus directement le système d'envoie et de réception de message. Les 
-différents message vont concerner la partie routage de l'information, le 
+différents messages vont concerner la partie routage de l'information, le 
 maintien à jour du répertoire de voisin et leur dynamicité, ainsi que la 
 description des connexions à maintenir. Le bloc de gestion de session permet au 
 pair de savoir avec qui il est connecté et contient également les méta informations 
@@ -196,7 +196,7 @@ exception est levée. La gestion des exceptions est expliquée dans \info{détai
 
 \subsection{Persistance à long terme}\label{sec:persistance-a-long-terme}
 Dans un contexte de collaboration sur le long terme pour des entreprises où le 
-besoin d'information accessible sur le long terme est nécessaire. La persistance 
+besoin d'information accessible sur le long terme est nécessaire. La persistance à 
 long-terme stocke le journal d'évènement qui est la 
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
