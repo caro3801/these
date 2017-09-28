@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+  \tikzset{venn circle/.style={draw,circle,minimum width=7cm, text width = 4cm 
+  ,fill=#1,text centered,opacity=0.4,text opacity=1},
+inter/.style={text width = 1.5cm,text centered,text opacity=1}
+}
+
+  \node [venn circle = rouge!60] (D) at (0,0) {
+  	\textbf{Disponibilit\'e} \\ 
+  	(\textit{Availabity}) };
+  \node [venn circle = bleue!60] (T) at (60:-5cm) {
+  	\textbf{Tol\'erance au\\ 
+  		partitionnement}\\
+  	(\textit{Partition Tolerance})};
+  \node [venn circle = vert!60] (C) at (0:-5cm) 
+  {\textbf{Coh\'erence}\\(\textit{Consistency})};
+  \node[inter,left,xshift=8mm] at (barycentric cs:D=1/2,T=1/2 ) {Gossip}; 
+  \node[inter,yshift=3mm,below] at (barycentric cs:D=1/2,C=1/2 ) {Paxos};
+  \node[inter,right,xshift=-10mm] at (barycentric cs:T=1/2,C=1/2 ) {2 phase \\ 
+  	commit};
+\end{tikzpicture}  
