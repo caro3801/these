@@ -163,9 +163,11 @@ qui lui permet de démarrer l'échange de données.
 
 L'API RTCDataChannel permet à chaque pair d'échanger des données arbitraires 
 avec d'autres à partir du navigateur avec des propriétés de livraison 
-personnalisables (fiable ou non fiable, ordonné ou non ordonné) selon le transport 
-sous-jacent\info{GrI13}. Dans 3DEvent, le choix d'avoir un transport fiable 
-\unsure{fiable ou pas fiable et pk...}et non ordonné a été fait pour respectivement 
+personnalisables -- fiable ou non fiable (Section \ref{sec:fiabilite}), ordonné ou non 
+ordonné (Section \ref{sec:ordre}). 
+
+Dans 3DEvent, le choix d'avoir un transport 
+fiable et non ordonné a été fait pour respectivement 
 garantir l'arrivée d'une donnée émise par l'utilisateur au sein de l'application et 
 permettre des échanges asynchrones.
 \improve{add \S sur "en cas de défaillance? }
@@ -231,57 +233,3 @@ proche du routage de GNutella.
 
 
 
-\begin{table}[]
-	\centering
-	\small
-	\caption{Type de messages lors de la synchronisation}
-	\label{table:messagetype}
-	\begin{tabular}{ll}
-		 \toprule
-		\textbf{Message}                & \textbf{Description} \\ \hline
-		STREAM\_SYNC\_ASK      &  Demande de synchronisation d'un 
-		\textit{stream}           \\
-		CHUNK                  &     Réception d'une donnée \textit{chunk})        
-		\\
-		READY\_ASK             &      Prêt pour la démarrer la demande de 
-		données de 
-		sync.        \\
-		READY                  &       Prêt pour démarrer la réception de 
-		données de 
-		sync.      \\
-		ALL\_EVENTS\_SYNC\_ASK &     Demande de toutes les données 
-		typées 
-		évènement           \\
-		EVENTS\_SYNC           &        Réception de données (en cours de 
-		synchronisation)       \\
-		META\_DATA\_ASK        &     Demande de métadonnées       \\
-		META\_DATA             &      Réception de métadonnées       \\
-		SYNC                   &      Réception de données (en cours de 
-		synchronisation)         \\
-		EVENT                  &     Réception d'une donnée typée 
-		évènement        \\
-		END\_SYNC              & Fin de la synchronisation \\ \bottomrule
-	\end{tabular}
-\end{table}
-\todo{parler des tableaux}
-
-\begin{table}[]
-	\centering
-	\caption{Statut du n\oe ud}
-	\label{table:nodestatus}
-	\begin{tabular}{ll}
-		\toprule
-		\textbf{Message}             & \textbf{Description} \\ \midrule
-		ERROR               &      En erreur (désynchronisation)       \\
-		READY               &       Prêt à recevoir des messages      \\
-		META\_DATA\_ASK     &      En demande de métadonnées       \\
-		META\_DATA\_RECEIVE &      En réception de métadonnées       \\
-		CLOSE               &     Déconnecté (connexion fermée)        \\
-		RECEIVE\_SYNC       &      En réception de données à synchroniser    \\
-		CONNECTED           &      Connecté (connexion ouverte)        \\
-		INIT                &     Initialisation   \\
-		OK                  &    Connecté et synchronisé      \\
-		SEND\_SYNC          &    En demande de synchronisation         \\
-		END\_SYNC           &      Synchronisation terminée      \\ \bottomrule
-	\end{tabular}
-\end{table}
