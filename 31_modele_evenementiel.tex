@@ -255,7 +255,7 @@ modélisation 3D collaborative (appuyant la sémantique des manipulations).
 \end{table}
 
 
-\subsubsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
+\subsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
 %TODO mettre l'image representant le cqrs +  celle de la validation des 
 %commandes
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
@@ -265,7 +265,7 @@ rejoués pour retrouver l'état de l'application.
 Les évènements représentent des faits immuables qui sont 
 seulement ajoutés au journal les un après les autres, ce qui permet des taux de 
 transaction élevés et une réplication efficace (cf Section 
-\ref{sec:es}). Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendues selon 
+\ref{sec:es}). Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
 les applications :
 
 \begin{description}
@@ -307,8 +307,8 @@ l'écriture d'un journal d'évènements local même s'il est partitionné sur pl
 sites. Les journaux d'évènements locaux situés sur plusieurs sites peuvent être 
 connectés par le biais d'un journal d'évènements dit \og repliqué\fg{} qui a pour 
 responsabilité de préserver l'ordre causal des évènements.\todo{dessin des 
-journaux}
-Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
+journaux} Les sites peuvent être situés à des endroits géographiquement distincts 
+ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}) ou encore être sur le 
 même nœud mais traités séparément selon les \improve{c'est quoi}zones 
 disponibles nécessaires au fonctionnement de l'application. 
@@ -392,7 +392,15 @@ de stockage est le même sur tous les sites, ce qui veut dire que les
 consommateurs qui lisent les évènements du journal local vont toujours voir les 
 effets avant leurs causes.
 
-
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{eps/cqrs2.pdf}
+	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
+	client dans 3DEvent : la gestion du cycle de vie des données avec \gls{CQRS} 
+	et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
+	en passant par la synchronisation réseau.}
+	\label{fig:cqrs-client}
+\end{figure}
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
@@ -403,7 +411,7 @@ effets avant leurs causes.
 	déclenchement de la commande au rendu visuel en passant par la génération 
 	de l'évènement, la 
 	synchronisation du journal d'évènements et l'impact sur le rendu des autres 
-	utilisateurs pour une translation sur un cube.}
+	utilisateurs pour une translation sur un cube.}\label{fig:cqrs-example}
 \end{figure}
 
 \subsection{Mécanisme de gestion de version}
@@ -566,7 +574,8 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	points d'intérêt, ou même proposer des résumés de scène générés à partir des 
 	traces des collaborateurs (que s'est-il passé depuis la dernière connexion du 
 	collaborateur X ?).
-	\item[Audit et monitoring de données 3D] L'\gls{ES} fournit un mécanisme 
+	\item[Audit et outils de surveillance de données 3D] L'\gls{ES} fournit un 
+	mécanisme 
 	d'audit intégré qui assure la cohérence des données transactionnelles. Utiliser 
 	ce mécanisme pour faire un audit ou surveiller en temps réel l'activité de 
 	l'application peut fournir une meilleure compréhension du travail d'équipe ainsi 
@@ -582,3 +591,30 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	\label{fig:git}
 \end{figure}
 \subsection{Bilan}
+
+Le modèle orienté évènement pour la modélisation 3D collaborative présenté dans 
+cette section intègre les besoins métiers par différents aspects. D'une part 
+le suivi des directives liées au \gls{DDD} permet de mieux cerner les règles 
+métiers pour les intégrer dans \gls{CQRS}. 
+La description de la typologie des 
+évènements manipulés insiste sur le compartimentage des objets métiers. La 
+modélisation 3D collaborative est passée au crible pour en dégager les quatre 
+agrégats fondamentaux (la scène, le maillage, la géométrie et l'utilisateur) et les 
+types d'évènements qui leurs sont associés. Cette étapes introduit des différences 
+fines sur les évènements qui se peut produire sur un agrégat. 
+Cet aspect est notamment intéressant pour l'observation et la surveillance du 
+contenu des sessions collaboratives\todo{ref section :développé dans implantation 
+du framework}.
+Les composants du patron \gls{CQRS} favorisent le découplage de l'application 
+pour obtenir une gestion de la cohérence plus fine. 
+La partie \gls{ES} s'intéresse à la sauvegarde des évènements dans un journal 
+d'évènement, et notamment dans le cas des applications distribuées en proposant 
+un mécanisme de synchronisation pour détecter les conflits. La fonction principale 
+de cette partie est de permettre de recréer un état de l'application cohérent en 
+intégrer implicitement une gestion de version des évènements.
+Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 3D, il 
+peut être facilement adapté pour différents types d'applications et étendu à 
+d'autres utilisations. Pour mettre en avant l'expertise de chacun et profiter de 
+toutes les ressources apportées par un utilisateur, une communication efficace de 
+ces évènements pour la collaboration doit désormais être établie entre les 
+collaborateurs.
