@@ -212,7 +212,20 @@ prenant en compte les paramètres nécessaires à leur instanciation. Par exempl
 la production d'un évènement \textit{meshTranslated} prend en paramètre le 
 vecteur de translation (x,y,z) et la référence de l'identifiant de la scène à laquelle il 
 appartient.
-
+\begin{lstlisting}[language=json,firstnumber=1,label=jsonexemple,caption=Mesh 
+added to Scene event and parameters]
+{
+	{
+		"sceneId": "scene-turbine",
+		"meshId":"406514c6-306b-f0f9643a037e",
+		"geometryId": "37076875-ea1c-bbd300481345",
+		"name": "blade",
+		"color": "#963912"
+	},
+	"version": 17,
+	"author": "Foo"
+}
+\end{lstlisting}
 Plus généralement, le domaine est la représentation des objets 3D d'un point de 
 vue expert.Les objets du domaines représentent les données liées aux 
 manipulations 3D sous une forme abstraite (géométrie, position), indépendante 
@@ -223,13 +236,13 @@ modélisation 3D collaborative (appuyant la sémantique des manipulations).
 %TODO parler des * dans le tableau comme un exemple
 \begin{table}[t]
 	\centering
-	\caption{Extrait des évènements de 3DEvent (cf Tab. \ref{tab:events}) pour 
-	l'agrégat maillage}
+	\caption{Évènements de pour 
+		l'agrégat Maillage (extrait de Tab. \ref{tab:events}) }
 	\label{tab:extraitevent}
 	\begin{tabular}{lll}
 		\toprule
 		\textbf{Évènement}& \textbf{Nommage} & \textbf{Description} \\ \midrule
-		\textbf{Agrégat Maillage}  &                      &             \\ \hline
+		%\textbf{Agrégat Maillage}  &                      &             \\ \hline
 		 Maillage ajouté (*)&     meshAdded                 
 		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
 			partir d'une géométrie\\ de la 
@@ -258,6 +271,18 @@ modélisation 3D collaborative (appuyant la sémantique des manipulations).
 \subsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
 %TODO mettre l'image representant le cqrs +  celle de la validation des 
 %commandes
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{eps/cqrs2.pdf}
+	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
+		client dans 3DEvent : la gestion du cycle de vie des données avec 
+		\gls{CQRS} 
+		et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
+		en passant par la synchronisation réseau.}
+	\label{fig:cqrs-client}
+\end{figure}
+
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
 d'une application sous la forme d'une séquence d'évènements. 
 Ces évènements sont conservés dans un journal d'évènements et peuvent être 
@@ -268,35 +293,38 @@ transaction élevés et une réplication efficace (cf Section
 \ref{sec:es}). Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
 les applications :
 
-\begin{description}
-	\item[Acteur] Un acteur consomme des évènements à partir d'un journal 
+\begin{itemize}
+	\item \textbf{Acteur} Un acteur consomme des évènements à partir d'un journal 
 	d'évènements et produit des évènements pour le même journal d'évènements. 
 	L'état interne dérivé à partir des évènements consommés est un modèle 
 	d'écriture 
 	en mémoire (\textit{in-memory}) et contribue à la partie commande (C) du 
 	CQRS\info{reference à la section}.
-	\item[Vue] Une vue est un acteur qui ne fait que consommer des évènements à 
+	\item \textbf{Vue} Une vue est un acteur qui ne fait que consommer des 
+	évènements à 
 	partir du journal d'évènements. L'état interne dérivé à partir des évènements 
 	consommés est un modèle de lecture en mémoire et contribue à la partie 
 	requête (Q) du CQRS\info{reference à la section}.
-	\item[Producteur] Un producteur est un acteur qui produit des évènements à 
+	\item \textbf{Producteur} Un producteur est un acteur qui produit des 
+	évènements à 
 	partir 
 	du journal d'évènements pour mettre à jour la base de données. L'état interne 
 	dérivé 
 	à partir des évènements consommés est un modèle de lecture en mémoire et 
 	contribue à la partie requête (Q) du CQRS\info{reference à la section}.
-	\item[Processeur] Un processeur est un acteur qui consomme des évènements 
+	\item \textbf{Processeur} Un processeur est un acteur qui consomme des 
+	évènements 
 	à 
 	partir d'un journal d'évènements et produit les évènements traités pour un autre 
 	journal d'évènements. Les processeurs peuvent être utilisés pour connecter les 
 	journaux d'évènement au traitement des évènements.\info{reference à la 
 	section}.
-	
-\end{description}
+\end{itemize}
 
 %\subsubsection{Collaboration évènementielle}
 
 \paragraph{Le journal d'évènements}
+
 Les évènements produits par un des composants présentée ci-dessus
 peuvent être consommés par d'autres de ces abstractions s'ils partagent un 
 journal d'évènements local ou distribué. Un journal d'évènements peut 
@@ -392,15 +420,8 @@ de stockage est le même sur tous les sites, ce qui veut dire que les
 consommateurs qui lisent les évènements du journal local vont toujours voir les 
 effets avant leurs causes.
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.9\columnwidth]{eps/cqrs2.pdf}
-	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
-	client dans 3DEvent : la gestion du cycle de vie des données avec \gls{CQRS} 
-	et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
-	en passant par la synchronisation réseau.}
-	\label{fig:cqrs-client}
-\end{figure}
+
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
