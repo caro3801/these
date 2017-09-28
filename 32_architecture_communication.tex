@@ -21,8 +21,8 @@ Les \gls{SEC} ont connu un fort développement avec l'intérêt croissant
 pour le \gls{P2P} dans les années 2000. 
 La base théorique des \glspl{SEC} s'appuie sur les propriétés de 
 convergence, préservation de la 
-causalité et préservation de l'intention du modèle \acrshort{CCI} 
-\cite{Sun1998} (cf Section \ref{sec:cci}). 
+()causalité et préservation de l'intention du modèle \acrshort{CCI} 
+\cite{Sun1998}. 
 La plupart des travaux liés aux \gls{SEC} \gls{P2P} s'intéressent à 
 l'édition collaborative massive de documents textuels dont les propriétés 
 de commutativité sont plus faciles à gérer (insertion/suppression) en 
@@ -51,7 +51,19 @@ et de standardisation sont élevés pour permettre à des utilisateurs de
 prendre le système rapidement en main sans installer autre chose qu'un 
 navigateur. 
 
-\subsubsection{Constat}
+\paragraph{Constat}
+
+Les systèmes P2P qui sont orientés évènements consistent en plusieurs n\oe uds 
+interconnectés qui ont des fonctions similaires et exectuents des tâches 
+similaires. Les pairs partagent directement leurs ressources (contenu, CPU, 
+stockage, bande passante) sans nécessiter de serveur central. A la place, les 
+pairs coopèrent aux moyens d'évènements qui prennent la forme de messages 
+échangés entre pairs. Les systèmes P2P sont capables de s'adapter aux 
+disfonctionnement et à la dynamicité des pairs tout en maintenant des 
+performances acceptables. Le systèmes P2P sont généralement utilisés comme 
+soutien aux services de l'application pour la communication et la collaboration, le 
+calcul distribué, la distribution de contenu et pour les services d'intergiciel comme 
+le routage et la localisation, l'anonymat et la confidentialité.
 
 \gls{WebRTC} est une technologie qui fournit aux navigateurs 
 \textit{destkop} et mobiles la possibilité de communiquer en temps-réel 
@@ -71,54 +83,10 @@ bidirectionnel pour l'échange de données. Contrairement à
 \ref{fig:protocolstack}) qui lui offre des fonctionnalités similaires (fiabilité, 
 ordonnancement, sécurité). 
 
-La jeunesse du protocole (2011) fait que peu de travaux académiques 
-l'utilisent pour créer des \gls{EVC3D} \cite{Desprat2015a,Steiakaki2016}. 
-Côté commercial, un grand nombre d'applications et de services 
-basés sur ce protocole ont fait leur apparition (par ordre d'importance) : 
-des systèmes d'échanges audio/vidéo (VoIP)\footnote{WebRTCWorld en 
-	liste un peu plus de 140 
-	\url{http://www.webrtcworld.com/webrtc-list.aspx}. Consulté le 
-	07/07/2017.}, des systèmes de partage de fichiers\footnote{WebTorrent 
-	\url{https://github.com/feross/webtorrent}. Consulté le 04/09/2017.} et 
-autres applications (capture d'écran, réalité augmentée, jeux)
-\footnote{Curation de ressources et modules WebRTC 
-	recensant plus de 100 projets 
-	\url{https://github.com/openrtc-io/awesome-webrtc}. Consulté le 
-	07/07/2017.}. 
-
-La simplicité de la mise en place (très semblable à WebSocket) et la 
-richesse apportée par le \gls{P2P} n'y sont pas étrangers.
-Les réseaux \gls{P2P} ne sont souvent pas bien connus des 
-développeurs web qui sont habitués aux architectures client-serveur, ce 
-qui peut représenter une barrière d'entrée pour de nouvelles applications 
-réseau. 
-Dans les systèmes \gls{P2P}, il n'y a pas de fermes de serveurs comme 
-il peut en exister dans les applications client-serveur. 
-Les machines clientes et les systèmes d'extrémité (\textit{end system}) 
-sont considérée comme \og les ressources\fg{} dans un réseau 
-\gls{P2P}. 
-En principe, ces ressources sont difficilement administrables à l'échelle 
-dans un réseau non structuré ; la qualité de service peut en pâtir.
-Cependant, lors d'un déploiement \gls{P2P} réel, des serveurs sont en 
-général utilisés pour télécharger l'application cliente qui contient la couche 
-intergicielle \gls{P2P} et fournit à l'utilisateur le service de connexion 
-nécessaire à l'accès au service. 
-Ces serveurs sont moins coûteux que peut l'être une ferme de serveurs. 
-De plus, pour beaucoup de services décentralisés, il n'existe 
-pas de solution pérenne pour tester ces applications à l'échelle ; chaque 
-service doit créer son propre système de test. 
-Ce contexte technologique est un motivation supplémentaire dans les travaux de 
-cette thèse.
-
 %TODO parler chargeet distribution
-\begin{figure}[th]
-	\centering
-	\includegraphics[width=0.8\columnwidth]{protocol_stack2.eps}
-	\caption{Pile des protocoles IP: TCP vs UDP}
-	\label{fig:protocolstack}
-\end{figure}
 
-\subsubsection{Contribution}
+
+\paragraph{Contribution}
 Une architecture de communication hybride en trois parties serveur, persistance, 
 pairs est utilisée dans 3DEvent \cite{Desprat2016}. Cela permet de concilier à la 
 fois les avantages d'une architecture client-serveur et ceux du \gls{P2P} en évitant 
@@ -161,10 +129,11 @@ Le rôle induit les capacités et la configuration de chaque pair, i.e. un pair 
 est configuré uniquement pour relayer les données tandis qu'un pair actif sera 
 configurer pour traiter et relayer les données tandis qu'un pair passif ne fait que 
 stocker et relayer les données.
+
 \begin{figure}[ht]
 	\centering
-	\inputTikZ{1}{eps/tikz/middleware/middleware}
-	\caption{Composants de chaque pair dans 3DEvent (point de vue réseau)}
+	\inputTikZ{0.8}{eps/tikz/middleware/middleware}
+x	\caption{Composants de chaque pair dans 3DEvent (point de vue réseau)}
 	\label{fig:middleware}
 \end{figure}
 
@@ -201,7 +170,7 @@ situation respective de leurs \textit{ESM} \info{definir} afin de se synchronise
 	\label{fig:connexionpairs}
 \end{figure}
 
-\subsection{Event Store distribué}
+\subsection{Extension : Event Store distribué}
 
 L'Event Store est un composant clé dans le traitement des évènements. Il prend 
 en entrée des évènements générés ou reçus extérieurement et produit en sortie 
