@@ -14,9 +14,10 @@
 
 %\usepackage[hide=true]{nobibprint}
 \begin{document}
-	\frontmatter
 	\include{glossaire}
-	\maketitle
+	\frontmatter
+	\includepdf[pages={1}]{pagedegarde/example.pdf}
+	%\maketitle
 	\dominitoc
 	\include{resume}
 	%\include{remerciements}
@@ -26,13 +27,12 @@
 	\mainmatter
 
 %\chapter{Introduction}
-%\include{01_intro}
+\include{01_intro}
 
 %\chapter{Contexte}
-%\include{1_contexte}
 
 %\chapter{État de l'art}
-%\include{2_etat_de_lart}
+\include{2_etat_de_lart}
 
 %\chapter{Contributions scientifiques}
 \include{3_contributions}
