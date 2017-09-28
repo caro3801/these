@@ -88,8 +88,36 @@ Section X)\improve{annulation d'un évènement ou juste ES}.
 Dans chaque onglet on trouve donc différent blocs \gls{HTML}, avec des 
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
 correspondent aux Views de notre modèle.
+\paragraph{Exemple d'interaction dans le framework}
+\todo{ref a la fig et traduction. cote implé?}
+The conflict detection component allows the developer to imple- ment its own 
+conflict resolution rules. It triggers a flag if versions between the received 
+aggregate and the current one are equal (see Figure 4). According to the business 
+logic rules defined, the event is rejected, accepted with or without modifications. 
+From this pro- cess, new events can be generated during the resolution.
 
+Figure 4 describes how the system executes a translation action triggered by a 
+user and how it’s broadcasted to his/her collaborators (scene, cube geometry, and 
+cube mesh should be created before). 
+
+La Figure \ref{fig:cqrs-example} décrit la façon dont le système traite l'exécution 
+d'une commande de translation déclenchée par l'utilisateur et comment cette 
+information est diffusée à ces collaborateurs.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
+	\caption[Flux de la collaboration dans le framework 3DEvent entre 3 
+	utilisateurs]{Exemple d'édition collaborative où User A est connecté à User  B, 
+		lui 
+		même connecté à User C. Le cycle montre les différentes étapes du 
+		déclenchement de la commande au rendu visuel en passant par la 
+		génération 
+		de l'évènement, la 
+		synchronisation du journal d'évènements et l'impact sur le rendu des autres 
+		utilisateurs pour une translation sur un cube.}\label{fig:cqrs-example}
+\end{figure}
 \subsection{Flexibilité de la visualisation}
+\label{sec:flexviz}
 Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
 partir du flux d'évènements. Pour Abdullin, <<la projection est le processus de 
 conversion (ou d'agrégation) d'un flux d'évènement en une représentation 
@@ -122,3 +150,5 @@ passer d'un état à l'autre et qui réalisent les actions déterminées en fonc
 scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
 jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
 jamais utiliser $eA$.
+
+

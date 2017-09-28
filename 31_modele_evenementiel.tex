@@ -172,32 +172,42 @@ la modélisation 3D collaborative (visualisation et manipulation).
 	\caption{Illustration des notions de évènements du domaine, des types 
 		d'évènements, et des instances d'évènements.}
 	\label{fig:representation_event}
-\end{figure}
+\end{figure} 
 
-Le domaine des évènements \textit{ED} (\textit{Event Domain}) correspond au 
-contexte borné dans 
-lequel les évènements se produisent. \todo{changer instance par agregat}
-Il contient les entités du type d'évènement 
-\textit{ET} (\textit{Event Type}) spécifié. Un \textit{ET} est utilisé pour exprimer un 
-intérêt concret envers les entités d'un \textit{ED}. Les évènements abstraits 
-\textit{aet} (\textit{abstract event type}) sont compatibles avec l'\textit{ED}. Les 
-instances d'évènements \textit{EI} (Event Instances) -- ou simplement 
-évènements -- sont composés du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
-\textit{EP} est l'acronyme pour les paramètres d'évènements (Event Parameter) 
-assignés à un \textit{EI}. La spécification des évènements nécessite de 
+Pour décrire le cadre de référence dans lequel les évènements se produisent, la 
+notion de domaines d'évènements est introduite. Un domaine d'évènements 
+\textit{ED} (\textit{Event Domain}) contient les évènements qui respecte les types 
+d'évènements qui peuvent être spécifiés. Par analogie avec le \gls{DDD}, cet 
+espace correspond au contexte borné (cadre d'action) d'un agrégat. À un agrégat 
+sont associés des types d'évènements \textit{ET} (\textit{Event Type}) particuliers. 
+Un \textit{ET} est utilisé pour exprimer un intérêt concret envers les entités d'un 
+\textit{ED}. 
+Les évènements abstraits \textit{aet} (\textit{abstract event type}) sont 
+compatibles avec l'\textit{ED}. 
+Une instance d'évènement \textit{e} -- ou simplement 
+évènements -- est composée du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
+L'ensemble des toutes les instances d'évènements possibles est exprimée par 
+\textit{EI}. \textit{EP} (Event Parameters) correspond à l'ensemble des paramètres 
+que peut avoir l'\textit{EI}. Ainsi, tous les évènements sont liés aux intérêts 
+d'un~\textit{ED}. La spécification des évènements nécessite de 
 s'intéresser à tous les types d'évènements qui sont utilisés lors de la manipulation 
 et la visualisation d'objets 3D dans un \gls{EVC}. La détection d'évènement est un 
 processus qui permet de récupérer les instances d'évènements d'un \textit{ET} en 
 particulier. Cela peut être utilisé pour la visualisation de types particulier par 
 exemple. Dans 3DEvent, la spécification des évènements est calquée sur les 
 comportements observés lors des expérimentations des premiers travaux 
-\cite{Desprat2015a, Desprat2015b}. Le Tableau \ref{tab:extraitevent} ci-dessous, 
+\cite{Desprat2015a, Desprat2015b}. 
+
+Le Tableau \ref{tab:extraitevent} ci-dessous, 
 présente les évènements de l'agrégat Maillage -- extrait du Tableau 
 \ref{tab:events} qui résume les 
 différents types d'évènements de bases construits à partir du framework et les 
-agrégats auxquels ils sont associés. 
+agrégats auxquels ils sont associés. Parmi ces évènements, l'évènement 
+\textit{meshAdded} et \textit{meshDropped} semblent être très proches, voire 
+identique quant au résultat que l'utilisateur peut obtenir. Cependant, la sémantique 
+liée à chacun permet de différencier l'intention de l'utilisateur. 
 
-%TODO parler des * dans le tableau comme un exemple
+
 \begin{table}[ht]
 	\centering
 	\caption{Évènements de pour 
@@ -231,32 +241,15 @@ agrégats auxquels ils sont associés.
 	\end{tabular}
 \end{table}
 
-
 Ce tableau permet de donner un exemple qui reprend la description qui vient d'être 
 présentée. L'\textit{ED} correspond donc au \og système de modélisation 3D 
-collaborative\fg{}. 
-Dans ce contexte on retrouve l'agrégat (entité) \og Maillage\fg{}. Chaque agrégat 
-Maillage 
-réagit à un certain nombre de types d'évènements comme \textit{meshAdded}, 
+collaborative\fg{}. Dans ce contexte l'agrégat (entité) \og Maillage\fg{} réagit à un 
+certain nombre de types d'évènements comme \textit{meshAdded}, 
 \textit{meshDropped} \dots Les évènements typés sont produits par l'agrégat en 
 prenant en compte les paramètres nécessaires à leur instanciation. Par exemple, 
 la production d'un évènement \textit{meshTranslated} prend en paramètre le 
 vecteur de translation (x,y,z) et la référence de l'identifiant de la scène à laquelle il 
 appartient.
-\begin{lstlisting}[language=json,firstnumber=1,label=jsonexemple,caption=Mesh 
-added to Scene event and parameters]
-{
-	{
-		"sceneId": "scene-turbine",
-		"meshId":"406514c6-306b-f0f9643a037e",
-		"geometryId": "37076875-ea1c-bbd300481345",
-		"name": "blade",
-		"color": "#963912"
-	},
-	"version": 17,
-	"author": "Foo"
-}
-\end{lstlisting}
 
 
 Plus généralement, le domaine est la représentation des objets 3D d'un point de 
@@ -357,13 +350,14 @@ sur plusieurs sites.
 Le site est considéré comme une zone disponible qui accepte 
 l'écriture d'un journal d'évènements local même s'il est partitionné sur plusieurs 
 sites. Les journaux d'évènements locaux situés sur plusieurs sites peuvent être 
-connectés par le biais d'un journal d'évènements dit \og répliqué\fg{} (copié sur une autre réplique) qui a pour 
-responsabilité de préserver l'ordre causal des évènements.\todo{dessin des 
-journaux}  Les sites peuvent être situés à des endroits géographiquement distincts 
-ou sur 
+connectés par le biais d'un journal d'évènements dit \og répliqué\fg{} (copié sur une 
+autre réplique) qui a pour responsabilité de préserver l'ordre causal des 
+évènements.
+%\todo{dessin des journaux}  
+Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}) ou encore être sur le 
-même nœud mais traités séparément selon les \improve{c'est quoi}zones 
-disponibles nécessaires au fonctionnement de l'application. 
+même nœud mais traités séparément selon les zones 
+disponibles qui sont nécessaires au fonctionnement de l'application. 
 Les Acteurs et les Processeurs écrivent cependant toujours sur leur journal 
 d'évènements local. 
 Les composants peuvent soit collaborer sur un journal d'évènements local sur le 
@@ -445,30 +439,6 @@ effets avant leurs causes.
 
 
 
-\paragraph{Exemple d'interaction dans le framework}
-\todo{ref a la fig et traduction. cote implé?}
-The conflict detection component allows the developer to imple- ment its own 
-conflict resolution rules. It triggers a flag if versions between the received 
-aggregate and the current one are equal (see Figure 4). According to the business 
-logic rules defined, the event is rejected, accepted with or without modifications. 
-From this pro- cess, new events can be generated during the resolution.
-
-Figure 4 describes how the system executes a translation action triggered by a 
-user and how it’s broadcasted to his/her collaborators (scene, cube geometry, and 
-cube mesh should be created before). 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
-	\caption[Flux de la collaboration dans le framework 3DEvent entre 3 
-	utilisateurs]{Exemple d'édition collaborative où User A est connecté à User  B, 
-	lui 
-	même connecté à User C. Le cycle montre les différentes étapes du 
-	déclenchement de la commande au rendu visuel en passant par la génération 
-	de l'évènement, la 
-	synchronisation du journal d'évènements et l'impact sur le rendu des autres 
-	utilisateurs pour une translation sur un cube.}\label{fig:cqrs-example}
-\end{figure}
-
 \subsection{Cohérence Éventuelle en CQRS}
 
 
@@ -507,8 +477,8 @@ CQRS is when
 }.
 Young justifie ensuite que le lien entre \gls{CAP} et \gls{CQRS} est plus ténu qu'il 
 n'y paraît. Même si \gls{CQRS} ne permet pas d'éviter le dilemme de \gls{CAP}, le 
-fait que \gls{CQRS} découpe le système en petites parties permet de les ajuster 
-séparément.
+fait que \gls{CQRS} découpe le système en petites parties permet d'ajuster la 
+cohérence séparément.
 
 Dans \gls{CQRS}, l'interaction avec plusieurs agents (utilisateurs, services) est 
 découplée et subit un traitement réparti 
@@ -519,7 +489,8 @@ Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interf
 Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de formulaire -> envoi 
 asynchrone -> 
 message de confirmation}, si l'utilisateur attends que la soumission soit une 
-requête qui peut probablement échouer, alors l'asynchronisme se justifie. La probabilité 
+requête qui peut probablement échouer, alors l'asynchronisme se justifie pour être 
+capable de fournir une explication à l'utilisateur en cas d'erreur. La probabilité 
 d'échec peut être réduite en pré-validant la commande. Si personne d'autre que 
 l'utilisateur ne travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
 l'asynchronicité rajoute une interaction inutile au flux dans le cas où peu de gens 
@@ -528,9 +499,6 @@ Par exemple, il est intéressant de rendre l'exécution d'une
 commande synchrone et la mise à jour de la vue asynchrone. Les modèles de 
 cohérence sont des décisions liées au métier car ils ont un impact direct sur 
 l'expérience utilisateur. 
-
-
-
 
 
 %Linéaire (strong consistency)
@@ -587,7 +555,7 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	temps-réel) sur des plateformes web à cause du coût et de la complexité que 
 	cela peut apporter dans des architectures traditionnelles. 3DEvent peut 
 	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
-	évènements et indiquer les différences entre deux états.\todo{acyclic graph}
+	évènements et indiquer les différences entre deux états.%\todo{acyclic graph}
 	
 	\item[Scenarii et \textit{path recording}] Pour des jeux sérieux, les graphistes 
 	3D ou des études d'ergonomie, cette fonctionnalité est particulièrement 
@@ -638,8 +606,8 @@ agrégats fondamentaux (la scène, le maillage, la géométrie et l'utilisateur)
 types d'évènements qui leurs sont associés. Cette étape introduit des différences 
 fines sur les évènements qui sont produits à partir d'un agrégat. 
 Cet aspect est notamment intéressant pour l'observation et la surveillance du 
-contenu des sessions collaboratives\todo{ref section :développé dans implantation 
-du framework}.
+contenu des sessions collaboratives développés en Section 
+\ref{sec:flexviz}. \todo{attention garder le bon endroit}
 Les composants du patron \gls{CQRS} favorisent le découplage de l'application 
 pour obtenir une gestion de la cohérence plus fine. 
 
@@ -652,7 +620,6 @@ intégrant implicitement une gestion de version des évènements.
 Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 3D, il 
 peut être facilement adapté pour différents types d'applications et étendu à 
 d'autres utilisations. 
-
 Pour mettre en avant l'expertise de chacun et profiter de 
 toutes les ressources apportées par un utilisateur, une communication efficace de 
 ces évènements pour la collaboration doit désormais être établie entre les 

@@ -67,10 +67,8 @@ le routage et la localisation, l'anonymat et la confidentialité.
 
 \gls{WebRTC} est une technologie qui fournit aux navigateurs 
 \textit{destkop} et mobiles la possibilité de communiquer en temps-réel 
-(\textit{Real-Time Communications}) via une collection de standards, 
+(cf \ref{sec:webrtc} via une collection de standards, 
 protocoles et \glspl{API} JavaScript. 
-Le standard \gls{WebRTC} est développé au sein du \gls{W3C} et de 
-l'\gls{IETF} depuis 2011 dans sa version 1.0 (Working Draft). 
 L'un des atouts de cette technologie est de permettre de façon simple et 
 sans module d'extension la capture d'un flux audio et / ou vidéo (ex : 
 applications de VoIP), ainsi que l'échange de données arbitraires entre 
@@ -110,7 +108,7 @@ résistante aux pannes.
 
 \subsection{Présentation générale}
 Un intergiciel (\textit{middleware}) se compose en général d'une \gls{API} de 
-recherche \ref{fig:middleware}.
+recherche (Figure \ref{fig:middleware}).
 Dans notre modèle cette brique est principalement en lien avec le 
 gestionnaire d'instance qui se charge de la recherche. L'\gls{API} de messagerie 
 concerne plus directement le système d'envoie et de réception de message. Les 
@@ -132,7 +130,7 @@ stocker et relayer les données.
 \begin{figure}[ht]
 	\centering
 	\inputTikZ{0.8}{eps/tikz/middleware/middleware}
-x	\caption{Composants de chaque pair dans 3DEvent (point de vue réseau)}
+	\caption{Composants de chaque pair dans 3DEvent (point de vue réseau)}
 	\label{fig:middleware}
 \end{figure}
 
@@ -143,6 +141,9 @@ La couche \gls{P2P} fournit une dissémination rapide de l'information et
 décentralise la réplication des données à court terme. Cela évite donc au serveur 
 d'être le point central des échanges en déchargeant les canaux passant par le 
 serveur.
+
+
+
 
 \paragraph{Connexion des pairs en début de session}
 
