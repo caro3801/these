@@ -1058,7 +1058,10 @@ c'est pourquoi la décentralisation de l'information est nécessaire. La connais
 peut vite devenir viciée dans un système dynamique décentralisé ce qui implique 
 de trouver une méthode efficace pour gérer la dynamicité.
 
-Les systèmes \gls{PubSub} ont donc l'avantage de proposer une architecture orientée évènements dont le fonctionnement s'adapte à plusieurs types de communication, que ce soit client serveur, P2P. Cette flexibilité à l'avantage de proposer un système à couplage lâche qui reste cependant difficile d'observer à grande échelle.
+Les systèmes \gls{PubSub} ont donc l'avantage de proposer une \gls{EDA} dont le 
+fonctionnement s'adapte à plusieurs types de communication, que ce soit client 
+serveur, P2P. Cette flexibilité à l'avantage de proposer un système à couplage 
+lâche qui reste cependant difficile d'observer à grande échelle.
 
 \subsubsection{Outils de surveillance, contrôle de performances et validation ergonomique}
 Dans un système distribué comme \gls{PubSub}, les outils de comparaisons 
@@ -1304,13 +1307,14 @@ d'\acrlong{ES} en 2005. Il définit l'\gls{ES} comme \og une série de
 changements 
 de l'état d'une application\fg{}'.  \og série d'évènements capture tout ce qui est 
 nécessaire à la reconstruction de l'état courant'\fg{}. Il voit les évènements 
-comme 
-immuables et le journal d'évènement (\textit{event log}) comme un stockage 
-linéaire (\textit{append only store}) des évènements. Les évènements ne sont 
-jamais supprimés, le seul moyen de l'''annuler'' consiste à effectuer générer un 
-évènement rétroactif. Une fois qu'un évènement rétroactif est ajouté, 
-l'évènement 
-rétroactif agit à l'inverse de l'évènement précédent pour compenser ses effets. 
+comme immuables et le journal d'évènement (\textit{event log}) comme un 
+stockage linéaire (\textit{append only store}) des évènements (Figure 
+\ref{fig:es-event}). 
+Les évènements ne sont jamais supprimés, le seul moyen de l'''annuler'' consiste à 
+effectuer générer un évènement rétroactif. 
+Une fois qu'un évènement rétroactif est ajouté, l'évènement rétroactif agit à 
+l'inverse de l'évènement précédent pour compenser ses effets (Figure 
+\ref{fig:es-transaction-delete}). 
 Dans ce billet, Fowler n'établit pas clairement la distinction entre les 
 évènements 
 et les commandes qui déclenchent ces évènements. Ce problème est 
@@ -1357,15 +1361,15 @@ insiste sur le fait que \og l'état du modèle du domain est persisté comme un
 			\label{fig:es-without-snapshot}
 		}
 		\subfloat[Avec la notion de snapshot]{
-			\includegraphics[width=0.4\textwidth]{without-snapshot.eps}
+			\includegraphics[width=0.4\textwidth]{snapshot.eps}
 			\label{fig:es-snapshot}
 		}
 		\caption{Snapshot en Event-Sourcing}
 	\end{figure}
 
-Les avantages et les inconvénients de l'approche \gls{ES} sont orientés selon le 
+Les avantages et les inconvénients de l'approche \gls{ES} dépendent du
 cadre dans lequel elle est utilisée. En reprenant ceux cités par Klamer 
-\cite{Klamer2013a}, on peut les reprendre sous l'angle de la modélisation 3D 
+\cite{Klamer2013a}, ils peuvent être envisagés sous l'angle de la modélisation 3D 
 collaborative.
 
 \subsubsection{Avantages}
@@ -1463,10 +1467,11 @@ avoir une exactitude rigoureuse de ce qui se passe dans le système.
 Un évènement représente quelque chose qui est arrivé dans le domaine. Un 
 évènement appliqué sur un état, donne un nouvel état. 
 La condition pour appliquer un pur déterminisme en \gls{ES} est la fonction 
-suivante : \texttt{State $\rightarrow$ Event $\rightarrow$ State}. Cette fonction met 
-en correspondance les (mêmes) entrées avec les (mêmes) sorties, on peut se 
-reposer dessus pour reconstituer un état à n'important quel moment dans le 
-temps. Le déterminisme est appliqué en assurant à l'évènement tous les 
+suivante : \texttt{État~$\rightarrow$~Évènement~$\rightarrow$~État}. 
+Cette fonction met en correspondance les (mêmes) entrées avec les (mêmes) 
+sorties ; ce qui permet de se reposer dessus pour reconstituer un état à 
+n'important quel moment dans le temps. 
+Le déterminisme est appliqué en assurant à l'évènement tous les 
 informations lui permettant de faire la transition (i.e. sans effet de bord). 
 L'évènement est alors considéré comme une encapsulation de toutes les 
 informations pertinentes concernant la transition du système d'un état à l'autre.
@@ -1474,7 +1479,7 @@ informations pertinentes concernant la transition du système d'un état à l'au
 Une commande va être déclenchée par l'utilisateur qui veut modifier le domaine. 
 Une commande appliquée sur un état va produire un ou plusieurs évènements (qui 
 ne sont pas forcément appliqués à l'état courant de l'application par la suite): 
-\texttt{State $\rightarrow$ Command $\rightarrow$ Event list}
+\texttt{État~$\rightarrow$~Commande~$\rightarrow$~Liste d'évènements}.
 
 La différence principale entre un évènement et une commande réside donc dans 
 l'\textbf{intention}. D'un point de vue fonctionnel, le \gls{CS} est un patron de 
@@ -1533,29 +1538,29 @@ systèmes de modélisation 3D pour la visualisation ou la manipulation d'objets 
 collaboratifs sur le web, cet aspect est souvent mis de côté. Or, dans le cadre de 
 la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
 prépondérants.
-Différentes approches parmi les architecture orientée évènements dans un 
+Différentes approches parmi les architectures orientée évènements dans un 
 système collaboratif permettent d'intégrer les règles liées au métier dans une 
 application de modélisation collaborative. Dans un 
-premier temps, 
-l'architecture \gls{PubSub}, propose un système de notifications pour les différents 
+premier temps, l'architecture \gls{PubSub}, propose un système de notifications 
+pour les différents 
 n\oe uds d'un réseau de manière lâche. De cette manière la communication est 
 homogénéisée et repose uniquement sur des notifications d'évènement pour les 
-entrées et sorties des participants. Le mécanisme d'abonnement autorise une 
+entrées et sorties des clients. Le mécanisme d'abonnement autorise une 
 grande variété de stratégies quant au routage des messages.
 Dans un second temps, différents patrons de conceptions sont présentés. Le 
 \gls{DDD} est plutôt considéré comme un patron de conception stratégique. Ses 
-principes permettent d'avoir une vision centrée métier au logiciel. A partir de ces 
-orientations, \gls{CQRS} vient proposer une discrimination entre la partie écriture 
-(commande) et lecture (requête) dans l'application. Le passage à l'échelle côté 
-lecture est favorisé grâce à la création de projections des données facilite la 
-restitution des données sans risques d'effets de 
-bord. Côté écriture, le contenu des commandes est validé tout au long de la partie 
-commande, notamment avec l'intégration des les règles métiers dans le modèle 
-du domaine. L'\gls{ES} est le patron qui introduit la notion d'évènement au sens 
-que \og ce qui s'est passé\fg{}. Les évènements sont orientés métiers en suivant 
-les lignes du \gls{DDD}. Le flux d'évènements qui est généré par 
-\gls{CQRS} est stocké dans un \gls{EventStore} qui correspond à la source de 
-vérité de l'application. On peut connaître l'historique de l'application 
-juste en regarde la pile d'évènements autant que recréé l'état de l'application à 
-partir de l'\gls{EventStore}. \todo{parler de la concurrence} 
+principes permettent de donner une vision centrée métier au logiciel. 
+A partir de ces orientations, \gls{CQRS} vient proposer une discrimination entre la 
+partie écriture (commande) et lecture (requête) dans l'application. Le passage à 
+l'échelle côté lecture est favorisé grâce à la création de projections des données 
+facilite la restitution des données sans risques d'effets de bord. 
+Le côté écriture, permet de valider le contenu entrant selon les règles métiers du 
+le domaine métier. L'\gls{ES} est le patron qui introduit la notion d'évènemens (\og 
+ce qui s'est passé\fg{}). L'état de l'application se reconstruit à 
+partir de ces évènements issus de l'expertise métier -- déduite grâce au \gls{DDD}. 
+Les évènements générés par \gls{CQRS} sont stockés dans le journal des 
+évènements qui les partage aux autres collaborateurs, ce qui peut 
+provoquer des conflits qu'il faut pouvoir détecter pour éviter les incohérences dans 
+l'\gls{EVC}. 
+%\todo{parler de la concurrence} 
 
