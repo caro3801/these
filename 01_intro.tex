@@ -13,19 +13,18 @@ concurrente se fait sentir \info{better read the first
 	one!}\cite{Chandrasegaran2013,Wu2014}. Or, la quantité et la taille des données 
 étant toujours croissante, il devient de plus en plus difficile de partager les 
 modèles, particulièrement avec les utilisateurs n'ayant pas accès aux derniers 
-logiciels et matériels graphiques. En conséquences,
+logiciels et matériels graphiques. En conséquence,
 le développement de plateformes légères déployées sur le web pour de répondre à ces 
 besoins est en forte progression. 
-Dans un \gls{EVC3D}, la simulation distribuée d'un environnement virtuel 3D, un 
-grand nombre d'utilisateurs situés à différents endroits géographiques peuvent 
-interagir les uns avec les autres en temps-réel. 
-Cette distorsion de l'espace physique et temporel impose aux \gls{EVC3D} des 
-mécanismes de communication rapide, conservant un environnement cohérent
+Dans un \gls{EV3D}, la simulation virtuelle et simulation distribuée d'un environnement 3D, un grand nombre d'utilisateurs situés à différents endroits géographiques peuvent 
+interagir les uns avec les autres en temps-réel. Un \gls{EVC3D} insiste sur l'aspect collaboratif des interactions qui se produisent entre les utilisateurs.
+Cette distorsion de l'espace physique et temporel impose aux \glspl{EVC3D} des 
+mécanismes de communication rapides, conservant un environnement cohérent
 des données partagées durant la collaboration. 
 L'utilisation d'un client comme medium pour 
 accéder à l'\gls{EVC3D} est requise pour envoyer des demandes au serveur. Le 
 client peut être manipulé par un utilisateur ou un agent logiciel (bot).
-Un \gls{EVC3D} se compose également un protocole de communication qui 
+Un \gls{EVC3D} se compose également d'un protocole de communication qui 
 permet aux différents clients d'échanger les mises à jours correspondants aux 
 modifications effectuées dans l'espace 3D virtuel partagé. La distribution des 
 données devient alors un enjeu de taille dans ce type d'application en terme de 
@@ -33,61 +32,6 @@ temps, de sécurité et de fiabilité.
 
 
 \input{1_contexte}
-
-L'exigence vis-à-vis des temps de réponse est de plus en plus 
-grande et ce pour deux raisons principales : les limitations humaines (mémoire et 
-attention limitées 
-à court terme) et les aspirations de l'être humain (besoin d'être en contrôle sur les 
-machines). S'accroissant au gré de la technologie et aux attentes 
-utilisateurs (rétro-compatibilité, temps de 
-chargement), elle varie selon le domaine mais reste très assez prégnante sur le 
-web en général. 
-Par exemple, dans un domaine annexe comme le e-commerce, une étude réalisée 
-en 2009 explique qu’une grande partie des internautes abandonnaient leurs achats 
-en ligne si les pages mettaient 2 secondes ou plus à charger\footnote{\url{https://www.akamai.com/us/en/about/news/press/2009-press/akamai-reveals-2-seconds-as-the-new-threshold-of-acceptability-for-ecommerce-web-page-response-times.jsp}}. De nos jours, ce 
-délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
-Nielsen \cite{Nielsen1993a} indique trois temps de réponse limites concernant les 
-temps de réponses :
-\begin{itemize}
-	\item \textit{0,1 seconde} donne une sensation de réponse instantanée, comme 
-	si le 
-	résultat avait été produit par l'utilisateur et non l'ordinateur. Ce niveau de temps 
-	de réponse soutient la sensation de manipulation directe.\footnote{En IHM, la 
-		manipulation directe correspond à un mode d'interaction au cours duquel les 
-		utilisateurs font des actions sur les objets d'intérêt affichés dans l'interface 
-		utilisateur en utilisant des actions physiques, incrémentales et réversibles 
-		dont 
-		les effets sont immédiatement visibles sur l'écran.} 
-	\item \textit{1 seconde} garde le flux de pensées de l'utilisateur sans 
-	interuption. 
-	L'utilisateur peut ressentir un délai et par conséquent savoir que c'est la 
-	machine qui génère le résultat ; l'utilisateur a quand même une impression de 
-	contrôle sur l'expérience générale et peut de déplacer librement dans l'interface 
-	sans attendre la machine. Ce degré de réactivité est impératif pour une bonne 
-	navigation.
-	\item \textit{10 secondes} conservent l'attention de l'utilisateur. Entre 1 et 10 
-	secondes, l'utilisateur se sent dépendant de la machine, mais peut faire avec. 
-	\item \textit{Au delà} de 10 secondes, l'utilisateur va commencer à penser à d'autres choses, rendant difficile 
-	le retour à la tâche une fois que la machine répond.
-\end{itemize} 
-Dans le domaine de l'édition et la manipulation collaborative 
-d'objets 3D, les contraintes abordées se situent à divers degrés : au chargement 
-et lors des mises à jour. Le chargement concerne la phase de téléchargement de 
-l'application web et des données relatives mais également d'affichage des 
-modèles 3D sont spécifiques dans ce domaine car ils ont 
-tendance à être lourds (structure de données 3D et métadonnées) à charger 
-(contrairement au texte par exemple). Cette phase peut s'accorder des délais 
-relativement long (1-10s) compte tenu du fait que l'utilisateur connaît en partie ces 
-contraintes liées à la taille des objets 3D. Concernant les mises à jour, l'édition 
-collaborative requiert un temps de réponse raisonnablement court est contraint par 
-l'exactitude des calculs et le temps dans lequel le résultat est produit. Pour les 
-mises à jour internes -- produites par l'utilisateur, actions sur l'interface -- on 
-s'accordera sur un délai inférieur à 0,1 seconde dans cette thèse. 
-Pour les mises à jour externes -- produites par les collaborateurs -- les latences 
-réseaux rentrent en comptes (serveur, pairs\ldots) on s'accordera sur un délai 
-entre 1 et 10 secondes dans cette thèse selon les degrés d'asynchronicité 
-possibles. 
-
 
 
 Les bureaux d'études en ingénierie et en architecture travaillent sur des projets 
@@ -99,7 +43,7 @@ modèles en \gls{3D} doivent être revues par des gestionnaires de projet, des
 clients et les intervenants impliqués qui peuvent à leur tour suggérer des 
 modifications sur la conception tout cela en accord avec des contraintes métiers 
 transparentes. Ces règles doivent donc apparaître dès la conception pour être 
-intégrée tôt dans la modélisation 3D.
+intégrées tôt dans la modélisation 3D.
 
 %Toutes ces entités ont besoin d'être capables de 
 %charger les ressources pour pouvoir les inspecter et les analyser. Ces 
@@ -119,12 +63,12 @@ Cette thèse se situe à l'interface de trois champs de recherches (Figure
 3D. Souvent commerciaux (Clara.io, OnShape, Verold Studio), les modeleurs 
 utilisent des technologies supportées par les navigateurs web qui leur permettent 
 d'être disponibles sur la plupart des plateformes. 
-Cependant ces derniers reposent sur une gestion centralisée des données qui rend 
+Cependant ces dernières reposent sur une gestion centralisée des données qui rend 
 les utilisateurs très dépendants de la disponibilité de ces plateformes et d'une 
 connexion internet pour la distribution des informations. 
 Mises à part quelques exceptions, les fonctionnalités collaboratives 
 sont souvent présentées comme mineures. Même si le \og partage\fg{} de la 
-visualisation à la manière des \og réseaux sociaux\fg{} est assez courant, l'édition 
+visualisation à la manière des \og réseaux sociaux\fg{} est assez courante, l'édition 
 collaborative est souvent complexe à implémenter car les besoins sont nombreux. 
 Parmi eux, on trouve tout d'abord le besoin d'avoir un système distribué 
 conservant la cohérence des modifications de chacun des utilisateurs. Or, 
@@ -144,18 +88,17 @@ cours du temps. Dans ce contexte, il existe un fort besoin de gérer l'évolutio
 versions permettant la revue des modèles \gls{3D}. 
 En s'appuyant sur les ressources à dispositions, tels que les clients (navigateurs 
 web) sur lesquels les utilisateurs manipulent les modèles \gls{3D}, le passage à 
-l'échelle est plus flexible car les ressources augmentent avec le nombre de client 
+l'échelle est plus flexible car les ressources augmentent avec le nombre de clients 
 et procurant également plus d'autonomie aux utilisateurs utilisant leurs ressources 
 propres.
 L'architecture de communication et les contraintes liées aux architectures 
-distribuées et décentralisée correspond au second axe de recherche. 
+distribuées et décentralisées correspond au second axe de recherche. 
 Enfin, le dernier champs 
 s'adresse à la partie que nous appellerons \og métier\fg{} qui se rapporte au 
-domaine de la manipulation d'objets 3D qui inclue la 
+domaine de la manipulation d'objets 3D qui inclut la 
 gestion du cycle de vie des données 3D de l'interaction utilisateur à son stockage 
 en passant par sa distribution. Ces aspects se rapportent principalement à 
-l'historique, la traçabilité de l'information et l'expertise embarquée dans le système 
-dans le cadre de cette thèse.
+l'historique, la traçabilité de l'information et l'expertise embarquée dans le système.
 
 \begin{figure}[hbt]
 	\centering

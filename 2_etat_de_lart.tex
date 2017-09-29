@@ -385,6 +385,59 @@ L'expression temps-réel est largement utilisée par des applications requérant
 forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
 expérience. La communication dans un \gls{EVC} est primordiale pour échanger entre les collaborateurs . Elle doit respecter l'intention des utilisateurs pour leur permettre de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
 
+L'exigence vis-à-vis des temps de réponse est de plus en plus 
+grande et ce pour deux raisons principales : les limitations humaines (mémoire et 
+attention limitées 
+à court terme) et les aspirations de l'être humain (besoin d'être en contrôle sur les 
+machines). S'accroissant au gré de la technologie et des attentes des 
+utilisateurs (rétro-compatibilité, temps de 
+chargement), cette exigence varie selon le domaine : elle est prépondérante sur le 
+web en général. 
+Par exemple, dans un domaine connexe comme le e-commerce, une étude réalisée 
+en 2009 explique qu’une grande partie des internautes abandonneraient leurs achats 
+en ligne si les pages mettaient 2 secondes ou plus à charger\footnote{\url{https://www.akamai.com/us/en/about/news/press/2009-press/akamai-reveals-2-seconds-as-the-new-threshold-of-acceptability-for-ecommerce-web-page-response-times.jsp}}. De nos jours, ce 
+délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
+Nielsen \cite{Nielsen1993a} indique quatres valeurs limites concernant les 
+temps de réponses :
+\begin{itemize}
+	\item \textit{0,1 seconde} donne une sensation de réponse instantanée, comme 
+	si le 
+	résultat avait été produit par l'utilisateur et non l'ordinateur. Ce niveau de temps 
+	de réponse soutient la sensation de manipulation directe.\footnote{En IHM, la 
+		manipulation directe correspond à un mode d'interaction au cours duquel les 
+		utilisateurs font des actions sur les objets d'intérêt affichés dans l'interface 
+		utilisateur en utilisant des actions physiques, incrémentales et réversibles 
+		dont 
+		les effets sont immédiatement visibles sur l'écran.} 
+	\item \textit{1 seconde} garde le flux de pensées de l'utilisateur sans 
+	interruption. 
+	L'utilisateur peut ressentir un délai et par conséquent savoir que c'est la 
+	machine qui génère le résultat ; il a quand même une impression de 
+	contrôle sur l'expérience générale et peut se déplacer librement dans l'interface 
+	sans attendre la machine. Ce degré de réactivité est impératif pour une bonne 
+	navigation.
+	\item \textit{10 secondes} conservent l'attention de l'utilisateur. Entre 1 et 10 
+	secondes, l'utilisateur se sent dépendant de la machine, mais peut faire avec. 
+	\item \textit{Au delà} de 10 secondes, l'utilisateur va commencer à penser à d'autres choses, rendant difficile 
+	le retour à la tâche une fois que la machine répond.
+\end{itemize} 
+Dans le domaine de l'édition et la manipulation collaborative 
+d'objets 3D, les contraintes abordées se situent à divers degrés : au chargement 
+et lors des mises à jour. Le chargement concerne la phase de téléchargement des ressources (page web, modèles 3D) parfois lourdes. Cette phase peut s'accorder de délais 
+relativement long (1-10s) compte tenu du fait que l'utilisateur connaît en partie ces 
+contraintes liées à la taille des objets 3D. Concernant les mises à jour, l'édition 
+collaborative requiert un temps de réponse raisonnablement court qui est contraint par 
+l'exactitude des calculs et le temps dans lequel le résultat est produit. Pour les 
+mises à jour internes -- produites par l'utilisateur, actions sur l'interface -- on 
+s'accordera sur un délai inférieur à 0,1 seconde dans cette thèse. 
+Pour les mises à jour externes -- produites par les collaborateurs -- les latences 
+réseaux rentrent en comptes (serveur, pairs\ldots) on s'accordera sur un délai 
+entre 1 et 10 secondes selon les degrés d'asynchronicité 
+possibles. 
+
+
+
+
 
 La communication et la transmission des données lors de la collaboration comptent parmi les piliers d'un \gls{EVC3D}. Que ce soit dans dans un 
 \gls{EV}, un jeu multi-joueurs ou un jeu sérieux (\textit{serious game}), les 
@@ -635,7 +688,7 @@ l'utilisent pour créer des \gls{EVC3D} \cite{Desprat2015a,Steiakaki2016} et
 optimiser le partage de modèles 3D \cite{Koskela2014}. 
 Côté commercial, un grand nombre d'applications et de services 
 basés sur ce protocole ont fait leur apparition (par ordre d'importance) : 
-des systèmes d'échanges audio/vidéo (VoIP)\footnote{WebRTCWorld en 
+des systèmes d'échanges audio / vidéo (VoIP)\footnote{WebRTCWorld en 
 	liste un peu plus de 140 
 	\url{http://www.webrtcworld.com/webrtc-list.aspx}. Consulté le 
 	07/07/2017.}, des systèmes de partage de fichiers\footnote{WebTorrent 
@@ -1099,7 +1152,7 @@ modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se 
 	\item L'\textbf{entité} (\textit{entity}) : un objet qui n'est pas définit par ces 
 	attributs 
 	mais plutôt par une continuité et son identité. 
-	Par exemple, chaque une scène possède des maillages qui utilisent des 
+	Par exemple, chaque scène possède des maillages qui utilisent des 
 	géométries.Si l'on 
 	considère un maillage comme unique dans chacune des scènes alors chaque 
 	maillage est une entité. Si on considère que ce sont les mêmes maillage qui 
@@ -1458,7 +1511,7 @@ Historiquement, l'\gls{ES} de Fowler dans ses premières versions ressemblait pl
 sous une forme fonctionnelle pure avec l'apparition de base de données comme 
 EventStore ou le langage de programmation plus adaptés comme F\#. Les deux 
 patrons peuvent cohabiter si le \gls{CS} a un cadre d'action bien délimité 
-et de les composants de l'architecture ont un couplage lâche afin que seuls les 
+et que les composants de l'architecture ont un couplage lâche afin que seuls les 
 évènements produits par les agrégats ne modifient l'état interne de l'application. 
 
 
