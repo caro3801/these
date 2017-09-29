@@ -898,6 +898,10 @@ fonction des capacités des clients. L'impact énergétique d'un tel système a 
 évalué sur les mobiles ciblant trois optimisations possibles : la qualité visuelle, les 
 performances et la consommation d'énergie. 
 
+Les architectures hybrides, combinant client-serveur et \gls{P2P} sont également 
+des solutions utilisées dans le cadre de l'apprentissage en ligne 
+\cite{Ekadiyanto2012} et du BIM \cite{Chen2014} par exemple. 
+
 En général, les systèmes \gls{P2P} semblent n'être supportés que dans les 
 environnements virtuels 3D. Ce phénomène est probablement dû au lien étroit 
 entre la séparation spatiale de l'utilisateur et le besoin de distribuer les données à 
@@ -1331,49 +1335,19 @@ insiste sur le fait que \og l'état du modèle du domain est persisté comme un
 		
 		\centering
 		\noindent
-		\begin{tikzpicture}[node distance=2.5cm,
-		every node/.style={ font=\scriptsize}, align=left,text width=5em,
-		text centered,
-		axis/.style={very thick, ->, >=stealth',yshift=-1cm}, draw]
-		% Specification of nodes (position, etc.)
-		
-		\node (e1)		[event]          {Created Scene \\"MyScene" 1};
-		\node (e2)	  	[event, right of=e1]          {Added Mesh "Bunny" 1 \\to Scene 
-		1};
-		\node (e3)	  	[event, right of=e2]          {Added Mesh \\"Teapot" 2  \\to 
-		Scene 1};
-		\node (e4)	  	[eventn, right of=e3]          {Translated \\Mesh 2 to 
-		\{x:0,y:0,z:1\}};
-		\draw[axis] (-1.3,0)  -- (12.5,0) node(xline)[]{~~~~~~~~~~~Temps};
-		
-		\end{tikzpicture}
-		\caption{Transaction en Event-Sourcing}
+		\subfloat[Nouvel évènement en \gls{ES}]{
+			\inputTikZ{1}{eps/tikz/eventsourcing/es.tex}
+			\label{fig:es-event}
+		}
+	
+	\subfloat[Transaction avec compensation en \gls{ES}]{
+		\inputTikZ{1}{eps/tikz/eventsourcing/escompensation.tex}
+		\label{fig:es-transaction-delete}
+	}
+		\caption{Transaction en \gls{ES}}
 		\label{fig:es-transaction}
 	\end{figure}
-	
-	\begin{figure}[!h]
-		\centering
-		\noindent
-		\begin{tikzpicture}[node distance=2.5cm,
-		every node/.style={ font=\scriptsize}, align=center,text width=5em,
-		text centered,
-		axis/.style={very thick, ->, >=stealth',yshift=-1cm}, draw]
-		% Specification of nodes (position, etc.)
-		
-		\node (e1)		[event]          {Created Scene \\"MyScene" 1};
-		\node (e2)	  	[event, right of=e1]          {Added Mesh "Bunny" 1 \\to Scene 
-		1};
-		\node (e3)	  	[event, right of=e2]          {Added Mesh \\"Teapot" 2  \\to 
-		Scene 1};
-		\node (e4)	  	[event, right of=e3]          {Translated \\Mesh 2 to 
-		\{x:0,y:0,z:1\}};
-		\node (e5)	  	[eventc, right of=e4]          {Canceled translation on Mesh 2};
-		\draw[axis] (-1.3,0)  -- (12.5,0) node(xline)[]{~~~~~~~~~~~Temps};
-		\end{tikzpicture}
-		\caption{Transaction avec compensation en Event-Sourcing}
-		\label{fig:es-transaction-delete}
-	\end{figure}
-	
+
 	
 	\begin{figure}[t]
 		\centering
@@ -1449,18 +1423,24 @@ l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Stor
 nécessaire de le calculer à partir des évènements reçus.
 A chaque évènement créé (et stocké), ce processus sera alourdi car ils ne 
 peuvent être supprimés. Plus la pile d'évènements est longue, plus cela prend 
-du temps (linéaire), considérant que les commandes ont besoin parfois de connaître une partie de l'état courant issu de ces évènements pour être déclenchée.\info{rehydratation d'un 
-agrégat diff avec projection -> eventually consistence (proj = EC /rehy -> 
-valides}.\unsure{Dans tous les autres cas l'utilisation de \textit{snapshots} 
-permet de contrer proprement ce problème en offrant une forme dénormalisée 
-de la donnée. }Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
+du temps (linéaire).
+ considérant que les commandes ont besoin parfois de connaître une partie de 
+ l'état courant issu de ces évènements pour être déclenchée.
+ 
+Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
 moment qui correspond à l'empilement d'évènements ayant mené à cet état. En 
 créant un \gls{snapshot}, on évite de reconstruire un état à partir du début de la 
-vie de l'agrégat; on empile les nouveaux évènements à partir de ce snapshot. 
+vie de l'agrégat (Figure \ref{fig:es-without-snapshot}) ; on empile les nouveaux 
+évènements à partir de ce snapshot (Figure \ref{fig:es-snapshot}). 
 L'utilisation du \gls{snapshot} est intéressante à partir du moment où la pile 
 d'évènements devient plus lourde que le \gls{snapshot} lui-même. Il est donc 
 important de bien déterminer la périodicité du déclenchement du \gls{snapshot} 
 (temporelle ou selon le nombre d'évènements).
+ \info{rehydratation d'un agrégat diff avec projection -> eventually consistence (proj 
+ = EC /rehy -> 
+	valides}\unsure{Dans tous les autres cas l'utilisation de \textit{snapshots} 
+	permet de contrer proprement ce problème en offrant une forme dénormalisée 
+	de la donnée. }
 
 Le parcours des évènements se fait classiquement du premier au dernier 
 (\textit{bottom-up}). Si on utilise les \gls{snapshot}, on peut se permettre de les 
@@ -1514,24 +1494,61 @@ patrons peuvent cohabiter si le \gls{CS} a un cadre d'action bien délimité
 et que les composants de l'architecture ont un couplage lâche afin que seuls les 
 évènements produits par les agrégats ne modifient l'état interne de l'application. 
 
+\section{Conclusion}
 
-\subsection{Bilan}
-Cette section présente différentes approches pour intégrer une architecture 
-orientée évènements dans un système collaboratif
-respectant les règles liées au métier. Dans un premier temps, 
+La manipulation et la visualisation d'objets 3D sur le web est une problématique 
+qui peut se découper en différentes parties.
+La première concerne la modélisation collaborative 3D sur le web. Les plateformes 
+existantes essayent de répondre à plusieurs challenge : conserver la cohérence 
+de l'environnement, proposer des solutions performantes et économiques (bande 
+passante, énergie, graphique, stockage)  pour s'adapter aux évolutions du web.
+L'un des aspects fondamentaux du web est l'accessibilité. Cela passe par la 
+standardisation des technologies web par le \gls{W3C}.  L'émergence des 
+standards comme WebGL (affichage 3D) et WebRTC (connexion P2P entre 
+navigateur) a fait apparaître de nouvelles possibilités concernant la visualisation et 
+le partage de données 3D. 
+
+
+La seconde partie concerne la communication en temps réel au sein d'une 
+application collaborative. Il existe plusieurs critères pour choisir le protocole de 
+transport adapté à un \gls{EVC3D} : la fiabilité, l'ordonnancement et le risque 
+d'erreur. 
+Jusque là souvent cantonnés aux traditionnelles 
+applications client-serveur sur web, les \glspl{EVC} se montrent malgré tout 
+intéressés par les architectures de communications P2P (éventuellement 
+combinées à une architecture client-serveur). Dans ce cadre, les \gls{EVC3D} 
+particulièrement lors d'édition collaborative de scènes 3D, le choix d'une 
+architecture \gls{P2P} combiné à la haute fréquence des mises à jour, suggère le 
+choix d'un mode non fiable et non ordonné sans erreur. C'est l'application qui gère 
+les 
+paquets manquants et leur ré-ordonnancement pour favoriser la rapidité 
+de la livraison.
+
+La troisième partie s'intéresse aux propriétés des architectures orientées 
+évènements. Le couplage lâche est une propriété 
+qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybride. Elles ont 
+l'avantage de proposer une intégration de la partie métier transparente. Dans les 
+différents 
+systèmes de modélisation 3D pour la visualisation ou la manipulation d'objets 3D 
+collaboratifs sur le web, cet aspect est souvent mis de côté. Or, dans le cadre de 
+la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
+prépondérants.
+Différentes approches parmi les architecture orientée évènements dans un 
+système collaboratif permettent d'intégrer les règles liées au métier dans une 
+application de modélisation collaborative. Dans un 
+premier temps, 
 l'architecture \gls{PubSub}, propose un système de notifications pour les différents 
 n\oe uds d'un réseau de manière lâche. De cette manière la communication est 
 homogénéisée et repose uniquement sur des notifications d'évènement pour les 
 entrées et sorties des participants. Le mécanisme d'abonnement autorise une 
 grande variété de stratégies quant au routage des messages.
-
-Dans un second, différents patrons de conceptions sont présentés. Le \gls{DDD} 
-est plutôt considéré comme un patron de conception stratégique. Ses principes 
-permettent d'avoir une vision centrée métier au logiciel. A partir de ces 
+Dans un second temps, différents patrons de conceptions sont présentés. Le 
+\gls{DDD} est plutôt considéré comme un patron de conception stratégique. Ses 
+principes permettent d'avoir une vision centrée métier au logiciel. A partir de ces 
 orientations, \gls{CQRS} vient proposer une discrimination entre la partie écriture 
-(commande) et lecture (requête) dans l'application. Cela a des impacts à différents 
-niveaux. Le passage à l'échelle côté lecture est favorisé grâce à la création de 
-projections des données facilite la restitution des données sans risques d'effets de 
+(commande) et lecture (requête) dans l'application. Le passage à l'échelle côté 
+lecture est favorisé grâce à la création de projections des données facilite la 
+restitution des données sans risques d'effets de 
 bord. Côté écriture, le contenu des commandes est validé tout au long de la partie 
 commande, notamment avec l'intégration des les règles métiers dans le modèle 
 du domaine. L'\gls{ES} est le patron qui introduit la notion d'évènement au sens 
@@ -1541,17 +1558,4 @@ les lignes du \gls{DDD}. Le flux d'évènements qui est généré par
 vérité de l'application. On peut connaître l'historique de l'application 
 juste en regarde la pile d'évènements autant que recréé l'état de l'application à 
 partir de l'\gls{EventStore}. \todo{parler de la concurrence} 
-
-\section{Conclusion}
-
-Dans les architectures orientées évènements, le couplage lâche est une propriété 
-qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybride. Elles ont 
-l'avantage de 
-proposer une intégration de la partie métier transparente. Dans les différents 
-systèmes de modélisation 3D pour la visualisation ou la manipulation d'objets 3D 
-collaboratifs sur le web, cet aspect est souvent mis de côté. Or, dans le cadre de 
-la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
-prépondérants.\todo{finir en parlant du P2P} 
-
-
 

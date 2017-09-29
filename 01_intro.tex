@@ -31,20 +31,499 @@ données devient alors un enjeu de taille dans ce type d'application en terme de
 temps, de sécurité et de fiabilité. 
 
 
-\input{1_contexte}
+
+\subsection{La collaboration}
+La collaboration \info{https://wiki.p2pfoundation.net/Collaboration} est souvent 
+définie comme un processus récursif
+\footnote{Le « principe de boucle 
+	récursive » se retrouve dans le concept de la pensée complexe. Edgar Morin  
+	explique qu'« un processus récursif est un processus où les produits et les 
+	effets 
+	sont en même temps causes et producteurs de ce qui les produit » 
+	\cite[p. 100]{Morin1990}.} où deux (ou plus) personnes (ou organisations) 
+travaillent ensemble à la croisée de buts communs 
+en partageant leurs connaissances pour apprendre et bâtir un consensus. 
+La collaboration permet l'émergence de conceptions partagées dans la réalisation 
+de visions partagées dans des environnements et des systèmes complexes. 
+Les imbrications de chaque domaine et la transdiciplinarité sont acceptés comme 
+dans le concept de pensée complexe. D'ailleurs, dans sa définition de la 
+complexité, Edgar Morin fait référence au sens étymologique latin \og 
+complexus\fg{} qui signifie \og ce qui est tissé ensemble\fg{} \cite{Morin1990a}.
+La plupart des collaborations requièrent un élément dirigeant qui peut prendre une 
+forme sociale (personne) au sein d'un groupe décentralisé et égalitaire (tout le 
+monde au même niveau). L'élément dirigeant va souvent aider également à trouver 
+des consensus. 
+La disponibilité des ressources peut également devenir un élément dirigeant dans 
+la collaboration.
+Une équipe travaillant de manière collaborative peut concentrer plus de 
+ressources, de reconnaissances et de récompenses lors d'une 
+compétition comportant des ressources finies. 
+La collaboration est aussi présente dans la recherche de buts opposés mettant en 
+avant la notion de collaboration contradictoire (en opposition avec la collaboration 
+constructive) ; la négociation et la compétition peuvent également faire partie du 
+terrain 
+de la collaboration.
+
+Une application collaborative peut aussi intégrer les notions de coordination et de 
+coopération:
+\begin{itemize}
+	\item La \textbf{coordination} se base sur le principe d'harmonisation des 
+	tâches, des rôles et du calendrier dans des systèmes et environnements 
+	simples.
+	\item La \textbf{coopération} permet de résoudre des problèmes dans des 
+	systèmes et environnements complexes dans lesquels les participants auraient 
+	été 
+	incapables (temps, espace, connaissance, matériel) d'accomplir le travail seuls.
+\end{itemize}
+
+Dans les années 2000, deux classifications ont été retenues concernant la 
+collaboration.
+La première classification, décrite en 2007 par Gotta \cite{Gotta2007}, propose 
+un modèle segmentant la collaboration de manière structurée en quatre catégories 
+: de la plus dirigée à la plus volontaire, en passant par l'hybride.
+\begin{itemize}
+	\item \textit{Collaboration centrée processus.} Les conditions requises du 
+	processus 
+	nécessitent l'engagement de l'utilisateur, qui doit, de par son rôle ou sa 
+	responsabilité, diriger ses efforts dans la collaboration avec les autres. Cette 
+	stratégie se concentre sur les activités de manipulation collaborative 3D plutôt 
+	que sur leur contexte organisationnel afin de favoriser la synergie autour de la 
+	réussite d'un processus. Par exemple, pour la création et l'utilisation d'un 
+	modèle 	3D dans un \gls{BIM}, il s'agit de favoriser la prise de décision sur un 
+	projet et communiquer à propos.
+	
+	\item \textit{Collaboration centrée activité.}
+	Les activités partagées créent un sentiment de co-dé\-pendance qui motive la 
+	collaboration entre les membres. La co-dépendance prend l'avantage sur le 
+	propre intérêt de chacun comme motivation pour collaborer. Le groupe a besoin 
+	de chacun pour que l'objectif soit considéré comme réalisé. L'intérêt personnel 
+	ou l'allégeance à l'esprit d'équipe peut aussi promouvoir la collaboration. Par 
+	exemple, la visualisation collaborative des activités des différents contributeurs 
+	dans l'\gls{EVC3D} permet à chacun de rendre compte de ses réalisations. Ce 
+	type de collaboration doit beaucoup à l'ergonomie de l'activité qui insiste sur la 
+	différence entre le travail prescrit et le travail réel : la tâche et l'activité.
+	
+	\item \textit{Collaboration centrée communauté.}
+	La participation de la communauté à la collaboration induit la contribution. En 
+	effet, les interactions professionnelles ou sociales peuvent encourager ou 
+	persuader les utilisateurs de partager leurs informations ou connaissances 
+	(exemple : les logiciels \textit{open-source})
+	
+	\item \textit{Collaboration centrée réseau.}
+	Les connexions réseau favorisent la coopération réciproque. Dans le but de 
+	récupérer des avis ou du savoir-faire externe, un utilisateur peut faire appel à 
+	son réseau social pour supplémenter une autre interaction collaborative. 
+	Souvent utilisée dans le cadre d'urgences écologiques ou sanitaires (exemple: 
+	contributions OpenStreetMap lors d'ouragans ou de tsunamis), la collaboration 
+	centrée réseau est très présente dans des situations où l'expertise est 
+	fortement 
+	valorisée comme dans les \gls{BIM} ou la visualisation scientifique. Les 
+	contributeurs peuvent être intégrés en fonction des besoins des utilisateurs déjà 
+	présents sur le projet.
+\end{itemize}
+Dans le cadre de cette thèse, en se référant à cette première classification, les 
+aspects centrés sur les activités sont mis en avant. En effet, la collaboration 
+portant sur la modélisation 3D attend un résultat porté sur l'activité de conception. 
+Celle-ci nécessite l'implication de personnes avec différentes compétences / 
+connaissances qui doivent s'entraider pour mettre en commun des 
+objets 3D et réaliser leur objectif. \info{add figure}
+
+Une seconde classification proposée par Callahan et al. 
+\cite{Callahan2008} s'intéresse au triplé \og{} collaboration par équipe\fg{}, \og{} 
+collaboration 
+communautaire\fg{} et \og{} collaboration en réseau\fg{}. En contraste avec la 
+précédente 
+classification qui se concentre sur les équipes et une collaboration formelle et 
+structurée, celle-ci offre davantage d'ouverture :
+\begin{itemize}
+	\item \textit{Collaboration par équipe.}
+	Dans une équipe, tous les membres se connaissent. Il y a une interdépendance 
+	claire des tâches à effectuer où la réciprocité est attendue, avec un échéancier 
+	et des objectifs explicites. Pour réaliser son but, l'équipe doit réaliser les tâches 
+	dans un temps imparti. La collaboration par équipe suggère que les membres 
+	coopèrent sur un pied d'égalité (bien qu'il y ait souvent un chef) recevant une 
+	reconnaissance égale.
+	
+	\item \textit{Collaboration communautaire.}
+	L'objectif de ce type de collaboration est plus orienté sur la possibilité 
+	d'apprendre que sur la tâche elle-même, même si les centres d'intérêt sont 
+	partagés par la communauté. Les utilisateurs sont là pour partager et construire 
+	la connaissance plus que compléter un projet. Les membres vont aller voir leur 
+	communauté pour demander de l'aide sur un problème ou un avis et ramener la 
+	solution à implémenter dans leur équipe. L'adhésion peut être limitée et 
+	explicite, mais les périodes de temps sont souvent ouvertes. Les membres 
+	sont considérés comme égaux bien que les plus expérimentés peuvent avoir 
+	des statuts privilégiés. La réciprocité est un facteur important dans la 
+	communauté pour que cela fonctionne.
+	
+	\item \textit{Collaboration en réseau.}
+	La collaboration en réseau est une surcouche de la collaboration 
+	traditionnellement centrée sur la relation d'une équipe ou d'une communauté. 
+	Elle s'appuie sur une action individuelle et un intérêt personnel qui resurgissent 
+	ensuite sur le réseau, sous la forme de personnes qui contribuent ou cherchent 
+	quelque chose à partir du réseau. L'adhésion et les périodes sont ouvertes et 
+	non limitées. Il n'y a pas de rôle explicite. Les membres ne se connaissent pas 
+	forcément. Le pouvoir est distribué. Cette forme de collaboration est dirigée par 
+	l'avènement des réseaux sociaux, des accès omniprésents à internet et la 
+	capacité de se connecter avec divers individus malgré la distance.
+\end{itemize}
+Cette thèse, en se référant à cette seconde classification, s'intéresse plutôt 
+à la collaboration par équipe. La conception d'un objet 3D, et ses différentes 
+phases de modélisation, constitue une problématique nécessitant l'apport de 
+plusieurs intervenants avec leurs capacités propres et travaillant de concert à la 
+réalisation d'un objectif commun dans un temps imparti (exemple : revue de 
+projet). Là où la coopération et l'effort conjoint pour réaliser un objectif sont 
+nécessaires, le facteur temps reste un élément important à prendre en compte 
+pour évaluer la productivité d'une session collaborative.
+
+Le travail dans un \gls{EVC3D} facilite la compréhension 
+de certaines problématiques liées à l'espace 3D ; c'est également un point de 
+rencontre et d'échanges entre contributeurs sur le court terme et le long terme. 
+Le croisement de ces deux dimensions, spatiale et temporelle, implique une 
+multiplication des points de vue et donc des données à traiter sur le problème lors 
+de la collaboration.
 
 
-Les bureaux d'études en ingénierie et en architecture travaillent sur des projets 
-(visualisation \gls{CAO}, \gls{BIM}, gestion et arrangement d'espaces 
-architecturaux) qui 
-nécessitent la collaboration de professionnels venant de milieux différents avec 
-des compétences et connaissances variées. Les modifications dans leurs 
-modèles en \gls{3D} doivent être revues par des gestionnaires de projet, des 
-clients et les intervenants impliqués qui peuvent à leur tour suggérer des 
-modifications sur la conception tout cela en accord avec des contraintes métiers 
-transparentes. Ces règles doivent donc apparaître dès la conception pour être 
-intégrées tôt dans la modélisation 3D.
+\subsection{Les environnements virtuels collaboratifs 3D}
 
+Un \gls{EVC3D} est un environnement virtuel 3D où plusieurs utilisateurs locaux 
+ou à distance peuvent se rejoindre et partager une expérience collaborative 
+interactive en 3D. La principale caractéristique d'un \gls{EVC3D} est la simulation 
+immersive et interactive 3D d'environnements virtuels, tels que les jeux sérieux ou 
+multijoueurs. \gls{EVC3D} permet à plusieurs utilisateurs d'interagir les uns avec 
+les autres en temps (quasi) réel, même s'ils sont situés dans des lieux différents. 
+D'autres fonctionnalités sont proposées par ce type de plateformes comme le 
+partage d'espace, de présence et du temps. Selon Singhal et Zyda 
+\cite{Singhal1999}, \gls{EVC3D} est constitué de quatre composants principaux :
+\begin{enumerate*}[label=(\roman*)]
+	\item un moteur graphique pour l'affichage ;
+	\item des appareils de contrôle et de communication :
+	\item un système de traitement ;
+	\item et un réseau de transmission des données. 
+\end{enumerate*}
+
+Ce type d'environnement nécessite également d'impliquer l'utilisateur dans une 
+boucle \og ac\-tion~/~per\-ception\fg{} pour lui permettre prendre conscience
+que ses actions contribuent à la modification de l'environnement virtuel. Les 
+interactions classiques se font par le biais d'appareils dédiés.
+Il existe trois catégories d'interactions selon Chris Hand \cite{Hand1997}: la 
+navigation (interaction avec le point de vue de l'utilisateur) ; la manipulation des 
+objets virtuels issus de l'environnement virtuel (sélection d'objet, manipulation 
+d'objet) ; et le contrôle de l'application (interaction avec une interface 3D pour 
+modifier des paramètres de l'environnement virtuel).
+
+La manipulation d'objets figure parmi les interactions les plus fondamentales 
+lorsqu'on 
+aborde la \gls{CAO}, le \gls{BIM} ou le \gls{PLM}. La manipulation 
+collaborative d'objets virtuels par plusieurs utilisateurs fait ainsi partie des 
+nouveaux 
+besoins liés aux développement de ces activités.
+La manipulation collaborative s'avère indispensable dans plusieurs types 
+d'applications comme le prototypage virtuel, les simulations d'entraînement ou la 
+simulation d'assemblage et de maintenance. L'expérience de modélisation 
+\gls{CAO} collaborative peut être accompagnée de mécanismes ludiques pour 
+intégrer une capture temps-réel de la connaissance \cite{Kosmadoudi2013}.
+Ces lieux virtuels sont l'occasion pour les utilisateurs de participer de manière 
+naturelle et efficace à la création et à la vie de l'objet manipulé dans 
+l'environnement virtuel sans danger et à bas coût. 
+Une autre utilisation des \gls{EVC3D} sert la navigation virtuelle, c'est-à-dire les 
+visites collaboratives (musées, héritage culturel, les revues de projets 
+architecturaux / urbains, ou encore les jeux collaboratifs (courses, simulateur de 
+jeux collectifs). 
+Les \gls{EVC3D} permettent, non seulement aux utilisateurs de communiquer de 
+manière distante, mais également de partager ensemble des 
+interactions dans le monde virtuel. 
+Ces interactions peuvent s'appliquer à différents objets, différentes parties du 
+même objet, ou encore sur la même partie (en même temps) d'un objet virtuel 
+partagé.
+Plusieurs problèmes, liés aux domaines des systèmes distribués (et les 
+protocoles 
+réseaux) et d'\acrshort{IHM}, doivent être résolus pour concevoir un 
+\gls{EVC3D} fiable, ergonomique et en temps-réel. 
+
+
+
+\subsection{Les systèmes d'édition collaboratifs}
+En 1989, Ellis et Gibbs proposent la définition d'un \textit{groupware}, terme 
+généralement traduit par collecticiel : 
+\textcquote{Ellis1989}{\textit{computer-based systems that support groups of 
+		people engaged in a common task (or goal) and that provide an interface to a 
+		shared environment.}}. 
+Une application collaborative est une application qui accompagne un groupe de 
+participants dans la réalisation d'une tâche ou d'un objectif en fournissant une 
+interface vers un environnement partagé. 
+Cette définition, suffisamment large, englobe un ensemble d'applications 
+permettant le travail collaboratif très hétérogènes. 
+
+Vidot propose de distinguer les différentes catégories de collecticiels en fonction 
+de leur rapport au temps et à l'espace \cite{Vidot2002}. 
+L'aspect temporel se réfère à la synchronicité des interactions. 
+Une synchronicité élevée implique que les actions des utilisateurs sont visibles en 
+temps réel (action synchrone). 
+Au contraire, une synchronicité faible, implique qu'un temps certain s'écoule entre 
+l'action d'un utilisateur et sa visibilité chez les autres (action asynchrone). L'aspect 
+spatial s'intéresse à la répartition géographique des utilisateurs. Les 
+environnements sont dits répartis lorsque les utilisateurs sont physiquement 
+distants. Cette thèse concerne les applications collaboratives appartenant à la 
+catégorie 
+des applications synchrones réparties.
+
+Un modèle d'édition collaborative en temps réel permet à plusieurs utilisateurs de 
+visualiser et d'éditer de manière simultanée le même document (texte, image, 3D) 
+depuis plusieurs sites connectés par un réseau de communication. Un modèle 
+d'édition collaborative est composé d'un nombre connu ou inconnu de répliques. 
+Une réplique est une copie du document partagé modifiable à n'importe quel 
+instant. L'exécution d'une opération de modification se fait localement sur la 
+réplique qui la diffuse ensuite à l'ensemble des répliques. La notification de la 
+modification qui contient l'opération de modification est communiquée de manière 
+asynchrone. Les répliques distantes qui reçoivent cette notification exécutent 
+alors l'opération localement. L'une des difficultés principale de ces systèmes 
+réside dans la maintenance de la cohérence. Il existe différents facteurs pouvant 
+pousser un système à ne plus être cohérent :
+\begin{itemize}
+	\item \textbf{La divergence.} Les opérations peuvent arriver sur plusieurs sites 
+	dans différents ordres provoquant dissemblables résultats sur chaque réplique 
+	participant à l'édition collaborative, à moins que les opérations ne soient 
+	commutatives (ce qui est rarement le cas). Dans les cas d'application où la 
+	cohérence du résultat final est nécessaire, la divergence doit être évitée. Le 
+	problème de divergence peut être évité grâce à l'utilisation d'un protocole de 
+	sérialisation.
+	\item \textbf{La violation de la causalité.} Le fait que la latence dans une 
+	communication 
+	est intrinsèquement non-déterministe peut conduire le système à la violation de 
+	la causalité, i.e. les opérations peuvent arriver et être exécutées dans un ordre 
+	qui ne respecte pas l'ordre causal.
+	\item \textbf{La violation de l'intention.} Suite à la génération d'opérations 
+	concurrentes, 
+	l'effet actuel d'une opération au moment de son exécution peut être différent de 
+	l'intention de cette opération au moment de sa génération.
+\end{itemize}
+%TODO exemple dpour chacun des critères
+Ces trois facteurs d'incohérence sont indépendants. 
+Notamment en ce qui concerne la violation de l'intention et le problème de 
+divergence qui sont deux problèmes d'incohérence dont la nature est différente : 
+le premier facteur peut toujours être résolu en utilisant un protocole de sérialisation 
+alors que le dernier ne peut utiliser un protocole de sérialisation fixé si les 
+opérations sont exécutées sous leurs formes originelles \cite{Sun1997}. 
+Le modèle \gls{CCI} proposé par Sun et al. \cite{Sun1998} propose un modèle de 
+cohérence pour les systèmes d’édition collaborative qui s’adresse à ces facteurs 
+afin d'assurer « la préservation 
+de la convergence, de la causalité et la préservation de l’intention » 
+\cite{Sun1998}. Une majorité de travaux se sont intéressés à ces propriétés sur 
+des documents textuels \cite{Weiss2010}. 
+
+Cette thèse s’intéresse précisément à l’édition collaborative d’espace de travail en 
+3D. 
+Les opérations d’ajout et de suppression d’éléments 3D dans un espace partagé 
+ainsi que les modifications de haut niveau sur ces éléments 3D telles que la 
+translation,rotation et l’homothétie sont considérées ici.
+%Ces différents facteurs ont fait l'objet de 
+%nombreux travaux au sein de la communauté \gls{CSCW}. 
+
+%\subsubsection{Les systèmes d'édition collaboratifs}
+%
+%\paragraph{Modèle d'édition collaborative}
+%
+%\subsection{La collaboration 3D en accord avec l'évolution du web}
+%
+%\subsubsection{Introduction}
+%\subsubsection{Le web et le P2P : WebRTC}
+%\subsubsection{Le web et la 3D :  WebGL}
+
+\subsection{Les architectures orientées évènements pour la collaboration}
+Un évènement est un élément omniprésent de la vie. Le terme \textit{évènement} 
+existe dans presque tous les champs en science, avec différents sens. Le but de 
+cette section est de répertorier les différentes notions d'évènements. Pour cela, 
+différentes descriptions du terme évènements sont proposées ainsi que leur notion 
+liée à la littérature informatique. \jp{pourquoi ne pas mettre directement la définition 
+	qui nous intéresse ?}
+
+Dans la littérature, une variété de définitions du terme évènement existe. 
+Habituellement, un évènement est considéré comme quelque chose qui 
+\og arrive\fg{}, en particulier quelque chose d'inhabituel ou d'important. 
+Cependant la plupart des travaux de la littérature évitent de définir le sens précis 
+des évènements en n'indiquant pas le champ d'application dans lequel ils sont 
+utilisés. 
+Il existe trois entrées pour le terme évènement dans le dictionnaire. 
+La première entrée se réfère à la physique (dans le cadre de la théorie 
+de la relativité) où un évènement est <<~un phénomène considéré comme localisé 
+et instantané, survenant en un point et un instant bien déterminés~>>. La seconde 
+se réfère à la théorie des probabilités, indiquant qu'un évènement est <<~la partie 
+d'un univers $\Omega$ réalisée quand l'une des éventualités la composant se 
+réalise~>>. La troisième définition se rapporte à la psychologie impliquant <<~tout 
+ce qui est capable de modifier la réalité interne d'un sujet (fait extérieur, 
+représentation, etc.)~>>. Cette dernière définition est très proche de ce que l'on 
+retrouve en informatique comme les changements d'état ou les actions entraînant 
+certaines conséquences. Dans une application, il peut être important de 
+s'intéresser au déplacement d'un objet de quelques unités (\textit{object moved 
+	event}), ou d'apprendre qu'un utilisateur est passé de déconnecté à connecté 
+(\textit{status changed}). On s'applique donc à identifier ce qui modifie l'état 
+intrinsèque d'un objet et sa représentation. Bien que ces différentes descriptions 
+permettent d'avoir une compréhension générale du terme évènement, chaque sous 
+discipline de l'informatique comprend 
+ses propres associations avec le terme évènement.
+
+L'implantation d'un système orienté évènements nécessite l'instanciation d'une 
+architecture abstraite, 
+le positionnement des composants sur des machines, ainsi que des protocoles 
+pour subvenir à l'interaction, en utilisant des technologies et des produits 
+spécifiques. Une telle instance est appelée architecture système. De ce fait, les 
+architectures de systèmes distribués orientés évènements doivent 
+répondre aux exigences des utilisateurs et aux problèmes liés à la nature des 
+plateformes et applications. 
+Le passage à l'échelle (nombre de d'utilisateurs, ressources distribuées sur de 
+grandes zones géographiques) génère un grand nombre d'évènements qui doivent 
+être traités de façon efficace. 
+
+Les systèmes complexes distribués sont construits à partir de collections 
+couplées de manière dite \og lâche\fg{} (\textit{loosely coupled}) \footnote{Un 
+	couplage lâche indique que les 
+	composants échangent peu d'informations. Contrairement à un couplage fort, où 
+	les 
+	composants ont une faible indépendance fonctionnelle et sont donc peu 
+	réutilisables, le couplage faible s'appuie sur l'établissement d'un protocole 
+	d'échange faisant le moins d'a priori sur les composants. Cela permet de fixer 
+	un 
+	cadre d'interaction entre les composants.}, technologiquement neutre 
+et indépendant de la localisation des services. 
+Le développement d'applications dirigées par les évènements est un challenge 
+tripartite : la production d'évènements, le traitement des évènements et la 
+consommation des évènements \cite{Chandy2011}.
+Cristea et al. \cite{Cristea2011} présentent un aperçu des architectures distribuées 
+pour les systèmes orientés évènements. 
+Cette approche est utilisée dans de nombreuses applications réactives. Souvent 
+appliquées à la finance ou aux systèmes logistiques, de telles solutions peuvent 
+également intégrer les besoins de plateformes distribuées à grande échelle, 
+comme les applications web et le travail collaboratif. 
+
+
+
+\subsubsection{Sensibilisation et perception du groupe}
+Le travail collaboratif peut également être supporté par des modèles orientés 
+évènements prenant en compte la sensibilisation au groupe (\textit{awareness}) 
+dans des activités. Ces systèmes sont présents dans la littérature depuis les 
+prémices de la technologie web \cite{Bentley1997,Steinfield1999,You2001}. Ces 
+propositions ont commencé par approcher la sensibilisation à l'espace de travail 
+dans le but d'informer les utilisateurs des changements se produisant dans 
+l'espace 
+de travail partagé. 
+Des travaux plus récents se sont concentrés sur des 
+nouveaux paradigmes comme les systèmes \gls{P2P} pour proposer des 
+\textit{groupware} décentralisés ubiquitaires et sensibles à l'environnement. La 
+sensibilisation au sein du groupe n'est pas seulement désignée 
+pour notifier les utilisateurs ; son but est également d'aider dans les processus de 
+groupes pour éviter les problèmes. Ces derniers peuvent prendre différentes 
+formes comme :  l'inefficacité due à une information limitée et la fourniture d'un 
+système de communication; la disponibilité d'informations superflues; la difficulté 
+d'extraire l'information pour surveiller ou faire des rapports; l'utilisation des 
+données issues des ressources produites par le groupe pour améliorer sa 
+perception des données disponibles. Par exemple, Xhafa et Poulovassilis 
+\cite{Xhafa2010} exposent une approche distribuée basée évènements pour gérer 
+des collecticiels (\textit{groupware}) en \gls{P2P}. 
+\improve{ca veut rien dire}
+Leur méthode permet de développer des applications de collecticiels spécifiques  
+sur les opérations et les services primitifs liés à la sensibilisation. Ces derniers 
+sont directement implémentés dans l'intergiciel \gls{P2P}. Le modèle propose 
+différentes approches dépendant de la plateforme (web ou mobile) avec une 
+granularité différente de l'information 
+d'\textit{awareness} dont :
+
+%Dans les collecticiels évènementiels P2P, les conditions à intégrer dans le 
+%développement de l'intergiciel P2P, pour proposer une sensibilisation au 
+%groupe  -- activité, process, contexte, communication, disponibilité -- sont 
+%nombreuses \cite{Xhafa2010} : 
+\begin{description}
+	\item[La sensibilisation distribuée] A l'inverse d'une approche centralisée, où 
+	l'information de sensibilisation est gérée par un serveur central, dans un 
+	système décentralisé, l'information sur laquelle la sensibilisation est construite 
+	est répartie sur les sites des différents pairs. Dans les approches basées 
+	serveur, le traitement des évènements est effectué sur le serveur qui stocke 
+	les évènements ainsi que la base de données contenant l'historique et fournit 
+	l'interface de requête pour extraire les informations d'intérêt. Dans le collecticiel 
+	\gls{P2P}, le stockage, le traitement et les requêtes d'évènements doivent être 
+	faits 
+	de manière répartie.
+	
+	\item[La sensibilisation à la dynamicité des évènements] Les systèmes 
+	\gls{P2P} 
+	sont dynamiques par nature (\textit{join / leave} des pairs). La fonctionnalité de 
+	sensibilisation doit prendre en compte cette dynamicité. En effet, la 
+	synchronisation et la cohérence de l'information sur les différents sites sont 
+	cruciales et plus difficiles à mettre en place que dans un système 
+	client-serveur. La sensibilisation sous contrainte de dynamicité du réseau doit 
+	intégrer des mécanismes de propagation et de réplication fournissant le contenu 
+	au groupe. 
+	
+	\item[La généricité des évènements] Un système basé évènements manipule 
+	plusieurs types d'évènements. C'est pourquoi il est nécessaire que les 
+	évènements soient le plus génériques possibles pour faciliter la construction de 
+	requêtes à travers un système lâchement couplé.
+	
+	\item[Les mécanismes à empreinte mémoire réduite] L'utilisation de 
+	mécanismes à empreinte mémoire réduite est indispensable dans le but de 
+	réduire la surcharge causée par la génération d'évènements, le traitement des 
+	évènements et les notifications, ainsi que pour permettre le support de la 
+	sensibilisation par des pairs qui possèdent des capacités limités.
+	
+\end{description}
+%A parallel grid-based implementation for real-time processing of event log data of 
+%collaborative applications
+%\cite{Xhafa2010a}
+%
+%Using mobile-based complex event processing to realize collaborative remote 
+%person monitoring
+%\cite{Stojanovic2014}
+%\info{Xhafa2010 parle aussi des mobiles}
+
+Brown et al. \cite{Brown2003} proposent un mécanisme de distribution de 
+données basé évènements. Le \textit{Battlefield Augmented Reality System} 
+(BARS) se situe dans le contexte de la collaboration sur mobile en réalité 
+augmentée et environnement virtuel. Cet environnement a besoin de conserver 
+une information cohérente au cours du temps, qui plus est de rendre compte de la 
+situation (\textit{situation awareness}) et de permettre la coordination d'équipe sur 
+mobile entre les utilisateurs. Ils définissent \textit{situation awareness} comme le 
+fait que <<~chaque utilisateur doit obtenir une meilleure compréhension de 
+l'environnement~>>. Pour cela, ils se placent dans un cadre où il est nécessaire 
+de gérer plusieurs utilisateurs avec des connexions différentes (bas débit et haut 
+débit) avec des connexions au réseau qui ne sont pas fiables et une réplication 
+partielle des données pour minimiser les évènements non voulus.
+\info{consistency cohérence conflits} L'analyse des applications utilisant des 
+systèmes orientés évènements explique 
+qu'ils sont obligés de faire des choix spécifiques au métier lié à l'application 
+\cite{Hinze2009}. Par exemple, dans les applications de jeux vidéo, la distribution 
+des évènements est souvent liée à un mécanisme \gls{PubSub} centralisé qui 
+modifie les souscriptions au fur et à mesure que les joueurs se déplacent dans 
+l'espace. De plus, les évènements dans un jeu doivent être protégés contre 
+l'altération pour éviter la triche ou la dissémination d'évènements faux. Cela 
+s'applique également aux données d'un \gls{EVC3D} destiné à un usage industriel 
+(données confidentielles ou critiques).
+
+\subsubsection{Intégration des règles métiers}
+Comme les bureaux d'études en ingénierie et en architecture travaillent sur des 
+projets (visualisation \gls{CAO}, \gls{BIM}, gestion et arrangement d'espaces 
+architecturaux), la collaboration de professionnels venant de milieux différents 
+avec des compétences et connaissances variées doit pouvoir se réunir autour d'un 
+outil qui connaît leur langage, leurs contraintes : leur expertise. En effet, les 
+modifications de modèles en \gls{3D} doivent être revues par des gestionnaires de 
+projet, des clients et les intervenants impliqués qui peuvent à leur tour suggérer 
+des modifications sur la conception. Tout cela doit se faire en accord avec des 
+contraintes métiers transparentes.
+Les règles métier doivent donc apparaître dès la conception pour être 
+intégrées tôt dans la modélisation 3D. 
+
+Les architectures orientées 
+évènements sont bien adaptées pour d'intégrer dans la description des 
+évènements plusieurs aspects liés au métier. 
+Cette sémantique porte avec elle les connaissances des manipulations expertes.
+Un aspect majeur de cette thèse repose sur l'intégration du métier dans le 
+processus de la manipulation et de la visualisation des objets 3D. 
+
+À l'ajout d'information sémantique sur les données, les 
+architectures orientées évènements enrichissent les applications de la possibilité 
+d'implantation d'outils de surveillance de flux métiers pour l'observation en temps 
+réel ou l'analyse a posteriori de ces données pour fixer des objectifs ou repérer 
+des 
+problèmes de performance dans la collaboration par exemple.
 %Toutes ces entités ont besoin d'être capables de 
 %charger les ressources pour pouvoir les inspecter et les analyser. Ces 
 %contraintes 
