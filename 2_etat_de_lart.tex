@@ -751,8 +751,7 @@ effectué par les protocoles \gls{SCTP} et \gls{RRTCC}.
 %\cite{Eskola}\cite{Singh2013b}
 
 Depuis 2011, les contributeurs du standard WebRTC font beaucoup 
-d'efforts pour élargir et maintenir la compatibilité et interopérabilité entre 
-tous les navigateurs\info{ref tableau interop}.
+d'efforts pour élargir et maintenir la compatibilité et interopérabilité entre les navigateurs.
 %TODO \info{parler de edge}\improve{dans CE sens}\info{parler de 
 %ORTC}. 
 Cependant, certains navigateurs (comme Chrome) imposent une limite de taille 
@@ -769,11 +768,11 @@ session. Le mécanisme de signalisation est utilisé pour échanger trois
 types d'information : 
 \begin{itemize}
 	\item des messages de contrôle sur la session pour ouvrir ou fermer un 
-	lien de communication et rapporter les erreurs,
+	lien de communication et rapporter les erreurs ;
 	\item les configurations réseaux telles (ICE candidates, IP ou
-	port de l'ordinateur),\improve{parler de ça} 
+	port de l'ordinateur) ; 
 	\item et les capacités média du navigateur (limite de débit, codecs, 
-	résolution, formats de donnée). 
+	résolution, formats de donnée).
 \end{itemize}
 Un service de signalisation est nécessaire à la mise en relation des 
 différents pairs au cours d'une session collaborative. 
@@ -1256,9 +1255,9 @@ collaboratif est récurrent. Une fois que la donnée a été montrée à un util
 même donnée peut être changée par un autre utilisateur, elle est altérée. 
 \gls{CQRS} pallie cela en répondant aux besoins suivants :
 \begin{itemize}
-	\item En traitement/ écriture : besoins transactionnels, garantie de cohérence 
-	(\textit{consistency}) des données, de normalisation.
-	\item En consultation/lecture: dénormalisation, scalabilité. \info{ajouter au dico}
+	\item en traitement/ écriture : besoins transactionnels, garantie de cohérence 
+	des données, de normalisation ;
+	\item en consultation/lecture: dénormalisation, passage à l'échelle.
 \end{itemize}
 
 La plupart des architectures en couches ne font pas explicitement référence à ces 
@@ -1356,15 +1355,15 @@ insiste sur le fait que \og l'état du modèle du domain est persisté comme un
 	\begin{figure}[t]
 		\centering
 		
-		\subfloat[Sans la notion de snapshot]{
+		\subfloat[Sans la notion de Snapshot]{
 			\includegraphics[width=0.4\textwidth]{without-snapshot.eps}
 			\label{fig:es-without-snapshot}
 		}
-		\subfloat[Avec la notion de snapshot]{
+		\subfloat[Avec la notion de Snapshot]{
 			\includegraphics[width=0.4\textwidth]{snapshot.eps}
 			\label{fig:es-snapshot}
 		}
-		\caption{Snapshot en Event-Sourcing}
+		\caption{Snapshot en \gls{ES}}
 	\end{figure}
 
 Les avantages et les inconvénients de l'approche \gls{ES} dépendent du
@@ -1509,8 +1508,8 @@ de l'environnement, proposer des solutions performantes et économiques (bande
 passante, énergie, graphique, stockage)  pour s'adapter aux évolutions du web.
 L'un des aspects fondamentaux du web est l'accessibilité. Cela passe par la 
 standardisation des technologies web par le \gls{W3C}.  L'émergence des 
-standards comme WebGL (affichage 3D) et WebRTC (connexion P2P entre 
-navigateur) a fait apparaître de nouvelles possibilités concernant la visualisation et 
+standards comme WebGL (affichage 3D) et WebRTC (connexion P2P entre navigateurs) 
+a fait apparaître de nouvelles possibilités concernant la visualisation et 
 le partage de données 3D. 
 
 
@@ -1555,7 +1554,7 @@ partie écriture (commande) et lecture (requête) dans l'application. Le passage
 l'échelle côté lecture est favorisé grâce à la création de projections des données 
 facilite la restitution des données sans risques d'effets de bord. 
 Le côté écriture, permet de valider le contenu entrant selon les règles métiers du 
-le domaine métier. L'\gls{ES} est le patron qui introduit la notion d'évènemens (\og 
+le domaine métier. L'\gls{ES} est le patron qui introduit la notion d'évènement (\og 
 ce qui s'est passé\fg{}). L'état de l'application se reconstruit à 
 partir de ces évènements issus de l'expertise métier -- déduite grâce au \gls{DDD}. 
 Les évènements générés par \gls{CQRS} sont stockés dans le journal des 
