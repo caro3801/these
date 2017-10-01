@@ -1,4 +1,4 @@
-%!TEX root = main.tex
+
 %\chapter{Implantation}
 %\section{3DEvent : Plateforme web de manipulation et visualisation 
 %	collaborative 
@@ -98,10 +98,21 @@ Dans chaque onglet on trouve donc différent blocs \gls{HTML}, avec des
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
 correspondent aux Views de notre modèle.
 \paragraph{Exemple d'interaction dans le framework}
+La Figure \ref{fig:cqrs-example} décrit la façon dont le système traite l'exécution 
+d'une commande de translation déclenchée par l'utilisateur et comment cette 
+information est diffusée à ces collaborateurs\footnote{Pour que l'exemple 
+fonctionne, la scène, 
+la géométrie du cube et le maillage \textit{cube1} doivent avoir été précédemment 
+créés.}. 
+
+
 \todo{ref a la fig et traduction. cote implé?}
-The conflict detection component allows the developer to imple- ment its own 
-conflict resolution rules. It triggers a flag if versions between the received 
-aggregate and the current one are equal (see Figure 4). According to the business 
+Le composant responsable de la détection de conflit permet au développeur 
+d'implémenter ses propres règles de résolution de conflit. Le composant déclenche 
+une exception lorsque le numéro de version reçu et le numéro de version courant 
+de l'agrégat sont identique (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
+règles métiers définies et les exceptions liés à la cohérence, l'évènement peut être 
+business 
 logic rules defined, the event is rejected, accepted with or without modifications. 
 From this pro- cess, new events can be generated during the resolution.
 
@@ -109,12 +120,9 @@ Figure 4 describes how the system executes a translation action triggered by a
 user and how it’s broadcasted to his/her collaborators (scene, cube geometry, and 
 cube mesh should be created before). 
 
-La Figure \ref{fig:cqrs-example} décrit la façon dont le système traite l'exécution 
-d'une commande de translation déclenchée par l'utilisateur et comment cette 
-information est diffusée à ces collaborateurs.
-\begin{figure}[ht]
+\begin{figure}[]
 	\centering
-	\includegraphics[width=0.9\columnwidth]{eps/example10.eps}
+	\includegraphics[width=\columnwidth]{eps/example10.eps}
 	\caption[Flux de la collaboration dans le framework 3DEvent entre 3 
 	utilisateurs]{Exemple d'édition collaborative où User A est connecté à User  B, 
 		lui 
@@ -160,4 +168,12 @@ scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $
 jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
 jamais utiliser $eA$.
 
-
+\begin{figure}
+	\centering
+	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
+	\caption{Structure d'un agrégat}{Structure d'un agrégat et ses versions. Chaque 
+	version est un état de l'agrégat qui correspond à l'empilement des instance 
+	d'évènements (ei) qu'il contient. Les types des évènements sont relatifs au type 
+	d'agrégat dans lequel il est contenu.}
+	\label{fig:aggregate}
+\end{figure}

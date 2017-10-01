@@ -233,13 +233,16 @@ Il existe plusieurs méthodes de transmission de contenu au sein d'un réseau P2
 que l'on peut catégoriser selon deux modes : le téléchargement (\textit{download}) 
 et le flux continu (\textit{streaming}). Le téléchargement requière que le contenu 
 soit entièrement téléchargé pour pouvoir être lu, tandis que le flux continu peut 
-être lu au fur et à mesure de sa récupération. Ce mode est principalement utilisé 
-pour la lecture de vidéo en ligne. En comparaison le mode téléchargement est 
-moins restrictif et relativement simple à mettre en place. Tout comme les 
-systèmes utilisant une architecture client-serveur, la transmission de contenu en 
-P2P peut également être catégorisée selon ces deux modes. Une catégorisation 
-plus précise du flux continu peut être donnée selon quand le contenu est généré : 
-en direct (live) et à la demande (\textit{on-demand}).
+être lu au fur et à mesure de sa récupération. Ce dernier mode, principalement 
+utilisé pour la lecture de vidéo en ligne, s'applique bien à la transmission de 
+contenu 3D : niveaux de détails \cite{Chu2012,Hu2008}, progressif 
+\cite{Cheng2009,Limper2014}, mise en cache \cite{Jia2014}, compression / 
+décompression
+\cite{Lavoue2013,Ponchio2015,Maglo2013a}. 
+Une catégorisation plus précise du flux continu peut être donnée selon quand le 
+contenu est généré : 
+en direct (\textit{live} ou \textit{push}) et à la demande (\textit{on-demand} ou 
+\textit{pull}).  
 
 
 Le mécanisme de routage que nous avons utilisé dans \cite{Desprat2015a} est 
@@ -247,11 +250,27 @@ proche du routage de GNutella.
 
 
 
-\subsubsection{Ordonnancement des évènements désordonnés}
-La configuration des connexions RTCDataChannel 
+\subsubsection{Gestion des évènements des agrégats}
 
-
-
+La configuration des connexions RTCDataChannel peut être configurée de selon 
+les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancement. 
+Dans l'intergiciel de 3DEvent, cette configuration est : non fiable et non ordonnée. 
+C'est l'application qui est en charge de \og ré-ordonner\fg{} les évènements. En 
+effet, les évènements sont associés à des agrégats. Comme chaque agrégat 
+possède un flux d'évènements dédié et numéroté il est alors simple de les 
+ordonner lorsque. 
+Lors de la synchronisation (Section \todo{ref section sync}), les 
+évènements manquants sont demandés successivement à tous les pairs. Lors 
+qu'un pair reçoit les évènements il les stocke dans le flux correspondant à 
+l'agrégat. Si un évènement est manquant, les suivants sont quand même stockés 
+en laissant l'espace de l'évènement manquant dans le tableau. L'évènement est 
+redemandé jusqu'à son obtention, laquelle provoque le déblocage de l'état de 
+l'agrégat jusqu'au prochain évènement manquant (ou la fin du flux). Les 
+évènements qui ont été stockés \og en attendant\fg{} permettent à l'application 
+d'être directement en capacité de poursuivre la construction de l'état de l'agrégat. 
+Cette mécanique tire avantage des Snapshots (présentés dans \todo{ref section}) 
+qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déjà d'un 
+état avancé.
 
 \subsubsection{Sélection fantôme}
 Les interactions utilisateurs doivent être adaptées à la collaboration et aux 
