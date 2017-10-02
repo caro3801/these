@@ -1,7 +1,11 @@
+%\documentclass[]{standalone}
+%\usepackage{tikz}
+%\usetikzlibrary{matrix,positioning,arrows.meta,arrows,calc}
+
 
 \tikzset{
 	cell/.style={rectangle,draw=black,font=\bfseries\itshape},
-	cell2/.style={rectangle,draw=bleue!70,dashed},
+	cell2/.style={rectangle,draw=bleue!40},
 	space/.style={
 		matrix of nodes,
 		row sep=-\pgflinewidth,column sep=10\pgflinewidth,
@@ -9,6 +13,7 @@
 	},
 every node/.style={anchor=base,minimum width=5em,minimum height=2em}
 }
+%\begin{document}
 
 \begin{tikzpicture}
 	\matrix (first) [space,
@@ -35,3 +40,5 @@ every node/.style={anchor=base,minimum width=5em,minimum height=2em}
 	};
 
 \end{tikzpicture}
+
+%\end{document}

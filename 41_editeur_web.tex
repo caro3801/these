@@ -4,17 +4,9 @@
 %	collaborative 
 %	d'objets 3D}
 \subsection{Éditeur 3DEvent}
-3DEvent est à la fois un \gls{framework} et un éditeur 3D pour la visualisation et la 
-manipulation d'objets 3D. La partie \gls{framework} est basée évènement pour 
-répondre à des contraintes liés à la temporalité de l'information traitée via l'éditeur 
-ainsi qu'à la distribution de l'information en terme d'intégrité et de poids. L'éditeur 
-va réagir et interpréter les informations (évènements) fournies par le 
-\gls{framework} pour proposer visualisation et interactions adaptées.
 
- L'application 3DEvent est un 
-éditeur 3D reposant sur les principes et les technologies du web qui permet de 
-manipuler des objets 3D de manière 
-collaborative en temps-réel. Les interactions possibles sont : 
+
+Les interactions possibles sont : 
 \begin{description}
 	
 	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut 
@@ -41,18 +33,22 @@ collaborative en temps-réel. Les interactions possibles sont :
 L'intérêt de proposer une application web se retrouve principalement dans 
 l'accessibilité qu'elle propose. En effet, n'importe quel terminal muni d'un 
 navigateur web peut y accéder, ce qui la rend distribuée et multi-plateforme. 
+Les fonctionnalités graphiques proposées par WebGL sont un peu réduites par 
+rapport à celles d'OpenGL dont l'\gls{API} évolue plus vite et propose plus de 
+flexibilité et d'optimisations. Cependant, les performances graphique restent très 
+correctes car le navigateur est quand même capable d'utiliser les processeurs 
+graphiques du terminal (GPU) pour les calculs et rendus 3D.
 
-Les fonctionnalités graphiques proposées par 
-WebGL sont un peu réduites par rapport à celles d'OpenGL dont l'\gls{API} évolue 
-plus vite et propose plus de flexibilité et d'optimisations. Cependant, les 
-performances graphique restent très correctes car le navigateur est quand même 
-capable d'utiliser les processeurs graphiques du terminal (GPU) pour les calculs et 
-rendus 3D.
 \subsection{Interface utilisateur}
 Dans le but de proposer une \gls{IU} proche des fonctionnalités métiers liées à la 
-modélisation 3D avec une interface orientée tâche. De cette manière, le modèle 
-orienté évènements présenté dans le précédent chapitre est directement orienté 
-métier.
+modélisation 3D, l'éditeur possède une interface orientée tâche en comparaison 
+avec des interfaces CRUD. En effet, les interfaces CRUD réduisent la sémantique 
+métier du domaine d'application à la création, la lecture, la mise à jour et la 
+suppression, omettant toutes les subtilités que peuvent dégager ces actions en 
+perdant l'intention de l'utilisateur dès le niveau de l'interface. Une 
+interface orientée tâche a tendance à montrer les changements qui se produisent 
+dans le domaine.De cette manière, le modèle orienté évènements présenté dans 
+le précédent chapitre est directement orienté métier. 
 \subsubsection{Présentation de l'interface}
 
 Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
@@ -177,3 +173,10 @@ jamais utiliser $eA$.
 	d'agrégat dans lequel il est contenu.}
 	\label{fig:aggregate}
 \end{figure}
+
+\subsection{Bilan}
+
+ L'application 3DEvent repose sur les principes et les 
+technologies du web pour permettre de visualiser et manipuler des objets 3D de 
+manière 
+collaborative en temps-réel.

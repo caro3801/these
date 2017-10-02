@@ -4,29 +4,49 @@
 \chaptertable
 
 \section{Introduction} 
+Cette section présente l'implantation de 3DEvent, la plateforme web de 
+manipulation et visualisation collaborative d'objets 3D réalisée à partir du modèle 
+présenté dans le chapitre précédent.
+
+La première partie s'intéresse à l'intégration 
+du framework pour proposer une application d'assemblage d'objets 3D. La 
+présentation commence avec la description de l'\gls{IU} et des fonctionnalités 
+proposées dont le principe de sélection fantôme et le système de visualisation 
+flexible reposant sur le système de projection du modèle orienté évènements. 
+
+La seconde présente l'implémentation de l'architecture de communication avec les 
+différentes implémentation des acteurs du système, les politiques de connexion et 
+l'intergiciel \gls{P2P} qui permettent l'échange de données entre les collaborateurs.
+
+Enfin, la troisième section récapitule et discute les choix techniques pour 
+l'interface utilisateur et la partie réseau qui ont été fait dans l'implémentation.
 
 
 \section{3DEvent : Plateforme web de manipulation collaborative d'objets 3D}
-Cette section présente l'implantation de 3DEvent, la plateforme web de 
-manipulation et visualisation collaborative d'objets 3D réalisée à partir du modèle 
-présenté dans le chapitre précédent. La première partie s'intéresse à l'intégration 
-du framework pour proposer une application d'assemblage d'objets 3D. La seconde 
-partie expose les choix techniques pour l'interface utilisateur et la mise en avant 
-du système de visualisation flexible.
+Dans le chapitre précédent une des contribution présentée correspond au 
+modèle orienté évènements : le \gls{framework} 3DEvent. 
+Son implémentation prend la forme d'une application web qui intègre un éditeur 
+pour la visualisation et la manipulation d'objets 3D de manière collaborative (aussi 
+appelée \og application 3DEvent\fg{}).
 
 \input{41_editeur_web}
 
 \section{Intergiciel P2P pour l'échange de données 3D}
 
 L'architecture de communication décrite dans le chapitre précédent nécessite 
-l'implantation d'un intergiciel P2P compatible avec les besoins liés à la 3D, le 
-web et la collaboration. 
+l'implémentation d'un intergiciel P2P compatible avec les besoins liés à la 3D, le 
+web et la collaboration. Cette section décrit les politiques de connexion pour 
+l'éditeur présenté dans la section précédente ainsi que les mécanismes de 
+synchronisation nécessaire à l'échange de données dans l'application. 
 
 \input{42_intergiciel_p2p}
 
 
 \section{Résumé des choix techniques}
 
+\paragraph{JavaScript, TypeScript et Node.JS}
+\paragraph{IHM}
+\paragraph{WebRTC}
 \paragraph{Base de données NoSQL}\label{p:nosql} L'évolution de 
 l'utilisation du web en tant que plateforme applicative a encouragé le changement 
 dans le stockage des données pour de nouveaux besoin supportant de larges 
