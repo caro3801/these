@@ -1,14 +1,14 @@
 %!TEX root = main.tex
 
 %%%%%%% SECTION %%%%%%%
-\section{Modèle évènementiel pour l'intégration du domaine 3D dans les 
+\section{Modèle événementiel pour l'intégration du domaine 3D dans les 
 EVC}
 
 %\subsection{Introduction}
-La méthodologie orientée évènements intègre plusieurs aspects souvent laissés 
+La méthodologie orientée événements intègre plusieurs aspects souvent laissés 
 de côté dans la littérature concernant le développement des environnements 
 virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. 
-Les évènements peuvent en effet être utilisés dans le cadre de \gls{CSCW} et 
+Les événements peuvent en effet être utilisés dans le cadre de \gls{CSCW} et 
 d'\gls{EVC}, qui ont évolués du simple collecticiel à de plus importantes 
 organisations virtuelles comme on peut le retrouver dans des environnements 
 scientifiques et d'ingénierie. L'idée de partager des ressources communes pour 
@@ -19,13 +19,13 @@ collaborations sont routinières, les motifs de collaboration sont bien connus. 
 motifs consistent en des segments de collaborations récurrents qui peuvent être 
 capturés, encapsulés dans des composants distincts et réutilisés comme des 
 solutions pour d'autres problèmes liés à la collaboration. Par exemple, les services 
-de sensibilisation permettent de traiter les évènements et donner des informations 
-à propos du travail collaboratif. En utilisant les évènements suivis, les services 
+de sensibilisation permettent de traiter les événements et donner des informations 
+à propos du travail collaboratif. En utilisant les événements suivis, les services 
 d'analyse fournissent des statistiques à propos des collaborations passées et 
 présentes.
 
 
-Un système orienté évènements a l'avantage d'être découplé. Dès 
+Un système orienté événements a l'avantage d'être découplé. Dès 
 lors, les données produites lors de la collaboration peuvent facilement être 
 réutilisées pour un traitement secondaire comme la sensibilisation aux éléments 
 de l'environnement. 
@@ -36,7 +36,7 @@ les utilisateurs et la façon dont elles sont affichées.
 L'\gls{EP} occupe, dans le champ de l'informatique, une place centrale dans 
 beaucoup de systèmes comme l'énergie, la santé, l'environnement, les transports, 
 la finance, les services et l'industrie. L'\gls{EP} réunit des méthodes et des outils 
-pour filtrer, transformer, et détecter des motifs dans des évènements, dans le but 
+pour filtrer, transformer, et détecter des motifs dans des événements, dans le but 
 de réagir à des conditions qui changent, généralement liées à des contraintes de 
 temps \cite{Chandy2011}. L'\gls{EP} intègre plusieurs fonctionnalités pour :
 \begin{itemize}
@@ -54,20 +54,20 @@ domaines se basant sur le paradigme de l'\gls{EP}.
 
 
 %L'intégration de la partie métier L'un des aspects principaux a été de 
-%combiner tous les aspects reliés aux évènements dans le \textit{pipeline} de 
+%combiner tous les aspects reliés aux événements dans le \textit{pipeline} de 
 %visualisation et de manipulation d'objets 3D. 
 
 
 \subsubsection{Constat}
 
 Par nature, une \gls{EDA} est extrêmement peu couplée et 
-hautement distribuée. Le créateur de l'évènement sait seulement que l'évènement 
-se produit et n'a aucune idée du traitement que l'évènement va subir par 
+hautement distribuée. Le créateur de l'événement sait seulement que l'événement 
+se produit et n'a aucune idée du traitement que l'événement va subir par 
 la suite ou qui cela va concerner. 
 C'est pourquoi les \glspl{EDA} sont plus utilisées dans un 
 contexte de flux d'information asynchrone. La traçabilité dans ces environnements 
 devient alors un enjeu important. Facilitée par l'empreinte laissée par chaque 
-évènement, elle n'en demeure pas moins complexe selon l'échelle d'évaluation. A 
+événement, elle n'en demeure pas moins complexe selon l'échelle d'évaluation. A 
 l'échelle d'un utilisateur, d'un groupe d'utilisateurs, ou de plusieurs groupes, les 
 acteurs restent des entités assez homogènes dans le cadre de la modélisation 3D 
 collaborative ce qui simplifie la tâche car le contexte et le domaine sont 
@@ -75,20 +75,20 @@ connus.
 
 
 
-%Il existe différent types de traitement d'évènement : simple, en continu, 
+%Il existe différent types de traitement d'événement : simple, en continu, 
 %complexe. 
 %Ils peuvent être utilisés ensemble dans le cadre d'une même application.
 %\begin{itemize}
-%\item Traitement d'évènement simple. (\textit{simple event processing}). 
-%Dans le traitement simple d'évènement, un évènement notable arrive, initiant 
+%\item Traitement d'événement simple. (\textit{simple event processing}). 
+%Dans le traitement simple d'événement, un événement notable arrive, initiant 
 %une 
-%cascade d'actions. Le traitement simple d'évènement est généralement utilisé 
+%cascade d'actions. Le traitement simple d'événement est généralement utilisé 
 %pour 
 %orienter un flux temps-réel qui peut prendre un peu de temps, n'entraînant pas de 
 %coût sur la partie métier.
-%\item Traitement de flux continu d'évènement. (\textit{stream event 
+%\item Traitement de flux continu d'événement. (\textit{stream event 
 %processing}). 
-%\item Traitement d'évènement complexe. (\textit{complex event 
+%\item Traitement d'événement complexe. (\textit{complex event 
 %processing}). 
 %
 %\end{itemize}
@@ -160,9 +160,10 @@ Notons que le contexte de l'application peut faire varier les frontières d'un
 domaine. Le modèle issu du domaine défini permet de mettre en valeur les 
 aspects métiers liés à l'application.
 
-\subsubsection{Spécification des évènements dans le framework}
-Le framework étant orienté évènements, cette section de thèse introduit la représentation et 
-le vocabulaire utilisé dans la description des évènements de 3DEvent. 3DEvent 
+\subsubsection{Spécification des événements dans le framework}
+Le framework étant orienté événements, cette section de thèse introduit la 
+représentation et 
+le vocabulaire utilisé dans la description des événements de 3DEvent. 3DEvent 
 reprend la représentation proposée par Tominski \cite{Doktor-ingenieur2006} 
 illustrée par la Figure \ref{fig:representation_event}, et adapte ses propriétés pour 
 la modélisation 3D collaborative (visualisation et manipulation). 
@@ -170,40 +171,40 @@ la modélisation 3D collaborative (visualisation et manipulation).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\columnwidth]{eps/event4.eps}
-	\caption{Illustration des notions de évènements du domaine, des types 
-		d'évènements, et des instances d'évènements.}
+	\caption{Illustration des notions de événements du domaine, des types 
+		d'événements, et des instances d'événements.}
 	\label{fig:representation_event}
 \end{figure} 
 
-Pour décrire le cadre de référence dans lequel les évènements se produisent, la 
-notion de domaines d'évènements est introduite. Un domaine d'évènements 
-\textit{ED} (\textit{Event Domain}) contient les évènements qui respecte les types 
-d'évènements qui peuvent être spécifiés. Par analogie avec le \gls{DDD}, cet 
+Pour décrire le cadre de référence dans lequel les événements se produisent, la 
+notion de domaines d'événements est introduite. Un domaine d'événements 
+\textit{ED} (\textit{Event Domain}) contient les événements qui respecte les types 
+d'événements qui peuvent être spécifiés. Par analogie avec le \gls{DDD}, cet 
 espace correspond au contexte borné (cadre d'action) d'un agrégat. À un agrégat 
-sont associés des types d'évènements \textit{ET} (\textit{Event Type}) particuliers. 
+sont associés des types d'événements \textit{ET} (\textit{Event Type}) particuliers. 
 Un \textit{ET} est utilisé pour exprimer un intérêt concret envers les entités d'un 
 \textit{ED}. 
-Les évènements abstraits \textit{aet} (\textit{abstract event type}) sont 
+Les événements abstraits \textit{aet} (\textit{abstract event type}) sont 
 compatibles avec l'\textit{ED}. 
-Une instance d'évènement \textit{e} -- ou simplement 
-évènements -- est composée du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
-L'ensemble des toutes les instances d'évènements possibles est exprimée par 
+Une instance d'événement \textit{e} -- ou simplement 
+événements -- est composée du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
+L'ensemble des toutes les instances d'événements possibles est exprimée par 
 \textit{EI}. \textit{EP} (Event Parameters) correspond à l'ensemble des paramètres 
-que peut avoir l'\textit{EI}. Ainsi, tous les évènements sont liés aux intérêts 
-d'un~\textit{ED}. La spécification des évènements nécessite de 
-s'intéresser à tous les types d'évènements qui sont utilisés lors de la manipulation 
-et la visualisation d'objets 3D dans un \gls{EVC}. La détection d'évènement est un 
-processus qui permet de récupérer les instances d'évènements d'un \textit{ET} en 
+que peut avoir l'\textit{EI}. Ainsi, tous les événements sont liés aux intérêts 
+d'un~\textit{ED}. La spécification des événements nécessite de 
+s'intéresser à tous les types d'événements qui sont utilisés lors de la manipulation 
+et la visualisation d'objets 3D dans un \gls{EVC}. La détection d'événement est un 
+processus qui permet de récupérer les instances d'événements d'un \textit{ET} en 
 particulier. Cela peut être utilisé pour la visualisation de types particulier par 
-exemple. Dans 3DEvent, la spécification des évènements est calquée sur les 
+exemple. Dans 3DEvent, la spécification des événements est calquée sur les 
 comportements observés lors des expérimentations des premiers travaux 
 \cite{Desprat2015a, Desprat2015b}. 
 
 Le Tableau \ref{tab:extraitevent} ci-dessous, 
-présente les évènements de l'agrégat Maillage -- extrait du Tableau 
+présente les événements de l'agrégat Maillage -- extrait du Tableau 
 \ref{tab:events} qui résume les 
-différents types d'évènements de bases construits à partir du framework et les 
-agrégats auxquels ils sont associés. Parmi ces évènements, l'évènement 
+différents types d'événements de bases construits à partir du framework et les 
+agrégats auxquels ils sont associés. Parmi ces événements, l'événement 
 \textit{meshAdded} et \textit{meshDropped} semblent être très proches, voire 
 identique quant au résultat que l'utilisateur peut obtenir. Cependant, la sémantique 
 liée à chacun permet de différencier l'intention de l'utilisateur. 
@@ -211,12 +212,12 @@ liée à chacun permet de différencier l'intention de l'utilisateur.
 
 \begin{table}[ht]
 	\centering
-	\caption{Évènements de pour 
+	\caption{événements de pour 
 		l'agrégat Maillage (extrait de Tab. \ref{tab:events}) }
 	\label{tab:extraitevent}
 	\begin{tabular}{lll}
 		\toprule
-		\textbf{Évènement}& \textbf{Nommage} & \textbf{Description} \\ \midrule
+		\textbf{événement}& \textbf{Nommage} & \textbf{Description} \\ \midrule
 		%\textbf{Agrégat Maillage}  &                      &             \\ \hline
 		Maillage ajouté (*)&     meshAdded                 
 		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
@@ -245,10 +246,10 @@ liée à chacun permet de différencier l'intention de l'utilisateur.
 Ce tableau permet de donner un exemple qui reprend la description qui vient d'être 
 présentée. L'\textit{ED} correspond donc au \og système de modélisation 3D 
 collaborative\fg{}. Dans ce contexte l'agrégat nommé \og Maillage\fg{} réagit à un 
-certain nombre de types d'évènements comme \textit{meshAdded}, 
-\textit{meshDropped} \dots Les évènements typés sont produits par l'agrégat en 
+certain nombre de types d'événements comme \textit{meshAdded}, 
+\textit{meshDropped} \dots Les événements typés sont produits par l'agrégat en 
 prenant en compte les paramètres nécessaires à leur instanciation. Par exemple, 
-la production d'un évènement \textit{meshTranslated} prend en paramètre le 
+la production d'un événement \textit{meshTranslated} prend en paramètre le 
 vecteur de translation (x,y,z) et la référence de l'identifiant de la scène à laquelle il 
 appartient.
 
@@ -257,8 +258,8 @@ Plus généralement, le domaine est la représentation des objets 3D d'un point 
 vue expert. Les objets du domaine représentent les données liées aux 
 manipulations 3D sous une forme abstraite (géométrie, position), indépendamment
 des besoins du rendu (lumière, matériau \dots). Le framework intègre un 
-générateur d'évènements pour faciliter l'implantation de nouveau types 
-d'évènements au plus proche des besoins des utilisateurs dans une application de 
+générateur d'événements pour faciliter l'implantation de nouveau types 
+d'événements au plus proche des besoins des utilisateurs dans une application de 
 modélisation 3D collaborative (appuyant la sémantique des manipulations).
 
 
@@ -288,12 +289,13 @@ l'utilisateur déclenche une commande à partir de l'interface, la commande et s
 paramètres sont récupérés et traités par le domaine pour être validés selon les 
 règles métiers exprimées par ce dernier. Si la modification est validée, le domaine 
 produit ou modifie l'agrégat concerné. Ces modifications sont converties sous 
-forme d'évènements. Les évènements sont ensuite transmis à l'Event Store où ils sont stockés 
+forme d'événements. Les événements sont ensuite transmis à l'Event Store où ils 
+sont stockés 
 avant d'être transférés à l'Event Publisher. L'Event Publisher joue le rôle d'interface 
 entre la partie écriture et la partie lecture. Il est également responsable de la 
-publication des évènements sur le bus d'évènement Event Bus où sont 
+publication des événements sur le bus d'événement Event Bus où sont 
 accrochées les différentes projections. Les projections sont nourries a partir des 
-évènements publiés auxquels elles sont abonnées. Enfin, une Vue (composant
+événements publiés auxquels elles sont abonnées. Enfin, une Vue (composant
 inclus dans l'\gls{IU}) récupère les \glspl{DTO}
 contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
 se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
@@ -302,140 +304,140 @@ mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
 
 
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
-d'une application sous la forme d'une séquence d'évènements. 
-Ces évènements sont conservés dans un journal d'évènements et peuvent être 
+d'une application sous la forme d'une séquence d'événements. 
+Ces événements sont conservés dans un journal d'événements et peuvent être 
 rejoués pour retrouver l'état de l'application. 
-Les évènements représentent des faits immuables qui sont 
+Les événements représentent des faits immuables qui sont 
 seulement ajoutés au journal les un après les autres, ce qui permet des taux de 
 transaction élevés et une réplication efficace (cf Section 
 \ref{sec:es}). Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
 les applications :
 
 \begin{itemize}
-	\item \textbf{Acteur} Un acteur consomme des évènements à partir d'un journal 
-	d'évènements et produit des évènements pour le même journal d'évènements. 
-	L'état interne dérivé à partir des évènements consommés est un modèle 
+	\item \textbf{Acteur} Un acteur consomme des événements à partir d'un journal 
+	d'événements et produit des événements pour le même journal d'événements. 
+	L'état interne dérivé à partir des événements consommés est un modèle 
 	d'écriture 
 	en mémoire (\textit{in-memory}) et contribue à la partie commande (C) du 
 	CQRS\info{reference à la section}.
 	\item \textbf{Vue} Une vue est un acteur qui ne fait que consommer des 
-	évènements à 
-	partir du journal d'évènements. L'état interne dérivé à partir des évènements 
+	événements à 
+	partir du journal d'événements. L'état interne dérivé à partir des événements 
 	consommés est un modèle de lecture en mémoire et contribue à la partie 
 	requête (Q) du CQRS\info{reference à la section}.
 	\item \textbf{Producteur} Un producteur est un acteur qui produit des 
-	évènements à 
+	événements à 
 	partir 
-	du journal d'évènements pour mettre à jour la base de données. L'état interne 
+	du journal d'événements pour mettre à jour la base de données. L'état interne 
 	dérivé 
-	à partir des évènements consommés est un modèle de lecture en mémoire et 
+	à partir des événements consommés est un modèle de lecture en mémoire et 
 	contribue à la partie requête (Q) du CQRS\info{reference à la section}.
 	\item \textbf{Processeur} Un processeur est un acteur qui consomme des 
-	évènements 
+	événements 
 	à 
-	partir d'un journal d'évènements et produit les évènements traités pour un autre 
-	journal d'évènements. Les processeurs peuvent être utilisés pour connecter les 
-	journaux d'évènement au traitement des évènements.\info{reference à la 
+	partir d'un journal d'événements et produit les événements traités pour un autre 
+	journal d'événements. Les processeurs peuvent être utilisés pour connecter les 
+	journaux d'événement au traitement des événements.\info{reference à la 
 	section}.
 \end{itemize}
 
-%\subsubsection{Collaboration évènementielle}
+%\subsubsection{Collaboration événementielle}
 
-\paragraph{Le journal d'évènements}
+\paragraph{Le journal d'événements}
 
-Les évènements produits par un des composants présenté ci-dessus
+Les événements produits par un des composants présenté ci-dessus
 peuvent être consommés par d'autres de ces abstractions s'ils partagent un 
-journal d'évènements local ou distribué. Un journal d'évènements peut 
+journal d'événements local ou distribué. Un journal d'événements peut 
 fonctionner sur un seul site ou être répliqué 
 sur plusieurs sites. 
 Le site est considéré comme une zone disponible qui accepte 
-l'écriture d'un journal d'évènements local même s'il est partitionné sur plusieurs 
-sites. Les journaux d'évènements locaux situés sur plusieurs sites peuvent être 
-connectés par le biais d'un journal d'évènements dit \og répliqué\fg{} (copié sur une 
+l'écriture d'un journal d'événements local même s'il est partitionné sur plusieurs 
+sites. Les journaux d'événements locaux situés sur plusieurs sites peuvent être 
+connectés par le biais d'un journal d'événements dit \og répliqué\fg{} (copié sur une 
 autre réplique) qui a pour responsabilité de préserver l'ordre causal des 
-évènements.
+événements.
 %\todo{dessin des journaux}  
 Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}) ou encore être sur le 
 même nœud mais traités séparément selon les zones 
 disponibles qui sont nécessaires au fonctionnement de l'application. 
 Les Acteurs et les Processeurs écrivent cependant toujours sur leur journal 
-d'évènements local. 
-Les composants peuvent soit collaborer sur un journal d'évènements local sur le 
+d'événements local. 
+Les composants peuvent soit collaborer sur un journal d'événements local sur le 
 même site, ou bien au travers d'un journal répliqué sur différents sites.
-Il est important de différencier le journal d'évènements de la base de données 
+Il est important de différencier le journal d'événements de la base de données 
 (côté serveur) ; la base de données peut ne contenir qu'une partie du journal. 
 Une base de données peut également être considérée comme un élément 
-complémentaire au journal d'évènements, cependant et bien que parfois 
+complémentaire au journal d'événements, cependant et bien que parfois 
 confondus, ils restent bien distincts conceptuellement.
-Le journal d'évènements commun est la base des échanges pour communiquer 
-par le biais d'évènements de collaboration. Ce type d'architecture se retrouve dans 
+Le journal d'événements commun est la base des échanges pour communiquer 
+par le biais d'événements de collaboration. Ce type d'architecture se retrouve dans 
 différents cas d'utilisation :
 \improve{est ce que cette section est nécessaire?}
 \begin{itemize}
 	\item \textit{Processus métier distribués.} Les acteurs de différents types 
-	utilisent des évènements pour communiquer et parvenir à résoudre un problème 
+	utilisent des événements pour communiquer et parvenir à résoudre un problème 
 	commun. Bien qu'ils jouent des rôles différents dans le processus métier, ils 
-	réagissent à la réception d'évènements (programmation réactive) en 
-	mettant à jour l'état de l'application et en produisant de nouveaux évènements. 
+	réagissent à la réception d'événements (programmation réactive) en 
+	mettant à jour l'état de l'application et en produisant de nouveaux événements. 
 	Cette forme de collaboration est appelée collaboration dirigée par les 
-	évènements.\improve{ref}
+	événements.\improve{ref}
 	\item\textit{Réplication d'état d'Acteur.} Les acteurs de même type consomment 
-	les évènements de chacun pour répliquer l'état interne avec une cohérence 
+	les événements de chacun pour répliquer l'état interne avec une cohérence 
 	causale. Dans 3DEvent, les opérations concurrentes sont autorisées dans 
 	l'environnement pour mettre à jour l'état des acteurs répliqués et permettre la 
 	résolution interactive de conflit en cas de mises à jour concurrentes et 
 	conflictuelles. \improve{miuex 
 	expliquer}
-	\item \textit{Agrégation d'évènement.} Les vues et les producteurs agrègent des 
-	évènements à partir d'autres composants pour générer des vues spécifiques à 
+	\item \textit{Agrégation d'événement.} Les vues et les producteurs agrègent des 
+	événements à partir d'autres composants pour générer des vues spécifiques à 
 	l'application.
-	La collaboration évènementielle apporte de la fiabilité dans la gestion des 
+	La collaboration événementielle apporte de la fiabilité dans la gestion des 
 	données dans un système distribué. Par exemple, si un processus distribué 
 	échoue à cause d'un problème sur une partie du réseau, le système reprend 
 	automatiquement dès les répliques sont à jour.
 \end{itemize}
 
-%\paragraph{Bus d'évènement}
-Les composants souscrivent à leur journal d'évènements en s'accrochant au 
-\textbf{bus d'évènements}.
-Les évènements nouveaux sont poussés vers les souscripteurs, 
+%\paragraph{Bus d'événement}
+Les composants souscrivent à leur journal d'événements en s'accrochant au 
+\textbf{bus d'événements}.
+Les événements nouveaux sont poussés vers les souscripteurs, 
 ce qui leur permet de mettre à jour l'état de l'application avec une latence 
 minimale. 
-Un évènement écrit à un endroit est publié de manière fiable aux souscripteurs sur 
+Un événement écrit à un endroit est publié de manière fiable aux souscripteurs sur 
 ce site et aux souscripteurs des sites distants. 
 Par conséquent, les composants qui échangent par le biais d'un 
-journal d'évènements répliqué communiquent via un bus qui préserve l'ordre causal 
-des évènements de manière durable et tolérant au partitionnement. De ce fait, les 
+journal d'événements répliqué communiquent via un bus qui préserve l'ordre causal 
+des événements de manière durable et tolérant au partitionnement. De ce fait, les 
 services sur les partitions du réseau inter-sites (lien entre les sites) peuvent 
-continuer d'écrire des évènements localement. La livraison des évènements sur 
+continuer d'écrire des événements localement. La livraison des événements sur 
 les sites distants reprend automatiquement lorsque les partitions sont à jour.
 
 
-Le journal d'évènements est répliqué localement et fournit un ordre total des 
-évènements stockés et appartient à un site. 
+Le journal d'événements est répliqué localement et fournit un ordre total des 
+événements stockés et appartient à un site. 
 Le site est une zone de disponibilité qui héberge un ou plusieurs 
-journal d'évènements. Les évènements d'un journal d'évènements sont 
+journal d'événements. Les événements d'un journal d'événements sont 
 répliqués sur les sites distancts de manière asynchrone. 
-Afin de lier des journaux d'évènements (localisés sur différents sites) à un journal 
-d'évènements répliqué, les 
-journaux d'évènements locaux doivent être accessibles à partir des points 
+Afin de lier des journaux d'événements (localisés sur différents sites) à un journal 
+d'événements répliqué, les 
+journaux d'événements locaux doivent être accessibles à partir des points 
 d'entrées de réplication. De plus, ces points d'entrée doivent être 
 connectés entre eux afin de créer un réseau de réplications. 
-Un journal d'évènements répliqué est représenté par un journal d'évènements local 
+Un journal d'événements répliqué est représenté par un journal d'événements local 
 sur chacun des sites participants.
 
 \info{point d'entrée = network bridge}
 
-Les points d'entrée permettent de gérer un ou plusieurs journaux d'évènements. 
+Les points d'entrée permettent de gérer un ou plusieurs journaux d'événements. 
 Ces journaux sont identifiés pour permettre à la réplication de ne s'intéresser 
 qu'aux journaux de même identifiant. 
 Les journaux avec différents identifiants sont ainsi isolés les uns des autres et 
 leur distribution peut donc varier selon les sites.
 
-Les journaux répliqués fournissent l'ordre causal des évènements stockés : l'ordre 
+Les journaux répliqués fournissent l'ordre causal des événements stockés : l'ordre 
 de stockage est le même sur tous les sites, ce qui veut dire que les 
-consommateurs qui lisent les évènements du journal local vont toujours voir les 
+consommateurs qui lisent les événements du journal local vont toujours voir les 
 effets avant leurs causes.
 
 
@@ -458,14 +460,14 @@ le bon état.
 	\caption{Théorème CAP et les algorithmes de compromis}
 	\label{fig:cap}
 \end{figure}
-L'ordonnancement des évènements durant les mises à jour reste identique lorsque
-les évènements sont rejoués par la suite car l'ordre issu de l'\gls{ES} est 
-déterminée par l'ordonnancement des évènements stockés 
+L'ordonnancement des événements durant les mises à jour reste identique lorsque
+les événements sont rejoués par la suite car l'ordre issu de l'\gls{ES} est 
+déterminée par l'ordonnancement des événements stockés 
 localement. Au sein d'une réplique, tous les composants \gls{CQRS} respectent 
-cet ordonnancement. L’ordre de stockage des évènements répliqués sur des sites 
+cet ordonnancement. L’ordre de stockage des événements répliqués sur des sites 
 distincts est cohérent sont ordonnés de manière causale \cite{Lamport1978} : les 
-évènements liés causalement ont le même ordre sur tous les sites alors que les 
-évènements concurrents peuvent avoir un ordre différent. Cette propriété est 
+événements liés causalement ont le même ordre sur tous les sites alors que les 
+événements concurrents peuvent avoir un ordre différent. Cette propriété est 
 importante pour obtenir une cohérence causale forte dans une application qui 
 respecte le théorème \gls{CAP} (Figure \ref{fig:cap}).  \blockquote[]{	\textit{The 
 largest single 
@@ -546,7 +548,7 @@ l'expérience utilisateur.
 %\end{algorithm}
 \subsection{Potentielles applications et autres utilisations}
 La conception et l'implémentation d'une plateforme comme 3DEvent qui est 
-asynchrone, distribuée et orientée évènements  (notamment la persistance) peut 
+asynchrone, distribuée et orientée événements  (notamment la persistance) peut 
 être appliquée à différents champs.
 \begin{description}
 	\item[GIT-like app] Les solutions pour faire de la gestion de version, comme 
@@ -556,7 +558,7 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	temps-réel) sur des plateformes web à cause du coût et de la complexité que 
 	cela peut apporter dans des architectures traditionnelles. 3DEvent peut 
 	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
-	évènements et indiquer les différences entre deux états.%\todo{acyclic graph}
+	événements et indiquer les différences entre deux états.%\todo{acyclic graph}
 	
 	\item[Scenarii et \textit{path recording}] Pour des jeux sérieux, les graphistes 
 	3D ou des études d'ergonomie, cette fonctionnalité est particulièrement 
@@ -571,7 +573,8 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	
 	\item[Traçage utilisateur et \textit{crowdsouring}] 3DEvent peut se révéler être 
 	un bon outil pour enregistrer la trace d'un utilisateur lorsqu'il navigue dans la 
-	scène. L'enregistrement du chemin de la caméra et des actions de l'utilisateur sous la forme d'évènements sont des informations 
+	scène. L'enregistrement du chemin de la caméra et des actions de l'utilisateur 
+	sous la forme d'événements sont des informations 
 	"issues de la foule" (\textit{crowdsouring}). En utilisant un processus 
 	d'apprentissage, il est possible de proposer de meilleurs chemins, repérer des 
 	points d'intérêt, ou même proposer des résumés de scène générés à partir des 
@@ -584,8 +587,8 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 	l'application peut fournir une meilleure compréhension du travail d'équipe ainsi 
 	que l'évolution de la conception. Cela peut permettre de repérer (avec du 
 	\gls{CEP}) et corriger certaines fonctionnalités afin d'améliorer l'ergonomie de 
-	l'application. Par exemple, si un évènement est anormalement représenté dans 
-	le journal des évènements, il sera possible de lever une alerte facilement.
+	l'application. Par exemple, si un événement est anormalement représenté dans 
+	le journal des événements, il sera possible de lever une alerte facilement.
 \end{description}
 %\begin{figure}[htb]
 %	\centering
@@ -595,33 +598,33 @@ asynchrone, distribuée et orientée évènements  (notamment la persistance) pe
 %\end{figure}
 \subsection{Bilan}
 
-Le modèle orienté évènement pour la modélisation 3D collaborative présenté dans 
+Le modèle orienté événement pour la modélisation 3D collaborative présenté dans 
 cette section intègre les besoins métiers par différents aspects. Le suivi des 
 directives liées au \gls{DDD} permet de mieux cerner les règles 
 métiers pour les intégrer dans \gls{CQRS}. 
 
 La description de la typologie des 
-évènements manipulés insiste sur le compartimentage des objets métiers. La 
+événements manipulés insiste sur le compartimentage des objets métiers. La 
 modélisation 3D collaborative est minutieusement étudiée pour en dégager les quatre 
 agrégats fondamentaux (la scène, le maillage, la géométrie et l'utilisateur) et les 
-types d'évènements qui leurs sont associés. Cette étape introduit des différences 
-fines sur les évènements qui sont produits à partir d'un agrégat. 
+types d'événements qui leurs sont associés. Cette étape introduit des différences 
+fines sur les événements qui sont produits à partir d'un agrégat. 
 Cet aspect est notamment intéressant pour l'observation et la surveillance du 
 contenu des sessions collaboratives développés en Section 
 \ref{sec:flexviz}. \todo{attention garder le bon endroit}
 Les composants du patron \gls{CQRS} favorisent le découplage de l'application 
 pour obtenir une gestion de la cohérence plus fine. 
 
-La partie \gls{ES} s'intéresse à la sauvegarde des évènements dans un journal 
-d'évènement, et notamment dans le cas des applications distribuées en proposant 
+La partie \gls{ES} s'intéresse à la sauvegarde des événements dans un journal 
+d'événement, et notamment dans le cas des applications distribuées en proposant 
 un mécanisme de synchronisation pour détecter les conflits. La fonction principale 
 de cette partie est de permettre de recréer un état de l'application cohérent en 
-intégrant implicitement une gestion de version des évènements.
+intégrant implicitement une gestion de version des événements.
 
 Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 3D, il 
 peut être facilement adapté pour différents types d'applications et étendu à 
 d'autres utilisations. 
 Pour mettre en avant l'expertise de chacun et profiter de 
 toutes les ressources apportées par un utilisateur, une communication efficace de 
-ces évènements pour la collaboration doit désormais être établie entre les 
+ces événements pour la collaboration doit désormais être établie entre les 
 collaborateurs.

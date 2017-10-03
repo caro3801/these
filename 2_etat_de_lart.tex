@@ -311,7 +311,7 @@ supporter les récentes avancées de WebGL pour afficher une scène décrite dan
 le \gls{DOM} à l'intérieur d'un \textit{canvas} HTML5. 
 X3DOM essaye de respecter le standard X3D et ses concepts pour en permettre 
 l'intégration du format dans le \gls{DOM}. De plus, X3DOM intègre le support 
-d'éléments \gls{HTML}, les évènements \gls{DOM} et de profils \acrshort{CSS} en 
+d'éléments \gls{HTML}, les événements \gls{DOM} et de profils \acrshort{CSS} en 
 supplément \cite{Sutter2015}. 
 En comparaison avec X3DOM, XML3D a développé une extension à \gls{HTML}5 
 pour décrire une scène 3D. 
@@ -324,7 +324,7 @@ scientifique 3D distribuée \cite{Jung2012} pour des données spatiales
 \cite{Stein2014} ou du rendu volumique \cite{Becher2012}, par exemple. 
 En manipulant directement les objets 3D à partir des éléments \gls{DOM}, grâce à 
 sa structure bien connue, il est alors plus simple, lors de la collaboration, d'utiliser 
-ces éléments \cite{Gadea2016} ou les évènements du \gls{DOM} \cite{Lowet2009} 
+ces éléments \cite{Gadea2016} ou les événements du \gls{DOM} \cite{Lowet2009} 
 comme protocole de synchronisation de scènes. 
 L'ajout de nombreux \textit{listeners} sur un document peut affecter les 
 performances de parcours de l'arbre du \gls{DOM} notamment si une scène est
@@ -917,18 +917,18 @@ tous les participants.
 %	\subsection{Les approches pour les données 3D}
 %	\subsection{Conclusion}
 
-\section{Les systèmes distribués orientés évènements pour la collaboration}
+\section{Les systèmes distribués orientés événements pour la collaboration}
 
 	\subsection{Introduction}
 % old evenements et collaboration
-La plupart des systèmes basés évènements sont très populaires lorsqu'il s'agit de 
-collaboration\cite{Helmer2011}. Les évènements peuvent être utilisé dans 
+La plupart des systèmes basés événements sont très populaires lorsqu'il s'agit de 
+collaboration\cite{Helmer2011}. Les événements peuvent être utilisé dans 
 \gls{CSCW}
 On retrouve par exemple la spécification 
-d'évènements composites 
+d'événements composites 
 pour le support de la collaboration dans la conception logicielle \cite{Yuan2002} 
 ou encore la définition de patrons de conception dédiés à la collaboration dans les 
-architectures basées évènement \cite{Verginadis2009}. Dans ce dernier domaine 
+architectures basées événement \cite{Verginadis2009}. Dans ce dernier domaine 
 Papageorgiou et al. \cite{Papageorgiou2011} proposent un assistant pour la 
 création de ces patrons pour la collaboration en s'appuyant sur un système de 
 recommandation basé sur le contexte qui utilisent une représentation sémantique 
@@ -936,7 +936,7 @@ recommandation basé sur le contexte qui utilisent une représentation sémantiq
 
 CoDesign est un exemple de \gls{framework} permettant de faire de la 
 conception logicielle de manière collaborative \cite{Bang2010}. L'utilisation d'une 
-architecture basée évènement permet à l'application d'être très extensible car très 
+architecture basée événement permet à l'application d'être très extensible car très 
 peu couplée. Chaque instance CoDesign intègre un intergiciel appelé CoWare en 
 charge de la synchronisation de contenus édités de manière concurrentes sur les 
 différentes instances CoDesign ainsi qu'un module chargé de notifier les 
@@ -950,7 +950,7 @@ données distribuée inhérents aux architectures microservices en utilisant \gl
 \gls{CQRS}. Une de leurs application exemple est un tableau Kanban collaboratif 
 temps-réel construit sur leur 
 plateforme\footnote{https://github.com/eventuate-examples/es-kanban-board}. 
-%	\subsection{Les évènements comme base du comportement réactif}
+%	\subsection{Les événements comme base du comportement réactif}
 	\subsection{Systèmes Publish-Subscribe}
 
 Le système \glsreset{PubSub}\gls{PubSub} est un mécanisme basé sur le 
@@ -961,12 +961,12 @@ Les \textit{publishers} (ceux qui émettent des messages) et les \textit{subscri
 Autrement dit, le \textit{publisher} n'est pas forcément au courant de l'existence de 
 ses \textit{subscribers} et n'a donc pas de contrainte forte le liant à ces derniers. 
 De son côté, le \textit{subscriber} est souvent indifférent au \textit{publisher} qui lui 
-fournit les évènements qui l'intéressent. La Figure \ref{fig:pubsub} représente le 
+fournit les événements qui l'intéressent. La Figure \ref{fig:pubsub} représente le 
 modèle \gls{PubSub}.
-Le service de notification d'évènement est utilisé comme passe plat d'évènements 
+Le service de notification d'événement est utilisé comme passe plat d'événements 
 entre le publisher et les subscribers. Son rôle est de gérer les abonnements 
 (souscription/désinscription) et de notifier les \textit{subscribers} concernés par la 
-publication d'un évènement par un \textit{publisher}.
+publication d'un événement par un \textit{publisher}.
 %TODO expliquer la figure 
 
 \begin{figure}[ht!]
@@ -988,7 +988,7 @@ Pour répondre à des besoins de mise à l'échelle, d'interopérabilité, de fi
 d'expressivité et d'utilisabilité, il s'appui sur un modèle \gls{PubSub} basé types et 
 attributs. 
 En spécifiant d'abord le type et ensuite en filtrant sur les attributs des 
-évènements, ce modèle rend le routage des données intuitif pour le 
+événements, ce modèle rend le routage des données intuitif pour le 
 développement d'application distribuées à grande échelle comme le commerce en 
 ligne (\textit{e-commerce}). 
 Scribe \cite{Castro2002} et Hermes \cite{Pietzuch2002} sont des exemples de 
@@ -996,7 +996,7 @@ systèmes \gls{PubSub} basés sur les \glspl{DHT}.
 Le premier se concentre sur la catégorie du sujet (topic-based) tandis que le second 
 supporte à la fois la communication orientée sujet et la communication orientée contenu (content-based) en utilisant un 
 filtrage par agrégat. Les deux utilisent un n\oe ud \textit{rendezvous} pour chaque 
-sujet ou type d'évènement dans la couche réseau et construise et maintient la 
+sujet ou type d'événement dans la couche réseau et construise et maintient la 
 distribution à partir de ce n\oe ud \textit{rendezvous}. TERA \cite{Baldoni2007} 
 propose une dissémination sur deux couches orientée sujet. Le but est d'effectuer 
 une distribution uniforme en fonction des intérêts des n\oe uds. La dissémination 
@@ -1004,7 +1004,7 @@ se déroule en deux phases. Pendant la première phase, un algorithme de marche 
 est utilisé sur la couche basse qui connecte les n\oe uds dans le but de localiser 
 le n\oe ud qui a souscrit au sujet. La seconde phase commence lorsqu'un 
 \textit{subscriber} est trouvé pour le connecter au \textit{cluster} correspondant au 
-sujet sur la couche haute. C'est là que l'évènement est disséminé.
+sujet sur la couche haute. C'est là que l'événement est disséminé.
 
 En juin 2017, Leonardo Quernozy présente une rétrospective des systèmes 
 \gls{PubSub} en \gls{P2P} massifs lors de la conférence DEBS'2017 à 
@@ -1036,11 +1036,11 @@ GRYPHON d'IBM \cite{Banavar1999}, SIENA \cite{Carzaniga2000}, REBECA
 \cite{Parzyjegla2010} et également REDS, JEDI, PADRES présentés plus en 
 détails dans \cite{Tarkoma2012}.
 Ces différentes solutions ont été conçues comme des systèmes de gestion avec 
-des gestionnaires d'évènements dédiées. Le passage à l'échelle est 
-principalement effectué par un routage efficace des évènements (comme le 
-filtrage d'évènements). Seuls quelques travaux ont utilisé le concept de 
+des gestionnaires d'événements dédiées. Le passage à l'échelle est 
+principalement effectué par un routage efficace des événements (comme le 
+filtrage d'événements). Seuls quelques travaux ont utilisé le concept de 
 \textit{clustering} par intérêt comme moyen afin de réduire le nombre de 
-notifications d'évènement et éviter la surcharge. 
+notifications d'événement et éviter la surcharge. 
 A partir des années 2000, les 
 systèmes \gls{P2P} ont commencer à émerger avec 
 l'apparition de Gnutella et consorts, les \glspl{DHT} (Chord, Pastry, Kademlia) et  
@@ -1081,10 +1081,10 @@ posée au développeur. Elle adresse plusieurs aspects de liés à l'\gls{IU} :
 	\item le type de service (fiabilité) et les fonctionnalités auxiliaires. 
 \end{itemize}
 
-Pour évaluer la charge de travail d'un système distribué basé évènements, 
+Pour évaluer la charge de travail d'un système distribué basé événements, 
 Kounev et al. \cite{Kounev2008} ont utilisé des techniques d'analyse 
 opérationnelle pour caractériser le trafic du système et dériver une approximation 
-de la moyenne des délais de livraison d'évènements. 
+de la moyenne des délais de livraison d'événements. 
 
 %TODO precisier quelles recherches
 Beaucoup de recherches ont été menées dans le but d'améliorer les performance 
@@ -1096,7 +1096,7 @@ dédiés. Une alternative à bas coût est d'utiliser les différents clients à
 des données sur la foule (\textit{crowd computing})\cite{Li2015}. De ce fait, le 
 contenu 3D est distribué par les pairs et non plus par le serveur. En combinant les 
 ressources réseau du serveur et de plusieurs clients, on peut réaliser une 
-distribution des données (évènements) en améliorant les performances du 
+distribution des données (événements) en améliorant les performances du 
 système pendant les sessions de travail collaboratif. 
 
 
@@ -1182,8 +1182,8 @@ modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se 
 	maillage n'a également pas d'intéret à connaître les informations des 
 	utilisateurs, c'est la scène qui gère l'interface entre les maillages et les 
 	utilisateurs.
-	\item L'\textbf{évènement du domaine} (\textit{domain event}) : un 
-	évènement auquel 
+	\item L'\textbf{événement du domaine} (\textit{domain event}) : un 
+	événement auquel 
 	l'expert du domaine s'intéresse. Il est définit par un objet du domaine.
 	\item Le \textbf{dépôt} (\textit{repository}) : les méthodes pour récupérer les 
 	objets du domaine doivent être déléguées à un \textbf{dépôt} spécialisé afin de 
@@ -1202,9 +1202,9 @@ systèmes d'information plus robustes et flexibles face aux nouvelles demandes.}
 
 Le \gls{DDD} a également l'avantage de fonctionner en harmonie avec les 
 principes de l'\gls{ES}. L'approche logicielle \gls{DDD} étant conçue pour refléter 
-les évènements se déroulant dans la réalité métier qui ne sont pas 
+les événements se déroulant dans la réalité métier qui ne sont pas 
 interchangeables -- la plupart du temps. L'utilisation d'architectures 
-basées évènements est naturelle dans ce genre d'environnement. 
+basées événements est naturelle dans ce genre d'environnement. 
 
 Les disciplines liées à la 3D dans un contexte industrielles ont besoin de pouvoir 
 communiquer sur un langage commun pour permettre à chacun des 
@@ -1265,9 +1265,9 @@ problèmes. Le fait de tout sauvegarder dans une base de données centralisée p
 être une étape dans la gestion de la collaboration mais l'altération des données est 
 souvent exacerbée par l'utilisation de caches comme accélérateur de performance.
 L'immuabilité en \gls{CQRS} est un concept clé qui prévient la  
-modification de l'état interne d'une commande ou d'un évènement. Les 
+modification de l'état interne d'une commande ou d'un événement. Les 
 commandes sont immuables car leur usage nécessite un envoi direct au domaine 
-pour être traitées. Quant aux évènements, ils sont immuables car ils représentent 
+pour être traitées. Quant aux événements, ils sont immuables car ils représentent 
 ce qui s'est produit dans le passé (qu'on ne peut donc pas changer). 
 
 \subsection{Event Sourcing}
@@ -1282,11 +1282,11 @@ extensibles\fg{}\cite{Boner2014TheManifesto} comme le \gls{CQRS} et l'\gls{ES}.
 L'\glsreset{ES}\gls{ES} est une approche complémentaire au \gls{CQRS} pour 
 gérer la 
 concurrence des données et capturer l'intention de l'utilisateur. Ce patron de 
-conception stocke les évènements en mode ajout seulement 
+conception stocke les événements en mode ajout seulement 
 (\textit{append-only}) pour sauvegarder le résultat des commandes sur le 
 domaine. Cela permet de conserver tous les changements qui ont mené à un 
 état plutôt qu'uniquement l'état. Ce paradigme permet de recréer n'importe quel 
-état d'un agrégat à partir de la liste d'évènements qu'on lui a appliqué. Cette 
+état d'un agrégat à partir de la liste d'événements qu'on lui a appliqué. Cette 
 liste représente une base la vérité du système\jp{pas clair}. 
 \improve{improve}\gls{ES} permet de simplifier les tâches complexes dans des 
 domaines complexes comme la 3D en ne requérant pas la synchronisation de 
@@ -1304,33 +1304,33 @@ définitions données de l'\gls{ES} et du vocabulaire lié à ce patron de conce
 \textbf{Martin Fowler} Martin Fowler a été le premier à utiliser le terme 
 d'\acrlong{ES} en 2005. Il définit l'\gls{ES} comme \og une série de 
 changements 
-de l'état d'une application\fg{}'.  \og série d'évènements capture tout ce qui est 
-nécessaire à la reconstruction de l'état courant'\fg{}. Il voit les évènements 
-comme immuables et le journal d'évènement (\textit{event log}) comme un 
-stockage linéaire (\textit{append only store}) des évènements (Figure 
+de l'état d'une application\fg{}'.  \og série d'événements capture tout ce qui est 
+nécessaire à la reconstruction de l'état courant'\fg{}. Il voit les événements 
+comme immuables et le journal d'événement (\textit{event log}) comme un 
+stockage linéaire (\textit{append only store}) des événements (Figure 
 \ref{fig:es-event}). 
-Les évènements ne sont jamais supprimés, le seul moyen de l'''annuler'' consiste à 
-effectuer générer un évènement rétroactif. 
-Une fois qu'un évènement rétroactif est ajouté, l'évènement rétroactif agit à 
-l'inverse de l'évènement précédent pour compenser ses effets (Figure 
+Les événements ne sont jamais supprimés, le seul moyen de l'''annuler'' consiste à 
+effectuer générer un événement rétroactif. 
+Une fois qu'un événement rétroactif est ajouté, l'événement rétroactif agit à 
+l'inverse de l'événement précédent pour compenser ses effets (Figure 
 \ref{fig:es-transaction-delete}). 
 Dans ce billet, Fowler n'établit pas clairement la distinction entre les 
-évènements 
-et les commandes qui déclenchent ces évènements. Ce problème est 
+événements 
+et les commandes qui déclenchent ces événements. Ce problème est 
 considéré dans plusieurs travaux fondamentaux \cite{Prakash1994,Sun2002,Weiss2009a,Weiss2010} approfondie par un revue de Chen et al. \cite{Cheng2013}.
 
 \textbf{Greg Young} Grand contributeur au domaine de l'\gls{ES} (et \gls{CQRS}), Greg 
 Young décrit l'\gls{ES} comme \og le stockage de l'état courant sous la forme 
-d'une série d'évènements et la reconstruction de l'état du système en rejouant 
-cette série d'évènements'\fg{}. D'après lui, le journal d'évènements a également 
-un comportement linéaire : les évènements qui sont déjà arrivés ne peuvent 
-être défaits. Ce que Fowler appelle évènements rétroactifs, Young le décrit 
+d'une série d'événements et la reconstruction de l'état du système en rejouant 
+cette série d'événements'\fg{}. D'après lui, le journal d'événements a également 
+un comportement linéaire : les événements qui sont déjà arrivés ne peuvent 
+être défaits. Ce que Fowler appelle événements rétroactifs, Young le décrit 
 comme des actions inverses.
 
 \textbf{Udi Dahan} Udi Dahan est également un auteur de billets de blog 
 prolifique sur les systèmes \gls{ES}. Dans sa définition de l'\gls{ES}, Dahan 
 insiste sur le fait que \og l'état du modèle du domain est persisté comme un 
-\textit{flux} d'évènements plutôt qu'un simple instantané\fg{}.
+\textit{flux} d'événements plutôt qu'un simple instantané\fg{}.
 
 
 %
@@ -1338,7 +1338,7 @@ insiste sur le fait que \og l'état du modèle du domain est persisté comme un
 		
 		\centering
 		\noindent
-		\subfloat[Nouvel évènement en \gls{ES}]{
+		\subfloat[Nouvel événement en \gls{ES}]{
 			\inputTikZ{1}{eps/tikz/eventsourcing/es.tex}
 			\label{fig:es-event}
 		}
@@ -1407,11 +1407,11 @@ le sujet. \improve{style exemple}
 \paragraph{Résolution} Avec un système classique, la fonctionnalité doit être 
 créée pour enregistrer ce traitement puis être testée et implémentée (dans cet 
 exemple, il en faudrait deux). Seulement après, un rapport pourra être délivré. 
-Dans un environnement utilisant l'\gls{ES}, tous les évènements existent déjà 
+Dans un environnement utilisant l'\gls{ES}, tous les événements existent déjà 
 donc les données sont déjà disponibles et ont seulement à être analysées 
 (dans 
-notre exemples, les informations sont inhérentes aux évènements). De plus, les 
-évènements étant stockés depuis le début de la vie de l'application\jp{préciser : 
+notre exemples, les informations sont inhérentes aux événements). De plus, les 
+événements étant stockés depuis le début de la vie de l'application\jp{préciser : 
 	début de la vie}, beaucoup plus de données peuvent être analysées. Par 
 exemple : demander toutes les modifications d'un objet depuis la dernière 
 connexion d'un utilisateur pour lui communiquer visuellement les différences par 
@@ -1423,37 +1423,37 @@ rapport à sa dernière visite.
 En revanche, les performances de l'application peuvent être affectées par 
 l'utilisation de 
 l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Store, il est 
-nécessaire de le calculer à partir des évènements reçus.
-A chaque évènement créé (et stocké), ce processus sera alourdi car ils ne 
-peuvent être supprimés. Plus la pile d'évènements est longue, plus cela prend 
+nécessaire de le calculer à partir des événements reçus.
+A chaque événement créé (et stocké), ce processus sera alourdi car ils ne 
+peuvent être supprimés. Plus la pile d'événements est longue, plus cela prend 
 du temps (linéaire).
  considérant que les commandes ont besoin parfois de connaître une partie de 
- l'état courant issu de ces évènements pour être déclenchée.
+ l'état courant issu de ces événements pour être déclenchée.
  
 Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
-moment qui correspond à l'empilement d'évènements ayant mené à cet état. En 
+moment qui correspond à l'empilement d'événements ayant mené à cet état. En 
 créant un \gls{snapshot}, on évite de reconstruire un état à partir du début de la 
 vie de l'agrégat (Figure \ref{fig:es-without-snapshot}) ; on empile les nouveaux 
-évènements à partir de ce snapshot (Figure \ref{fig:es-snapshot}). 
+événements à partir de ce snapshot (Figure \ref{fig:es-snapshot}). 
 L'utilisation du \gls{snapshot} est intéressante à partir du moment où la pile 
-d'évènements devient plus lourde que le \gls{snapshot} lui-même. Il est donc 
+d'événements devient plus lourde que le \gls{snapshot} lui-même. Il est donc 
 important de bien déterminer la périodicité du déclenchement du \gls{snapshot} 
-(temporelle ou selon le nombre d'évènements).
+(temporelle ou selon le nombre d'événements).
  \info{rehydratation d'un agrégat diff avec projection -> eventually consistence (proj 
  = EC /rehy -> 
 	valides}\unsure{Dans tous les autres cas l'utilisation de \textit{snapshots} 
 	permet de contrer proprement ce problème en offrant une forme dénormalisée 
 	de la donnée. }
 
-Le parcours des évènements se fait classiquement du premier au dernier 
+Le parcours des événements se fait classiquement du premier au dernier 
 (\textit{bottom-up}). Si on utilise les \gls{snapshot}, on peut se permettre de les 
 parcourir dans l'autre sens (\textit{top-bottom}) jusqu'à trouver un \gls{snapshot} 
-puis appliquer tous les évènements qui sont arrivés entre ce \gls{snapshot} et 
+puis appliquer tous les événements qui sont arrivés entre ce \gls{snapshot} et 
 l'état courant. Dans le cas où l'on souhaite accéder à des données historiques 
 plus anciennes que le dernier \gls{snapshot}, le second parcours fonctionne 
 aussi. Cependant, elle doit être évitée pour ne pas créer de dépendance entre 
 les \gls{snapshot}. Sans les snapshots le modèle peut encore varier 
-<<~librement~>> tant que l'on sait comment lui appliquer un évènement passé. 
+<<~librement~>> tant que l'on sait comment lui appliquer un événement passé. 
 Le fait de travailler avec des \gls{snapshot} crée une dépendance des 
 snapshots qui doivent intégrer les modifications du domaine. Une solution est 
 de recalculer les snapshots quand le domaine est modifié mais cela reste 
@@ -1463,28 +1463,28 @@ coûteux (et à éviter).\info{versionning event -> retro compatibilité}
 Les patrons de conception \gls{CS} et \gls{ES} sont strictement déterministes pour 
 avoir une exactitude rigoureuse de ce qui se passe dans le système.
 
-Un évènement représente quelque chose qui est arrivé dans le domaine. Un 
-évènement appliqué sur un état, donne un nouvel état. 
+Un événement représente quelque chose qui est arrivé dans le domaine. Un 
+événement appliqué sur un état, donne un nouvel état. 
 La condition pour appliquer un pur déterminisme en \gls{ES} est la fonction 
-suivante : \texttt{État~$\rightarrow$~Évènement~$\rightarrow$~État}. 
+suivante : \texttt{État~$\rightarrow$~événement~$\rightarrow$~État}. 
 Cette fonction met en correspondance les (mêmes) entrées avec les (mêmes) 
 sorties ; ce qui permet de se reposer dessus pour reconstituer un état à 
 n'important quel moment dans le temps. 
-Le déterminisme est appliqué en assurant à l'évènement tous les 
+Le déterminisme est appliqué en assurant à l'événement tous les 
 informations lui permettant de faire la transition (i.e. sans effet de bord). 
-L'évènement est alors considéré comme une encapsulation de toutes les 
+L'événement est alors considéré comme une encapsulation de toutes les 
 informations pertinentes concernant la transition du système d'un état à l'autre.
 
 Une commande va être déclenchée par l'utilisateur qui veut modifier le domaine. 
-Une commande appliquée sur un état va produire un ou plusieurs évènements (qui 
+Une commande appliquée sur un état va produire un ou plusieurs événements (qui 
 ne sont pas forcément appliqués à l'état courant de l'application par la suite): 
-\texttt{État~$\rightarrow$~Commande~$\rightarrow$~Liste d'évènements}.
+\texttt{État~$\rightarrow$~Commande~$\rightarrow$~Liste d'événements}.
 
-La différence principale entre un évènement et une commande réside donc dans 
+La différence principale entre un événement et une commande réside donc dans 
 l'\textbf{intention}. D'un point de vue fonctionnel, le \gls{CS} est un patron de 
-conception lié à une décision qui produit plusieurs évènements, tandis que 
+conception lié à une décision qui produit plusieurs événements, tandis que 
 l'\gls{ES} se contente d'appliquer un changement à l'état courant. De plus, en 
-\gls{ES}, l'évènement stocké a été produit par l'agrégat. 
+\gls{ES}, l'événement stocké a été produit par l'agrégat. 
 La différenciation majeure des deux patrons de conception s'accentue lors 
 l'interaction avec des systèmes externes. L'aspect fonctionnel de l'application de 
 changement d'état de l'\gls{ES} al'avantage de permettre de reconstruire l'état sans 
@@ -1496,7 +1496,7 @@ sous une forme fonctionnelle pure avec l'apparition de base de données comme
 EventStore ou le langage de programmation plus adaptés comme F\#. Les deux 
 patrons peuvent cohabiter si le \gls{CS} a un cadre d'action bien délimité 
 et que les composants de l'architecture ont un couplage lâche afin que seuls les 
-évènements produits par les agrégats ne modifient l'état interne de l'application. 
+événements produits par les agrégats ne modifient l'état interne de l'application. 
 
 \section{Conclusion}
 
@@ -1529,7 +1529,7 @@ paquets manquants et leur ré-ordonnancement pour favoriser la rapidité
 de la livraison.
 
 La troisième partie s'intéresse aux propriétés des architectures orientées 
-évènements. Le couplage lâche est une propriété 
+événements. Le couplage lâche est une propriété 
 qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybride. Elles ont 
 l'avantage de proposer une intégration de la partie métier transparente. Dans les 
 différents 
@@ -1537,13 +1537,13 @@ systèmes de modélisation 3D pour la visualisation ou la manipulation d'objets 
 collaboratifs sur le web, cet aspect est souvent mis de côté. Or, dans le cadre de 
 la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
 prépondérants.
-Différentes approches parmi les architectures orientée évènements dans un 
+Différentes approches parmi les architectures orientée événements dans un 
 système collaboratif permettent d'intégrer les règles liées au métier dans une 
 application de modélisation collaborative. Dans un 
 premier temps, l'architecture \gls{PubSub}, propose un système de notifications 
 pour les différents 
 n\oe uds d'un réseau de manière lâche. De cette manière la communication est 
-homogénéisée et repose uniquement sur des notifications d'évènement pour les 
+homogénéisée et repose uniquement sur des notifications d'événement pour les 
 entrées et sorties des clients. Le mécanisme d'abonnement autorise une 
 grande variété de stratégies quant au routage des messages.
 Dans un second temps, différents patrons de conceptions sont présentés. Le 
@@ -1554,11 +1554,11 @@ partie écriture (commande) et lecture (requête) dans l'application. Le passage
 l'échelle côté lecture est favorisé grâce à la création de projections des données 
 facilite la restitution des données sans risques d'effets de bord. 
 Le côté écriture, permet de valider le contenu entrant selon les règles métiers du 
-le domaine métier. L'\gls{ES} est le patron qui introduit la notion d'évènement (\og 
+le domaine métier. L'\gls{ES} est le patron qui introduit la notion d'événement (\og 
 ce qui s'est passé\fg{}). L'état de l'application se reconstruit à 
-partir de ces évènements issus de l'expertise métier -- déduite grâce au \gls{DDD}. 
-Les évènements générés par \gls{CQRS} sont stockés dans le journal des 
-évènements qui les partage aux autres collaborateurs, ce qui peut 
+partir de ces événements issus de l'expertise métier -- déduite grâce au \gls{DDD}. 
+Les événements générés par \gls{CQRS} sont stockés dans le journal des 
+événements qui les partage aux autres collaborateurs, ce qui peut 
 provoquer des conflits qu'il faut pouvoir détecter pour éviter les incohérences dans 
 l'\gls{EVC}. 
 %\todo{parler de la concurrence} 

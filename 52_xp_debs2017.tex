@@ -1,6 +1,6 @@
 %!TEX root = main.tex
 %\section{Assemblage d'objets 3D sur le web avec architecture 
-%évènementielle}
+%événementielle}
 %\label{sec:us}
 L'expérimentation propose de répliquer une collaboration réaliste entre différents 
 participants travaillant à distance. Ce cas d'étude présenté dans 
@@ -99,15 +99,15 @@ l'expérimentation. Chaque participant a reçu une image de l'assemblage à réa
 
 \paragraph{Données collectées}
 Pour chaque expérimentation et chaque participant, le temps de complètement, le 
-nombre d'évènements générés et l'horodatage de chaque évènement pour 
+nombre d'événements générés et l'horodatage de chaque événement pour 
 observer le complètement de la tâche en termes de vitesse et d'efficacité ainsi 
 que les effets sur le temps d'implication d'un collaborateur selon le nombre de 
 collaborateurs. 
 
-L'enregistrement des données commence lorsque le premier évènement sur la 
-scène initialisée est généré (horodatage du premier évènement); et il s'arrête 
+L'enregistrement des données commence lorsque le premier événement sur la 
+scène initialisée est généré (horodatage du premier événement); et il s'arrête 
 lorsque le groupe indique que la tâche à compléter est terminée (horodatage du 
-dernier évènement est considéré).
+dernier événement est considéré).
 
 
 \paragraph{Questionnaire}
@@ -123,12 +123,12 @@ participants. En utilisant une échelle de notation sur sept points \cite{Lewis1
 
 
 Au cours des différentes sessions collaboratives, l'application à produit plusieurs 
-centaines d'évènements (environ 300 par session). Les expérimentations ont été 
+centaines d'événements (environ 300 par session). Les expérimentations ont été 
 réalisées sur plusieurs dispositifs notamment un \textit{smartphone} avec une 
 connexion 4G. 
 La Figure \ref{fig:screenshots} montre quelques captures d'écran durant une 
 session collaborative sur le modèle Rotor ; et la Figure \ref{fig:ui4} montre les 
-premiers évènements enregistrés dans la base de données\info{mettre ailleurs?}. 
+premiers événements enregistrés dans la base de données\info{mettre ailleurs?}. 
 Les boîtes englobantes représentent la sélection des différents collaborateurs 
 pendant la session.
 \begin{figure}[ht]
@@ -161,13 +161,13 @@ pendant la session.
 
 \paragraph{Analyse des interactions}
 Les traces des utilisateurs récupérées au cours des expérimentations sont la base 
-du travail d'analyse qui est présenté ici. Ces traces, composées d'évènements 
+du travail d'analyse qui est présenté ici. Ces traces, composées d'événements 
 générés par les utilisateurs, permettent de savoir qui (Figure \ref{petita}) a fait quoi 
 (Figure \ref{petitb}) lors des sessions collaborative. Généralement, le \og qui\fg{} 
 est assez facile à retrouver lors de la récupération des traces. Le \og quoi\fg{} 
 cependant nécessite que les notifications aient une signification précise et proche 
-du métier. Grâce au travail de découpage et de dénomination des évènements 
-effectué en amont, le journal d'évènements (\textit{log}) indique précisément tout 
+du métier. Grâce au travail de découpage et de dénomination des événements 
+effectué en amont, le journal d'événements (\textit{log}) indique précisément tout 
 ce 
 qui s'est passé lors de la session du point de vue du métier. Cette fonctionnalité est 
 intéressante dans le contexte de la traçabilité des données et lors d'audits sur 
@@ -177,26 +177,26 @@ Figure \ref{fig:collabsession} montre deux angles d'enregistrement d'une session
 sur le modèle \textit{living room}. Au début de la session, beaucoup d'objets sont 
 ajoutés (meshAddedToSceneEvent). Seul un utilisateur a ajouté un objet en 
 utilisant la fonctionnalité pour déposer un objet à un endroit spécifique de la scène 
-(meshDropped \info{name it}). Le nombre d'évènements concernant la sélection et 
+(meshDropped \info{name it}). Le nombre d'événements concernant la sélection et 
 la désélection est à peu près similaire aux exception. La différence s'explique par 
-le fait que l'évènement de désélection n'est pas déclenché lors d'un changement 
+le fait que l'événement de désélection n'est pas déclenché lors d'un changement 
 d'objet sélectionné, car la désélection n'est pas effectuée explicitement par 
 l'utilisateur. Au commencement, les participants ont fortement interagit (jusqu'à 20 
-évènements en 15 secondes). Cela s'explique par le recours massif à l'ajout 
+événements en 15 secondes). Cela s'explique par le recours massif à l'ajout 
 d'objets dans la scène pour composer le modèle et la mise à l'échelle de ceux-ci 
 (du au positionnement arbitraire des objets de la bibliothèque). Ensuite, les trois 
 utilisateurs interagissent ensemble durant quelques minutes avant que l'un d'entre 
 eux ne quitte et ne reviennent quelques secondes plus tard (informations 
-récupérées à partir du journal d'évènements lié aux agrégats utilisateurs). Enfin, le 
-nombre d'évènements diminue montrant la fin de l'activité, les utilisateurs finissant 
+récupérées à partir du journal d'événements lié aux agrégats utilisateurs). Enfin, le 
+nombre d'événements diminue montrant la fin de l'activité, les utilisateurs finissant 
 la tâche et ajustant les derniers objets.
 
 L'implication d'un utilisateur peut être vue par le prisme de la fréquence de ses 
 contributions et la variété de fonctionnalités utilisées, autrement dit, les différents 
-types d'évènement produits. L'analyse d'une session apporte plusieurs indicateurs 
+types d'événement produits. L'analyse d'une session apporte plusieurs indicateurs 
 tout au long de la session. Par exemple, l'absence d'un utilisateur pendant une 
 longue période peut indiquer une déconnexion. Ou encore, l'utilisation trop 
-fréquente d'un type d'évènement (ou d'un motif d'évènements répété) peut montrer 
+fréquente d'un type d'événement (ou d'un motif d'événements répété) peut montrer 
 une faiblesse de l'ergonomie de l'interface. Pour ce dernier aspect, on peut prendre 
 l'exemple dans la Figure \ref{petitb} à 45s, on remarque un nombre élevé de 
 MeshScaledEvent. A posteriori, nous nous sommes rendu compte que la 
@@ -209,7 +209,7 @@ reprendre à de nombreuse fois pour réaliser la bonne transformation.
 	\subfloat[Par 
 	utilisateur]{\includegraphics[width=\columnwidth]{eps/byuser.eps}\label{petita}} \\
 	\subfloat[Par type 
-	d'évènement]{\includegraphics[width=\columnwidth]{eps/byevents.eps}\label{petitb}}
+	d'événement]{\includegraphics[width=\columnwidth]{eps/byevents.eps}\label{petitb}}
 	\caption{Résumé d'une session collaborative au cours du temps}
 	\label{fig:collabsession}
 \end{figure}
@@ -236,7 +236,7 @@ participant avec une latence de plus de 10s à certains moment, mais malgré cel
 le groupe nous a notifié que cela n'avait pas affecté la collaboration. Au long des 
 expérimentations, quelques conflits ont été levés sur différentes opérations à 
 différent niveaux. Au niveau réseau (mauvaise version, désynchronisation), la 
-politique en place est d'annuler l'évènement et de resynchroniser les utilisateurs 
+politique en place est d'annuler l'événement et de resynchroniser les utilisateurs 
 entre eux. Au niveau des utilisateurs (opérations opposées sur le même objet), la 
 résolution du conflit doit passer par un canal externe (chat) pour que les 
 utilisateurs se mettent d'accord.  

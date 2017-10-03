@@ -174,11 +174,13 @@ permettre des échanges asynchrones.
 En cas d'arrêt soudain du serveur, si une connexion a été établie préalablement 
 entre les clients et est toujours en cours, elle n'est pas impactée par la défaillance 
 du serveur.
+
 \subsection{Données d'échange}
 En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
 d'un format de données permettant de faire communiquer des acteurs hétérogènes 
 du système. Le format \gls{JSON}, dérivé de la notation des objets du langage 
-JavaScript, est lisible et interopérable. Le Listing \ref{jsonexemple} montre un exemple d'évènement en format JSON.
+JavaScript, est lisible et interopérable. Le Listing \ref{jsonexemple} montre un 
+exemple d'événement en format JSON.
 %Son pendant binaire est le format \gls{BSON}.
 %Le format de fichier \gls{glTF} se base sur la représentation \gls{JSON} afin de 
 %décrire une scène 3D.
@@ -223,7 +225,7 @@ mises à jour qu'ils génèrent grâce au protocole de
 \gls{streaming3D} (cf. \ref{streamingprotocol}) sans passer par le serveur.
 
 Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès aux 
-évènements enregistrés sur le client. La configuration du client est également 
+événements enregistrés sur le client. La configuration du client est également 
 stockée localement. 
 
 \subsubsection{Protocole de streaming pour la synchronisation}
@@ -250,23 +252,23 @@ proche du routage de GNutella.
 
 
 
-\subsubsection{Gestion des évènements des agrégats}
+\subsubsection{Gestion des événements des agrégats}
 
 La configuration des connexions RTCDataChannel peut être configurée de selon 
 les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancement. 
 Dans l'intergiciel de 3DEvent, cette configuration est : non fiable et non ordonnée. 
-C'est l'application qui est en charge de \og ré-ordonner\fg{} les évènements. En 
-effet, les évènements sont associés à des agrégats. Comme chaque agrégat 
-possède un flux d'évènements dédié et numéroté il est alors simple de les 
+C'est l'application qui est en charge de \og ré-ordonner\fg{} les événements. En 
+effet, les événements sont associés à des agrégats. Comme chaque agrégat 
+possède un flux d'événements dédié et numéroté il est alors simple de les 
 ordonner lorsque. 
 Lors de la synchronisation (Section \todo{ref section sync}), les 
-évènements manquants sont demandés successivement à tous les pairs. Lors 
-qu'un pair reçoit les évènements il les stocke dans le flux correspondant à 
-l'agrégat. Si un évènement est manquant, les suivants sont quand même stockés 
-en laissant l'espace de l'évènement manquant dans le tableau. L'évènement est 
+événements manquants sont demandés successivement à tous les pairs. Lors 
+qu'un pair reçoit les événements il les stocke dans le flux correspondant à 
+l'agrégat. Si un événement est manquant, les suivants sont quand même stockés 
+en laissant l'espace de l'événement manquant dans le tableau. L'événement est 
 redemandé jusqu'à son obtention, laquelle provoque le déblocage de l'état de 
-l'agrégat jusqu'au prochain évènement manquant (ou la fin du flux). Les 
-évènements qui ont été stockés \og en attendant\fg{} permettent à l'application 
+l'agrégat jusqu'au prochain événement manquant (ou la fin du flux). Les 
+événements qui ont été stockés \og en attendant\fg{} permettent à l'application 
 d'être directement en capacité de poursuivre la construction de l'état de l'agrégat. 
 Cette mécanique tire avantage des Snapshots (présentés dans \todo{ref section}) 
 qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déjà d'un 
@@ -304,13 +306,13 @@ celui manipulé ($O_f$), plusieurs aspects de l'interactions sont mis en valeur 
 	en cours car cela lui convient.
 
 	\item le métier : seules les manipulations menées à terme son 
-	considérées comme des commandes. Cela évite d'avoir des évènements qui ne 
-	sont pas pertinents pour le métier dans le journal d'évènements comme lorsque 
+	considérées comme des commandes. Cela évite d'avoir des événements qui ne 
+	sont pas pertinents pour le métier dans le journal d'événements comme lorsque 
 	l'utilisateur change d'idée lors de l'interaction ou
 	suite à une intervention concurrente. L'utilisateur n'a un impact sur l'application 
 	que lorsqu'une modification métier est réalisée.
 	
-	\item le réseau : l'information importante à faire transité est l'évènement 
+	\item le réseau : l'information importante à faire transité est l'événement 
 	correspondant à la modification métier pas toutes les positions intermédiaires 
 	même si intuitivement l'idée de temps réel pourrait conduire à cette solution. La 
 	quantité de messages produite surchargerai à la fois le réseau et le fil 

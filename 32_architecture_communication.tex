@@ -3,7 +3,7 @@
 
 %\subsection{Introduction}
 
-Dans la section précédente, l'introduction du modèle orienté évènements 
+Dans la section précédente, l'introduction du modèle orienté événements 
 s'intéresse principalement à ce qui se passe au sein d'un seul client. 
 Or, la collaboration passe par la mise en relation des différents collaborateurs et 
 l'échange des données nécessaires à la collaboration : données de connexion, 
@@ -52,11 +52,12 @@ navigateur.
 
 \paragraph{Constat}
 
-Les systèmes \gls{P2P} qui sont orientés évènements consistent en plusieurs n\oe uds 
+Les systèmes \gls{P2P} qui sont orientés événements consistent en plusieurs 
+n\oe uds 
 interconnectés qui ont des fonctions similaires et exécutent des tâches 
 similaires. Les pairs partagent directement leurs ressources (contenu, CPU, 
 stockage, bande passante) sans nécessiter de serveur central. A la place, les 
-pairs coopèrent aux moyens d'évènements qui prennent la forme de messages 
+pairs coopèrent aux moyens d'événements qui prennent la forme de messages 
 échangés entre pairs. Les systèmes \gls{P2P} sont capables de s'adapter aux 
 disfonctionnement et à la dynamicité des pairs tout en maintenant des 
 performances acceptables. Les systèmes \gls{P2P} sont généralement utilisés comme 
@@ -117,7 +118,7 @@ description des connexions à maintenir. Le bloc de gestion de session permet au
 pair de savoir avec qui il est connecté et contient également les méta informations 
 liées à ces liens (temps de connexion). 
 Chaque pair doit également posséder un endroit où stocker les informations de 
-contenu à traiter qui correspond au journal d'évènements. Le stockage peut 
+contenu à traiter qui correspond au journal d'événements. Le stockage peut 
 prendre plusieurs formes : \textit{in-memory}, stockage local, disque dur\dots selon le 
 type de stockage adapté et disponible.
 Un pair est également au courant de son rôle. Le rôle d'un pair permet de 
@@ -171,31 +172,31 @@ situation respective de leurs \textit{ESM} \info{definir} afin de se synchronise
 
 \subsection{Extension : Event Store distribué}
 
-L'Event Store est un composant clé dans le traitement des évènements. Il prend 
-en entrée des évènements générés ou reçus extérieurement et produit en sortie 
-des évènements cohérents qui peuvent être par la suite publiés. Les évènements 
+L'Event Store est un composant clé dans le traitement des événements. Il prend 
+en entrée des événements générés ou reçus extérieurement et produit en sortie 
+des événements cohérents qui peuvent être par la suite publiés. Les événements 
 sont considérés comme cohérents lorsqu'il n'y a pas d'erreur de cohérence, i.e. 
 lorsque les numéros de versions sont bien ordonnés. Chaque Event Store contient 
 deux éléments: l'Event Stream Manager (ESM) et des Network Bridges (NB). Un
 ESM est une structure de données représentée par une collection de flux 
-d'évènements. Un flux d'évènement est représenté par un tableau d'évènements 
-indexés en séquence permettant de stocker les évènements d'un aggrégat dans 
+d'événements. Un flux d'événement est représenté par un tableau d'événements 
+indexés en séquence permettant de stocker les événements d'un aggrégat dans 
 l'ordre temporel. Si un flux ne rencontre pas de problème de cohérence alors le 
 dernier index correspond au numéro de version de l'agrégat. Lorsque l'Event Store 
-reçoit un évènement de l'instance courante\info{utilisation du terme 
-	instance?}, l'ESM récupère (ou crée) le flux d'évènements associé à l'agrégat 
-référencé par l'évènement. Alors, la cohérence de la version est vérifiée en 
-comparant la version attendue (exposée dans les métadonnées de l'évènement) 
+reçoit un événement de l'instance courante\info{utilisation du terme 
+	instance?}, l'ESM récupère (ou crée) le flux d'événements associé à l'agrégat 
+référencé par l'événement. Alors, la cohérence de la version est vérifiée en 
+comparant la version attendue (exposée dans les métadonnées de l'événement) 
 et la version actuelle de l'agrégat. Si les deux numéros de versions sont égaux, 
-l'évènement est ajouté à la fin du tableau du flux pour être stocké, sinon une 
+l'événement est ajouté à la fin du tableau du flux pour être stocké, sinon une 
 exception est levée. La gestion des exceptions est expliquée dans \info{détails 
-	exception}. Une fois le stockage effectué dans l'ESM, l'évènement est publié.
+	exception}. Une fois le stockage effectué dans l'ESM, l'événement est publié.
 
 
 
 \subsection{Persistance à long terme}\label{sec:persistance-a-long-terme}
 Dans un contexte industriel de collaboration, l'information doit être disponible sur le long terme, facilement accessible par l'entreprise. La persistance à 
-long-terme stocke le journal d'évènement qui est la 
+long-terme stocke le journal d'événement qui est la 
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
 
@@ -243,10 +244,10 @@ known as “offline first”) \cite{Gadea2016}}
 3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
 de gérer au mieux la cohérence des données. 
 Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
-génération d'un ou plusieurs évènements. Ces évènements sont considérés 
+génération d'un ou plusieurs événements. Ces événements sont considérés 
 comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
 (\textit{committed}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
-évènements doit produire une nouvelle version sans être en conflit avec la 
+événements doit produire une nouvelle version sans être en conflit avec la 
 précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
 est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
 un conflit est levé~: 

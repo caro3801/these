@@ -325,26 +325,27 @@ translation, la rotation et l’homothétie.
 %\subsubsection{Le web et le P2P : WebRTC}
 %\subsubsection{Le web et la 3D :  WebGL}
 
-\subsection{Les architectures orientées évènements pour la collaboration}
+\subsection{Les architectures orientées événements pour la collaboration}
 
-Un événement est un élément omniprésent de la vie. Le terme \textit{évènement} 
+Un événement est un élément omniprésent de la vie. Le terme \textit{événement} 
 existe dans presque tous les champs en science, avec différents sens. Le but de 
-cette section est de répertorier les différentes notions d'évènements. Pour cela, 
+cette section est de répertorier les différentes notions d'événements. Pour cela, 
 différentes descriptions du terme sont proposées ainsi que leur notion 
 liée à la littérature informatique. \jp{pourquoi ne pas mettre directement la définition 
 	qui nous intéresse ?}
 
-Dans la littérature, une variété de définitions du terme évènement existe. 
-Habituellement, un évènement est considéré comme quelque chose qui 
+Dans la littérature, une variété de définitions du terme événement existe. 
+Habituellement, un événement est considéré comme quelque chose qui 
 \og se produit\fg{}, en particulier quelque chose d'inhabituel ou d'important. 
 Cependant la plupart des travaux de la littérature évitent de définir le sens précis 
-des évènements en n'indiquant pas le champ d'application dans lequel ils sont 
+des événements en n'indiquant pas le champ d'application dans lequel ils sont 
 utilisés. 
-Il existe trois entrées pour le terme évènement dans le dictionnaire. 
+Il existe trois entrées pour le terme événement dans le dictionnaire. 
 La première entrée se réfère à la physique (dans le cadre de la théorie 
-de la relativité), où un évènement est <<~un phénomène considéré comme localisé 
+de la relativité), où un événement est <<~un phénomène considéré comme 
+localisé 
 et instantané, survenant en un point et un instant bien déterminés~>>. La seconde 
-se réfère à la théorie des probabilités, indiquant qu'un évènement est <<~la partie 
+se réfère à la théorie des probabilités, indiquant qu'un événement est <<~la partie 
 d'un univers $\Omega$ réalisée quand l'une des éventualités la composant se 
 réalise~>>. La troisième définition se rapporte à la psychologie impliquant <<~tout 
 ce qui est capable de modifier la réalité interne d'un sujet (fait extérieur, 
@@ -355,20 +356,21 @@ s'intéresser au déplacement d'un objet de quelques unités (\textit{object mov
 	event}) ou d'apprendre qu'un utilisateur est passé de déconnecté à connecté 
 (\textit{status changed}). On s'applique donc à identifier ce qui modifie l'état 
 intrinsèque d'un objet et sa représentation. Bien que ces différentes descriptions 
-permettent d'avoir une compréhension générale du terme évènement, chaque sous-discipline de l'informatique comprend 
-ses propres associations avec le terme évènement.
+permettent d'avoir une compréhension générale du terme événement, chaque 
+sous-discipline de l'informatique comprend 
+ses propres associations avec le terme événement.
 
-L'implantation d'une architecture orientée évènements (de l'anglais \gls{EDA}) 
+L'implantation d'une architecture orientée événements (de l'anglais \gls{EDA}) 
 nécessite l'instanciation d'une 
 architecture abstraite, 
 le positionnement des composants sur des machines, ainsi que des protocoles 
 pour subvenir à l'interaction, en utilisant des technologies et des produits 
 spécifiques. Une telle instance est appelée architecture système. De ce fait, les 
-architectures de systèmes distribués orientés évènements doivent 
+architectures de systèmes distribués orientés événements doivent 
 répondre aux exigences des utilisateurs et aux problèmes liés à la nature des 
 plateformes et applications. 
 Le passage à l'échelle (nombre de d'utilisateurs, ressources distribuées sur de 
-grandes zones géographiques) génère un grand nombre d'évènements qui doivent 
+grandes zones géographiques) génère un grand nombre d'événements qui doivent 
 être traités de façon efficace. 
 
 Les systèmes complexes distribués sont construits à partir de collections 
@@ -382,11 +384,11 @@ couplées de manière dite \og lâche\fg{} (\textit{loosely coupled}) \footnote{
 	un 
 	cadre d'interaction entre les composants.}, technologiquement neutre 
 et indépendante de la localisation des services. 
-Le développement d'applications dirigées par les évènements est un challenge 
-tripartite : la production d'évènements, le traitement des évènements et la 
-consommation des évènements \cite{Chandy2011}.
+Le développement d'applications dirigées par les événements est un challenge 
+tripartite : la production d'événements, le traitement des événements et la 
+consommation des événements \cite{Chandy2011}.
 Cristea et al. \cite{Cristea2011} présentent un aperçu des architectures distribuées 
-pour les systèmes orientés évènements. 
+pour les systèmes orientés événements. 
 Cette approche est utilisée dans de nombreuses applications réactives. Souvent 
 appliquées à la finance ou aux systèmes logistiques, de telles solutions peuvent 
 également intégrer les besoins de plateformes distribuées à grande échelle, 
@@ -396,7 +398,7 @@ comme les applications web et le travail collaboratif.
 
 \subsubsection{Sensibilisation et perception du groupe}
 Le travail collaboratif peut également être supporté par des modèles orientés 
-évènements prenant en compte la sensibilisation au groupe (\textit{awareness}) 
+événements prenant en compte la sensibilisation au groupe (\textit{awareness}) 
 dans des activités. Ces systèmes sont présents dans la littérature depuis les 
 prémices de la technologie web \cite{Bentley1997,Steinfield1999,You2001}. Ces 
 propositions ont commencé par approcher la sensibilisation à l'espace de travail 
@@ -414,7 +416,7 @@ système de communication; la disponibilité d'informations superflues; la diffi
 d'extraire l'information pour surveiller ou faire des rapports; l'utilisation des 
 données issues des ressources produites par le groupe pour améliorer sa 
 perception des données disponibles. Par exemple, Xhafa et Poulovassilis 
-\cite{Xhafa2010} exposent une approche distribuée basée évènements pour gérer 
+\cite{Xhafa2010} exposent une approche distribuée basée événements pour gérer 
 des collecticiels (\textit{groupware}) en \gls{P2P}. 
 \improve{ca veut rien dire}
 Leur méthode permet de développer des applications de collecticiels spécifiques  
@@ -424,7 +426,7 @@ différentes approches dépendant de la plateforme (web ou mobile) avec une
 granularité différente de l'information 
 d'\textit{awareness} dont :
 
-%Dans les collecticiels évènementiels P2P, les conditions à intégrer dans le 
+%Dans les collecticiels événementiels P2P, les conditions à intégrer dans le 
 %développement de l'intergiciel P2P, pour proposer une sensibilisation au 
 %groupe  -- activité, process, contexte, communication, disponibilité -- sont 
 %nombreuses \cite{Xhafa2010} : 
@@ -433,14 +435,14 @@ d'\textit{awareness} dont :
 	l'information de sensibilisation est gérée par un serveur central, dans un 
 	système décentralisé, l'information sur laquelle la sensibilisation est construite 
 	est répartie sur les sites des différents pairs. Dans les approches basées 
-	serveur, le traitement des évènements est effectué sur le serveur qui stocke 
-	les évènements ainsi que la base de données contenant l'historique et fournit 
+	serveur, le traitement des événements est effectué sur le serveur qui stocke 
+	les événements ainsi que la base de données contenant l'historique et fournit 
 	l'interface de requête pour extraire les informations d'intérêt. Dans le collecticiel 
-	\gls{P2P}, le stockage, le traitement et les requêtes d'évènements doivent être 
+	\gls{P2P}, le stockage, le traitement et les requêtes d'événements doivent être 
 	faits 
 	de manière répartie.
 	
-	\item[La sensibilisation à la dynamicité des évènements] Les systèmes 
+	\item[La sensibilisation à la dynamicité des événements] Les systèmes 
 	\gls{P2P} 
 	sont dynamiques par nature (\textit{join / leave} des pairs). La fonctionnalité de 
 	sensibilisation doit prendre en compte cette dynamicité. En effet, la 
@@ -450,15 +452,15 @@ d'\textit{awareness} dont :
 	intégrer des mécanismes de propagation et de réplication fournissant le contenu 
 	au groupe. 
 	
-	\item[La généricité des évènements] Un système basé évènements manipule 
-	plusieurs types d'évènements. C'est pourquoi il est nécessaire que les 
-	évènements soient le plus génériques possibles pour faciliter la construction de 
+	\item[La généricité des événements] Un système basé événements manipule 
+	plusieurs types d'événements. C'est pourquoi il est nécessaire que les 
+	événements soient le plus génériques possibles pour faciliter la construction de 
 	requêtes à travers un système lâchement couplé.
 	
 	\item[Les mécanismes à empreinte mémoire réduite] L'utilisation de 
 	mécanismes à empreinte mémoire réduite est indispensable dans le but de 
-	réduire la surcharge causée par la génération d'évènements, le traitement des 
-	évènements et les notifications, ainsi que pour permettre le support de la 
+	réduire la surcharge causée par la génération d'événements, le traitement des 
+	événements et les notifications, ainsi que pour permettre le support de la 
 	sensibilisation par des pairs qui possèdent des capacités limités.
 	
 \end{description}
@@ -472,7 +474,7 @@ d'\textit{awareness} dont :
 %\info{Xhafa2010 parle aussi des mobiles}
 
 Brown et al. \cite{Brown2003} proposent un mécanisme de distribution de 
-données basé évènements. Le \textit{Battlefield Augmented Reality System} 
+données basé événements. Le \textit{Battlefield Augmented Reality System} 
 (BARS) se situe dans le contexte de la collaboration sur mobile en réalité 
 augmentée et environnement virtuel. Cet environnement a besoin de conserver 
 une information cohérente au cours du temps, qui plus est de rendre compte de la 
@@ -482,15 +484,15 @@ fait que <<~chaque utilisateur doit obtenir une meilleure compréhension de
 l'environnement~>>. Pour cela, ils se placent dans un cadre où il est nécessaire 
 de gérer plusieurs utilisateurs avec des connexions différentes (bas débit et haut 
 débit) avec des connexions au réseau qui ne sont pas fiables et une réplication 
-partielle des données pour minimiser les évènements non voulus.
+partielle des données pour minimiser les événements non voulus.
 \info{consistency cohérence conflits} L'analyse des applications utilisant des 
-systèmes orientés évènements explique 
+systèmes orientés événements explique 
 qu'ils sont obligés de faire des choix spécifiques au métier lié à l'application 
 \cite{Hinze2009}. Par exemple, dans les applications de jeux vidéo, la distribution 
-des évènements est souvent liée à un mécanisme \gls{PubSub} centralisé qui 
+des événements est souvent liée à un mécanisme \gls{PubSub} centralisé qui 
 modifie les souscriptions au fur et à mesure que les joueurs se déplacent dans 
-l'espace. De plus, les évènements dans un jeu doivent être protégés contre 
-l'altération pour éviter la triche ou la dissémination d'évènements faux. Cela 
+l'espace. De plus, les événements dans un jeu doivent être protégés contre 
+l'altération pour éviter la triche ou la dissémination d'événements faux. Cela 
 s'applique également aux données d'un \gls{EVC3D} destiné à un usage industriel 
 (données confidentielles ou critiques).
 
@@ -508,8 +510,8 @@ Les règles métier doivent donc apparaître dès la conception pour être
 intégrées tôt dans la modélisation 3D. 
 
 Les architectures orientées 
-évènements sont bien adaptées pour intégrer dans la description des 
-évènements plusieurs aspects liés au métier. 
+événements sont bien adaptées pour intégrer dans la description des 
+événements plusieurs aspects liés au métier. 
 Cette sémantique porte avec elle les connaissances des manipulations expertes.
 Un aspect majeur de cette thèse repose sur l'intégration du métier dans le 
 processus de la manipulation et de la visualisation des objets 3D. 
@@ -637,11 +639,11 @@ suit.
 \begin{itemize}
 	\item \improve{réécrire + introduire ref chapitre}Proposition d'un système de 
 	gestion et de visualisation de contenu \gls{3D} avec un historique non linéaire 
-	orienté évènements.
+	orienté événements.
 	\item Définition d'une architecture hybride (client serveur et \gls{P2P}) adapté à 
 	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur web en 
 	temps réel.
-	\item Introduction des concepts d'évènements métiers liées à la \gls{3D} 
+	\item Introduction des concepts d'événements métiers liées à la \gls{3D} 
 	comme moyen d'interagir dans une scène  \gls{3D} multi-échelle
 \end{itemize}
 \subsection{Contributions pratiques}
@@ -672,7 +674,7 @@ manipuler des objets \gls{3D} avec une grande traçabilité et de manière auton
 %La première contribution propose 
 Finalement, le chapitre\info{ref chap final} aborde le problème spécifique de 
 la transmission du contenu \gls{3D} lors d'une session collaborative en temps réel. 
-En considérant et développant un modèle orienté évènements, 3DEvent dérive 
+En considérant et développant un modèle orienté événements, 3DEvent dérive 
 des 
 stratégies pour délivrer et obtenir une scène 3D en continu (\textit{streaming} en 
 anglais) en s'appuyant sur les différentes configurations matérielles, utilisateurs et 

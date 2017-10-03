@@ -47,7 +47,7 @@ métier du domaine d'application à la création, la lecture, la mise à jour et
 suppression, omettant toutes les subtilités que peuvent dégager ces actions en 
 perdant l'intention de l'utilisateur dès le niveau de l'interface. Une 
 interface orientée tâche a tendance à montrer les changements qui se produisent 
-dans le domaine.De cette manière, le modèle orienté évènements présenté dans 
+dans le domaine.De cette manière, le modèle orienté événements présenté dans 
 le précédent chapitre est directement orienté métier. 
 \subsubsection{Présentation de l'interface}
 
@@ -64,7 +64,7 @@ interface est scindée en deux panneaux~:
 		\item "Scene" contient tous les détails de la scène et des maillages qu'elle 
 		inclue~; 
 		\item "Collaboration" fournit les informations liées à la collaboration~;
-		\item "History" liste tous les évènements qui ont eut lieu dans la scène et 
+		\item "History" liste tous les événements qui ont eut lieu dans la scène et 
 		leurs  détails. 
 	\end{enumerate}
 \end{enumerate}
@@ -82,13 +82,13 @@ et son rôle (administrateur, éditeur, lecteur ou autre\footnote{Un rôle peut 
 liste, l'utilisateur accède au dernier point de vue dans l'espace 3D connu du 
 collaborateur représenté.
 
-L'onglet "History" liste tous les évènements passés dans la scène en fournissant 
-l'accès à leur détail. Pour chaque évènement, le système est capable de montrer 
-dans l'espace 3D la différence entre l'état  après l'évènement cliqué $state_x$ et 
+L'onglet "History" liste tous les événements passés dans la scène en fournissant 
+l'accès à leur détail. Pour chaque événement, le système est capable de montrer 
+dans l'espace 3D la différence entre l'état  après l'événement cliqué $state_x$ et 
 l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir de 
 <<~revenir en arrière~>> sans perdre les données entre $state_n$ et $state_x$ 
 car dans notre système cela s'effectue par compensation (cf Event-Sourcing 
-Section X)\improve{annulation d'un évènement ou juste ES}.
+Section X)\improve{annulation d'un événement ou juste ES}.
 
 Dans chaque onglet on trouve donc différent blocs \gls{HTML}, avec des 
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
@@ -107,7 +107,7 @@ Le composant responsable de la détection de conflit permet au développeur
 d'implémenter ses propres règles de résolution de conflit. Le composant déclenche 
 une exception lorsque le numéro de version reçu et le numéro de version courant 
 de l'agrégat sont identique (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
-règles métiers définies et les exceptions liés à la cohérence, l'évènement peut être 
+règles métiers définies et les exceptions liés à la cohérence, l'événement peut être 
 business 
 logic rules defined, the event is rejected, accepted with or without modifications. 
 From this pro- cess, new events can be generated during the resolution.
@@ -125,41 +125,41 @@ cube mesh should be created before).
 		même connecté à User C. Le cycle montre les différentes étapes du 
 		déclenchement de la commande au rendu visuel en passant par la 
 		génération 
-		de l'évènement, la 
-		synchronisation du journal d'évènements et l'impact sur le rendu des autres 
+		de l'événement, la 
+		synchronisation du journal d'événements et l'impact sur le rendu des autres 
 		utilisateurs pour une translation sur un cube.}\label{fig:cqrs-example}
 \end{figure}
 \subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
 Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
-partir du flux d'évènements. Pour Abdullin, <<la projection est le processus de 
-conversion (ou d'agrégation) d'un flux d'évènement en une représentation 
+partir du flux d'événements. Pour Abdullin, <<la projection est le processus de 
+conversion (ou d'agrégation) d'un flux d'événement en une représentation 
 structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
 peut être avoir différentes appellations : modèle de lecture persistent, vue ou 
 état.>>\info{footnote abullin prj}
 La partie lecture du modèle (l'affichage sur interface utilisateur) bénéficie des 
-projections en lui permettant de réduire l'afflux des évènements, ne laissant filtrer 
+projections en lui permettant de réduire l'afflux des événements, ne laissant filtrer 
 que ceux qui sont pertinents pour la vue. La projection fournit une vue adaptée 
-(filtrée, enrichie\ldots) du flux d'évènements au client. Elle peut également être 
+(filtrée, enrichie\ldots) du flux d'événements au client. Elle peut également être 
 utilisée pour mettre en avant des aspects experts (notifications, déclenchement 
 d'action) ou des raisons de confidentialité.
 Une projection peut être créée de manière synchrone (à la volée) au fur et à 
-mesure de la publication des évènements ou de manière asynchrone et donc 
-découplée du flux des évènements. 
+mesure de la publication des événements ou de manière asynchrone et donc 
+découplée du flux des événements. 
 
 
 Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
 paquets réseau de manière ordonnée.
 Par conséquent, les messages pouvant arriver dans n'importe quel ordre, 
-qu'arriverait-il si un évènement A ($eA$) nécessitant un autre évènement B ($eB$) 
+qu'arriverait-il si un événement A ($eA$) nécessitant un autre événement B ($eB$) 
 pour être appliqué arrivait avant? Dans cette situation, le système va générer une 
 erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
-d'information sur la hiérarchie d'application des évènements ($eB$ puis $eA$).
+d'information sur la hiérarchie d'application des événements ($eB$ puis $eA$).
 
 Pour pallier ce problème, l'introduction du système de projection permet d'avoir un 
 mécanisme (comme un automate fini) qui défini les transitions nécessaires pour 
 passer d'un état à l'autre et qui réalisent les actions déterminées en fonction des 
-évènements qui arrivent. Par exemple, si on essaie d'ajouter un objet dans une 
+événements qui arrivent. Par exemple, si on essaie d'ajouter un objet dans une 
 scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
 jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
 jamais utiliser $eA$.
@@ -169,7 +169,7 @@ jamais utiliser $eA$.
 	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
 	\caption{Structure d'un agrégat}{Structure d'un agrégat et ses versions. Chaque 
 	version est un état de l'agrégat qui correspond à l'empilement des instance 
-	d'évènements (ei) qu'il contient. Les types des évènements sont relatifs au type 
+	d'événements (ei) qu'il contient. Les types des événements sont relatifs au type 
 	d'agrégat dans lequel il est contenu.}
 	\label{fig:aggregate}
 \end{figure}

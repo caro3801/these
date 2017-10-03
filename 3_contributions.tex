@@ -17,7 +17,7 @@ de communication répondant aux contraintes fonctionnelles (détection de confli
 et technologiques (web).
 
 Ce chapitre présente les contributions scientifiques de cette thèse.
-Tout d'abord, je présente le modèle orienté évènements pour la 
+Tout d'abord, je présente le modèle orienté événements pour la 
 visualisation et la manipulation d'objets 3D dans un environnement web. La 
 contribution insiste sur l'intégration de la partie métier de la 3D par l'utilisation de 
 patrons de conception (\gls{DDD}, \gls{CQRS}, \gls{ES}). La réflexion concernant 
@@ -25,7 +25,7 @@ le découpage des opérations 3D liées à la manipulation d'objets 3D est expli
 dans un premier temps. Dans un second temps, pour procurer plus d'autonomie 
 aux utilisateurs, je propose de déporter le patron \gls{CQRS} uniquement sur le 
 client afin qu'il soit capable de gérer la partie métier seul. La valeur ajoutée par le 
-modèle orienté évènements ne permet pas l'échange entre les utilisateurs bien 
+modèle orienté événements ne permet pas l'échange entre les utilisateurs bien 
 qu'elle soit pensée pour intégrer les aspects métiers de cette dernière. 
 
 La seconde contribution s'intéresse à l'architecture de 
@@ -39,12 +39,13 @@ des ressources. Cette contribution est découpée en deux parties. La première
 concerne la présentation d'une preuve de concept sur la base du modèle présenté 
 dans \cite{Desprat2015a} avec une architecture de communication simple 
 proposant une diffusion des mises à jour par différentiel d'état. La seconde partie 
-tire avantage de la mise en place du \gls{framework} orienté évènements présenté dans 
+tire avantage de la mise en place du \gls{framework} orienté événements présenté 
+dans 
 \cite{Desprat2016} et utilise la méthode de distribution des informations présenté 
 dans \cite{Desprat2017} pour améliorer la résilience du système. 
 
 %%%%%%% SECTION %%%%%%%
-%\section{Modèle évènementiel pour l'intégration du domaine 3D lors de la 
+%\section{Modèle événementiel pour l'intégration du domaine 3D lors de la 
 %manipulation d'objets 3D}
 \input{31_modele_evenementiel}
 
