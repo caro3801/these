@@ -5,19 +5,19 @@
 
 Dans la section précédente, l'introduction du modèle orienté événements 
 s'intéresse principalement à ce qui se passe au sein d'un seul client. 
-Or, la collaboration passe par la mise en relation des différents collaborateurs et 
-l'échange des données nécessaires à la collaboration : données de connexion, 
-mises à jour de la scène, sensibilisation\dots 
+Or, la collaboration passe par la mise en relation des différents collaborateurs mais aussi par  
+l'échange des données nécessaires à la collaboration (données de connexion, 
+mises à jour de la scène, sensibilisation\dots )
 Afin de pouvoir proposer un \gls{SEC} adapté aux besoins de l'édition de scènes 
 3D, plusieurs critères doivent êtres respectés: 
 \begin{itemize}
-	\item granularité fine pour l'édition massive ;
-	\item spécifique à la modélisation 3D ;
-	\item reposant sur des technologies web (réseau, interface, interaction 3D).
+	\item une granularité fine pour l'édition massive ;
+	\item une granularité spécifique à la modélisation 3D ;
+	\item et une granularité reposant sur des technologies web (réseau, interface, interaction 3D).
 \end{itemize}
 
 Les systèmes \gls{P2P} qui sont orientés événements consistent en plusieurs 
-n\oe uds interconnectés qui ont des fonctions similaires et exécutent des tâches 
+n\oe uds interconnectés qui ont des fonctions et des tâches 
 similaires. Les pairs partagent directement leurs ressources (contenu, CPU, 
 stockage, bande passante) sans nécessiter de serveur central. A la place, les 
 pairs coopèrent aux moyens d'événements qui prennent la forme de messages 
@@ -26,7 +26,7 @@ dysfonctionnement et à la dynamicité des pairs tout en maintenant des
 performances acceptables. Les systèmes \gls{P2P} sont généralement utilisés 
 comme soutien aux services de l'application pour la communication et la 
 collaboration, le calcul distribué, la distribution de contenu et pour les services 
-d'intergiciel comme le routage et la localisation, l'anonymat et la confidentialité.
+d'intergiciel comme le routage et la localisation ou encore l'anonymat et la confidentialité.
 
 \paragraph{Constat} Les \glspl{SEC} ont connu un fort développement avec 
 l'intérêt 
@@ -37,11 +37,11 @@ convergence, préservation de la causalité et préservation de l'intention du m
 \acrshort{CCI} \cite{Sun1998}. 
 La plupart des travaux liés aux \glspl{SEC} \gls{P2P} s'intéressent à 
 l'édition collaborative massive de documents textuels dont les propriétés 
-de commutativité sont plus faciles à gérer (insertion/suppression) en 
+de commutativité sont plus faciles à gérer (insertion / suppression) en 
 comparaison à celles concernant la 3D (multiplication de matrices de 
 rotation). La génération de conflits en 3D peut vite devenir incontrôlable. Il est 
 donc nécessaire de mettre en place des mécanismes de détection de 
-conflit et de maintient de cohérence au cours des sessions de 
+conflit et de maintenir une cohérence au cours des sessions de 
 collaboration. 
 
 
@@ -77,7 +77,7 @@ Le terme \og hybride\fg{} invoque un compromis entre la
 centralisation de l'information nécessaire à la prise de décision globale et 
 la décentralisation des échanges utile à l'amélioration du partage de 
 contenu 3D à l'échelle locale. 
-En agissant sur ces deux échelles la granularité de la collaboration est plus fine. 
+En agissant sur ces deux échelles, la granularité de la collaboration est plus fine. 
 Par exemple, le passage à l'échelle est facilité par la présence de 
 ressources locales et la coordination des utilisateurs se fait à une échelle 
 globale ce qui permet également l'accès à une source de vérité 
@@ -104,10 +104,10 @@ Les contributions portées par \cite{Desprat2015a} et \cite{Desprat2015b}
 s'appuient sur des pairs ayant un rôle simple et proposent une transmission des 
 mises à jour en tant que différentiel d'état. Les conflits lors d'opérations 
 concurrentes sont évités grâce à un mécanisme de verrouillage. 
-Avec \cite{Desprat2016} la mise en place du modèle événement impose 
+Plus tard, Desprat et al.  \cite{Desprat2016} mettent en place le modèle événement qui impose 
 l'évolution, au niveau réseau, du protocole de transmission (celui-ci reposant sur 
 des notifications d'événements et la gestion des flux d'agrégat). 
-Enfin, \cite{Desprat2017} va plus loin en distinguant deux rôles parmi les pairs : la 
+Plus récemment, Desprat et al. \cite{Desprat2017} ont permis de distinguer les deux rôles parmi les pairs : la 
 partie serveur se se composent désormais de pairs qui ont un rôle de vérification 
 de la cohérence et de relais des données dans la couche \gls{P2P}. Cette 
 contribution intervient dans le but d'encourager la résilience du système et la 
@@ -157,9 +157,9 @@ présentant une vue minimaliste d'un pair dédié au partage de contenu
 \cite[p.135-136]{Buford2009}. Les 
 fonctions sont divisées en trois :
 \begin{itemize}
-	\item couche de routage et d'échange de messages ;
-	\item recherche et stockage de contenu ;
-	\item ainsi que configuration et sélection du rôle du pair.
+	\item la couche de routage et d'échange de messages ;
+	\item la recherche et le stockage de contenu ;
+	\item ainsi que la configuration et sélection du rôle du pair.
 \end{itemize}
 
 
@@ -183,7 +183,7 @@ L'élément responsable de la couche de routage et d'échange de messages permet
 états des voisins.
 Un pair possède un mécanisme d'amorçage (\textit{bootstrap}) qui permet de 
 localiser les autres pairs qui lui permettront de rejoindre la couche \gls{P2P}. Les 
-étapes pour rejoindre ou quitter la couche, sont proposées par le protocole 
+étapes pour rejoindre ou quitter la couche sont proposées par le protocole 
 d'établissement de connexion 
 (cf signaling mecanism\todo{ref section signaling}).
 La couche applicative permet  d'échanger des messages avec les autres pairs 
@@ -226,9 +226,9 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 \todo{revoir}
 \begin{description}
 	\item[Spécificité des composants de l'architecture] Les pairs sont la base de la 
-	dissémination de l'information. Le partie serveur 
-	centralise les données liées à la persistance long  terme;
-	décentralise la réplication des données à court terme. Cela évite donc au 
+	dissémination de l'information. La partie serveur 
+	centralise les données liées à la persistance long  terme et
+	décentralise la réplication des données à court terme. Cela évite au 
 	serveur 
 	d'être le point central des échanges en déchargeant les canaux passant par le 
 	serveur.
@@ -271,7 +271,7 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 		\end{enumerate}
 	\end{enumerate}
 	
-	Ces quatre phases sont distinctes même si lorsqu'un pair initialise ou rejoint 
+	Ces quatre phases sont distinctes même si, lorsqu'un pair initialise ou rejoint 
 	d'une 
 	session collaborative (séquence d'initialisation), les phases 
 	\ref{phase1signaling}, \ref{phase2sync} et \ref{phase3gen} s'enchainent pour 
@@ -279,12 +279,12 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	\ref{phase3gen} s'alternent. La phase \ref{phase4quit} se produit lorsque qu'un 
 	client quitte une scène de manière volontaire (changement de scène, fermeture 
 	de l'onglet du navigateur) ou involontaire (fausse manipulation, navigateur en 
-	panne, coupure internet) signifiant la terminaison de la session collaborative.
+	panne, coupure internet) signifiant la fin de la session collaborative.
 	
 	\item [Gestion du stockage et structure des données] 
 	Le stockage peut prendre plusieurs formes : \textit{in-memory}, stockage local, 
 	disque dur\dots selon le type de stockage adapté et disponible. 
-	Dans l'architecture hybride il existe deux niveaux de stockage : la persistence 
+	Dans l'architecture hybride, il existe deux niveaux de stockage : la persistence 
 	long-terme, distante -- la base de données -- et la persistence court-terme, 
 	locale -- le navigateur.
 	Le serveur assure d'une part la centralisation du stockage à long-terme et 
@@ -300,7 +300,7 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	a de lourds impacts sur l'expérience utilisateur (fonctionnalités, interface 
 	utilisateur) et la gestion de la cohérence dans le réseau \gls{P2P}.  
 	
-	\item [Protocole d'échange].
+	\item [Protocole d'échange]
 	La couche \gls{P2P} fournit une dissémination rapide de l'information et 
 \end{description}
 
