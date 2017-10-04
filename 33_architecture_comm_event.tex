@@ -10,51 +10,6 @@ long-terme stocke le journal d'événement qui est la
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
 
-\subsubsection{Synchronisation client-serveur}
-\label{sec:synchronisation-client-serveur}
-
-Les travaux \cite{Desprat2015a} et \cite{Desprat2015b} présentent une version 
-naïve du processus de synchronisation. La cohérence est garantie par un système 
-de verrouillage des objets.
-
-Lors de la connexion d'un nouveau client a lieu la synchronisation des deux 
-systèmes de persistance pour obtenir les mises à jour : 
-\improve{l'échange des mises à jour entre le client (persistance à court terme) et la 
-	base de données (à long terme) afin de synchroniser les deux éléments avec. 
-	La 
-	base de données peut également servir en cas de conflit important ; elle sert de 
-	référent.}
-\improve{synchro- nizing with a NoSQL-based database whenever possible 
-	(thereby supporting intermittent connections of mobile devices; this approach is 
-	known as “offline first”) \cite{Gadea2016}}
-\begin{enumerate}
-	\item depuis le client, où l'on distingue trois cas :
-	\begin{enumerate}
-		\item travail "\textit{offline}" (hors ligne) : l'utilisateur a travaillé hors ligne et 
-		doit maintenant publier "en ligne" son travail. Les mises à jour publiées sur la 
-		base de données ; le serveur vérifie si aucun conflit ne survient puis 
-		fusionne (\textit{merge}) les nouvelles entrées avec l'existant; 
-		
-		\item travail "\textit{serverless}" (en collaboration avec d'autres pairs sans le 
-		serveur) : dans le cas où le serveur est absent, les clients peuvent continuer 
-		de créer en collaborant. Ces données n'étant stockées que sur le client, il est 
-		nécessaire de les transmettre à la base de données dès qu'une connexion 
-		est possible. 
-		Cela peut être fait en une fois ou de manière partagée\improve{ça veut dire 
-			quoi?};
-		
-		\item travail "\textit{online}" (en collaboration avec d'autres pairs avec le 
-		serveur) : le client envoie régulièrement \improve{combien de temps} ses 
-		nouvelles modifications pour qu'elles soient intégrées à la base de données.
-	\end{enumerate}
-	\item depuis la base de données :
-	Le client reçoit toutes les nouvelles mises à jour de la scène depuis la dernière 
-	fois qu'il s'est connecté. Cela peut également inclure des mises à jour qui sont 
-	en conflit avec ce qu'il y a dans son propre espace de stockage qu'il lui faut 
-	donc modifier.
-	Dans le cas où un utilisateur est seul connecté, la base de données est la 
-	seule source disponible pour la mise à jour du client. 
-\end{enumerate}
 
 
 \subsubsection{Mécanisme de gestion de version}
