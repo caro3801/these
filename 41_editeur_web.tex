@@ -1,4 +1,3 @@
-
 %\chapter{Implantation}
 %\section{3DEvent : Plateforme web de manipulation et visualisation 
 %	collaborative 
@@ -9,11 +8,11 @@
 Les interactions possibles sont : 
 \begin{description}
 	
-	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut 
-	com\-me dans un environnement 3D classique interagir avec la vue en utilisant 
+	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut, 
+	com\-me dans un environnement 3D classique, interagir avec la vue en utilisant 
 	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
 	utiliser les commandes clavier et souris pour effectuer des opérations de 
-	translation, rotation et homothétie directement dans le \textit{viewport} ou via le 
+	translation, de rotation et d' homothétie de trois manières différentes: directement dans le \textit{viewport}, via le 
 	menu ou via la console du navigateur.
 	\item[Charger des modèles 3D] L'éditeur gère la plupart des formats de fichier 
 	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
@@ -25,7 +24,7 @@ Les interactions possibles sont :
 	son point de vue à celui d'un autre utilisateur. Le choix d'implanter ce type de 
 	fonctionnalité s'inscrit dans la perspective de sensibilisation de l'utilisateur au 
 	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre le 
-	point de vue d'un collaborateur, se mettre à sa place, est une manière de 
+	point de vue d'un collaborateur est une manière de 
 	comprendre son fonctionnement et d'imaginer ses 
 	perspectives de conception à travers le point de vue qu'il a choisi.
 \end{description}
@@ -131,7 +130,7 @@ cube mesh should be created before).
 \end{figure}
 \subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
-Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
+Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de l'état courant à 
 partir du flux d'événements. Pour Abdullin, <<la projection est le processus de 
 conversion (ou d'agrégation) d'un flux d'événement en une représentation 
 structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
@@ -150,9 +149,9 @@ découplée du flux des événements.
 
 Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
 paquets réseau de manière ordonnée.
-Par conséquent, les messages pouvant arriver dans n'importe quel ordre, 
-qu'arriverait-il si un événement A ($eA$) nécessitant un autre événement B ($eB$) 
-pour être appliqué arrivait avant? Dans cette situation, le système va générer une 
+Par conséquent, les messages peuvent arriver dans n'importe quel ordre.
+Qu'arriverait-il alors si un événement A ($eA$) nécessitant un autre événement B ($eB$) 
+arrivait avant celui-ci? Dans cette situation, le système génére une 
 erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
 d'information sur la hiérarchie d'application des événements ($eB$ puis $eA$).
 

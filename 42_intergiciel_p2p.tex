@@ -139,7 +139,7 @@ première requête au serveur qui le stocke. Selon le paramétrage de la connect
 directe minimum établie préalablement, le serveur recherche aléatoirement l'ID 
 d'autres clients qui satisfont la règle de connectivité. Cette règle de connectivité 
 minimum permet d'ajuster la densité du maillage (connectivité élevée: maillage 
-partiel dense voire complet ; connectivité faible: maillage partiel éparse) et 
+partiel dense, voire complet ; connectivité faible: maillage partiel éparse) et 
 d'obtenir une topologie maillée adaptée aux besoins de l'application en termes de 
 synchronisation (temps-réel ou non) ou aux capacités des appareils. Il faut noter 
 cependant que plus la connectivité est faible, plus l'information a besoin de « 
@@ -156,7 +156,7 @@ mises à jours originales à la base de données via le serveur.
 
 \subsubsection{De navigateur à navigateur}
 Lors de la connexion d'un nouveau client à la scène, le serveur effectue la phase 
-de signaling permettant de le mettre en relation avec un autre client. Le 
+de signalement permettant de le mettre en relation avec un autre client. Le 
 mécanisme est répété tant que la règle de connectivité peut s'appliquer. Le client 
 reçoit une notification de l'établissement de la connexion avec un autre client ce 
 qui lui permet de démarrer l'échange de données.
@@ -179,7 +179,7 @@ du serveur.
 En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
 d'un format de données permettant de faire communiquer des acteurs hétérogènes 
 du système. Le format \gls{JSON}, dérivé de la notation des objets du langage 
-JavaScript, est lisible et interopérable. Le Listing \ref{jsonexemple} montre un 
+JavaScript, est lisible et inter-opérable. Le Listing \ref{jsonexemple} montre un 
 exemple d'événement en format JSON.
 %Son pendant binaire est le format \gls{BSON}.
 %Le format de fichier \gls{glTF} se base sur la représentation \gls{JSON} afin de 
@@ -189,12 +189,12 @@ représenter n'importe quelle donnée. Par exemple le format de fichier
 \gls{glTF}\info{ref gltf section} se base sur la représentation \gls{JSON} afin de 
 décrire une scène 3D.
 Le format \gls{JSON} est aussi utilisé pour la sérialisation et la désérialisation des 
-objets transmis par RTCDataChannel qui prend n'importe quel format de données.
+objets transmis par RTCDataChannel. 
 
 L'\acrshort{API} RTCDataChannel supporte beaucoup de types de données 
 différents (chaînes de caractères, types binaires : Blob, ArrayBuffer\dots). Dans 
-un environnement multi-utilisateur avec des données hétérogènes (3D, images, 
-informations) tel que 3DEvent cela facilite l'interopérabilité.
+un environnement multi-utilisateurs tel que 3DEvent avec des données hétérogènes (3D, images, 
+informations) l'inter-opérabilité est facilité.
 
 \begin{lstlisting}[language=json,firstnumber=1,label=jsonexemple,caption=Mesh 
 added to Scene event and parameters]
@@ -215,7 +215,9 @@ added to Scene event and parameters]
 \subsubsection{Persistance à court terme}
 Le navigateur (client) offre un espace de stockage avec l'interface \textit{Storage} 
 de l'API Web Storage qui donne accès au \texttt{session storage} ou au  
-\texttt{local storage}. Grâce à un système clé/valeur, il est possible d'avoir une 
+\texttt{local storage}. Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès aux 
+évènements enregistrés sur le client. La configuration du client est également 
+stockée localement. Grâce à ce système , il est possible d'avoir une 
 persistance des données à travers les sessions du navigateur. Le contenu stocké 
 correspond aux données générées par un utilisateur et par ses collaborateurs. Les 
 répliques stockées sur chaque navigateur permettent à un utilisateur une plus 
@@ -224,9 +226,8 @@ autonomie en cas de déconnexion. C'est également un moyen de distribuer entre 
 mises à jour qu'ils génèrent grâce au protocole de 
 \gls{streaming3D} (cf. \ref{streamingprotocol}) sans passer par le serveur.
 
-Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès aux 
 événements enregistrés sur le client. La configuration du client est également 
-stockée localement. 
+
 
 \subsubsection{Protocole de streaming pour la synchronisation}
 \label{streamingprotocol}
@@ -276,8 +277,8 @@ qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déj
 
 \subsubsection{Sélection fantôme}
 Les interactions utilisateurs doivent être adaptées à la collaboration et aux 
-manipulation à effectuer. Pour cela, l'éditeur 3DEvent introduit la fonctionnalité de 
-sélection \og fantôme\fg{} : lorsqu'un utilisateur souhaite sélectionner un objet de 
+manipulations à effectuer. Pour cela, l'éditeur 3DEvent introduit la fonctionnalité de 
+sélection \og fantôme\fg{}. Lorsqu'un utilisateur souhaite sélectionner un objet de 
 la scène, l'objet original ($O_o$) est 
 cloné et devient l'objet fantôme ($O_f$) (mêmes propriétés, représenté avec de la 
 transparence d'où le terme \og fantôme\fg{}). 
@@ -295,21 +296,21 @@ celui manipulé ($O_f$), plusieurs aspects de l'interactions sont mis en valeur 
 	L'$O_f$ a aussi un rôle d'intermédiaire entre l'utilisateur et la 
 	finalité de l'interaction en donnant un support visuel à sa réflexion experte.
 	Grâce à $O_f$, l'utilisateur peut également révoquer sa manipulation en 
-	cours sans avoir eu d'impact sur $O_o$ en évitant des actions (faire l'action 
-	puis la défaire) inutiles pour le métier et coûteuses pour le réseau.
+	cours sans avoir eu d'impact sur $O_o$ en évitant des actions inutiles (faire l'action 
+	puis la défaire) pour le métier et coûteuses pour le réseau.
 	
 	\item la collaboration : si un collaborateur effectue une modification 
 	à destination du même $O_o$ alors la représentation de $O_o$ chez 
 	l'utilisateur est également modifiée. $O_f$ par contre ne subit pas d'impact ; 
 	l'utilisateur peut continuer sa manipulation et~/~ou l'ajuster en fonction des 
 	nouvelles informations liées à $O_o$ ou même révoquer sa manipulation 
-	en cours car cela lui convient.
+	en cours si cela lui convient.
 
-	\item le métier : seules les manipulations menées à terme son 
+	\item le métier : seules les manipulations menées à terme sont 
 	considérées comme des commandes. Cela évite d'avoir des événements qui ne 
-	sont pas pertinents pour le métier dans le journal d'événements comme lorsque 
+	sont pas pertinents pour le métier dans le journal d'événements (comme lorsque 
 	l'utilisateur change d'idée lors de l'interaction ou
-	suite à une intervention concurrente. L'utilisateur n'a un impact sur l'application 
+	suite à une intervention concurrente). L'utilisateur n'a un impact sur l'application 
 	que lorsqu'une modification métier est réalisée.
 	
 	\item le réseau : l'information importante à faire transité est l'événement 

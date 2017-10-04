@@ -27,7 +27,7 @@ trois types:
 	\item les opérations de transformation et 
 	\item les autres solutions synchrones et asynchrones.
 \end{enumerate*}
-Selon leurs comportements face à l'apparition d'un conflit, ces types de 
+Selon leur comportement face à l'apparition d'un conflit, ces types de 
 collaboration sont classifiés comme pessimistes ou optimistes (Tableau 
 \ref{table:collprobs}). Les solutions de type autoritaire (\og \textit{authoritative}\fg{}) 
 sont comptées parmi les solutions pessimistes car elles préviennent toute 
@@ -35,7 +35,7 @@ occurrence de conflit, tandis que les solutions des deux autres types,
 transformées opérationnelles -- \gls{OT} -- et autres (synchrones ou asynchrones), 
 sont dites optimistes car permissives face à l'apparition de conflits. 
 Dans ce dernier cas, les conflits détectés peuvent, selon les stratégies, amener à 
-une résolution manuelle ou automatique.
+une résolution automatique ou manuelle.
 
 \begin{table}
 	\centering
@@ -57,14 +57,14 @@ une résolution manuelle ou automatique.
 		& Permission temporaire        
 		&                                                                                  \\ \hline
 		\multirow{2}{0.2\textwidth}{Transformées opérationnelles}                     & 
-		Séquence de transformation                     & Résolution de conflit temps-réel 
+		Séquence de transformation                     & Résolution de conflit temps réel 
 		pour les documents textuels                     \\ \cline{2-3} 
 		& Transformées opérationnelles 3D                 & Résolution de conflit pour 
 		dépendant des modèles 3D                              \\ \hline
 		\multirow{3}{0.2\textwidth}{Autre (synchrone ou asynchrone)} & 
 		Semi-synchrone                               & \multirow{3}{0.3\textwidth}{Détection 
 		de conflit ou résolution avec interaction utilisateur} \\
-		& Signalisation des conflit %(conflict awareness) 
+		& Signalisation des conflits %(conflict awareness) 
 		&                                                                                  \\
 		& Résolution de conflit créative                 &                      \\ 
 		\bottomrule                                                           
@@ -79,7 +79,7 @@ proposés dans les solutions collaboratives traditionnelles. Les utilisateurs do
 souscrire aux permissions du système avant de pouvoir effectuer leurs 
 modifications. Ces mécanismes permettent de s'assurer que les opérations sont 
 effectuées de manière séquentielle, ce qui assure la cohérence des données à 
-travers le système. Plus simples à mettre en place, ces mécanismes sont plus 
+travers le système. Plus simples à mettre en place, ces mécanismes sont aussi plus 
 restrictifs vis-à-vis de la liberté de création des utilisateurs du système. Par 
 exemple, Lets3D \cite{Ha2015} est un éditeur collaboratif 3D sur le web dont la 
 gestion de la concurrence repose sur la demande de permission par objet 
@@ -107,7 +107,7 @@ L'existence de protocoles agnostiques\footnote{Indépendant des
 protocoles de communication, le protocole dit \og agnostique\fg{} négocie le 
 protocole avec son pair et commence la communication. Cette démarche 
 apporte plus de flexibilité et d'interopérabilité au système.} comme Dat 
-\cite{Ogden2017} permettent également une synchronisation fiable pour des 
+\cite{Ogden2017} permet également une synchronisation fiable pour des 
 contenus dynamiques. Dat est un protocole de synchronisation de jeu de données 
 qui n'assume pas que le jeu de données soit statique ou que le jeu de données 
 soit entièrement téléchargé. C'est un protocole agnostique dont la conception 
@@ -122,7 +122,7 @@ l'hébergement de sites web en \gls{P2P}, promettant ainsi une disponibilité
 pérenne du contenu. 
 
 
-\subsection{... sur le web : HTML5 et au delà}
+\subsection{... sur le web : HTML5 et au-delà}
 %TODO designing in context
 %\cite{Dobos2015}
 
@@ -132,11 +132,11 @@ de prédilection pour la visualisation et la manipulation d'objet 3D de haut niv
 Pour les projets d'\gls{AIC} ou de \gls{BIM}, la demande de traitement et la fidélité 
 ont tendance à être plus élevés, particulièrement pour la représentation de dessins 
 d'ingénierie ou de modèles d'architecture 3D. 
-Les objets simples (primitives) ou les maillages optimisés pour le rendu temps-réel 
-ne sont ni suffisants, ni assez génériques pour être supportés par tous les 
+Les objets simples (primitives) ou les maillages optimisés pour le rendu temps réel 
+ne sont ni suffisants ni assez génériques pour être supportés par tous les 
 processus liés à l'élaboration d'un produit. 
 Plus les projets sont gros, plus ils dépendent d'une multitude de logiciels 3D --  
-dont l'interopérabilité n'est pas garantie -- s'adressant chacun aux besoins d'une 
+dont l'interopérabilité n'est pas garantie -- pourvoyant chacun aux besoins d'une 
 tâche spécifique. 
 Chaque tâche (ex: modélisation \gls{CAO}, \textit{stress testing}\ldots) possède sa 
 propre représentation des données qui peut varier selon les niveaux de 
@@ -151,7 +151,7 @@ l'avantage d'être distribuée pour être accessible depuis un navigateur web ; 
 un système d'édition hors-ligne, le téléversement peut s'avérer long et fastidieux.
 De plus, les logiciels spécialisés pour la modélisation 3D, contrairement aux jeux 
 multijoueurs, sont traditionnellement dédiés à un utilisateur unique sans 
-représentation visuelle des autres opérateurs, dans le même espace 3D. 
+représentation visuelle des autres opérateurs dans le même espace 3D. 
 Ici encore, les principes d'accessibilité du web facilitent la création d'un espace 
 virtuel 3D collaboratif pour la visualisation, la manipulation et l'échange de
 données partagées. 
@@ -173,17 +173,17 @@ d'utilisateurs simultanés.
 Dans chacun des cas, chaque système a besoin d'un client adapté pour opérer de 
 manière isolée, sans inter-opérer avec les autre systèmes. 
 C'est dans ce contexte qu'en 2011, Mouton et al. \cite{Mouton2011} présentent 
-une analyse approfondie de l'état des environnements collaboratifs 3D, ciblant 
+une analyse approfondie de l'état de l'art des environnements collaboratifs 3D, ciblant 
 principalement la visualisation collaborative. 
 Ils montrent l'apparition de la tendance à déporter les environnements collaboratifs 
 sur le web, grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition 
 du standard HTML5 comprenant un support avancé de l'audio et de la vidéo, ainsi 
 que plusieurs \gls{API} de stockage côté client (LocalStorage, IndexedDB). 
 
-Les applications web revêtent plusieurs avantages par rapport aux applications 
+De plus on peut noter que les applications web revêtent plusieurs avantages par rapport aux applications 
 natives sur mobiles ou aux logiciels autonomes. 
 Cela repose principalement sur le fait que les navigateurs sont présents partout 
-dans nos vies aujourd'hui (2017), incluant les téléphones intelligents et les 
+dans nos vies en 2017, incluant les téléphones intelligents et les 
 tablettes qui les rendent indépendants des plateformes utilisées. 
 Le déploiement sur le web ne requiert pas d'installation ou de mises à jour autres 
 que celles du navigateur (en ne considérant que les applications sans greffon). 
@@ -199,9 +199,9 @@ Parmi les solutions sans greffon (\textit{plugin less}), beaucoup sont développ
 pour faire de la modélisation 3D et utilisent l'architecture client-serveur et le 
 protocole \gls{WebSocket} pour effectuer la synchronisation entre les différents 
 clients collaborateurs. Quelques raisons peuvent expliquer cette situation. 
-Historiquement, les développeurs sont plus familier avec les architectures 
+Historiquement, les développeurs sont plus familiers avec les architectures 
 client-serveur et le standard \gls{WebSocket}. Techniquement, la gestion de 
-données est facilité dans un architecture centralisée notamment concernant la 
+données est facilitée dans une architecture centralisée notamment concernant la 
 synchronisation et la gestion de la concurrence dans un \gls{EVC}. 
 Commercialement, le suivi des données de l'utilisateur est plus simple avec un 
 serveur central qui garantit un engagement de l'utilisateur vis-à-vis du service 
@@ -211,7 +211,7 @@ serveur central qui garantit un engagement de l'utilisateur vis-à-vis du servic
 %
 Le choix de plateformes web dans l'infonuagique pour la modélisation \gls{CAO} 
 est prépondérant pour les solutions commerciales comme OnShape, Clara.io et 
-TinkerCAD. Les fonctionnalités minimums de ces plateformes consistent en la 
+TinkerCAD. Les fonctionnalités minimum de ces plateformes consistent en la 
 mise en place d'un environnement 3D visualiser un objet 3D accompagnées d'un 
 système d'annulation / refaire et d'une plateforme de 
 diffusion des créations.
@@ -232,7 +232,7 @@ est aussi une plateforme de publication d'objets 3D pour faciliter l'accès à l
 conception d'objets 3D. 
 TinkerCAD est une application destinée au grand 
 public pour la conception et l'impression 3D. De ce fait, les fonctionnalités sont 
-limitées à cause du métier, l'impression 3D et de la cible, grand public. La gestion 
+limitées à cause du métier, l'impression 3D, et de la cible, le grand public. La gestion 
 de version est donc plus légère, similaire à celle proposée par Clara.io. 
 OpenJSCAD, Verold Studio, Vectary sont d'autres 
 exemples de modeleurs 3D moins connus, avec des fonctionnalités proches de 
@@ -243,11 +243,11 @@ TinkerCAD.
 %performant et un système d'annotation et de visualisation collaboratives.
 Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
 sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
-modélisation par surface implicite (BlobTree) \cite{Grasberger2013}. 
+modélisation par surfaces implicites (BlobTree) \cite{Grasberger2013}. 
 Les objets sont alors manipulés comme des géométries de construction de 
-solides avec les opérations booléennes associées. Le Tableau \ref{table:encoding} 
+solides avec les opérations booléennes associées. Le tableau \ref{table:encoding} 
 résume les différents types 
-d'encodages associés au types de modélisation~3D. 
+d'encodages associés aux types de modélisation~3D. 
 
 \begin{table}[h]
 	\centering
@@ -282,14 +282,14 @@ d'encodages associés au types de modélisation~3D.
 %\end{table}
 \subsection{Web 3D : deux approches}
 La plateforme web possède certains avantages par rapport à des clients lourds. 
-En effet, le développement de l'infonuagique a permis le développement de 
-meilleures infrastructures de services. Du fait de ce développement, la création de 
-plateformes collaboratives sur le web pour faire de la conception 3D est devenue, 
-non seulement faisable en termes de ressources, mais également en termes de 
-technologie. Il existe deux types d'approches pour créer du contenu web 2D ou 
-3D. L'approche déclarative et l'approche impérative. La Figure \ref{fig:impdec} 
+En effet, l'essor de l'infonuagique a permis le développement de 
+meilleures infrastructures de services. Ces dernières ont rendu faisable, en termes de ressources, mais également en termes de 
+technologie la création de 
+plateformes collaboratives sur le web pour faire de la conception 3D. 
+Il existe deux types d'approches pour créer du contenu web 2D ou 
+3D: l'approche déclarative et l'approche impérative. La Figure \ref{fig:impdec} 
 montre le pendant 3D pour chaque approche 2D. En 2D, les spécifications 
-déclaratives (\gls{SVG}) et impératives (canvas) sont issues du HTML5, alors 
+déclaratives (\gls{SVG}) et impératives (canvas) sont issues de la normalisation du HTML5, alors 
 qu'en 3D, les spécifications sont encore en évolution. 
 
 \begin{figure}[hbt]
@@ -300,12 +300,12 @@ qu'en 3D, les spécifications sont encore en évolution.
 \end{figure}
 
 L'approche déclarative (Dec3D) s'intègre au \gls{DOM} et se 
-focalise sur l'utilisation les technologies du web existantes comme CSS3, 
+focalise sur l'utilisation de technologies du web existantes comme CSS3, 
 HTML5 et l'Ajax. 
 X3D est ainsi un format de fichier respectant le standard ISO \cite{X3D2011} permettant de 
 représenter des scènes 3D interactives en XML et rétro-compatible avec VRML97. Il 
 se différencie des formats de fichiers comme Collada en intégrant le comportement de 
-la scène durant l'exécution, en plus de la description du contenu 3D. Les deux 
+la scène durant l'exécution en plus de la description du contenu 3D. Les deux 
 bibliothèques les plus notables dérivées de ce standard sont X3DOM 
 \cite{Behr2010} et XML3D \cite{Sons2010} : toutes les deux sont capables de 
 supporter les récentes avancées de WebGL pour afficher une scène décrite dans 
@@ -321,8 +321,8 @@ représentation à une autre (tout comme le X3D peut être rendu dans un navigat
 en utilisant X3DOM). 
 
 L'approche déclarative est utilisée dans de nombreux travaux de visualisation 
-scientifique 3D distribuée \cite{Jung2012} pour des données spatiales 
-\cite{Stein2014} ou du rendu volumique \cite{Becher2012}, par exemple. 
+scientifique 3D distribuée \cite{Jung2012} par exemple pour des données spatiales 
+\cite{Stein2014} ou du rendu volumique \cite{Becher2012}. 
 En manipulant directement les objets 3D à partir des éléments \gls{DOM}, grâce à 
 sa structure bien connue, il est alors plus simple, lors de la collaboration, d'utiliser 
 ces éléments \cite{Gadea2016} ou les événements du \gls{DOM} \cite{Lowet2009} 
@@ -384,7 +384,7 @@ web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiqu
 \section{Communication en temps-réel}
 L'expression temps-réel est largement utilisée par des applications requérant une 
 forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
-expérience. La communication dans un \gls{EVC} est primordiale pour échanger entre les collaborateurs . Elle doit respecter l'intention des utilisateurs pour leur permettre de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
+expérience. La communication dans un \gls{EVC} est primordiale pour échanger entre les collaborateurs. Elle doit respecter l'intention des utilisateurs pour leur permettre de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
 
 L'exigence vis-à-vis des temps de réponse est de plus en plus 
 grande et ce pour deux raisons principales : les limitations humaines (mémoire et 
@@ -417,22 +417,22 @@ temps de réponses :
 	contrôle sur l'expérience générale et peut se déplacer librement dans l'interface 
 	sans attendre la machine. Ce degré de réactivité est impératif pour une bonne 
 	navigation.
-	\item \textit{10 secondes} conservent l'attention de l'utilisateur. Entre 1 et 10 
+	\item \textit{10 secondes} conserve l'attention de l'utilisateur. Entre 1 et 10 
 	secondes, l'utilisateur se sent dépendant de la machine, mais peut faire avec. 
-	\item \textit{Au delà} de 10 secondes, l'utilisateur va commencer à penser à d'autres choses, rendant difficile 
+	\item \textit{Au delà} de 10 secondes, l'utilisateur va commencer à penser à autre chose, rendant difficile 
 	le retour à la tâche une fois que la machine répond.
 \end{itemize} 
 Dans le domaine de l'édition et la manipulation collaborative 
 d'objets 3D, les contraintes abordées se situent à divers degrés : au chargement 
-et lors des mises à jour. Le chargement concerne la phase de téléchargement des ressources (page web, modèles 3D) parfois lourdes. Cette phase peut s'accorder de délais 
-relativement long (1-10s) compte tenu du fait que l'utilisateur connaît en partie ces 
+et lors des mises à jour. Le chargement concerne la phase de téléchargement des ressources (page web, modèles 3D), parfois lourdes. Cette phase peut s'accorder de délais 
+relativement longs (1-10s) compte tenu du fait que l'utilisateur connaît en partie les 
 contraintes liées à la taille des objets 3D. Concernant les mises à jour, l'édition 
 collaborative requiert un temps de réponse raisonnablement court qui est contraint par 
 l'exactitude des calculs et le temps dans lequel le résultat est produit. Pour les 
 mises à jour internes -- produites par l'utilisateur, actions sur l'interface -- on 
-s'accordera sur un délai inférieur à 0,1 seconde dans cette thèse. 
+s'accordera dans cette thèse sur un délai inférieur à 0,1 seconde. 
 Pour les mises à jour externes -- produites par les collaborateurs -- les latences 
-réseaux rentrent en comptes (serveur, pairs\ldots) on s'accordera sur un délai 
+réseaux rentrent en compte (serveur, pairs\ldots), et on s'accordera sur un délai 
 entre 1 et 10 secondes selon les degrés d'asynchronicité 
 possibles. 
 
@@ -441,8 +441,8 @@ possibles.
 
 
 La communication et la transmission des données lors de la collaboration comptent parmi les piliers d'un \gls{EVC3D}. Que ce soit dans dans un 
-\gls{EV}, un jeu multi-joueurs ou un jeu sérieux (\textit{serious game}), les 
-participants interagissent en temps-réel ou quasi-réel, alors qu'ils sont situés à 
+\gls{EV}, un jeu multijoueur ou un jeu sérieux (\textit{serious game}), les 
+participants interagissent en temps réel ou quasi réel, alors qu'ils sont situés à 
 différents endroits géographiques. 
 Le développement d'un \gls{EVC3D} nécessite donc des connaissances issues de 
 plusieurs domaines comme la conception et l'implémentation de protocoles 
@@ -461,7 +461,7 @@ des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre 
 \gls{EVC} pour la modélisation 3D. 
 
 La variété des domaines et applications auxquels s'adressent les 
-\glspl{EVC3D} actuels, fait qu'il n'existe pas de protocole de 
+\glspl{EVC3D} actuels fait qu'il n'existe pas de protocole de 
 communication parfait, adapté à tous les types d'environnements. 
 Les besoins en communication, qui se formulent souvent en termes de 
 fiabilité de la livraison des messages et de l'ordonnancement des messages, sont 
@@ -504,7 +504,7 @@ pour fournir les données statistiques liés à la  connexion à l'expéditeur.
 
 L'utilisation d'un protocole de communication fiable ou non fiable dépend du 
 type d'application et du type de l'environnement réseau dans lequel il est conçu 
-pour opérer. Si une application dite temps-réel est conçue pour fonction en réseau 
+pour opérer. Si une application dite temps-réel est conçue pour fonctionner en réseau 
 local -- \gls{LAN} -- l'utilisation d'un protocole fiable est une option recommandée. 
 Les câbles utilisés dans ce contexte sont souvent rapides et stables ; un paquet 
 perdu ou corrompu peut rapidement être détecté et retransmis. Dans des 
@@ -544,8 +544,8 @@ que la numérotation des paquets n'est pas requise (paquets plus légers).
 L'application est alors en charge de gérer le fait que les paquets arrivent dans le 
 désordre. La livraison de paquets ordonnés est souvent une fonctionnalité 
 appréciée dans le 
-cadre des \gls{SEC}, et particulièrement en 3D, afin de respecter l'intention de 
-l'utilisateur car l'ordre des actions détermine le résultat de ces actions. Par 
+cadre des \gls{SEC}. C'est particulièrement le cas en 3D afin de respecter l'intention de 
+l'utilisateur, car l'ordre des actions en détermine le résultat. Par 
 exemple, l'exécution de deux matrices 3D consécutives n'est pas commutative.
 
 \subsection{Les principaux protocoles de transport}
@@ -557,11 +557,11 @@ présentation succincte des protocoles ci-dessous indique leur propriété de
 fiabilité et d'ordonnancement.
 \subsubsection{TCP}
 Le \gls{TCP} est probablement le protocole le plus utilisé sur internet pour 
-transporter des données : navigation web, chat, transfert de fichiers \dots 
+transporter des données : navigation web, chat, transfert de fichiers\dots 
 \gls{TCP} est un protocole dit \og orienté connexion\fg{}, ce qui implique que les 
 deux terminaux sur le réseau s'informent et s'accordent chacun sur ce qu'ils 
 veulent envoyer / recevoir de la part de l'autre. 
-Quand cet accord est établit, la connexion \gls{TCP} est ouvert et le flux peut 
+Quand cet accord est établi, la connexion \gls{TCP} est ouverte et le flux peut 
 transiter par la connexion. 
 \gls{TCP} envoie des données sous forme de flux continu d'octets qui arrivent de 
 manière fiable et ordonnée. 
@@ -576,8 +576,7 @@ l'expéditeur détecte qu'il n'a pas reçu le ACK concernant la donnée erronée
 
 \subsubsection{UDP}
 Le \gls{UDP} est considéré comme l'opposé de \gls{TCP} concernant plusieurs 
-aspects. Premièrement, \gls{UDP} ne nécessite pas, pour établir la connexion, de 
-d'étape configuration et d'accord comme \gls{TCP}. Les deux terminaux doivent 
+aspects. Premièrement, \gls{UDP} ne nécessite pas, pour établir la connexion, d'étape de configuration et d'accord comme \gls{TCP}. Les deux terminaux doivent 
 configurer un socket \gls{UDP} et écouter ce socket pour récupérer les données 
 entrantes. Du fait qu'aucun accord n'est établit par les deux terminaux, chacun 
 peut envoyer ou recevoir des données de n'importe quel socket proprement 
@@ -585,7 +584,7 @@ configuré.
 Deuxièmement, \gls{UDP} est un protocole dit \og orienté message\fg{}. Par 
 rapport à \gls{TCP} où il n'y a pas de distinction claire entre les messages du fait 
 de sa nature (flux continu), \gls{UDP} fait une distinction claire entre chaque 
-messages (un message envoyé donne un message reçu, sauf si perte du 
+message (un message envoyé donne un message reçu, sauf si perte du 
 message). Les messages qui transitent en \gls{UDP} sont envoyés de manière 
 non fiable et désordonnée. L'en-tête \gls{UDP} n'a pas de notion de numérotation, il 
 est plus léger que \gls{TCP} à cet égard.
@@ -593,7 +592,7 @@ est plus léger que \gls{TCP} à cet égard.
 \gls{UDP} n'a pas de champ pour faire une somme de contrôle pour détecter les 
 potentielles erreurs dans un paquet. Cependant, cette fonctionnalité est optionnelle 
 dans IPv4 qui rapport une somme de contrôle remplie de zéros en cas d'erreur. En 
-IPv6, la somme de contrôle est obligatoire donc même si \gls{UDP} est non fiable, 
+IPv6, la somme de contrôle est obligatoire ; donc même si \gls{UDP} est non fiable, 
 il doit fournir les moyens de vérifier les paquets pour la fiabilité de 
 la transmission.
 
@@ -604,23 +603,23 @@ fiabilité à leur manière (re-ordonnancement, retransmission\dots).
 
 \subsubsection{SCTP}
 Le \gls{SCTP} est le plus jeune des trois protocoles présentés. Ce protocole 
-empreinte des fonctionnalités à \gls{TCP} mais utilise une approche orientée 
-message comme \gls{UDP}. Comme \gls{TCP}, la connexion doit être négocier 
+emprunte des fonctionnalités à \gls{TCP} mais utilise une approche orientée 
+message comme \gls{UDP}. Comme \gls{TCP}, la connexion doit être négociée 
 entre les deux terminaux. \gls{SCTP} discute également le nombre de flux utilisés 
 : il autorise le multiplexage de plusieurs flux de données dans une seule 
 connexion \gls{SCTP}. En comparaison, \gls{TCP} sépare chaque flux dans une 
-connexion différente : le support de plusieurs flux est gérer à plus haut niveau.
+connexion différente : le support de plusieurs flux est géré à plus haut niveau.
 
 \gls{SCTP} a été conçu comme un protocole fiable avec une option pour envoyer 
 les messages de manière ordonnée ou non ordonnée. L'ordonnancement choisi est 
 signifié par un \textit{bit-flag} dans l'en-tête associée au message. Une extension 
 du protocole permet de configurer la fiabilité d'un message expédié. La fiabilité 
-partielle peut être établit en fonction de différents paramètres (temps d'attente ou 
+partielle peut être établie en fonction de différents paramètres (temps d'attente ou 
 nombre de tentatives 
 avant retransmission). Cependant, seul l'expéditeur est au courant du niveau de 
 fiabilité des données. Lorsque le destinataire remarque des données manquantes, 
 il envoie à l'expéditeur des acquittements sélectifs (SACKs). Un SACKs contient 
-les séquences de messages reçus et manquants et c'est à l'expediteur de vérifier 
+les séquences de messages reçus et manquants et c'est à l'expéditeur de vérifier 
 la configuration de la fiabilité des messages. Pour les messages marqués non 
 fiables, l'expéditeur génère un nouveau paquet pour notifier le destinataire qu'il 
 peut les \og oublier\fg{} et avancer sa séquence de nombre à la valeur données 
@@ -633,7 +632,7 @@ par exemple.
 
 L'adoption de ce protocole est ralentie par le fait que l'implantation de \gls{SCTP} 
 n'est pas supportée par tous les systèmes d'exploitation notamment 
-Windows\cite{Hogg}. 
+Windows \cite{Hogg}. 
 
 \begin{table}[h]
 	\caption{Aperçu des procotoles de transport}
@@ -707,12 +706,12 @@ autres applications (capture d'écran, réalité augmentée, jeux)
 
 L'utilisation et la gestion de réseaux \gls{P2P} sont des changements de paradigme 
 qui peuvent représenter une 
-barrière d'entrée auprès des développeurs web qui sont habitués aux architectures 
+barrière d'entrée auprès des développeurs web, habitués aux architectures 
 client-serveur. 
 Cependant, l'implantation de WebRTC, très semblable à WebSocket, rend la 
 technologie facilement abordable dans un premier temps. L'attrait pour les 
-propriétés du \gls{P2P} (distribution, résilience) sont une motivation 
-supplémentaire en plus des implications sociales que cette architecture (partage, 
+propriétés du \gls{P2P} (distribution, résilience) est une motivation 
+supplémentaire, en plus des implications sociales que cette architecture (partage, 
 coopération, coût) apporte en faveur de l'intégration de WebRTC dans les 
 applications web.
 
@@ -756,7 +755,7 @@ d'efforts pour élargir et maintenir la compatibilité et interopérabilité ent
 %TODO \info{parler de edge}\improve{dans CE sens}\info{parler de 
 %ORTC}. 
 Cependant, certains navigateurs (comme Chrome) imposent une limite de taille 
-pour l'envoi de messages contenant de la donnée brute ce qui contrevient au 
+pour l'envoi de messages contenant de la donnée brute, ce qui contrevient au 
 principe énoncé par le standard.
 %Enfin, la sécurité des 
 %communications est encore vulnérable malgré le chiffrement des données 
@@ -764,7 +763,7 @@ principe énoncé par le standard.
 
 \subsubsection{Mécanisme de signalisation et problématiques réseaux}
 Le mécanisme de signalisation (\textit{signaling mecanism} en anglais) 
-permet de coordonner et d'envoyer des message de contrôle durant une 
+permet de coordonner et d'envoyer des messages de contrôle durant une 
 session. Le mécanisme de signalisation est utilisé pour échanger trois 
 types d'information : 
 \begin{itemize}
@@ -795,7 +794,7 @@ d'un tiers (serveur) est, en pratique, quasi systématiquement privilégiée.
 	\label{fig:turn}
 \end{figure} 
 
-La Figure \ref{fig:turn} représente le cas le plus complexe que le l'on peut 
+La Figure \ref{fig:turn} représente le cas le plus complexe que l'on peut 
 rencontrer pour établir une connexion WebRTC. Le plus simple des réseaux P2P 
 peut être résumé comme deux machines connectées directement l'une à l'autre. 
 Cette vision un peu utopique ne tient pas compte des routeurs qu'une connexion 
@@ -805,7 +804,7 @@ les adresse IP à d'autres adresse IP (dans le cas d'un intranet par exemple).
 Cela permet de faire communiquer des machines non uniques et non routables en 
 faisant semblant d'utiliser des adresses externes, uniques et routables. 
 Pour permettre à un client situé derrière un routeur \gls{NAT} de connaître son 
-adresse IP publique et le type de serveur \gls{NAT} l'utilisation d'un serveur 
+adresse IP publique et le type de serveur \gls{NAT}, l'utilisation d'un serveur 
 \gls{STUN} est requise. 
 L'utilisation d'une \gls{NAT} dynamique impose des restrictionq sur l'adresse de  
 destination. Dans ce cas, le \gls{STUN} est inutile, on utilise un serveur 
@@ -835,7 +834,7 @@ d'abord puis en cas d'échec, \gls{TURN}).
 %\improve{reformuler paragraphe}
 Un des aspects prépondérant dans les \gls{EVC3D} concerne la communication et 
 la transmission des données lors de la collaboration. Que ce soit dans dans un 
-\gls{EV}, un jeu multi-joueur ou un jeu sérieux (\textit{serious game}), les 
+\gls{EV}, un jeu multijoueur ou un jeu sérieux (\textit{serious game}), les 
 participants interagissent en temps-réel ou quasi-réel alors qu'ils sont situés à 
 différents endroits géographiques. 
 Le développement d'un \gls{EVC3D} nécessite donc des connaissances issues de 
@@ -863,7 +862,7 @@ l'utilisation du protocole \gls{TCP} sur internet dans le cadre des \gls{EVC3D} 
 pas recommandée à cause de la taille de l'en-tête et du ACK qui réduisent le débit 
 des paquets.
 Dans ce contexte, le protocole \gls{UDP} obtient de meilleurs résultats dans le cas 
-ou le flux de données est local (\gls{LAN}). 
+où le flux de données est local (\gls{LAN}). 
 Les protocoles les plus adaptés pour communiquer dans un \gls{EVC3D} sont 
 cependant \acrshort{SCTP} et \gls{RTP}/\gls{RTCP}. Ils combinent les 
 fonctionnalités de 
@@ -877,7 +876,7 @@ Depuis plusieurs décennies, les architectures \gls{P2P} sont utilisées dans le
 méthode qui permet aux pairs hébergés sur des appareils avec des capacités 
 limitées (bande passante, processeur, processeur graphique) de demander une 
 partie du contenu de l'environnement aux autres pairs.
-Des systèmes récents comme celui de Martinez et al. \cite{Martinez2009}, 
+Des systèmes récents comme celui de Martinez et al. \cite{Martinez2009} 
 utilisent la 
 localisation d'un utilisateur pour transmettre uniquement les mises à jours à son 
 plus 
@@ -932,15 +931,15 @@ ou encore la définition de patrons de conception dédiés à la collaboration d
 architectures basées événement \cite{Verginadis2009}. Dans ce dernier domaine 
 Papageorgiou et al. \cite{Papageorgiou2011} proposent un assistant pour la 
 création de ces patrons pour la collaboration en s'appuyant sur un système de 
-recommandation basé sur le contexte qui utilisent une représentation sémantique 
+recommandation basé sur le contexte, qui utilise une représentation sémantique 
 (\gls{OWL}).
 
 CoDesign est un exemple de \gls{framework} permettant de faire de la 
 conception logicielle de manière collaborative \cite{Bang2010}. L'utilisation d'une 
 architecture basée événement permet à l'application d'être très extensible car très 
 peu couplée. Chaque instance CoDesign intègre un intergiciel appelé CoWare en 
-charge de la synchronisation de contenus édités de manière concurrentes sur les 
-différentes instances CoDesign ainsi qu'un module chargé de notifier les 
+charge de la synchronisation de contenus édités de manière concurrente sur les 
+différentes instances CoDesign, ainsi qu'un module chargé de notifier les 
 architectes de situations de modélisation conflictuelles. 
 %Les conflits sont 
 %catégorisés de trois manières différentes. 
@@ -948,7 +947,7 @@ architectes de situations de modélisation conflictuelles.
 Eventuate est une plateforme qui se base sur un modèle de programmation 
 événementielle ayant pour but de résoudre les problèmes liés à la gestion de 
 données distribuée inhérents aux architectures microservices en utilisant \gls{ES} et 
-\gls{CQRS}. Une de leurs application exemple est un tableau Kanban collaboratif 
+\gls{CQRS}. Une de leurs applications exemple est un tableau Kanban collaboratif 
 temps-réel construit sur leur 
 plateforme\footnote{https://github.com/eventuate-examples/es-kanban-board}. 
 %	\subsection{Les événements comme base du comportement réactif}
@@ -964,7 +963,7 @@ ses \textit{subscribers} et n'a donc pas de contrainte forte le liant à ces der
 De son côté, le \textit{subscriber} est souvent indifférent au \textit{publisher} qui lui 
 fournit les événements qui l'intéressent. La Figure \ref{fig:pubsub} représente le 
 modèle \gls{PubSub}.
-Le service de notification d'événement est utilisé comme passe plat d'événements 
+Le service de notification d'événement est utilisé comme passe-plat d'événements 
 entre le publisher et les subscribers. Son rôle est de gérer les abonnements 
 (souscription/désinscription) et de notifier les \textit{subscribers} concernés par la 
 publication d'un événement par un \textit{publisher}.
@@ -986,18 +985,18 @@ flexible.
 
 
 Pour répondre à des besoins de mise à l'échelle, d'interopérabilité, de fiabilité, 
-d'expressivité et d'utilisabilité, il s'appui sur un modèle \gls{PubSub} basé types et 
+d'expressivité et d'utilisabilité, il s'appuie sur un modèle \gls{PubSub} basé types et 
 attributs. 
 En spécifiant d'abord le type et ensuite en filtrant sur les attributs des 
 événements, ce modèle rend le routage des données intuitif pour le 
-développement d'application distribuées à grande échelle comme le commerce en 
+développement d'applications distribuées à grande échelle comme le commerce en 
 ligne (\textit{e-commerce}). 
 Scribe \cite{Castro2002} et Hermes \cite{Pietzuch2002} sont des exemples de 
 systèmes \gls{PubSub} basés sur les \glspl{DHT}. 
 Le premier se concentre sur la catégorie du sujet (topic-based) tandis que le second 
 supporte à la fois la communication orientée sujet et la communication orientée contenu (content-based) en utilisant un 
 filtrage par agrégat. Les deux utilisent un n\oe ud \textit{rendezvous} pour chaque 
-sujet ou type d'événement dans la couche réseau et construise et maintient la 
+sujet ou type d'événement dans la couche réseau et construisent et maintiennent la 
 distribution à partir de ce n\oe ud \textit{rendezvous}. TERA \cite{Baldoni2007} 
 propose une dissémination sur deux couches orientée sujet. Le but est d'effectuer 
 une distribution uniforme en fonction des intérêts des n\oe uds. La dissémination 
@@ -1024,15 +1023,15 @@ the ''News'' service in the ISIS system\fg{}:
 		of an event about which they have expressed interest.}\fg{}
 }
 
-Après cette publication les premiers systèmes \gls{PubSub} commencent à 
-se développer. Le concept de routeur d'information est introduite par Oki et al. 
-\cite{Oki1993} : un seul bus d'information pour tous les services, objets, données 
+Après cette publication, les premiers systèmes \gls{PubSub} commencent à 
+se développer. Le concept de routeur d'information est introduit par Oki et al. 
+\cite{Oki1993} : un seul bus d'information pour tous les services, objets, données
 \ldots Les protocoles de communication ont une sémantique minimale, 
-les objets (instances de classe) sont auto-descriptifs, i.e. ils sont 
-capable d'introspection (service, opérations, attributs) pour adapter leur 
+les objets (instances de classe) sont auto-descriptifs - i.e. ils sont 
+capables d'introspection (service, opérations, attributs) pour adapter leur 
 comportement au changement, les types peuvent être définis dynamiquement et 
 la communication est anonyme. 
-Puis l'apparition de solutions plus avancées sont apparues avec le projet 
+Puis des solutions plus avancées sont apparues avec le projet 
 GRYPHON d'IBM \cite{Banavar1999}, SIENA \cite{Carzaniga2000}, REBECA 
 \cite{Parzyjegla2010} et également REDS, JEDI, PADRES présentés plus en 
 détails dans \cite{Tarkoma2012}.
@@ -1043,30 +1042,30 @@ filtrage d'événements). Seuls quelques travaux ont utilisé le concept de
 \textit{clustering} par intérêt comme moyen afin de réduire le nombre de 
 notifications d'événement et éviter la surcharge. 
 A partir des années 2000, les 
-systèmes \gls{P2P} ont commencer à émerger avec 
+systèmes \gls{P2P} ont commencé à émerger avec 
 l'apparition de Gnutella et consorts, les \glspl{DHT} (Chord, Pastry, Kademlia) et  
-Réseaux non-structurés (Cyclon, Scamp, ADH). Ces systèmes ayant pour 
-objectifs de gérer des réseaux massifs, dynamiques (\textit{churn}), résistants 
+Réseaux non-structurés (Cyclon, Scamp, ADH). Ces systèmes ont pour 
+objectif de gérer des réseaux massifs, dynamiques (\textit{churn}), résistants 
 aux 
 erreurs, et offrants des primitives de communications basiques.
 Les réseaux \gls{P2P} promettent alors des propriétés intéressantes pour les 
 infrastructures logicielles comme les systèmes \gls{PubSub} concernant le passage à 
 l'échelle. Cependant, les systèmes \gls{PubSub} d'alors reposent sur une connaissance 
-totale du réseau pour être efficace, du fait de leur taille limitée. La connaissance 
+totale du réseau pour être efficaces, du fait de leur taille limitée. La connaissance 
 globale de l'information ne peut être collectée dans un système à grande échelle, 
 c'est pourquoi la décentralisation de l'information est nécessaire. La connaissance 
-peut vite devenir viciée dans un système dynamique décentralisé ce qui implique 
+peut vite devenir viciée dans un système dynamique décentralisé, ce qui implique 
 de trouver une méthode efficace pour gérer la dynamicité.
 
 Les systèmes \gls{PubSub} ont donc l'avantage de proposer une \gls{EDA} dont le 
 fonctionnement s'adapte à plusieurs types de communication, que ce soit client 
-serveur, P2P. Cette flexibilité à l'avantage de proposer un système à couplage 
-lâche qui reste cependant difficile d'observer à grande échelle.
+serveur, P2P. Cette flexibilité a l'avantage de proposer un système à couplage 
+lâche qu'il reste cependant difficile d'observer à grande échelle.
 
 \subsubsection{Outils de surveillance, contrôle de performances et validation ergonomique}
-Dans un système distribué comme \gls{PubSub}, les outils de comparaisons 
+Dans un système distribué comme \gls{PubSub}, les outils de comparaison 
 sont souvent très hétérogènes et ne permettent pas forcément d'évaluer sur une 
-même base la monté en charge. 
+même base la montée en charge. 
 Carzaniga and Wolf \cite{Carzaniga2002} proposent quelques 
 lignes directrices pour concevoir une suite de \textit{benchmark} dans un système 
 \gls{PubSub}, sans fournir de résultat spécifique, dont le but est double : la 
@@ -1149,28 +1148,28 @@ L'accent mis sur l'identification des interactions dans le système encourage la
 mise en \oe{}uvre d'une interface orientée tâches (\textit{task-based UI}).
 La testabilité fonctionnelle est intégrée via les règles métier explicitées 
 et concentrées dans une couche spécifique de l'application. Cela les rend 
-plus facilement identifiable et testable automatiquement.
+plus facilement identifiables et testables automatiquement.
 La robustesse est améliorée face aux changements dans le système d'information.
 
 En \gls{DDD}, il existe des artéfacts qui permettent d'exprimer, créer et stocker un 
 modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se trouvent 
 :
 \begin{itemize}
-	\item L'\textbf{entité} (\textit{entity}) : un objet qui n'est pas définit par ces 
+	\item L'\textbf{entité} (\textit{entity}) : un objet qui n'est pas défini par ces 
 	attributs 
 	mais plutôt par une continuité et son identité. 
 	Par exemple, chaque scène possède des maillages qui utilisent des 
 	géométries.Si l'on 
 	considère un maillage comme unique dans chacune des scènes alors chaque 
-	maillage est une entité. Si on considère que ce sont les mêmes maillage qui 
-	sont réutilisés alors une maillage est considérée comme un objet-valeur.
+	maillage est une entité. Si on considère que ce sont les mêmes maillages qui 
+	sont réutilisés alors un maillage est considéré comme un objet-valeur.
 	
 	\item L'\textbf{objet-valeur} (\textit{value object}) : un objet qui contient des 
 	attributs 
 	mais n'a pas d'identité conceptuelle. Il doit être traité comme un objet
 	immuable. Par rapport à l'exemple précédent, on peut considérer que si les 
 	géométries sont réutilisées d'une scène à l'autre, ce sont des objet-valeur qui 
-	ne seront jamais modifié car les utilisateurs ne sont intéressés que par les 
+	ne seront jamais modifiés car les utilisateurs ne sont intéressés que par les 
 	informations qu'elles portent.
 	
 	\item L'\textbf{agrégat} (\textit{aggregate}) : une collection d'objets qui sont 
@@ -1179,7 +1178,7 @@ modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se 
 	d'agrégat souche (\textit{aggregate root}). Ce dernier garantit la cohérence des 
 	modifications faites au sein de l'agrégat en interdisant aux objets externes de 
 	faire référence à ses membres. Par exemple, dans une modélisation 3D 
-	collaborative un utilisateur ne peux pas modifier le nom d'un autre utilisateur. Un 
+	collaborative un utilisateur ne peut pas modifier le nom d'un autre utilisateur. Un 
 	maillage n'a également pas d'intéret à connaître les informations des 
 	utilisateurs, c'est la scène qui gère l'interface entre les maillages et les 
 	utilisateurs.
@@ -1195,8 +1194,8 @@ modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se 
 
 
 Les notions plus détaillées qui se rapportent au \gls{DDD} sont présentées dans 
-\cite{Evans2003} et \cite{Vernon2013}\footnote{Les différents livres publiés par 
-Vernon s'attachent également à montrer la nécessitée pour les différentes 
+\cite{Evans2003} et \cite{Vernon2013}\footnote{Les différents ouvrages publiés par 
+Vernon s'attachent également à montrer la nécessité pour les différentes 
 branches de l'informatique à proposer des 
 systèmes d'information plus robustes et flexibles face aux nouvelles demandes.}.\info{source: 
 	http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
@@ -1207,10 +1206,10 @@ les événements se déroulant dans la réalité métier qui ne sont pas
 interchangeables -- la plupart du temps. L'utilisation d'architectures 
 basées événements est naturelle dans ce genre d'environnement. 
 
-Les disciplines liées à la 3D dans un contexte industrielles ont besoin de pouvoir 
+Les disciplines liées à la 3D dans un contexte industriel ont besoin de pouvoir 
 communiquer sur un langage commun pour permettre à chacun des 
 intervenants de s'exprimer dans la création du produit. Par exemple, la \gls{CAO} 
-est très utile dans un contexte d'ingénierie par l'utilisation de quatre propriétés 
+est très utile dans un contexte d'ingénierie grâce à l'utilisation de quatre propriétés 
 fondamentales telles que l'historique, les fonctionnalités, la paramétrisation et le 
 haut niveau de contrainte.
 
@@ -1250,7 +1249,6 @@ modifications acceptables et qui est autorisé à le faire.
 \end{figure}
 
 
-
 Le caractère vicié (\textit{staleness}) d'une donnée dans un environnement 
 collaboratif est récurrent. Une fois que la donnée a été montrée à un utilisateur, la 
 même donnée peut être changée par un autre utilisateur, elle est altérée. 
@@ -1263,7 +1261,7 @@ même donnée peut être changée par un autre utilisateur, elle est altérée.
 
 La plupart des architectures en couches ne font pas explicitement référence à ces 
 problèmes. Le fait de tout sauvegarder dans une base de données centralisée peut 
-être une étape dans la gestion de la collaboration mais l'altération des données est 
+être une étape dans la gestion de la collaboration, mais l'altération des données est 
 souvent exacerbée par l'utilisation de caches comme accélérateur de performance.
 L'immuabilité en \gls{CQRS} est un concept clé qui prévient la  
 modification de l'état interne d'une commande ou d'un événement. Les 
@@ -1295,9 +1293,9 @@ modèle de données et du métier.
 
 L'\gls{ES} est souvent présent dans des architecture asynchrones qui ont 
 l'avantage de pouvoir utiliser des queues de message, plusieurs bases de 
-données et où la partie lecture est éventuellement consistante.
+données, et où la partie lecture est éventuellement consistante.
 La plupart de la littérature concernant ce patron se trouve en ligne, dans des 
-billets de blog, des présentations, ou de la documentation logicielle. La 
+billets de blog, des présentations ou de la documentation logicielle. La 
 littérature académique est relativement réduite, souvent rapproché des travaux 
 sur l'évolution de graphes. Cette section fournit un aperçu des différentes 
 définitions données de l'\gls{ES} et du vocabulaire lié à ce patron de conception.
@@ -1305,8 +1303,7 @@ définitions données de l'\gls{ES} et du vocabulaire lié à ce patron de conce
 \textbf{Martin Fowler} Martin Fowler a été le premier à utiliser le terme 
 d'\acrlong{ES} en 2005. Il définit l'\gls{ES} comme \og une série de 
 changements 
-de l'état d'une application\fg{}'.  \og série d'événements capture tout ce qui est 
-nécessaire à la reconstruction de l'état courant'\fg{}. Il voit les événements 
+de l'état d'une application\fg{}. Il voit les événements 
 comme immuables et le journal d'événement (\textit{event log}) comme un 
 stockage linéaire (\textit{append only store}) des événements (Figure 
 \ref{fig:es-event}). 
@@ -1318,12 +1315,12 @@ l'inverse de l'événement précédent pour compenser ses effets (Figure
 Dans ce billet, Fowler n'établit pas clairement la distinction entre les 
 événements 
 et les commandes qui déclenchent ces événements. Ce problème est 
-considéré dans plusieurs travaux fondamentaux \cite{Prakash1994,Sun2002,Weiss2009a,Weiss2010} approfondie par un revue de Chen et al. \cite{Cheng2013}.
+considéré dans plusieurs travaux fondamentaux \cite{Prakash1994,Sun2002,Weiss2009a,Weiss2010}, et approfondi par une revue de Chen et al. \cite{Cheng2013}.
 
 \textbf{Greg Young} Grand contributeur au domaine de l'\gls{ES} (et \gls{CQRS}), Greg 
 Young décrit l'\gls{ES} comme \og le stockage de l'état courant sous la forme 
 d'une série d'événements et la reconstruction de l'état du système en rejouant 
-cette série d'événements'\fg{}. D'après lui, le journal d'événements a également 
+cette série d'événements\fg{}. D'après lui, le journal d'événements a également 
 un comportement linéaire : les événements qui sont déjà arrivés ne peuvent 
 être défaits. Ce que Fowler appelle événements rétroactifs, Young le décrit 
 comme des actions inverses.
@@ -1376,15 +1373,15 @@ collaborative.
 L'\gls{ES} peut apporter beaucoup d'avantages à une application, notamment 
 lorsque les besoins en traçabilité de l'information sont importants comme dans 
 la modélisation collaborative de données 3D.
-L'historique du système est accessible tout au long de la vie de l'application ce 
+L'historique du système est accessible tout au long de la vie de l'application, ce 
 qui implique qu'il est non seulement possible d'accéder à l'état courant du 
-système, mais également toutes les actions ayant mené jusqu'à cet état. C'est 
+système, mais également à toutes les actions ayant mené jusqu'à cet état. C'est 
 un avantage certain pour les système critiques, les applications d'Informatique 
 Décisionnelle ou les applications collaboratives. La pratique la plus 
 courante est de proposer un système principal et d'ajouter une multitude de 
 sous-systèmes qui enregistrent les différentes métriques (analyse d'un ou 
 plusieurs axes, \textit{reporting} sur une propriété) du système principal. Avec 
-l'\gls{ES}, il est toujours possible de regarder <<dans le passé>> et récupérer 
+l'\gls{ES}, il est toujours possible de regarder << dans le passé >> et de récupérer 
 les données à partir de ce moment. Par comparaison, les avantages de 
 l'\gls{ES} sur l'Active Record sont:
 \begin{itemize}
@@ -1406,12 +1403,12 @@ ces changements identifiée, le chef de projet pourra alors intervenir et clarif
 le sujet. \improve{style exemple}
 
 \paragraph{Résolution} Avec un système classique, la fonctionnalité doit être 
-créée pour enregistrer ce traitement puis être testée et implémentée (dans cet 
-exemple, il en faudrait deux). Seulement après, un rapport pourra être délivré. 
+créée pour enregistrer ce traitement, puis être testée et implémentée (dans cet 
+exemple, il en faudrait deux). Ensuite seulement, un rapport pourra être délivré. 
 Dans un environnement utilisant l'\gls{ES}, tous les événements existent déjà 
 donc les données sont déjà disponibles et ont seulement à être analysées 
 (dans 
-notre exemples, les informations sont inhérentes aux événements). De plus, les 
+notre exemple, les informations sont inhérentes aux événements). De plus, les 
 événements étant stockés depuis le début de la vie de l'application\jp{préciser : 
 	début de la vie}, beaucoup plus de données peuvent être analysées. Par 
 exemple : demander toutes les modifications d'un objet depuis la dernière 
@@ -1427,9 +1424,8 @@ l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Stor
 nécessaire de le calculer à partir des événements reçus.
 A chaque événement créé (et stocké), ce processus sera alourdi car ils ne 
 peuvent être supprimés. Plus la pile d'événements est longue, plus cela prend 
-du temps (linéaire).
- considérant que les commandes ont besoin parfois de connaître une partie de 
- l'état courant issu de ces événements pour être déclenchée.
+du temps (linéaire), considérant que les commandes ont parfois besoin de connaître une partie de 
+ l'état courant issu de ces événements pour être déclenchées.
  
 Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
 moment qui correspond à l'empilement d'événements ayant mené à cet état. En 
@@ -1486,10 +1482,10 @@ l'\textbf{intention}. D'un point de vue fonctionnel, le \gls{CS} est un patron d
 conception lié à une décision qui produit plusieurs événements, tandis que 
 l'\gls{ES} se contente d'appliquer un changement à l'état courant. De plus, en 
 \gls{ES}, l'événement stocké a été produit par l'agrégat. 
-La différenciation majeure des deux patrons de conception s'accentue lors 
+La différenciation majeure des deux patrons de conception s'accentue lors de 
 l'interaction avec des systèmes externes. L'aspect fonctionnel de l'application de 
-changement d'état de l'\gls{ES} al'avantage de permettre de reconstruire l'état sans 
-effets de bord car elle ne travaille que sur l'état interne de l'application. 
+changement d'état de l'\gls{ES} a l'avantage de permettre de reconstruire l'état sans 
+effet de bord car elle ne travaille que sur l'état interne de l'application. 
 
 Historiquement, l'\gls{ES} de Fowler dans ses premières versions ressemblait plus 
 à du \gls{CS}. L'évolution de l'\gls{ES} a conduit à revoir ce patron théoriquement 
@@ -1531,19 +1527,19 @@ de la livraison.
 
 La troisième partie s'intéresse aux propriétés des architectures orientées 
 événements. Le couplage lâche est une propriété 
-qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybride. Elles ont 
+qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybrides. Elles ont 
 l'avantage de proposer une intégration de la partie métier transparente. Dans les 
 différents 
 systèmes de modélisation 3D pour la visualisation ou la manipulation d'objets 3D 
-collaboratifs sur le web, cet aspect est souvent mis de côté. Or, dans le cadre de 
+collaboratifs sur le web, cet aspect est souvent mis de côté. Or dans le cadre de 
 la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
 prépondérants.
 Différentes approches parmi les architectures orientée événements dans un 
 système collaboratif permettent d'intégrer les règles liées au métier dans une 
 application de modélisation collaborative. Dans un 
-premier temps, l'architecture \gls{PubSub}, propose un système de notifications 
+premier temps, l'architecture \gls{PubSub} propose un système de notifications 
 pour les différents 
-n\oe uds d'un réseau de manière lâche. De cette manière la communication est 
+n\oe uds d'un réseau de manière lâche. De cette manière, la communication est 
 homogénéisée et repose uniquement sur des notifications d'événement pour les 
 entrées et sorties des clients. Le mécanisme d'abonnement autorise une 
 grande variété de stratégies quant au routage des messages.
@@ -1554,7 +1550,7 @@ A partir de ces orientations, \gls{CQRS} vient proposer une discrimination entre
 partie écriture (commande) et lecture (requête) dans l'application. Le passage à 
 l'échelle côté lecture est favorisé grâce à la création de projections des données 
 facilite la restitution des données sans risques d'effets de bord. 
-Le côté écriture, permet de valider le contenu entrant selon les règles métiers du 
+Le côté écriture permet de valider le contenu entrant selon les règles métiers du 
 le domaine métier. L'\gls{ES} est le patron qui introduit la notion d'événement (\og 
 ce qui s'est passé\fg{}). L'état de l'application se reconstruit à 
 partir de ces événements issus de l'expertise métier -- déduite grâce au \gls{DDD}. 
