@@ -6,22 +6,22 @@
 \subsection{Éditeur 3DEvent}
 3DEvent est à la fois un \gls{framework} et un éditeur 3D pour la visualisation et la 
 manipulation d'objets 3D. La partie \gls{framework} est basée évènement pour 
-répondre à des contraintes liés à la temporalité de l'information traitée via l'éditeur 
+répondre à des contraintes liées à la temporalité de l'information 
 ainsi qu'à la distribution de l'information en terme d'intégrité et de poids. L'éditeur 
 va réagir et interpréter les informations (évènements) fournies par le 
-\gls{framework} pour proposer visualisation et interactions adaptées.
+\gls{framework} pour proposer une visualisation et des interactions adaptées.
 
  L'application 3DEvent est un 
-éditeur 3D reposant sur les principes et les technologies du web qui permet de 
+éditeur 3D reposant sur les principes et les technologies du web qui permettent de 
 manipuler des objets 3D de manière 
 collaborative en temps-réel. Les interactions possibles sont : 
 \begin{description}
 	
-	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut 
-	com\-me dans un environnement 3D classique interagir avec la vue en utilisant 
+	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut, 
+	com\-me dans un environnement 3D classique, interagir avec la vue en utilisant 
 	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
 	utiliser les commandes clavier et souris pour effectuer des opérations de 
-	translation, rotation et homothétie directement dans le \textit{viewport} ou via le 
+	translation, de rotation et d' homothétie de trois manières différentes: directement dans le \textit{viewport}, via le 
 	menu ou via la console du navigateur.
 	\item[Charger des modèles 3D] L'éditeur gère la plupart des formats de fichier 
 	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
@@ -33,7 +33,7 @@ collaborative en temps-réel. Les interactions possibles sont :
 	son point de vue à celui d'un autre utilisateur. Le choix d'implanter ce type de 
 	fonctionnalité s'inscrit dans la perspective de sensibilisation de l'utilisateur au 
 	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre le 
-	point de vue d'un collaborateur, se mettre à sa place, est une manière de 
+	point de vue d'un collaborateur est une manière de 
 	comprendre son fonctionnement et d'imaginer ses 
 	perspectives de conception à travers le point de vue qu'il a choisi.
 \end{description}
@@ -127,7 +127,7 @@ information est diffusée à ces collaborateurs.
 \end{figure}
 \subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
-Dans l'approche \gls{CQRS}, une projection est une dérivation de l'état courant à 
+Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de l'état courant à 
 partir du flux d'évènements. Pour Abdullin, <<la projection est le processus de 
 conversion (ou d'agrégation) d'un flux d'évènement en une représentation 
 structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
@@ -146,11 +146,9 @@ découplée du flux des évènements.
 
 Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
 paquets réseau de manière ordonnée.
-Par conséquent, les messages pouvant arriver dans n'importe quel ordre, 
-qu'arriverait-il si un évènement A ($eA$) nécessitant un autre évènement B ($eB$) 
-pour être appliqué arrivait avant? Dans cette situation, le système va générer une 
-erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
-d'information sur la hiérarchie d'application des évènements ($eB$ puis $eA$).
+Qu'arriverait-il alors si un évènement A ($eA$) nécessitant un autre évènement B ($eB$) 
+arrivait avant celui-ci ? Dans cette situation, le système appliquerai $eA$ sur un état inadéquat car il n'aura pas eu
+d'information sur la hiérarchie d'application des évènements ($eB$ puis $eA$). Le système va alors générer une erreur
 
 Pour pallier ce problème, l'introduction du système de projection permet d'avoir un 
 mécanisme (comme un automate fini) qui défini les transitions nécessaires pour 

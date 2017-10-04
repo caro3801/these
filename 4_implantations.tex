@@ -8,7 +8,7 @@
 
 \section{3DEvent : Plateforme web de manipulation collaborative d'objets 3D}
 Cette section présente l'implantation de 3DEvent, la plateforme web de 
-manipulation et visualisation collaborative d'objets 3D réalisée à partir du modèle 
+manipulation et de visualisation collaborative d'objets 3D réalisée à partir du modèle 
 présenté dans le chapitre précédent. La première partie s'intéresse à l'intégration 
 du framework pour proposer une application d'assemblage d'objets 3D. La seconde 
 partie expose les choix techniques pour l'interface utilisateur et la mise en avant 
@@ -29,16 +29,16 @@ web et la collaboration.
 
 \paragraph{Base de données NoSQL}\label{p:nosql} L'évolution de 
 l'utilisation du web en tant que plateforme applicative a encouragé le changement 
-dans le stockage des données pour de nouveaux besoin supportant de larges 
+dans le stockage des données pour de nouveaux besoins supportant de larges 
 volumes de données (comme les données 3D). Une base de données \gls{NoSQL} 
 fournit un schéma libre et dynamique ainsi qu'une API de requête riche pour la 
-manipulation de données. De plus, la possibilité d'enrichir un document à la volée 
+manipulation de données. De plus, la possibilité d'enrichir un document <<à la volée>> 
 facilite l'évolution des objets (3D) et la maintenance.\info{parler de la 
 	maintenance?} de l'application.\improve{eventual consistency, scalabilty}
 3DEvent intègre un système de persistance sur le long terme caractérisé par une 
 base de données \gls{NoSQL}.
 
-La base de données (\gls{NoSQL}) conserve tous les évènements qui 
+La base de données (\gls{NoSQL}) conserve tous les évènements qui se
 sont produits dans une scène.\improve{voir ce qu'il faut ajouter éventuellement le 
 	schéma aussi.} 
 La mise en place d'une base de données centralisée apporte de la robustesse au 
