@@ -1,0 +1,85 @@
+\subsection{De l'état à l'événement}
+\label{sec:statetoevent}
+Afin d'intégrer la notion d'historique dans une application web, plusieurs indicateurs 
+sont nécessaires (version, granularité de l'historisation, type et taille des données 
+manipulées). Cette section décrit le processus pour passer d'un système basé 
+états à un système basé évènements dans l'intérêt de réduire la somme des 
+données transmises sans perdre d'information concernant la logique métier.
+\paragraph{Description des variables}
+Une scène $S$ contient l'ensemble des $n$ objets $x$ ($S =\{x_0,x_1,...,x_n\}$). 
+Chaque élément de $S$ est associé à une taille calculée comme la somme des 
+modifications $m$ selon la version $v$. 
+
+Pour tout objet $x$ appartenant à la scène $S$ on associe une taille $w \in 
+\mathbb{R}$. $w$ correspond à la taille totale des données transmises pour 
+modifier l'objet à chaque version $v$ ($v$=0 correspond à la taille de l'objet à l'état 
+original, i.e. l'\gls{EventStore} est vide). La taille totale de la scène, notée $Sw$, 
+correspond à sommer la taille de tous ses objets (équation \ref{eq:sw}). Toutes les 
+variables évoquées sont exprimées en octet pour avoir des termes avec des 
+unités homogènes.
+
+\begin{equation}
+\label{eq:sw}
+\text{Taille d'une scène $S$ : } S_w= \sum_{i=0}^{n}w_i
+\end{equation}
+
+
+\paragraph{Transmission par état}
+Dans un système où à chaque modification on transmet l'état complet (équation 
+\ref{eq:complet}), la taille des éléments transmis correspond à la somme de tous 
+les états par lesquels l'objet est passé. Cette valeur va augmenter par paliers de 
+tailles relativement équivalentes.
+La transmission par état permet d'avoir un historique grâce à une sauvegarde 
+chronologique. Cependant elle est lourde voire redondante et n'offre pas 
+d'information sur l'intention de l'utilisateur (quelle opération a permis d'arriver à cet 
+état?).
+
+\begin{equation}
+\label{eq:complet}
+\text{Par état : } w_i = \sum_{v=0}^{n}state_{v}
+\end{equation}
+
+
+\paragraph{Transmission par différentiel d'état}
+\label{par:diff}
+Dans un système où l'on transmet un différentiel d'état (équation 
+\ref{eq:différentiel}), la différence entre deux états peut être difficile à exprimer 
+\info{cf meshhisto} car il s'agit d'un objet 3D dont les informations, stockées dans 
+un fichier, ne sont pas linéaires. Le différentiel peut beaucoup varier jusqu'à 
+atteindre une taille proche de l'état actuel si une transformation génère beaucoup 
+de modifications par rapport à l'état précédent. A contrario, une modification sur la 
+position d'un objet peut être très légère. La fonction représentant la taille des 
+ressources transmises augmentera par palier avec au pire les propriétés de la 
+proposition précédente (équation \ref{eq:complet}). Le différentiel d'état permet 
+d'alléger la transmission par rapport à la proposition précédente, ne contenant 
+cependant pas d'information sémantique sur ce qui est transmis et les opérations 
+qui ont conduit à l'état d'un objet 3D de la scène.
+
+\begin{equation}
+\label{eq:différentiel}
+\text{Par différentiel d'état : } w_i = state_0 + \sum_{v=1}^{n}(\underbrace{state_{v} 
+- state_{v-1}}_{differential})
+\end{equation}
+
+\paragraph{Transmission par évènement}
+La transmission par évènement (équation \ref{eq:evenement}) repose sur le 
+principe du différentiel d'état ($differential$) exprimé ci-dessus (équation 
+\ref{eq:différentiel}) en ajoutant la notion de type d'évènement ($eventType$). Le 
+type d'un évènement indique le nom de la transformation à appliquer pour passer 
+d'un état à l'autre. Un évènement contient par nature une sémantique <<métier>> 
+associée à chaque opération qui donne des indications sur l'intention de 
+l'utilisateur. 
+
+\begin{equation}
+\label{eq:evenement}
+\text{Par évènement : } w_i= state_0 + \sum_{v=1}^{n}(\underbrace{eventType + 
+differential}_{event}) 
+\end{equation}
+
+Dans un \gls{EVC3D}, il y a des évènements concernant à la fois la manipulation 
+3D, la navigation et les éléments se rapportant à la collaboration (par exemple: 
+prendre le point de vue d'un collaborateur). La taille d'un évènement est variable 
+(comme un différentiel d'état) avec un minimum contenant le type d'évènement 
+($eventType$) dû à sa structure type/paramètres. Cette proposition est un peu 
+plus lourde à transmettre que la précédente mais ajoute une valeur sémantique à 
+l'historique.
