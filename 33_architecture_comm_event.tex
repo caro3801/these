@@ -1,49 +1,94 @@
 \subsection{Architecture de hybride \og orientée événements\fg{}}
 \label{sec:comm_event}
 
+Cette architecture est une combinaison des contributions présentés dans 
+\cite{Desprat2016,Desprat2017} : elle repose sur les éléments du 
+framework orienté événement (Section \todo{ref modele event}) qui sont également 
+en relation avec la couche réseau (Figure \ref{fig:archievent}).
+\begin{figure}[]
+	\centering
+	\includegraphics[width=\columnwidth]{eps/archi.pdf}
+	\caption{Architecture de communication \og orientée événements\fg{}}
+	\label{fig:archievent}
+\end{figure}
 
+\subsubsection{Spécificité des composants de l'architecture}
+L'Event Store est un composant clé dans le traitement des événements. Présent 
+sur chaque pair, il prend en entrée des événements de deux natures : ceux qu'il a 
+générés via la partie commande (internes) ou ceux reçus via le réseau 
+principalement (externes). 
+L'Event Store produit en sortie des événements dit \og 
+cohérents\fg{} qui peuvent être publiés par la suite sur l'Event Publisher.
+Un Event Store est composé de deux types d'élements : 
+\begin{itemize}
+	\item l'\gls{ESM} qui gère les flux d'événements : structure de données 
+	présente dans chaque Event Store qui doit permettre l'accès en lecture et en 
+	écritures des agrégats qu'il contient. 
+	Un \gls{ESM} contient des flux d'événements ordonnés temporellement 
+	pour chaque agrégat géré ;
+	\item les \glspl{NB} qui servent de connecteurs réseaux : responsable de la 
+	gestion d'une connexion \gls{P2P}, i.e. gère le flux de données entrant et 
+	sortant vers chaque pair auquel il est relié.
+\end{itemize}
 
-\subsubsection{Persistance à long terme}\label{sec:persistance-a-long-terme}
+La Figure \ref{fig:archievent} montre des pairs (appelés instances) de différentes 
+nature :
+\begin{itemize}
+	\item Instance Web :  produit, stocke et relaie des événements aux autres 
+	instances.
+	\item Instance Serveur : stocke et relaie des événements aux autres instances 
+	et à la base de données. 
+\end{itemize}
+
+En plus de servir de relais comme une Instance Serveur, une Instance Web est 
+productrice d'événements. C'est en général le type d'instance par lequel un 
+utilisateur accédera à l'application. Les Instances Serveurs, en comparaison avec 
+l'architecture présentée précédemment, sont des \og serveurs\fg{} qui participent 
+directement à la couche réseau. En cela ils aident à la dissémination des données 
+et peuvent rapidement être monté pour garantir une disponibilité des données 
+auprès des autres instances (notamment en cas de pannes).
+Toutes les instances sont coordonnées par l'\gls{IM} qui est responsable de mettre 
+les pairs en relation. Il est notamment le serveur responsable dans le mécanisme 
+de \textit{signalling}. 
+
+L'ensemble des Event Stores forment une grappe (\textit{cluster}) qui gère le 
+journal d'événements partagé de manière réparti entre toutes les instances.
+\subsubsection{Gestion du stockage}
+\paragraph{Local avec l'\gls{ESM}}
+Lorsque l'Event Store reçoit de nouveaux événements, l'\gls{ESM} crée ou 
+récupère le flux d'événements associé à l'agrégat dans un premier temps. Puis 
+stocke l'événement à la suite de ceux présents dans le flux de l'agrégat.
+
+\paragraph{Long-terme et distant avec une base de données fonctionnelle}
 Dans un contexte industriel de collaboration, l'information doit être disponible sur le 
 long terme, facilement accessible par l'entreprise. La persistance à 
-long-terme stocke le journal d'événement qui est la 
+long-terme stocke le journal d'événements qui est la 
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
 
+Sur la base du modèle orienté événements, les données à stocker sont les 
+événements. Ils sont immuables et 
+sont des données purement fonctionnelles \todo{voir section \gls{ES} vs CS}.
+L'utilisation d'une base de données fonctionnelle permet de se reposer sur 
+l'immuabilité des événements.
+L'argument souvent opposé à l'utilisation de telles bases est le coût de l'espace de 
+stockage. Or, le coût de la redondance et de la non localité du traitement des 
+données a chuté au cours de ces dernières années. 
+Une base de données dont les données muent -- i.e où chaque donnée peut être 
+modifiée à n'importe quel moment -- ne permet pas de conserver l'historique des 
+modifications (ex : \textit{Active Record}). Dans une base de données dite 
+fonctionnelle, la structure de données doit elle-même être fonctionnelle et donc 
+immuable -- i.e. ne peut être modifiée à posteriori et fait seulement référence à 
+d'autres données immuables. Une telle base de données est \og une interface vers 
+des \textit{snapshots} versionnés\fg{} \cite{Meric2012}.
 
+Dans le cas de l'\gls{ES} les événements sont considérés comme des deltas 
+(avec quelques méta données supplémentaires) sur les agrégats. C'est donc sous 
+leur forme originale qu'ils sont stockés. Cela évite également les transformations 
+de données (et la perte d'information ou l'ajout de complexité) qui sont nécessaires 
+dans les \glspl{ORM}, en lecture et en écriture.
 
-\subsubsection{Mécanisme de gestion de version}
-3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
-de gérer au mieux la cohérence des données. 
-Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
-génération d'un ou plusieurs événements. Ces événements sont considérés 
-comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
-(\textit{committed}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
-événements doit produire une nouvelle version sans être en conflit avec la 
-précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
-est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
-un conflit est levé~: 
-\begin{enumerate}[label=\alph*)]
-	\item \label{i:vi} La version $v_a$ correspond à la valeur d'initialisation
-	\item \label{i:vdiff} La version $v_a$ est différente de la version $v_c$
-\end{enumerate}
-Dans \ref{i:vi}, on s'assure qu'après une action la version initiale de l'agrégat ne 
-peut être la même. Cet item peut sembler évident mais il est important de le noter 
-car il dépend entièrement de la valeur initiale choisie pour les agrégats du 
-\gls{framework} (on peut commencer à n'importe quelle valeur -- -1, 0\ldots).
-
-
-%
-%\subsubsection{Gestion de la cohérence}
-%
-%
-%\subsubsection{Respect de la causalité}
-%\subsubsection{Convergence des répliques}
-%\subsubsection{Préservation de l'intention}
-\subsubsection{Extension : Event Store distribué}
-
-
-%\paragraph{Connexion des pairs en début de session}
+\subsubsection{Gestion de la synchronisation}
 Dans \cite{Desprat2017}, lorsqu'un pair initialise ou rejoint, la séquence pour 
 rejoindre une session collaborative évolue 
 pour prendre en considération l'intégration des événements et la synchronisation 
@@ -58,11 +103,11 @@ gestionnaire
 d'instance, et retourne la liste des pairs avec lesquels le pair doit se connecter. 
 Pour chaque pair $idB$ de la liste retournée $ids$, $idA$ utilise le mécanisme de 
 signalisation (offre/demande). Le mécanisme est déclenché par l'instanciation d'un 
-\textit{network bridge}\info{definir} dans l'\textit{event store} \info{definir} de $idA$ 
+\gls{NB} dans l'Event Store de $idA$ 
 puis celui de $idB$. Afin de resynchroniser les deux pairs (après cette série 
-d'échanges asynchrones), $idA$ et $idB$ s'échangent des métadonnées sur la 
-situation respective de leurs \textit{ESM} \info{definir} afin de se synchroniser 
-\info{(see refernece sync mechanism}.
+d'échanges asynchrones), $idA$ et $idB$ s'échangent des méta-données sur la 
+situation respective de leurs \gls{ESM} afin de se synchroniser\todo{(see 
+refernece sync mechanism}.
 
 \begin{figure}[h]
 	\noindent
@@ -72,24 +117,53 @@ situation respective de leurs \textit{ESM} \info{definir} afin de se synchronise
 	\label{fig:connexionpairs}
 \end{figure}
 
+\subsubsection{Gestion de la cohérence}
+Les événements sont considérés comme \og cohérents\fg{}  lorsqu'il n'y a pas 
+d'erreur de cohérence dans l'agrégat, i.e. lorsqu'il n'y a pas de doublon dans les 
+numéros de versions et qu'ils sont bien ordonnés. Lorsqu'un \gls{ESM} ne 
+rencontre pas de problème de cohérence alors le 
+dernier index correspond au numéro de version de l'agrégat. 
+
+Lorsque l'Event Store reçoit un événement interne, l'ESM récupère (ou crée) le flux 
+d'événements associé à l'agrégat référencé par l'événement. 
+Alors, la cohérence de la version est vérifiée en comparant la version attendue 
+(exposée dans les méta-données de l'événement) et la version actuelle de 
+l'agrégat. 
+Si les deux numéros de versions sont égaux, l'événement est ajouté à la fin du 
+tableau du flux pour être stocké dans l'\gls{ESM}, sinon une exception est levée. 
+La gestion des exceptions est expliquée dans \info{détails exception}. 
+
+\paragraph{Mécanisme de gestion de version}
+3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
+de gérer au mieux la cohérence des données. 
+Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
+génération d'un ou plusieurs événements. Ces événements sont considérés 
+comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
+(\textit{committed}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
+événements doit produire une nouvelle version sans être en conflit avec la 
+précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
+est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
+un conflit est levé~: 
+\begin{enumerate}[label=\alph*)]
+	\item \label{i:vi} La version $v_a$ correspond à la valeur d'initialisation
+	\item \label{i:vdiff} La version $v_a$ est différente de la version $v_c$
+\end{enumerate}
+Dans \ref{i:vi}, après une action, la version initiale de l'agrégat ne 
+peut être la même. Cet item peut sembler évident mais il est important de le noter 
+car il dépend entièrement de la valeur initiale choisie pour les agrégats du 
+\gls{framework} (on peut commencer à n'importe quelle valeur -- -1, 0\ldots).
+\todo{parler de b), et redite par rapport a au dessus}
+
+%
+%\subsubsection{Gestion de la cohérence}
+%
+%
+%\subsubsection{Respect de la causalité}
+%\subsubsection{Convergence des répliques}
+%\subsubsection{Préservation de l'intention}
+
+%\paragraph{Connexion des pairs en début de session}
 
 
-L'Event Store est un composant clé dans le traitement des événements. Il prend 
-en entrée des événements générés ou reçus extérieurement et produit en sortie 
-des événements cohérents qui peuvent être par la suite publiés. Les événements 
-sont considérés comme cohérents lorsqu'il n'y a pas d'erreur de cohérence, i.e. 
-lorsque les numéros de versions sont bien ordonnés. Chaque Event Store contient 
-deux éléments: l'Event Stream Manager (ESM) et des Network Bridges (NB). Un
-ESM est une structure de données représentée par une collection de flux 
-d'événements. Un flux d'événement est représenté par un tableau d'événements 
-indexés en séquence permettant de stocker les événements d'un aggrégat dans 
-l'ordre temporel. Si un flux ne rencontre pas de problème de cohérence alors le 
-dernier index correspond au numéro de version de l'agrégat. Lorsque l'Event Store 
-reçoit un événement de l'instance courante\info{utilisation du terme 
-	instance?}, l'ESM récupère (ou crée) le flux d'événements associé à l'agrégat 
-référencé par l'événement. Alors, la cohérence de la version est vérifiée en 
-comparant la version attendue (exposée dans les métadonnées de l'événement) 
-et la version actuelle de l'agrégat. Si les deux numéros de versions sont égaux, 
-l'événement est ajouté à la fin du tableau du flux pour être stocké, sinon une 
-exception est levée. La gestion des exceptions est expliquée dans \info{détails 
-	exception}. Une fois le stockage effectué dans l'ESM, l'événement est publié.
+
+

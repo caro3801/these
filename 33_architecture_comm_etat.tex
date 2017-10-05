@@ -122,9 +122,9 @@ Les géométries sont, quant à elles, stockées avec leur identifiant propre et
 3D complet donné sous le format \gls{JSON}.
 
 Localement, sur chaque client, il existe un stockage relationnel (IndexedDB) pour 
-chaque objet 
-de la base de donnée récupérée. Cela permet au client de faire des requêtes 
-directement dans son espace local si besoin d'ajouter un maillage par exemple. 
+chaque objet de la base de donnée récupérée. Cela permet au client de faire des 
+requêtes directement dans son espace local si besoin d'ajouter un maillage par 
+exemple. 
 C'est également une source pour transférer ses modifications aux autres clients.
 Les navigateurs permettent désormais de stocker de quantités de données 
 importante localement avec une durée de vie illimitée. 
@@ -149,12 +149,8 @@ Lors de la connexion d'un nouveau client a lieu la synchronisation des deux
 systèmes de persistance pour obtenir les mises à jour : 
 \improve{l'échange des mises à jour entre le client (persistance à court terme) et la 
 	base de données (à long terme) afin de synchroniser les deux éléments avec. 
-	La 
-	base de données peut également servir en cas de conflit important ; elle sert de 
-	référent.}
-\improve{synchro- nizing with a NoSQL-based database whenever possible 
-	(thereby supporting intermittent connections of mobile devices; this approach is 
-	known as “offline first”) \cite{Gadea2016}}
+	La base de données peut également servir en cas de conflit important ; elle sert 
+	de référent.}
 \begin{enumerate}
 	\item depuis le client, où l'on distingue trois cas :
 	\begin{enumerate}
@@ -185,8 +181,10 @@ systèmes de persistance pour obtenir les mises à jour :
 \end{enumerate}
 
 
-
-
+Le fait de synchroniser un client avec une base de données NoSQL dès que cela 
+est possible permet de supporter les connexions intermittentes comme pour les 
+appareils mobiles dans cette architecture ; cette approche est connue sans le nom 
+de \og\textit{ offline first}\fg{} \cite{Gadea2016}.
 \subsubsection{Protocole d'échange}
 Les échanges se font à deux niveaux: entre les pairs ainsi qu'entre chaque pair et 
 la base de données. Pour le premier niveau, la couche réseau \gls{P2P} est assez 
@@ -201,22 +199,30 @@ utilisateur.
 La base de données centralisée est beaucoup sollicitée lors des sessions 
 collaboratives, ce qui peut mener à une surcharge similaire aux architectures 
 uniquement client serveur. 
-Chaque pair a une responsabilité importante dans l'envoi de message à tous les 
-collaborateurs. La distribution des données devrait être allégée car cette fonction 
-de relai peut être lourde pour le fonctionnement du pair. 
-La topologie en maillage complet limite le passage à l'échelle car le nombre de 
-connexion va croitre de manière exponentielle. 
+En combinant client-serveur et \gls{P2P}, la charge aurait dû être réduite et 
+transférée aux autres pairs, notamment lors de la phase de récupération d'une 
+nouvelle scène qui repose entièrement sur le serveur. 
+Chaque pair assume la responsabilité dans l'envoi de ses modifications à tous les 
+autres pairs. Cette tâche ne profite pas du réseau \gls{P2P} de manière optimale 
+car la topologie ne profite pas de la fonction relai des pairs. Cela pourrait alléger  la 
+distribution dans la couche \gls{P2P} et responsabiliser un peu plus les pairs pour 
+faciliter le passage à l'échelle.
+En effet, la topologie en maillage complet limite le passage à l'échelle car le 
+nombre de connexion va croitre de manière exponentielle. 
 
-Les requêtes \gls{CRUD} ne sont pas très expressives concernant le métier. 
+Par ailleurs, les requêtes \gls{CRUD} ne sont pas très expressives concernant le 
+métier. 
 Aucune vérification n'est donc effectuée sur la validité des données transmises 
 dans cette architecture. De plus, il peut arriver, du fait de latences réseaux que les 
 modifications des différents utilisateurs s'entrelacent à l'arrivée et ne rendent pas 
 l'intention de l'utilisateur. Cela peut mener à des dé-synchronisations fortes.
 
-L'utilisation d'une solution pessimiste dans un environnement \gls{P2P} peut 
-parfois mener à des inter-blocages si un utilisateur quitte la scène sans avoir 
-relâché l'objet, c'est à dire, sans en avoir informé la base de données et les autres 
-utilisateurs. Même si l'application peut prendre le relais, et permettre la relache du 
+Concernant la gestion de la concurrence, l'utilisation d'une solution pessimiste 
+dans un environnement \gls{P2P} peut parfois mener à des inter-blocages si un 
+utilisateur quitte la scène sans avoir relâché l'objet, c'est à dire, sans en avoir 
+informé la base de données et les autres 
+utilisateurs. 
+Même si l'application peut prendre le relais, et permettre la relache du 
 verrou au bout d'un certain temps, l'expérience utilisateur peut être dégradée 
 pendant cette période.
 Le maintient de la cohérence est a peu près garanti dans ce modèle si l'on 
@@ -224,8 +230,9 @@ considère un environnement où la fréquence des modifications n'est pas très
 élevée, que tous les clients communique leur horloge local pour établir un 
 référentiel de temps concernant les mises à jour. 
 
-Le transfert par différentiel d'état peut être efficace pour réduire la taille des 
-données transmises mais peut varier grandement selon le type de changement 
+Enfin, le transfert par différentiel d'état utilisé pour réduire la taille des 
+données liées au changement d'état des objets lors de la transmission des 
+données peut varier grandement selon le type de changement 
 effectué, rendant peu prédictibilité la charge des canaux de communication. 
 %
 %Some issues remain in RTCDataChannel API : the com- patibility and 
