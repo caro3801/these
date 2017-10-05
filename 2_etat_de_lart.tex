@@ -73,7 +73,7 @@ une résolution automatique ou manuelle.
 
 
 La plupart du temps, ce sont des mécanismes autoritaires comme le mécanisme 
-de verrouillage (\textit{lock mechanism}), des feux de signalement (\textit{traffic 
+de verrouillage (\textit{lock mechanism}), des feux de circulation (\textit{traffic 
 light mecanism}) ou requérant des droits ou des permissions temporaires, qui sont 
 proposés dans les solutions collaboratives traditionnelles. Les utilisateurs doivent 
 souscrire aux permissions du système avant de pouvoir effectuer leurs 
@@ -93,8 +93,7 @@ Alors que Duplex \cite{Pacull1994}, un \gls{EVC3D}, est présenté au même
 moment, ce dernier s'intéresse plus spécifiquement aux problématiques de 
 passage à l'échelle, en essayant de réduire la taille du contexte partagé pour 
 limiter les problèmes liés à la concurrence. 
-Les modèles liés à l'annulation (\textit{undo/redo}) dans les éditeurs collaboratifs 
-distribués sont nombreux. Pour les documents textuels, les travaux les plus 
+Les approches pour défaire / refaire (\textit{undo/redo}) des manipulations dans les éditeurs collaboratifs distribués sont nombreuses. Pour les documents textuels, les travaux les plus 
 aboutis dans un environnement distribué collaboratif 
 \cite{Prakash1994,Sun2002,Ressel}. Les 
 algorithmes souvent utilisés dans ce cadre sont les algorithmes 
@@ -160,7 +159,7 @@ données partagées.
 La collaboration en temps-réel est de plus en plus présente sur le web pour 
 différents types de documents, notamment 3D.
 La revue sur la visualisation distribuée, effectuée par Grimstead et al. en 2005 
-\cite{Grimstead2005}, indique que la plupart des systèmes sont conçus pour 
+\cite{Grimstead2005}, indiquait que la plupart des systèmes sont conçus pour 
 moins de cent 
 utilisateurs simultanés et reposent sur un ou plusieurs serveurs pour supporter ces 
 utilisateurs. 
@@ -186,7 +185,7 @@ Cela repose principalement sur le fait que les navigateurs sont présents partou
 dans nos vies en 2017, incluant les téléphones intelligents et les 
 tablettes qui les rendent indépendants des plateformes utilisées. 
 Le déploiement sur le web ne requiert pas d'installation ou de mises à jour autres 
-que celles du navigateur (en ne considérant que les applications sans greffon). 
+que celles du navigateur -- en ne considérant que les applications sans greffon (\textit{plugin less}). 
 La modification de l'application est gérée de manière centralisée par les serveurs 
 qui distribuent l'application. 
 Les éditeurs peuvent diffuser leur application à l'échelle mondiale instantanément  
@@ -195,8 +194,7 @@ autre qu'internet.
 
 %Computer-Aided Engineering (CAE) Collaborative /
 
-Parmi les solutions sans greffon (\textit{plugin less}), beaucoup sont développées 
-pour faire de la modélisation 3D et utilisent l'architecture client-serveur et le 
+Parmi les solutions sans greffon dédiée à de la modélisation 3D, de nombreuses utilisent l'architecture client-serveur et le 
 protocole \gls{WebSocket} pour effectuer la synchronisation entre les différents 
 clients collaborateurs. Quelques raisons peuvent expliquer cette situation. 
 Historiquement, les développeurs sont plus familiers avec les architectures 
@@ -213,7 +211,7 @@ Le choix de plateformes web dans l'infonuagique pour la modélisation \gls{CAO}
 est prépondérant pour les solutions commerciales comme OnShape, Clara.io et 
 TinkerCAD. Les fonctionnalités minimum de ces plateformes consistent en la 
 mise en place d'un environnement 3D visualiser un objet 3D accompagnées d'un 
-système d'annulation / refaire et d'une plateforme de 
+système défaire / refaire et d'une plateforme de 
 diffusion des créations.
 OnShape est un service de modélisation 3D très riche dont l'objectif est de 
 proposer une qualité équivalente des fonctionnalités de modeleurs autonomes 
