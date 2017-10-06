@@ -6,7 +6,6 @@
 \RequirePackage[frenchb]{babel}
 \RequirePackage{lmodern}
 \RequirePackage{keyval}
-
 	
 \newcommand{\stretchy}{1.3}
 
@@ -22,7 +21,8 @@
 	\adjustmtc
 	\listoftables
 	\adjustmtc
-	\printglossary[title={Liste des abréviations}]
+	\printglossaries
+	%\printglossary[]
 	\adjustmtc
 	\setstretch{\stretchy}
 }
@@ -36,10 +36,11 @@
 	\pagebreak}
 
 \RequirePackage[tight]{minitoc}
+\mtcselectlanguage{french}
 \RequirePackage{setspace}
 
 \RequirePackage[backref,colorlinks=true,citecolor=CadetBlue,linkcolor=MidnightBlue]{hyperref}
-\RequirePackage[toc,translate=babel]{glossaries}
+\RequirePackage[toc,acronym,translate=babel]{glossaries}
 \RequirePackage{booktabs}
 \RequirePackage{makeidx}
 
