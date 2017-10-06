@@ -107,13 +107,9 @@ d'implémenter ses propres règles de résolution de conflit. Le composant décl
 une exception lorsque le numéro de version reçu et le numéro de version courant 
 de l'agrégat sont identique (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
 règles métiers définies et les exceptions liés à la cohérence, l'événement peut être 
-business 
-logic rules defined, the event is rejected, accepted with or without modifications. 
-From this pro- cess, new events can be generated during the resolution.
+rejeté. Ce traitement peut être à l'origine de la génération de nouveaux 
+événements.
 
-Figure 4 describes how the system executes a translation action triggered by a 
-user and how it’s broadcasted to his/her collaborators (scene, cube geometry, and 
-cube mesh should be created before). 
 
 \begin{figure}[]
 	\centering
