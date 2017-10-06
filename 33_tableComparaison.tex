@@ -1,0 +1,61 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[h]
+\centering
+\caption{Récapitulatif des deux approches d'architecture de communication}
+\label{ta:recap_approche}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Critère}    & 
+\textbf{HybridEvent}                                                                                      & 
+\textbf{HybridState}                                                                                      \\ 
+\midrule
+Type stockage pair  & Fonctionnel 
+(event)                                                                                       & 
+Relationnel                                                                                               \\
+Type BDD            & Fonctionnel 
+(event)                                                                                       & NoSQL (Doc. 
+JSON)                                                                                         \\
+Cohérence           & 
+Éventuelle                                                                                                & 
+Forte                                                                                                     \\
+Synchronisation     & 
+Push-pull                                                                                                 & 
+Push                                                                                                      \\
+Gestion de conflit  & 
+CRDT-like                                                                                                 & 
+Verrouillage des objets                                                                                   \\
+Robustesse          & \begin{tabular}[c]{@{}l@{}}Plusieurs pairs sont liés \\ au 
+serveur BDD : \\ disponibilité ++\end{tabular} & 
+\begin{tabular}[c]{@{}l@{}}Lourde charge pour le \\ serveur lié à la BDD:\\ 
+disponibilité - -\end{tabular} \\
+Connectivité pair   & One-to-many 
+(policy)                                                                                      & 
+One-to-all                                                                                                \\
+Passage à l'échelle & 
+Oui                                                                                                       & 
+Faible                                                                                                    \\
+Orientée métier     & 
+Oui                                                                                                       & 
+Non                                                                                                       \\
+Transmission        & Notification 
+événement                                                                                    & Diff. 
+état                                                                                                \\
+Topologie Maillage  & 
+Partiel                                                                                                   & 
+Complet                                                                                                   \\
+Type données        & 
+Évènement                                                                                                 & 
+État                                                                                                      \\
+Type requêtes       & Projection / 
+DTO                                                                                          & CRUD / 
+REST                                                                                               \\
+Historique des données         & 
+Oui                                                                                                       & 
+Non                                                                                                       \\
+Défaire / Refaire   & Oui 
+(compensation)                                                                                        & 
+\begin{tabular}[c]{@{}l@{}}Oui (annulation commande \\avec effets de 
+bord)\end{tabular}                \\ \bottomrule
+\end{tabular}
+\end{table}
