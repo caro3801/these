@@ -104,7 +104,7 @@ système distribué. C'est pourquoi l'exploitation du patron de conception
 Ce fonctionnement ne permet pas le travail hors ligne.
 
 Côté serveur, le stockage des données est de moins en moins cher, il est possible de stocker beaucoup de données de manière distante notamment 
-grâce au \gls{cloud}\info{definir le cloud}. Le serveur a une puissance de calcul 
+grâce l'infonuagique. Le serveur a une puissance de calcul 
 plus importante (et surtout ajustable).
 
 Côté client, la puissance de calcul des machines sur lesquelles sont installés les 
@@ -291,8 +291,9 @@ règles métiers exprimées par ce dernier. Si la modification est validée, le 
 produit ou modifie l'agrégat concerné. Ces modifications sont converties sous 
 forme d'événements. Les événements sont ensuite transmis à l'Event Store où ils 
 sont stockés 
-avant d'être transférés à l'Event Publisher. L'Event Publisher joue le rôle d'interface 
-entre la partie écriture et la partie lecture. Il est également responsable de la 
+avant d'être transférés à l'Event Publisher. L'Event Publisher joue le rôle 
+d'interface entre la partie écriture et la partie lecture. 
+Il est également responsable de la 
 publication des événements sur le bus d'événement Event Bus où sont 
 accrochées les différentes projections. Les projections sont nourries a partir des 
 événements publiés auxquels elles sont abonnées. Enfin, une Vue (composant
@@ -489,12 +490,13 @@ dont résulte la cohérence éventuelle de l'application.
 Dans la conception d'interaction pour l'interface, la synchronicité peut varier en 
 fonction certains contextes. 
 Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interface.  
-Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de formulaire -> envoi 
-asynchrone -> 
-message de confirmation}, si l'utilisateur attends que la soumission soit une 
-requête qui peut probablement échouer, alors l'asynchronisme se justifie pour être 
-capable de fournir une explication à l'utilisateur en cas d'erreur. La probabilité 
-d'échec peut être réduite en pré-validant la commande. Si personne d'autre que 
+Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de 
+formulaire -> envoi asynchrone -> message de confirmation}, si l'utilisateur attends 
+que la soumission soit une requête qui peut probablement échouer, alors 
+l'asynchronisme se justifie pour être capable de fournir une explication à 
+l'utilisateur en cas d'erreur. 
+La probabilité d'échec peut être réduite en pré-validant la commande. Si personne 
+d'autre que 
 l'utilisateur ne travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
 l'asynchronicité rajoute une interaction inutile au flux dans le cas où peu de gens 
 travaillent sur la même instance d'agrégat.
@@ -503,6 +505,18 @@ commande synchrone et la mise à jour de la vue asynchrone. Les modèles de
 cohérence sont des décisions liées au métier car ils ont un impact direct sur 
 l'expérience utilisateur. 
 
+
+Dans ce modèle événementiel, la partie Commande permet de limiter l'introduction 
+de données impropres dans le système via différentes mécanismes. Chaque 
+commande issue de l'\gls{IU} entraîne la génération d'un ou plusieurs événements. 
+Ces événements sont considérés 
+comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
+(\textit{committed}) par le système.
+Une commande peut-être rejetée pour différentes raisons. Ces raisons sont 
+exprimées par différentes phases de validation de la commande.
+Une première validation se fait en amont du déclenchement de l'\gls{IU} avec par 
+exemple une vérification de type des paramètres passés à la commande.
+Quand la commande entre dans le système
 
 %Linéaire (strong consistency)
 %one version replace another -- one parent and one children in the sequence
