@@ -1,4 +1,5 @@
-\subsection{Architecture de hybride \og orientée événements\fg{}}
+\subsection{Architecture de communication hybride \og orientée 
+événements\fg{}}
 \label{sec:comm_event}
 
 Cette architecture est une combinaison des contributions présentés dans 
@@ -88,7 +89,7 @@ leur forme originale qu'ils sont stockés. Cela évite également les transforma
 de données (et la perte d'information ou l'ajout de complexité) qui sont nécessaires 
 dans les \glspl{ORM}, en lecture et en écriture.
 
-\subsubsection{Gestion de la synchronisation}
+\subsubsection{Gestion de la session}
 Dans \cite{Desprat2017}, lorsqu'un pair initialise ou rejoint, la séquence pour 
 rejoindre une session collaborative évolue 
 pour prendre en considération l'intégration des événements et la synchronisation 
@@ -117,15 +118,15 @@ refernece sync mechanism}.
 	\label{fig:connexionpairs}
 \end{figure}
 
-\subsubsection{Gestion de la cohérence}
+\subsubsection{Gestion de la synchronisation et de la cohérence}
 Les événements sont considérés comme \og cohérents\fg{}  lorsqu'il n'y a pas 
 d'erreur de cohérence dans l'agrégat, i.e. lorsqu'il n'y a pas de doublon dans les 
 numéros de versions et qu'ils sont bien ordonnés. Lorsqu'un \gls{ESM} ne 
 rencontre pas de problème de cohérence alors le 
 dernier index correspond au numéro de version de l'agrégat. 
 
-Lorsque l'Event Store reçoit un événement interne, l'ESM récupère (ou crée) le flux 
-d'événements associé à l'agrégat référencé par l'événement. 
+Lorsque l'Event Store reçoit un événement interne, l'\gls{ESM} récupère (ou crée) 
+le flux d'événements associés à l'agrégat référencé par l'événement. 
 Alors, la cohérence de la version est vérifiée en comparant la version attendue 
 (exposée dans les méta-données de l'événement) et la version actuelle de 
 l'agrégat. 
@@ -135,11 +136,8 @@ La gestion des exceptions est expliquée dans \info{détails exception}.
 
 \paragraph{Mécanisme de gestion de version}
 3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
-de gérer au mieux la cohérence des données. 
-Chaque gestion de commande (Figure \ref{fig:gestionCommande}) entraîne la 
-génération d'un ou plusieurs événements. Ces événements sont considérés 
-comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
-(\textit{committed}).  Pour qu'ils le deviennent, l'agrégat concerné par ces 
+de gérer au mieux la cohérence des données (voir Section \todo{ref section}). 
+Pour qu'ils le deviennent, l'agrégat concerné par ces 
 événements doit produire une nouvelle version sans être en conflit avec la 
 précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
 est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
@@ -153,6 +151,26 @@ peut être la même. Cet item peut sembler évident mais il est important de le 
 car il dépend entièrement de la valeur initiale choisie pour les agrégats du 
 \gls{framework} (on peut commencer à n'importe quelle valeur -- -1, 0\ldots).
 \todo{parler de b), et redite par rapport a au dessus}
+
+
+
+\subsubsection{Topologie et Protocole d'échange}
+L'architecture hybride orientée \og événements\fg{} tire profit de la présence des 
+Instances Serveur pour réduire la responsabilité des pairs producteurs (Instances 
+Web) dans la distribution des données. En effet, les Instances Serveur qui 
+participent au réseau permettent de proposer plus de points de distribution de 
+données directement reliés à la base de données. De ce fait la politique de 
+connectivité entre les pairs peut être réduite, la topologie du réseau correspond à 
+un maillage partiel (\textit{partial mesh topology}). 
+\subsubsection{Discussion des problématiques liés à une architecture de 
+communication orientrée \og événements\fg{}}
+Architecture réactive à l'attrition. Tous les éléments participants à la gestion de 
+données, actifs dans la distribution ou producteurs de données, sont au même 
+niveau. Le réseau \gls{P2P} est renforcée par la présence de pairs présents pour 
+faire le relais dans la distribution des données. 
+
+La gestion de la cohérence \todo{finir}
+
 
 %
 %\subsubsection{Gestion de la cohérence}

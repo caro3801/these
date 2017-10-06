@@ -53,6 +53,33 @@ envoyé à l'utilisateur lorsqu'il arrive sur une scène.
 Le prototype est construit sur l'utilisation de MongoDB.
 
 
+\subsubsection{Gestion du stockage et structure de données}
+
+Avec une base de données NoSQL utilisant des schémas dynamiques, les 
+données sont stockées sous forme de document. Chaque document est 
+auto-descriptif et peut contenir des valeurs qui s'imbriquent sous la forme d'une 
+structure en arbre hiérarchique. Une collection consiste à grouper des documents, 
+équivalent dnas une base de données relationnelle à la notion de table. La base de 
+données contient deux types de collections : les scènes et les géométries. Une 
+collection de scènes contient des scènes qui sont décrites par leur identifiant et 
+les méta-données de l'espace virtuel 3D ainsi que la liste des contributeurs et la 
+liste des maillages. Cette liste correspond à une association entre un identifiant de 
+maillage, les méta-données de l'objet et l'identifiant d'une géométrie existante. 
+Les géométries sont, quant à elles, stockées avec leur identifiant propre et l'objet 
+3D complet donné sous le format \gls{JSON}.
+
+Localement, sur chaque client, il existe un stockage relationnel (IndexedDB) pour 
+chaque objet de la base de donnée récupérée. Cela permet au client de faire des 
+requêtes directement dans son espace local si besoin d'ajouter un maillage par 
+exemple. 
+C'est également une source pour transférer ses modifications aux autres clients.
+Les navigateurs permettent désormais de stocker de quantités de données 
+importante localement avec une durée de vie illimitée. 
+
+Les paramètres des opérations fondamentales sur la base de données 
+(\gls{CRUD}) sur les collections sont très bien supportés par les requêtes 
+\gls{REST}.
+
 
 \subsubsection{Gestion de la session}
 Lorsqu'un utilisateur rejoint une session, il suit le déroulement des opérations 
@@ -106,32 +133,6 @@ du client pour qu'ils puissent mettre à jour leur interface en conséquence.
 %optimization. The channel can be over- feed when an object is imported then 
 %pushed through the network.
 %
-\subsubsection{Gestion du stockage et structure de données}
-
-Avec une base de données NoSQL utilisant des schémas dynamiques, les 
-données sont stockées sous forme de document. Chaque document est 
-auto-descriptif et peut contenir des valeurs qui s'imbriquent sous la forme d'une 
-structure en arbre hiérarchique. Une collection consiste à grouper des documents, 
-équivalent dnas une base de données relationnelle à la notion de table. La base de 
-données contient deux types de collections : les scènes et les géométries. Une 
-collection de scènes contient des scènes qui sont décrites par leur identifiant et 
-les méta-données de l'espace virtuel 3D ainsi que la liste des contributeurs et la 
-liste des maillages. Cette liste correspond à une association entre un identifiant de 
-maillage, les méta-données de l'objet et l'identifiant d'une géométrie existante. 
-Les géométries sont, quant à elles, stockées avec leur identifiant propre et l'objet 
-3D complet donné sous le format \gls{JSON}.
-
-Localement, sur chaque client, il existe un stockage relationnel (IndexedDB) pour 
-chaque objet de la base de donnée récupérée. Cela permet au client de faire des 
-requêtes directement dans son espace local si besoin d'ajouter un maillage par 
-exemple. 
-C'est également une source pour transférer ses modifications aux autres clients.
-Les navigateurs permettent désormais de stocker de quantités de données 
-importante localement avec une durée de vie illimitée. 
-
-Les paramètres des opérations fondamentales sur la base de données 
-(\gls{CRUD}) sur les collections sont très bien supportés par les requêtes 
-\gls{REST}.
 
 \subsubsection{Gestion de la synchronisation et de la cohérence}
 \label{sec:synchronisation-client-serveur}
@@ -185,16 +186,21 @@ Le fait de synchroniser un client avec une base de données NoSQL dès que cela
 est possible permet de supporter les connexions intermittentes comme pour les 
 appareils mobiles dans cette architecture ; cette approche est connue sans le nom 
 de \og\textit{ offline first}\fg{} \cite{Gadea2016}.
-\subsubsection{Protocole d'échange}
-Les échanges se font à deux niveaux: entre les pairs ainsi qu'entre chaque pair et 
-la base de données. Pour le premier niveau, la couche réseau \gls{P2P} est assez 
+\subsubsection{Topologie et protocole d'échange}
+Cette architecture est basée sur une topologie de maillage complet (\textit{full 
+mesh topology}) pour le réseau \gls{P2P}.
+Les échanges se font donc à deux niveaux: entre les pairs ainsi qu'entre chaque 
+pair et la base de données. Pour le premier niveau, la couche réseau \gls{P2P} est 
+assez 
 naïve dans le sens où les connexions sont considérées comme fiables et 
 ordonnées, le client n'a alors qu'à publier toutes les modifications qu'il effectue et 
 les envoyer à tous les clients (auxquels il est nécessairement connecté).
 Les pairs échange des différentiels d'état sur les objets. Ces messages ne 
 contiennent pas d'information sémantique sur le type d'action effectuée par chaque 
 utilisateur. 
-\subsubsection{Problèmes soulevés par cette architecture}
+
+\subsubsection{Discussion des problématiques liés à une architecture de 
+communication orientrée \og états\fg{}}
 
 La base de données centralisée est beaucoup sollicitée lors des sessions 
 collaboratives, ce qui peut mener à une surcharge similaire aux architectures 
