@@ -3,7 +3,7 @@
 %%%%%%% SECTION %%%%%%%
 \section{Modèle événementiel pour l'intégration du domaine 3D dans les 
 EVC}
-
+\label{sec:modele_event}
 %\subsection{Introduction}
 La méthodologie orientée événements intègre plusieurs aspects souvent laissés 
 de côté dans la littérature concernant le développement des environnements 
@@ -270,16 +270,6 @@ modélisation 3D collaborative (appuyant la sémantique des manipulations).
 %TODO mettre l'image representant le cqrs +  celle de la validation des 
 %commandes
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=\columnwidth]{eps/cqrs2.pdf}
-	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
-		client dans 3DEvent : la gestion du cycle de vie des données avec 
-		\gls{CQRS} 
-		et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
-		en passant par la synchronisation réseau. Issu de \cite{Desprat2017}.}
-	\label{fig:cqrs-client}
-\end{figure}
 
 La Figure \ref{fig:cqrs-client} montre le déroulement du cycle des opérations du 
 modèle au sein de \gls{CQRS}, de l'action utilisateur à la visualisation de son 
@@ -302,6 +292,17 @@ contenant les mises à jour à partir d'une projection. La mise à jour d'une Vu
 se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
 visualisation 3D des modifications des collaborateurs en temps réel) ou active -- 
 mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{eps/cqrs2.pdf}
+	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
+		client dans 3DEvent : la gestion du cycle de vie des données avec 
+		\gls{CQRS} 
+		et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
+		en passant par la synchronisation réseau. Issu de \cite{Desprat2017}.}
+	\label{fig:cqrs-client}
+\end{figure}
 
 
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
