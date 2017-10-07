@@ -2,6 +2,9 @@
 %\section{Assemblage d'objets 3D sur le web avec architecture 
 %évènementielle}
 %\label{sec:us}
+
+
+\subsection{Présentation de l'expérimentation 2}
  Cette expérimentation a été réalisée sur la base des contributions liées à 
 \cite{Desprat2016,Desprat2017}. Elle souligne plusieurs aspects relatif à la fiabilité 
 du modèle et de son implantation de deux manières: 
@@ -22,6 +25,7 @@ effectuée de manière quantitative (outils de surveillance) et de manière qual
 %experiment are triangulated surfaces converted from the STL files given. The 
 %case 
 %is composed of N connected components. (see figure F).
+
 \paragraph{Tâche à effectuer}
 Les participants devaient assembler les différentes parties d'un modèle 3D en 
 utilisant l'application 3DEvent et les fonctionnalités décrites précédemment 
@@ -47,6 +51,21 @@ des expérimentations. Les participants étaient des étudiants de Master ou de
 Doctorat en informatique (pas nécessairement familiers avec les environnements 
 3D). Les participants étaient autorisés à communiquer entre eux.
 
+\begin{figure}[ht!]
+	\centering
+	
+	\subfloat[Translation (environnement 3D) et visualisation de l'historique 
+	(panneau 
+	latéral)]{\includegraphics[width=0.75\textwidth]{eps/1translatehisto.eps}\label{fig:ui1}}\hfill
+	\subfloat[Rotation (environnement 3D) et outils pour la manipulation d'objet 3D 
+	(panneau 
+	latéral)]{\includegraphics[width=0.75\textwidth]{eps/2rotatedetail.eps}\label{fig:ui2}}\hfill
+	\subfloat[Mise à l'échelle (environnement 3D) et liste des collaborateurs 
+	(panneau 
+	latéral)]{\includegraphics[width=0.75\textwidth]{eps/3scalecollab.eps}\label{fig:ui3}}\hfill
+	\caption{Interface utilisateur pendant une session collaborative (trois personnes)}
+	\label{fig:screenshots}
+\end{figure}
 
 \paragraph{Procédure}
 Les modèles utilisés lors de l'expériences sont décrits dans le Tableau 
@@ -100,50 +119,36 @@ dernier évènement est considéré).
 \paragraph{Questionnaire}
 En dehors des données collectées, les participants devaient remplir un 
 questionnaire basé sur l'expérimentation pour exprimer leurs retours qualitatifs 
-concernant leur expérience (Annexe \ref{app:quest}) \info{ajout questionnaire}. 
+concernant leur expérience (Annexe \ref{q:xp2}). 
 
 Le questionnaire est inspiré de \cite{Lewis1995}, qui permet d'évaluer la facilité 
 d'utilisation du système et l'implication dans la collaboration de chacun des 
 participants. En utilisant une échelle de notation sur sept points \cite{Lewis1993}, 
 (1~:~pas d'accord~; 7~:~d'accord) pour avoir assez de points de discrimination.
-
-
-
 Au cours des différentes sessions collaboratives, l'application à produit plusieurs 
 centaines d'évènements (environ 300 par session). Les expérimentations ont été 
 réalisées sur plusieurs dispositifs notamment un \textit{smartphone} avec une 
 connexion 4G. 
+
+
+
+
+\subsection{Résultats et discussion}
+\label{sec:res}
+
 La Figure \ref{fig:screenshots} montre quelques captures d'écran durant une 
 session collaborative sur le modèle Rotor ; et la Figure \ref{fig:ui4} montre les 
 premiers évènements enregistrés dans la base de données\info{mettre ailleurs?}. 
 Les boîtes englobantes représentent la sélection des différents collaborateurs 
-pendant la session.
-\begin{figure}[ht]
-	\centering
-	
-	\subfloat[Translation (environnement 3D) et visualisation de l'historique 
-	(panneau 
-	latéral)]{\includegraphics[width=0.7\textwidth]{eps/1translatehisto.eps}\label{fig:ui1}}\hfill
-	\subfloat[Rotation (environnement 3D) et outils pour la manipulation d'objet 3D 
-	(panneau 
-	latéral)]{\includegraphics[width=0.7\textwidth]{eps/2rotatedetail.eps}\label{fig:ui2}}\hfill
-	\subfloat[Mise à l'échelle (environnement 3D) et liste des collaborateurs 
-	(panneau 
-	latéral)]{\includegraphics[width=0.7\textwidth]{eps/3scalecollab.eps}\label{fig:ui3}}\hfill
-	\caption{Interface utilisateur pendant une session collaborative (trois personnes)}
-	\label{fig:screenshots}
-\end{figure}
+pendant la session.\todo{mettre ailleurs?}
 
-\begin{figure}[ht]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{eps/eventstore.eps}
 	\caption{Persistance long-terme (Event Store\textsuperscript{\textregistered}), 
 		base de données/outil de monitoring}
 	\label{fig:ui4}
 \end{figure}
-
-\subsection{Résultats et discussion}
-\label{sec:res}
 
 
 \paragraph{Analyse des interactions}
@@ -155,11 +160,21 @@ est assez facile à retrouver lors de la récupération des traces. Le \og quoi\
 cependant nécessite que les notifications aient une signification précise et proche 
 du métier. Grâce au travail de découpage et de dénomination des évènements 
 effectué en amont, le journal d'évènements (\textit{log}) indique précisément tout 
-ce 
-qui s'est passé lors de la session du point de vue du métier. Cette fonctionnalité 
-est 
-intéressante dans le contexte de la traçabilité des données et lors d'audits sur 
-l'assemblage. 
+ce qui s'est passé lors de la session du point de vue du métier. Cette 
+fonctionnalité est intéressante dans le contexte de la traçabilité des données et 
+lors d'audits sur l'assemblage. 
+
+\begin{figure}[]
+	\centering
+	
+	\subfloat[Par 
+	utilisateur]{\includegraphics[width=\columnwidth]{eps/byuser.eps}\label{petita}}
+	\\
+	\subfloat[Par type 
+	d'évènement]{\includegraphics[width=\columnwidth]{eps/byevents.eps}\label{petitb}}
+	\caption{Résumé d'une session collaborative au cours du temps}
+	\label{fig:collabsession}
+\end{figure}
 
 Figure \ref{fig:collabsession} montre deux angles d'enregistrement d'une session 
 sur le modèle \textit{living room}. Au début de la session, beaucoup d'objets sont 
@@ -191,16 +206,13 @@ MeshScaledEvent. A posteriori, nous nous sommes rendu compte que la
 fonctionnalité était mal calibrée pour l'échelle du modèle et nécessitait donc de s'y 
 reprendre à de nombreuse fois pour réaliser la bonne transformation.
 
-\begin{figure}[ht]
-	\centering
-	
-	\subfloat[Par 
-	utilisateur]{\includegraphics[width=\columnwidth]{eps/byuser.eps}\label{petita}} \\
-	\subfloat[Par type 
-	d'évènement]{\includegraphics[width=\columnwidth]{eps/byevents.eps}\label{petitb}}
-	\caption{Résumé d'une session collaborative au cours du temps}
-	\label{fig:collabsession}
-\end{figure}
+	\begin{figure}[]
+		\centering
+		\includegraphics[width=1\columnwidth]{eps/questionnaire.eps} 
+		\caption{Résultats des questionnaires collectés}
+		\label{fig:questionnaire}
+	\end{figure}
+
 
 \paragraph{Questionnaires}
 Après chaque expérimentation, le participant a rempli directement un questionnaire 
@@ -244,7 +256,7 @@ d'application.
 Le fait que l'application soit basée web à également joué en faveur de 
 l'appropriation de l'application car il a semblé assez naturel aux participants de se 
 rendre à l'adresse internet donnée (sans rien installer) pour effectuer les tâches en 
-manipulant un medium (3D) inhabituel pour ce genre de plateforme. De plus, on 
+manipulant un média (3D) inhabituel pour ce genre de plateforme. De plus, on 
 peut également supposer que le prototype créé pour l'expérimentation correspond 
 bien au à l'objectif d'assemblage coopératif d'objets 3D vu que les tâches ont 
 rapidement été réalisées. Sur une échelle de \og non-interactif \fg{} à \og 
@@ -258,13 +270,4 @@ navigateur web. Quant au fait que le nombre d'utilisateur améliore à la fois
 l'efficacité et la rapidité du complétement de la tâhce, les participants ont 
 généralement été d'accord.
 
-\begin{landscape}
-	
-	\begin{figure}[]
-		\centering
-		\includegraphics[width=1\columnwidth]{eps/questionnaire.eps} 
-		\caption{Résultats des questionnaires collectés}
-		\label{fig:questionnaire}
-	\end{figure}
-	
-\end{landscape}
+\subsection{Conclusion de l'expérimentation 2}

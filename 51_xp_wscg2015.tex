@@ -3,7 +3,7 @@
 %événementielle}
 %\label{sec:us}
 
-\subsection{Présentation de l'expérimentation}
+\subsection{Présentation de l'expérimentation 1}
 
 L'expérimentation propose de répliquer une collaboration réaliste entre 
 différents participants travaillant à distance pour faire des tâches d'assemblage de 
@@ -47,7 +47,7 @@ En utilisant les outils de l'éditeur, les informations liées aux autres utilis
 utilisateurs doivent manipuler les pièces (sélection, rotation, translation, 
 homothétie) de manière collaborative afin d'atteindre l'objectif. 
 \paragraph{Population}
-L'expérience a été conduite sur trois groupes de trois ou quatre participants 
+L'expérience a été conduite sur trois groupes de deux ou quatre participants 
 chacun. Un essai pour \textit{Wind Turbine} a été tenté à six participants 
 simultanés.
 Durant l'expérimentation, les utilisateurs était sur le même réseau que le serveur 
@@ -131,30 +131,49 @@ des connexions après un crash).En cela le participant a apprécié la robustess
 l'application sans être perturbé très longtemps par l'interruption.
 Concernant la fluidité des manipulations et de la visualisation au sein de 
 l'application durant la collaboration, les participants n'ont pas ressenti de latence 
-perturbantes en général. Ils ont qualifié l'application de temps-réel plutôt 
-qu'interactive. La variation du nombre d'utilisateur sur les différentes épreuves n'a 
-pas altéré la qualité du rendu et de réseau pour le participant.
+perturbantes en général. Ils ont qualifié l'application de \og temps réel\fg{} plutôt 
+qu'\og interactive\fg{}. La variation du nombre d'utilisateur sur les différentes 
+épreuves n'a pas altéré la qualité du rendu et de réseau pour le participant.
 
 \subsection{Conclusion de l'expérimentation 1}
 
-This paper proposed web-based 3D modeling collab- oration based on a hybrid 
-communication architecture client-server and P2P network. The client is respon- 
-sible for 3D rendering and handling the user interac- tions on a scene. It also hosts 
-the peer connection to be able to communicate updates to other peers. The server 
-is used to link the client with the NoSQL database in order to store the 
-modifications, and manage the users presence on a scene and automatically 
-create a P2P full mesh topology network between them. The P2P con- nection 
-relies on a WebRTC communication that trans- mits information directly between 
-browser with update messages, broadcasting according to the P2P star topol- ogy, 
-using a signaling server to establish the commu- nication between two peers. The 
-qualitative evalua- tions of the experiments were conclusive overall even if some 
-points should be improved. On model import, the broadcast causes latency issues 
-on client peers re- ceivers (camera freeze). To reduce latency with larger scenes 
-we consider using progressive rendering and making a better use of peer-to-peer 
-mesh to stream the model relying on seed peers like in the partial mesh topology. 
-An improvement of interface features and visual feedback of collaborative 
-manipulations was asked by the users. This evaluation will be supple- mented in 
-future works with a quantitative evaluation to compare our hybrid architecture to 
-others, particu- larly using server logs, FPS in client and WebRTC tools (Chrome : 
-chrome://webrt-internal; Firefox : about:webrtc) which provides statistics and 
-graphs on the data exchanged between peers’ browsers.
+
+Cette expérimentation présente différentes épreuves sur le cas d'études lié à cette 
+thèse. Elle repose sur un modèle utilisant une architecture de communication 
+hybride combinant client-serveur et \gls{P2P}. Le client est responsable de 
+proposer un environnement 3D intégrer à l'interface permettant la manipulation et 
+la visualisation des objets 3D manipulés de manière collaborative. Afin de pouvoir 
+collaborer, il héberge également les connexions nécessaires à communiquer ses 
+mises à jour vers les autres pairs (autant de connexion WebRTC DataChannel que 
+de pairs) et vers la base de données via le serveur (une seule connexion 
+WebSocket). Les modifications sont transmises sous forme de différentiel d'état et 
+sont stocker sur les pairs localement et sur la base de données de manière 
+distante. Le réseau \gls{P2P} est composé uniquement de client producteurs de 
+données reliés de manière complète. 
+Les évaluations liées à l'expérimentation sont plutôt encourageantes même si 
+certains points doivent être améliorés. Concernant la fonctionnalité d'import de 
+modèle, la transmission par les pairs du modèle a causé des latences sur les 
+pairs destinataires (gèle de la fenêtre). Afin de réduire la latence sur des scènes 
+aussi voire plus grandes, deux alternatives sont à étudier : l'utilisation d'un 
+rendu progressif et compressé ainsi qu'une meilleure répartition de la charge entre 
+les pairs pour la distribution des données. Dans ce dernier cas, l'utilisation d'un 
+maillage partiel et d'une distribution des modèles incluant les pairs permettrait de 
+responsabiliser d'avantage les pairs en désengorgeant un peu le serveur et surtout 
+le réseau \gls{P2P}.
+Concernant l'amélioration des fonctionnalités liés à l'interface, l'ajout de retours 
+visuels liés aux interactions collaborations ainsi la visualisation de l'historique sont 
+indispensables. Le manque 
+d'évaluation quantitative fait défaut à ces travaux. Cela pourrait permettre de 
+mieux examiner les apports de l'architecture de communication hybride par rapport 
+aux architectures classiques dans le contexte de la modélisation 3D collaborative. 
+Cela pourrait se concrétiser par l'examen de la collaboration en récupérant le 
+journal des actions, l'impact sur la visualisation (Frame Per Second), et 
+l'observation des échanges WebRTC en entrées / sorties.
+
+%An improvement of interface features and visual feedback of collaborative 
+%manipulations was asked by the users. This evaluation will be supple- mented in 
+%future works with a quantitative evaluation to compare our hybrid architecture to 
+%others, particu- larly using server logs, FPS in client and WebRTC tools (Chrome 
+%: 
+%chrome://webrt-internal; Firefox : about:webrtc) which provides statistics and 
+%graphs on the data exchanged between peers’ browsers.
