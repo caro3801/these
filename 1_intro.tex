@@ -50,11 +50,8 @@ dans le concept de pensée complexe. Dans sa définition de la
 complexité, Edgar Morin fait d'ailleurs référence à l'étymologie latine \og 
 complexus\fg{} qui signifie \og ce qui est tissé ensemble\fg{} \cite{Morin1990a}.
 La plupart des collaborations requièrent un élément dirigeant qui peut prendre une 
-forme sociale (personne) au sein d'un groupe décentralisé et égalitaire (tout le 
-monde au même niveau). L'élément dirigeant va également souvent aider à trouver 
-des consensus. 
-La disponibilité des ressources peut aussi devenir un élément dirigeant dans 
-la collaboration.
+forme sociale (personne) au sein d'un groupe décentralisé et égalitaire (horizontal). L'élément dirigeant va également souvent aider à trouver 
+des consensus (exemple : la disponibilité des ressources).
 Une équipe travaillant de manière collaborative a la possibilité de concentrer plus de 
 ressources, de reconnaissances et de récompenses lors d'une 
 compétition comportant des ressources finies. 
@@ -99,7 +96,7 @@ un modèle segmentant la collaboration de manière structurée en quatre catégo
 	ou l'allégeance à l'esprit d'équipe peut aussi promouvoir la collaboration. Par 
 	exemple, la visualisation collaborative des activités des différents contributeurs 
 	dans l'\gls{EVC3D} permet à chacun de rendre compte de ses réalisations. Ce 
-	type de collaboration doit beaucoup à l'ergonomie de l'activité qui insiste sur la 
+	type de collaboration repose beaucoup sur l'ergonomie de l'activité qui insiste sur la 
 	différence entre le travail prescrit et le travail réel : la tâche et l'activité.
 	
 	\item \textit{Collaboration centrée communauté.}
@@ -123,7 +120,8 @@ un modèle segmentant la collaboration de manière structurée en quatre catégo
 Dans le cadre de cette thèse, en se référant à cette première classification, les 
 aspects centrés sur les activités sont mis en avant. En effet, la collaboration 
 portant sur la modélisation 3D attend un résultat porté sur l'activité de conception. 
-Celle-ci nécessite l'implication de personnes dotées de différentes compétences/ connaissances qui doivent s'entraider pour mettre en commun des 
+Celle-ci nécessite l'implication de personnes dotées de différentes compétences / 
+connaissances qui doivent s'entraider pour mettre en commun des 
 objets 3D et réaliser leur objectif. \info{add figure}
 
 Une seconde classification proposée par Callahan et al. 
@@ -154,7 +152,7 @@ structurée, celle-ci offre davantage d'ouverture :
 	des statuts privilégiés. La réciprocité dans la 
 	communauté est un facteur important pour que cela fonctionne.
 	
-	\item \textit{Collaboration en réseau.}
+	\item \textit{Collaboration par réseautage.}
 	La collaboration en réseau est une surcouche de la collaboration 
 	traditionnellement centrée sur la relation d'une équipe ou d'une communauté. 
 	Elle s'appuie sur une action individuelle et un intérêt personnel qui resurgissent 
@@ -210,8 +208,7 @@ d'objet) ; et le contrôle de l'application (interaction avec une interface 3D p
 modifier des paramètres de l'environnement virtuel).
 
 La manipulation d'objets figure parmi les interactions les plus fondamentales 
-lorsqu'on 
-aborde la \gls{CAO}, le \gls{BIM} ou le \gls{PLM}. La manipulation 
+dans la \gls{CAO}, le \gls{BIM} ou le \gls{PLM}. La manipulation 
 collaborative d'objets virtuels par plusieurs utilisateurs fait ainsi partie des 
 nouveaux 
 besoins liés aux développement de ces activités.
@@ -291,7 +288,7 @@ pousser un système à ne plus être cohérent :
 	qui ne respecte pas l'ordre causal.
 	\item \textbf{La violation de l'intention.} Suite à la génération d'opérations 
 	concurrentes, 
-	l'effet actuel d'une opération au moment de son exécution peut être différent de 
+	l'effet d'une opération au moment de son exécution peut être différent de 
 	l'intention de cette opération au moment de sa génération.
 \end{itemize}
 %TODO exemple dpour chacun des critères
@@ -301,7 +298,7 @@ le premier facteur peut toujours être résolu en utilisant un protocole de sér
 alors que le dernier ne peut utiliser un protocole de sérialisation fixé si les 
 opérations sont exécutées sous leurs formes originelles \cite{Sun1997}. 
 Le modèle \gls{CCI} proposé par Sun et al. \cite{Sun1998} propose un modèle de 
-cohérence pour les systèmes d’édition collaborative qui s’adresse à ces facteurs 
+cohérence pour les systèmes d’édition collaborative qui aborde ces problèmes
 afin d'assurer « la préservation 
 de la convergence, de la causalité et la préservation de l’intention » 
 \cite{Sun1998}. Une majorité de travaux se sont intéressés à ces propriétés sur 
@@ -358,7 +355,7 @@ s'intéresser au déplacement d'un objet de quelques unités (\textit{object mov
 intrinsèque d'un objet et sa représentation. Bien que ces différentes descriptions 
 permettent d'avoir une compréhension générale du terme événement, chaque 
 sous-discipline de l'informatique comprend 
-ses propres associations avec le terme événement.
+ses propres associations.
 
 L'implantation d'une architecture orientée événements (de l'anglais \gls{EDA}) 
 nécessite l'instanciation d'une 
@@ -398,7 +395,7 @@ comme les applications web et le travail collaboratif.
 
 \subsubsection{Sensibilisation et perception du groupe}
 Le travail collaboratif peut également être supporté par des modèles orientés 
-événements prenant en compte la sensibilisation au groupe (\textit{awareness}) 
+événements prenant en compte la sensibilisation au groupe (\textit{awareness})\footnote{La traduction d'\textit{awareness} par sensibilisation en français est un peu réductrice car le terme anglais incorpore la perception de l'environnement ambiant, être conscient de ce qui se passe autour} 
 dans des activités. Ces systèmes sont présents dans la littérature depuis les 
 prémices de la technologie web \cite{Bentley1997,Steinfield1999,You2001}. Ces 
 propositions ont commencé par approcher la sensibilisation à l'espace de travail 
@@ -548,7 +545,7 @@ visualisation à la manière des \og réseaux sociaux\fg{} est assez courant, l'
 collaborative est souvent complexe à implémenter car les besoins sont nombreux. 
 Parmi eux, on trouve tout d'abord le besoin d'avoir un système distribué 
 conservant la cohérence des modifications de chacun des utilisateurs. Or 
-le nombre d'utilisateurs ne doit pas affecter l'expérience utilisateur ; le système 
+le nombre d'utilisateurs ne doit pas affecter l'expérience ; le système 
 doit supporter le passage à l'échelle. 
 Un nombre d'utilisateurs élevé implique la mise en place d'un système de 
 distribution de données adapté. Ce système est en plus contraint par la dynamicité
@@ -572,7 +569,7 @@ distribuées et décentralisées correspondent au second axe de recherche.
 Enfin, le dernier champ 
 s'adresse à la partie que nous appellerons \og métier\fg{} qui se rapporte au 
 domaine de la manipulation d'objets 3D, lequel inclut la 
-gestion du cycle de vie des données 3D, de l'interaction utilisateur à leur stockage 
+gestion du cycle de vie des données 3D, de l'interaction utilisateur au stockage 
 en passant par leur distribution. Ces aspects se rapportent principalement à 
 l'historique, la traçabilité de l'information et l'expertise embarquée dans le système.
 
@@ -643,7 +640,7 @@ suit.
 	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur web en 
 	temps réel.
 	\item Introduction des concepts d'événements métiers liées à la \gls{3D} 
-	comme moyen d'interagir dans une scène  \gls{3D} multi-échelle
+	comme moyen d'interagir dans une scène \gls{3D} multi-échelle.
 \end{itemize}
 \subsection{Contributions pratiques}
 \begin{itemize}
