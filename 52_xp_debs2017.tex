@@ -2,10 +2,9 @@
 %\section{Assemblage d'objets 3D sur le web avec architecture 
 %évènementielle}
 %\label{sec:us}
-L'expérimentation propose de répliquer une collaboration réaliste entre différents 
-participants travaillant à distance. Ce cas d'étude présenté dans 
-\cite{Desprat2017} souligne plusieurs aspects relatif à la fiabilité du modèle et de 
-son implantation de deux manières: 
+ Cette expérimentation a été réalisée sur la base des contributions liées à 
+\cite{Desprat2016,Desprat2017}. Elle souligne plusieurs aspects relatif à la fiabilité 
+du modèle et de son implantation de deux manières: 
 \begin{itemize}
 	\item fonctionnelle : manipulation et visualisation 
 	3D, historique ;
@@ -46,19 +45,19 @@ internet (au moins 20Mb/s) pour éviter d'avoir des latences extrêmes (>10
 secondes) au cours 
 des expérimentations. Les participants étaient des étudiants de Master ou de 
 Doctorat en informatique (pas nécessairement familiers avec les environnements 
-3D). Les participants étaient autorisés à communiquer entre eux par chat.
+3D). Les participants étaient autorisés à communiquer entre eux.
 
 
 \paragraph{Procédure}
 Les modèles utilisés lors de l'expériences sont décrits dans le Tableau 
-\ref{table:summary}. L'expérimentation se déroule en trois phases : 
-\begin{description}
-	\item[Phase d'essai] Chaque participant s'entraîne pendant 5-10 minutes sur un 
+\ref{table:models_xp2}. L'expérimentation se déroule en trois phases : 
+\begin{enumerate}
+	\item Phase d'essai : Chaque participant s'entraîne pendant 5-10 minutes sur un 
 	modèle de test dans l'application pour se familiariser avec l'interface et les 
 	fonctionnalités proposées.
-	\item[Phase solo] Le participant effectue un assemblage du modèle Rotor ou 
+	\item Phase solo : Le participant effectue un assemblage du modèle Rotor ou 
 	Camera Box.
-	\item[Phase de collaboration] Un groupe de participants réalise deux 
+	\item Phase de collaboration : Un groupe de participants réalise deux 
 	assemblages sur 
 	\begin{enumerate*}[label=(\roman*)]
 		\item un petit modèle (10 ou 12 parties) puis
@@ -67,26 +66,14 @@ Les modèles utilisés lors de l'expériences sont décrits dans le Tableau
 	La phase de collaboration a été répétée six fois : trois fois 
 	avec un groupe de deux participants et trois fois avec un groupe de trois 
 	participants.
-\end{description}
+\end{enumerate}
 
 Du fait que les participants pouvaient participer à différentes configurations de 
 groupe durant la phase de collaboration, plusieurs modèles 3D avec des 
 caractéristiques similaires (nombre de parties et nombre de triangles) ont été 
 présentés pour éviter les biais liés à l'apprentissage.
 
-\begin{table}[ht]
-	\centering
-	\caption{Modèles utilisés durant l'expérimentation}
-	\label{table:summary}
-	\begin{tabular}{cccc}\hline
-		\textbf{Modèle}  & \textbf{Nombre de parties} &  \textbf{Nombre de triangles} 
-		& \textbf{Taille totale}  \\ \hline
-		Rotor      &   10  &    62k & 4Mo        \\
-		Camera box        &   12  &    67k & 5Mo        \\
-		Car      &   16  &      170k & 8Mo \\       
-		Living room      &   16  &      200k & 9Mo \\    \bottomrule
-	\end{tabular}
-\end{table}
+
 \paragraph{Initialisation}
 
 Pour chaque phase, l'application a été initialisée par le chargement des parties du 
@@ -155,7 +142,7 @@ pendant la session.
 	\label{fig:ui4}
 \end{figure}
 
-\subsection{Résultats et Discussion}
+\subsection{Résultats et discussion}
 \label{sec:res}
 
 

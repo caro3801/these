@@ -36,7 +36,8 @@
 		Maillage mis à l'échelle &  meshScaled           &      Un maillage a 
 		subit une homothétie dans la Scène         \\
 		\textbf{Agrégat Géométrie} &                      &             \\ \hline
-		Géométrie importé dans la bibliothèque &  geometryImported           &        
+		\begin{tabular}[c]{@{}l@{}}Géométrie importée\\dans la bibliothèque 
+		\end{tabular}&  geometryImported           &        
 		\begin{tabular}[c]{@{}l@{}} Une géométrie est créée à partir d'un fichier 
 		importé par\\ 
 		un utilisateur et ajoutée à la bibliothèque de la 
@@ -115,8 +116,50 @@
 \end{table}
 
 \pagebreak
-\section{Expérimentation 2 : User study questionnaire}
+\section{Experimentation 1 materials}
+\subsection{Description des modèles utilisés}
+\begin{table}[h]
+	\caption{\label{table:models_xp1}Model descriptions for the experiments}
+	\centering
+	\begin{tabular}{lccc}
+		\textbf{Experiment} & \textbf{objects} & \textbf{size}	& \textbf{users}\\ \hline
+		Wind turbine     			& 6					& 1.0 MB        	& 2 \\ 
+		Pick up					& 8					& 1.3 MB         	& 4	\\
+		Castle from \textit{server}	& 35				& 1.3 MB        	& 4	\\
+		Castle from \textit{peer}& 35 & 1.3 MB & 4 \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Questionnaire pour l'enquête utilisateur}
+\label{q:xp1}
+Did you reach the goal or are you satisfied with the result?
+\begin{itemize}
+	\item Type of external communication channel used?
+	\item Collaboration satisfaction?
+	\item User interface quality: tools? Object manipulation? Global?
+	\begin{itemize}
+		\item Practice: difficulty or frustration?
+		\item Collaborative rendering (latency, consistency, recovery)?
+	\end{itemize}
+\end{itemize}
+\section{Expérimentation 2}
 \label{app:quest}
+\subsection{Description des modèles utilisés}
+\begin{table}[ht]
+	\centering
+	\caption{Modèles utilisés durant l'expérimentation}
+	\label{table:models_xp2}
+	\begin{tabular}{cccc}\hline
+		\textbf{Modèle}  & \textbf{Nombre de parties} &  \textbf{Nombre de triangles} 
+		& \textbf{Taille totale}  \\ \hline
+		Rotor      &   10  &    62k & 4Mo        \\
+		Camera box        &   12  &    67k & 5Mo        \\
+		Car      &   16  &      170k & 8Mo \\       
+		Living room      &   16  &      200k & 9Mo \\    \bottomrule
+	\end{tabular}
+\end{table}
+\subsection{Questionnaire pour l'enquête utilisateur}
+\label{q:xp2}
 Seven-points scale questions from 1 (don't agree) to 7 (agree):
 \begin{itemize}
 	\item Did you enjoy this?

@@ -5,31 +5,156 @@
 
 \subsection{Présentation de l'expérimentation}
 
- L'expérimentation propose de répliquer une collaboration réaliste entre 
+L'expérimentation propose de répliquer une collaboration réaliste entre 
 différents participants travaillant à distance pour faire des tâches d'assemblage de 
-modèle 3D.
+modèle 3D. L'expérimentation reprend le cas d'étude de l'assemblage d'objets 3D 
+(Section \ref{xp:use_case}). 
 
 L'expérimentation est basée sur un prototype d'application développé selon 
-l'implémentation présentée dans la Section \todo{ref section proto}.
+l'implantation présentée dans la Section \todo{ref section proto}.
 Le prototype est développé sur une plateforme web et consiste en un application 
-de modélisation 3D collaborative multi-utilisateurs. 
-D'un côté, l'interface permettant la visualisation et l'édition 
-
-We developed a prototype of the the web-based multi- user collaborative modeling 
-to demonstrate the feasi- bility of our model architecture.. In one hand, the vi- 
-sualization was based on the WebGL technology us- ing ThreeJS to visualize 3D 
-models online and offline without plugins. On the other hand, the real-time in- 
-teractive collaboration relied on the hybrid architecture model exposed in the 
-previous section. The Node.Js server platform allowed us to run a WebSocket 
-server that handled the signaling mechanism for the WebRTC user connections 
-creating the P2P mesh. The resources of the client were used in terms of 
-graphics, storage, WebRTC capabilities in order to share the scene infor- mation 
-between the users. We propose three experi- ments (Table 3) to evaluate our 
-system in the following criteria: user-friendly interface, robustness and network 
-latency.
+de modélisation 3D collaborative multi-utilisateurs pour démontrer la faisabilité de 
+l'architecture présentée dans \todo{ref section archi state}. 
 
 
+\paragraph{Tâches à effectuer.}
+L'expérimentation consiste en quatre épreuves qui partagent la même procédure.
+Les modèles utilisés dans chaque épreuve sont décrits dans le tableau 
+\ref{table:models_xp1} : \textit{Wind Turbine}, \textit{Pick up} et \textit{Castle}. 
 
+Les épreuves sur les modèles \textit{Wind Turbine} et \textit{Pick Up} partagent le 
+même objectif : 
+assembler un modèle, dont les utilisateurs possède l'image, composé de 
+différentes pièces qui sont téléversées par les utilisateurs. L'image correspond à 
+l'assemblage final à obtenir et indique les différentes parties qui le 
+compose (type et quantité). Ces deux épreuves s'arrêtent lorsque les participants 
+le notifient oralement ou durent dix minutes maximum chacune.
 
-\subsection{Résultats}
-\subsection{Discussion et Conclusion}
+Le modèle \textit{Castle} est utilisé dans deux épreuves : 
+\textit{Castle from server} et \textit{Castle from peer}. L'objectif de ces épreuves
+diffère un peu des épreuves précédentes car l'épreuve s'effectue sur un  modèle 
+de château en kit (composer d'un dizaine d'objets différents : tour, murs, 
+escalier\dots) : les 
+participants ont dix minutes pour construire un 
+château de manière collaborative en faisant appel à leur créativité. 
+Dans l'épreuve \textit{Castle from server}, les objets sont récupérés 
+automatiquement à partir du serveur ; 
+dans l'épreuve \textit{Castle from peer}, les pairs peuvent ajouter de nouveaux 
+objets du kit qu'ils possèdent sur leur machine.
+
+En utilisant les outils de l'éditeur, les informations liées aux autres utilisateurs 
+(représentation dans l'environnement 3D de leur position ou de leur sélection), les 
+utilisateurs doivent manipuler les pièces (sélection, rotation, translation, 
+homothétie) de manière collaborative afin d'atteindre l'objectif. 
+\paragraph{Population}
+L'expérience a été conduite sur trois groupes de trois ou quatre participants 
+chacun. Un essai pour \textit{Wind Turbine} a été tenté à six participants 
+simultanés.
+Durant l'expérimentation, les utilisateurs était sur le même réseau que le serveur 
+(\gls{LAN}). 
+Les participants étaient des étudiants de Master ou de Doctorat en Informatique 
+plutôt familiers avec les environnements 3D. Les participants étaient autorisés à 
+communiquer entre eux (oralement, par chat, autre \dots).
+\paragraph{Procédure}
+L'expérimentation consiste en quatre épreuves qui partagent la même procédure:
+\begin{enumerate}
+	\item Phase d'essai 
+	\begin{enumerate}
+		\item explication du contexte et de l'expérimentation ;
+		\item prise en main du système, familiarisation avec 
+		l'interface ;
+	\end{enumerate}
+	\item Phase de collaboration : réalisation de l'épreuve (se répète autant de fois 
+	que d'épreuves)
+	\begin{enumerate}
+		\item Présentation de l'épreuve et de son objectif
+		\item Initialisation : nettoyage de la scène et chargement des modèles
+		\item Réalisation de l'objectif
+	\end{enumerate}
+	\item Phase de retour d'expérience : remplissage questionnaire et discussion 
+	informelle sur les épreuves.
+\end{enumerate}
+
+\paragraph{Initialisation}
+
+L'épreuve est décrite et l'objectif de l'épreuve est présenté a tous les participants.
+Pour chaque phase de collaboration, l'application nettoie les données issues de 
+l'épreuve précédente. 
+À l'exception des pièces du modèle \textit{Castle} qui sont chargées
+en totalité sur le serveur dans \textit{Castle from server} et les pairs \textit{Castle 
+from peer}), les pièces du modèle de l'épreuve sont distribuées de manière 
+aléatoire entre les différents participants.
+
+\paragraph{Données collectées}
+Au cours des épreuves (principalement lorsque celles ci s'arrêtent)  les 
+participants ont exprimé certains retours qualitatifs dont il a été pris note. Le type 
+d'interaction entre les participants est également observé.
+
+\paragraph{Questionnaire}
+Au début de l'expérimentation, les participants reçoivent et prennent connaissance 
+du questionnaire (voir Annexe \ref{q:xp1}). Ce questionnaire est rempli à plusieurs 
+moment au cours de l'expérimentation. Au début, le participant décrit sa situation, 
+sa familiarité avec les environnements 3D, le type de machine et de navigateur 
+qu'il utilise. À la fin de chaque épreuve il répond aux questions concernant 
+l'épreuve qu'il vient de passer. À la fin de l'expérimentation, il répond aux 
+questions d'ordre plus général sur son expérience et les améliorations 
+envisageables.
+\subsection{Résultats et discussion}
+Les participants ont globalement été satisfaits des résultats issus de la 
+collaboration ainsi que du rendu visuel des assemblages effectués durant les 
+épreuves. Cela est également dû au fait qu'ils ont systématiquement atteint les 
+objectifs (dans le temps imparti) : réalisation de l'assemblage du modèle 3D 
+présenté sans frustration. Ils se sont également \og amusés\fg{} sur les épreuves
+avec le \textit{Castle} car ils étaient libres dans la création et souhaiter continuer 
+l'épreuve au delà du temps imparti. L'utilisation de canaux de communication 
+externes à l'application a été reportée plusieurs fois, principalement sous formes 
+d'échanges oraux. Ces échanges concernait l'état de leur application et ce qu'ils 
+étaient en train de faire ou ce qu'ils souhaitaient faire. Cette interaction provient, 
+d'après les participants, du manque de retours visuels différenciés sur les 
+manipulations effectués par les collaborateurs (exemple: pas de couleur différente 
+pour sélection d'objet par un autre utilisateur). Cela peut plus généralement 
+s'expliquer comme un manque sensibilisation à l'environnement collaboratif. 
+L'\gls{IU} a été bien appréciée, parfois jugée \og trop simple\fg{} par certains 
+utilisateurs. Ce choix avait été fait pour faciliter l'usage, l'apprentissage et 
+l'adoption de l'\gls{IU} et s'est révélé anecdotique lors de l'expérimentation car le 
+panel de personne de participants était familier de ce genre 
+d'environnement (échantillon faible).
+Les fonctionnalités liées à la manipulation d'objets reçoivent une bonne évaluation 
+à l'exception de l'importation de modèles. Cela est dû, dans ce prototype, au 
+fait que l'application ne peut digérer et transmettre des modèles trop lourds. Un 
+participant a vu sa fenêtre \og geler\fg{} (navigateur Chrome) lors de l'épreuve 
+\textit{Castle from peer}. Cela l'a amené à quitter la session et à revenir sur la 
+scène pour pouvoir continuer de participer à la session collaborative. Sans 
+perturber la session en cours pour ses collaborateur, le participant a pu revenir sur 
+l'application, reprenant la collaboration avec les autres participants (rétablissement 
+des connexions après un crash).En cela le participant a apprécié la robustesse de 
+l'application sans être perturbé très longtemps par l'interruption.
+Concernant la fluidité des manipulations et de la visualisation au sein de 
+l'application durant la collaboration, les participants n'ont pas ressenti de latence 
+perturbantes en général. Ils ont qualifié l'application de temps-réel plutôt 
+qu'interactive. La variation du nombre d'utilisateur sur les différentes épreuves n'a 
+pas altéré la qualité du rendu et de réseau pour le participant.
+
+\subsection{Conclusion de l'expérimentation 1}
+
+This paper proposed web-based 3D modeling collab- oration based on a hybrid 
+communication architecture client-server and P2P network. The client is respon- 
+sible for 3D rendering and handling the user interac- tions on a scene. It also hosts 
+the peer connection to be able to communicate updates to other peers. The server 
+is used to link the client with the NoSQL database in order to store the 
+modifications, and manage the users presence on a scene and automatically 
+create a P2P full mesh topology network between them. The P2P con- nection 
+relies on a WebRTC communication that trans- mits information directly between 
+browser with update messages, broadcasting according to the P2P star topol- ogy, 
+using a signaling server to establish the commu- nication between two peers. The 
+qualitative evalua- tions of the experiments were conclusive overall even if some 
+points should be improved. On model import, the broadcast causes latency issues 
+on client peers re- ceivers (camera freeze). To reduce latency with larger scenes 
+we consider using progressive rendering and making a better use of peer-to-peer 
+mesh to stream the model relying on seed peers like in the partial mesh topology. 
+An improvement of interface features and visual feedback of collaborative 
+manipulations was asked by the users. This evaluation will be supple- mented in 
+future works with a quantitative evaluation to compare our hybrid architecture to 
+others, particu- larly using server logs, FPS in client and WebRTC tools (Chrome : 
+chrome://webrt-internal; Firefox : about:webrtc) which provides statistics and 
+graphs on the data exchanged between peers’ browsers.
