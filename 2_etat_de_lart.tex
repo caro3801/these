@@ -377,7 +377,7 @@ L'expression temps-réel est largement utilisée par des applications requérant
 forme de temps de réponse rapide et réactif pour que l'utilisateur ait une bonne 
 expérience. La communication dans un \gls{EVC} est primordiale pour échanger entre les collaborateurs. Elle doit respecter l'intention des utilisateurs pour leur permettre de s'immerger dans la collaboration et faire confiance à l'application (exactitude des modifications).
 
-L'exigence vis-à-vis des temps de réponse est de plus en plus 
+L'exigence vis-à-vis des temps de réponse est  
 grande et ce pour deux raisons principales : les limitations humaines (mémoire et 
 attention limitées 
 à court terme) et les aspirations de l'être humain (besoin d'être en contrôle sur les 
@@ -389,7 +389,7 @@ Par exemple, dans un domaine connexe comme le e-commerce, une étude réalisée
 en 2009 explique qu’une grande partie des internautes abandonneraient leurs achats 
 en ligne si les pages mettaient 2 secondes ou plus à charger\footnote{\url{https://www.akamai.com/us/en/about/news/press/2009-press/akamai-reveals-2-seconds-as-the-new-threshold-of-acceptability-for-ecommerce-web-page-response-times.jsp}}. De nos jours, ce 
 délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
-Nielsen \cite{Nielsen1993a} indique quatres valeurs limites concernant les 
+Nielsen \cite{Nielsen1993a} indique quatre valeurs limites concernant les 
 temps de réponses :
 \begin{itemize}
 	\item \textit{0,1 seconde} donne une sensation de réponse instantanée, comme 
@@ -468,8 +468,8 @@ retenu quelque part dans le réseau, le protocole est au courant et essaye de
 renvoyer les données concernées. Un protocole dit \og non fiable\fg{}, ne fournit 
 pas ce genre de garantie et n'essaiera pas de transmettre à nouveau les données.
 
-Bien que la fiabilité dans une communication est une propriété habituellement 
-recherchée, cela implique également que le canal doit connaître l'état des données 
+Bien que la fiabilité dans une communication soit une propriété habituellement 
+recherchée, elle implique également que le canal doive connaître l'état des données 
 qui transitent. Soit l'expéditeur numérote les paquets en séquence, et dans ce 
 cas, seul le destinataire a la connaissance des paquets manquants (et à 
 renvoyer). Pour indiquer les paquets manquants à l'expéditeur, le destinataire peut 
@@ -477,7 +477,7 @@ envoyer des acquittements (ACKs) pour confirmer leur réception. Ces ACKs
 peuvent être joints aux messages ou envoyés séparément. En plus des données 
 additionnelles envoyées, un protocole fiable peut aussi générer des latences 
 sévères (dans l'attente d'un paquet perdu ou avec beaucoup de retard). Cela peut 
-impliquer que les \og nouvelles\fg{} données peuvent arrivées et être déjà 
+impliquer que les \og nouvelles\fg{} données peuvent arriver et être déjà 
 périmées.
 
 Pour certaines applications qui ne peuvent pas faire face à ces délais potentiels 
