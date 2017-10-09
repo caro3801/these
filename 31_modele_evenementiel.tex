@@ -171,7 +171,7 @@ la modélisation 3D collaborative (visualisation et manipulation).
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\columnwidth]{eps/event4.eps}
-	\caption{Illustration des notions de événements du domaine, des types 
+	\caption{Illustration des notions d'événements du domaine, des types 
 		d'événements, et des instances d'événements.}
 	\label{fig:representation_event}
 \end{figure} 
@@ -232,13 +232,13 @@ liée à chacun permet de différencier l'intention de l'utilisateur.
 			supprimé \\de la Scène \end{tabular}      \\
 		Maillage translaté &   meshTranslated  	 &    \begin{tabular}[c]{@{}l@{}} Un 
 			maillage a 
-			subit une translation \\dans la Scène \end{tabular}              \\
+			subi une translation \\dans la Scène \end{tabular}              \\
 		Maillage pivoté &      meshRotated                &    
 		\begin{tabular}[c]{@{}l@{}} Un maillage a 
-			subit une rotation \\dans la Scène \end{tabular}           \\
+			subi une rotation \\dans la Scène \end{tabular}           \\
 		Maillage mis à l'échelle &  meshScaled           &     
 		\begin{tabular}[c]{@{}l@{}} Un maillage a 
-			subit une homothétie    \\dans la Scène \end{tabular}    \\ 
+			subi une homothétie    \\dans la Scène \end{tabular}    \\ 
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -299,7 +299,7 @@ mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
 	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
 		client dans 3DEvent : la gestion du cycle de vie des données avec 
 		\gls{CQRS} 
-		et \gls{ES} dans un navigateur web, des actions utilisateurs à la visualisation 
+		et \gls{ES} dans un navigateur web, des actions des utilisateurs à la visualisation 
 		en passant par la synchronisation réseau. Issu de \cite{Desprat2017}.}
 	\label{fig:cqrs-client}
 \end{figure}
@@ -310,7 +310,7 @@ d'une application sous la forme d'une séquence d'événements.
 Ces événements sont conservés dans un journal d'événements et peuvent être 
 rejoués pour retrouver l'état de l'application. 
 Les événements représentent des faits immuables qui sont 
-seulement ajoutés au journal les un après les autres, ce qui permet des taux de 
+seulement ajoutés au journal les uns après les autres, ce qui permet des taux de 
 transaction élevés et une réplication efficace (cf Section 
 \ref{sec:es}). Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
 les applications :
@@ -366,7 +366,7 @@ disponibles qui sont nécessaires au fonctionnement de l'application.
 Les Acteurs et les Processeurs écrivent cependant toujours sur leur journal 
 d'événements local. 
 Les composants peuvent soit collaborer sur un journal d'événements local sur le 
-même site, ou bien au travers d'un journal répliqué sur différents sites.
+même site, ou au travers d'un journal répliqué sur différents sites.
 Il est important de différencier le journal d'événements de la base de données 
 (côté serveur) ; la base de données peut ne contenir qu'une partie du journal. 
 Une base de données peut également être considérée comme un élément 
@@ -444,11 +444,11 @@ effets avant leurs causes.
 
 
 
-\subsection{Cohérence Éventuelle en CQRS}
+\subsection{Cohérence éventuelle en CQRS}
 
 
 La \gls{CE}, ou \textit{eventual consistency} en anglais, propose dans un système 
-distribué contenant plusieurs répliques d'avoir une coordination lâche entre ces 
+distribué contenant plusieurs répliques, d'avoir une coordination lâche entre ces 
 répliques. Cela apporte de nombreux avantages en termes de disponibilité, 
 tolérance aux fautes et sécurité des données et évite l'intégration de protocoles comme \textit{2 
 phase commit} ou de protocoles \textit{Paxos} (consensus) complexifiant les échanges. 
@@ -492,7 +492,7 @@ Dans la conception d'interaction pour l'interface, la synchronicité peut varier
 fonction certains contextes. 
 Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interface.  
 Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de 
-formulaire -> envoi asynchrone -> message de confirmation}, si l'utilisateur attends 
+formulaire -> envoi asynchrone -> message de confirmation}, si l'utilisateur attend 
 que la soumission soit une requête qui peut probablement échouer, alors 
 l'asynchronisme se justifie pour être capable de fournir une explication à 
 l'utilisateur en cas d'erreur. 
@@ -517,7 +517,6 @@ Une commande peut-être rejetée pour différentes raisons. Ces raisons sont
 exprimées par différentes phases de validation de la commande.
 Une première validation se fait en amont du déclenchement de l'\gls{IU} avec par 
 exemple une vérification de type des paramètres passés à la commande.
-Quand la commande entre dans le système
 
 %Linéaire (strong consistency)
 %one version replace another -- one parent and one children in the sequence
@@ -563,7 +562,7 @@ Quand la commande entre dans le système
 %\end{algorithm}
 \subsection{Potentielles applications et autres utilisations}
 La conception et l'implémentation d'une plateforme comme 3DEvent qui est 
-asynchrone, distribuée et orientée événements  (notamment la persistance) peut 
+asynchrone, distribuée et orientée événements peut 
 être appliquée à différents champs.
 \begin{description}
 	\item[GIT-like app] Les solutions pour faire de la gestion de version, comme 
@@ -575,7 +574,7 @@ asynchrone, distribuée et orientée événements  (notamment la persistance) pe
 	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
 	événements et indiquer les différences entre deux états.%\todo{acyclic graph}
 	
-	\item[Scenarii et \textit{path recording}] Pour des jeux sérieux, les graphistes 
+	\item[Scenarii et \textit{path recording}] Pour des jeux sérieux, l'infographie 
 	3D ou des études d'ergonomie, cette fonctionnalité est particulièrement 
 	pertinente. Le \gls{framework} peut proposer une comparaison entre deux traces 
 	laissées par un ou plusieurs utilisateurs. Dans le cas où les utilisateurs ont la 

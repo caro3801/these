@@ -470,8 +470,7 @@ pas ce genre de garantie et n'essaiera pas de transmettre à nouveau les donnée
 
 Bien que la fiabilité dans une communication soit une propriété habituellement 
 recherchée, elle implique également que le canal doive connaître l'état des données 
-qui transitent. Soit l'expéditeur numérote les paquets en séquence, et dans ce 
-cas, seul le destinataire a la connaissance des paquets manquants (et à 
+qui transitent. Dans le cas où l'expéditeur numérote les paquets en séquence, seul le destinataire a la connaissance des paquets manquants (et à 
 renvoyer). Pour indiquer les paquets manquants à l'expéditeur, le destinataire peut 
 envoyer des acquittements (ACKs) pour confirmer leur réception. Ces ACKs 
 peuvent être joints aux messages ou envoyés séparément. En plus des données 
@@ -481,7 +480,7 @@ impliquer que les \og nouvelles\fg{} données peuvent arriver et être déjà
 périmées.
 
 Pour certaines applications qui ne peuvent pas faire face à ces délais potentiels 
-ou ne peuvent pas s'offrir de données additionnelles, les protocoles non fiables 
+ou ne peuvent pas se permettre l'utilisation de données additionnelles, les protocoles non fiables 
 sont utilisés. 
 L'expéditeur se repose alors sur le réseau pour délivrer les paquets 
 correctement, mais il n'y a aucune garantie. Les protocoles non fiables ne 

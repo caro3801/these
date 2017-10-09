@@ -12,7 +12,7 @@ Les interactions possibles sont :
 	com\-me dans un environnement 3D classique, interagir avec la vue en utilisant 
 	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
 	utiliser les commandes clavier et souris pour effectuer des opérations de 
-	translation, de rotation et d' homothétie de trois manières différentes: directement dans le \textit{viewport}, via le 
+	translation, de rotation et d'homothétie de trois manières différentes: directement dans le \textit{viewport}, via le 
 	menu ou via la console du navigateur.
 	\item[Charger des modèles 3D] L'éditeur gère la plupart des formats de fichier 
 	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
@@ -26,7 +26,7 @@ Les interactions possibles sont :
 	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre le 
 	point de vue d'un collaborateur est une manière de 
 	comprendre son fonctionnement et d'imaginer ses 
-	perspectives de conception à travers le point de vue qu'il a choisi.
+	perspectives de conception à travers son angle de caméra qu'il a choisi.
 \end{description}
 
 L'intérêt de proposer une application web se retrouve principalement dans 
@@ -127,11 +127,11 @@ rejeté. Ce traitement peut être à l'origine de la génération de nouveaux
 \subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
 Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de l'état courant à 
-partir du flux d'événements. Pour Abdullin, <<la projection est le processus de 
+partir du flux d'événements. Pour Abdullin, \og la projection est le processus de 
 conversion (ou d'agrégation) d'un flux d'événement en une représentation 
 structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
 peut être avoir différentes appellations : modèle de lecture persistent, vue ou 
-état.>>\info{footnote abullin prj}
+état.\fg{}\info{footnote abullin prj}
 La partie lecture du modèle (l'affichage sur interface utilisateur) bénéficie des 
 projections en lui permettant de réduire l'afflux des événements, ne laissant filtrer 
 que ceux qui sont pertinents pour la vue. La projection fournit une vue adaptée 
@@ -146,14 +146,13 @@ découplée du flux des événements.
 Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
 paquets réseau de manière ordonnée.
 Par conséquent, les messages peuvent arriver dans n'importe quel ordre.
-Qu'arriverait-il alors si un événement A ($eA$) nécessitant un autre événement B ($eB$) 
-arrivait avant celui-ci? Dans cette situation, le système génére une 
+Qu'arriverait-il alors si un événement A ($eA$) nécessitant un autre événement B ($eB$) arrivait avant celui-ci? Dans cette situation, le système génére une 
 erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
 d'information sur la hiérarchie d'application des événements ($eB$ puis $eA$).
 
 Pour pallier ce problème, l'introduction du système de projection permet d'avoir un 
 mécanisme (comme un automate fini) qui défini les transitions nécessaires pour 
-passer d'un état à l'autre et qui réalisent les actions déterminées en fonction des 
+passer d'un état à l'autre. Les transitions réalisent les actions déterminées en fonction des 
 événements qui arrivent. Par exemple, si on essaie d'ajouter un objet dans une 
 scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
 jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 

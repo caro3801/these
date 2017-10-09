@@ -142,8 +142,7 @@ minimum permet d'ajuster la densité du maillage (connectivité élevée: mailla
 partiel dense, voire complet ; connectivité faible: maillage partiel éparse) et 
 d'obtenir une topologie maillée adaptée aux besoins de l'application en termes de 
 synchronisation (temps-réel ou non) ou aux capacités des appareils. Il faut noter 
-cependant que plus la connectivité est faible, plus l'information a besoin de « 
-rebondir » pour atteindre tous les pairs et par conséquent le temps de 
+cependant que plus la connectivité est faible, plus l'information a besoin de transiter par des intermédiaires pour atteindre tous les pairs et par conséquent le temps de 
 transmission est augmenté (exemple d'une distribution en ligne). 
 
 \subsubsection{De navigateur à serveur}
@@ -156,7 +155,7 @@ mises à jours originales à la base de données via le serveur.
 
 \subsubsection{De navigateur à navigateur}
 Lors de la connexion d'un nouveau client à la scène, le serveur effectue la phase 
-de signalement permettant de le mettre en relation avec un autre client. Le 
+de \textit{signaling} permettant de le mettre en relation avec un autre client. Le 
 mécanisme est répété tant que la règle de connectivité peut s'appliquer. Le client 
 reçoit une notification de l'établissement de la connexion avec un autre client ce 
 qui lui permet de démarrer l'échange de données.
@@ -179,7 +178,7 @@ du serveur.
 En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
 d'un format de données permettant de faire communiquer des acteurs hétérogènes 
 du système. Le format \gls{JSON}, dérivé de la notation des objets du langage 
-JavaScript, est lisible et inter-opérable. Le Listing \ref{jsonexemple} montre un 
+JavaScript, est lisible et interopérable. Le Listing \ref{jsonexemple} montre un 
 exemple d'événement en format JSON.
 %Son pendant binaire est le format \gls{BSON}.
 %Le format de fichier \gls{glTF} se base sur la représentation \gls{JSON} afin de 
@@ -188,13 +187,13 @@ Ce type de données est assez abstrait et suffisamment générique pour
 représenter n'importe quelle donnée. Par exemple le format de fichier 
 \gls{glTF}\info{ref gltf section} se base sur la représentation \gls{JSON} afin de 
 décrire une scène 3D.
-Le format \gls{JSON} est aussi utilisé pour la sérialisation et la désérialisation des 
+Le format \gls{JSON} est assez générique pour être aussi utilisé pour la sérialisation et la désérialisation des 
 objets transmis par RTCDataChannel. 
 
 L'\acrshort{API} RTCDataChannel supporte beaucoup de types de données 
 différents (chaînes de caractères, types binaires : Blob, ArrayBuffer\dots). Dans 
 un environnement multi-utilisateurs tel que 3DEvent avec des données hétérogènes (3D, images, 
-informations) l'inter-opérabilité est facilité.
+informations) l'interopérabilité est facilitée.
 
 \begin{lstlisting}[language=json,firstnumber=1,label=jsonexemple,caption=Mesh 
 added to Scene event and parameters]
@@ -215,9 +214,8 @@ added to Scene event and parameters]
 \subsubsection{Persistance à court terme}
 Le navigateur (client) offre un espace de stockage avec l'interface \textit{Storage} 
 de l'API Web Storage qui donne accès au \texttt{session storage} ou au  
-\texttt{local storage}. Ce stockage fonctionne sur un système de clé/valeur qui rend facile l'accès aux 
-évènements enregistrés sur le client. La configuration du client est également 
-stockée localement. Grâce à ce système , il est possible d'avoir une 
+\texttt{local storage}. Ce stockage est présent sur le client et fonctionne sur un système de clé / valeur. La configuration du client est également 
+stockée localement. Grâce à ce système, il est possible d'avoir une 
 persistance des données à travers les sessions du navigateur. Le contenu stocké 
 correspond aux données générées par un utilisateur et par ses collaborateurs. Les 
 répliques stockées sur chaque navigateur permettent à un utilisateur une plus 
@@ -285,7 +283,7 @@ transparence d'où le terme \og fantôme\fg{}).
 L'objet $O_f$ prend alors le focus de sélection pour que l'utilisateur le manipule à 
 la place de l'objet $O_f$. 
 En différenciant l'actuel objet que l'utilisateur souhaite sélectionné ($O_{o}$) de 
-celui manipulé ($O_f$), plusieurs aspects de l'interactions sont mis en valeur pour :
+celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
 \begin{itemize}
 	\item l'ergonomie dans l'environnement 3D :
 	$O_f$ est un objet temporaire qui permet à l'utilisateur
@@ -317,8 +315,8 @@ celui manipulé ($O_f$), plusieurs aspects de l'interactions sont mis en valeur 
 	correspondant à la modification métier pas toutes les positions intermédiaires 
 	même si intuitivement l'idée de temps réel pourrait conduire à cette solution. La 
 	quantité de messages produite surchargerai à la fois le réseau et le fil 
-	d'exécution principale de l'application. En effet, WebRTC a l'inconvénient pour le 
-	moment de ne pouvoir s'exécuter dans un \textit{Web Worker} (fil d'exécution 
+	d'exécution principale de l'application. En effet, \gls{WebRTC} a l'inconvénient pour le 
+	moment de ne pas pouvoir s'exécuter dans un \textit{Web Worker} (fil d'exécution 
 	parallèle en JavaScript). Cette solution imposerai des 
 	latences réseau et d'\gls{IU} qui affecteraient gravement l'expérience utilisateur
 	sans apporter d'informations supplémentaires à l'aspect métier de la 

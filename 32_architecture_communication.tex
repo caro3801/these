@@ -7,17 +7,17 @@ Dans la section précédente, l'introduction du modèle orienté événements
 s'intéresse principalement à ce qui se passe au sein d'un seul client. 
 Or, la collaboration passe par la mise en relation des différents collaborateurs mais aussi par  
 l'échange des données nécessaires à la collaboration (données de connexion, 
-mises à jour de la scène, sensibilisation\dots )
+mises à jour de la scène, sensibilisation\dots)
 Afin de pouvoir proposer un \gls{SEC} adapté aux besoins de l'édition de scènes 
-3D, plusieurs critères doivent êtres respectés: 
+3D, plusieurs types de granularité doivent être proposés: 
 \begin{itemize}
 	\item une granularité fine pour l'édition massive ;
-	\item une granularité spécifique à la modélisation 3D ;
+	\item une granularité liées aux spécificités de la modélisation 3D ;
 	\item et une granularité reposant sur des technologies web (réseau, interface, interaction 3D).
 \end{itemize}
 
 Les systèmes \gls{P2P} qui sont orientés événements consistent en plusieurs 
-n\oe uds interconnectés qui ont des fonctions et des tâches 
+n\oe uds interconnectés dont les fonctions et l'exécution des des tâches sont
 similaires. Les pairs partagent directement leurs ressources (contenu, CPU, 
 stockage, bande passante) sans nécessiter de serveur central. A la place, les 
 pairs coopèrent aux moyens d'événements qui prennent la forme de messages 
@@ -104,7 +104,7 @@ Les contributions portées par \cite{Desprat2015a} et \cite{Desprat2015b}
 s'appuient sur des pairs ayant un rôle simple et proposent une transmission des 
 mises à jour en tant que différentiel d'état. Les conflits lors d'opérations 
 concurrentes sont évités grâce à un mécanisme de verrouillage. 
-Plus tard, Desprat et al.  \cite{Desprat2016} mettent en place le modèle événement qui impose 
+Plus tard, Desprat et al.  \cite{Desprat2016} mettent en place le modèle orienté événements qui impose 
 l'évolution, au niveau réseau, du protocole de transmission (celui-ci reposant sur 
 des notifications d'événements et la gestion des flux d'agrégat). 
 Plus récemment, Desprat et al. \cite{Desprat2017} ont permis de distinguer les deux rôles parmi les pairs : la 
@@ -221,8 +221,8 @@ données.
 
 Les architectures de communication des contributions se divisent en deux parties, 
 chacune correspondant au paradigme qu'elles utilisent respectivement : état ou 
-événement. Relativement au paradigme auquel elles font référence, elles peuvent 
-être décrites selon plusieurs critères:
+événement. Selon le paradigme auquel elles font référence, elles peuvent 
+être décrites par plusieurs critères:
 \todo{revoir}
 \begin{description}
 	\item[Spécificité des composants de l'architecture] Les pairs sont la base de la 
