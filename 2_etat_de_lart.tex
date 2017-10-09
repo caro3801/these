@@ -436,9 +436,9 @@ participants interagissent en (quasi) temps réel, alors qu'ils sont situés à
 différents endroits géographiques. 
 Le développement d'un \gls{EVC3D} nécessite donc des connaissances issues de 
 plusieurs domaines comme la conception et l'implémentation de protocoles 
-réseaux et de réseaux distribués.
+réseaux et de réseaux distribués, la gestion des données concurrentes, la visualisation 3D et l'ergonomie.
 
-Un protocole de communication en temps-réel existe, il s'appelle \gls{RTP} et a 
+Dans le monde du réseau, un protocole de communication en temps-réel existe, il s'appelle \gls{RTP} et a 
 été développé dans le but de faciliter la communication en temps-réel sur un 
 réseau. Coexistant avec \gls{RTP}, le protocole \gls{RTCP} est utilisé pour 
 transmettre des informations de contrôle à propos des données en temps-réel. 
@@ -507,13 +507,13 @@ protocole non fiable peut être employé.
 \subsection{Ordonné versus Désordonné}
 \label{sec:ordre}
 Les paquets envoyés par l'expéditeur ne prennent pas forcément tous le même 
-chemin vers l'expéditeur. La réaction des réseaux face à la congestion consiste à 
+chemin vers le destinataire. La réaction des réseaux face à la congestion consiste à 
 modifier les tables de routage afin que les paquets évitent le n\oe ud congestionné. 
 Cela peut altérer l'ordre des paquets à la réception. Le choix du protocole a 
 également une influence sur la gestion de l'ordre d'arrivée des paquets.
 
 Les protocoles dits \og ordonnés\fg{} garantissent que l'ordre dans lequel les 
-paquets sont envoyés est préservé dans l'application, lors de la réception de ces 
+paquets sont envoyés est préservé dans l'application lors de la réception de ces 
 données par le destinataire. Même si les paquets arrivent dans le désordre, le 
 protocole peut imposer l'ordonnancement des données à l'aide d'une mémoire 
 tampon en attendant les données précédentes. Cela impose que le protocole 
