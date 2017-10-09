@@ -9,12 +9,14 @@ Les interactions possibles sont :
 \begin{description}
 	
 	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut, 
-	com\-me dans un environnement 3D classique, interagir avec la vue en utilisant 
+	com\-me dans un environnement \gls{3D} classique, interagir avec la vue en 
+	utilisant 
 	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
 	utiliser les commandes clavier et souris pour effectuer des opérations de 
 	translation, de rotation et d'homothétie de trois manières différentes: directement dans le \textit{viewport}, via le 
 	menu ou via la console du navigateur.
-	\item[Charger des modèles 3D] L'éditeur gère la plupart des formats de fichier 
+	\item[Charger des modèles \gls{3D}] L'éditeur gère la plupart des formats de 
+	fichier 
 	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
 	\item[Changement de référentiel] La modification des coordonnées de 
 	réfé\-ren\-ces (local/global)  pour les différentes transformations possibles
@@ -36,11 +38,12 @@ Les fonctionnalités graphiques proposées par WebGL sont un peu réduites par
 rapport à celles d'OpenGL dont l'\gls{API} évolue plus vite et propose plus de 
 flexibilité et d'optimisations. Cependant, les performances graphique restent très 
 correctes car le navigateur est quand même capable d'utiliser les processeurs 
-graphiques du terminal (GPU) pour les calculs et rendus 3D.
+graphiques du terminal (GPU) pour les calculs et rendus \gls{3D}.
 
 \subsection{Interface utilisateur}
 Dans le but de proposer une \gls{IU} proche des fonctionnalités métiers liées à la 
-modélisation 3D, l'éditeur possède une interface orientée tâche en comparaison 
+modélisation \gls{3D}, l'éditeur possède une interface orientée tâche en 
+comparaison 
 avec des interfaces CRUD. En effet, les interfaces CRUD réduisent la sémantique 
 métier du domaine d'application à la création, la lecture, la mise à jour et la 
 suppression, omettant toutes les subtilités que peuvent dégager ces actions en 
@@ -56,8 +59,9 @@ d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont
 et la souris\info{est ce qu'on parle de mobile?}. Le premier niveau de cette 
 interface est scindée en deux panneaux~: 
 \begin{enumerate}
-	\item L'espace 3D consacré à la visualisation des objets et à leur manipulation 
-	dans l'environnement 3D~;
+	\item L'espace \gls{3D} consacré à la visualisation des objets et à leur 
+	manipulation 
+	dans l'environnement \gls{3D}~;
 	\item La barre d'outils qui contient trois onglets~:~
 	\begin{enumerate}
 		\item "Scene" contient tous les détails de la scène et des maillages qu'elle 
@@ -71,19 +75,20 @@ interface est scindée en deux panneaux~:
 L'onglet "Scène" possède un bloc contenant les détails d'un maillage en cours de 
 sélection. Cela permet d'avoir la description des propriétés de l'objet sélectionné et 
 une manipulation de ses paramètres (position, rotation et mise à l'échelle) plus 
-précise que via l'espace 3D avec le cliqué/déplacé .
+précise que via l'espace \gls{3D} avec le cliqué/déplacé .
 
 L'onglet "Collaboration" présente la liste des collaborateurs qui participent à la 
 scène. Chacun d'eux est décrit par son nom, son état  (connecté ou déconnecté) 
 et son rôle (administrateur, éditeur, lecteur ou autre\footnote{Un rôle peut être 
 	défini par le biais du \gls{framework} 3DEvent}). En cliquant sur un élément de 
 	la 
-liste, l'utilisateur accède au dernier point de vue dans l'espace 3D connu du 
+liste, l'utilisateur accède au dernier point de vue dans l'espace \gls{3D} connu du 
 collaborateur représenté.
 
 L'onglet "History" liste tous les événements passés dans la scène en fournissant 
 l'accès à leur détail. Pour chaque événement, le système est capable de montrer 
-dans l'espace 3D la différence entre l'état  après l'événement cliqué $state_x$ et 
+dans l'espace \gls{3D} la différence entre l'état  après l'événement cliqué $state_x$ 
+et 
 l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir de 
 <<~revenir en arrière~>> sans perdre les données entre $state_n$ et $state_x$ 
 car dans notre système cela s'effectue par compensation (cf Event-Sourcing 
@@ -171,6 +176,7 @@ jamais utiliser $eA$.
 \subsection{Bilan}
 
  L'application 3DEvent repose sur les principes et les 
-technologies du web pour permettre de visualiser et manipuler des objets 3D de 
+technologies du web pour permettre de visualiser et manipuler des objets \gls{3D} 
+de 
 manière 
 collaborative en temps-réel.

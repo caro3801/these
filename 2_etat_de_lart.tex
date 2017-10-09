@@ -10,7 +10,7 @@
 \label{sec:concurrence}
 Dans un contexte collaboratif, on considère qu'il n'est pas possible pour une 
 personne seule de réaliser la tâche proposée complètement. 
-La modélisation 3D collaborative permet à différents concepteurs de travailler 
+La modélisation \gls{3D} collaborative permet à différents concepteurs de travailler 
 ensemble sur une même tâche de manière efficace (en terme de coûts temporel et 
 financier) et avec un support visuel manipulable, éditable et flexible (proposant 
 différentes possibilités de visualisation). 
@@ -59,7 +59,8 @@ une résolution automatique ou manuelle.
 		\multirow{2}{0.2\textwidth}{Transformées opérationnelles}                     & 
 		Séquence de transformation                     & Résolution de conflit temps réel 
 		pour les documents textuels                     \\ \cline{2-3} 
-		& Transformées opérationnelles 3D                 & Résolution de conflit pour  des modèles 3D                              \\ \hline
+		& Transformées opérationnelles \gls{3D}                 & Résolution de conflit 
+		pour  des modèles \gls{3D}                              \\ \hline
 		\multirow{3}{0.2\textwidth}{Autre (synchrone ou asynchrone)} & 
 		Semi-synchrone                               & \multirow{3}{0.3\textwidth}{Détection 
 		de conflit ou résolution avec interaction utilisateur} \\
@@ -80,7 +81,8 @@ modifications. Ces mécanismes permettent de s'assurer que les opérations sont
 effectuées de manière séquentielle, ce qui assure la cohérence des données à 
 travers le système. Plus simples à mettre en place, ces mécanismes sont aussi plus 
 restrictifs vis-à-vis de la liberté de création des utilisateurs du système. Par 
-exemple, Lets3D \cite{Ha2015} est un éditeur collaboratif 3D sur le web dont la 
+exemple, Lets3D \cite{Ha2015} est un éditeur collaboratif \gls{3D} sur le web dont 
+la 
 gestion de la concurrence repose sur la demande de permission par objet 
 sélectionné (ce qui verrouille l'objet pour les autres utilisateurs lorsqu'elle est 
 accordée).
@@ -121,16 +123,19 @@ pérenne du contenu.
 %TODO designing in context
 %\cite{Dobos2015}
 
-L'arrivée du web a bouleversé les usages liés à la collaboration sur des objets 3D. 
+L'arrivée du web a bouleversé les usages liés à la collaboration sur des objets 
+\gls{3D}. 
 Les principes, les technologies, l'omniprésence du web en ont fait une plateforme 
-de prédilection pour la visualisation et la manipulation d'objet 3D de haut niveau.   
+de prédilection pour la visualisation et la manipulation d'objet \gls{3D} de haut 
+niveau.   
 Pour les projets d'\gls{AIC} ou de \gls{BIM}, la demande de traitement et la fidélité 
 ont tendance à être plus élevés, particulièrement pour la représentation de dessins 
-d'ingénierie ou de modèles d'architecture 3D. 
+d'ingénierie ou de modèles d'architecture \gls{3D}. 
 Les objets simples (primitives) ou les maillages optimisés pour le rendu temps réel 
 ne sont ni suffisants ni assez génériques pour être supportés par tous les 
 processus liés à l'élaboration d'un produit. 
-Plus les projets sont gros, plus ils dépendent d'une multitude de logiciels 3D --  
+Plus les projets sont gros, plus ils dépendent d'une multitude de logiciels \gls{3D} 
+--  
 dont l'interopérabilité n'est pas garantie -- pourvoyant chacun aux besoins d'une 
 tâche spécifique. 
 Chaque tâche (ex: modélisation \gls{CAO}, \textit{stress testing}\ldots) possède sa 
@@ -138,21 +143,22 @@ propre représentation des données qui peut varier selon les niveaux de
 sémantique attachés à la géométrie. 
 Pour garder une trace de ces données et mettre en commun les données 
 générées autour d'un produit, l'utilisation d'un \gls{PDM}/\gls{PLM} est 
-souvent requise. Certains outils de création d'objets 3D (par exemple 
+souvent requise. Certains outils de création d'objets \gls{3D} (par exemple 
 Autodesk Revit) autorisent -- mais pas systématiquement -- la synchronisation de fichier via leur dépôt à distance. 
 En cela, une plateforme web pour un \gls{PDM}/\gls{PLM} a 
 l'avantage d'être distribuée pour être accessible depuis un navigateur web ; avec 
 un système d'édition hors-ligne, le téléversement peut s'avérer long et fastidieux.
-De plus, les logiciels spécialisés pour la modélisation 3D, contrairement aux jeux 
+De plus, les logiciels spécialisés pour la modélisation \gls{3D}, contrairement aux 
+jeux 
 multijoueurs, sont traditionnellement dédiés à un utilisateur unique sans 
-représentation visuelle des autres opérateurs dans le même espace 3D. 
+représentation visuelle des autres opérateurs dans le même espace \gls{3D}. 
 Ici encore, les principes d'accessibilité du web facilitent la création d'un espace 
-virtuel 3D collaboratif pour la visualisation, la manipulation et l'échange de
+virtuel \gls{3D} collaboratif pour la visualisation, la manipulation et l'échange de
 données partagées. 
 
 
 La collaboration en temps-réel est de plus en plus présente sur le web pour 
-différents types de documents, notamment 3D.
+différents types de documents, notamment \gls{3D}.
 La revue sur la visualisation distribuée, effectuée par Grimstead et al. en 2005 
 \cite{Grimstead2005}, indiquait que la plupart des systèmes sont conçus pour 
 moins de cent 
@@ -167,7 +173,8 @@ d'utilisateurs simultanés.
 Dans chacun des cas, chaque système a besoin d'un client adapté pour opérer de 
 manière isolée, sans inter-opérer avec les autre systèmes. 
 C'est dans ce contexte qu'en 2011, Mouton et al. \cite{Mouton2011} présentent 
-une analyse approfondie de l'état de l'art des environnements collaboratifs 3D, ciblant 
+une analyse approfondie de l'état de l'art des environnements collaboratifs 
+\gls{3D}, ciblant 
 principalement la visualisation collaborative. 
 Ils montrent l'apparition de la tendance à déporter les environnements collaboratifs 
 sur le web, grâce à l'évolution d'XMLHttpRequest en client-serveur et l'apparition 
@@ -189,7 +196,8 @@ autre qu'internet.
 
 %Computer-Aided Engineering (CAE) Collaborative /
 
-Parmi les solutions sans greffon dédiée à de la modélisation 3D, de nombreuses utilisent l'architecture client-serveur et le 
+Parmi les solutions sans greffon dédiée à de la modélisation \gls{3D}, de 
+nombreuses utilisent l'architecture client-serveur et le 
 protocole \gls{WebSocket} pour effectuer la synchronisation entre les différents 
 clients collaborateurs. Quelques raisons peuvent expliquer cette situation. 
 Historiquement, les développeurs sont plus familiers avec les architectures 
@@ -205,9 +213,10 @@ serveur central qui garantit un engagement de l'utilisateur vis-à-vis du servic
 Le choix de plateformes web dans l'infonuagique (\og cloud\fg{}) pour la 
 modélisation \gls{CAO} est prépondérant pour les solutions commerciales comme 
 OnShape, Clara.io et TinkerCAD. Les fonctionnalités minimum de ces plateformes 
-consistent en la mise en place d'un environnement 3D pour visualiser un objet 3D accompagnées d'un système défaire / refaire et d'une plateforme de 
+consistent en la mise en place d'un environnement \gls{3D} pour visualiser un 
+objet \gls{3D} accompagnées d'un système défaire / refaire et d'une plateforme de 
 diffusion des créations.
-OnShape est un service de modélisation 3D très riche dont l'objectif est de 
+OnShape est un service de modélisation \gls{3D} très riche dont l'objectif est de 
 proposer une qualité équivalente des fonctionnalités de modeleurs autonomes 
 (\textit{standalone}) professionnels, le tout de manière collaborative. Leur approche 
 de la gestion de version développe le concept de micro version \cite{Baran2015}. 
@@ -215,26 +224,31 @@ Cette approche est employée dans les travaux de Lu et al. \cite{Lu2016} pour
 gérer l'évolution de productions participatives liées à des tâches de modélisation 
 3D en usant de la créativité, de l'intelligence et du savoir-faire 
 d'un grand nombre de personnes en sous-traitance (\textit{crowdsourcing}). 
-Le modeleur 3D Clara.io \cite{Houston2013} est plus généraliste. Il s'oriente 
-davantage vers des fonctionnalités avancées de rendu 3D sur le \textit{cloud} en 
+Le modeleur \gls{3D} Clara.io \cite{Houston2013} est plus généraliste. Il s'oriente 
+davantage vers des fonctionnalités avancées de rendu \gls{3D} sur le \textit{cloud} 
+en 
 utilisant du lancer de rayons. 
 Les fonctionnalités d'historisation et de collaboration proposées 
 dans Clara.io restent très basiques (seulement annuler~/~refaire). TinkerCAD 
-est aussi une plateforme de publication d'objets 3D pour faciliter l'accès à la 
-conception d'objets 3D. 
+est aussi une plateforme de publication d'objets \gls{3D} pour faciliter l'accès à la 
+conception d'objets \gls{3D}. 
 TinkerCAD est une application destinée au grand 
-public pour la conception et l'impression 3D. De ce fait, les fonctionnalités sont 
-limitées à cause du domaine (l'impression 3D) et de la cible (le grand public). La gestion 
+public pour la conception et l'impression \gls{3D}. De ce fait, les fonctionnalités 
+sont 
+limitées à cause du domaine (l'impression \gls{3D}) et de la cible (le grand public). 
+La gestion 
 de version est donc plus légère, similaire à celle proposée par Clara.io. 
 OpenJSCAD, Verold Studio, Vectary sont d'autres 
-exemples de modeleurs 3D moins connus, avec des fonctionnalités proches de 
+exemples de modeleurs \gls{3D} moins connus, avec des fonctionnalités proches 
+de 
 TinkerCAD.
 %Un peu à part, GrabCAD est une plateforme web plus orientée sur la gestion de 
 %données 3D \gls{CAO} (\gls{PLM}), qui possède un système de gestion de 
 %version 
 %performant et un système d'annotation et de visualisation collaboratives.
 Pour réduire l'empreinte mémoire des messages transmis lors de la collaboration 
-sur le web, certains systèmes d'édition collaborative de contenu 3D utilisent une 
+sur le web, certains systèmes d'édition collaborative de contenu \gls{3D} utilisent 
+une 
 modélisation par surfaces implicites (BlobTree) \cite{Grasberger2013}. 
 Les objets sont alors manipulés comme des géométries de construction de 
 solides avec les opérations booléennes associées. Le tableau \ref{table:encoding} 
@@ -246,7 +260,7 @@ d'encodages associés aux types de modélisation~3D.
 	\caption{Encodage des données transmises}
 	\label{table:encoding}
 	\begin{tabular}{@{}lcc@{}}\hline
-		\textbf{Référence}& \textbf{Modélisation 3D}   & 
+		\textbf{Référence}& \textbf{Modélisation \gls{3D}}   & 
 		\begin{tabular}[c]{@{}l@{}}\textbf{Encodage des}\\ 
 			\textbf{modifications}\end{tabular} \\ \midrule
 		\cite{Grasberger2013}        &      Blob (CSG)    & Fonction implicite        \\
@@ -277,17 +291,18 @@ La plateforme web possède certains avantages par rapport à des clients lourds.
 En effet, l'essor de l'infonuagique a permis le développement de 
 meilleures infrastructures de services. Ces dernières ont rendu faisable, en termes de ressources, mais également en termes de 
 technologies la création de 
-plateformes collaboratives sur le web pour faire de la conception 3D.
+plateformes collaboratives sur le web pour faire de la conception \gls{3D}.
 
 Il existe deux types d'approches pour créer du contenu web 2D ou 
 3D : l'approche déclarative et l'approche impérative. La Figure \ref{fig:impdec} 
-montre le pendant 3D pour chaque approche 2D. En 2D, les spécifications 
-déclaratives (\gls{SVG}) et impératives (canvas) sont issues du dernier standard HTML (HTML5), alors qu'en 3D, les spécifications sont encore en évolution. 
+montre le pendant \gls{3D} pour chaque approche 2D. En 2D, les spécifications 
+déclaratives (\gls{SVG}) et impératives (canvas) sont issues du dernier standard 
+HTML (HTML5), alors qu'en \gls{3D}, les spécifications sont encore en évolution. 
 
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=0.8\columnwidth]{impdec}
-	\caption{Déclaratif vs Impératif en 2D et en 3D sur le web}
+	\caption{Déclaratif vs Impératif en 2D et en \gls{3D} sur le web}
 	\label{fig:impdec}
 \end{figure}
 
@@ -295,9 +310,10 @@ L'approche déclarative (Dec3D) s'intègre au \gls{DOM} et se
 focalise sur l'utilisation de technologies du web existantes comme CSS3, 
 HTML5 et l'Ajax. 
 X3D est ainsi un format de fichier respectant le standard ISO \cite{X3D2011} permettant de 
-représenter des scènes 3D interactives en XML et rétro-compatible avec VRML97. Il 
+représenter des scènes \gls{3D} interactives en XML et rétro-compatible avec 
+VRML97. Il 
 se différencie des formats de fichiers comme Collada en intégrant le comportement de 
-la scène durant l'exécution en plus de la description du contenu 3D. Les deux 
+la scène durant l'exécution en plus de la description du contenu \gls{3D}. Les deux 
 bibliothèques les plus notables dérivées de ce standard sont X3DOM 
 \cite{Behr2010} et XML3D \cite{Sons2010} : toutes les deux sont capables de 
 supporter les récentes avancées de WebGL pour afficher une scène décrite dans 
@@ -306,15 +322,19 @@ X3DOM essaye de respecter le standard X3D et ses concepts pour que le format s'i
 d'éléments \gls{HTML}, les événements \gls{DOM} et de profils \acrshort{CSS} en 
 supplément \cite{Sutter2015}. 
 En comparaison avec X3DOM, XML3D a développé une extension à \gls{HTML}5 
-pour décrire une scène 3D. 
-L'utilisation d'un langage déclaratif comme X3D s'adapte bien à des contextes où le XML est très présent (exemple : \gls{SIG}) : le contenu 3D peut être directement transformé (ex. XSLT) d'une 
+pour décrire une scène \gls{3D}. 
+L'utilisation d'un langage déclaratif comme X3D s'adapte bien à des contextes où 
+le XML est très présent (exemple : \gls{SIG}) : le contenu \gls{3D} peut être 
+directement transformé (ex. XSLT) d'une 
 représentation à une autre (tout comme le X3D peut être rendu dans un navigateur 
 en utilisant X3DOM). 
 
 L'approche déclarative est utilisée dans de nombreux travaux de visualisation 
-scientifique 3D distribuée \cite{Jung2012}, par exemple, pour des données spatiales 
+scientifique \gls{3D} distribuée \cite{Jung2012}, par exemple, pour des données 
+spatiales 
 \cite{Stein2014} ou du rendu volumique \cite{Becher2012}. 
-En manipulant directement les objets 3D à partir des éléments \gls{DOM}, grâce à 
+En manipulant directement les objets \gls{3D} à partir des éléments \gls{DOM}, 
+grâce à 
 sa structure bien connue, il est alors plus simple, lors de la collaboration, d'utiliser 
 ces éléments \cite{Gadea2016} ou les événements du \gls{DOM} \cite{Lowet2009} 
 comme protocole de synchronisation de scènes. 
@@ -348,7 +368,8 @@ très peuplée.
 \end{figure}
 
 Concernant l'approche impérative, la spécification WebGL 1.0 \cite{Khronos2011} 
-proposée par le groupe Khronos permet aux navigateurs d'effectuer un rendu 3D 
+proposée par le groupe Khronos permet aux navigateurs d'effectuer un rendu 
+\gls{3D} 
 grâce à une \gls{API} JavaScript adaptée de l'\gls{API} d'OpenGL~ES~2.0 
 \cite{Khronos2007} en utilisant l'élément \textit{canvas} d'\gls{HTML}5. Cette 
 spécification est supportée par la plupart des navigateurs traditionnels (Chrome 
@@ -370,7 +391,7 @@ ces dernières années sur les différentes plateformes possédant un navigateur
 web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiques 
 	sont collectées à partir de sites partenaires de \url{webglstats.com}. Ces sites 
 	ciblent des néophytes de WebGL possédant  en général le matériel 
-	dédié à la 3D. Consulté le 04/07/2017.}.
+	dédié à la \gls{3D}. Consulté le 04/07/2017.}.
 
 \section{Communication en temps-réel}
 L'expression temps-réel est largement utilisée par des applications requérant une 
@@ -414,9 +435,12 @@ temps de réponses :
 	le retour à la tâche une fois que la machine répond.
 \end{itemize} 
 Dans le domaine de l'édition et la manipulation collaborative 
-d'objets 3D, les contraintes abordées se situent à divers degrés : au chargement 
-et lors des mises à jour. Le chargement concerne la phase de téléchargement des ressources (page web, modèles 3D), parfois lourdes. Cette phase peut tolérer des délais relativement longs (1-10s) compte tenu du fait que l'utilisateur 
-connaît en partie les contraintes liées à la taille des objets 3D. 
+d'objets \gls{3D}, les contraintes abordées se situent à divers degrés : au 
+chargement 
+et lors des mises à jour. Le chargement concerne la phase de téléchargement des 
+ressources (page web, modèles \gls{3D}), parfois lourdes. Cette phase peut tolérer 
+des délais relativement longs (1-10s) compte tenu du fait que l'utilisateur 
+connaît en partie les contraintes liées à la taille des objets \gls{3D}. 
 Concernant les mises à jour, l'édition 
 collaborative requiert un temps de réponse raisonnablement court qui est contraint par 
 l'exactitude des calculs et le temps dans lequel le résultat est produit. Pour les 
@@ -447,8 +471,9 @@ informations statistiques concernant les flux de données et les connexions des
 destinataires qui permettent à l'expéditeur d'ajuster le flux en conséquence. Les 
 protocoles \gls{RTP} et \gls{RTCP} sont principalement conçus pour la 
 transmission de flux audio et vidéo, moins pour des données arbitraires comme 
-des données 3D. Pour cette raison, leur utilisation est limitée dans le cadre des 
-\gls{EVC} pour la modélisation 3D. 
+des données \gls{3D}. Pour cette raison, leur utilisation est limitée dans le cadre 
+des 
+\gls{EVC} pour la modélisation \gls{3D}. 
 
 La variété des domaines et applications auxquels s'adressent les 
 \glspl{EVC3D} actuels fait qu'il n'existe pas de protocole de 
@@ -533,8 +558,10 @@ que la numérotation des paquets n'est pas requise (paquets plus légers).
 L'application est alors en charge de gérer le fait que les paquets arrivent dans le 
 désordre. La livraison de paquets ordonnés est souvent une fonctionnalité 
 appréciée dans le 
-cadre des \gls{SEC}. C'est particulièrement le cas en 3D afin de respecter l'intention de l'utilisateur, car l'ordre des actions en détermine le résultat. Par 
-exemple, le calcul deux rotations consécutives se traduit par la multiplication deux matrices 3D qui n'est pas commutatif.
+cadre des \gls{SEC}. C'est particulièrement le cas en \gls{3D} afin de respecter 
+l'intention de l'utilisateur, car l'ordre des actions en détermine le résultat. Par 
+exemple, le calcul deux rotations consécutives se traduit par la multiplication deux 
+matrices \gls{3D} qui n'est pas commutatif.
 
 \subsection{Les principaux protocoles de transport}
 Les principes de fiabilité et d'ordonnancement décrits plus haut sont souvent 
@@ -675,7 +702,7 @@ d'utilisateurs ont utilisé la technologie \textit{open source} WebRTC. Ericsonn
 a été parmi les premiers à implémenter une application WebRTC en 2011. 
 La jeunesse du protocole (2011) fait que peu de travaux académiques 
 l'utilisent pour créer des \gls{EVC3D} \cite{Desprat2015a,Steiakaki2016} et 
-optimiser le partage de modèles 3D \cite{Koskela2014}. 
+optimiser le partage de modèles \gls{3D} \cite{Koskela2014}. 
 Côté commercial, un grand nombre d'applications et de services 
 basés sur ce protocole ont fait leur apparition (par ordre d'importance) : 
 des systèmes d'échanges audio / vidéo (VoIP)\footnote{WebRTCWorld en 
@@ -837,7 +864,7 @@ Cette prépondérance s'explique d'après deux situations. Premièrement, dans d
 réseaux où l'accès est fiable car ces environnements n'ont 
 pas (ou peu) de perte de paquet (ex : \gls{LAN}). Deuxièmement, dans un contexte 
 d'application où la perte de paquet n'est pas critique (ex : jeu vidéo, diffusion en 
-continu de son, vidéo, 3D\dots). 
+continu de son, vidéo, \gls{3D}\dots). 
 \gls{UDP} peut également s'utiliser dans les tout type de réseaux -- \gls{LAN} ou 
 \gls{WAN} (comme internet) --, car il est basé sur des datagrammes. Le fait qu'il 
 n'effectue pas de vérification de délivrance lui donne un avantage quant 
@@ -862,7 +889,8 @@ livraison fiable (pour les paquets clés par exemple) ou non fiable (pour des mi
 à jour normales).
 
 Depuis plusieurs décennies, les architectures \gls{P2P} sont utilisées dans les 
-\gls{EVC}. Par exemple, l'assistance au rendu 3D par les pairs pour le rendu est une 
+\gls{EVC}. Par exemple, l'assistance au rendu \gls{3D} par les pairs pour le rendu 
+est une 
 méthode qui permet aux pairs hébergés sur des appareils avec des capacités 
 limitées (bande passante, processeur, processeur graphique) de demander une 
 partie du contenu de l'environnement aux autres pairs.
@@ -892,7 +920,7 @@ des solutions utilisées dans le cadre de l'apprentissage en ligne
 \cite{Ekadiyanto2012} et du BIM \cite{Chen2014} par exemple. 
 
 En général, les systèmes \gls{P2P} semblent n'être supportés que dans les 
-environnements virtuels 3D. Ce phénomène est probablement dû au lien étroit 
+environnements virtuels \gls{3D}. Ce phénomène est probablement dû au lien étroit 
 entre la séparation spatiale de l'utilisateur et le besoin de distribuer les données à 
 tous les participants.
 %
@@ -1081,7 +1109,8 @@ requiert de lourds investissement pour installer et maintenir plusieurs serveurs
 dédiés. Une alternative à bas coût est d'utiliser les différents clients à disposition 
 (qui sont en relation par le biais de la collaboration) pour avoir un traitement réparti 
 des données sur la foule (\textit{crowd computing})\cite{Li2015}. De ce fait, le 
-contenu 3D est distribué par les pairs et non plus par le serveur. En combinant les 
+contenu \gls{3D} est distribué par les pairs et non plus par le serveur. En 
+combinant les 
 ressources réseau du serveur et de plusieurs clients, on peut réaliser une 
 distribution des données (événements) en améliorant les performances du 
 système pendant les sessions de travail collaboratif. 
@@ -1160,7 +1189,7 @@ modèle lié à un domaine (voir Figure \ref{fig:ddd}). Parmi les principaux se 
 	ensemble par une entité commune (\textit{root entity}), connue sous le nom 
 	d'agrégat souche (\textit{aggregate root}). Ce dernier garantit la cohérence des 
 	modifications faites au sein de l'agrégat en interdisant aux objets externes de 
-	faire référence à ses membres. Par exemple, dans une modélisation 3D 
+	faire référence à ses membres. Par exemple, dans une modélisation \gls{3D} 
 	collaborative un utilisateur ne peut pas modifier le nom d'un autre utilisateur. Un 
 	maillage n'a également pas d'intéret à connaître les informations des 
 	utilisateurs, c'est la scène qui gère l'interface entre les maillages et les 
@@ -1189,7 +1218,7 @@ les événements se déroulant dans la réalité métier qui ne sont pas
 interchangeables -- la plupart du temps. L'utilisation d'architectures 
 basées événements est naturelle dans ce genre d'environnement. 
 
-Les disciplines liées à la 3D dans un contexte industriel ont besoin de pouvoir 
+Les disciplines liées à la \gls{3D} dans un contexte industriel ont besoin de pouvoir 
 communiquer sur un langage partagé pour permettre à chacun des 
 intervenants de s'exprimer dans la création du produit. Par exemple, la \gls{CAO} 
 est très utile dans un contexte d'ingénierie grâce à l'utilisation de quatre propriétés 
@@ -1217,7 +1246,8 @@ métier de l'information (écriture) et de la restitution de l'information (lect
 cadre offert par ce principe permet de lever certaines contraintes d'architecture 
 comme le passage à l'échelle en faisant apparaître de nouvelles forces : la gestion 
 de la concurrence dans la collaboration sur des règles métier propre à la 
-modélisation 3D dans des cadres d'application spécifiques. En effet, selon le type 
+modélisation \gls{3D} dans des cadres d'application spécifiques. En effet, selon le 
+type 
 d'application, un ensemble de règles régit les droits concernant les types de 
 modifications acceptables et qui est autorisé à le faire.
 
@@ -1271,7 +1301,7 @@ domaine. Cela permet de conserver tous les changements qui ont mené à un
 état d'un agrégat à partir de la liste d'événements qu'on lui a appliqué. Cette 
 liste représente une base la vérité du système\jp{pas clair}. 
 \improve{improve}\gls{ES} permet de simplifier les tâches complexes dans des 
-domaines complexes comme la 3D en ne requérant pas la synchronisation de 
+domaines complexes comme la \gls{3D} en ne requérant pas la synchronisation de 
 modèle de données et du métier. 
 
 L'\gls{ES} est souvent présent dans des architecture asynchrones qui ont 
@@ -1348,13 +1378,14 @@ insiste sur le fait que \og l'état du modèle du domain est persisté comme un
 
 Les avantages et les inconvénients de l'approche \gls{ES} dépendent du
 cadre dans lequel elle est utilisée. En reprenant ceux cités par Klamer 
-\cite{Klamer2013a}, ils peuvent être envisagés sous l'angle de la modélisation 3D 
+\cite{Klamer2013a}, ils peuvent être envisagés sous l'angle de la modélisation 
+\gls{3D} 
 collaborative.
 
 \subsubsection{Avantages}
 L'\gls{ES} peut apporter beaucoup d'avantages à une application, notamment 
 lorsque les besoins en traçabilité de l'information sont importants comme dans 
-la modélisation collaborative de données 3D.
+la modélisation collaborative de données \gls{3D}.
 L'historique du système est accessible tout au long de la vie de l'application, ce 
 qui implique qu'il est non seulement possible d'accéder à l'état courant du 
 système, mais également à toutes les actions ayant mené jusqu'à cet état. C'est 
@@ -1376,7 +1407,7 @@ l'\gls{ES} sur l'Active Record sont:
 	
 \paragraph{Exemple} 
 Une revue de projet d'une scène est effectuée dans le cadre d'une application 
-collaborative de modélisation 3D en ligne. Le chef de projet remarque qu'un 
+collaborative de modélisation \gls{3D} en ligne. Le chef de projet remarque qu'un 
 objet a subi énormément de modifications par rapport aux autres. Il examine en 
 particulier cet objet pour en connaître les causes. Voici deux exemples 
 d'observations possibles : 1/ les spécifications ne sont pas assez claires 2/ 
@@ -1476,17 +1507,19 @@ et que les composants de l'architecture ont un couplage lâche afin que seuls le
 
 \section{Conclusion}
 
-La manipulation et la visualisation d'objets 3D sur le web est une problématique 
+La manipulation et la visualisation d'objets \gls{3D} sur le web est une 
+problématique 
 qui peut se découper en différentes parties.
-La première concerne la modélisation collaborative 3D sur le web. Les plateformes 
+La première concerne la modélisation collaborative \gls{3D} sur le web. Les 
+plateformes 
 existantes essayent de répondre à plusieurs challenge : conserver la cohérence 
 de l'environnement, proposer des solutions performantes et économiques (bande 
 passante, énergie, graphique, stockage)  pour s'adapter aux évolutions du web.
 L'un des aspects fondamentaux du web est l'accessibilité. Cela passe par la 
 standardisation des technologies web par le \gls{W3C}.  L'émergence des 
-standards comme WebGL (affichage 3D) et WebRTC (connexion P2P entre 
+standards comme WebGL (affichage \gls{3D}) et WebRTC (connexion P2P entre 
 navigateurs) a fait apparaître de nouvelles possibilités concernant la visualisation 
-et le partage de données 3D. 
+et le partage de données \gls{3D}. 
 
 
 La seconde partie concerne la communication en temps réel au sein d'une 
@@ -1497,7 +1530,7 @@ Jusque là souvent cantonnés aux traditionnelles
 applications client-serveur sur web, les \glspl{EVC} se montrent malgré tout 
 intéressés par les architectures de communications P2P (éventuellement 
 combinées à une architecture client-serveur). Dans ce cadre, les \gls{EVC3D} 
-particulièrement lors d'édition collaborative de scènes 3D, le choix d'une 
+particulièrement lors d'édition collaborative de scènes \gls{3D}, le choix d'une 
 architecture \gls{P2P} combiné à la haute fréquence des mises à jour, suggère le 
 choix d'un mode non fiable, non ordonné et sans erreur. C'est l'application qui gère 
 les 
@@ -1508,8 +1541,8 @@ La troisième partie s'intéresse aux propriétés des architectures orientées
 événements ou \gls{EDA}. Le couplage lâche est une propriété 
 qui s'accorde bien avec les systèmes distribués \gls{P2P} ou hybrides. Les 
 \glspl{EDA} ont l'avantage de proposer une intégration de la partie métier 
-transparente. Dans les différents systèmes de modélisation 3D pour la 
-visualisation ou la manipulation d'objets 3D collaboratifs sur le web, 
+transparente. Dans les différents systèmes de modélisation \gls{3D} pour la 
+visualisation ou la manipulation d'objets \gls{3D} collaboratifs sur le web, 
 cet aspect est souvent mis de côté. Or dans le cadre de 
 la \gls{CAO}, du \gls{BIM} ou d'application au cadre industriel, ces points sont 
 prépondérants.

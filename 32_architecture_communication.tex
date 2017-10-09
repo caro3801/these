@@ -12,8 +12,9 @@ Afin de pouvoir proposer un \gls{SEC} adapté aux besoins de l'édition de scèn
 3D, plusieurs types de granularité doivent être proposés: 
 \begin{itemize}
 	\item une granularité fine pour l'édition massive ;
-	\item une granularité liées aux spécificités de la modélisation 3D ;
-	\item et une granularité reposant sur des technologies web (réseau, interface, interaction 3D).
+	\item une granularité liées aux spécificités de la modélisation \gls{3D} ;
+	\item et une granularité reposant sur des technologies web (réseau, interface, 
+	interaction \gls{3D}).
 \end{itemize}
 
 Les systèmes \gls{P2P} qui sont orientés événements consistent en plusieurs 
@@ -38,8 +39,8 @@ convergence, préservation de la causalité et préservation de l'intention du m
 La plupart des travaux liés aux \glspl{SEC} \gls{P2P} s'intéressent à 
 l'édition collaborative massive de documents textuels dont les propriétés 
 de commutativité sont plus faciles à gérer (insertion / suppression) en 
-comparaison à celles concernant la 3D (multiplication de matrices de 
-rotation). La génération de conflits en 3D peut vite devenir incontrôlable. Il est 
+comparaison à celles concernant la \gls{3D} (multiplication de matrices de 
+rotation). La génération de conflits en \gls{3D} peut vite devenir incontrôlable. Il est 
 donc nécessaire de mettre en place des mécanismes de détection de 
 conflit et de maintenir une cohérence au cours des sessions de 
 collaboration. 
@@ -76,7 +77,7 @@ pair seul sur le réseau\dots).
 Le terme \og hybride\fg{} invoque un compromis entre la 
 centralisation de l'information nécessaire à la prise de décision globale et 
 la décentralisation des échanges utile à l'amélioration du partage de 
-contenu 3D à l'échelle locale. 
+contenu \gls{3D} à l'échelle locale. 
 En agissant sur ces deux échelles, la granularité de la collaboration est plus fine. 
 Par exemple, le passage à l'échelle est facilité par la présence de 
 ressources locales et la coordination des utilisateurs se fait à une échelle 
@@ -96,7 +97,7 @@ est d'obtenir une architecture de communication :
 Tous les travaux liés à cette thèse 
 \cite{Desprat2015a,Desprat2015b,Desprat2016,Desprat2017} s'appuient sur une 
 architecture de communication hybride tripartite (Figure \ref{fig:hybrid}) pour 
-faire de la modélisation 3D collaborative : serveur, persistance, 
+faire de la modélisation \gls{3D} collaborative : serveur, persistance, 
 et les pairs\footnote{Les pairs sont appelés \og Clients\fg{} dans les premiers 
 travaux}. 
 
@@ -126,7 +127,7 @@ répliqué sur les pairs participants à la collaboration.
 
 Cette section décrit le modèle d'architecture mis en 
 place pour gérer la transmission de contenu entre les différents clients 
-qui participent à l'édition collaborative d'un espace de travail 3D partagé. 
+qui participent à l'édition collaborative d'un espace de travail \gls{3D} partagé. 
 Les différents protocoles de transmission issus des travaux sus-nommés 
 sont présentés. Ils montrent ainsi l'évolution de l'architecture de communication de 
 sa version naïve à la version étendue, plus proche des considérations métiers 
@@ -235,7 +236,7 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	\item [Gestion de la session] 
 	La gestion de la session suit le cycle de vie des pairs au sein du réseau 
 	lorsqu'ils participent à une session collaborative. 
-	Pour intégrer le réseau \gls{P2P} et participer à l'édition d'une scène 3D de 
+	Pour intégrer le réseau \gls{P2P} et participer à l'édition d'une scène \gls{3D} de 
 	manière collaborative, les clients passent par les étapes suivantes :
 		\begin{enumerate}
 		\item Phase de \textit{signaling}

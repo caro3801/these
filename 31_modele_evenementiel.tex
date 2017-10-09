@@ -7,7 +7,7 @@ EVC}
 %\subsection{Introduction}
 La méthodologie orientée événements intègre plusieurs aspects souvent laissés 
 de côté dans la littérature concernant le développement des environnements 
-virtuels collaboratifs pour la visualisation et la manipulation d'objets 3D. 
+virtuels collaboratifs pour la visualisation et la manipulation d'objets \gls{3D}. 
 Les événements peuvent en effet être utilisés dans le cadre de \gls{CSCW} et 
 d'\gls{EVC}, qui ont évolués du simple collecticiel à de plus importantes 
 organisations virtuelles comme on peut le retrouver dans des environnements 
@@ -69,7 +69,8 @@ contexte de flux d'information asynchrone. La traçabilité dans ces environneme
 devient alors un enjeu important. Facilitée par l'empreinte laissée par chaque 
 événement, elle n'en demeure pas moins complexe selon l'échelle d'évaluation. A 
 l'échelle d'un utilisateur, d'un groupe d'utilisateurs, ou de plusieurs groupes, les 
-acteurs restent des entités assez homogènes dans le cadre de la modélisation 3D 
+acteurs restent des entités assez homogènes dans le cadre de la modélisation 
+\gls{3D} 
 collaborative ce qui simplifie la tâche car le contexte et le domaine sont 
 connus.
 
@@ -113,7 +114,8 @@ navigateurs web évolue rapidement (notamment les appareils mobiles comme les
 puisant dans ces ressources pour effectuer des traitements similaires à ceux que 
 l'on trouve traditionnellement côté serveur et pour proposer des fonctionnalités 
 avancées telles que le stockage de données sur le client (IndexedDB, 
-storageAPI), pour l'affichage 3D (WebGL) et pour la communication en \gls{P2P} 
+storageAPI), pour l'affichage \gls{3D} (WebGL) et pour la communication en 
+\gls{P2P} 
 (\gls{WebRTC}). En déportant ainsi la charge que pourrait subir une architecture 
 client-serveur côté client, les échanges réseaux sont limités car ils 
 sont très coûteux d'un point de vue énergétique pour les appareils mobiles 
@@ -126,7 +128,8 @@ experte).
 
 \paragraph{Contribution}
 Pour répondre à cette problématique, je propose un modèle pour la 
-transmission des données 3D et collaboratives qui permet de  limiter  le nombre 
+transmission des données \gls{3D} et collaboratives qui permet de  limiter  le 
+nombre 
 de requêtes et la taille des données transmises sans perdre la traçabilité de 
 celles-ci. L'idée est de profiter de la puissance du client pour créer une 
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
@@ -141,7 +144,8 @@ l'occasion de mettre à jour le système.\improve{en remettre une couche}
 %directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
 %\todo{reprendre 
 %la partie virtualisation dans la partie P2P}
-La mise en place d'une \gls{EDA} pour faire de la modélisation 3D engendre des 
+La mise en place d'une \gls{EDA} pour faire de la modélisation \gls{3D} engendre 
+des 
 avantages pour tous les métiers engagés (utilisateurs, développeurs, analystes 
 métier).
 \improve{qu'est ce que ça fait la}D'une part la sensibilisation à l'historique des 
@@ -153,7 +157,8 @@ de la charge permet de profiter du potentiel computationnel de toutes les partie
 prenantes du réseau. 
 
 Dans 3DEvent, le langage partagé se réfère au domaine de la manipulation 
-d'objets 3D mais aussi au domaine de la collaboration. Par exemple le terme de 
+d'objets \gls{3D} mais aussi au domaine de la collaboration. Par exemple le terme 
+de 
 maillage peut se référer à la fois au maillage géométrique ou bien au maillage de 
 l'architecture réseau, d'où l'importance de définir les différents contextes en amont. 
 Notons que le contexte de l'application peut faire varier les frontières d'un 
@@ -166,7 +171,7 @@ représentation et
 le vocabulaire utilisé dans la description des événements de 3DEvent. 3DEvent 
 reprend la représentation proposée par Tominski \cite{Doktor-ingenieur2006} 
 illustrée par la Figure \ref{fig:representation_event}, et adapte ses propriétés pour 
-la modélisation 3D collaborative (visualisation et manipulation). 
+la modélisation \gls{3D} collaborative (visualisation et manipulation). 
 
 \begin{figure}[ht]
 	\centering
@@ -193,7 +198,8 @@ L'ensemble des toutes les instances d'événements possibles est exprimée par
 que peut avoir l'\textit{EI}. Ainsi, tous les événements sont liés aux intérêts 
 d'un~\textit{ED}. La spécification des événements nécessite de 
 s'intéresser à tous les types d'événements qui sont utilisés lors de la manipulation 
-et la visualisation d'objets 3D dans un \gls{EVC}. La détection d'événement est un 
+et la visualisation d'objets \gls{3D} dans un \gls{EVC}. La détection d'événement 
+est un 
 processus qui permet de récupérer les instances d'événements d'un \textit{ET} en 
 particulier. Cela peut être utilisé pour la visualisation de types particulier par 
 exemple. Dans 3DEvent, la spécification des événements est calquée sur les 
@@ -244,7 +250,7 @@ liée à chacun permet de différencier l'intention de l'utilisateur.
 \end{table}
 
 Ce tableau permet de donner un exemple qui reprend la description qui vient d'être 
-présentée. L'\textit{ED} correspond donc au \og système de modélisation 3D 
+présentée. L'\textit{ED} correspond donc au \og système de modélisation \gls{3D} 
 collaborative\fg{}. Dans ce contexte l'agrégat nommé \og Maillage\fg{} réagit à un 
 certain nombre de types d'événements comme \textit{meshAdded}, 
 \textit{meshDropped} \dots Les événements typés sont produits par l'agrégat en 
@@ -254,13 +260,15 @@ vecteur de translation (x,y,z) et la référence de l'identifiant de la scène �
 appartient.
 
 
-Plus généralement, le domaine est la représentation des objets 3D d'un point de 
+Plus généralement, le domaine est la représentation des objets \gls{3D} d'un point 
+de 
 vue expert. Les objets du domaine représentent les données liées aux 
-manipulations 3D sous une forme abstraite (géométrie, position), indépendamment
+manipulations \gls{3D} sous une forme abstraite (géométrie, position), 
+indépendamment
 des besoins du rendu (lumière, matériau \dots). Le framework intègre un 
 générateur d'événements pour faciliter l'implantation de nouveau types 
 d'événements au plus proche des besoins des utilisateurs dans une application de 
-modélisation 3D collaborative (appuyant la sémantique des manipulations).
+modélisation \gls{3D} collaborative (appuyant la sémantique des manipulations).
 
 
 
@@ -290,7 +298,8 @@ accrochées les différentes projections. Les projections sont nourries a partir
 inclus dans l'\gls{IU}) récupère les \glspl{DTO}
 contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
 se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
-visualisation 3D des modifications des collaborateurs en temps réel) ou active -- 
+visualisation \gls{3D} des modifications des collaborateurs en temps réel) ou 
+active -- 
 mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
 
 \begin{figure}[h]
@@ -567,7 +576,7 @@ asynchrone, distribuée et orientée événements peut
 \begin{description}
 	\item[GIT-like app] Les solutions pour faire de la gestion de version, comme 
 	MeshGit~\cite{Denning2013} par exemple qui fait du
-	\textit{diff and merge} de maillages polygonaux pour des données 3D, 
+	\textit{diff and merge} de maillages polygonaux pour des données \gls{3D}, 
 	sont rarement implémentées (a fortiori en 
 	temps-réel) sur des plateformes web à cause du coût et de la complexité que 
 	cela peut apporter dans des architectures traditionnelles. 3DEvent peut 
@@ -612,14 +621,16 @@ asynchrone, distribuée et orientée événements peut
 %\end{figure}
 \subsection{Bilan}
 
-Le modèle orienté événement pour la modélisation 3D collaborative présenté dans 
+Le modèle orienté événement pour la modélisation \gls{3D} collaborative présenté 
+dans 
 cette section intègre les besoins métiers par différents aspects. Le suivi des 
 directives liées au \gls{DDD} permet de mieux cerner les règles 
 métiers pour les intégrer dans \gls{CQRS}. 
 
 La description de la typologie des 
 événements manipulés insiste sur le compartimentage des objets métiers. La 
-modélisation 3D collaborative est minutieusement étudiée pour en dégager les quatre 
+modélisation \gls{3D} collaborative est minutieusement étudiée pour en dégager 
+les quatre 
 agrégats fondamentaux (la scène, le maillage, la géométrie et l'utilisateur) et les 
 types d'événements qui leurs sont associés. Cette étape introduit des différences 
 fines sur les événements qui sont produits à partir d'un agrégat. 
@@ -635,7 +646,8 @@ un mécanisme de synchronisation pour détecter les conflits. La fonction princi
 de cette partie est de permettre de recréer un état de l'application cohérent en 
 intégrant implicitement une gestion de version des événements.
 
-Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 3D, il 
+Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 
+\gls{3D}, il 
 peut être facilement adapté pour différents types d'applications et étendu à 
 d'autres utilisations. 
 Pour mettre en avant l'expertise de chacun et profiter de 

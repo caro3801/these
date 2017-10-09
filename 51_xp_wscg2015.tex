@@ -7,13 +7,15 @@
 
 L'expérimentation propose de répliquer une collaboration réaliste entre 
 différents participants travaillant à distance pour faire des tâches d'assemblage de 
-modèle 3D. L'expérimentation reprend le cas d'étude de l'assemblage d'objets 3D 
+modèle \gls{3D}. L'expérimentation reprend le cas d'étude de l'assemblage d'objets 
+\gls{3D} 
 (Section \ref{sec:use_case}). 
 
 L'expérimentation est basée sur un prototype d'application développé selon 
 l'implantation présentée dans la Section \todo{ref section proto}.
 Le prototype est développé sur une plateforme web et consiste en un application 
-de modélisation 3D collaborative multi-utilisateurs pour démontrer la faisabilité de 
+de modélisation \gls{3D} collaborative multi-utilisateurs pour démontrer la 
+faisabilité de 
 l'architecture présentée dans \todo{ref section archi state}. 
 
 
@@ -43,7 +45,8 @@ dans l'épreuve \textit{Castle from peer}, les pairs peuvent ajouter de nouveaux
 objets du kit qu'ils possèdent sur leur machine.
 
 En utilisant les outils de l'éditeur, les informations liées aux autres utilisateurs 
-(représentation dans l'environnement 3D de leur position ou de leur sélection), les 
+(représentation dans l'environnement \gls{3D} de leur position ou de leur sélection), 
+les 
 utilisateurs doivent manipuler les pièces (sélection, rotation, translation, 
 homothétie) de manière collaborative afin d'atteindre l'objectif. 
 \paragraph{Population}
@@ -53,7 +56,8 @@ simultanés.
 Durant l'expérimentation, les utilisateurs était sur le même réseau que le serveur 
 (\gls{LAN}). 
 Les participants étaient des étudiants de Master ou de Doctorat en Informatique 
-plutôt familiers avec les environnements 3D. Les participants étaient autorisés à 
+plutôt familiers avec les environnements \gls{3D}. Les participants étaient 
+autorisés à 
 communiquer entre eux (oralement, par chat, autre \dots).
 \paragraph{Procédure}
 L'expérimentation consiste en quatre épreuves qui partagent la même procédure:
@@ -94,7 +98,8 @@ d'interaction entre les participants est également observé.
 Au début de l'expérimentation, les participants reçoivent et prennent connaissance 
 du questionnaire (voir Annexe \ref{q:xp1}). Ce questionnaire est rempli à plusieurs 
 moment au cours de l'expérimentation. Au début, le participant décrit sa situation, 
-sa familiarité avec les environnements 3D, le type de machine et de navigateur 
+sa familiarité avec les environnements \gls{3D}, le type de machine et de 
+navigateur 
 qu'il utilise. À la fin de chaque épreuve il répond aux questions concernant 
 l'épreuve qu'il vient de passer. À la fin de l'expérimentation, il répond aux 
 questions d'ordre plus général sur son expérience et les améliorations 
@@ -103,7 +108,7 @@ envisageables.
 Les participants ont globalement été satisfaits des résultats issus de la 
 collaboration ainsi que du rendu visuel des assemblages effectués durant les 
 épreuves. Cela est également dû au fait qu'ils ont systématiquement atteint les 
-objectifs (dans le temps imparti) : réalisation de l'assemblage du modèle 3D 
+objectifs (dans le temps imparti) : réalisation de l'assemblage du modèle \gls{3D} 
 présenté sans frustration. Ils se sont également \og amusés\fg{} sur les épreuves
 avec le \textit{Castle} car ils étaient libres dans la création et souhaiter continuer 
 l'épreuve au delà du temps imparti. L'utilisation de canaux de communication 
@@ -141,8 +146,10 @@ qu'\og interactive\fg{}. La variation du nombre d'utilisateur sur les différent
 Cette expérimentation présente différentes épreuves sur le cas d'études lié à cette 
 thèse. Elle repose sur un modèle utilisant une architecture de communication 
 hybride combinant client-serveur et \gls{P2P}. Le client est responsable de 
-proposer un environnement 3D intégrer à l'interface permettant la manipulation et 
-la visualisation des objets 3D manipulés de manière collaborative. Afin de pouvoir 
+proposer un environnement \gls{3D} intégrer à l'interface permettant la 
+manipulation et 
+la visualisation des objets \gls{3D} manipulés de manière collaborative. Afin de 
+pouvoir 
 collaborer, il héberge également les connexions nécessaires à communiquer ses 
 mises à jour vers les autres pairs (autant de connexion WebRTC DataChannel que 
 de pairs) et vers la base de données via le serveur (une seule connexion 
@@ -164,7 +171,8 @@ Concernant l'amélioration des fonctionnalités liés à l'interface, l'ajout de
 visuels liés aux interactions collaborations ainsi la visualisation de l'historique sont 
 indispensables. Une évaluation quantitative approfondie pourrait permettre de 
 mieux examiner les apports de l'architecture de communication hybride par rapport 
-aux architectures classiques dans le contexte de la modélisation 3D collaborative. 
+aux architectures classiques dans le contexte de la modélisation \gls{3D} 
+collaborative. 
 Cela pourrait se concrétiser par l'examen de la collaboration en récupérant le 
 journal des actions, l'impact sur la visualisation (Frame Per Second), et 
 l'observation des échanges WebRTC en entrées / sorties.

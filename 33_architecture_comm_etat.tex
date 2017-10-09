@@ -38,19 +38,19 @@ que chaque ressource est identifiée et manipulable par des représentation déf
 
 Chaque pair correspond a un client (navigateur web) qui contient l'intergiciel 
 \gls{P2P} offrant des fonctionnalités limitées, l'interface utilisateur contenant 
-l'environnement 3D et un espace de stockage reposant local (IndexedDB).
+l'environnement \gls{3D} et un espace de stockage reposant local (IndexedDB).
 
-La persistance long terme est une base de données NoSQL.
-NoSQL évite les structures rigides et a tendande à être optimisée pour les grandes 
-opérations de lecture. Il est donc possible de stocker des modèles 3D dans une 
-base de données, et du à sa flexibilité, aussi tracer d'autres méta données telles 
-que les relations entre les différents objets. Dans la base de données, l'accès est 
-implicitement supporté de manière distribuée grâce à un langage de requête 
-dédiée. La persistence en NoSQL permet d'avoir a un endroit une source de 
-données fiable et autoritaire qui permet a un utilisateur de récuperer le bon contenu 
+La persistance long terme est une base de données NoSQL. Ce type de base de 
+données a tendance à être optimisée en lecture (grâce à un 
+langage de requête dédié) et permet d'éviter les 
+structures rigides. Cette flexibilité est utile lors du stockage des modèles \gls{3D} 
+et 
+encourage la conservation d'autres méta données (ex: relations entre les différents 
+objets) pour faciliter la traçabilité. 
+Avec une base de données centralisée, le système possède une source de 
+données fiable et autoritaire qui permet à un utilisateur de récupérer le bon contenu 
 quand il revient sur une scène. La totalité du document contenant la scène est 
-envoyé à l'utilisateur lorsqu'il arrive sur une scène.
-Le prototype est construit sur l'utilisation de MongoDB.
+envoyé à l'utilisateur lorsqu'il y accède.
 
 
 \subsubsection{Gestion du stockage et structure de données}
@@ -62,7 +62,8 @@ structure en arbre hiérarchique. Une collection consiste à grouper des documen
 équivalent dnas une base de données relationnelle à la notion de table. La base de 
 données contient deux types de collections : les scènes et les géométries. Une 
 collection de scènes contient des scènes qui sont décrites par leur identifiant et 
-les méta-données de l'espace virtuel 3D ainsi que la liste des contributeurs et la 
+les méta-données de l'espace virtuel \gls{3D} ainsi que la liste des contributeurs et 
+la 
 liste des maillages. Cette liste correspond à une association entre un identifiant de 
 maillage, les méta-données de l'objet et l'identifiant d'une géométrie existante. 
 Les géométries sont, quant à elles, stockées avec leur identifiant propre et l'objet 
@@ -75,7 +76,6 @@ exemple.
 C'est également une source pour transférer ses modifications aux autres clients.
 Les navigateurs permettent désormais de stocker de quantités de données 
 importante localement avec une durée de vie illimitée. 
-
 Les paramètres des opérations fondamentales sur la base de données 
 (\gls{CRUD}) sur les collections sont très bien supportés par les requêtes 
 \gls{REST}.
@@ -92,8 +92,9 @@ Dans un second temps, le système établit les connexions \gls{P2P} entre les
 clients de manière automatique et complète (topologie réseau en maillage 
 complet) après avoir récupéré les identifiants des autres utilisateurs auprès du 
 serveur de \textit{signaling}. Une fois la connexion établie, chaque collaborateur 
-voit son environnement 3D dans l'éditeur mis à jour, indiquant la position du nouvel 
-arrivant. Les collaborateurs éditent ensuite la scène 3D qui produit, sur les 
+voit son environnement \gls{3D} dans l'éditeur mis à jour, indiquant la position du 
+nouvel 
+arrivant. Les collaborateurs éditent ensuite la scène \gls{3D} qui produit, sur les 
 différents objets, des requêtes \gls{CRUD} -- incluant les opérations de translation, 
 rotation et homothétie -- destinées au serveur (qui transmet les 
 modifications à la base de données) puis aux collaborateurs.
