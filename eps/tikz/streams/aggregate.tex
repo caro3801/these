@@ -25,7 +25,7 @@ every node/.style={anchor=base,minimum width=5em,minimum height=2em}
 	column 6/.style={nodes={cell2}},
 	column 7/.style={nodes={cell2}},
 	row 7/.style={nodes={ draw=none, fill=none ,minimum height=7mm}},
-	text depth=0.25ex]
+	text depth=0.5ex]
 	{
 		\textit{n} &          ei &                   &  $ei_{rotate}$     &	                   &	&\\
 		5&          ei &                   &  $ei_{scale}$   &    	             &	& $ei_{leave}$\\
@@ -39,6 +39,9 @@ every node/.style={anchor=base,minimum width=5em,minimum height=2em}
 		version& aggregate& m1              &              m2 &s1                   &g1&u1 \\
 	};
 
+\draw (-3.3,-0.2) rectangle (7.9,6.5) ;
+
+\node[] at (2.3,6) {\textit{Event Store}};
 \end{tikzpicture}
 
 %\end{document}
