@@ -314,6 +314,17 @@ mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
 \end{figure}
 
 
+Dans ce modèle événementiel, la partie Commande permet de limiter l'introduction 
+de données impropres dans le système via différentes mécanismes. Chaque 
+commande issue de l'\gls{IU} entraîne la génération d'un ou plusieurs événements. 
+Ces événements sont considérés 
+comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore \og publiés\fg{} 
+(\textit{committed}) par le système.
+Une commande peut-être rejetée pour différentes raisons. Ces raisons sont 
+exprimées par différentes phases de validation de la commande.
+Une première validation se fait en amont du déclenchement de l'\gls{IU} avec par 
+exemple une vérification de type des paramètres passés à la commande.
+
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
 d'une application sous la forme d'une séquence d'événements. 
 Ces événements sont conservés dans un journal d'événements et peuvent être 
@@ -425,11 +436,11 @@ continuer d'écrire des événements localement. La livraison des événements s
 les sites distants reprend automatiquement lorsque les partitions sont à jour.
 
 
-Le journal d'événements est répliqué localement et fournit un ordre total des 
-événements stockés et appartient à un site. 
+Le journal d'événements est local au site et fournit un ordre total des 
+événements stockés. 
 Le site est une zone de disponibilité qui héberge un ou plusieurs 
 journal d'événements. Les événements d'un journal d'événements sont 
-répliqués sur les sites distancts de manière asynchrone. 
+répliqués sur les sites distants de manière asynchrone \todo{cf section p2p}. 
 Afin de lier des journaux d'événements (localisés sur différents sites) à un journal 
 d'événements répliqué, les 
 journaux d'événements locaux doivent être accessibles à partir des points 
@@ -495,10 +506,9 @@ fait que \gls{CQRS} découpe le système en petites parties permet d'ajuster la
 cohérence séparément.
 
 Dans \gls{CQRS}, l'interaction avec plusieurs agents (utilisateurs, services) est 
-découplée et subit un traitement réparti 
-dont résulte la cohérence éventuelle de l'application. 
-Dans la conception d'interaction pour l'interface, la synchronicité peut varier en 
-fonction certains contextes. 
+découplée et subit un traitement réparti dont résulte la cohérence éventuelle de 
+l'application. Dans la conception d'interaction pour l'interface, la synchronicité peut 
+varier en fonction certains contextes. 
 Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interface.  
 Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de 
 formulaire -> envoi asynchrone -> message de confirmation}, si l'utilisateur attend 
@@ -506,26 +516,14 @@ que la soumission soit une requête qui peut probablement échouer, alors
 l'asynchronisme se justifie pour être capable de fournir une explication à 
 l'utilisateur en cas d'erreur. 
 La probabilité d'échec peut être réduite en pré-validant la commande. Si personne 
-d'autre que 
-l'utilisateur ne travaille sur l'agrégat, la probabilité d'échec est quasi-nulle. De ce fait, 
-l'asynchronicité rajoute une interaction inutile au flux dans le cas où peu de gens 
-travaillent sur la même instance d'agrégat.
+d'autre que l'utilisateur ne travaille sur l'agrégat, la probabilité d'échec est 
+quasi-nulle. De ce 
+fait, l'asynchronicité rajoute une interaction inutile au flux dans le cas où peu de 
+gens travaillent sur la même instance d'agrégat.
 Par exemple, il est intéressant de rendre l'exécution d'une 
-commande synchrone et la mise à jour de la vue asynchrone. Les modèles de 
-cohérence sont des décisions liées au métier car ils ont un impact direct sur 
-l'expérience utilisateur. 
-
-
-Dans ce modèle événementiel, la partie Commande permet de limiter l'introduction 
-de données impropres dans le système via différentes mécanismes. Chaque 
-commande issue de l'\gls{IU} entraîne la génération d'un ou plusieurs événements. 
-Ces événements sont considérés 
-comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore <<~publiés~>> 
-(\textit{committed}) par le système.
-Une commande peut-être rejetée pour différentes raisons. Ces raisons sont 
-exprimées par différentes phases de validation de la commande.
-Une première validation se fait en amont du déclenchement de l'\gls{IU} avec par 
-exemple une vérification de type des paramètres passés à la commande.
+commande synchrone et la mise à jour de la vue asynchrone. 
+Les modèles de cohérence sont des décisions liées au métier car ils ont un 
+impact direct sur l'expérience utilisateur. 
 
 %Linéaire (strong consistency)
 %one version replace another -- one parent and one children in the sequence
