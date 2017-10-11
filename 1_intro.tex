@@ -254,7 +254,7 @@ généralement traduit par collecticiel :
 Une application collaborative est une application qui accompagne un groupe de 
 participants dans la réalisation d'une tâche ou d'un objectif en fournissant une 
 interface vers un environnement partagé. 
-Cette définition, suffisamment large, englobe un ensemble très hétérogène d'applications 
+Cette définition, assez large, englobe un ensemble très hétérogène d'applications 
 permettant le travail collaboratif. 
 
 Vidot propose de distinguer les différentes catégories de collecticiels en fonction 
@@ -278,7 +278,7 @@ d'édition collaborative se compose d'un nombre connu ou inconnu de répliques.
 Une réplique est une copie du document partagé modifiable à n'importe quel 
 instant. L'exécution d'une opération de modification se fait localement sur la 
 réplique, qui la diffuse ensuite à l'ensemble des répliques. La notification de la 
-modification qui contient l'opération de modification est communiquée de manière 
+modification, contenant l'opération de modification, est communiquée de manière 
 asynchrone. Les répliques distantes qui reçoivent cette notification exécutent 
 alors l'opération localement. L'une des difficultés principale de ces systèmes 
 est d'en maintenir la cohérence. Il existe différents facteurs pouvant 
@@ -310,8 +310,7 @@ Le modèle \gls{CCI} proposé par Sun et al. \cite{Sun1998} propose un modèle d
 cohérence pour les systèmes d’édition collaborative qui aborde ces problèmes
 afin d'assurer « la préservation 
 de la convergence, de la causalité et la préservation de l’intention » 
-\cite{Sun1998}. Une majorité de travaux se sont intéressés à ces propriétés sur 
-des documents textuels \cite{Weiss2010}. 
+\cite{Sun1998}. Une majorité des travaux qui se sont intéressés aux propriétés \gls{CCI} portent sur des documents textuels \cite{Weiss2010}. 
 
 Cette thèse s’intéresse précisément à l’édition collaborative d’espace de travail en 
 3D. 
@@ -491,7 +490,8 @@ fait que <<~chaque utilisateur doit obtenir une meilleure compréhension de
 l'environnement~>>. Pour cela, ils se placent dans un cadre où il est nécessaire 
 de gérer plusieurs utilisateurs avec des connexions différentes (bas débit et haut 
 débit) avec des connexions au réseau qui ne sont pas fiables et une réplication 
-partielle des données pour minimiser les événements non voulus.\info{consistency cohérence conflits} L'analyse des applications utilisant des 
+partielle des données pour minimiser les événements non voulus\info{consistency cohérencec
+conflits}. L'analyse des applications utilisant des 
 systèmes orientés événements explique 
 qu'ils sont obligés de faire des choix spécifiques au métier lié à l'application 
 \cite{Hinze2009}. Par exemple, dans les applications de jeux vidéo, la distribution 

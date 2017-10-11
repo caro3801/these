@@ -42,7 +42,7 @@ de commutativité sont plus faciles à gérer (insertion / suppression) en
 comparaison à celles concernant la \gls{3D} (multiplication de matrices de 
 rotation). La génération de conflits en \gls{3D} peut vite devenir incontrôlable. Il est 
 donc nécessaire de mettre en place des mécanismes de détection de 
-conflit et de maintenir une cohérence au cours des sessions de 
+conflits et de maintenir une cohérence au cours des sessions de 
 collaboration. 
 
 
@@ -56,11 +56,11 @@ collaboration.
 %L'un des atouts de cette technologie est de permettre de façon simple et 
 %sans module d'extension la capture d'un flux audio et / ou vidéo (ex : 
 %applications de VoIP), ainsi que l'échange de données arbitraires entre 
-%navigateurs sans nécessiter d'intermédiaires (ex : partage de fichier en 
+%navigateurs sans nécessiter d'intermédiaires (ex : partage de fichiers en 
 %\gls{P2P}).
 %Techniquement, \gls{WebRTC} supporte un canal temps-réel 
 %bidirectionnel pour l'échange de données. Contrairement à 
-%\gls{WebSocket}, qui est basé sur \gls{TCP}, \gls{WebRTC} se base sur 
+%\gls{WebSocket}, qui est basé sur \gls{TCP}, \gls{WebRTC} repose sur 
 %\acrshort{UDP} en intégrant une pile de plusieurs protocoles (Figure 
 %\ref{fig:protocolstack}) qui lui offre des fonctionnalités similaires (fiabilité, 
 %ordonnancement, sécurité). 
@@ -71,13 +71,13 @@ collaboration.
 \paragraph{Contribution}
 La mise en place d'une architecture de communication 
 hybride permet de concilier à la 
-fois les avantages d'une architecture client-serveur et ceux du \gls{P2P} en évitant 
+fois les avantages d'une architecture client-serveur et ceux du \gls{P2P}, en évitant 
 certains désavantages occasionnés dans ces derniers (engorgement du serveur, 
 pair seul sur le réseau\dots). 
 Le terme \og hybride\fg{} invoque un compromis entre la 
 centralisation de l'information nécessaire à la prise de décision globale et 
 la décentralisation des échanges utile à l'amélioration du partage de 
-contenu \gls{3D} à l'échelle locale. 
+contenus \gls{3D} à l'échelle locale. 
 En agissant sur ces deux échelles, la granularité de la collaboration est plus fine. 
 Par exemple, le passage à l'échelle est facilité par la présence de 
 ressources locales et la coordination des utilisateurs se fait à une échelle 
@@ -89,7 +89,7 @@ est d'obtenir une architecture de communication :
 \begin{itemize}
 	\item entièrement basée web ; 
 	\item robuste face à l'évolution du nombre de collaborateurs ; 
-	\item efficace en terme d'accès et de distribution de la donnée ; 
+	\item efficace en termes d'accès et de distribution de la donnée ; 
 	\item et qui s'adapte à l'échelle selon les besoins de la collaboration.
 \end{itemize}
 
@@ -105,17 +105,17 @@ Les contributions portées par Desprat et al. dans \cite{Desprat2015a} et \cite{
 s'appuient sur des pairs ayant un rôle simple et proposent une transmission des 
 mises à jour en tant que différentiel d'état. Les conflits lors d'opérations 
 concurrentes sont évités grâce à un mécanisme de verrouillage. 
-Plus tard dans \cite{Desprat2016}, les auteurs mettent en place le modèle 
+Plus tard, dans \cite{Desprat2016}, les auteurs mettent en place le modèle 
 orienté événements qui impose l'évolution, au niveau réseau, du protocole 
 de transmission (celui-ci reposant sur 
 des notifications d'événements et la gestion des flux d'agrégat). 
-Plus récemment dans \cite{Desprat2017}, est apparue la distinction entre 
+Plus récemment, dans \cite{Desprat2017}, est apparue la distinction entre 
 les deux rôles parmi les pairs : la 
 partie serveur se compose désormais de pairs qui ont un rôle de vérification 
 de la cohérence et de relais des données dans la couche \gls{P2P}. Cette 
 contribution intervient dans le but d'encourager la résilience du système et la 
-vitesse de dissémination des informations dans le réseau en favorisant la prompte 
-détection de conflit (source de vérité plus proche des pairs producteurs). 
+vitesse de dissémination des informations dans le réseau, en favorisant la prompte 
+détection de conflits (source de vérité plus proche des pairs producteurs). 
 Cette extension repose sur la présence d'un journal d'événements partagé et 
 répliqué sur les pairs participants à la collaboration.
 
@@ -130,7 +130,7 @@ répliqué sur les pairs participants à la collaboration.
 Cette section décrit le modèle d'architecture mis en 
 place pour gérer la transmission de contenu entre les différents clients 
 qui participent à l'édition collaborative d'un espace de travail \gls{3D} partagé. 
-Les différents protocoles de transmission issus des travaux sus-nommés 
+Les différents protocoles de transmission, issus des travaux sus-nommés, 
 sont présentés. Ils montrent ainsi l'évolution de l'architecture de communication de 
 sa version naïve à la version étendue, plus proche des considérations métiers et 
 offrant plus de liberté dans la création grâce la mise en place d'un système inspiré 
@@ -175,9 +175,9 @@ fonctions sont divisées en trois :
 
 
 Chaque pair générique fournit de base une \gls{API} pour les fonctions d'échange 
-de message et de recherche. 
+de messages et de recherche. 
 L'\gls{API} de recherche est principalement en lien avec le 
-gestionnaire d'instance qui se charge de la recherche, mais il est possible de se 
+gestionnaire d'instances qui se charge de la recherche, mais il est possible de se 
 connecter à des pairs via d'autres pairs si le serveur est absent ou pour renforcer 
 le maillage.
 L'élément responsable de la couche de routage et d'échange de messages permet 
@@ -191,19 +191,18 @@ d'établissement de connexion
 (cf signaling mecanism\todo{ref section signaling}).
 La couche applicative permet  d'échanger des messages avec les autres pairs 
 dans le réseau en utilisant l'\gls{API} réseau, et les messages reçus peuvent être 
-transférés à leur destination en utilisant la fonction de transfert de message. 
+transférés à leur destination en utilisant la fonction de transfert de messages. 
 
-Le contenu partagé est stocké localement pour pouvoir être accessible par 
-d'autres 
-pairs ainsi que l'interface de l'application du pair courant. Le contenu doit être 
-organisé pour la recherche d'information afin de fournir une indexation et une 
+Le contenu partagé est stocké localement pour pouvoir être accessible par d'autres 
+pairs, ainsi que l'interface de l'application du pair courant. Le contenu doit être 
+organisé pour la recherche d'informations afin de fournir une indexation et une 
 interface de requête. 
 L'espace de stockage pour les données partagées va correspondre aux différents 
 états des agrégats \cite{Desprat2015a,Desprat2015b} ou au journal d'événements 
 \cite{Desprat2016,Desprat2017}.
 
 
-La dernière fonction concerne la manière dont le pair auto-organise à la fois ses 
+La dernière fonction concerne la manière dont le pair auto-organise, à la fois, ses 
 ressources locales et son rôle dans le réseau. Le pair détermine les 
 ressources du système et du réseau disponibles et peut surveiller les 
 changements éventuels régulièrement.
@@ -214,7 +213,7 @@ capacités et la configuration de chaque pair, i.e. un pair actif est configuré
 uniquement pour produire, stocker et relayer les données tandis qu'un pair passif ne fait que stocker et relayer les données. La stabilité du pair peut être indiquée par son niveau de 
 \textit{churn} (dynamicité : rejoindre et quitter un réseau) par exemple. 
 La Figure \ref{fig:middleware} peut être affinée en fonction du type de 
-réseau et d'applications. Chaque pair comprend un protocole pour la gestion
+réseaux et d'applications. Chaque pair comprend un protocole pour la gestion
 de sessions (ex: REST API) et pour l'échange de données (ex: RTCDataChannels)  
 pour pouvoir participer à la collaboration.
 
@@ -273,7 +272,7 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	\end{enumerate}
 	
 	Ces quatre phases sont distinctes même si, lorsqu'un pair initialise ou rejoint 
-	d'une 
+	une 
 	session collaborative (séquence d'initialisation), les phases 
 	\ref{phase1signaling}, \ref{phase2sync} et \ref{phase3gen} s'enchainent pour 
 	ce pair. Durant la session collaborative, les phases \ref{phase2sync} et 
@@ -288,13 +287,13 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	Dans l'architecture hybride, il existe deux niveaux de stockage : la persistence 
 	long-terme, distante -- la base de données -- et la persistence court-terme, 
 	locale -- le navigateur.
-	Le serveur assure d'une part la centralisation du stockage à long-terme et 
-	d'autre part la mise en relation des différents clients.
+	Le serveur assure, d'une part, la centralisation du stockage à long-terme, et 
+	d'autre part, la mise en relation des différents clients.
 	\item [Gestion de la synchronisation et de la cohérence (détection des conflits)] 
 	Il existe différentes possibilités de synchronisation des pairs. 
 	
 	L'édition concurrente lors de la collaboration peut être gérée de différentes 
-	manières selon si elle est plutôt pessimiste ou optimiste lors de la réplication 
+	manières, selon si elle est plutôt pessimiste ou optimiste lors de la réplication 
 	des 
 	données (voir Section \ref{sec:concurrence}). L'intégration d'une solution ou 
 	l'autre 
