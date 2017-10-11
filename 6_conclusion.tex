@@ -2,20 +2,126 @@
 \chapter{Conclusion}
 \chaptertable
 
-Cette thèse présente une architecture événementielle pour les \gls{EVC} sur le 
-web. Les contributions de cette thèse sont multiples. Il y a d'une part les 
-contributions scientifiques qui porte sur l'\gls{EDA} pour la 
-modélisation 3D collaborative et d'autre part, il y a la présentation d'une 
-architecture de communication hybride permettant de synchroniser les 
-\glspl{EVC3D} sur le web de différents client.
+Cette thèse s'inscrit dans le contexte la visualisation et de la manipulation d'objets 
+3D dans un \gls{EVC} sur le web. Ce sujet intègre de nombreux verrous 
+concernant différents domaines que la collaboration a tendance à réunir : gestion 
+de la cohérence dans un environnement collaboratif massif en \gls{P2P}, 
+architecture de communication efficace pour le passage à l'échelle et la résilience, 
+modèle de données dédiée au métier de la modélisation 3D collaborative. 
 
-Chacune de ces contributions est accompagnée de son implantation. 
+Pour répondre aux différentes question de 
+recherche posées en introduction de ce manuscrit, plusieurs contributions ont été 
+proposées, implantées et soumises à des expérimentations. 
 
-De plus, la réalisation de plusieurs prototypes fonctionnant sur différents 
-paradigme pour les expérimentation ont permis de montrer les avantages et 
-inconvénients de ceux-ci.
+%	\item[QR 1] Quelle architecture réseau est la plus adaptée pour une gestion 
+%efficace, robuste et temps réel des données \gls{3D} dans un environnement 
+%web ?
+La \textbf{QR 1} concerne l'architecture réseau qu'un \gls{EVC3D} doit proposer 
+pour 
+pouvoir s'adapter à une gestion efficace, robuste et temps réel des données dans 
+un environnement web. En effet, pour pouvoir collaborer les utilisateurs ont besoin 
+d'une architecture de communication qui les relie de manière transparente 
+intégrant un modèle de cohérence des données. 
 
-Enfin, les expérimentations principalement portées sur l'étude des utilisateurs 
-permet de souligner plusieurs aspects du modèle. Le premier est de montrer que 
-l'intégration du métier a permis l'observation minutieuse du travail réalisé au sein 
-de l'environnement. 
+L'architecture de communication au sein de l'\gls{EVC3D} a été l'objet de deux 
+contributions successives, la seconde s'inspirant des verrous issus de la 
+première. 
+L'architecture hybride à maillage complet se compose d'éléments 
+simples. 
+Seuls 
+les navigateurs des utilisateurs participent au réseau \gls{P2P}. Les données 
+correspondent à l'état des objets manipulés. Les modifications sont transférées 
+sous la forme d'un différentiel d'état. Bien que la politique de connectivité ne 
+permettent pas un passage à l'échelle efficace, la cohérence des données sur le 
+réseau est garantie de manière forte et pessimiste respectivement par le protocole 
+de transport est configuré comme fiable et ordonnés, et par le mécanisme de 
+verrouillage afin d'éviter l'édition concurrente d'objets 3D.
+
+Partant de ces observations, la seconde contribution liées à l'architecture de 
+communication repose sur le paradigme événementiel. Une politique de 
+connectivité plus lâche permet aux pairs de devenir relais des informations. La 
+partie serveur est \og descendue\fg{} au niveau de la couche \gls{P2P} pour 
+permettre un accès réparti des pairs producteurs de données (navigateurs) à la
+persistance des données via des pairs relais. L'ensemble des pairs partage un 
+journal d'événements qui est maintenu à jour et cohérent par à deux niveaux de 
+vérification : au niveau du pair, avec un système de version lié à l'ordre causal 
+puis au niveau de la grappe, avec un système de vote lors de la détection de 
+conflit pour accepter ou rejeter collectivement un événement. La cohérence repose 
+sur une stratégie optimiste avec des contraintes sur les règles métiers dont la 
+permissivité peut être configurée.
+L'expérimentation 2, reposant sur cette seconde architecture, a montré que ce 
+modèle optimiste est moins frustrant pour les utilisateurs. La couche \gls{P2P} est 
+enrichie de nouveaux pairs dédiés à la transmission des données qui permettent 
+une dissémination plus stable et rapide. Selon le nombre d'utilisateur, la montée 
+en charge peut plus facilement être absorbée.
+
+
+%\item[QR 2] Quelle architecture logicielle confère une traçabilité des données 
+%conforme aux règles métier liées à la manipulation d'objet \gls{3D} ? 
+
+Dans la \textbf{QR 2} sont évoqués les verrous souvent rencontrés dans la 
+modélisation 3D et particulièrement lorsque le volet collaboratif s'invite. Les 
+fonctionnalités d'historique et de défaire / refaire une action sont fondamentales en 
+modélisation 3D. Pour assurer un suivi de la création sans perdre l'intention de 
+l'utilisateur de son action à sa visualisation, la modélisation sur le paradigme 
+événementiel est adapté par ses capacités à permettre une forte traçabilité des 
+changements qui se produisent au sein d'un système. La modélisation passe, 
+dans un premier temps, par le suivi des bonnes pratiques énoncées par le 
+\gls{DDD} pour cerner les différents agrégats qui composent le domaine de la 
+modélisation 3D collaborative. 
+Puis, dans un second temps, deux principes sont combinés dans l'application 
+cliente : 
+\begin{enumerate*}[label=(\roman*)]
+	\item \label{item:cqrs}la séparation de la partie écriture de la partie lecture 
+	(\gls{CQRS}) ;
+	\item \label{item:es} la création d'événements auto-descriptifs du changement 
+	qui vient de se 
+	produire (\gls{ES}).
+\end{enumerate*}
+%\begin{itemize}
+\ref{item:cqrs} offre un large panel de niveaux de vérification des données fournies 
+par l'utilisateur 
+et valider les règles métier qui peuvent s'appliquer sur celles ci avant qu'elles 
+n'entrent de façon immuables dans le système. Côté lecture, les vues dans 
+l'interface sont les projections 
+
+\ref{item:es} 
+%
+%\item[QR 3] Quels sont les mécanismes assurant à l'utilisateur d'être 
+%autonome tout en ayant la possibilité de collaborer ?
+
+Une partie de la contribution décrivant le modèle événementiel révèle une partie de 
+la réponse à la \textbf{QR 3}.
+Le patron \gls{CQRS} est déporté en totalité sur le client, ce q
+
+%
+%\item[QR 4] Comment faciliter l'implémentation d'un tel système en garantissant 
+%le respect des règles métier liés à la manipulation d'objet \gls{3D}?
+%
+%\item[QR 5] Quelles sont les métriques (réseau, collaboration) permettant 
+%d'évaluer un tel système de manière quantitative ? Qualitative ?
+%
+%
+%
+%
+%
+%
+%\end{itemize}
+%Cette thèse présente une architecture événementielle pour les \gls{EVC3D} sur 
+%le 
+%web. Les contributions de cette thèse sont multiples. Il y a d'une part les 
+%contributions scientifiques qui porte sur l'\gls{EDA} pour la 
+%modélisation 3D collaborative et d'autre part, il y a la présentation d'une 
+%architecture de communication hybride permettant de synchroniser les 
+%\glspl{EVC3D} sur le web de différents client.
+%
+%Chacune de ces contributions est accompagnée de son implantation. 
+%
+%De plus, la réalisation de plusieurs prototypes fonctionnant sur différents 
+%paradigme pour les expérimentation ont permis de montrer les avantages et 
+%inconvénients de ceux-ci.
+%
+%Enfin, les expérimentations principalement portées sur l'étude des utilisateurs 
+%permet de souligner plusieurs aspects du modèle. Le premier est de montrer que 
+%l'intégration du métier a permis l'observation minutieuse du travail réalisé au sein 
+%de l'environnement. 
