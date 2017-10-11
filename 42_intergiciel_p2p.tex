@@ -186,10 +186,7 @@ du serveur.
 \subsection{Données d'échange}
 En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
 d'un format de données permettant de faire communiquer des acteurs hétérogènes 
-du système. Le format \gls{JSON}, dérivé de la notation des objets du langage 
-JavaScript, est lisible et interopérable.
-Ce format de données est assez abstrait et suffisamment générique pour 
-représenter n'importe quelle donnée. 
+du système.
 Le format \gls{JSON} est assez générique pour être aussi utilisé pour lors de la 
 sérialisation et la désérialisation des 
 événements et plus largement des paquets transmis par RTCDataChannel. 
@@ -237,13 +234,13 @@ paramètres]
 	"packetId" : "567826g6-766b-f0g9676b677r",
 	"streamId" : "scene-turbine",
 	"eventType" : "MeshAddedToSceneEvent",
+	"version" : 17,
 	"data" : {
 		"sceneId": "scene-turbine",
 		"meshId":"406514c6-306b-f0f9643a037e",
 		"geometryId": "37076875-ea1c-bbd300481345",
 		"name": "blade",
 		"color": "#963912",
-		"version": 17,
 		"author": "Foo"
 	}
 }
@@ -327,33 +324,30 @@ et s’interroge les uns les autre pour coherenc e globale.
 pour chaque event sauvé , l’Event store publie (push) l’event
 
 \begin{algorithm} % enter the algorithm environment
-	\caption{Sauvegarde des événements d'un agrégat dans l'Event Store} % 
+	\caption{Sauvegarde d'événements d'un agrégat dans l'Event Store} % 
 	%give the algorithm a caption
 	\label{algo:saveEvent} % and a label for \ref{} commands later in the document
 	\begin{algorithmic} % enter the algorithmic environment
-		\REQUIRE aggregateId : string, eventMessages : eventMsg[ ], 
+		\REQUIRE aggregateId : string, uncommitedEvents : eventMsg[ ], 
 		version : number
 		%\ENSURE $y = x^n$
-		\STATE $currentVersion \Leftarrow version$
-		\FOR{$eventMsg $ \textbf{in} $eventMessages$}	
-		\STATE{$eventMsg.version = ++ currentVersion$}
+		\STATE $expectedVersion \Leftarrow version$
+		\FOR{$eventMsg $ \textbf{in} $uncommitedEvents$}	
 		\STATE{$newMsg \Leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
 streamId : aggregateId\}$}
-		\STATE{$publish(aggregateId, newMsg, currentVersion)$}
+		\STATE{$publish(aggregateId, newMsg, expectedVersion++)$}
 		\ENDFOR
 	\end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm} % enter the algorithm environment
-	\caption{Ajout d'un événement dans l'Event Store Partagé} % 
+	\caption{Ajout d'un événement dans l'Event Store} % 
 	%give the algorithm a caption
 	\label{algo:addevent} % and a label for \ref{} commands later in the document
 	\begin{algorithmic} % enter the algorithmic environment
 		\REQUIRE streamId: string, event: EventStoreEvent, version: number
-		\IF{$ streamId \notin streams$}
-		\STATE$ streams.create(streamId)$
-		\ENDIF
-		\STATE $stream \Leftarrow streams.get(streamId);$
+		\ENSURE event
+		\STATE $stream \Leftarrow streams.getOrCreate(streamId);$
 		\IF{$ stream.has(version)$}
 		\STATE $throwExceptionVersion(stream,version)$
 		\ENDIF
@@ -361,7 +355,17 @@ streamId : aggregateId\}$}
 	\end{algorithmic}
 \end{algorithm}
 
-
+    % publish(stream: string, event: DomainEvent, version: number) {
+    %     let wrappedEvent = this.processEvent(stream, event, version);
+    %     if(wrappedEvent) {
+    %         for (var [to, node] of this.clusterNodes) {
+    %             if (node.nodeState === NodeStatus.READY) {
+    %                 //TODO revoir l'envoie des events, peut être par stream
+    %                 node.sendEvent(stream, wrappedEvent, wrappedEvent.index)
+    %             }
+    %         }
+    %     }
+    % }
 categories: type d’agregat
 c’est un flux liés a une categorie (exemple geometries) tous les events liés à la 
 categorie.
@@ -426,7 +430,7 @@ et le plus rapide repond et ça continue jusqu’a synchro . ignore si deja pres
 
 \subsubsection{Gestion des événements des agrégats}
 
-La configuration des connexions RTCDataChannel peut être configurée de selon 
+Une connexion RTCDataChannel peut être configurée selon 
 les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancement. 
 Dans l'intergiciel de 3DEvent, cette configuration est : non fiable et non ordonnée. 
 C'est l'application qui est en charge de \og ré-ordonner\fg{} les événements. En 
@@ -446,71 +450,14 @@ Cette mécanique tire avantage des Snapshots (présentés dans \todo{ref section
 qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déjà d'un 
 état avancé.
 
-\subsubsection{Sélection fantôme}
-Les interactions utilisateurs doivent être adaptées à la collaboration et aux 
-manipulations à effectuer. Pour cela, l'éditeur 3DEvent introduit la fonctionnalité de 
-sélection \og fantôme\fg{}. Lorsqu'un utilisateur souhaite sélectionner un objet de 
-la scène, l'objet original ($O_o$) est 
-cloné et devient l'objet fantôme ($O_f$). $O_f$ conservent les mêmes propriétés, 
-représenté avec de la 
-transparence d'où le terme \og fantôme\fg{}. 
-L'objet $O_f$ prend alors le focus de sélection pour que l'utilisateur le manipule à 
-la place de l'objet $O_f$. 
-Lorsque l'utilisateur relâche $O_f$, alors la modification intentée s'applique sur 
-$O_o$ avec le principe du \textit{Last Write Last Win} (le dernier gagne).
-La Figure \ref{fig:ghostselection} 
-représente la sélection fantôme lors de la translation du corps du rotor par 
-l'utilisateur Foo : c'est l'objet transparent qui est manipulé alors que l'objet opaque 
-représente sa position originale. 
-En différenciant l'actuel objet que l'utilisateur souhaite sélectionné ($O_{o}$) de 
-celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
-\begin{itemize}
-	\item l'ergonomie dans l'environnement \gls{3D} :
-	$O_f$ est un objet temporaire qui permet à l'utilisateur
-	d'avoir une visualisation de l'objet en cours de manipulation tout en 
-	conservant le dernier état de $O_o$ visible. 
-	$O_o$ peut être considéré comme un point de repère visuel pour l'utilisateur 
-	lorsqu'il effectue sa manipulation. 
-	L'$O_f$ a aussi un rôle d'intermédiaire entre l'utilisateur et la 
-	finalité de l'interaction en donnant un support visuel à sa réflexion experte.
-	Grâce à $O_f$, l'utilisateur peut également révoquer sa manipulation en 
-	cours sans avoir eu d'impact sur $O_o$ en évitant des actions inutiles (faire 
-	l'action 
-	puis la défaire) pour le métier et coûteuses pour le réseau.
-	
-	\item la collaboration : si un collaborateur effectue une modification 
-	à destination du même $O_o$ alors la représentation de $O_o$ chez 
-	l'utilisateur est également modifiée. $O_f$ par contre ne subit pas d'impact ; 
-	l'utilisateur peut continuer sa manipulation et~/~ou l'ajuster en fonction des 
-	nouvelles informations liées à $O_o$ ou même révoquer sa manipulation 
-	en cours si cela lui convient.
 
-	\item le métier : seules les manipulations menées à terme sont 
-	considérées comme des commandes. Cela évite d'avoir des événements qui ne 
-	sont pas pertinents pour le métier dans le journal d'événements (comme lorsque 
-	l'utilisateur change d'idée lors de l'interaction ou
-	suite à une intervention concurrente). L'utilisateur n'a un impact sur l'application 
-	que lorsqu'une modification métier est réalisée.
-	
-	\item le réseau : l'information importante à faire transité est l'événement 
-	correspondant à la modification métier pas toutes les positions intermédiaires 
-	même si intuitivement l'idée de temps réel pourrait conduire à cette solution. La 
-	quantité de messages produite surchargerai à la fois le réseau et le fil 
-	d'exécution principale de l'application. En effet, \gls{WebRTC} a l'inconvénient 
-	pour le 
-	moment de ne pas pouvoir s'exécuter dans un \textit{Web Worker} (fil 
-	d'exécution 
-	parallèle en JavaScript). Cette solution imposerai des 
-	latences réseau et d'\gls{IU} qui affecteraient gravement l'expérience utilisateur
-	sans apporter d'informations supplémentaires à l'aspect métier de la 
-	collaboration. 
-\end{itemize}
-
-
-\begin{figure}[ht]
+\begin{figure}
 	\centering
-	\includegraphics[trim={0 0 0cm 0}, clip, 
-	width=0.8\columnwidth]{eps/1translatehisto.eps}
-	\caption{Illustration de la sélection fantôme dans l'environnement 3D}
-	\label{fig:ghostselection}
+	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
+	\caption{Exemple d'agrégats}{Structure d'un agrégat et ses versions. Chaque 
+	version est un état de l'agrégat qui correspond à l'empilement des instances 
+	d'événements (ei) qu'il contient. Les types des événements sont relatifs au type 
+	d'agrégat dans lequel il est contenu.}
+	\label{fig:aggregate}
 \end{figure}
+

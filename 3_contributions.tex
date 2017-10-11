@@ -6,8 +6,8 @@ Les \gls{EVC3D} doivent considérer beaucoup de critères pour
 proposer un système réactif, robuste et permettant le passage à l'échelle en 
 intégrant les contraintes liées à la gestion de données \gls{3D}. La dimension 
 collaborative ajoute les problématiques de gestion de données concurrentes.
-En s'intéressant d'abord aux spécificités liées à 
-l'assemblage d'objets \gls{3D} dans une scène partagée cela permet de 
+S'intéresser d'abord aux spécificités liées à 
+l'assemblage d'objets \gls{3D} dans une scène partagée permet de 
 mieux comprendre les fonctionnalités spécifiques à la \gls{3D} (transformations), 
 à l'historisation et à la visualisation des données. De plus, les données générées
 doivent suivre un flux de validation avant d'être intégrées totalement au système.
@@ -16,31 +16,27 @@ et une forte réactivité qui implique la modélisation d'une architecture
 de communication répondant aux contraintes fonctionnelles (détection de conflit) 
 et technologiques (web).
 
-Ce chapitre présente les contributions scientifiques de cette thèse.
+Ce chapitre détaille les contributions scientifiques de cette thèse.
 Tout d'abord, il présente le modèle orienté événements pour la 
-visualisation et la manipulation d'objets \gls{3D} dans un environnement web. La 
-contribution insiste sur l'intégration de la partie métier de la \gls{3D} par l'utilisation 
-de
+visualisation et la manipulation d'objets \gls{3D} dans un environnement web. 
+Cette première contribution insiste sur l'intégration de la partie métier de la 
+\gls{3D} par l'utilisation de
 patrons de conception (\gls{DDD}, \gls{CQRS}, \gls{ES}). La réflexion concernant 
 le découpage des opérations \gls{3D} liées à la manipulation d'objets \gls{3D} est 
-expliquée 
-dans un premier temps. Dans un second temps, pour procurer plus d'autonomie 
+d'abord expliquée ; puis, pour procurer plus d'autonomie 
 aux utilisateurs, la contribution intègre le fait de déporter le patron \gls{CQRS} 
 uniquement sur le client afin qu'il soit capable de gérer la partie métier seul. 
-La valeur ajoutée par le modèle orienté événements ne permet pas l'échange entre les
-utilisateurs bien qu'elle soit pensée pour intégrer les aspects métiers de cette
-dernière. 
+La valeur ajoutée par le modèle orienté événements est l'intégration des aspects métiers de la modélisation 3D des actions des utilisateurs à la visualisation. 
 
-La seconde contribution s'intéresse à l'architecture de 
-communication dans un environnement web. L'architecture de communication doit 
+La seconde contribution de cette thèse concerne l'architecture de 
+communication dans un environnement web. Celle-ci doit 
 permettre au système d'être résilient, léger et transparent. 
 L'architecture hybride proposée repose sur une combinaison de l'architecture 
 client-serveur et l'architecture \gls{P2P}. 
-Cela tient du fait que la centralisation de l'information est nécessaire dans un 
-contexte industriel et que les propriétés du \gls{P2P} permettent une haute disponibilité 
-des ressources. Cette contribution est découpée en deux parties. La première 
-concerne la présentation d'une preuve de concept sur la base du modèle présenté 
-dans \cite{Desprat2015a} avec une architecture de communication simple 
+Cela tient à la nécessaire centralisation de l'information dans un 
+contexte industriel et à la haute disponibilité des ressources que permettent les propriétés du \gls{P2P}. Cette contribution est découpée en deux parties. La première 
+expose une preuve de concept, sur la base du modèle présenté 
+dans \cite{Desprat2015a}, avec une architecture de communication simple 
 proposant une diffusion des mises à jour par différentiel d'état. La seconde partie 
 tire avantage de la mise en place du \gls{framework} orienté événements présenté 
 dans 

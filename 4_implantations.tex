@@ -5,22 +5,22 @@
 
 \section{Introduction} 
 Cette section présente l'implantation de 3DEvent, la plateforme web de 
-manipulation et visualisation collaborative d'objets 3D réalisée à partir du modèle 
+manipulation et de visualisation collaborative d'objets 3D réalisée à partir du modèle 
 présenté dans le chapitre précédent.
 
 La première partie s'intéresse à l'intégration 
 du framework pour proposer une application d'assemblage d'objets 3D. La 
 présentation commence avec la description de l'\gls{IU} et des fonctionnalités 
 proposées dont le principe de sélection fantôme et le système de visualisation 
-flexible reposant sur le système de projection du modèle orienté événements. 
-En proposant une application qui repose sur les standards du web, elle est 
+flexible reposent sur le système de projection du modèle orienté événements. 
+En proposant une application basée sur les standards du web, elle est 
 accessible au plus grand nombre sans requérir d'installation et peut évoluer dans 
 le temps avec les standards. 
 %\blockquote{The power of the Web is in its universality. Access by everyone 
 %regardless of disability is an essential aspect}{Tim Berners-Lee.}
 
-La seconde présente l'implémentation de l'architecture de communication avec les 
-différentes implémentation des acteurs du système, les politiques de connexion et 
+La seconde partie présente l'implémentation de l'architecture de communication avec les 
+différentes implémentations des acteurs du système, les politiques de connexion et 
 l'intergiciel \gls{P2P} qui permettent l'échange de données entre les collaborateurs.
 
 Enfin, la troisième section récapitule et discute les choix techniques pour 
@@ -28,10 +28,10 @@ l'interface utilisateur et la partie réseau qui ont été fait dans l'implémen
 
 
 \section{3DEvent : Plateforme web de manipulation collaborative d'objets 3D}
-Dans le chapitre précédent une des contribution présentée correspond au 
+Dans le chapitre précédent, une des contributions présentées correspond au 
 modèle orienté événements : le \gls{framework} 3DEvent. 
 L'implantation d'un tel système contient plusieurs éléments comme l'éditeur 
-web et son l'interface utilisateur. Les éléments de sensibilisation à la collaboration 
+web et son interface utilisateur. Les éléments de sensibilisation à la collaboration 
 sont également implantés comme le mécanisme de sélection multiple. Enfin, le 
 système de visualisation flexible est un composant qui s'intègre du côté de la 
 partie lecture en \gls{CQRS} pour proposer un contenu adapté au client. 
@@ -42,9 +42,9 @@ partie lecture en \gls{CQRS} pour proposer un contenu adapté au client.
 événementiel}
 
 L'architecture de communication décrite dans le chapitre précédent nécessite 
-l'implémentation d'un intergiciel \gls{P2P} compatible avec les besoins liés à la 3D, le 
-web et la collaboration. Cette section décrit les politiques de connexion pour 
-l'éditeur présenté dans la section précédente ainsi que les mécanismes de 
+l'implémentation d'un intergiciel \gls{P2P} compatible avec les besoins liés à la 
+3D, le web et la collaboration. Cette section décrit les politiques de connexion 
+pour l'éditeur présenté dans la section précédente ainsi que les mécanismes de 
 synchronisation nécessaire à l'échange de données dans l'application. 
 
 \input{42_intergiciel_p2p}
@@ -53,13 +53,13 @@ synchronisation nécessaire à l'échange de données dans l'application.
 \section{Résumé des choix techniques}
 
 \paragraph{TypeScript et JavaScript}
-JavaScript est un langage orienté objet à prototype principalement utilisé dans les 
-pages web interactives (scripts) mais aussi sur les serveurs (ex: Node.js).
-L'application est implémtentée en TypeScript. TypeScript est un langage libre et 
+JavaScript est un langage orienté objet à prototype principalement utilisé dans 
+les pages web interactives (scripts) mais aussi sur les serveurs (ex: Node.js).
+L'application est implémentée en TypeScript. TypeScript est un langage libre et 
 open-source développé par Microsoft. C'est un sur-ensemble de \gls{JS}, i.e. il 
 peut intégrer du \gls{JS}). Le code écrit en TypeScript est transpilé en \gls{JS} 
-pour être interprété par le moteur \gls{JS} d'un navigateur. TypeScript intègre les 
-notions de type et de classe notamment qui permet d'améliorer et sécuriser la 
+pour être interprété par le moteur \gls{JS} d'un navigateur. TypeScript intègre la 
+notion de type qui permet d'améliorer et sécuriser la 
 production de code \gls{JS}.
 
 

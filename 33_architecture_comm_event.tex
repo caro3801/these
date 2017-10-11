@@ -2,9 +2,9 @@
 événements\fg{}}
 \label{sec:comm_event}
 
-Cette architecture est une combinaison des contributions présentés dans 
+Cette architecture est une combinaison des contributions présentées dans 
 \cite{Desprat2016,Desprat2017} : elle repose sur les éléments du 
-framework orienté événement (Section \todo{ref modele event}) qui sont également 
+framework orienté événements (Section \todo{ref modele event}) qui sont également 
 en relation avec la couche réseau (Figure \ref{fig:archievent}).
 \begin{figure}[]
 	\centering
@@ -16,24 +16,24 @@ en relation avec la couche réseau (Figure \ref{fig:archievent}).
 \subsubsection{Spécificité des composants de l'architecture}
 L'Event Store est un composant clé dans le traitement des événements. Présent 
 sur chaque pair, il prend en entrée des événements de deux natures : ceux qu'il a 
-générés via la partie commande (internes) ou ceux reçus via le réseau 
+générés via la partie commande (internes) et ceux reçus via le réseau 
 principalement (externes). 
 L'Event Store produit en sortie des événements dit \og 
 cohérents\fg{} qui peuvent être publiés par la suite sur l'Event Publisher.
-Un Event Store est composé de deux types d'élements : 
+Un Event Store est composé de deux types d'éléments : 
 \begin{itemize}
 	\item l'\gls{ESM} qui gère les flux d'événements : structure de données 
 	présente dans chaque Event Store qui doit permettre l'accès en lecture et en 
-	écritures des agrégats qu'il contient. 
+	écriture des agrégats qu'elle contient. 
 	Un \gls{ESM} contient des flux d'événements ordonnés temporellement 
 	pour chaque agrégat géré ;
-	\item les \glspl{NB} qui servent de connecteurs réseaux : responsable de la 
+	\item les \glspl{NB} qui servent de connecteurs réseaux : responsables de la 
 	gestion d'une connexion \gls{P2P}, i.e. gère le flux de données entrant et 
 	sortant vers chaque pair auquel il est relié.
 \end{itemize}
 
 La Figure \ref{fig:archievent} montre des pairs (appelés instances) de différentes 
-nature :
+natures :
 \begin{itemize}
 	\item Instance Web :  produit, stocke et relaie des événements aux autres 
 	instances.
@@ -46,14 +46,14 @@ productrice d'événements. C'est en général le type d'instance par lequel un
 utilisateur accédera à l'application. Les Instances Serveurs, en comparaison avec 
 l'architecture présentée précédemment, sont des \og serveurs\fg{} qui participent 
 directement à la couche réseau. En cela ils aident à la dissémination des données 
-et peuvent rapidement être monté pour garantir une disponibilité des données 
-auprès des autres instances (notamment en cas de pannes).
+et peuvent rapidement être montés pour garantir une disponibilité des données 
+auprès des autres instances (notamment en cas de panne).
 Toutes les instances sont coordonnées par l'\gls{IM} qui est responsable de mettre 
 les pairs en relation. Il est notamment le serveur responsable dans le mécanisme 
 de \textit{signalling}. 
 
-L'ensemble des Event Stores forment une grappe (\textit{cluster}) qui gère le 
-journal d'événements partagé de manière réparti entre toutes les instances.
+L'ensemble des Event Stores forme une grappe (\textit{cluster}) qui gère le 
+journal d'événements partagé de manière répartie entre toutes les instances.
 \subsubsection{Gestion du stockage}
 \paragraph{Local avec l'\gls{ESM}}
 Lorsque l'Event Store reçoit de nouveaux événements, l'\gls{ESM} crée ou 
@@ -62,29 +62,29 @@ stocke l'événement à la suite de ceux présents dans le flux de l'agrégat.
 
 \paragraph{Long-terme et distant avec une base de données fonctionnelle}
 Dans un contexte industriel de collaboration, l'information doit être disponible sur le 
-long terme, facilement accessible par l'entreprise. La persistance à 
+long-terme, facilement accessible par l'entreprise. La persistance à 
 long-terme stocke le journal d'événements qui est la 
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
 
 Sur la base du modèle orienté événements, les données à stocker sont les 
 événements. Ils sont immuables et 
-sont des données purement fonctionnelles \todo{voir section \gls{ES} vs CS}.
+sont des données purement fonctionnelles\todo{voir section \gls{ES} vs CS}.
 L'utilisation d'une base de données fonctionnelle permet de se reposer sur 
 l'immuabilité des événements.
 L'argument souvent opposé à l'utilisation de telles bases est le coût de l'espace de 
-stockage. Or, le coût de la redondance et de la non localité du traitement des 
+stockage. Or le coût de la redondance et de la non localité du traitement des 
 données a chuté au cours de ces dernières années. 
 Une base de données dont les données muent -- i.e où chaque donnée peut être 
 modifiée à n'importe quel moment -- ne permet pas de conserver l'historique des 
 modifications (ex : \textit{Active Record}). Dans une base de données dite 
 fonctionnelle, la structure de données doit elle-même être fonctionnelle et donc 
-immuable -- i.e. ne peut être modifiée à posteriori et fait seulement référence à 
+immuable -- i.e. ne peut être modifiée a posteriori et fait seulement référence à 
 d'autres données immuables. Une telle base de données est \og une interface vers 
 des \textit{snapshots} versionnés\fg{} \cite{Meric2012}.
 
 Dans le cas de l'\gls{ES} les événements sont considérés comme des deltas 
-(avec quelques méta données supplémentaires) sur les agrégats. C'est donc sous 
+(avec quelques métadonnées supplémentaires) sur les agrégats. C'est donc sous 
 leur forme originale qu'ils sont stockés. Cela évite également les transformations 
 de données (et la perte d'information ou l'ajout de complexité) qui sont nécessaires 
 dans les \glspl{ORM}, en lecture et en écriture.
@@ -122,22 +122,22 @@ refernece sync mechanism}.
 Les événements sont considérés comme \og cohérents\fg{}  lorsqu'il n'y a pas 
 d'erreur de cohérence dans l'agrégat, i.e. lorsqu'il n'y a pas de doublon dans les 
 numéros de versions et qu'ils sont bien ordonnés. Lorsqu'un \gls{ESM} ne 
-rencontre pas de problème de cohérence alors le 
+rencontre pas de problème de cohérence, alors le 
 dernier index correspond au numéro de version de l'agrégat. 
 
 Lorsque l'Event Store reçoit un événement interne, l'\gls{ESM} récupère (ou crée) 
 le flux d'événements associés à l'agrégat référencé par l'événement. 
-Alors, la cohérence de la version est vérifiée en comparant la version attendue 
+La cohérence de la version est alors vérifiée en comparant la version attendue 
 (exposée dans les méta-données de l'événement) et la version actuelle de 
 l'agrégat. 
-Si les deux numéros de versions sont égaux, l'événement est ajouté à la fin du 
+Si les deux numéros de version sont égaux, l'événement est ajouté à la fin du 
 tableau du flux pour être stocké dans l'\gls{ESM}, sinon une exception est levée. 
 La gestion des exceptions est expliquée dans \info{détails exception}. 
 
 \paragraph{Mécanisme de gestion de version}
 3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
 de gérer au mieux la cohérence des données (voir Section \todo{ref section}). 
-Pour qu'ils le deviennent, l'agrégat concerné par ces 
+Pour être cohérent, l'agrégat concerné par ces 
 événements doit produire une nouvelle version sans être en conflit avec la 
 précédente. En passant la version attendue $v_a$ au gestionnaire de conflit, on 
 est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
@@ -163,10 +163,10 @@ données directement reliés à la base de données. De ce fait la politique de
 connectivité entre les pairs peut être réduite, la topologie du réseau correspond à 
 un maillage partiel (\textit{partial mesh topology}). 
 \subsubsection{Discussion des problématiques liés à une architecture de 
-communication orientrée \og événements\fg{}}
+communication orientée \og événements\fg{}}
 Architecture réactive à l'attrition. Tous les éléments participants à la gestion de 
 données, actifs dans la distribution ou producteurs de données, sont au même 
-niveau. Le réseau \gls{P2P} est renforcée par la présence de pairs présents pour 
+niveau. Le réseau \gls{P2P} est renforcé par la présence de pairs destinés à 
 faire le relais dans la distribution des données. 
 
 La gestion de la cohérence \todo{finir}

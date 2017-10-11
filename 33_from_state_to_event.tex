@@ -3,7 +3,7 @@
 Afin d'intégrer la notion d'historique dans une application web, plusieurs indicateurs 
 sont nécessaires (version, granularité de l'historisation, type et taille des données 
 manipulées). Cette section décrit le processus pour passer d'un système basé 
-états à un système basé évènements dans l'intérêt de réduire la somme des 
+états à un système basé événements dans l'intérêt de réduire la somme des 
 données transmises sans perdre d'information concernant la logique métier.
 \paragraph{Description des variables}
 Une scène $S$ contient l'ensemble des $n$ objets $x$ ($S =\{x_0,x_1,...,x_n\}$). 
@@ -28,8 +28,8 @@ unités homogènes.
 Dans un système où à chaque modification on transmet l'état complet (équation 
 \ref{eq:complet}), la taille des éléments transmis correspond à la somme de tous 
 les états par lesquels l'objet est passé. Cette valeur va augmenter par paliers de 
-tailles relativement équivalentes.
-La transmission par état permet d'avoir un historique grâce à une sauvegarde 
+tailles du même ordre de grandeur.
+La transmission par état propose un historique issu d'une sauvegarde 
 chronologique. Cependant elle est lourde voire redondante et n'offre pas 
 d'information sur l'intention de l'utilisateur (quelle opération a permis d'arriver à cet 
 état?).
@@ -61,12 +61,12 @@ qui ont conduit à l'état d'un objet 3D de la scène.
 - state_{v-1}}_{differential})
 \end{equation}
 
-\paragraph{Transmission par évènement}
-La transmission par évènement (équation \ref{eq:evenement}) repose sur le 
+\paragraph{Transmission par événement}
+La transmission par événement (équation \ref{eq:evenement}) repose sur le 
 principe du différentiel d'état ($differential$) exprimé ci-dessus (équation 
-\ref{eq:différentiel}) en ajoutant la notion de type d'évènement ($eventType$). Le 
-type d'un évènement indique le nom de la transformation à appliquer pour passer 
-d'un état à l'autre. Un évènement contient par nature une sémantique <<métier>> 
+\ref{eq:différentiel}) en ajoutant la notion de type d'événement ($eventType$). Le 
+type d'un événement indique le nom de la transformation à appliquer pour passer 
+d'un état à l'autre. Un événement contient par nature une sémantique <<métier>> 
 associée à chaque opération qui donne des indications sur l'intention de 
 l'utilisateur. 
 
@@ -76,10 +76,10 @@ l'utilisateur.
 differential}_{event}) 
 \end{equation}
 
-Dans un \gls{EVC3D}, il y a des évènements concernant à la fois la manipulation 
+Dans un \gls{EVC3D}, il y a des événements concernant à la fois la manipulation 
 3D, la navigation et les éléments se rapportant à la collaboration (par exemple: 
-prendre le point de vue d'un collaborateur). La taille d'un évènement est variable 
-(comme un différentiel d'état) avec un minimum contenant le type d'évènement 
+prendre le point de vue d'un collaborateur). La taille d'un événement est variable 
+(comme un différentiel d'état) avec un minimum contenant le type d'événement 
 ($eventType$) dû à sa structure type/paramètres. Cette proposition est un peu 
 plus lourde à transmettre que la précédente mais ajoute une valeur sémantique à 
 l'historique.

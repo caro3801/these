@@ -45,7 +45,7 @@ données a tendance à être optimisée en lecture (grâce à un
 langage de requête dédié) et permet d'éviter les 
 structures rigides. Cette flexibilité est utile lors du stockage des modèles \gls{3D} 
 et 
-encourage la conservation d'autres méta données (ex: relations entre les différents 
+encourage la conservation d'autres méta-données (ex: relations entre les différents 
 objets) pour faciliter la traçabilité. 
 Avec une base de données centralisée, le système possède une source de 
 données fiable et autoritaire qui permet à un utilisateur de récupérer le bon contenu 
@@ -59,7 +59,7 @@ Avec une base de données NoSQL utilisant des schémas dynamiques, les
 données sont stockées sous forme de document. Chaque document est 
 auto-descriptif et peut contenir des valeurs qui s'imbriquent sous la forme d'une 
 structure en arbre hiérarchique. Une collection consiste à grouper des documents, 
-équivalent dnas une base de données relationnelle à la notion de table. La base de 
+équivalent dans une base de données relationnelle à la notion de table. La base de 
 données contient deux types de collections : les scènes et les géométries. Une 
 collection de scènes contient des scènes qui sont décrites par leur identifiant et 
 les méta-données de l'espace virtuel \gls{3D} ainsi que la liste des contributeurs et 
@@ -69,13 +69,12 @@ maillage, les méta-données de l'objet et l'identifiant d'une géométrie exist
 Les géométries sont, quant à elles, stockées avec leur identifiant propre et l'objet 
 3D complet donné sous le format \gls{JSON}.
 
-Localement, sur chaque client, il existe un stockage relationnel (IndexedDB) pour 
+Sur chaque pair, il existe un stockage relationnel (IndexedDB) pour 
 chaque objet de la base de donnée récupérée. Cela permet au client de faire des 
-requêtes directement dans son espace local si besoin d'ajouter un maillage par 
-exemple. 
+requêtes directement dans son espace local si besoin, par exemple en ajoutant un maillage. 
 C'est également une source pour transférer ses modifications aux autres clients.
-Les navigateurs permettent désormais de stocker de quantités de données 
-importante localement avec une durée de vie illimitée. 
+Les navigateurs permettent désormais de stocker des quantités de données 
+importantes localement avec une durée de vie illimitée. 
 Les paramètres des opérations fondamentales sur la base de données 
 (\gls{CRUD}) sur les collections sont très bien supportés par les requêtes 
 \gls{REST}.
@@ -87,7 +86,7 @@ décrit dans la Figure \ref{fig:sequence_state}.
 Dans un premier temps, afin de récupérer les données liées à l'espace de travail, 
 le client web de l'utilisateur qui se rend sur une scène récupère 
 tous les objets associés à la scène dans la base de données. Les objets de la 
-scènes sont renvoyés à l'éditeur pour les afficher. 
+scène sont renvoyés à l'éditeur pour les afficher. 
 Dans un second temps, le système établit les connexions \gls{P2P} entre les 
 clients de manière automatique et complète (topologie réseau en maillage 
 complet) après avoir récupéré les identifiants des autres utilisateurs auprès du 
@@ -99,7 +98,7 @@ différents objets, des requêtes \gls{CRUD} -- incluant les opérations de tran
 rotation et homothétie -- destinées au serveur (qui transmet les 
 modifications à la base de données) puis aux collaborateurs.
 Enfin, dans un dernier temps, lorsque l'utilisateur quitte la scène, il en notifie le 
-serveur de \textit{signaling} qui s'occupe d'indiquer aux clients restants, l'abandon 
+serveur de \textit{signaling} qui s'occupe d'indiquer aux clients restants l'abandon 
 du client pour qu'ils puissent mettre à jour leur interface en conséquence.
 
 \begin{figure}[ht!]
@@ -140,7 +139,7 @@ du client pour qu'ils puissent mettre à jour leur interface en conséquence.
 
 Les travaux \cite{Desprat2015a} et \cite{Desprat2015b} présentent une version 
 naïve du processus de synchronisation. La cohérence est garantie par un système 
-de verrouillage des objets. Cela évite notamment les sélections concurrente et par 
+de verrouillage des objets. Cela évite notamment les sélections concurrentes et par 
 conséquent les éditions concurrentes. 
 Lors de la récupération de la scène, elle est considérée comme cohérente. 
 Ensuite, le choix d'avoir des connexions \gls{P2P} ordonnées et fiables ainsi qu'un 
@@ -157,11 +156,11 @@ systèmes de persistance pour obtenir les mises à jour :
 	\item depuis le client, où l'on distingue trois cas :
 	\begin{enumerate}
 		\item travail "\textit{offline}" (hors ligne) : l'utilisateur a travaillé hors ligne et 
-		doit maintenant publier "en ligne" son travail. Les mises à jour publiées sur la 
+		doit maintenant publier "en ligne" son travail. Les mises à jour sont publiées sur la 
 		base de données ; le serveur vérifie si aucun conflit ne survient puis 
 		fusionne (\textit{merge}) les nouvelles entrées avec l'existant; 
 		
-		\item travail "\textit{serverless}" (en collaboration avec d'autres pairs sans le 
+		\item travail "\textit{serverless}" (en collaboration avec entre pairs sans le 
 		serveur) : dans le cas où le serveur est absent, les clients peuvent continuer 
 		de créer en collaborant. Ces données n'étant stockées que sur le client, il est 
 		nécessaire de les transmettre à la base de données dès qu'une connexion 
@@ -169,14 +168,14 @@ systèmes de persistance pour obtenir les mises à jour :
 		Cela peut être fait en une fois ou de manière partagée\improve{ça veut dire 
 			quoi?};
 		
-		\item travail "\textit{online}" (en collaboration avec d'autres pairs avec le 
+		\item travail "\textit{online}" (en collaboration entre pairs comprenant la partie
 		serveur) : le client envoie régulièrement \improve{combien de temps} ses 
 		nouvelles modifications pour qu'elles soient intégrées à la base de données.
 	\end{enumerate}
 	\item depuis la base de données :
 	Le client reçoit toutes les nouvelles mises à jour de la scène depuis la dernière 
 	fois qu'il s'est connecté. Cela peut également inclure des mises à jour qui sont 
-	en conflit avec ce qu'il y a dans son propre espace de stockage qu'il lui faut 
+	en conflit avec ce qu'il y a dans son propre espace de stockage, qu'il lui faut 
 	donc modifier.
 	Dans le cas où un utilisateur est seul connecté, la base de données est la 
 	seule source disponible pour la mise à jour du client. 
@@ -185,37 +184,37 @@ systèmes de persistance pour obtenir les mises à jour :
 
 Le fait de synchroniser un client avec une base de données NoSQL dès que cela 
 est possible permet de supporter les connexions intermittentes comme pour les 
-appareils mobiles dans cette architecture ; cette approche est connue sans le nom 
-de \og\textit{ offline first}\fg{} \cite{Gadea2016}.
+appareils mobiles dans cette architecture ; cette approche est connue sous le nom 
+de \og\textit{offline first}\fg{} \cite{Gadea2016}.
 \subsubsection{Topologie et protocole d'échange}
 Cette architecture est basée sur une topologie de maillage complet (\textit{full 
 mesh topology}) pour le réseau \gls{P2P}.
-Les échanges se font donc à deux niveaux: entre les pairs ainsi qu'entre chaque 
+Les échanges se font donc à deux niveaux: entre les pairs, ainsi qu'entre chaque 
 pair et la base de données. Pour le premier niveau, la couche réseau \gls{P2P} est 
 assez 
 naïve dans le sens où les connexions sont considérées comme fiables et 
-ordonnées, le client n'a alors qu'à publier toutes les modifications qu'il effectue et 
+ordonnées ; le client n'a alors qu'à publier toutes les modifications qu'il effectue et 
 les envoyer à tous les clients (auxquels il est nécessairement connecté).
-Les pairs échange des différentiels d'état sur les objets. Ces messages ne 
+Les pairs échangent des différentiels d'état sur les objets. Ces messages ne 
 contiennent pas d'information sémantique sur le type d'action effectuée par chaque 
 utilisateur. 
 
 \subsubsection{Discussion des problématiques liées à une architecture de 
-communication orientrée \og états\fg{}}
+communication orientée \og états\fg{}}
 
 La base de données centralisée est beaucoup sollicitée lors des sessions 
 collaboratives, ce qui peut mener à une surcharge similaire aux architectures 
-uniquement client serveur. 
+uniquement client-serveur. 
 En combinant client-serveur et \gls{P2P}, la charge aurait dû être réduite et 
 transférée aux autres pairs, notamment lors de la phase de récupération d'une 
 nouvelle scène qui repose entièrement sur le serveur. 
 Chaque pair assume la responsabilité dans l'envoi de ses modifications à tous les 
 autres pairs. Cette tâche ne profite pas du réseau \gls{P2P} de manière optimale 
-car la topologie ne profite pas de la fonction relai des pairs. Cela pourrait alléger  la 
+car la topologie ne profite pas de la fonction relais des pairs. Cela pourrait alléger  la 
 distribution dans la couche \gls{P2P} et responsabiliser un peu plus les pairs pour 
 faciliter le passage à l'échelle.
 En effet, la topologie en maillage complet limite le passage à l'échelle car le 
-nombre de connexion va croitre de manière exponentielle. 
+nombre de connexions va croître de manière exponentielle. 
 
 Par ailleurs, les requêtes \gls{CRUD} ne sont pas très expressives concernant le 
 métier. 
@@ -226,21 +225,21 @@ l'intention de l'utilisateur. Cela peut mener à des dé-synchronisations fortes
 
 Concernant la gestion de la concurrence, l'utilisation d'une solution pessimiste 
 dans un environnement \gls{P2P} peut parfois mener à des inter-blocages si un 
-utilisateur quitte la scène sans avoir relâché l'objet, c'est à dire, sans en avoir 
+utilisateur quitte la scène sans avoir relâché l'objet, c'est à dire sans en avoir 
 informé la base de données et les autres 
 utilisateurs. 
-Même si l'application peut prendre le relais, et permettre la relache du 
+Même si l'application peut prendre le relais et permettre la relâche du 
 verrou au bout d'un certain temps, l'expérience utilisateur peut être dégradée 
 pendant cette période.
-Le maintient de la cohérence est a peu près garanti dans ce modèle si l'on 
+Le maintien de la cohérence est a peu près garanti dans ce modèle si l'on 
 considère un environnement où la fréquence des modifications n'est pas très 
-élevée, que tous les clients communique leur horloge local pour établir un 
+élevée, et que tous les clients communiquent leur horloge locale pour établir un 
 référentiel de temps concernant les mises à jour. 
 
 Enfin, le transfert par différentiel d'état utilisé pour réduire la taille des 
 données liées au changement d'état des objets lors de la transmission des 
 données peut varier grandement selon le type de changement 
-effectué, rendant peu prédictibilité la charge des canaux de communication. 
+effectué, rendant peu prévisible la charge des canaux de communication. 
 %
 %Some issues remain in RTCDataChannel API : the com- patibility and 
 %interoperability is still not complete be- tween browsers6, some browsers (like 

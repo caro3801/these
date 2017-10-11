@@ -5,38 +5,35 @@
 \section{Cas d'étude : Assemblage collaboratif d'objets 3D dans un 
 environnement web}
 \label{sec:use_case}
-Dans le cadre de la modélisation \gls{3D} collaborative, il existe plusieurs types 
-d'application comme nous l'avons vu (\gls{CAO} collaborative, \gls{BIM} \dots). 
-Ces domaines d'activité ont un point en commun, les fonctionnalités de 
-modélisation \gls{3D} qui sont récurrentes sont les cas d'assemblage d'objets 
-\gls{3D} de 
-manières collaborative. Dans la mise en situation, les utilisateurs ont déjà une 
-modélisation précise de leur modèle sur leur machine qu'ils ont par exemple 
-réalisé à l'aide de logiciels spécifiques. L'utilisateur est responsable de fournir un 
-modèle compatible avec le prototype notamment concernant le format et la taille 
-du fichier et la sécurité du modèle qu'il partage (tatouage, droits). Le cas d'étude 
+Comme nous l'avons vu, dans le cadre de la modélisation \gls{3D} collaborative, il existe plusieurs types 
+d'application (\gls{CAO} collaborative, \gls{BIM} \dots). 
+Ces domaines d'activité ont un point commun : les fonctionnalités de 
+modélisation \gls{3D} récurrentes sont celles permettant l'assemblage d'objets 
+\gls{3D} de manière collaborative. Dans la mise en situation, les utilisateurs ont déjà une 
+modélisation précise de leur modèle  
+réalisée par exemple à l'aide de logiciels dédiés. L'utilisateur est responsable de fournir un 
+modèle compatible avec le prototype, notamment concernant le format et la taille 
+du fichier et la sécurité du modèle qu'il partage (tatouage et droits d'accès). Le cas d'étude 
 présente la mise en commun de ces objets pré-conçus dans un environnement 
 web.
 
-L'\textbf{expérimentation 1} concerne les expérimentations réalisées dans 
+L'\textbf{expérimentation 1} concerne les travaux réalisés dans 
 \cite{Desprat2015a} 
-et \cite{Desprat2015b}. Elle utilise le prototype décrit dans la Section \todo{ref 
-section} et s'intéresse à montrer une preuve de faisabilité concernant l'architecture 
+et \cite{Desprat2015b}. J'utilise alors le prototype décrit dans la Section \todo{ref 
+section} et je démontre la faisabilité concernant l'architecture 
 de communication décrite dans la section \ref{sec:comm_state}. 
 
  
-L'\textbf{expérimentation 2} concerne les expérimentations réalisées dans 
+L'\textbf{expérimentation 2} concerne les travaux réalisés dans 
 \cite{Desprat2016} et 
-\cite{Desprat2017}. Elle utilise le prototype décrit dans la Section \todo{ref section} 
-et s'intéresse à montrer l'intérêt auprès des utilisateurs d'une \gls{EDA} pour la 
+\cite{Desprat2017}. J' utilise le prototype décrit dans la Section \todo{ref section} 
+et je démontre l'intérêt auprès des utilisateurs d'une \gls{EDA} pour la 
 visualisation et la manipulation d'objets \gls{3D} reposant sur le modèle 
-événementiel présenté dans la section \ref{sec:modele_event} et les 
-répercussions sur l'architecture de 
+événementiel présenté dans la section \ref{sec:modele_event} ainsi que l'architecture de 
 communication décrite dans la section \ref{sec:comm_event}.
 
-Globalement, les objectifs des expérimentations menées au cours de la thèse 
-soulignent plusieurs aspects relatif à la fiabilité 
-du modèle et de son implantation de deux manières: 
+Globalement, les objectifs des travaux de cette thèse soulignent plusieurs aspects relatifs à la fiabilité 
+du modèle et à son implantation de deux manières: 
 \begin{itemize}
 	\item fonctionnelle : manipulation et visualisation 
 	3D, historique ;
@@ -44,29 +41,27 @@ du modèle et de son implantation de deux manières:
 	données, disponibilité du réseau.
 \end{itemize}
 
-Les deux expérimentations présentées ont en commun de présenter une enquête 
+Les deux expérimentations présentées ont en commun de proposer une enquête 
 utilisateur sur l'usage de leur prototype respectif. Le cas d'étude regroupe les 
-résultats des enquêtes utilisateurs menées dans le but d'obtenir des réponses 
-quant à la praticité de l'interface, sur la réactivité du système et sur la 
-cohérence des scènes manipulées lors de la cohérence. Il est également fait 
-référence à l'impact de l'architecture de communication sur l'expérience utilisateur 
-: est-ce transparent pour l'utilisateur ? adapté ? plus efficace ?
+résultats des enquêtes utilisateurs menées sur la praticité de l'interface, la réactivité du système et la cohérence des scènes manipulées lors des essais de collaboration. 
+Il est également fait référence à l'impact de l'architecture de communication 
+sur l'expérience utilisateur 
+: est-ce transparent pour l'utilisateur ? adapté ? plus efficace que l'architecture de l'expérimentation 1 ?
 
 
 
 
 \section{Expérimentation 1 : preuve de faisabilité}
 
-Ce cas d'étude présenté dans \cite{Desprat2015a, Desprat2015b} présente 
-une preuve de concept concernant l'architecture de communication : qu'est-ce 
-qu'apporte une architecture hybride dans la collaboration temps réel ? Est-il 
+Les travaux de Desprat et al. \cite{Desprat2015a, Desprat2015b} présentent 
+une preuve de faisabilité concernant l'architecture de communication dans une application d'assemblage d'objets 3D : qu'apporte une architecture hybride à la collaboration temps réel ? Est-il 
 possible techniquement de réaliser une 
-telle architecture pour l'échange de ressources \gls{3D} de manière fiable et 
+architecture pour l'échange de ressources \gls{3D} de manière fiable et 
 efficace 
-uniquement avec des technologies web? Quels sont les apports pour la 
+uniquement avec des technologies web ? Quels sont les apports pour la 
 collaboration, les utilisateurs et la réalisation de la tâche?
 Un des objectifs de cette expérimentation est de démontrer la faisabilité de notre 
-approche réseau hybride avec une attention particulière à l'égard de l'expérience 
+approche réseau hybride, avec une attention particulière à l'égard de l'expérience 
 utilisateur.
 
 
@@ -75,9 +70,10 @@ utilisateur.
 \label{sec:xp2}
 
 Le cas d'étude présenté dans la section \ref{sec:use_case} est de nouveau utilisé 
-dans le cadre de l'expérimentation 2 qui met en situation de collaboration plusieurs 
-participants pour qu'ils assemblent différentes parties d'un modèle sur la base des 
-contributions liées aux \gls{EDA} présentées dans cette thèse : quels sont les 
+dans le cadre de l'expérimentation 2 : plusieurs 
+participants sont réunis dans l'environnement collaboratif pour assembler différentes parties d'un modèle. Ces travaux sont réalisés sur la base des 
+contributions liées aux \gls{EDA} présentées dans cette thèse \todo{ref section event}: 
+quels sont les 
 apports d'un \gls{EDA} pour les utilisateurs? quelles informations pouvons nous 
 extraire de la collaboration grâce aux événements? est-ce que l'architecture de 
 communication est adaptée aux échanges (format, fréquence, résilience, 
@@ -90,16 +86,16 @@ robustesse)?
 
 \section{Comparaison entre l'expérimentation 1 et l'expérimentation 2}
 
-Les deux expérimentations présentées concernent le même cas d'études mais 
+Les deux expérimentations présentées concernent le même cas d'étude mais 
 reposent sur deux prototypes conçus sur la base de modèles utilisant des 
 paradigmes différents. 
 
 L'expérimentation 1 repose sur un modèle orienté états et présente principalement 
 une preuve de concept et de faisabilité concernant l'architecture de communication 
-hybride. Le passage à l'échelle est limité car elle le réseau est un maillage 
-complet, ce qui sollicite beaucoup les pairs. Le serveur liée à la base de données 
-reçoit également beaucoup de requêtes tant en écriture qu'en lecture. Le 
-mécanisme de verrouillage évite les conflits de sélection multi-utilisateurs mais 
+hybride. Le passage à l'échelle est limité car le réseau est un maillage 
+complet, ce qui sollicite beaucoup les pairs. Le serveur, lié à la base de données, 
+reçoit également beaucoup de requêtes, tant en écriture qu'en lecture. Le 
+mécanisme de verrouillage évite les conflits de sélection multi-utilisateurs, mais 
 restreint l'accès aux objets de la scène aux collaborateurs. 
 
 
@@ -110,31 +106,29 @@ collaboration grâce à l'implantation des principes du \gls{DDD}. L'analyse est
 possible grâce aux outils dérivés du \gls{CQRS}. En cela, beaucoup d'aspects liés 
 à l'observation de l'expérience utilisateur lors de la collaboration sont implicitement 
 présents dans le prototype. La gestion des événements au sein du réseau est 
-effectuée au sein d'un journal d'événements 
-partagé, dont la cohérence est repose sur l'ordre causal des événements d'un 
+effectuée dans d'un journal d'événements 
+partagé, dont la cohérence repose sur l'ordre causal des événements d'un 
 agrégat.
 
 
 Entre l'expérimentation 1 et l'expérimentation 2, le changement de paradigme a 
-apporter aux utilisateurs plusieurs fonctionnalités permettant d'améliorer leur 
+apporté aux différents utilisateurs de nouvelles fonctionnalités permettant d'améliorer leur 
 expérience de collaboration, notamment du point de vue de la gestion des 
 données métier. Par exemple, la validation systématique de leurs commandes à la 
-base de chaque actions dans l'expérimentation 2 évite de générer des événements 
-problématique. Cela est d'autant plus mis en avant avec l'utilisation de 
+base de chaque action dans l'expérimentation 2 évite de générer des événements 
+problématiques. Cela est intensifié par l'utilisation de 
 technologies comme JavaScript dans un navigateur web où il est très facile 
-d'injecter du code permettant d'effectuer des actions sans passer par l'\gls{IU} et 
-lorsque lorsque l'utilisateur passe par l'\gls{IU}, les erreurs de saisies sont 
-fréquentes. D'autre part, la gestion de la cohérence qui est utilisée dans 
+d'injecter du code permettant d'effectuer des actions sans passer par l'\gls{IU}. Notamment lorsque l'utilisateur passe par l'\gls{IU}, les erreurs de saisies sont plus
+fréquentes. D'autre part, la gestion de la cohérence utilisée dans 
 l'expérimentation 2 est beaucoup plus permissive que celle de l'expérimentation 1. 
-Les utilisateurs ont ressenti moins de frustration grâce à cela. Enfin, 
-l'expérimentation 2, les participants ont produit de plus grosses quantités de 
+Les utilisateurs ont de ce fait exprimé moins de frustration. Enfin, 
+dans l'expérimentation 2, les participants ont produit de plus grosses quantités de 
 données sans ressentir de frustration, de latence excessive ou de problème de 
-gèle de fenêtre.
-Dans l'expérimentation 2, les mécanismes de sensibilisation à la présence des 
-autres utilisateurs étant plus présent, les participants ont moins tenter de travailler 
-sur des objets déjà en cours d'utilisation ce qui a généré moins de conflit. 
+gel de fenêtre.
+L'expérimentation 2 ajoute des mécanismes de sensibilisation à la présence des 
+autres utilisateurs par rapport à l'expérimentation 1 qui participe à l'évitement de conflit. L'observation des participants indique qu'ils ont moins tenté de travailler 
+sur des objets déjà en cours d'utilisation lorsque les mécanismes sont activés, et ils ont donc généré moins de conflits. 
 Pour compenser l'autorité d'un utilisateur sur un objet par le mécanisme de 
-verrouillage offerte dans l'expérimentation 1, les utilisateurs ont appuyé le fait de 
-ressentir un certain contrôle sur un objet en cours de manipulation en s'appuyant 
-sur le mécanisme de sélection fantôme, leur permettant d'être plus maîtres des 
-contrôles notamment lors d'une sélection multi-utilisateur.
+verrouillage dans l'expérimentation 1, les utilisateurs se sont appuyés 
+sur le mécanisme de sélection fantôme, leur permettant d'être  maîtres des 
+contrôles notamment lors d'une sélection multi-utilisateurs.

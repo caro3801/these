@@ -10,9 +10,9 @@ quel terminal muni d'un
 navigateur web peut y accéder, ce qui la rend distribuée et multi-plateforme. 
 Les fonctionnalités graphiques proposées par WebGL sont un peu réduites par 
 rapport à celles d'OpenGL dont l'\gls{API} évolue plus vite et propose plus de 
-flexibilité et d'optimisations. Cependant, les performances graphique restent très 
+flexibilité et d'optimisations. Cependant, les performances graphiques restent très 
 correctes car le navigateur est quand même capable d'utiliser les processeurs 
-graphiques du terminal (GPU) pour les calculs et rendus \gls{3D}.
+graphiques du terminal (GPU) pour les calculs et les rendus \gls{3D}.
 
 Pour faire le lien entre le modèle et l'expérimentation, l'implantation du modèle a 
 pris la forme d'un éditeur pour la modélisation \gls{3D} haut niveau permettant de 
@@ -42,7 +42,7 @@ possibles sont :
 	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre le 
 	point de vue d'un collaborateur est une manière de 
 	comprendre son fonctionnement et d'imaginer ses 
-	perspectives de conception à travers son angle de caméra qu'il a choisi.
+	perspectives de conception à travers l'angle de caméra qu'il aura choisi.
 \end{description}
 
 
@@ -104,7 +104,7 @@ besoin dans le cadre de la consultation de données.
 %	\label{fig:screenshots}
 %\end{figure}
 Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
-(dans un navigateur) qui représente l'espace de travail collaboratif lui permettant 
+(dans un navigateur) qui représente l'espace de travail collaboratif et qui lui permettant 
 d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont le clavier 
 et la souris\info{est ce qu'on parle de mobile?}. Le premier niveau de cette 
 interface est scindée en deux panneaux~: 
@@ -133,7 +133,7 @@ interface est scindée en deux panneaux~:
 	{\includegraphics[width=0.27\textwidth]{eps/collaboration.eps}\label{fig:uicollab}} 
 	\hfill
 	\subfloat[Onglet \og 
-	historique]{\includegraphics[width=0.32\textwidth]{eps/history.eps}\label{fig:uihisotry}}
+	historique\fg{}]{\includegraphics[width=0.32\textwidth]{eps/history.eps}\label{fig:uihisotry}}
 	
 	\endgroup
 	\caption{Onglets du panneau latéral de l'interface}
@@ -167,40 +167,39 @@ l'accès à leur détail. Pour chaque événement, le système est capable de mo
 dans l'espace \gls{3D} la différence entre l'état  après l'événement cliqué $state_x$ 
 et l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir 
 de \og revenir en arrière\fg{} sans perdre les données entre $state_n$ et $state_x$ 
-car dans notre système cela s'effectue par compensation (cf Event-Sourcing 
+car dans le système présenté ici, cela s'effectue par compensation (cf Event-Sourcing 
 Section X)\improve{annulation d'un événement ou juste ES}.
 
 Dans chaque onglet se trouvent différents blocs \gls{HTML}, avec des 
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
-correspondent aux Views de notre modèle.
+correspondent aux views de ce modèle.
 
 Les boîtes englobantes représentent la sélection des différents collaborateurs 
 pendant la session.
 
-Parmi les Views disponibles dans le système, une grande partie est dédiée à 
+Parmi les views disponibles dans le système, une grande partie est dédiée à 
 l'\gls{IU} de l'application web pour le cas d'utilisation de la modélisation 3D. 
-D'autres Views sont disponible pour un autre cas d'utilisation destiné à 
-l'observation des comportements des utilisateurs qui est primordiale dans le cadre 
-des expérimentations.
+D'autres views sont disponibles pour un autre type d'utilisation destinée à 
+l'observation des comportements des utilisateurs, élément est primordiale dans une expérimentations.
 
 
 
 \paragraph{Exemple d'interaction}
 La Figure \ref{fig:cqrs-example} décrit la façon dont le système traite l'exécution 
 d'une commande de translation déclenchée par l'utilisateur et comment cette 
-information est diffusée à ces collaborateurs\footnote{Pour que l'exemple 
+information est diffusée aux collaborateurs\footnote{Pour que l'exemple 
 fonctionne, la scène, la géométrie du cube et le maillage \textit{cube1} doivent 
 avoir été créés en amont.}.
 Dans l'étape (a), la commande déclenchée par l'utilisateur s'adresse à l'agrégat 
-$cube1$ et contient les paramètres de la translation (vecteur x,y,z). L'agrégat qui 
+$cube1$ et contient les paramètres de la translation (vecteur x, y, z). L'agrégat, qui 
 modélise le domaine d'un maillage, génère l'événement de translation $e1$ (étape 
 (b)) si tout est valide d'un point de vue métier. L'événement $e1$ est ensuite 
 passé à l'Event Store. 
 Le composant responsable de la détection de conflit permet au développeur 
 d'implémenter ses propres règles de résolution de conflit. Le composant déclenche 
 une exception lorsque le numéro de version reçu et le numéro de version courant 
-de l'agrégat sont identique (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
-règles métiers définies et les exceptions liés à la cohérence, l'événement peut être 
+de l'agrégat sont identiques (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
+règles métiers définies et les exceptions liées à la cohérence, l'événement peut être 
 rejeté. Ce traitement peut être à l'origine de la génération de nouveaux 
 événements.
 
@@ -212,19 +211,90 @@ rejeté. Ce traitement peut être à l'origine de la génération de nouveaux
 	utilisateurs]{Exemple d'édition collaborative où User A est connecté à User  B, 
 		lui 
 		même connecté à User C. Le cycle montre les différentes étapes du 
-		déclenchement de la commande au rendu visuel en passant par la 
+		déclenchement: la commande, la 
 		génération 
 		de l'événement, la 
-		synchronisation du journal d'événements et l'impact sur le rendu des autres 
-		utilisateurs pour une translation sur un cube.}\label{fig:cqrs-example}
+		synchronisation du journal d'événements, l'impact sur le rendu des autres 
+		utilisateurs pour une translation sur un cube et le rendu visuel.}\label{fig:cqrs-example}
 \end{figure}
+
+\subsubsection{Sélection fantôme}
+Les interactions utilisateurs doivent être adaptées à la collaboration et aux 
+manipulations à effectuer. Pour cela, l'éditeur 3DEvent introduit la fonctionnalité de 
+sélection \og fantôme\fg{}. Lorsqu'un utilisateur souhaite sélectionner un objet de 
+la scène, l'objet original ($O_o$) est 
+cloné et devient l'objet fantôme ($O_f$). $O_f$ conservent les mêmes propriétés, 
+représenté avec de la 
+transparence d'où le terme \og fantôme\fg{}. 
+L'objet $O_f$ prend alors le focus de sélection pour que l'utilisateur le manipule à 
+la place de l'objet $O_f$. 
+Lorsque l'utilisateur relâche $O_f$, alors la modification intentée s'applique sur 
+$O_o$ avec le principe du \textit{Last Write Last Win} (le dernier gagne).
+La Figure \ref{fig:ghostselection} 
+représente la sélection fantôme lors de la translation du corps du rotor par 
+l'utilisateur Foo : c'est l'objet transparent qui est manipulé alors que l'objet opaque 
+représente sa position originale. 
+En différenciant l'actuel objet que l'utilisateur souhaite sélectionné ($O_{o}$) de 
+celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
+\begin{itemize}
+	\item l'ergonomie dans l'environnement \gls{3D} :
+	$O_f$ est un objet temporaire qui permet à l'utilisateur
+	d'avoir une visualisation de l'objet en cours de manipulation tout en 
+	conservant le dernier état de $O_o$ visible. 
+	$O_o$ peut être considéré comme un point de repère visuel pour l'utilisateur 
+	lorsqu'il effectue sa manipulation. 
+	L'$O_f$ a aussi un rôle d'intermédiaire entre l'utilisateur et la 
+	finalité de l'interaction en donnant un support visuel à sa réflexion experte.
+	Grâce à $O_f$, l'utilisateur peut également révoquer sa manipulation en 
+	cours sans avoir eu d'impact sur $O_o$ en évitant des actions inutiles (faire 
+	l'action 
+	puis la défaire) pour le métier et coûteuses pour le réseau.
+	
+	\item la collaboration : si un collaborateur effectue une modification 
+	à destination du même $O_o$ alors la représentation de $O_o$ chez 
+	l'utilisateur est également modifiée. $O_f$ par contre ne subit pas d'impact ; 
+	l'utilisateur peut continuer sa manipulation et~/~ou l'ajuster en fonction des 
+	nouvelles informations liées à $O_o$ ou même révoquer sa manipulation 
+	en cours si cela lui convient.
+
+	\item le métier : seules les manipulations menées à terme sont 
+	considérées comme des commandes. Cela évite d'avoir des événements qui ne 
+	sont pas pertinents pour le métier dans le journal d'événements (comme lorsque 
+	l'utilisateur change d'idée lors de l'interaction ou
+	suite à une intervention concurrente). L'utilisateur n'a un impact sur l'application 
+	que lorsqu'une modification métier est réalisée.
+	
+	\item le réseau : l'information importante à faire transité est l'événement 
+	correspondant à la modification métier pas toutes les positions intermédiaires 
+	même si intuitivement l'idée de temps réel pourrait conduire à cette solution. La 
+	quantité de messages produite surchargerai à la fois le réseau et le fil 
+	d'exécution principale de l'application. En effet, \gls{WebRTC} a l'inconvénient 
+	pour le 
+	moment de ne pas pouvoir s'exécuter dans un \textit{Web Worker} (fil 
+	d'exécution 
+	parallèle en JavaScript). Cette solution imposerai des 
+	latences réseau et d'\gls{IU} qui affecteraient gravement l'expérience utilisateur
+	sans apporter d'informations supplémentaires à l'aspect métier de la 
+	collaboration. 
+\end{itemize}
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[trim={0 0 0cm 0}, clip, 
+	width=0.8\columnwidth]{eps/1translatehisto.eps}
+	\caption{Illustration de la sélection fantôme dans l'environnement 3D}
+	\label{fig:ghostselection}
+\end{figure}
+
+
 \subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
 Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de l'état courant à 
 partir du flux d'événements. Pour Abdullin, \og la projection est le processus de 
 conversion (ou d'agrégation) d'un flux d'événement en une représentation 
-structurelle. Cette dernière (qui est mise à au moment où le flux est parcourue) 
-peut être avoir différentes appellations : modèle de lecture persistent, vue ou 
+structurelle. Cette dernière (qui est mise à jour au moment où le flux est parcourue) 
+peut avoir différentes appellations : modèle de lecture persistent, vue ou 
 état\fg{}\cite{Abdullin2011}.
 La partie lecture du modèle (l'affichage sur interface utilisateur) bénéficie des 
 projections en lui permettant de réduire l'afflux des événements, ne laissant filtrer 
@@ -244,23 +314,14 @@ Qu'arriverait-il alors si un événement A ($eA$) nécessitant un autre événem
 erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
 d'information sur la hiérarchie d'application des événements ($eB$ puis $eA$).
 
-Pour pallier ce problème, l'introduction du système de projection permet d'avoir un 
+Pour pallier à ce problème, l'introduction du système de projection permet d'avoir un 
 mécanisme (comme un automate fini) qui défini les transitions nécessaires pour 
 passer d'un état à l'autre. Les transitions réalisent les actions déterminées en fonction des 
-événements qui arrivent. Par exemple, si on essaie d'ajouter un objet dans une 
+événements qui arrivent. Par exemple, si un utilisateur essaie d'ajouter un objet dans une 
 scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
 jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
 jamais utiliser $eA$.
 
-\begin{figure}
-	\centering
-	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
-	\caption{Exemple d'agrégats}{Structure d'un agrégat et ses versions. Chaque 
-	version est un état de l'agrégat qui correspond à l'empilement des instances 
-	d'événements (ei) qu'il contient. Les types des événements sont relatifs au type 
-	d'agrégat dans lequel il est contenu.}
-	\label{fig:aggregate}
-\end{figure}
 
 \paragraph{Projections}
 chaque partie de l’interface est liée à une proj de la bdd
