@@ -9,7 +9,7 @@ de la cohérence dans un environnement collaboratif massif en \gls{P2P},
 architecture de communication efficace pour le passage à l'échelle et la résilience, 
 modèle de données dédiée au métier de la modélisation 3D collaborative. 
 
-Pour répondre aux différentes question de 
+Pour répondre aux différentes questions de 
 recherche posées en introduction de ce manuscrit, plusieurs contributions ont été 
 proposées, implantées et soumises à des expérimentations. 
 
@@ -79,20 +79,42 @@ cliente :
 	produire (\gls{ES}).
 \end{enumerate*}
 %\begin{itemize}
-\ref{item:cqrs} offre un large panel de niveaux de vérification des données fournies 
-par l'utilisateur 
-et valider les règles métier qui peuvent s'appliquer sur celles ci avant qu'elles 
-n'entrent de façon immuables dans le système. Côté lecture, les vues dans 
-l'interface sont les projections 
-
-\ref{item:es} 
+Grâce à \ref{item:cqrs} impose plusieurs niveaux de vérification des données : de 
+la saisie 
+utilisateur à la validation les règles métier. Ainsi, le système, qui ne manipule que 
+des événements immuables est garanti d'avoir des données valides.
+Côté lecture, les vues matérialisées de l'interface sont issues de projections faites 
+à partir du flux d'événements traités par le système. Les vues sont spécifiques à 
+l'activité, ce qui permet de présenter une interface orientée tâche plus proche des 
+attentes métiers de l'utilisateur. La projection découple les données de la base 
+de données des données servant une ou plusieurs vues. En effet, son rôle 
+d'intermédiaire est fournir les événements d'intérêts sous une forme dénormalisée 
+pour les vues (mise en cache).
+Le point \ref{item:es} reprend principalement les avantages de l'\gls{ES}, i.e. 
+enregistrer la 
+séquence d'événements qui a amenée à l'état courant de l'application. La 
+fonctionnalité d'historique est implicitement présente dans ce patron, même ce qui 
+pourrait être considéré comme une \og annulation\fg{} par l'utilisateur est conservé 
+sous la forme d'un événement de compensation. L'immuabilité des événements 
+capte toutes les manipulations métier de l'utilisateur. Par conséquent, la 
+reconstruction des agrégats du domaine permet d'avoir un état cohérent garanti 
+par l'aspect fonctionnel de ce patron. C'est particulièrement important pour 
+\begin{enumerate*}[label=(\roman*)]
+	\item améliorer la sensibilisation des collaborateurs à l'historique des objets 
+	manipulés ;
+	\item faciliter le développement d'outils de surveillance pour observer, analyser 
+	et améliorer l'application ;
+	\item et organiser des audits (exemple : respect d'une procédure).
+\end{enumerate*}
 %
 %\item[QR 3] Quels sont les mécanismes assurant à l'utilisateur d'être 
 %autonome tout en ayant la possibilité de collaborer ?
 
 Une partie de la contribution décrivant le modèle événementiel révèle une partie de 
 la réponse à la \textbf{QR 3}.
-Le patron \gls{CQRS} est déporté en totalité sur le client, ce q
+Le fait de déporter le patron \gls{CQRS} en totalité sur le client évite que le client 
+soit dépendant du serveur pour valider le contenu créé. L'utilisateur a accès 
+localement aux événements qui le concernent
 
 %
 %\item[QR 4] Comment faciliter l'implémentation d'un tel système en garantissant 
