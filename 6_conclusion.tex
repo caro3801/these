@@ -114,7 +114,15 @@ Une partie de la contribution décrivant le modèle événementiel révèle une 
 la réponse à la \textbf{QR 3}.
 Le fait de déporter le patron \gls{CQRS} en totalité sur le client évite que le client 
 soit dépendant du serveur pour valider le contenu créé. L'utilisateur a accès 
-localement aux événements qui le concernent
+localement aux événements. Il peut ainsi générer de nouveaux événements sur la 
+base de ceux qu'il possède. Les projections fonctionnent également sur ces 
+événements stockés. Le cycle des données est donc complètement géré en 
+interne et libère l'utilisateur d'une forte liaison avec la base de données centrale. 
+La synchronisation des données produites hors ligne est effectuée à la 
+reconnexion du pair au réseau. En effectuant la différence entre les agrégats 
+locaux et distants, les répliques sont capables de se synchroniser et de mettre à 
+jour leur Event Store. 
+
 
 %
 %\item[QR 4] Comment faciliter l'implémentation d'un tel système en garantissant 
