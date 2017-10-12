@@ -4,7 +4,7 @@
 Les premiers travaux liés à cette thèse \cite{Desprat2015a,Desprat2015b} se sont 
 intéressés principalement à la mise en place de l'architecture de communication 
 en basant les structures de données sur des états (plutôt que des événements). 
-Cette section décrit les choix fait lors de la modélisation de l'architecture \og 
+Cette section décrit les choix faits lors de la modélisation de l'architecture \og 
 orientée état\fg{}, pour le stockage et le transfert par exemple, en lien fort avec les 
 technologies web sous-jacentes.  
 %l'architecture est principalement s'app
@@ -33,23 +33,23 @@ Le système présenté repose sur une architecture \acrshort{REST}
 (\acrlong{REST}) concernant les échanges clients-serveur. Cette architecture 
 permet de séparer les responsabilités entre le client et le serveur en séparant 
 l'\gls{IU} du stockage. \gls{REST} propose une interface uniforme. Cela implique 
-que chaque ressource est identifiée et manipulable par des représentation définies 
+que chaque ressource est identifiée et manipulable par des représentations définies 
 (modification, suppression). 
 
 Chaque pair correspond a un client (navigateur web) qui contient l'intergiciel 
 \gls{P2P} offrant des fonctionnalités limitées, l'interface utilisateur contenant 
 l'environnement \gls{3D} et un espace de stockage reposant local (IndexedDB).
 
-La persistance long terme est une base de données NoSQL. Ce type de base de 
+La persistance long terme est une base de données NoSQL. Ce type de bases de 
 données a tendance à être optimisée en lecture (grâce à un 
 langage de requête dédié) et permet d'éviter les 
 structures rigides. Cette flexibilité est utile lors du stockage des modèles \gls{3D} 
 et 
-encourage la conservation d'autres méta-données (ex: relations entre les différents 
+encourage la conservation d'autres métadonnées (ex: relations entre les différents 
 objets) pour faciliter la traçabilité. 
 Avec une base de données centralisée, le système possède une source de 
 données fiable et autoritaire qui permet à un utilisateur de récupérer le bon contenu 
-quand il revient sur une scène. La totalité du document contenant la scène est 
+quand il revient sur une scène. La totalité du document, contenant la scène, est 
 envoyé à l'utilisateur lorsqu'il y accède.
 
 
@@ -62,7 +62,7 @@ structure en arbre hiérarchique. Une collection consiste à grouper des documen
 équivalent dans une base de données relationnelle à la notion de table. La base de 
 données contient deux types de collections : les scènes et les géométries. Une 
 collection de scènes contient des scènes qui sont décrites par leur identifiant et 
-les méta-données de l'espace virtuel \gls{3D} ainsi que la liste des contributeurs et 
+les méta-données de l'espace virtuel \gls{3D}, ainsi que la liste des contributeurs et 
 la 
 liste des maillages. Cette liste correspond à une association entre un identifiant de 
 maillage, les méta-données de l'objet et l'identifiant d'une géométrie existante. 
@@ -75,7 +75,7 @@ requêtes directement dans son espace local si besoin, par exemple en ajoutant u
 C'est également une source pour transférer ses modifications aux autres clients.
 Les navigateurs permettent désormais de stocker des quantités de données 
 importantes localement avec une durée de vie illimitée. 
-Les paramètres des opérations fondamentales sur la base de données 
+Les paramètres des opérations fondamentales effectuées sur la base de données 
 (\gls{CRUD}) sur les collections sont très bien supportés par les requêtes 
 \gls{REST}.
 
@@ -142,15 +142,15 @@ naïve du processus de synchronisation. La cohérence est garantie par un systè
 de verrouillage des objets. Cela évite notamment les sélections concurrentes et par 
 conséquent les éditions concurrentes. 
 Lors de la récupération de la scène, elle est considérée comme cohérente. 
-Ensuite, le choix d'avoir des connexions \gls{P2P} ordonnées et fiables ainsi qu'un 
+Ensuite, le choix d'avoir des connexions \gls{P2P} ordonnées et fiables, ainsi qu'un 
 maillage de pair complet, implique que toute donnée envoyée par un pair est 
 forcément reçue par les autres. 
 
-Lors de la connexion d'un nouveau client a lieu la synchronisation des deux 
+Lors de la connexion d'un nouveau client, a lieu la synchronisation des deux 
 systèmes de persistance pour obtenir les mises à jour : 
 \improve{l'échange des mises à jour entre le client (persistance à court terme) et la 
 	base de données (à long terme) afin de synchroniser les deux éléments avec. 
-	La base de données peut également servir en cas de conflit important ; elle sert 
+	La base de données peut également servir en cas de conflits importants ; elle sert 
 	de référent.}
 \begin{enumerate}
 	\item depuis le client, où l'on distingue trois cas :
