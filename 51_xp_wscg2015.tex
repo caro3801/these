@@ -29,8 +29,8 @@ même objectif :
 assembler un modèle dont les utilisateurs possèdent l'image, composé de 
 différentes pièces qui sont téléversées par les utilisateurs. L'image correspond à 
 l'assemblage final à obtenir et indique les différentes parties qui le 
-composent (type et quantité). Ces deux épreuves s'arrêtent lorsque les participants 
-le notifient oralement, ou durent dix minutes maximum chacune.
+composent (type et quantité). Les épreuves s'arrêtent lorsque les participants 
+le notifient à l'expérimentateur, ou durent dix minutes maximum chacune.
 
 Le modèle \textit{Castle} est utilisé dans deux épreuves : 
 \textit{Castle from server} et \textit{Castle from peer}. L'objectif de ces épreuves
@@ -80,48 +80,45 @@ L'expérimentation consiste en quatre épreuves qui partagent la même procédur
 
 \paragraph{Initialisation}
 
-L'épreuve est décrite et l'objectif de l'épreuve est présenté a tous les participants.
+L'épreuve est décrite et l'objectif de l'épreuve est présenté à tous les participants.
 Pour chaque phase de collaboration, l'application nettoie les données issues de 
 l'épreuve précédente. 
-À l'exception des pièces du modèle \textit{Castle} qui sont chargées
-en totalité sur le serveur dans \textit{Castle from server} et les pairs \textit{Castle 
-from peer}), les pièces du modèle de l'épreuve sont distribuées de manière 
-aléatoire entre les différents participants.
+À l'exception des pièces du modèle \textit{Castle}, qui sont chargées
+en totalité sur le serveur dans \textit{Castle from server} et les pairs dans 
+\textit{Castle from peer}), les pièces du modèle de l'épreuve 
+sont distribuées de manière aléatoire entre les différents participants.
 
 \paragraph{Données collectées}
 Entre chaque épreuve, les 
-participants ont exprimé certains retours qualitatifs dont il a été pris note. Le type 
-d'interaction entre les participants est observé lors des épreuves.
+participants ont exprimé certains retours qualitatifs dont il a été pris note. Les modalités d'interaction entre les participants sont observées lors des épreuves.
 
 \paragraph{Questionnaire}
 Au début de l'expérimentation, les participants reçoivent et prennent connaissance 
-du questionnaire (voir Annexe \ref{q:xp1}). Ce questionnaire est rempli à plusieurs 
+du questionnaire (voir Annexe \ref{q:xp1}). Ce questionnaire est rempli à différents 
 moments au cours de l'expérimentation. Au début, le participant décrit sa situation, 
 sa familiarité avec les environnements \gls{3D}, le type de machine et de 
-navigateur 
-qu'il utilise. À la fin de chaque épreuve il répond aux questions concernant 
+navigateur qu'il utilise. À la fin de chaque épreuve, il répond aux questions concernant 
 l'épreuve qu'il vient de passer. À la fin de l'expérimentation, il répond aux 
 questions d'ordre plus général sur son expérience et les améliorations 
 envisageables.
 \subsection{Résultats et discussion}
 Les participants ont globalement été satisfaits des résultats issus de la 
-collaboration ainsi que du rendu visuel des assemblages effectués durant les 
-épreuves. Cela est également dû au fait qu'ils ont atteint les 
-objectifs à chaque fois (dans le temps imparti) : réalisation de l'assemblage du modèle \gls{3D} 
+collaboration, ainsi que du rendu visuel des assemblages effectués durant les 
+épreuves. Cela s'explique principalement par le fait qu'ils ont atteint les 
+objectifs fixés à chaque fois (dans le temps imparti) : réalisation de l'assemblage du modèle \gls{3D} 
 présenté sans frustration. Ils se sont également \og amusés\fg{} sur les épreuves
-avec le \textit{Castle} car ils étaient libres dans la création et souhaitaient continuer 
-l'épreuve au-delà du temps imparti. L'utilisation de canaux de communication 
-externes à l'application a été reportée plusieurs fois, principalement sous formes 
+avec le \textit{Castle} car ils étaient libres dans la création et souhaitaient même continuer l'épreuve au-delà du temps imparti. L'utilisation de canaux de communication 
+externes à l'application a été reportée plusieurs fois, principalement sous la forme 
 d'échanges oraux. Ces échanges concernaient l'état de leur application et ce qu'ils 
 étaient en train de faire ou ce qu'ils souhaitaient faire. Cette interaction provient, 
 d'après les participants, du manque de retours visuels différenciés sur les 
 manipulations effectués par les collaborateurs (exemple: pas de couleur différente 
 pour la sélection d'objet par un autre utilisateur). Cela peut plus généralement 
-s'interpréter comme un manque sensibilisation à l'environnement collaboratif. 
+s'interpréter comme un manque de sensibilisation à l'environnement collaboratif. 
 L'\gls{IU} a été bien appréciée, parfois jugée \og trop simple\fg{} par certains 
 utilisateurs. Ce choix avait été fait pour faciliter l'usage, l'apprentissage et 
 l'adoption de l'\gls{IU} et s'est révélé anecdotique lors de l'expérimentation car le 
-panel de personne de participants était familier de ce genre 
+panel de participants était familier de ce genre 
 d'environnement.
 Les fonctionnalités liées à la manipulation d'objets reçoivent une bonne évaluation, 
 à l'exception de l'importation de modèles. Cela est dû, dans ce prototype, au 
@@ -150,30 +147,32 @@ manipulation et
 la visualisation des objets \gls{3D} manipulés de manière collaborative. Afin de 
 pouvoir 
 collaborer, il héberge également les connexions nécessaires pour communiquer ses 
-mises à jour vers les autres pairs (autant de connexion WebRTC DataChannel que 
+mises à jour vers les autres pairs (autant de connexions WebRTC DataChannel que 
 de pairs) et vers la base de données via le serveur (une seule connexion 
-WebSocket). Les modifications sont transmises sous forme de différentiel d'état et 
+WebSocket). Les modifications sont transmises sous forme de différentiels d'état et 
 sont stockées sur les pairs localement et sur la base de données de manière 
-distante. Le réseau \gls{P2P} est composé uniquement de client producteurs de 
+distante. Le réseau \gls{P2P} est composé uniquement de clients producteurs de 
 données reliés de manière complète. 
 Les évaluations liées à l'expérimentation sont plutôt encourageantes, même si 
-certains points doivent être améliorés. Concernant la fonctionnalité d'import de 
-modèle, la transmission par les pairs du modèle a causé des latences sur les 
-pairs destinataires (gel de la fenêtre). Afin de réduire la latence sur des scènes 
-aussi voire plus grandes, deux alternatives sont à étudier : l'utilisation d'un 
+certains points doivent être améliorés. Concernant la fonctionnalité permettant 
+d'importer des géométries, leur transmission dans le réseau \gls{P2P} a causé 
+des latences sur les pairs destinataires (gel de la fenêtre). 
+Afin de réduire la latence lors de la transmission de larges scènes, deux alternatives 
+sont à étudier : l'utilisation d'un 
 rendu progressif et compressé ainsi qu'une meilleure répartition de la charge entre 
-les pairs pour la distribution des données. Dans ce dernier cas, l'utilisation d'un 
-maillage partiel et d'une distribution des modèles incluant les pairs permettrait de 
-responsabiliser d'avantage les pairs en désengorgeant un peu le serveur et surtout 
-le réseau \gls{P2P}.
-Concernant l'amélioration des fonctionnalités liés à l'interface, l'ajout de retours 
-visuels liés aux interactions collaboratives ainsi que la visualisation de l'historique sont 
+les pairs pour la distribution des données. Dans ce dernier cas, l'utilisation d'une 
+topologie maillée partiellement et d'une distribution des modèles incluant les pairs 
+permettraient de responsabiliser davantage les pairs en désengorgeant
+un peu le serveur et surtout le réseau \gls{P2P}.
+Concernant l'amélioration des fonctionnalités proposées par l'\gls{IU}, 
+l'ajout de retours visuels liés aux interactions collaboratives, 
+ainsi que la visualisation de l'historique sont 
 indispensables. Une évaluation quantitative approfondie pourrait permettre de 
 mieux examiner les apports de l'architecture de communication hybride par rapport 
 aux architectures classiques dans le contexte de la modélisation \gls{3D} 
 collaborative. 
 Cela pourrait se concrétiser par l'examen de la collaboration en récupérant le 
-journal des actions, l'impact sur la visualisation (Frame Per Second), et 
+journal des actions, l'impact sur la visualisation (Frame Per Second) et 
 l'observation des échanges WebRTC en entrées / sorties.
 
 %An improvement of interface features and visual feedback of collaborative 

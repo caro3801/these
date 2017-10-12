@@ -29,11 +29,10 @@ coopérative au sein de l'application.
 
 \paragraph{Tâche à effectuer}
 Les participants devaient assembler les différentes parties d'un modèle \gls{3D} en 
-utilisant l'application 3DEvent et les fonctionnalités décrites précédemment 
-\info{ref section foncitonnalités} pour que le résultat corresponde à l'assemblage 
+utilisant l'application 3DEvent et les fonctionnalités décrites précédemment\info{ref section fonctionnalités} pour que le résultat corresponde à l'assemblage 
 donné en exemple (images). La complexité de la tâche est modulée selon 
 deux facteurs : le nombre de parties composant le modèle et le nombre de 
-collaborateurs. Afin de permettre un apprentissage et une utilisation facile de la manipulation des objets \gls{3D} il a été choisi de conserver des manipulations de haut niveau.
+collaborateurs. Afin de permettre un apprentissage et une utilisation facile de la manipulation des objets \gls{3D}, il a été choisi de conserver des manipulations de haut niveau.
 %Participants had to assemble in a web-browser the different parts of a model 
 %using 3DEvent application and features described in Section \ref{sec:ui} to 
 %match 
@@ -43,7 +42,7 @@ collaborateurs. Afin de permettre un apprentissage et une utilisation facile de 
 %keep the 3D manipulation tasks at high level to be easy to learn/use.
 \paragraph{Population}
 L'expérience a été conduite sur 12 groupes de deux ou trois participants chacun. 
-Chaque participant était localisé en France dans une zone urbaine avec de bonnes 
+Chaque participant était localisé en France dans une zone urbaine disposant de bonnes 
 infrastructures, en travaillant sur des réseaux distincts avec une bonne connexion 
 internet (au moins 20Mb/s) pour éviter d'avoir des latences extrêmes (>10 
 secondes) au cours 
@@ -97,7 +96,7 @@ présentés pour éviter les biais liés à l'apprentissage.
 \paragraph{Initialisation}
 
 Pour chaque phase, l'application a été initialisée par le chargement des parties du 
-modèle dans la bibliothèque d'objets chez chaque participant. Les parties des 
+modèle dans la bibliothèque d'objets sur chaque pair (incluant chaque participants). Les parties des 
 objets ont volontairement été positionnées (rotation et homothétie) aléatoirement 
 afin que les utilisateurs aient à manipuler les différentes fonctionnalités. Cette 
 configuration nous a permis d'observer l'activité à l'intérieur de chaque groupe durant 
@@ -154,7 +153,7 @@ pendant la session.\todo{mettre ailleurs?}
 
 \paragraph{Analyse des interactions}
 Les traces des utilisateurs récupérées au cours des expérimentations sont la base 
-du travail d'analyse présenté ici. Ces traces, composées d'événements 
+du travail d'analyse présenté ci-après. Ces traces, composées d'événements 
 générés par les utilisateurs, permettent de savoir qui (Figure \ref{petita}) a fait quoi 
 (Figure \ref{petitb}) lors des sessions collaboratives. Généralement, le \og qui\fg{} 
 est assez facile à retrouver lors de la récupération des traces. Le \og quoi\fg{} 
@@ -177,20 +176,21 @@ lors d'audits sur l'assemblage.
 	\label{fig:collabsession}
 \end{figure}
 
-Figure \ref{fig:collabsession} montre deux angles d'enregistrement d'une session 
+La Figure \ref{fig:collabsession} montre deux angles d'enregistrement d'une session 
 sur le modèle \textit{living room}. Au début de la session, beaucoup d'objets sont 
 ajoutés (meshAddedToSceneEvent). Seul un utilisateur a ajouté un objet en 
 utilisant la fonctionnalité pour déposer un objet à un endroit spécifique de la scène 
 (meshDropped\info{name it}). Le nombre d'événements concernant la sélection et 
 la désélection est à peu près similaire aux exceptions. La différence s'explique par 
-le fait que l'événement de désélection n'est pas déclenché lors d'un changement 
-d'objet sélectionné, car la désélection n'est pas effectuée explicitement par 
-l'utilisateur. Dans les premiers moments, les participants ont fortement interagi (jusqu'à 20 
-événements en 15 secondes). Cela s'explique par le recours massif à l'ajout 
+le fait que l'événement de désélection n'est pas déclenché lorsque l'utilisateur change
+d'objet sélectionné. En effet, la désélection n'est pas effectuée explicitement par 
+l'utilisateur. Dans les premiers moments, les participants ont fortement interagi 
+(jusqu'à 20 événements en 15 secondes). Cela s'explique par le recours massif à l'ajout 
 d'objets dans la scène pour composer le modèle et la mise à l'échelle de ceux-ci 
-(du au positionnement arbitraire des objets de la bibliothèque). Ensuite, les trois 
-utilisateurs interagissent ensemble durant quelques minutes avant que l'un d'entre 
-eux ne quitte et ne reviennent quelques secondes plus tard (informations 
+(causé par le positionnement arbitraire des objets de la bibliothèque). 
+Ensuite, les trois utilisateurs interagissent ensemble durant quelques
+minutes avant que l'un d'entre 
+eux ne quitte et ne revienne quelques secondes plus tard (informations 
 récupérées à partir du journal d'événements lié aux agrégats utilisateurs). Enfin, la diminution du nombre d'événements montre la fin de l'activité, les utilisateurs achevant 
 la tâche et ajustant les derniers objets.
 
@@ -201,7 +201,7 @@ tout au long de la session. Par exemple, l'absence d'un utilisateur pendant une
 longue période peut indiquer une déconnexion. Ou encore, l'utilisation trop 
 fréquente d'un type d'événements (ou d'un motif d'événements répété) peut montrer 
 une faiblesse de l'ergonomie de l'interface. Ce dernier aspect est illustré par un exemple dans la Figure \ref{petitb} à 45s, où un nombre élevé de 
-MeshScaledEvent est détecté. A posteriori, je me suis rendu compte que la 
+MeshScaledEvent est détecté. \textit{A posteriori}, je me suis rendu compte que la 
 fonctionnalité n'était pas suffisament calibrée pour l'échelle du modèle et nécessitait plusieurs manipulations pour réaliser la bonne transformation.
 
 	\begin{figure}[]
@@ -234,7 +234,7 @@ participant a affiché à certains moments une latence de plus de 10s ; mais
 le groupe nous a notifié que cela n'avait pas affecté la collaboration. Pour l'ensemble des 
 expérimentations, quelques conflits ont été levés sur différentes opérations et à
 différents niveaux. Au niveau réseau (mauvaise version, désynchronisation), la 
-politique en place est d'annuler l'événement et de resynchroniser les utilisateurs 
+politique en place consiste à annuler l'événement et de resynchroniser les utilisateurs 
 entre eux. Au niveau des utilisateurs (opérations opposées sur le même objet), la 
 résolution du conflit doit passer par un canal externe (chat) pour que les 
 utilisateurs se mettent d'accord.  
@@ -247,14 +247,11 @@ utilisateurs se mettent d'accord.
 Dans toutes les expérimentations menées, le but a été atteint dans 
 un même ordre de temps (10-12 minutes). La facilité d'utilisation du système est bien notée, 
 mais il reste encore quelques aspects à améliorer. Pour modérer ces résultats, il 
-est important de rappeler que bien que la 
-ces modèles ne sont pas très complexes et que tous les participants étaient 
-débutants sur le système et n'étaient pas forcément familiers avec ce genre 
-d'application. 
+est important de rappeler que les modèles utilisés ne sont pas très complexes et que tous les participants étaient débutants sur le système et parfois néophytes en modélisation 3D.
 Le fait que l'application repose sur des technologies web a également joué en faveur de 
 l'appropriation de l'application, car il a semblé assez naturel aux participants de se 
 rendre à l'adresse internet donnée (sans rien installer) pour effectuer les tâches en 
-manipulant un média (3D) inhabituel pour ce genre de plateforme. De plus, on 
+manipulant un média (3D) inhabituel pour ce genre de plateformes. De plus, on 
 peut également supposer que le prototype créé pour l'expérimentation correspond 
 bien à l'objectif d'assemblage coopératif d'objets \gls{3D} puisque les tâches ont 
  été réalisées rapidement. Sur une échelle de \og non-interactif \fg{} à \og 
@@ -263,8 +260,7 @@ temps réel\fg{}.
 
 La satisfaction générale à propos de l'expérimentation et la satisfaction concernant 
 la collaboration et l'expérience utilisateur \info{ah bon}montrent que les participants 
-ont apprécié positivement de faire de la modélisation collaborative \gls{3D} dans un 
-navigateur web. Quant à savoir si le nombre d'utilisateurs améliore à la fois 
+ont apprécié positivement les épreuves proposées durant l'expérimentation. Quant à savoir si le nombre d'utilisateurs améliore à la fois 
 l'efficacité et la rapidité du complètement de la tâche, les participants ont 
 généralement été d'accord.
 
