@@ -8,10 +8,13 @@ concernant différents domaines que la collaboration a tendance à réunir : ges
 de la cohérence dans un environnement collaboratif massif en \gls{P2P}, 
 architecture de communication efficace pour le passage à l'échelle et la résilience, 
 modèle de données dédiée au métier de la modélisation 3D collaborative. 
+
+\section{Discussion}
 Pour répondre aux différentes questions de 
 recherche posées en introduction de ce manuscrit, plusieurs contributions ont été 
 proposées, implantées et soumises à des expérimentations à travers 
 \cite{Desprat2015a,Desprat2015b,Desprat2016,Desprat2017}. 
+
 
 %	\item[QR 1] Quelle architecture réseau est la plus adaptée pour une gestion 
 %efficace, robuste et temps réel des données \gls{3D} dans un environnement 
@@ -173,6 +176,10 @@ peut se traduire par un rendu effectué par des bibliothèques 3D différentes
 (Three.JS, BabylonJS) ou un rendu adapté selon un profil utilisateur. Les 
 projections sont également un facteur facilitant l'évolution de l'application 
 simplifiant le processus d'agrégation et de filtrage des événements.
+
+La réalisation de plusieurs prototypes fonctionnant sur différents 
+paradigme pour les expérimentation ont permis de montrer les avantages et 
+inconvénients de ceux-ci.
 Passer d'un paradigme orienté état à un paradigme événementiel a apporté
 plusieurs bénéfices liés au métier, notamment en ce qui concerne la conservation 
 de l'intention de l'utilisateur au moment de la réalisation d'un action. En effet, les 
@@ -194,6 +201,12 @@ Cela permet de proposer une visualisation rapidement même si tous les
 événements ne sont pas reçu et de donner à l'utilisateur un retour visuel sur 
 l'interface d'une scène se construisant par exemple, lui permettant de commencer 
 à percevoir, s'immerger voire travailler sur la scène.
+
+Enfin, l'expérimentation 2 a directement bénéficié de l'implantation d'un modèle 
+orienté événements pour le prototype utilisé : l'intégration du métier a permis 
+l'observation minutieuse du travail réalisé par les utilisateurs au sein de 
+l'environnement. C'est la base du travail d'analyse des interactions de cette 
+expérimentation.
 %un module de gestion de conflit est 
 %mis en place. Il permet d'assurer la cohérence de l'état de l'application à deux 
 %niveaux : 
@@ -214,8 +227,20 @@ d'évaluation qualitatifs. En effet, les deux expérimentations portent sur une 
 des utilisateurs dans le cas d'application de l'assemblage de modèles 3D de 
 manière collaborative pour la visualisation et la manipulation d'objets dans un 
 environnement web.
-
-
+La mise en place des protocoles d'expérimentation a permis de soumettre les 
+utilisateurs à différentes épreuves d'assemblage : contraint par un objectif 
+déterminé, création libre. 
+L'évaluation a porté sur les observations de l'expérimentateur et des réponses 
+données par les participants au questionnaire concernant différents aspects : le 
+ressenti du participant par rapport à la latence dans l'environnement, la gestion de 
+la cohérence, la qualité de la récupération des données en cas de déconnexion 
+mais également sur l'apprentissage et la facilité d'utilisation de l'application. La 
+qualité de la collaboration est également soumise au questionnaire pour savoir si 
+la coopération améliorer l'efficacité et / ou la vitesse de réalisation de la tâche.
+Les contraintes liées à ce type d'expérimentations sont nombreuses : nombre de 
+participants, taille des données 3D, gestion de la cohérence\dots 
+Les métriques quantitatives n'ont pu être abordée au cours de cette thèse mais 
+plusieurs perspectives sont évoquées dans la Section \todo{ref section} ci-après.
 
 %
 %
@@ -240,3 +265,17 @@ environnement web.
 %permet de souligner plusieurs aspects du modèle. Le premier est de montrer que 
 %l'intégration du métier a permis l'observation minutieuse du travail réalisé au sein 
 %de l'environnement. 
+
+
+\section{Perspectives}
+
+Pour obtenir des métriques quantitatives fiables, la simulation de comportements 
+collaboratif sous forme de scénario enregistrés (grâce à l'\gls{ES}) aurai pu 
+permettre d'obtenir 
+des résultats sur des métriques quantitatives telles que la quantité de données 
+transmises, une variation plus grande de la topologie du réseau. Lorsqu'on 
+remarque que certains sont capables de réunir jusqu'à 100 personnes 
+simultanément pour réaliser montrer le passage à l'échelle de leur système 
+\cite{Hu2017}, il semble préférable pour des questions de temps, logistiques, de 
+coûts d'évoquer les possibilités de virtualisation offertes par les plateformes 
+réceptives au standard WebRTC.
