@@ -35,7 +35,7 @@ Seuls
 les navigateurs des utilisateurs participent au réseau \gls{P2P}. Les données 
 correspondent à l'état des objets manipulés. Les modifications sont transférées 
 sous la forme d'un différentiel d'état. Bien que la politique de connectivité ne 
-permettent pas un passage à l'échelle efficace, la cohérence des données sur le 
+permette pas un passage à l'échelle efficace, la cohérence des données sur le 
 réseau est garantie de manière forte et pessimiste respectivement par le protocole 
 de transport est configuré comme fiable et ordonnés, et par le mécanisme de 
 verrouillage afin d'éviter l'édition concurrente d'objets 3D.
@@ -93,8 +93,8 @@ Côté lecture, les vues matérialisées de l'interface sont issues de projectio
 l'activité, ce qui permet de présenter une interface orientée tâche plus proche des 
 attentes métiers de l'utilisateur. La projection découple les données de la base 
 de données des données servant une ou plusieurs vues. En effet, son rôle 
-d'intermédiaire est fournir les événements d'intérêts sous une forme dénormalisée 
-pour les vues (mise en cache).
+d'intermédiaire est de fournir les événements d'intérêts sous une forme 
+dénormalisée pour les vues (mise en cache).
 Le point \ref{item:es} reprend principalement les avantages de l'\gls{ES}, i.e. 
 enregistrer la 
 séquence d'événements qui a amenée à l'état courant de l'application. La 
@@ -136,9 +136,8 @@ informations. Le serveur n'est plus une source d'engorgement pour l'accès à la
 base de données mais un ensemble de pairs reliés à une source de vérité de 
 l'application. Les pairs liés à la base de données sont répartis dans le réseau de 
 manière à être plus disponible et proche pour les pairs sur lesquels les utilisateurs 
-travaillent. En cas d'arrêt temporaire de quelques uns de ces pairs, l'application 
+travaillent. En cas d'arrêt temporaire de quelques-uns de ces pairs, l'application 
 peut continuer de fonctionner en collaboration sur le réseau \gls{P2P} restant. 
-%a toujours des n\oe uds avec connecte toujours les pairs entre eux.
 La mise en place d'un environnement collaboratif nécessite également un 
 mécanisme de gestion de conflits. Cette thèse présente successivement deux 
 implantations de ce mécanisme, l'un pessimiste (verrou), l'autre optimiste 
@@ -157,7 +156,7 @@ La \textbf{QR 4} s'intéresse à l'implémentation d'un \gls{EVC3D} sur le web. 
 question s'oriente principalement sur les choix qu'impose ce type d'environnement 
 très contraint tant au niveau du métier de la modélisation 3D collaborative 
 qu'au niveau des technologies et des techniques qui s'y rapportent.
-les prototypes réalisés sont cross-plateformes sont réalisés à partir de 
+Les prototypes cross-plateformes sont réalisés à partir de 
 technologies web issues de standards (définis par \gls{W3C}, \gls{IETF} et 
 \acrshort{ECMA} 
 pour \gls{JS}) largement supportés comme WebGL pour le rendu de 
@@ -178,11 +177,11 @@ projections sont également un facteur facilitant l'évolution de l'application
 simplifiant le processus d'agrégation et de filtrage des événements.
 
 La réalisation de plusieurs prototypes fonctionnant sur différents 
-paradigme pour les expérimentation ont permis de montrer les avantages et 
+paradigmes pour les expérimentations ont permis de montrer les avantages et 
 inconvénients de ceux-ci.
 Passer d'un paradigme orienté état à un paradigme événementiel a apporté
 plusieurs bénéfices liés au métier, notamment en ce qui concerne la conservation 
-de l'intention de l'utilisateur au moment de la réalisation d'un action. En effet, les 
+de l'intention de l'utilisateur au moment de la réalisation d'une action. En effet, les 
 événements sont auto-descriptif et porte également le lien de causalité qui reflète 
 cette intention. Le réseau, responsable de la dissémination de ces informations ne 
 porte pas la responsabilité de la conservation de cette propriété, c'est à la couche 
@@ -207,14 +206,6 @@ orienté événements pour le prototype utilisé : l'intégration du métier a p
 l'observation minutieuse du travail réalisé par les utilisateurs au sein de 
 l'environnement. C'est la base du travail d'analyse des interactions de cette 
 expérimentation.
-%un module de gestion de conflit est 
-%mis en place. Il permet d'assurer la cohérence de l'état de l'application à deux 
-%niveaux : 
-%\begin{enumerate*}[label=(\roman*)]
-%	\item \label{item:local}au niveau local (pair)
-%	\item \label{item:global}et au niveau global (grappe). 
-%\end{enumerate*}
-
 
 %\item[QR 5] Quelles sont les métriques (réseau, collaboration) permettant 
 %d'évaluer un tel système de manière quantitative ? Qualitative ?
@@ -222,7 +213,7 @@ expérimentation.
 Dans la \textbf{QR 5}, la volonté de trouver des métriques adaptées à l'évaluation 
 d'un \gls{EVC3D} est exprimée tant concernant le réseau que la collaboration. La 
 question se pose à la fois en termes quantitatifs et qualitatifs.
-Les expérimentations détaillées dans cette thèse présente plusieurs facteurs 
+Les expérimentations détaillées dans cette thèse présentent plusieurs facteurs 
 d'évaluation qualitatifs. En effet, les deux expérimentations portent sur une étude 
 des utilisateurs dans le cas d'application de l'assemblage de modèles 3D de 
 manière collaborative pour la visualisation et la manipulation d'objets dans un 
@@ -242,35 +233,11 @@ participants, taille des données 3D, gestion de la cohérence\dots
 Les métriques quantitatives n'ont pu être abordée au cours de cette thèse mais 
 plusieurs perspectives sont évoquées dans la Section \todo{ref section} ci-après.
 
-%
-%
-%
-%
-%\end{itemize}
-%Cette thèse présente une architecture événementielle pour les \gls{EVC3D} sur 
-%le 
-%web. Les contributions de cette thèse sont multiples. Il y a d'une part les 
-%contributions scientifiques qui porte sur l'\gls{EDA} pour la 
-%modélisation 3D collaborative et d'autre part, il y a la présentation d'une 
-%architecture de communication hybride permettant de synchroniser les 
-%\glspl{EVC3D} sur le web de différents client.
-%
-%Chacune de ces contributions est accompagnée de son implantation. 
-%
-%De plus, la réalisation de plusieurs prototypes fonctionnant sur différents 
-%paradigme pour les expérimentation ont permis de montrer les avantages et 
-%inconvénients de ceux-ci.
-%
-%Enfin, les expérimentations principalement portées sur l'étude des utilisateurs 
-%permet de souligner plusieurs aspects du modèle. Le premier est de montrer que 
-%l'intégration du métier a permis l'observation minutieuse du travail réalisé au sein 
-%de l'environnement. 
-
 
 \section{Perspectives}
 
 Pour obtenir des métriques quantitatives fiables, la simulation de comportements 
-collaboratif sous forme de scénario enregistrés (grâce à l'\gls{ES}) aurai pu 
+collaboratif sous forme de scénario enregistrés (grâce à l'\gls{ES}) aurait pu 
 permettre d'obtenir 
 des résultats sur des métriques quantitatives telles que la quantité de données 
 transmises, une variation plus grande de la topologie du réseau. Lorsqu'on 
