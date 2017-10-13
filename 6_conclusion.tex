@@ -8,10 +8,10 @@ concernant différents domaines que la collaboration a tendance à réunir : ges
 de la cohérence dans un environnement collaboratif massif en \gls{P2P}, 
 architecture de communication efficace pour le passage à l'échelle et la résilience, 
 modèle de données dédiée au métier de la modélisation 3D collaborative. 
-
 Pour répondre aux différentes questions de 
 recherche posées en introduction de ce manuscrit, plusieurs contributions ont été 
-proposées, implantées et soumises à des expérimentations. 
+proposées, implantées et soumises à des expérimentations à travers 
+\cite{Desprat2015a,Desprat2015b,Desprat2016,Desprat2017}. 
 
 %	\item[QR 1] Quelle architecture réseau est la plus adaptée pour une gestion 
 %efficace, robuste et temps réel des données \gls{3D} dans un environnement 
@@ -65,7 +65,9 @@ fonctionnalités d'historique et de défaire / refaire une action sont fondament
 modélisation 3D. Pour assurer un suivi de la création sans perdre l'intention de 
 l'utilisateur de son action à sa visualisation, la modélisation sur le paradigme 
 événementiel est adapté par ses capacités à permettre une forte traçabilité des 
-changements qui se produisent au sein d'un système. La modélisation passe, 
+changements qui se produisent au sein d'un système. 
+
+La modélisation logicielle passe, 
 dans un premier temps, par le suivi des bonnes pratiques énoncées par le 
 \gls{DDD} pour cerner les différents agrégats qui composent le domaine de la 
 modélisation 3D collaborative. 
@@ -123,15 +125,98 @@ reconnexion du pair au réseau. En effectuant la différence entre les agrégats
 locaux et distants, les répliques sont capables de se synchroniser et de mettre à 
 jour leur Event Store. 
 
-
+L'autre partie de la réponse à la \textbf{QR 3} est apportée par la contribution 
+portant sur la présentation d'une architecture de communication hybride. Le 
+système appuie l'autonomie des utilisateurs en leur permettant de s'échanger 
+directement des 
+informations. Le serveur n'est plus une source d'engorgement pour l'accès à la 
+base de données mais un ensemble de pairs reliés à une source de vérité de 
+l'application. Les pairs liés à la base de données sont répartis dans le réseau de 
+manière à être plus disponible et proche pour les pairs sur lesquels les utilisateurs 
+travaillent. En cas d'arrêt temporaire de quelques uns de ces pairs, l'application 
+peut continuer de fonctionner en collaboration sur le réseau \gls{P2P} restant. 
+%a toujours des n\oe uds avec connecte toujours les pairs entre eux.
+La mise en place d'un environnement collaboratif nécessite également un 
+mécanisme de gestion de conflits. Cette thèse présente successivement deux 
+implantations de ce mécanisme, l'un pessimiste (verrou), l'autre optimiste 
+(\textit{Last Write Wins}). 
+Considérant que le premier peut générer des effets de bord considérables dans 
+l'environnement et amener à la frustration des utilisateurs, le second, plus 
+permissif et accompagné de mécanismes de sensibilisation au groupe (boîtes 
+englobantes) et de sensibilisation à l'interaction (sélection fantôme), 
+renie ces inconvénients et laisse plus de liberté à l'utilisateur dans ses choix de 
+sélection et plus largement d'interaction.
 %
 %\item[QR 4] Comment faciliter l'implémentation d'un tel système en garantissant 
 %le respect des règles métier liés à la manipulation d'objet \gls{3D}?
-%
+
+La \textbf{QR 4} s'intéresse à l'implémentation d'un \gls{EVC3D} sur le web. La 
+question s'oriente principalement sur les choix qu'impose ce type d'environnement 
+très contraint tant au niveau du métier de la modélisation 3D collaborative 
+qu'au niveau des technologies et des techniques qui s'y rapportent.
+les prototypes réalisés sont cross-plateformes sont réalisés à partir de 
+technologies web issues de standards (définis par \gls{W3C}, \gls{IETF} et 
+\acrshort{ECMA} 
+pour \gls{JS}) largement supportés comme WebGL pour le rendu de 
+l'environnement 3D et parfois encore en évolution comme WebRTC DataChannel 
+pour la transmission de données en \gls{P2P}. 
+Dans le prototype reposant sur le paradigme événementiel, l'implantation d'une 
+\gls{IU} orientée tâches rend possible un accompagnement de l'utilisateur dans 
+chaque actions en lui procurant une interface adaptée à la tâche en cours de 
+réalisation. Le pendant à ce découpage de l'interface par tâches est un passage à 
+l'échelle facilité par la production de vues matérialisées issues de projections 
+d'événement qui peuvent être mises en cache. Une projection pouvant servir 
+plusieurs vues, il est possible de décliner plusieurs visualisations des mêmes 
+données. La projection liée à l'environnement 3D peut par exemple proposer 
+plusieurs déclinaisons des mêmes données pour chaque vue qui en dépende. Cela 
+peut se traduire par un rendu effectué par des bibliothèques 3D différentes 
+(Three.JS, BabylonJS) ou un rendu adapté selon un profil utilisateur. Les 
+projections sont également un facteur facilitant l'évolution de l'application 
+simplifiant le processus d'agrégation et de filtrage des événements.
+Passer d'un paradigme orienté état à un paradigme événementiel a apporté
+plusieurs bénéfices liés au métier, notamment en ce qui concerne la conservation 
+de l'intention de l'utilisateur au moment de la réalisation d'un action. En effet, les 
+événements sont auto-descriptif et porte également le lien de causalité qui reflète 
+cette intention. Le réseau, responsable de la dissémination de ces informations ne 
+porte pas la responsabilité de la conservation de cette propriété, c'est à la couche 
+applicative (aux projections) de s'en charger. Cela permet d'alléger les échanges 
+avec des connexions \gls{P2P} ayant une configuration non fiable et non 
+ordonnée. Le protocole d'échange proposé repose sur une politique push / pull pour 
+s'assurer de la synchronisation des différents pairs. En cas de conflits, les 
+participants sont notifiés par le gestionnaire de conflit, ce qui leur permet de 
+relancer la synchronisation sur une base commune en cas de problème insolvable. 
+Le ré-ordonnancement passe par le mécanisme de visualisation flexible. A la 
+réception des événements les événements sont stockés dans les projections. 
+Seuls les événements en séquence (pas d'événements manquants, de \og 
+trou\fg{}) sont transmis à la vue ce qui permet de stocker en avance les futurs 
+événements et déclenche une nouvelle demande des événements manquants. 
+Cela permet de proposer une visualisation rapidement même si tous les 
+événements ne sont pas reçu et de donner à l'utilisateur un retour visuel sur 
+l'interface d'une scène se construisant par exemple, lui permettant de commencer 
+à percevoir, s'immerger voire travailler sur la scène.
+%un module de gestion de conflit est 
+%mis en place. Il permet d'assurer la cohérence de l'état de l'application à deux 
+%niveaux : 
+%\begin{enumerate*}[label=(\roman*)]
+%	\item \label{item:local}au niveau local (pair)
+%	\item \label{item:global}et au niveau global (grappe). 
+%\end{enumerate*}
+
+
 %\item[QR 5] Quelles sont les métriques (réseau, collaboration) permettant 
 %d'évaluer un tel système de manière quantitative ? Qualitative ?
 %
-%
+Dans la \textbf{QR 5}, la volonté de trouver des métriques adaptées à l'évaluation 
+d'un \gls{EVC3D} est exprimée tant concernant le réseau que la collaboration. La 
+question se pose à la fois en termes quantitatifs et qualitatifs.
+Les expérimentations détaillées dans cette thèse présente plusieurs facteurs 
+d'évaluation qualitatifs. En effet, les deux expérimentations portent sur une étude 
+des utilisateurs dans le cas d'application de l'assemblage de modèles 3D de 
+manière collaborative pour la visualisation et la manipulation d'objets dans un 
+environnement web.
+
+
+
 %
 %
 %
