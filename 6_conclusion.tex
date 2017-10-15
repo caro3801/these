@@ -29,11 +29,10 @@ intégrant un modèle de cohérence des données.
 L'architecture de communication de l'\gls{EVC3D} a été l'objet de deux 
 contributions successives, la seconde s'inspirant des verrous issus de la 
 première. 
-L'architecture hybride à maillage complet se compose d'éléments 
-simples. 
-Seuls 
-les navigateurs des utilisateurs participent au réseau \gls{P2P}. Les données 
-correspondent à l'état des objets manipulés. Les modifications sont transférées 
+L'architecture hybride à maillage complet se compose d'éléments simples. 
+Seuls les navigateurs des utilisateurs participent au réseau \gls{P2P}. Les 
+données correspondent à l'état des objets manipulés. 
+Les modifications sont transférées 
 sous la forme d'un différentiel d'états. Bien que la politique de connectivité ne 
 permette pas un passage à l'échelle efficace, la cohérence des données sur le 
 réseau est garantie de manière forte et pessimiste respectivement par le protocole 
@@ -136,7 +135,7 @@ l'application. Les pairs liés à la base de données sont répartis dans le ré
 manière à être plus disponibles et proches pour les pairs sur lesquels les 
 utilisateurs travaillent. 
 En cas d'arrêt temporaire de quelques-uns de ces pairs, l'application 
-peut continuer de fonctionner en collaboration sur le réseau \gls{P2P} restant. 
+peut continuer de fonctionner en collaboration sur les pairs restants. 
 La mise en place d'un environnement collaboratif nécessite également un 
 mécanisme de gestion de conflits. Cette thèse présente successivement deux 
 implantations de ce mécanisme, l'un pessimiste (verrou), l'autre optimiste 
@@ -246,11 +245,12 @@ La simulation de comportements
 collaboratifs sous forme de scénarios enregistrés (grâce à l'\gls{ES}) aurait pu 
 permettre d'obtenir des résultats sur des métriques quantitatives fiables telles que la 
 quantité de données transmises, la variation de la topologie du 
-réseau. Alors que des auteurs sont capables de réunir jusqu'à 100 personnes 
+réseau. Alors que des auteurs sont capables de réunir jusqu'à cent personnes 
 simultanément sur une expérimentation pour montrer le passage à l'échelle de leur 
 système \cite{Hu2017}, il semble préférable pour des questions de temps, de 
 logistiques et de coûts, d'évoquer les possibilités de virtualisation offertes par les 
-plateformes réceptives au standard WebRTC.
+plateformes réceptives au standard WebRTC pour tester les capacités du système 
+\cite{}.
 
 Pour cela il est nécessaire d'avoir un système de virtualisation du réseau pour 
 pouvoir faire varier les différents critères -- nombre 
@@ -266,8 +266,8 @@ transitant sur une connexion DataChannel.
 
 \paragraph{Compatibilité et plasticité}
 Le standard WebRTC, sur lequel repose la couche \gls{P2P}, est encore en 
-évolution, parfois instable, hétérogène\footnote{Les standards ne sont que des 
-recommandations\dots} ou indisponible, c'est pourquoi en proposant l'utilisation 
+évolution, parfois instable, hétérogène\footnote{Les standards ne sont pas toujours 
+respectés\dots} ou indisponible, c'est pourquoi en proposant l'utilisation 
 de protocoles alternatifs à WebRTC (WebSocket, HTTP, ORTC) l'accessibilité est 
 renforcée. En fonction du type de connexion et d'appareil, l'application pourrait 
 basculer d'un protocole à l'autre pour stabiliser la connexion en choisissant selon 
@@ -279,7 +279,7 @@ proposant par exemple un rendu image du modèle 3D effectué sur un serveur
 \cite{Abdallah2014} ou réalisé par une grappe de pairs \cite{Li2015}.
 Ces perspectives d'adaptation du rendu 3D, ou plus généralement de l'interface 
 font référence à un intérêt pour la plasticité dans les interfaces 3D 
-\cite{Lacoche2014} en s'appuyant sur les métadonnées issus de l'utilisateur, du 
+\cite{Lacoche2014} en s'appuyant sur les métadonnées issues de l'utilisateur, du 
 système, de l'appareil, de la connexion et de la sémantique du contenu produit et 
 des contraintes de temps liées au cas d'utilisation.
 
@@ -291,7 +291,7 @@ données 3D pourrait être améliorée grâce à un format de
 compression propre aux événements produits. Grâce au 
 réseau \gls{P2P} il est possible de rapprocher les ressources des utilisateurs 
 selon leurs intérêts. Le rendu assisté par les pairs \cite{Zhu2011} couplé avec une 
-couche dédié au routage par sujet \cite{Baldoni2007} pourrait encourager un 
+couche dédiée au routage par sujet \cite{Baldoni2007} pourrait encourager un 
 meilleur équilibre dans la répartition de la charge de transmission.
 
 %\paragraph{Modèle de cohérence}\todo{faire?}
