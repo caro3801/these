@@ -1,0 +1,263 @@
+\subsection{Interface orientée tâche}
+Dans le but de proposer une \gls{IU} proche des fonctionnalités métiers liées à la 
+modélisation \gls{3D}, l'éditeur possède une interface orientée \og tâche\fg{}, en 
+comparaison avec des \gls{IU} \gls{CRUD}. En effet, les \gls{IU} \gls{CRUD} 
+réduisent la sémantique métier du domaine d'application à la création, la lecture, la 
+mise à jour et la suppression, omettant toutes les subtilités que peuvent dégager 
+ces actions en perdant l'intention de l'utilisateur dès le niveau de l'interface. Une 
+interface orientée tâche a tendance à s'attarder sur toutes les nuances que le 
+domaine possède en caractérisant chaque action sans subir d'effet de 
+simplification. Cette proximité avec le métier permet de calquer directement 
+l'interface du modèle événementiel sur l'\gls{IU} et de guider l'utilisateur dans ses 
+activités. L'utilisabilité, qualité de l'expérience utilisateur fournit par un système 
+pour réaliser une tâche, est alors maximisée en terme d'efficacité, d'efficience et 
+de satisfaction. 
+Ce type d'\gls{IHM} s'organise autour de cas d'utilisation. Cela permet, 
+d'une part, de présenter clairement les 
+actions (\og ajouter une géométrie à la 
+bibliothèque à partir d'un fichier\fg{} plutôt que \og téléverser un fichier\fg{}) : 
+l'intention est clairement définie. D'autre part, lorsque l'utilisateur s'apprête à faire 
+une action, seules les informations utiles sont affichées. Enfin, l'application fournit 
+simplement l'information dans le contexte où elle doit être présentée, évitant à 
+l'utilisateur d'aller la chercher ailleurs.
+L'\gls{IU} devient alors une couche de l'application qui nécessite d'agréger, croiser 
+et filtrer des données. La dénormalisation proposée par \gls{CQRS} remédie à ce 
+besoin dans le cadre de la consultation de données. 
+
+
+\subsubsection{Présentation de l'interface}
+
+
+%\begin{figure}[h!]
+%	\centering
+%	\begingroup
+%	
+%	\subfloat[Rotation (vue \gls{3D}) et outils de manipulation d'objet 
+%	\gls{3D} 
+%	(panneau 
+%	
+%latéral)]{\includegraphics[width=0.75\textwidth]{eps/2rotatedetail.eps}\label{fig:ui2}}\hfill
+%	
+%	\subfloat[Translation (vue \gls{3D}) et visualisation de l'historique 
+%	(panneau 
+%	
+%latéral)]{\includegraphics[width=0.75\textwidth]{eps/1translatehisto.eps}\label{fig:ui1}}\hfill
+%	
+%	\subfloat[Mise à l'échelle (vue \gls{3D}) et liste des collaborateurs 
+%	(panneau 
+%	
+%latéral)]{\includegraphics[width=0.75\textwidth]{eps/3scalecollab.eps}\label{fig:ui3}}\hfill
+%	
+%	\endgroup
+%	\caption{Interface utilisateur pendant une session collaborative (trois 
+%personnes)}
+%	\label{fig:screenshots}
+%\end{figure}
+Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
+(dans un navigateur) qui représente l'espace de travail collaboratif et qui lui 
+permettant 
+d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont le clavier 
+et la souris\info{est ce qu'on parle de mobile?}. Le premier niveau de cette 
+interface est scindée en deux panneaux~: 
+\begin{enumerate}
+	\item L'espace \gls{3D} consacré à la visualisation des objets et à leur 
+	manipulation 
+	dans l'environnement \gls{3D}~;
+	\item La barre d'outils qui contient trois onglets~:~
+	\begin{enumerate}
+		\item "Scene" contient tous les détails de la scène et des maillages qu'elle 
+		inclue~; 
+		\item "Collaboration" fournit les informations liées à la collaboration~;
+		\item "History" liste tous les événements qui ont eut lieu dans la scène et 
+		leurs  détails. 
+	\end{enumerate}
+\end{enumerate}
+
+\begin{figure}[]
+	\centering
+	\begingroup
+	
+	\subfloat[Onglet \og outils de manipulation sur la 
+	scène\fg{}]{\includegraphics[width=0.38\textwidth]{eps/scenecontrol.eps}\label{fig:uicontrol}}
+	\hfill
+	\subfloat[Onglet \og collaboration\fg{}]
+	{\includegraphics[width=0.27\textwidth]{eps/collaboration.eps}\label{fig:uicollab}} 
+	\hfill
+	\subfloat[Onglet \og 
+	historique\fg{}]{\includegraphics[width=0.32\textwidth]{eps/history.eps}\label{fig:uihisotry}}
+	
+	\endgroup
+	\caption{Onglets du panneau latéral de l'interface}
+	\label{fig:uipanneau}
+\end{figure}
+
+La Figure \ref{fig:uipanneau} montre quelques captures d'écran durant une 
+session collaborative sur le modèle Rotor. L'onglet "Scene" (Figure 
+\ref{fig:uicontrol}) possède un bloc contenant les détails 
+d'un 
+maillage en cours de 
+sélection. Cela permet d'avoir la description des propriétés de l'objet sélectionné et 
+une manipulation de ses paramètres (position, rotation et mise à l'échelle) plus 
+précise que via l'espace \gls{3D} avec le cliqué / déplacé. "Scene" intègre 
+également un espace réservé aux géométries disponibles dans la scène appelé 
+Bibliothèque (de géométries).
+
+L'onglet "Collaboration" (Figure \ref{fig:uicollab}) présente la liste des 
+collaborateurs qui 
+participent à la 
+scène. Chacun d'eux est décrit par son nom, son état  (connecté ou déconnecté) 
+et son rôle (administrateur, éditeur, lecteur ou autre\footnote{Un rôle peut être 
+	défini par le biais du \gls{framework} 3DEvent}). En cliquant sur un élément de 
+	la 
+liste, l'utilisateur accède au dernier point de vue dans l'espace \gls{3D} connu du 
+collaborateur représenté.
+
+L'onglet "History" (Figure \ref{fig:uihisotry}) liste tous les événements passés dans 
+la 
+scène en fournissant 
+l'accès à leur détail. Pour chaque événement, le système est capable de montrer 
+dans l'espace \gls{3D} la différence entre l'état  après l'événement cliqué $state_x$ 
+et l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir 
+de \og revenir en arrière\fg{} sans perdre les données entre $state_n$ et $state_x$ 
+car dans le système présenté ici, cela s'effectue par compensation (cf 
+Event-Sourcing 
+Section X)\improve{annulation d'un événement ou juste ES}.
+
+Dans chaque onglet se trouvent différents blocs \gls{HTML}, avec des 
+comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
+correspondent aux views de ce modèle.
+
+Les boîtes englobantes représentent la sélection des différents collaborateurs 
+pendant la session.
+
+Parmi les vues disponibles dans le système, une grande partie est dédiée à 
+l'\gls{IU} de l'application web pour le cas d'utilisation de la modélisation 3D. 
+D'autres views sont disponibles pour un autre type d'utilisation destinée à 
+l'observation des comportements des utilisateurs, élément est primordiale dans 
+une expérimentations.
+
+
+
+\subsubsection{Exemple d'interaction}
+La Figure \ref{fig:cqrs-example} décrit la façon dont le système traite l'exécution 
+d'une commande de translation déclenchée par l'utilisateur et comment cette 
+information est diffusée aux collaborateurs\footnote{Pour que l'exemple 
+	fonctionne, la scène, la géométrie du cube et le maillage \textit{cube1} doivent 
+	avoir été créés en amont.}.
+Dans l'étape (a), la commande déclenchée par l'utilisateur s'adresse à l'agrégat 
+$cube1$ et contient les paramètres de la translation (vecteur x, y, z). L'agrégat, 
+qui 
+modélise le domaine d'un maillage, génère l'événement de translation $e1$ (étape 
+(b)) si tout est valide d'un point de vue métier. L'événement $e1$ est ensuite 
+passé à l'Event Store. 
+Le composant responsable de la détection de conflit permet au développeur 
+d'implémenter ses propres règles de résolution de conflit. Le composant déclenche 
+une exception lorsque le numéro de version reçu et le numéro de version courant 
+de l'agrégat sont identiques (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
+règles métiers définies et les exceptions liées à la cohérence, l'événement peut 
+être 
+rejeté. Ce traitement peut être à l'origine de la génération de nouveaux 
+événements.
+
+
+\begin{figure}[]
+	\centering
+	\includegraphics[width=\columnwidth]{eps/example10.eps}
+	\caption[Flux de la collaboration dans le framework 3DEvent entre 3 
+	utilisateurs]{Exemple d'édition collaborative où User A est connecté à User  B, 
+		lui 
+		même connecté à User C. Le cycle montre les différentes étapes du 
+		déclenchement: la commande, la 
+		génération 
+		de l'événement, la 
+		synchronisation du journal d'événements, l'impact sur le rendu des autres 
+		utilisateurs pour une translation sur un cube et le rendu 
+		visuel.}\label{fig:cqrs-example}
+\end{figure}
+
+\subsection{Sélection fantôme}
+Les interactions utilisateurs doivent être adaptées à la collaboration et aux 
+manipulations à effectuer. Pour cela, l'éditeur 3DEvent introduit la fonctionnalité de 
+sélection \og fantôme\fg{}. Lorsqu'un utilisateur souhaite sélectionner un objet de 
+la scène, l'objet original ($O_o$) est 
+cloné et devient l'objet fantôme ($O_f$). $O_f$ conservent les mêmes propriétés, 
+représenté avec de la 
+transparence d'où le terme \og fantôme\fg{}. 
+L'objet $O_f$ prend alors le focus de sélection pour que l'utilisateur le manipule à 
+la place de l'objet $O_f$. 
+Lorsque l'utilisateur relâche $O_f$, alors la modification intentée s'applique sur 
+$O_o$ avec le principe du \textit{Last Write Wins} (le dernier gagne).
+La Figure \ref{fig:ghostselection} 
+représente la sélection fantôme lors de la translation du corps du rotor par 
+l'utilisateur Foo : c'est l'objet transparent qui est manipulé alors que l'objet opaque 
+représente sa position originale. 
+En différenciant l'actuel objet que l'utilisateur souhaite sélectionné ($O_{o}$) de 
+celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
+\begin{itemize}
+	\item l'ergonomie dans l'environnement \gls{3D} :
+	$O_f$ est un objet temporaire qui permet à l'utilisateur
+	d'avoir une visualisation de l'objet en cours de manipulation tout en 
+	conservant le dernier état de $O_o$ visible. 
+	$O_o$ peut être considéré comme un point de repère visuel pour l'utilisateur 
+	lorsqu'il effectue sa manipulation. 
+	L'$O_f$ a aussi un rôle d'intermédiaire entre l'utilisateur et la 
+	finalité de l'interaction en donnant un support visuel à sa réflexion experte.
+	Grâce à $O_f$, l'utilisateur peut également révoquer sa manipulation en 
+	cours sans avoir eu d'impact sur $O_o$ en évitant des actions inutiles (faire 
+	l'action 
+	puis la défaire) pour le métier et coûteuses pour le réseau.
+	
+	\item la collaboration : si un collaborateur effectue une modification 
+	à destination du même $O_o$ alors la représentation de $O_o$ chez 
+	l'utilisateur est également modifiée. $O_f$ par contre ne subit pas d'impact ; 
+	l'utilisateur peut continuer sa manipulation et~/~ou l'ajuster en fonction des 
+	nouvelles informations liées à $O_o$ ou même révoquer sa manipulation 
+	en cours si cela lui convient.
+	
+	\item le métier : seules les manipulations menées à terme sont 
+	considérées comme des commandes. Cela évite d'avoir des événements qui ne 
+	sont pas pertinents pour le métier dans le journal d'événements (comme lorsque 
+	l'utilisateur change d'idée lors de l'interaction ou
+	suite à une intervention concurrente). L'utilisateur n'a un impact sur l'application 
+	que lorsqu'une modification métier est réalisée.
+	
+	\item le réseau : l'information importante à faire transité est l'événement 
+	correspondant à la modification métier pas toutes les positions intermédiaires 
+	même si intuitivement l'idée de temps réel pourrait conduire à cette solution. La 
+	quantité de messages produite surchargerai à la fois le réseau et le fil 
+	d'exécution principale de l'application. En effet, \gls{WebRTC} a l'inconvénient 
+	pour le 
+	moment de ne pas pouvoir s'exécuter dans un \textit{Web Worker} (fil 
+	d'exécution 
+	parallèle en JavaScript). Cette solution imposerai des 
+	latences réseau et d'\gls{IU} qui affecteraient gravement l'expérience utilisateur
+	sans apporter d'informations supplémentaires à l'aspect métier de la 
+	collaboration. 
+\end{itemize}
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[trim={0 0 0cm 0}, clip, 
+	width=0.8\columnwidth]{eps/1translatehisto.eps}
+	\caption{Illustration de la sélection fantôme dans l'environnement 3D}
+	\label{fig:ghostselection}
+\end{figure}
+
+\paragraph{Projections}
+\todo{refomuler}
+chaque partie de l’interface est liée à une proj de la bdd
+les actions user et les actions des autres users passent par le meme cycle
+pas de diff de prise en compte des evnts de l’interaction user ou de la couche 
+reseau
+en CS : les actions users -> actions -> recup info
+action push du servuer qui peuvent etre gerees de maniere diff
+\subsection{Bilan}
+
+\todo{refomuler}
+L'application 3DEvent repose sur les principes et les 
+technologies du web pour permettre de visualiser et manipuler des objets \gls{3D} 
+de 
+manière 
+collaborative en temps-réel.
+\paragraph{Testabilité}

@@ -1,0 +1,68 @@
+\subsection{Implantation des composants pour la 
+	communication}
+		\paragraph{Serveur}
+		
+Le prototype utilise un serveur Node.js qui sert à la fois de serveur de 
+\textit{signaling} pour mettre en liaison les utilisateurs mais il sert également 
+de lien avec la base de données. Node.js permet d'utiliser du \gls{JS} côté 
+serveur, simplifiant la compréhension et la maintenance de l'environnement. 
+L'application utilise le micro-framework ExpressJS par dessus Node.js qui a 
+l'avantage de simplifier le routage réseau.
+
+		\paragraph{Base de données}
+
+Pour assurer la sauvegarde au long-terme des modifications faite par les 
+utilisateurs, la base de données MongoDB stocke l'état de chaque scène de 
+l'application. L'utilisation d'une base de données NoSQL orientée document 
+permet de stocker toutes les données pertinentes ensemble, dans un même 
+document. Un document est auto-descriptif et peut imbriquer des données 
+dans une structure d'arbre hiérarchisé. Une collection regroupe des 
+documents. Dans ce prototype, il existe trois collections : \textit{Scenes} et 
+\textit{Geometries} et \textit{Meshes}. 
+La collection \textit{Scenes} contient chaque document concernant une 
+scène : identifiant de la scène, métadonnées de l'espace virtuel (nom de la 
+scène, liste des utilisateurs), liste des maillages inclus (identifiant maillage). 
+La collection \textit{Geometries} comprend les géométries importées dans 
+l'application sous la forme de : identifiant de la géométrie, données 3D.
+La collection \textit{Meshes} représente les maillages utilisés dans les 
+scènes : identifiant du maillage, nom du maillage, identifiant de la géométrie.
+Les paramètres liés aux opérations \gls{CRUD} de la base de données sont 
+fournis part la requête \gls{REST}. 
+
+		\paragraph{Couche \gls{P2P}} 
+
+La compatibilité entre navigateurs 
+(cross-plateforme) concernant 
+l'\gls{API} Datachannel issue du standard \gls{WebRTC} n'est pas encore 
+effective. C'est pourquoi ce prototype ne fonctionne que sur les dernières 
+version de Chrome et Firefox\todo{version number}. PeerJS est une 
+bibliothèque \textit{open source} qui enveloppe WebRTC et fournie une \gls{API} 
+de connexion navigateur-à-navigateur.
+Le client possède un identifiant, donné par le serveur de \textit{signaling} lors 
+de sa première connexion, qui lui permet de se connecter à un pair distant 
+dont il a obtenu l'identifiant par le serveur. Le mécanisme 
+de \textit{signaling} est délégué à PeerJS qui se charge de l'implantation de 
+\gls{ICEF} et des problématiques \gls{NAT}. 
+
+
+		\paragraph{Couche applicative}
+		
+Les différentes actions utilisateurs sont relayés par un système 
+événementiel. L'interface intègre une couche de messagerie pour notifier les 
+composant d'un nouvel événement \gls{JS}. Dans le prototype, la 
+bibliothèque 
+\textit{js-signals} sert de gestionnaire d'événements aux différents 
+composants de l'\gls{IU} pour 
+communiquer. Dans ce contexte chaque \textit{signal} possède un 
+contrôleur, qui simplifie le contrôle de la réaction des événements en 
+fournissant des fonctionnalités de souscription et de diffusion aux
+événements~\gls{JS}. 
+
+En comparaison avec une implémentation \textit{Event 
+emitter / dispatcher} et \gls{PubSub}, le patron de conception 
+Observateur dans \textit{js-signals} n'utilise pas de chaîne de caractère pour 
+décrire les types d'événements \gls{JS} (évite les erreurs).
+Une instance \textit{signal} enregistre des procédures (événements \gls{JS}, 
+callbacks) qui peuvent être asynchrones. 
+Lorsqu'il est intercepté -- n'importe où dans le contexte de l'application -- les 
+procédures qui lui sont associées sont également déclenchées.

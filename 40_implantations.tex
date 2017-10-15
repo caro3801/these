@@ -1,0 +1,119 @@
+\chapter{Prototypes d'application web pour la conception 3D collaborative}
+\chaptertable
+
+\section{Introduction}
+Ce chapitre présente deux prototypes, chacun implanté sur un paradigme différent.
+Le prototype 3DState repose sur des structure de données orientées états pour 
+proposer une preuve de concept concernant principalement l'architecture de 
+communication hybride, tandis que le prototype 3DEvent s'établi sur le paradigme 
+événementiel pour implanter une approche peu couplée dans l'intergiciel \gls{P2P} 
+et l'interface.orientée tâche par laquelle l'utilisateur interagi avec le système.
+Chaque prototype possède les mêmes blocs : une interface utilisateur (contenant 
+un environnement 3D), un intergiciel \gls{P2P} 
+
+
+
+La programmation réactive (PR) est le paradigme de programmation à la base de 
+l'implantation des interfaces graphiques des deux prototypes : les composants 
+répondent à des événements qui leur parviennent. 
+Cela s'applique principalement à l'interface graphique mais 
+également au niveau des flux réseaux pour proposer une application disponible 
+(répondre rapidement), résilient (disponible même en cas d'erreur), souple 
+(fonctionnel même surchargé), orienté messages (utiliser des messages 
+asynchrones). Pour conserver ces propriétés, la programmation réactive impose 
+de suivre la variation des valeurs dans le temps, être à l'écoute les événements 
+qui surviennent, suivre les dépendances des variables pour pouvoir propager les 
+mises à jour de valeurs, et enfin propager automatiquement les changements.
+En cela, le langage de programmation \gls{JS} s'adapte bien à la PR car il repose 
+sur un système de boucle d'événements, un gestionnaire d'événement et 
+d'injection de comportements asynchrones. 
+
+\paragraph{Signaling}
+L'assomption est faite que tous les clients utilisent des navigateurs qui 
+implémentent et supportent le protocole WebSocket et l'\gls{API} 
+RTCDataChannel de WebRTC. Pour rappel, l'\gls{API} RTCDataChannel permet à 
+chaque pair d'échanger des données arbitraires 
+avec d'autres à partir du navigateur avec des propriétés de livraison 
+personnalisables -- fiable ou non fiable (Section \ref{sec:fiabilite}), ordonné ou non 
+ordonné (Section \ref{sec:ordre}). 
+La connexion entre un pair (client) et le serveur est établie sur la base du protocole 
+\gls{WebSocket}. Cette connexion bi-directionnelle est initialisée lors de la 
+première requête du client pour récupérer le contenu de l'application. Cette 
+connexion sert à la fois pour la phase de \textit{signaling} lors de l'établissement 
+d'une connexion \gls{WebRTC} mais également pour que le client puisse envoyer 
+des mises à jours originales à la base de données via les pairs reliés à la base de 
+données. 
+
+
+\paragraph{Interactions de base}
+L'intérêt de proposer une application web se retrouve principalement dans 
+l'accessibilité qu'elle propose. 
+En effet, n'importe quel terminal muni d'un navigateur web peut y accéder, ce qui 
+la rend distribuée et multiplateforme. 
+Les fonctionnalités graphiques proposées par WebGL sont un peu réduites par 
+rapport à celles d'OpenGL dont l'\gls{API} évolue plus vite et propose plus de 
+flexibilité et d'optimisations. Cependant, les performances graphiques restent très 
+correctes car le navigateur est quand même capable d'utiliser les processeurs 
+graphiques du terminal (GPU) pour les calculs et les rendus \gls{3D}.
+
+Pour faire le lien entre le modèle et l'expérimentation, l'implantation du modèle a 
+pris la forme d'un éditeur pour la modélisation \gls{3D} haut niveau permettant de 
+visualiser et manipuler des objets \gls{3D} de manière collaborative dans un 
+environnement web.
+
+Dans chacun des prototypes, les interactions de bases sont les suivantes :
+\begin{description}
+	
+	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut, 
+	com\-me dans un environnement \gls{3D} classique, interagir avec la vue en 
+	utilisant 
+	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
+	utiliser les commandes clavier et souris pour effectuer des opérations de 
+	translation, de rotation et d'homothétie de trois manières différentes: 
+	directement dans le \textit{viewport}, via le 
+	menu ou via la console du navigateur.
+	\item[Charger des modèles \gls{3D}] L'éditeur gère la plupart des formats de 
+	fichier 
+	3D \info{ref [Bou12]}(OBJ, PLY, DAE, glTF\ldots)
+	\item[Changement de référentiel] La modification des coordonnées de 
+	réfé\-ren\-ces (local/global)  pour les différentes transformations possibles
+	\item[Grid snapping] Cette fonctionnalité permet d'aligner les modèles avec la 
+	grille avec un effet de magnétisme sur les intersection de la grille.
+	\item[Changement de point de vue] L'utilisateur peut à tout moment passer de 
+	son point de vue à celui d'un autre utilisateur. Le choix d'implanter ce type de 
+	fonctionnalité s'inscrit dans la perspective de sensibilisation de l'utilisateur au 
+	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre le 
+	point de vue d'un collaborateur est une manière de 
+	comprendre son fonctionnement et d'imaginer ses 
+	perspectives de conception à travers l'angle de caméra qu'il aura choisi.
+\end{description}
+
+
+\section{3DState : une preuve de concept orientée états}
+
+3DState correspond au prototype de 
+\cite{Desprat2015a,Desprat2015b}. Il présente l'implantation de l'architecture de 
+communication orientée états ainsi que les choix techniques qui l'accompagne.
+
+
+%\subsection{Implantation des composants pour la communication}
+
+\input{42_3DState_P2P}
+
+%\subsection{Interface de 3DState}
+\input{42_3DState_UI}
+
+\section{3DEvent : une approche découplée orientée événements}
+Dans le chapitre précédent, une des contributions présentées correspond au 
+modèle orienté événements : le \gls{framework} 3DEvent. 
+L'implantation d'un tel système contient plusieurs éléments comme l'éditeur 
+web et son interface utilisateur. Les éléments de sensibilisation à la collaboration 
+sont également implantés comme le mécanisme de sélection multiple. Enfin, le 
+système de visualisation flexible est un composant qui s'intègre du côté de la 
+partie lecture en \gls{CQRS} pour proposer un contenu adapté au client. 
+
+
+%\subsection{Intergiciel pour l'échange de 3D par événements}
+\input{43_3DEvent_P2P}
+%\subsection{Interface orientée tâche}
+\input{43_3DEvent_UI}

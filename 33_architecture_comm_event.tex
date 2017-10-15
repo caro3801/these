@@ -157,7 +157,96 @@ Instances Serveur pour réduire la responsabilité des pairs producteurs (Instan
 Web) dans la distribution des données. En effet, les Instances Serveur qui 
 participent au réseau permettent de proposer plus de points de distribution de 
 données directement reliés à la base de données. De ce fait, la politique de 
-connectivité entre les pairs peut être réduite, le réseau a une topologie maillée partiellement (\textit{partial mesh topology}). 
+connectivité entre les pairs peut être réduite, le réseau a une topologie maillée 
+partiellement (\textit{partial mesh topology}). 
+
+
+\subsubsection{Gestion de la cohérence}
+
+
+
+Pour chaque événement sauvegarder, l’Event Store publie (push) l’événement sur 
+le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme 
+\ref{algo:saveEvent}. \todo{finir explications}
+
+\begin{algorithm} % enter the algorithm environment
+	\caption{Sauvegarde d'événements d'un agrégat dans l'Event Store} % 
+	%give the algorithm a caption
+	\label{algo:saveEvent} % and a label for \ref{} commands later in the document
+	\begin{algorithmic} % enter the algorithmic environment
+		\REQUIRE aggregateId : string, uncommitedEvents : eventMsg[ ], 
+		version : number
+		%\ENSURE $y = x^n$
+		\STATE $expectedVersion \Leftarrow version$
+		\FOR{$eventMsg $ \textbf{in} $uncommitedEvents$}	
+		\STATE{$newMsg \Leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
+			streamId : aggregateId\}$}
+		\STATE{$publish(aggregateId, newMsg, expectedVersion++)$}
+		\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
+\todo{parler de cet algo}
+\begin{algorithm} % enter the algorithm environment
+	\caption{Ajout d'un événement dans l'Event Store} % 
+	%give the algorithm a caption
+	\label{algo:addevent} % and a label for \ref{} commands later in the document
+	\begin{algorithmic} % enter the algorithmic environment
+		\REQUIRE streamId: string, event: EventStoreEvent, version: number
+		\ENSURE event
+		\STATE $stream \Leftarrow streams.getOrCreate(streamId);$
+		\IF{$ stream.has(version)$}
+		\STATE $throwExceptionVersion(stream,version)$
+		\ENDIF
+		\STATE $stream.data.set(version,event) $
+	\end{algorithmic}
+\end{algorithm}
+
+\todo{categories: type d’agregat
+	c’est un flux liés a une categorie (exemple geometries) tous les events liés à la 
+	categorie.}
+
+\todo{metadata phase sync permet a un nouveau noeud de recup toutes les info 
+	manquantes et de les demander de maniere repartie a tous les noeuds}
+
+
+
+\begin{algorithm} % enter the algorithm environment
+	\caption{Synchronisation d'un n\oe ud de l'Event Store partagé} % 
+	%give the algorithm a caption
+	\label{algo:synchnode} % and a label for \ref{} commands later in the document
+	\begin{algorithmic} % enter the algorithmic environment
+		\REQUIRE $node : ClusterNode$
+		\ENSURE $nodeState == synchronized$
+		\STATE $nodeMetadata \Leftarrow node.getMetadata()$
+		\IF{$nodeMetadata != \{\} $}
+		\STATE $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
+		\WHILE{$streamsToSync > 0$}
+		\STATE $streamToSync \Leftarrow streamsToSync.pop()$
+		\STATE $events \Leftarrow  node.getEvents(streamToSync)$
+		\IF{$! streamToSync.has(version)$}
+		\FOR {$event$ \textbf{in} $events$}
+		\STATE $processEvent(event.streamName, event, 
+		event.version)$
+		\ENDFOR 
+		\ENDIF
+		\STATE $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
+		\ENDWHILE
+		\ENDIF
+		\STATE $node.endSync()$
+	\end{algorithmic}
+\end{algorithm}
+
+L'algorithme \ref{algo:synchnode} décrit la synchronisation d'un n\oe ud avec un 
+autre n\oe ud dans l'Event Store partagé. Le n\oe ud courant demande le 
+différentiel (\textit{diff}) entre ses flux et ceux du n\oe ud $node$ pour 
+connaître quels sont les flux à synchroniser. Si un n\oe ud possède les données 
+demandée il les envoie. Si le n\oe ud courant reàoit à nouveau les mêmes 
+données, elles sont ignorées par le système.
+
+
+
+
+
 
 \subsubsection{Discussion des problématiques liées à une architecture de 
 communication orientée \og événements\fg{}}

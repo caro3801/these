@@ -450,7 +450,45 @@ de stockage est le même sur tous les sites, ce qui veut dire que les
 consommateurs qui lisent les événements du journal local vont toujours voir les 
 effets avant leurs causes.
 
+\subsubsection{Flexibilité de la visualisation}
+\label{sec:flexviz}
+Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de 
+l'état courant à 
+partir du flux d'événements. Pour Abdullin, \og la projection est le processus de 
+conversion (ou d'agrégation) d'un flux d'événement en une représentation 
+structurelle. Cette dernière (qui est mise à jour au moment où le flux est 
+parcourue) 
+peut avoir différentes appellations : modèle de lecture persistent, vue ou 
+état\fg{}\cite{Abdullin2011}.
+La partie lecture du modèle (l'affichage sur interface utilisateur) bénéficie des 
+projections en lui permettant de réduire l'afflux des événements, ne laissant filtrer 
+que ceux qui sont pertinents pour la vue. La projection fournit une vue adaptée 
+(filtrée, enrichie\ldots) du flux d'événements au client. Elle peut également être 
+utilisée pour mettre en avant des aspects experts (notifications, déclenchement 
+d'action) ou des raisons de confidentialité.
+Une projection peut être créée de manière synchrone (à la volée) au fur et à 
+mesure de la publication des événements ou de manière asynchrone et donc 
+découplée du flux des événements. 
 
+
+Du fait de la nature d'un réseau \gls{P2P}, les pairs ne reçoivent pas forcément les 
+paquets réseau de manière ordonnée.
+Par conséquent, les messages peuvent arriver dans n'importe quel ordre.
+Qu'arriverait-il alors si un événement A ($eA$) nécessitant un autre événement B 
+($eB$) arrivait avant celui-ci? Dans cette situation, le système génére une 
+erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas 
+d'information sur la hiérarchie d'application des événements ($eB$ puis $eA$).
+
+Pour pallier à ce problème, l'introduction du système de projection permet d'avoir 
+un mécanisme (comme un automate fini) qui défini les transitions nécessaires 
+pour 
+passer d'un état à l'autre. Les transitions réalisent les actions déterminées en 
+fonction des 
+événements qui arrivent. Par exemple, si un utilisateur essaie d'ajouter un objet 
+dans une 
+scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
+jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
+jamais utiliser $eA$.
 
 \subsection{Cohérence éventuelle en CQRS}
 

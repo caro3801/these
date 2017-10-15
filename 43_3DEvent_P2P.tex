@@ -1,0 +1,173 @@
+\subsection{Intergiciel pour l'échange de 3D par événements}
+
+L'architecture de communication décrite dans le chapitre précédent nécessite 
+l'implémentation d'un intergiciel \gls{P2P} compatible avec les besoins liés à la 
+3D, le web et la collaboration. Cette section décrit les politiques de connexion 
+pour l'éditeur présenté dans la section précédente ainsi que les mécanismes de 
+synchronisation nécessaire à l'échange de données dans l'application. 
+
+\subsubsection{Signaling et connectivité}
+L'assomption est faite que tous les clients utilisent des navigateurs qui 
+implémentent et supportent le protocole WebSocket et l'\gls{API} 
+RTCDataChannel. 
+
+La topologie de l'architecture de communication repose sur la mise en relation 
+automatique des clients par le biais du serveur pour établir une connexion 
+\gls{WebRTC}. Pour ce faire, chaque client envoie son identifiant (ID) lors de sa 
+première requête au serveur qui le stocke. Selon le paramétrage de la connectivité 
+directe minimum établie préalablement, le serveur recherche aléatoirement l'ID 
+d'autres clients qui satisfont la règle de connectivité. Cette règle de connectivité 
+minimum permet d'ajuster la densité du maillage (connectivité élevée: maillage 
+partiel dense, voire complet ; connectivité faible: maillage partiel éparse) et 
+d'obtenir une topologie maillée adaptée aux besoins de l'application en termes de 
+synchronisation (temps-réel ou non) ou aux capacités des appareils. Il faut noter 
+cependant que plus la connectivité est faible, plus l'information a besoin de 
+transiter par des intermédiaires pour atteindre tous les pairs et par conséquent le 
+temps de transmission est augmenté (exemple d'une distribution en ligne). 
+
+
+Lors de la phase de \textit{signaling} c'est donc la partie gestion des instances du 
+serveur qui gère la politique de connexion des données. Dans le prototype réalisé 
+la connectivité minimum entre les différents pairs participant à la même scène est 
+fixée à 2. Cette politique permet de créer un maillage réseau qui n'est pas trop 
+dense en considérant que le nombre maximum d'utilisateur dépassera pas dix.
+
+\subsubsection{De navigateur à navigateur}
+Lors de la connexion d'un nouveau client à la scène, le serveur effectue la phase 
+de \textit{signaling} permettant de le mettre en relation avec un autre client. Le 
+mécanisme est répété tant que la règle de connectivité peut s'appliquer. Le client 
+reçoit une notification de l'établissement de la connexion avec un autre client ce 
+qui lui permet de démarrer l'échange de données.
+
+Dans 3DEvent, le choix d'avoir un transport fiable et non ordonné a été fait pour 
+respectivement garantir l'arrivée d'une donnée émise par l'utilisateur au sein de 
+l'application et permettre des échanges asynchrones\todo{add \S sur "en cas de 
+défaillance? }.
+En cas d'arrêt soudain du serveur, si une connexion a été établie préalablement 
+entre les clients et est toujours en cours, elle n'est pas impactée par la défaillance 
+du serveur.
+\subsubsection{Données d'échanges}
+
+En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
+d'un format de données permettant de faire communiquer des acteurs hétérogènes 
+du système.
+Le format \gls{JSON} est assez générique pour être aussi utilisé pour lors de la 
+sérialisation et la désérialisation des 
+événements et plus largement des paquets transmis par RTCDataChannel. 
+L'\acrshort{API} RTCDataChannel supporte beaucoup de types de données 
+différents (chaînes de caractères, types binaires : Blob, ArrayBuffer\dots). Dans 
+un environnement multi-utilisateurs tel que 3DEvent avec des données 
+hétérogènes (3D, images, 
+informations) l'interopérabilité est facilitée.
+
+Le Listing  \ref{jsonstore} représente la structure de données utilisée sur le réseau 
+lorsqu'un événement est transmis. Seule la partie $data$ est utilisé au sein du pair 
+pour faire les manipulations en \gls{CQRS} car le type de l'instance d'événement 
+manipulé est connu. 
+
+La structure représentant l'événement transporte un numéro de version \og 
+attendue\fg{} 
+qui correspond à la version que l'agrégat doit avoir lorsque l'événement lui est 
+appliqué. De cette manière la cohérence interne du pair est maintenu grâce à ce 
+numéro de version.
+Les événements contenant les objets 3D ($importGeometryEvent$) ont une 
+propriété contenant la géométrie sous la forme d'un Blob contenant le fichier. 
+
+\begin{lstlisting}[language=json,firstnumber=1,label=jsonstore,caption=Format
+du Message transitant sur le réseau contenant l'événement MeshAddedToScene 
+et ses 
+paramètres]
+{
+	"packetId" : "567826g6-766b-f0g9676b677r",
+	"streamId" : "scene-turbine",
+	"eventType" : "MeshAddedToSceneEvent",
+	"version" : 17,
+	"data" : {
+		"sceneId": "scene-turbine",
+		"meshId":"406514c6-306b-f0f9643a037e",
+		"geometryId": "37076875-ea1c-bbd300481345",
+		"name": "blade",
+		"color": "#963912",
+		"author": "Foo"
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{Synchronisation des données}
+\paragraph{Persistance à court terme}
+Le navigateur (client) offre un espace de stockage avec l'interface \textit{Storage} 
+de l'API Web Storage qui donne accès au \texttt{session storage} ou au  
+\texttt{local storage}. Ce stockage est présent sur le client et fonctionne sur un 
+système de clé / valeur. La configuration du client est également 
+stockée localement. Grâce à ce système, il est possible d'avoir une 
+persistance des données à travers les sessions du navigateur. Le contenu stocké 
+correspond aux données générées par un utilisateur et par ses collaborateurs. Les 
+répliques stockées sur chaque navigateur permettent à un utilisateur une plus 
+grande 
+autonomie en cas de déconnexion. C'est également un moyen de distribuer entre 
+les clients les 
+mises à jour qu'ils génèrent grâce au protocole de 
+\gls{streaming3D} (cf. \ref{streamingprotocol}) sans passer par le serveur.
+
+\paragraph{Protocole de streaming pour la synchronisation}
+\label{streamingprotocol}
+
+Il existe plusieurs méthodes de transmission de contenu au sein d'un réseau 
+\gls{P2P} que l'on peut catégoriser selon deux modes : le téléchargement 
+(\textit{download}) 
+et le flux continu (\textit{streaming}). Le téléchargement requière que le contenu 
+soit entièrement téléchargé pour pouvoir être lu, tandis que le flux continu peut 
+être lu au fur et à mesure de sa récupération. Ce dernier mode, principalement 
+utilisé pour la lecture de vidéo en ligne, s'applique bien à la transmission de 
+contenu \gls{3D} : niveaux de détails \cite{Chu2012,Hu2008}, progressif 
+\cite{Cheng2009,Limper2014}, mise en cache \cite{Jia2014}, compression / 
+décompression
+\cite{Lavoue2013,Ponchio2015,Maglo2013a}. 
+Une catégorisation plus précise du flux continu peut être donnée selon quand le 
+contenu est généré : 
+en direct (\textit{live} ou \textit{push}) et à la demande (\textit{on-demand} ou 
+\textit{pull}).  
+\todo{finir: 
+	chaque client receptionne les info qui l’interesse : une scene en priorite?
+	les messages sont stockes localement
+	chaque client s’occupe de maintenir sa coherence
+	et s’interroge les uns les autre pour coherenc e globale.
+	->bcp de messages emis}
+
+
+
+\subsubsection{Gestion des événements des agrégats}
+
+Une connexion RTCDataChannel peut être configurée selon 
+les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancement. 
+Dans l'intergiciel de 3DEvent, cette configuration est : non fiable et non ordonnée. 
+C'est l'application qui est en charge de \og ré-ordonner\fg{} les événements. En 
+effet, les événements sont associés à des agrégats. Comme chaque agrégat 
+possède un flux d'événements dédié et numéroté il est alors simple pour 
+l'application de les 
+ordonner lorsqu'elle les réceptionne. 
+Lors de la synchronisation (Section \todo{ref section sync}), les 
+événements manquants sont demandés successivement à tous les pairs. Lors 
+qu'un pair reçoit les événements il les stocke dans le flux correspondant à 
+l'agrégat. Si un événement est manquant, les suivants sont quand même stockés 
+en laissant l'espace de l'événement manquant dans le tableau. L'événement est 
+redemandé jusqu'à son obtention, laquelle provoque le déblocage de l'état de 
+l'agrégat jusqu'au prochain événement manquant (ou la fin du flux). Les 
+événements qui ont été stockés \og en attendant\fg{} permettent à l'application 
+d'être directement en capacité de poursuivre la construction de l'état de l'agrégat. 
+Cette mécanique tire avantage des Snapshots (présentés dans \todo{ref section}) 
+qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déjà d'un 
+état avancé.\todo{mettre en avant cette partie}
+
+
+\begin{figure}
+	\centering
+	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
+	\caption{Exemple d'agrégats}{Structure d'un agrégat et ses versions. Chaque 
+		version est un état de l'agrégat qui correspond à l'empilement des instances 
+		d'événements (ei) qu'il contient. Les types des événements sont relatifs au 
+		type 
+		d'agrégat dans lequel il est contenu.}
+	\label{fig:aggregate}
+\end{figure}
