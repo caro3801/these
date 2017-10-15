@@ -12,7 +12,7 @@ modèle de données dédiée au métier de la modélisation 3D collaborative.
 \section{Discussion}
 Pour répondre aux différentes questions de 
 recherche posées en introduction de cette thèse, plusieurs contributions ont été 
-proposées, implantées et soumises à des expérimentations à travers 
+proposées, implantées et soumises à des expérimentations, voir 
 \cite{Desprat2015a,Desprat2015b,Desprat2016,Desprat2017}. 
 
 
@@ -42,7 +42,7 @@ verrouillage évitant l'édition concurrente d'objets 3D.
 
 Partant de ces observations, la seconde contribution liée à l'architecture de 
 communication repose sur le paradigme événementiel. Une politique de 
-connectivité plus lâche permet aux pairs de devenir relais des informations. La 
+connectivité plus souple  permet aux pairs de devenir des relais des informations. La 
 partie serveur est \og descendue\fg{} au niveau de la couche \gls{P2P} pour 
 permettre un accès réparti des pairs producteurs de données (navigateurs) à la
 persistance des données via des pairs relais. L'ensemble des pairs partage un 
@@ -84,20 +84,20 @@ cliente :
 	produire (\gls{ES}).
 \end{enumerate*}
 %\begin{itemize}
-Grâce à \ref{item:cqrs} impose plusieurs niveaux de vérification des données : de 
+Grâce à \ref{item:cqrs}, le système impose plusieurs niveaux de vérification des données : de 
 la saisie utilisateur à la validation les règles métiers. Ainsi, le système, qui ne 
 manipule que des événements immuables, est garanti d'avoir des données valides.
 Côté lecture, les vues matérialisées de l'interface sont issues de projections faites 
 à partir du flux d'événements traités par le système. Les vues sont spécifiques à 
 l'activité, ce qui permet de présenter une interface orientée tâches plus proche des 
-attentes métiers de l'utilisateur. La projection découple les données de la base 
-de données des données servant une ou plusieurs vues. En effet, son rôle 
+attentes métiers de l'utilisateur. La projection découple les flux de la base 
+de données des évènements servant une ou plusieurs vues. En effet, son rôle 
 d'intermédiaire est de fournir les événements d'intérêts sous une forme 
 dénormalisée pour les vues (mise en cache).
 Le point \ref{item:es} reprend principalement les avantages de l'\gls{ES}, i.e. 
 enregistrer la 
-séquence d'événements qui a amenée à l'état courant de l'application. La 
-fonctionnalité d'historique est implicitement présente dans ce patron, même ce qui 
+séquence d'événements qui a mené à l'état courant de l'application. La 
+fonctionnalité d'historique est implicitement présente dans ce patron. Même ce qui 
 pourrait être considéré comme une \og annulation\fg{} par l'utilisateur est conservé 
 sous la forme d'un événement de compensation. L'immuabilité des événements 
 capte toutes les manipulations métiers de l'utilisateur. Par conséquent, la 
@@ -116,8 +116,7 @@ par l'aspect fonctionnel de ce patron. C'est particulièrement important pour
 
 Une partie de la contribution décrivant le modèle événementiel révèle une partie de 
 la réponse à la \textbf{QR 3}.
-Le fait de déporter le patron \gls{CQRS} en totalité sur le client évite que le client 
-soit dépendant du serveur pour valider le contenu créé. L'utilisateur a accès 
+Le fait de déporter le patron \gls{CQRS} en totalité sur le client évite la dépendance du client au serveur pour valider le contenu créé. L'utilisateur a accès 
 localement aux événements. Il peut ainsi générer de nouveaux événements sur la 
 base de ceux qu'il possède déjà. Les projections fonctionnent également sur ces 
 événements stockés. Le cycle des données est donc complètement géré en 
@@ -129,11 +128,11 @@ jour leur Event Store.
 
 L'autre partie de la réponse à la \textbf{QR 3} est apportée par la contribution 
 portant sur la présentation d'une architecture de communication hybride. Le 
-système appuie l'autonomie des utilisateurs en leur permettant de s'échanger 
+système renforce l'autonomie des utilisateurs en leur permettant de s'échanger 
 directement des 
 informations. Le serveur n'est plus une source d'engorgement pour l'accès à la 
 base de données, mais un ensemble de pairs reliés à une source de vérité de 
-l'application. Les pairs, liés à la base de données, sont répartis dans le réseau de 
+l'application. Les pairs liés à la base de données sont répartis dans le réseau de 
 manière à être plus disponibles et proches pour les pairs sur lesquels les 
 utilisateurs travaillent. 
 En cas d'arrêt temporaire de quelques-uns de ces pairs, l'application 
@@ -195,7 +194,7 @@ relancer la synchronisation sur une base commune en cas de problème insolvable.
 Le ré-ordonnancement passe par le mécanisme de visualisation flexible. Les 
 événements sont publiés a destination des projections une fois reçu et validés. 
 Seuls les événements en séquence (pas d'événements manquants, de \og 
-trou\fg{}) sont transmis à la vue, ce qui permet de stocker en avance les futurs 
+trou\fg{}) sont transmis aux projections, ce qui permet de stocker en avance les futurs 
 événements et de déclencher une nouvelle demande des événements manquants. 
 Cela permet de proposer rapidement un retour visuel à l'utilisateur d'une scène en 
 cours de synchronisation par exemple même si tous les événements ne sont pas 
@@ -239,14 +238,14 @@ ci-après.\todo{enlever le quantitatif de la question?}
 
 \section{Perspectives}
 Les évaluations présentées sont à compléter avec des évaluations quantitatives 
-permettant de comparer les archiecture de communication hybrides exposée avec 
+permettant de comparer les architectures de communication hybrides exposées avec 
 d'autres systèmes pour la modélisation 3D collaborative. 
 
 \paragraph{Virtualisation des comportements collaboratifs}
-Pour obtenir des métriques quantitatives fiables, la simulation de comportements 
-collaboratif sous forme de scénarios enregistrés (grâce à l'\gls{ES}) aurait pu 
-permettre d'obtenir des résultats sur des métriques quantitatives telles que la 
-quantité de données transmises, une variation plus grande de la topologie du 
+La simulation de comportements 
+collaboratifs sous forme de scénarios enregistrés (grâce à l'\gls{ES}) aurait pu 
+permettre d'obtenir des résultats sur des métriques quantitatives fiables telles que la 
+quantité de données transmises, la variation de la topologie du 
 réseau. Alors que des auteurs sont capables de réunir jusqu'à 100 personnes 
 simultanément sur une expérimentation pour montrer le passage à l'échelle de leur 
 système \cite{Hu2017}, il semble préférable pour des questions de temps, de 
@@ -256,10 +255,11 @@ plateformes réceptives au standard WebRTC.
 Pour cela il est nécessaire d'avoir un système de virtualisation du réseau pour 
 pouvoir faire varier les différents critères -- nombre 
 d'utilisateurs, nombre de messages, nombre d'événements traités, taille des 
-données 3D (impact sur la visualisation), longueur des scénarios -- permettant de 
-montrer si le passage à l'échelle est quantifiable lors de la collaboration dont le 
-temps de synchronisation semble être un bon indicateur. Ces données pourraient 
-permettre d'appuyer les résultats qualitatifs qui sont présentés dans cette thèse. 
+données 3D (impact sur la visualisation), longueur des scénarios -- qui indiqueraient de 
+manière quantitative la capacité du système à passer à l'échelle 
+lors de la collaboration. Le temps de synchronisation semble être un bon indicateur 
+concernant cette propriété. Ces données pourraient permettre d'appuyer les résultats
+qualitatifs qui sont présentés dans cette thèse. 
 Les outils liés à WebRTC sont encore au stade expérimental mais produisent déjà 
 des statistiques par rapport à quelques un des critères énoncés sur les données 
 transitant sur une connexion DataChannel.
@@ -273,7 +273,7 @@ renforcée. En fonction du type de connexion et d'appareil, l'application pourra
 basculer d'un protocole à l'autre pour stabiliser la connexion en choisissant selon 
 différents facteurs (énergétique, bande passante) indiqués par l'appareil ou 
 l'utilisateur. 
-Le type de modélisation peut également s'adapter en fonction des ces critères  
+Le type de modélisation peut également s'adapter en fonction de ces critères  
 pour ne pas dégrader trop l'expérience utilisateur selon les cas d'utilisation en 
 proposant par exemple un rendu image du modèle 3D effectué sur un serveur 
 \cite{Abdallah2014} ou réalisé par une grappe de pairs \cite{Li2015}.
@@ -291,7 +291,7 @@ données 3D pourrait être améliorée grâce à un format de
 compression propre aux événements produits. Grâce au 
 réseau \gls{P2P} il est possible de rapprocher les ressources des utilisateurs 
 selon leurs intérêts. Le rendu assisté par les pairs \cite{Zhu2011} couplé avec une 
-couche dédié au routage pas sujet \cite{Baldoni2007} pourrait encourager un 
+couche dédié au routage par sujet \cite{Baldoni2007} pourrait encourager un 
 meilleur équilibre dans la répartition de la charge de transmission.
 
 %\paragraph{Modèle de cohérence}\todo{faire?}
