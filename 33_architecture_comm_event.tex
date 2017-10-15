@@ -6,7 +6,7 @@ Cette architecture est une combinaison des contributions présentées dans
 \cite{Desprat2016,Desprat2017} : elle repose sur les éléments du 
 framework orienté événements (Section \todo{ref modele event}) qui sont également 
 en relation avec la couche réseau (Figure \ref{fig:archievent}).
-\begin{figure}[]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\columnwidth]{eps/archi.pdf}
 	\caption{Architecture de communication \og orientée événements\fg{}}
@@ -88,9 +88,10 @@ leur forme originale qu'ils sont stockés. Cela évite également les transforma
 de données (et la perte d'information ou l'ajout de complexité) qui sont nécessaires 
 dans les \glspl{ORM}, en lecture et en écriture.
 
-\subsubsection{Gestion de la session}
+\subsubsection{Gestion de la synchronisation et de la cohérence}
 Dans \cite{Desprat2017} lorsqu'un pair initialise ou rejoint la séquence pour 
-rejoindre une session collaborative, il évolue pour se synchroniser et intégrer les nouveaux événements à son journal.
+rejoindre une session collaborative, il évolue pour se synchroniser et intégrer les 
+nouveaux événements à son journal.
 La Figure \ref{fig:connexionpairs} représente la séquence d'actions nécessaire à 
 une instance 3DEvent ($idA$) pour rejoindre le réseau contenant déjà d'autres 
 instances 3DEvent. L'action \textit{join} est exécutée lorsqu'un utilisateur envoie 
@@ -114,7 +115,7 @@ afin de se synchroniser\todo{(see refernece sync mechanism}.
 	\label{fig:connexionpairs}
 \end{figure}
 
-\subsubsection{Gestion de la synchronisation et de la cohérence}
+\paragraph{Cohérence d'un agrégat}
 Les événements sont considérés comme \og cohérents\fg{}  lorsqu'il n'y a pas 
 d'erreur de cohérence dans l'agrégat, i.e. lorsqu'il n'y a pas de doublon dans les 
 numéros de versions et qu'ils sont bien ordonnés. Lorsqu'un \gls{ESM} ne 

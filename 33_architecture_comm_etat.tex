@@ -69,7 +69,7 @@ maillage, les méta-données de l'objet et l'identifiant d'une géométrie exist
 Les géométries sont, quant à elles, stockées avec leur identifiant propre et l'objet 
 3D complet donné sous le format \gls{JSON}.
 
-Sur chaque pair, il existe un stockage relationnel (IndexedDB) pour 
+Sur chaque pair, il existe un stockage relationnel pour 
 chaque objet de la base de donnée récupérée. Cela permet au client de faire des 
 requêtes directement dans son espace local si besoin, par exemple en ajoutant un maillage. 
 C'est également une source pour transférer ses modifications aux autres clients.
@@ -80,35 +80,6 @@ Les paramètres des opérations fondamentales effectuées sur la base de donnée
 \gls{REST}.
 
 
-\subsubsection{Gestion de la session}
-Lorsqu'un utilisateur rejoint une session, il suit le déroulement des opérations 
-décrit dans la Figure \ref{fig:sequence_state}. 
-Dans un premier temps, afin de récupérer les données liées à l'espace de travail, 
-le client web de l'utilisateur qui se rend sur une scène récupère 
-tous les objets associés à la scène dans la base de données. Les objets de la 
-scène sont renvoyés à l'éditeur pour les afficher. 
-Dans un second temps, le système établit les connexions \gls{P2P} entre les 
-clients de manière automatique et complète (topologie réseau en maillage 
-complet) après avoir récupéré les identifiants des autres utilisateurs auprès du 
-serveur de \textit{signaling}. Une fois la connexion établie, chaque collaborateur 
-voit son environnement \gls{3D} dans l'éditeur mis à jour, indiquant la position du 
-nouvel 
-arrivant. Les collaborateurs éditent ensuite la scène \gls{3D} qui produit, sur les 
-différents objets, des requêtes \gls{CRUD} -- incluant les opérations de translation, 
-rotation et homothétie -- destinées au serveur (qui transmet les 
-modifications à la base de données) puis aux collaborateurs.
-Enfin, dans un dernier temps, lorsque l'utilisateur quitte la scène, il en notifie le 
-serveur de \textit{signaling} qui s'occupe d'indiquer aux clients restants l'abandon 
-du client pour qu'ils puissent mettre à jour leur interface en conséquence.
-
-\begin{figure}[ht!]
-	\centering
-	\includegraphics[trim={0 0 0 3cm},clip,width=1\columnwidth]
-	{eps/sequence_wscg.eps}
-	\caption{Diagramme de séquence de la gestion de la session dans une 
-	architecture \og orientée état\fg{}}
-	\label{fig:sequence_state}
-\end{figure}
 
 %
 %We propose to auto connect users on a scene with a We- bRTC connection. As 
