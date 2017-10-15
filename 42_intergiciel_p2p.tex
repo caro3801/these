@@ -313,12 +313,7 @@ Le mécanisme de routage que nous avons utilisé dans \cite{Desprat2015a} est
 proche du routage de GNutella. 
 
 
-\todo{new}
-chaque client receptionne les info qui l’interesse : une scene en priorite?
-les messages sont stockes localement
-chaque client s’occupe de maintenir sa coherence
-et s’interroge les uns les autre pour coherenc e globale.
-->bcp de messages emis
+
 
 
 pour chaque event sauvé , l’Event store publie (push) l’event
@@ -435,8 +430,8 @@ les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancem
 Dans l'intergiciel de 3DEvent, cette configuration est : non fiable et non ordonnée. 
 C'est l'application qui est en charge de \og ré-ordonner\fg{} les événements. En 
 effet, les événements sont associés à des agrégats. Comme chaque agrégat 
-possède un flux d'événements dédié et numéroté il est alors simple de les 
-ordonner lorsque. 
+possède un flux d'événements dédié et numéroté il est alors simple pour l'application de les 
+ordonner lorsqu'elle les réceptionne. 
 Lors de la synchronisation (Section \todo{ref section sync}), les 
 événements manquants sont demandés successivement à tous les pairs. Lors 
 qu'un pair reçoit les événements il les stocke dans le flux correspondant à 
