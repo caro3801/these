@@ -8,8 +8,10 @@
 
 \subsection{Collaboration et concurrence en 3D}
 \label{sec:concurrence}
-Dans un contexte collaboratif, on considère qu'il n'est pas possible pour une 
-personne seule de réaliser la tâche proposée complètement. 
+Réaliser une tâche ou une activité de manière collaborative peut permettre soit d'atteindre 
+un objectif qui n'est pas réalisable par une seule personne (exemple : faire porter trente 
+chopes de bières par une personne\footnote{Guinness record : 29 chopes en une fois en 2017}), soit 
+d'être plus efficace et plus rapide pour l'atteindre (exemple: faire porter trente chopes par trente personnes). 
 La modélisation \gls{3D} collaborative permet à différents concepteurs de travailler 
 ensemble sur une même tâche de manière efficace (en terme de coûts temporel et 
 financier) avec un support visuel manipulable, éditable et flexible (proposant 
@@ -20,7 +22,7 @@ Mettre en place une situation de travail collaboratif demande en plus de prendre
 comme le type de collaboration (synchrone, asynchrone) et de cohérence souhaités 
 (forte, éventuelle) par exemple.
 
-Mettre en place une situation de travail collaboratif demande en plus de prendre en compte, les différentes solutions pour la conception collaborative peuvent être divisées en 
+Mettre en place une situation de travail collaboratif demande en plus de prendre en compte les différentes solutions pour la conception collaborative. Celles-ci peuvent être divisées en 
 trois types: 
 \begin{enumerate*}[label=(\roman*)]
 	\item les mécanismes de type autoritaire (requérant des autorisations) ;
@@ -33,7 +35,7 @@ collaboration sont classés comme pessimistes ou optimistes (Tableau
 sont comptées parmi les solutions pessimistes car elles empêchent toute 
 occurrence de conflit, tandis que les solutions des deux autres types,
 transformées opérationnelles -- \gls{OT} -- et autres (synchrones ou asynchrones), 
-sont dites optimistes, car plus permissives, ne s'empêchent pas la possibilité de 
+sont dites optimistes, car plus permissives, et ne s'empêchent pas la possibilité de 
 manipulation concurrente menant potentiellement à l'occurrence de conflits. 
 Dans ce dernier cas, les conflits détectés peuvent, selon les stratégies, amener à 
 une résolution automatique ou manuelle.
@@ -241,7 +243,7 @@ davantage vers des fonctionnalités avancées de rendu \gls{3D} avec lancer de r
 Les fonctionnalités d'historisation et de collaboration proposées 
 dans Clara.io restent très basiques (seulement annuler~/~refaire) tout comme la plateforme de publication proposée. 
 
-Plateforme de publication d'objets \gls{3D} populaire, TinkerCAD se focaliser sur l'accès à la 
+Plateforme de publication d'objets \gls{3D} populaire, TinkerCAD se focalise sur l'accès à la 
 conception d'objets \gls{3D} pour les néophytes. TinkerCAD est une application destinée au grand 
 public pour la conception et l'impression \gls{3D}. De ce fait, les fonctionnalités 
 sont limitées à cause du domaine (l'impression \gls{3D}) et de la cible (le grand public). 
@@ -454,7 +456,7 @@ et le temps de transmettre le résultat produit. Pour les
 mises à jour internes -- produites par l'utilisateur, actions sur l'interface -- on 
 s'accordera dans cette thèse sur un délai inférieur à 0,1 seconde. 
 Pour les mises à jour externes -- produites par les collaborateurs -- les latences 
-réseaux rentrent en compte (serveur, pairs\ldots), et on s'accordera sur un délai 
+réseaux rentrent en compte (serveur, pairs\ldots), on s'accordera sur un délai 
 entre 1 et 10 secondes selon les degrés d'asynchronicité possibles. 
 
 
@@ -809,7 +811,7 @@ identifiants de connexion.
 Une fois que la connexion est établie entre deux pairs, 
 RTCDataChannel est capable, en théorie, d'être le canal de signalisation. 
 Cette solution peut aider à réduire la latence (car les messages sont 
-envoyé directement entre les pairs) mais n'est pas très fiable. L'utilisation 
+envoyés directement entre les pairs) mais n'est pas très fiable. L'utilisation 
 d'un tiers (serveur) est, en pratique, quasi systématiquement privilégiée.
 
 \begin{figure}[hbt]
@@ -869,7 +871,7 @@ réseaux et de réseaux distribués.
 Comme l'indique \cite{Roberto2014}, le protocole le plus souvent rencontré dans 
 les \gls{EVC3D} est l'\gls{UDP}. 
 Cette prépondérance s'explique selon deux facteurs. Premièrement, dans des 
-réseaux où l'accès est fiable car ces environnements n'ont 
+réseaux où l'accès est fiable, ces environnements n'ont 
 pas (ou peu) de perte de paquet (ex : \gls{LAN}). Deuxièmement, dans un contexte 
 d'application où la perte de paquet n'est pas critique (ex : jeu vidéo, diffusion en 
 continu de son, vidéo, \gls{3D}\dots). 
@@ -1062,7 +1064,7 @@ Ces différentes solutions ont été conçues comme des systèmes de gestion ave
 des gestionnaires d'événements dédiées. Le passage à l'échelle est 
 principalement effectué par un routage efficace des événements (comme le 
 filtrage d'événements). Seuls quelques travaux ont utilisé le concept de grappe 
-(\textit{clustering}) par intérêt comme moyen afin de réduire le nombre de 
+(\textit{clustering}) par intérêt comme moyen de réduire le nombre de 
 notifications d'événement et éviter la surcharge. 
 A partir des années 2000, les 
 systèmes \gls{P2P} ont commencé à émerger avec 
@@ -1086,7 +1088,7 @@ de la dynamicité des pairs efficace.
 
 Les systèmes \gls{PubSub} ont donc l'avantage de proposer une \gls{EDA} dont le 
 fonctionnement s'adapte à plusieurs types de communication, que ce soit client 
-serveur, P2P. Cette flexibilité a l'avantage de proposer un système à couplage 
+serveur ou P2P. Cette flexibilité a l'avantage de proposer un système à couplage 
 lâche qu'il reste cependant difficile d'observer à grande échelle.
 
 \subsubsection{Outils de surveillance, contrôle de performances et validation ergonomique}
@@ -1520,11 +1522,9 @@ et que les composants de l'architecture ont un couplage lâche afin que seuls le
 \section{Conclusion}
 
 La manipulation et la visualisation d'objets \gls{3D} sur le web est une 
-problématique 
-qui peut se découper en différentes parties.
+problématique qui peut se découper en différentes parties.
 La première concerne la modélisation collaborative \gls{3D} sur le web. Les 
-plateformes 
-existantes essayent de répondre à plusieurs challenge : conserver la cohérence 
+plateformes existantes essayent de répondre à plusieurs challenge : conserver la cohérence 
 de l'environnement, proposer des solutions performantes et économiques (bande 
 passante, énergie, graphique, stockage)  pour s'adapter aux évolutions du web.
 L'un des aspects fondamentaux du web est l'accessibilité. Cela passe par la 

@@ -123,14 +123,25 @@ indépendant possible en termes de ressources (données, réseaux, validation
 experte). 
 
 \paragraph{Contribution}
-Pour répondre à cette problématique, je propose un modèle pour la 
-transmission des données liées à la \gls{3D} et à la collaboration qui permet de  limiter  le 
-nombre 
-de requêtes et la taille des données transmises, sans perdre la traçabilité de 
+Plusieurs aspects de la contribution dans le modèle événementiel sont décrites ci-après. 
+Tout d'abord, il est nécessaire de spécifier les événements qui vont être utilisés
+sous une forme générique. Ces événements, qui représentent ce qui se passe dans l'application, 
+doivent faire ressortir l'expertise de chaque modification. Que ce soit le contexte 
+auquel il est lié, les paramètres qu'il inclus, le type représenté, les informations de chaque événement
+sont issues du domaine de la modélisation 3D. 
+Puis, le modèle événementiel propose d'adapter les patrons de conception 
+\gls{ES} et \gls{CQRS} sous un angle nouveau.
+En déportant ces patrons en totalité sur le client, le système est capable de traiter 
+le cycle des données de manière autonome (sauf la sauvegarde à long terme) en profitant des
+ressources que le client met à disposition. La conservation de la séparation du traitement 
+en écriture et en lecture permet au système d'être capable de vérifier la validité des 
+modifications entrantes par lui-même et d'être flexible sur les flux sortants d'événements qu'il propose.
+Cela simplifie notamment la transmission des données liées à la \gls{3D} et à la collaboration en limitant le 
+nombre de requêtes et la taille des données transmises, sans perdre la traçabilité de 
 celles-ci. L'idée est de profiter de la puissance du client pour créer une 
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
 (travail hors ligne) ou involontaire (coupure). L'utilisateur a la garantie d'avoir 
-un historique performant qui profite de chaque connexion au réseau  pour mettre à jour le système.\improve{en remettre une couche}
+un historique performant qui profite de chaque connexion au réseau  pour mettre à jour le système.
 
 
 \subsection{Modèle général}
