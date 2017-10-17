@@ -483,7 +483,7 @@ fiabilité de la livraison des messages et de l'ordonnancement des messages, son
 les variables d'ajustement en fonction des contraintes qu'imposent les limites de 
 temps de réponse et de bande passante.
 
-\subsection{Fiable versus Non Fiable}
+\paragraph{Fiable versus Non Fiable}
 \label{sec:fiabilite}
 La fiabilité d'un protocole de communication définit comment le protocole fait face 
 à la perte ou au retard de données. Un protocole dit \og fiable\fg{} (\textit{reliable}) 
@@ -529,7 +529,7 @@ la perte de données n'est pas aussi importante que le fait de la retarder, alor
 protocole non fiable peut être employé.
 
 
-\subsection{Ordonné versus Désordonné}
+\paragraph{Ordonné versus Désordonné}
 \label{sec:ordre}
 Les paquets envoyés par l'expéditeur ne prennent pas forcément tous le même 
 chemin vers le destinataire. La réaction des réseaux face à la congestion consiste à 
@@ -570,7 +570,7 @@ applications en temps-réel, ces principes sont considérés comme les aspects l
 importants à considérer pour le choix d'un protocole de communication. La 
 présentation succincte des protocoles ci-dessous indique leur propriété de 
 fiabilité et d'ordonnancement.
-\subsubsection{TCP}
+\paragraph{TCP}
 Le \gls{TCP} est probablement le protocole le plus utilisé sur internet pour 
 transporter des données : navigation web, chat, transfert de fichiers\dots 
 \gls{TCP} est un protocole dit \og orienté connexion\fg{}, ce qui implique que les 
@@ -589,7 +589,7 @@ Si la somme est incorrecte, la données est écartée et considérée comme perd
 Une nouvelle copie de la donnée est alors attendue à la réception lorsque 
 l'expéditeur détecte qu'il n'a pas reçu le ACK concernant la donnée erronée.
 
-\subsubsection{UDP}
+\paragraph{UDP}
 Le \gls{UDP} est considéré comme l'opposé de \gls{TCP} concernant plusieurs 
 aspects. Premièrement, \gls{UDP} ne nécessite pas, pour établir la connexion, d'étape 
 de configuration et d'accord comme \gls{TCP}. Les deux terminaux doivent 
@@ -618,7 +618,7 @@ protocole de base sur lequel d'autres protocoles viennent se greffer car il rest
 léger. Ces autres protocoles peuvent s'assurer de l'ordonnancement et / ou de la 
 fiabilité à leur manière (re-ordonnancement, retransmission\dots). 
 
-\subsubsection{SCTP}
+\paragraph{SCTP}
 Le \gls{SCTP} est le plus jeune des trois protocoles présentés. Ce protocole 
 emprunte des fonctionnalités à \gls{TCP} mais utilise une approche orientée 
 message comme \gls{UDP}. Comme \gls{TCP}, la connexion doit être négociée 
@@ -626,7 +626,6 @@ entre les deux terminaux. \gls{SCTP} discute également le nombre de flux utilis
 : il autorise le multiplexage de plusieurs flux de données dans une seule 
 connexion \gls{SCTP}. En comparaison, \gls{TCP} sépare chaque flux dans une 
 connexion différente : le support de plusieurs flux est géré à plus haut niveau.
-
 \gls{SCTP} a été conçu comme un protocole fiable avec une option pour envoyer 
 les messages de manière ordonnée ou non ordonnée. L'ordonnancement choisi est 
 signifié par un \textit{bit-flag} dans l'en-tête associée au message. Une extension 
@@ -749,7 +748,7 @@ base de données, service de signalisation).
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\columnwidth]{protocol_stack2.eps}
+	\includegraphics[width=0.7\columnwidth]{protocol_stack2.eps}
 	\caption{Pile des protocoles IP: TCP vs UDP}
 	\label{fig:protocolstack}
 \end{figure}
@@ -806,7 +805,7 @@ d'un tiers (serveur) est, en pratique, quasi systématiquement privilégiée.
 
 \begin{figure}[hbt]
 	\centering
-	\includegraphics[width=0.8\columnwidth]{turn.eps}
+	\includegraphics[width=0.7\columnwidth]{turn.eps}
 	\caption{STUN, TURN et signalisation}
 	\label{fig:turn}
 \end{figure} 
@@ -914,11 +913,9 @@ effectue le \textit{load balancing} nécessaire pour distribuer les données en
 fonction des capacités des clients. L'impact énergétique d'un tel système a été 
 évalué sur les mobiles ciblant trois optimisations possibles : la qualité visuelle, les 
 performances et la consommation d'énergie. 
-
 Les architectures hybrides, combinant client-serveur et \gls{P2P} sont également 
 des solutions utilisées dans le cadre de l'apprentissage en ligne 
 \cite{Ekadiyanto2012} et du BIM \cite{Chen2014} par exemple. 
-
 En général, les systèmes \gls{P2P} semblent n'être supportés que dans les 
 environnements virtuels \gls{3D}. Ce phénomène est probablement dû au lien étroit 
 entre la séparation spatiale de l'utilisateur et le besoin de distribuer les données à 
@@ -1486,10 +1483,10 @@ informations pertinentes concernant la transition du système d'un état à l'au
 Une commande va être déclenchée par l'utilisateur qui veut modifier le domaine. 
 Une commande appliquée sur un état va produire un ou plusieurs événements (qui 
 ne sont pas forcément appliqués à l'état courant de l'application par la suite): 
-\texttt{État~$\rightarrow$~Commande~$\rightarrow$~Liste d'événements}.
+\texttt{État~$\rightarrow$~Commande $\rightarrow$~Liste d'événements}.
 
 La différence principale entre un événement et une commande réside donc dans 
-l'\textbf{intention}. D'un point de vue fonctionnel, le \gls{CS} est un patron de 
+l'\textbf{inten\-tion}. D'un point de vue fonctionnel, le \gls{CS} est un patron de 
 conception lié à une décision qui produit plusieurs événements, tandis que 
 l'\gls{ES} se contente d'appliquer un changement à l'état courant. De plus, en 
 \gls{ES}, l'événement stocké a été produit par l'agrégat. 

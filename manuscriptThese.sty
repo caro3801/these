@@ -24,13 +24,17 @@
 	\adjustmtc
 	\listoftables
 	\adjustmtc
-	\printglossaries
-	%\printglossary[]
-	\adjustmtc
-	\adjustmtc
 	\setstretch{\stretchy}
 }
+\newcommand{\completeglossaire}{
 
+\singlespacing
+\printglossaries
+%\printglossary[]
+\adjustmtc
+\adjustmtc
+\setstretch{\stretchy}
+}
 	\newcommand{\chaptertable}{
 	\singlespacing
 	\minitoc
@@ -90,7 +94,7 @@
 \RequirePackage{etoc}
 
 %\RequirePackage[a4paper,left=3cm,right=3cm,top=3cm,bottom=3cm,marginparwidth=15mm]{geometry}
-\RequirePackage[a4paper,left=2.5cm,right=2.5cm,top=3cm,bottom=3cm,marginparwidth=15mm]{geometry}
+\RequirePackage[a4paper,left=2.5cm,right=2cm,top=3cm,bottom=3cm,marginparwidth=15mm]{geometry}
 
 \RequirePackage{sectsty}
 \setlength{\headheight}{12.8pt}
