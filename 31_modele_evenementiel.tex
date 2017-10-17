@@ -100,14 +100,14 @@ système distribué. C'est pourquoi l'exploitation du patron de conception
 \gls{CQRS} est traditionnellement développée sur la base d'une architecture client-serveur (pour récupérer les mises à jour). 
 Ce fonctionnement ne permet pas le travail hors ligne.
 
-Côté serveur, le stockage des données est de moins en moins cher : il est possible de stocker beaucoup de données de manière distante notamment 
-grâce l'infonuagique. Le serveur a une puissance de calcul 
-plus importante (et surtout ajustable).
+Côté serveur, le stockage des données est de moins en moins cher : il est possible de 
+stocker beaucoup de données de manière distante notamment 
+grâce l'infonuagique. Le serveur a une puissance de calcul plus importante (et surtout ajustable).
 
 Côté client, la puissance de calcul des machines sur lesquelles sont installés les 
 navigateurs web évolue rapidement (notamment les appareils mobiles comme les 
 \textit{smartphones} et les tablettes). Les navigateurs suivent cette tendance en 
-puisant dans ces ressources pour effectuer des traitements similaires à ceux que 
+puisant dans ces ressources (CPU et GPU) pour effectuer des traitements similaires à ceux que 
 l'on trouve traditionnellement côté serveur et pour proposer des fonctionnalités 
 avancées, telles que le stockage de données sur le client (IndexedDB, 
 storageAPI), l'affichage \gls{3D} (WebGL) et la communication en 
@@ -142,7 +142,9 @@ celles-ci. L'idée est de profiter de la puissance du client pour créer une
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
 (travail hors ligne) ou involontaire (coupure). L'utilisateur a la garantie d'avoir 
 un historique performant qui profite de chaque connexion au réseau  pour mettre à jour le système.
-
+Le modèle événementiel présenté dans cette thèse inclut également un modèle de cohérence allégé 
+Il prend la forme d'un module de détection de conflit basé sur le journal d'événements dont chaque 
+client possède une réplique locale.
 
 \subsection{Modèle général}
 %TODO
@@ -152,9 +154,10 @@ un historique performant qui profite de chaque connexion au réseau  pour mettre
 %la partie virtualisation dans la partie P2P}
 La mise en place d'une \gls{EDA} pour faire de la modélisation \gls{3D} engendre des 
 avantages pour tous les métiers engagés (utilisateurs, développeurs, analystes métier).
-D'une part, la sensibilisation à l'historique des 
-données et aux interactions 
-inter-utilisateurs est partagée par les collaborateurs et les analystes métier. Les utilisateurs sont mieux informés de l'impact de leurs modifications et ont un aperçu général de l'évolution de la scène. D'autre part, 
+D'une part, la sensibilisation à l'historique des données et aux interactions 
+inter-utilisateurs est partagée par les collaborateurs et les analystes métier. 
+Les utilisateurs sont mieux informés de l'impact de leurs modifications et 
+ont un aperçu général de l'évolution de la scène. D'autre part, 
 la sensibilisation à la distribution des données est une composante 
 importante pour les utilisateurs et les développeurs. En effet, la répartition 
 de la charge permet de profiter du potentiel de calcul de toutes les parties 
@@ -170,7 +173,7 @@ domaine. Le modèle issu du domaine défini permet de mettre en valeur les
 aspects métiers liés à l'application.
 
 \subsubsection{Spécification des événements dans le framework}
-Le framework étant orienté événements, cette section de thèse introduit la 
+Le \gls{framework} étant orienté événements, cette section de thèse introduit la 
 représentation et 
 le vocabulaire utilisé dans la description des événements de 3DEvent. 3DEvent 
 reprend la représentation proposée par Tominski \cite{Doktor-ingenieur2006} 
@@ -212,11 +215,15 @@ sur les comportements observés lors des expérimentations des premiers travaux
 Le Tableau \ref{tab:extraitevent}
 présente les événements de l'agrégat Maillage -- extrait du Tableau 
 \ref{tab:events} qui résume les 
-différents types d'événements de base construits à partir du framework et les 
+différents types d'événements de base construits à partir du \gls{framework} et les 
 agrégats auxquels ils sont associés. Parmi ces événements, l'événement 
 \textit{meshAdded} et \textit{meshDropped} semblent très proches, voire 
-identiques quant au résultat que l'utilisateur peut obtenir. Cependant, la sémantique 
-liée à chacun permet de différencier l'intention de l'utilisateur. 
+identiques quant au résultat que l'utilisateur peut obtenir. Pour \textit{meshAdded}, 
+l'utilisateur va, en cliquant sur l'item de la bibliothèque, voir apparaître 
+un maillage au centre de la scène. Concernant \textit{meshDropped}, 
+l'utilisateur effectue un glissé / déposé de l'objet depuis la bibliothèque 
+à l'endroit dans l'environnement 3D où il souhaite que l'objet soit positionné.
+Cependant, la sémantique liée à chacun permet de différencier l'intention de l'utilisateur. 
 
 
 \begin{table}[ht]
@@ -266,7 +273,7 @@ appartient.
 Plus généralement, le domaine est la représentation des objets \gls{3D} d'un point 
 de vue expert. Les objets du domaine représentent les données liées aux 
 manipulations \gls{3D} sous une forme abstraite (géométrie, position), 
-indépendamment des besoins du rendu (lumière, matériau\dots). Le framework intègre un 
+indépendamment des besoins du rendu (lumière, matériau\dots). Le \gls{framework} intègre un 
 générateur d'événements pour faciliter l'implantation de nouveaux types 
 d'événements au plus proche des besoins des utilisateurs dans une application de 
 modélisation \gls{3D} collaborative (appuyant la sémantique des manipulations).
@@ -276,7 +283,7 @@ modélisation \gls{3D} collaborative (appuyant la sémantique des manipulations)
 
 
 \subsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
-%TODO mettre l'image representant le cqrs +  celle de la validation des 
+%TODO celle de la validation des 
 %commandes
 
 
@@ -333,44 +340,40 @@ Ces événements sont conservés dans un journal et peuvent être
 rejoués pour retrouver l'état de l'application. 
 Les événements représentent des faits immuables qui sont ajoutés au journal les
 uns après les autres (sans pouvoir en être supprimés), ce qui permet des taux de 
-transaction élevés et une réplication efficace (cf Section 
-\ref{sec:es}). Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
+transaction élevés et une réplication efficace (cf. Section \ref{sec:es}). 
+Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
 les applications :
 
 \begin{itemize}
-	\item \textbf{Acteur} Un acteur consomme des événements à partir d'un journal 
+	\item \textit{Acteur.} Un acteur consomme des événements à partir d'un journal 
 	d'événements et produit des événements pour le même journal d'événements. 
 	L'état interne dérivé à partir des événements consommés est un modèle 
 	d'écriture 
 	en mémoire (\textit{in-memory}) et contribue à la partie commande (C) du 
 	CQRS\info{reference à la section}.
-	\item \textbf{Vue} Une vue est un acteur qui ne fait que consommer des 
+	\item \textit{Vue.} Une vue est un acteur qui ne fait que consommer des 
 	événements à 
 	partir du journal d'événements. L'état interne dérivé à partir des événements 
 	consommés est un modèle de lecture en mémoire et contribue à la partie 
 	requête (Q) du CQRS\info{reference à la section}.
-	\item \textbf{Producteur} Un producteur est un acteur qui produit des 
-	événements à 
-	partir 
-	du journal d'événements pour mettre à jour la base de données. L'état interne 
-	dérivé 
-	à partir des événements consommés est un modèle de lecture en mémoire et 
-	contribue à la partie requête (Q) du CQRS\info{reference à la section}.
-	\item \textbf{Processeur} Un processeur est un acteur qui consomme des 
-	événements 
-	à 
-	partir d'un journal d'événements et produit les événements traités pour un autre 
-	journal d'événements. Les processeurs peuvent être utilisés pour connecter les 
-	journaux d'événements au traitement des événements.\info{reference à la 
-	section}.
+	\item \textit{Producteur.} Un producteur est un acteur qui produit des 
+	événements à partir du journal d'événements pour mettre à jour la base 
+	de données. L'état interne dérivé à partir des événements consommés est 
+	un modèle de lecture en mémoire et 
+	contribue à la partie requête (Q) du CQRS (cf. Section \ref{sec:CQRS}).
+	\item \textit{Processeur.} Un processeur est un acteur qui consomme des 
+	événements à partir d'un journal d'événements et produit les événements 
+	traités pour un autre journal d'événements. Les processeurs peuvent être 
+	utilisés pour connecter les journaux d'événements au traitement des 
+	événements.\info{reference à la section}.
 \end{itemize}
 
 %\subsubsection{Collaboration événementielle}
 
-\paragraph{Le journal d'événements}
+\subsection{Journal des événements}
 
 Les événements produits par un des composants présenté ci-dessus
-peuvent être consommés par d'autres de ces abstractions s'ils partagent un 
+peuvent être consommés par d'autres de ces composants s'ils partagent un 
 journal d'événements local ou distribué. Un journal d'événements peut 
 fonctionner sur un seul site ou être répliqué 
 sur plusieurs sites. 
@@ -441,16 +444,17 @@ Le journal d'événements est local au site et fournit un ordre total des
 événements stockés. 
 Le site est une zone de disponibilité qui héberge un ou plusieurs 
 journaux d'événements. Les événements d'un journal d'événements sont 
-répliqués sur les sites distants de manière asynchrone\todo{cf section p2p}. 
+répliqués sur les sites distants de manière asynchrone. 
 Afin de lier des journaux d'événements (localisés sur différents sites) à un journal 
 d'événements répliqué, les 
 journaux d'événements locaux doivent être accessibles à partir des points 
 d'entrées de réplication. De plus, ces points d'entrée doivent être 
 connectés entre eux afin de créer un réseau de réplications. 
 Un journal d'événements répliqué est représenté par un journal d'événements local 
-sur chacun des sites participants.\info{point d'entrée = network bridge}
+sur chacun des sites participants.
 
-Les points d'entrée permettent de gérer un ou plusieurs journaux d'événements. 
+Les points d'entrée (aussi appelés \glspl{NB})
+permettent de gérer un ou plusieurs journaux d'événements. 
 Ces journaux sont identifiés pour permettre à la réplication de ne s'intéresser 
 qu'aux journaux de même identifiant. 
 Les journaux avec différents identifiants sont ainsi isolés les uns des autres et 
@@ -461,7 +465,7 @@ de stockage est le même sur tous les sites, ce qui veut dire que les
 consommateurs qui lisent les événements du journal local vont toujours voir les 
 effets avant leurs causes.
 
-\subsubsection{Flexibilité de la visualisation}
+\subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
 Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de 
 l'état courant à 
@@ -528,15 +532,9 @@ si les évènements respecte l'ordre causale \cite{Lamport1978} : les
 événements liés causalement ont le même ordre sur tous les sites, alors que les 
 événements concurrents peuvent avoir un ordre différent. Cette propriété est 
 importante pour obtenir une cohérence causale forte dans une application qui 
-respecte le théorème \gls{CAP} (Figure \ref{fig:cap}).  \blockquote[]{	\textit{The 
-largest single 
-benefit about 
-CQRS is when 
-		you start running into 
-		problems 
-		with the CAP theorem}}{
-	\cite{Young2010}
-}.
+respecte le théorème \gls{CAP} (Figure \ref{fig:cap}).  
+\blockquote[]{\textit{The largest single benefit about CQRS is when you 
+start running into problems with the CAP theorem}}{\cite{Young2010}}.
 Young justifie ensuite que le lien entre \gls{CAP} et \gls{CQRS} est plus ténu qu'il 
 n'y paraît. Même si \gls{CQRS} ne permet pas d'éviter le dilemme de \gls{CAP}, le 
 fait que \gls{CQRS} découpe le système en petites parties permet d'ajuster la 
@@ -604,51 +602,7 @@ impact direct sur l'expérience utilisateur.
 %    });
 %}
 %\end{algorithm}
-\subsection{Potentielles applications et autres utilisations}
-La conception et l'implémentation d'une plateforme comme 3DEvent qui est 
-asynchrone, distribuée et orientée événements peut 
-être appliquée à différents champs.
-\begin{description}
-	\item[GIT-like app] Les solutions pour faire de la gestion de version, comme, 
-	par exemple,
- 	MeshGit~\cite{Denning2013} qui fait du
-	\textit{diff and merge} de maillages polygonaux pour des données \gls{3D}, 
-	sont rarement implémentées (a fortiori en 
-	temps réel) sur des plateformes web à cause du coût et de la complexité que 
-	cela peut induire dans des architectures traditionnelles. 3DEvent peut 
-	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
-	événements et indiquer les différences entre deux états.%\todo{acyclic graph}
-	
-	\item[Scénarios et \textit{path recording}] Pour des jeux sérieux, l'infographie 
-	3D ou des études d'ergonomie, cette fonctionnalité est particulièrement 
-	pertinente. Le \gls{framework} peut proposer une comparaison entre deux traces 
-	laissées par un ou plusieurs utilisateurs. Dans le cas où les utilisateurs ont la 
-	même tâche à réaliser, il est facile de faire la différence entre deux réalisations 
-	pour comparer, analyser et montrer les résultats, pour des raisons 
-	pédagogiques par exemple, ou pour relever des habitudes (de travail). Dans 
-	l'exemple du jeu sérieux, il est possible de comparer la trace utilisateur à la trace experte 
-	et de permettre de rejouer le même scénario plusieurs fois facilement pour 
-	observer l'évolution. Ce type de fonctionnalité est intrinsèque à 3DEvent. 
-	
-	\item[Traçage utilisateur et \textit{crowdsouring}] 3DEvent peut se révéler être 
-	un bon outil pour enregistrer la trace d'un utilisateur lorsqu'il navigue dans la 
-	scène. L'enregistrement du chemin de la caméra et des actions de l'utilisateur 
-	sous la forme d'événements sont des informations 
-	\og issues de la foule\fg{} (\textit{crowdsourcing}). En utilisant un processus 
-	d'apprentissage, il est possible de proposer de meilleurs chemins, repérer des 
-	points d'intérêt, ou même proposer des résumés de scène générés à partir des 
-	traces des collaborateurs (que s'est-il passé depuis la dernière connexion du 
-	collaborateur X ?).
-	\item[Audit et outils de surveillance de données 3D] L'\gls{ES} fournit un 
-	mécanisme 
-	d'audit intégré qui assure la cohérence des données transactionnelles. Utiliser 
-	ce mécanisme pour faire un audit ou surveiller en temps réel l'activité de 
-	l'application peut fournir une meilleure compréhension du travail d'équipe, ainsi 
-	que de l'évolution de la conception. Cela peut permettre de repérer (avec du 
-	\gls{CEP}), et corriger, certaines fonctionnalités afin d'améliorer l'ergonomie de 
-	l'application. Par exemple, si un événement est anormalement représenté dans 
-	le journal des événements, il sera possible de lever une alerte facilement.
-\end{description}
+
 %\begin{figure}[htb]
 %	\centering
 %	\includegraphics[width=0.3\columnwidth]{gitgraph}
@@ -658,20 +612,17 @@ asynchrone, distribuée et orientée événements peut
 \subsection{Bilan}
 
 Le modèle orienté événements pour la modélisation \gls{3D} collaborative, présenté 
-dans 
-cette section, intègre les besoins métiers par différents aspects. Le suivi des 
+dans cette section, intègre les besoins métiers par différents aspects. Le suivi des 
 directives liées au \gls{DDD} permet de mieux cerner les règles 
 métiers pour les intégrer dans \gls{CQRS}. 
 
-La description de la typologie des 
-événements manipulés insiste sur le compartimentage des objets métiers. La 
-modélisation \gls{3D} collaborative est minutieusement étudiée pour en dégager 
-les quatre 
-agrégats fondamentaux (la scène, le maillage, la géométrie et l'utilisateur) et les 
-types d'événements qui leur sont associés. Cette étape introduit des différences 
-fines sur les événements qui sont produits à partir d'un agrégat - un aspect intéressant notamment pour l'observation et la surveillance du 
-contenu des sessions collaboratives, développées en Section 
-\ref{sec:flexviz}. \todo{attention garder le bon endroit}
+La description de la typologie des événements manipulés insiste sur le compartimentage 
+des objets métiers. La modélisation \gls{3D} collaborative est minutieusement étudiée 
+pour en dégager les quatre agrégats fondamentaux (la scène, le maillage, la géométrie 
+et l'utilisateur) et les types d'événements qui leur sont associés. Cette étape introduit 
+des différences fines sur les événements qui sont produits à partir d'un agrégat 
+-- un aspect intéressant notamment pour l'observation et la surveillance du contenu 
+des sessions collaboratives, développées en Section \ref{sec:flexviz}.
 Les composants du patron \gls{CQRS} favorisent le découplage de l'application 
 pour obtenir une gestion de la cohérence plus fine. 
 
@@ -682,8 +633,7 @@ de cette partie est de permettre de recréer un état de l'application cohérent
 intégrant implicitement une gestion de version des événements.
 
 Ce modèle introduit le cadre de travail pour utilisateur expert en manipulation 
-\gls{3D}. Il 
-peut être facilement adapté pour différents types d'applications et étendu à 
+\gls{3D}. Il peut être facilement adapté pour différents types d'applications et étendu à 
 d'autres utilisations. 
 Pour mettre en avant l'expertise de chacun et profiter de 
 toutes les ressources apportées par un utilisateur, une communication efficace de 

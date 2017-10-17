@@ -235,6 +235,52 @@ plusieurs perspectives sont évoquées dans la Section \todo{ref section}
 ci-après.\todo{enlever le quantitatif de la question?}
 
 
+\section{Potentielles applications et autres utilisations}
+La conception d'un modèle événementiel à travers l'implémentation d'une plateforme 
+comme 3DEvent peut servir d'autres applications 
+asynchrones, distribuées et orientées événements.
+\begin{itemize}
+	\item \textit{Git-like app.} Les solutions pour faire de la gestion de version, comme, 
+	par exemple,
+ 	Mesh\-Git \cite{Denning2013} qui fait du
+	\textit{diff and merge} de maillages polygonaux pour des données \gls{3D}, 
+	sont rarement implémentées (\textit{a fortiori} en 
+	temps réel) sur des plateformes web à cause du coût et de la complexité que 
+	cela peut induire dans des architectures traditionnelles. 3DEvent peut 
+	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
+	événements et indiquer les différences entre deux états.
+	
+	\item \textit{Scénarios et \textit{path recording}.} Pour des jeux sérieux, l'infographie 
+	3D ou des études d'ergonomie, cette fonctionnalité est particulièrement 
+	pertinente. Le \gls{framework} peut proposer une comparaison entre deux traces 
+	laissées par un ou plusieurs utilisateurs. Dans le cas où les utilisateurs ont la 
+	même tâche à réaliser, il est facile de faire la différence entre deux réalisations 
+	pour comparer, analyser et montrer les résultats, pour des raisons 
+	pédagogiques par exemple, ou pour relever des habitudes (de travail). Dans 
+	l'exemple du jeu sérieux, il est possible de comparer la trace utilisateur à la trace experte 
+	et de permettre de rejouer le même scénario plusieurs fois facilement pour 
+	observer l'évolution. Ce type de fonctionnalité est intrinsèque à 3DEvent. 
+	
+	\item \textit{Traçage utilisateur et \textit{crowdsouring}.} 3DEvent peut se révéler être 
+	un bon outil pour enregistrer la trace d'un utilisateur lorsqu'il navigue dans la 
+	scène. L'enregistrement du chemin de la caméra et des actions de l'utilisateur 
+	sous la forme d'événements sont des informations 
+	\og issues de la foule\fg{} (\textit{crowdsourcing}). En utilisant un processus 
+	d'apprentissage, il est possible de proposer de meilleurs chemins, repérer des 
+	points d'intérêt, ou même proposer des résumés de scène générés à partir des 
+	traces des collaborateurs (que s'est-il passé depuis la dernière connexion du 
+	collaborateur X ?).
+	\item \textit{Audit et outils de surveillance de données 3D.} L'\gls{ES} fournit un 
+	mécanisme 
+	d'audit intégré qui assure la cohérence des données transactionnelles. Utiliser 
+	ce mécanisme pour faire un audit ou surveiller en temps réel l'activité de 
+	l'application peut fournir une meilleure compréhension du travail d'équipe, ainsi 
+	que de l'évolution de la conception. Cela peut permettre de repérer (avec du 
+	\gls{CEP}), et corriger, certaines fonctionnalités afin d'améliorer l'ergonomie de 
+	l'application. Par exemple, si un événement est anormalement représenté dans 
+	le journal des événements, il sera possible de lever une alerte facilement.
+\end{itemize}
+
 \section{Perspectives}
 Les évaluations présentées sont à compléter avec des évaluations quantitatives 
 permettant de comparer les architectures de communication hybrides exposées avec 

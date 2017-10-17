@@ -42,16 +42,16 @@ château de manière collaborative en faisant appel à leur créativité.
 Dans l'épreuve \textit{Castle from server}, les objets sont récupérés 
 automatiquement à partir du serveur ; 
 dans l'épreuve \textit{Castle from peer}, les pairs peuvent ajouter de nouveaux 
-objets du kit qu'ils possèdent sur leur machine.
+objets du kit qu'ils possèdent sur leur appareil.
 
 En utilisant les outils de l'éditeur, les informations liées aux collaborateurs 
 (représentation dans l'environnement \gls{3D} de leur position ou de leur sélection) permettent à un 
-utilisateur de manipuler les pièces (sélection, rotation, translation, 
-homothétie) de manière collaborative pour contribuer à atteindre l'objectif. 
+utilisateur de manipuler les pièces 3D (sélection, rotation, translation, 
+homothétie) et les disposer de manière à atteindre l'objectif. 
 \paragraph{Population}
-L'expérience a été conduite sur trois groupes de deux ou quatre participants 
+L'expérience a été conduite sur trois groupes de deux, deux et quatre participants 
 chacun. Une épreuve sur le modèle \textit{Wind Turbine} a été effectuée avec six participants 
-en simultané.
+en simultané pour observer le comportement du système dans un cas non prévu.
 Durant l'expérimentation, les utilisateurs étaient sur le même réseau que le serveur 
 (\gls{LAN}). 
 Les participants étaient des étudiants de Master ou de Doctorat en Informatique 
@@ -107,7 +107,9 @@ collaboration, ainsi que du rendu visuel des assemblages effectués durant les
 épreuves. Cela s'explique principalement par le fait qu'ils ont atteint les 
 objectifs fixés à chaque fois (dans le temps imparti) : réalisation de l'assemblage du modèle \gls{3D} 
 présenté sans frustration. Ils se sont également \og amusés\fg{} sur les épreuves
-avec le \textit{Castle} car ils étaient libres dans la création et souhaitaient même continuer l'épreuve au-delà du temps imparti. L'utilisation de canaux de communication 
+avec le \textit{Castle} car ils étaient libres dans la création et souhaitaient même continuer l'épreuve au-delà du temps imparti. 
+
+L'utilisation de canaux de communication 
 externes à l'application a été reportée plusieurs fois, principalement sous la forme 
 d'échanges oraux. Ces échanges concernaient l'état de leur application et ce qu'ils 
 étaient en train de faire ou ce qu'ils souhaitaient faire. Cette interaction provient, 
@@ -115,11 +117,14 @@ d'après les participants, du manque de retours visuels différenciés sur les
 manipulations effectués par les collaborateurs (exemple: pas de couleur différente 
 pour la sélection d'objet par un autre utilisateur). Cela peut plus généralement 
 s'interpréter comme un manque de sensibilisation à l'environnement collaboratif. 
+
+
 L'\gls{IU} a été bien appréciée, parfois jugée \og trop simple\fg{} par certains 
 utilisateurs. Ce choix avait été fait pour faciliter l'usage, l'apprentissage et 
 l'adoption de l'\gls{IU} et s'est révélé anecdotique lors de l'expérimentation car le 
 panel de participants était familier de ce genre 
 d'environnement.
+
 Les fonctionnalités liées à la manipulation d'objets reçoivent une bonne évaluation, 
 à l'exception de l'importation de modèles. Cela est dû, dans ce prototype, au 
 fait que l'application ne peut traiter et transmettre des modèles trop lourds. Un 
@@ -130,6 +135,7 @@ perturber la session en cours pour ses collaborateurs, le participant a pu reven
 l'application, reprenant la collaboration avec les autres participants (rétablissement 
 des connexions après un crash). En cela le participant a apprécié la robustesse de 
 l'application, sans être perturbé très longtemps par l'interruption.
+
 Concernant la fluidité des manipulations et de la visualisation au sein de 
 l'application durant la collaboration, les participants n'ont pas ressenti de latence 
 excessive (au-delà de 10s). Ils ont qualifié l'application de \og temps réel\fg{} plutôt 
@@ -143,16 +149,16 @@ Cette expérimentation présente différentes épreuves sur le cas d'étude lié
 thèse. Elle repose sur un modèle utilisant une architecture de communication 
 hybride combinant client-serveur et \gls{P2P}. Le client est responsable de 
 proposer un environnement \gls{3D} intégré à l'interface, permettant la 
-manipulation et 
-la visualisation des objets \gls{3D} manipulés de manière collaborative. Afin de 
-pouvoir 
-collaborer, il héberge également les connexions nécessaires pour communiquer ses 
-mises à jour vers les autres pairs (autant de connexions WebRTC DataChannel que 
-de pairs) et vers la base de données via le serveur (une seule connexion 
-WebSocket). Les modifications sont transmises sous forme de différentiels d'état et 
-sont stockées sur les pairs localement et sur la base de données de manière 
-distante. Le réseau \gls{P2P} est composé uniquement de clients producteurs de 
+manipulation et la visualisation des objets \gls{3D} manipulés de manière 
+collaborative. Afin de pouvoir collaborer, il héberge également les connexions 
+nécessaires pour communiquer ses mises à jour vers les autres pairs 
+(autant de connexions WebRTC DataChannel que de pairs) et vers la base de données
+via le serveur (une seule connexion WebSocket). Les modifications sont transmises
+sous forme de différentiels d'état et sont stockées sur les pairs localement et 
+sur la base de données de manière distante. 
+Le réseau \gls{P2P} est composé uniquement de clients producteurs de 
 données reliés de manière complète. 
+
 Les évaluations liées à l'expérimentation sont plutôt encourageantes, même si 
 certains points doivent être améliorés. Concernant la fonctionnalité permettant 
 d'importer des géométries, leur transmission dans le réseau \gls{P2P} a causé 
@@ -164,6 +170,7 @@ les pairs pour la distribution des données. Dans ce dernier cas, l'utilisation 
 topologie maillée partiellement et d'une distribution des modèles incluant les pairs 
 permettraient de responsabiliser davantage les pairs en désengorgeant
 un peu le serveur et surtout le réseau \gls{P2P}.
+
 Concernant l'amélioration des fonctionnalités proposées par l'\gls{IU}, 
 l'ajout de retours visuels liés aux interactions collaboratives, 
 ainsi que la visualisation de l'historique sont 
