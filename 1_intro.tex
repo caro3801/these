@@ -4,9 +4,9 @@
 \section{Contexte}
 Le besoin de collaboration et de manipulation en temps réel d'objets en \gls{3D} 
 ainsi que leur contrôle de version a été très tôt une raison de la dissémination des 
-outils pour la \gls{CAO}. Tandis que l'ingénierie et la visualisation scientifique ont 
+outils de \gls{CAO}. Tandis que l'ingénierie et la visualisation scientifique ont 
 produit des quantités de données massives dans des domaines tels que la 
-conception architecturale, l'industrie des jeux vidéo ou encore l'impression \gls{3D}, un 
+conception architecturale, l'héritage culturel ou la conception d'objets manufacturés, un 
 besoin croissant de maintenir, visualiser et manipuler de larges scènes \gls{3D} 
 polygonales pouvant être éditées par de multiples utilisateurs de manière 
 concurrente se fait sentir \info{better read the first 
@@ -16,7 +16,7 @@ modèles, particulièrement avec les utilisateurs n'ayant pas accès aux dernier
 logiciels et matériels graphiques. En conséquence,
 le développement de plateformes légères déployées sur le web pour répondre à ces 
 besoins est en forte progression. 
-Dans un \gls{EV3D}, la simulation virtuelle et simulation distribuée d'un 
+Dans un \gls{EV3D}, la simulation virtuelle et distribuée d'un 
 environnement \gls{3D}, un grand nombre d'utilisateurs situés à différents endroits 
 géographiques peuvent 
 interagir les uns avec les autres en temps réel. Un \gls{EVC3D} insiste sur l'aspect collaboratif des interactions qui se produisent entre les utilisateurs.
@@ -26,7 +26,7 @@ des données partagées durant la collaboration.
 L'utilisation d'un client comme medium pour 
 accéder à l'\gls{EVC3D} est requise pour envoyer des demandes au serveur. Le 
 client peut être manipulé par un utilisateur ou un agent logiciel (bot).
-Un \gls{EVC3D} se compose également d'un protocole de communication qui 
+Un \gls{EVC3D} comprend également un protocole de communication qui 
 permet aux différents clients d'échanger les mises à jours correspondant aux 
 modifications effectuées dans l'espace \gls{3D} virtuel partagé. La distribution des 
 données devient alors un enjeu majeur dans ce type d'application en terme de 
@@ -52,7 +52,8 @@ dans le concept de pensée complexe. Dans sa définition de la
 complexité, Edgar Morin fait d'ailleurs référence à l'étymologie latine \og 
 complexus\fg{} qui signifie \og ce qui est tissé ensemble\fg{} \cite{Morin1990a}.
 La plupart des collaborations requièrent un élément dirigeant qui peut prendre une 
-forme sociale (personne) au sein d'un groupe décentralisé et égalitaire (horizontal). L'élément dirigeant va également souvent aider à trouver 
+forme sociale (personne) au sein d'un groupe décentralisé et égalitaire (horizontal). 
+L'élément dirigeant va également souvent aider à trouver 
 des consensus (exemple : la disponibilité des ressources).
 Une équipe travaillant de manière collaborative a la possibilité de concentrer plus de 
 ressources, de reconnaissances et de récompenses lors d'une 
@@ -79,17 +80,16 @@ Dans les années 2000, deux classifications ont été retenues concernant la
 collaboration.
 La première classification, décrite en 2007 par Gotta \cite{Gotta2007}, propose 
 un modèle segmentant la collaboration de manière structurée en quatre catégories 
-: de la plus dirigée à la plus volontaire, en passant par l'hybride.
+: de la plus dirigée à la plus libre (volontaire), en passant par l'hybride.
 \begin{itemize}
 	\item \textit{Collaboration centrée processus.} Les conditions requises du 
 	processus 
 	nécessitent l'engagement de l'utilisateur, qui doit, de par son rôle ou sa 
 	responsabilité, diriger ses efforts dans la collaboration avec les autres. Cette 
 	stratégie se concentre sur les activités de manipulation collaborative \gls{3D} 
-	plutôt 
-	que sur leur contexte organisationnel afin de favoriser la synergie autour de la 
+	plutôt que sur leur contexte organisationnel afin de favoriser la synergie autour de la 
 	réussite d'un processus. Par exemple, pour la création et l'utilisation d'un 
-	modèle 	3D dans un \gls{BIM}, il s'agit de favoriser la prise de décision sur un 
+	modèle 	3D dans un contexte de \gls{BIM}, il s'agit de favoriser la prise de décision sur un 
 	projet et de communiquer à ce propos.
 	
 	\item \textit{Collaboration centrée activité.}
@@ -115,8 +115,7 @@ un modèle segmentant la collaboration de manière structurée en quatre catégo
 	Souvent utilisée dans le cadre d'urgences écologiques ou sanitaires (exemple: 
 	contributions OpenStreetMap lors d'ouragans ou de tsunamis), la collaboration 
 	centrée réseau est très présente dans des situations où l'expertise est 
-	fortement 
-	valorisée comme dans les \gls{BIM} ou la visualisation scientifique. Les 
+	fortement valorisée comme dans les \gls{BIM} ou la visualisation scientifique. Les 
 	contributeurs peuvent être intégrés en fonction des besoins des utilisateurs déjà 
 	présents sur le projet.
 \end{itemize}
@@ -187,16 +186,16 @@ de la collaboration.
 \subsection{Les environnements virtuels collaboratifs 3D}
 
 Un \gls{EVC3D} est un environnement virtuel \gls{3D} où plusieurs utilisateurs 
-locaux 
-ou à distance peuvent se rejoindre et partager une expérience collaborative 
+locaux ou distants peuvent se rejoindre et partager une expérience collaborative 
 interactive en \gls{3D}. La principale caractéristique d'un \gls{EVC3D} est la 
 simulation 
 immersive et interactive \gls{3D} d'environnements virtuels, tels que les jeux 
-sérieux (multi-utilisateurs). \gls{EVC3D} permet à plusieurs utilisateurs d'interagir les uns avec 
-les autres en temps (quasi) réel, même s'ils sont situés dans des lieux différents. 
+sérieux (multi-utilisateurs). Un \gls{EVC3D} permet à plusieurs utilisateurs 
+d'interagir les uns avec les autres en (quasi) temps réel, même s'ils sont 
+situés dans des lieux différents. 
 D'autres fonctionnalités sont proposées par ce type de plateformes comme le 
 partage d'espace, de présence et du temps. Selon Singhal et Zyda 
-\cite{Singhal1999}, \gls{EVC3D} est constitué de quatre composants principaux :
+\cite{Singhal1999}, un \gls{EVC3D} est constitué de quatre composants principaux :
 \begin{enumerate*}[label=(\roman*)]
 	\item un moteur graphique pour l'affichage ;
 	\item des appareils de contrôle et de communication :
@@ -264,15 +263,14 @@ temps réel (action synchrone).
 Au contraire, une synchronicité faible, implique qu'un temps notable s'écoule entre 
 l'action d'un utilisateur et sa visibilité chez les autres (action asynchrone). L'aspect 
 spatial s'intéresse à la répartition géographique des utilisateurs. Les 
-environnements sont dits répartis lorsque les utilisateurs sont physiquement 
-distants. Cette thèse concerne les applications collaboratives appartenant à la 
+environnements sont dits répartis lorsque les utilisateurs travaillent sur des ressources 
+réparties sur le réseau. Cette thèse concerne les applications collaboratives appartenant à la 
 catégorie des applications synchrones réparties.
 
 Un modèle d'édition collaborative en temps réel permet à plusieurs utilisateurs de 
 visualiser et d'éditer de manière simultanée le même document (texte, image, 
-\gls{3D}) 
-depuis plusieurs sites connectés par un réseau de communication. Un modèle 
-d'édition collaborative se compose d'un nombre connu ou inconnu de répliques. 
+objet \gls{3D}) depuis plusieurs sites connectés par un réseau de communication. 
+Un modèle d'édition collaborative se compose d'un nombre connu ou inconnu de répliques. 
 Une réplique est une copie du document partagé modifiable à n'importe quel 
 instant. L'exécution d'une opération de modification se fait localement sur la 
 réplique, qui la diffuse ensuite à l'ensemble des répliques. La notification de la 
@@ -379,15 +377,12 @@ grandes zones géographiques) génère un grand nombre d'événements qui doiven
 
 Les systèmes complexes distribués sont construits à partir de collections 
 couplées de manière dite \og lâche\fg{} (\textit{loosely coupled}) \footnote{Un 
-	couplage lâche indique que les 
-	composants échangent peu d'informations. Contrairement à un couplage fort, où 
-	les 
-	composants ont une faible indépendance fonctionnelle et sont donc peu 
-	réutilisables, le couplage faible s'appuie sur l'établissement d'un protocole 
-	d'échange faisant le moins d'a priori sur les composants. Cela permet de fixer 
-	un 
-	cadre d'interaction entre les composants.}, technologiquement neutre 
-et indépendante de la localisation des services. 
+couplage lâche indique que les composants échangent peu d'informations. 
+Contrairement à un couplage fort, où les composants ont une faible indépendance 
+fonctionnelle et sont donc peu réutilisables, le couplage faible s'appuie 
+sur l'établissement d'un protocole d'échange faisant le moins d'a priori sur les 
+composants. Cela permet de fixer un cadre d'interaction entre les composants.}, 
+technologiquement neutre et indépendante de la localisation des services. 
 Le développement d'applications dirigées par les événements est un challenge 
 tripartite : la production d'événements, le traitement des événements et la 
 consommation des événements \cite{Chandy2011}.
@@ -416,7 +411,7 @@ sensibilisation au sein du groupe n'est pas seulement utilisée
 pour notifier les utilisateurs ; son but est également d'aider dans les processus de 
 groupes pour éviter les problèmes. Ces derniers peuvent prendre différentes 
 formes comme :  l'inefficacité due à une information limitée ou un 
-système de communication restreint; la disponibilité d'informations superflues; la difficulté 
+système de communication restreint; la présence d'informations superflues; la difficulté 
 d'extraire l'information pour surveiller ou faire des rapports; l'utilisation des 
 données issues des ressources produites par le groupe pour améliorer sa 
 perception des données disponibles. Par exemple, Xhafa et Poulovassilis 
@@ -424,7 +419,7 @@ perception des données disponibles. Par exemple, Xhafa et Poulovassilis
 des collecticiels (\textit{groupware}) en \gls{P2P}. 
 \improve{ca veut rien dire}
 Leur méthode permet de développer des applications de collecticiels spécifiques  
-sur les opérations et les services primitifs liés à la sensibilisation. Ces derniers 
+sur les opérations et les services primitifs liés à la sensibilisation\footnote{Traduction du terme \textit{awareness} dans cette thèse : indications ambiantes dans l'environnement, suite à des notifications ponctuelles.}. Ces derniers 
 sont directement implémentés dans l'intergiciel \gls{P2P}. Le modèle propose 
 différentes approches dépendant de la plateforme (web ou mobile) avec une 
 granularité différente de l'information 
@@ -456,7 +451,8 @@ d'\textit{awareness} dont :
 	
 	\item \textit{La généricité des événements.} Un système basé événements manipule 
 	plusieurs types d'événements. C'est pourquoi il est nécessaire que les 
-	événements soient le plus génériques possibles pour faciliter la construction de 
+	événements soient le plus génériques possibles, i.e. qu'ils puissent être traités 
+	de la même manière par tous les composants, pour faciliter la construction de 
 	requêtes à travers un système lâchement couplé.
 	
 	\item \textit{Les mécanismes à empreinte mémoire réduite.} L'utilisation de 
@@ -488,10 +484,10 @@ de gérer plusieurs utilisateurs avec des connexions différentes (bas débit et
 débit) avec des connexions au réseau qui ne sont pas fiables et une réplication 
 partielle des données pour minimiser les événements non voulus\info{consistency cohérencec
 conflits}. L'analyse des applications utilisant des 
-systèmes orientés événements explique 
-qu'ils sont obligés de faire des choix spécifiques au métier lié à l'application 
-\cite{Hinze2009}. Par exemple, dans les applications de jeux vidéo, la distribution 
-des événements est souvent liée à un mécanisme \gls{PubSub} centralisé qui 
+systèmes orientés événements explique qu'ils sont obligés de faire des choix 
+spécifiques au métier lié à l'application 
+\cite{Hinze2009}. Par exemple, dans les applications de simulations distribuées, 
+la distribution des événements est souvent liée à un mécanisme \gls{PubSub} centralisé qui 
 modifie les souscriptions au fur et à mesure que les joueurs se déplacent dans 
 l'espace. De plus, les événements dans un jeu doivent être protégés contre 
 l'altération pour éviter la triche ou la dissémination d'événements faux. Cela 
@@ -515,15 +511,14 @@ Les architectures orientées
 événements sont bien adaptées pour intégrer dans la description des 
 événements plusieurs aspects liés au métier. 
 Cette sémantique porte avec elle les connaissances des manipulations expertes.
-Un aspect majeur de cette thèse repose sur l'intégration du métier dans le 
+Un aspect majeur de cette thèse repose sur l'intégration des aspects du métier dans le 
 processus de la manipulation et de la visualisation des objets \gls{3D}. 
 
-À l'ajout d'information sémantique sur les données, les \glspl{EDA} enrichissent 
-les applications de la possibilité 
-d'implantation d'outils de surveillance de flux métiers pour l'observation en temps 
-réel ou l'analyse a posteriori de ces données pour fixer des objectifs ou repérer 
-des 
-problèmes de performance dans la collaboration par exemple.
+Les \glspl{EDA} sont également un socle pour l'implantation d'outils de surveillance 
+de flux métiers pour l'observation en temps réel ou l'analyse a posteriori de ces 
+données pour fixer des objectifs ou repérer 
+des problèmes de performance dans la collaboration. Elles s'appuient sur l'intégration 
+de la sémantique métier aux données proposée par la modélisation des événements.
 %Toutes ces entités ont besoin d'être capables de 
 %charger les ressources pour pouvoir les inspecter et les analyser. Ces 
 %contraintes 
@@ -565,11 +560,11 @@ La visualisation et la manipulation collaborative d'objets \gls{3D} sont sujette
 plusieurs problématiques telles que la cohérence des ressources manipulées au 
 cours du temps. Dans ce contexte, il existe un fort besoin de gérer l'évolution des 
 versions permettant la revue des modèles \gls{3D}. 
-En s'appuyant sur les ressources à disposition, telles que les clients (navigateurs 
-web) sur lesquels les utilisateurs manipulent les modèles \gls{3D}, le passage à 
-l'échelle est plus flexible car les ressources augmentent avec le nombre de clients 
-et procurant également plus d'autonomie aux utilisateurs utilisant leurs ressources 
-propres.
+En s'appuyant sur les ressources disponibles, telles que les clients (navigateurs 
+web) sur lesquels les utilisateurs manipulent les modèles \gls{3D}, le gestion de la charge est 
+plus flexible car les ressources augmentent avec le nombre de clients.
+Cela fournit également plus d'autonomie aux utilisateurs car le système leur permet d'utiliser
+leurs ressources propres, ce qui n'est pas une pratique développée par le tout-infonuagique.
 L'architecture de communication et les contraintes liées aux architectures 
 distribuées et décentralisées correspondent au second axe de recherche. 
 Enfin, le dernier champ 
@@ -577,7 +572,7 @@ s'adresse à la partie que nous appellerons \og métier\fg{} qui se rapporte au
 domaine de la manipulation d'objets \gls{3D}, lequel inclut la 
 gestion du cycle de vie des données \gls{3D}, de l'interaction utilisateur au 
 stockage 
-en passant par leur distribution. Ces aspects se rapportent principalement à 
+en passant par leur distribution. Ces aspects concernent principalement
 l'historique, la traçabilité de l'information et l'expertise embarquée dans le système.
 
 \begin{figure}[hbt]
@@ -589,7 +584,7 @@ l'historique, la traçabilité de l'information et l'expertise embarquée dans l
 
 L'objectif de cette thèse est triple : 
 \begin{enumerate*}[label=(\roman*)]
-	\item extraire les informations liées aux règles métier pour l'affichage et la 
+	\item s'appuyer sur les informations liées aux règles métier pour l'affichage et la 
 	manipulation d'objets \gls{3D} en collaboration nécessaires à la traçabilité de 
 	l'information,
 	\item repérer les principales problématiques de gestion des données sur le 
@@ -628,7 +623,7 @@ ensemble de pratiques dans la gestion des données pour la manipulation d'objets
 l'historique d'une scène \gls{3D} en utilisant des contenus \gls{3D} de différentes 
 natures. Dans ce but, j'ai choisi le paradigme événementiel et je l'ai 
 intégré à mon modèle de collaboration grâce à l'utilisation de solutions 
-préexistantes pour le partage et la diffusion de contenus \gls{3D} dans le cadre 
+déjà existantes pour le partage et la diffusion de contenus \gls{3D} dans le cadre 
 d'applications collaboratives sur le web.
 
 En constatant le manque de processus et d'outils qui pourraient réellement supporter la modélisation collaborative \gls{3D} sur le web intégrant l'identification de problèmes spécifiques et leur formulation liés a également été importante. 
@@ -643,8 +638,8 @@ suit.
 	\item \improve{réécrire + introduire ref chapitre}Proposition d'un système de 
 	gestion et de visualisation de contenu \gls{3D} avec un historique non linéaire 
 	orienté événements.
-	\item Définition d'une architecture hybride (client serveur et \gls{P2P}) adapté à 
-	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur web en 
+	\item Définition d'une architecture hybride (client serveur et \gls{P2P}) adaptée à 
+	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur le web en 
 	temps réel.
 	\item Introduction des concepts d'événements métiers liées à la \gls{3D} 
 	comme moyen d'interagir dans une scène \gls{3D} multi-échelle.
