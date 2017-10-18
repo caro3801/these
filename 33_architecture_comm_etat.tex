@@ -131,7 +131,7 @@ systèmes de persistance pour obtenir les mises à jour :
 	fois qu'il s'est connecté. Cela peut également inclure des mises à jour qui sont 
 	en conflit avec ce qu'il y a dans son propre espace de stockage, qu'il lui faut 
 	donc modifier.
-	Dans le cas où un utilisateur est seul connecté, la base de données est la 
+	Dans le cas où seul un utilisateur est connecté, la base de données est la 
 	seule source disponible pour la mise à jour du client. 
 \end{enumerate}
 
@@ -185,7 +185,7 @@ utilisateurs.
 Même si l'application peut prendre le relais et permettre la relâche du 
 verrou au bout d'un certain temps, l'expérience utilisateur peut être dégradée 
 pendant cette période.
-Le maintien de la cohérence est a peu près garanti dans ce modèle si l'on 
+Le maintien de la cohérence est à peu près garanti dans ce modèle si l'on 
 considère un environnement où la fréquence des modifications n'est pas très 
 élevée, et que tous les clients communiquent leur horloge locale pour établir un 
 référentiel de temps concernant les mises à jour. 
