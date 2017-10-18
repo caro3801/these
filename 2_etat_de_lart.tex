@@ -1453,9 +1453,8 @@ En revanche, les performances de l'application peuvent être affectées par
 l'utilisation de 
 l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Store, il est 
 nécessaire de le calculer à partir des événements reçus.
-A chaque événement créé (et stocké), ce processus sera alourdi car ils ne 
-peuvent être supprimés. Plus la pile d'événements est longue, plus cela prend 
-du temps (linéaire), considérant que les commandes ont parfois besoin de 
+Le processus  va s'alourdir car chaque événement créé (et stocké) ne sera pas supprimé. Plus la pile d'événements est longue, plus cela va prendre 
+du temps (linéaire), surtout en considérant que les commandes ont parfois besoin de 
 connaître une partie de l'état courant issu de ces événements pour être 
 déclenchées (Figure \ref{fig:es-without-snapshot-aggregate}).
  

@@ -586,17 +586,13 @@ impact direct sur l'expérience utilisateur.
 
 
 L'\gls{ES} donne la possibilité de gérer les conflits liés à la concurrence avec une 
-fine granularité. Selon le scenario suivant par exemple $UserA$ a effectué une 
+fine granularité. Par exemple, selon le scenario suivant :  $UserA$ a effectué une 
 une translation $MeshTrans\-latedEvent$ sur le maillage 
-$mesh1$ lorsque $UserB$ a effectué une rotation $MeshRotatedEvent$ sur ce 
-même objet. Lorsque les événements sont sauvegardés, la version de l'agrégat 
-$mesh1$ est différente chez chacun des deux utilisateurs (un numéro derrière ce 
-qu'il devrait être). Le module détecteur de conflits est peut contenir un dictionnaire 
-des procédures à suivre en fonction des événements qu'il déclare en conflit en de 
-levant une exception d'après cette situation. L'algorithme \ref{algo:conflictregister} 
-présente la fonction utilisée pour détecter des conflits entre plusieurs types 
-d'événements. Le registre contient la liste des événements avec lequel un 
-événement peut provoquer un conflit. La fonction permet de savoir si un conflit est 
+$mesh1$ au moment où $UserB$ a effectué une rotation $MeshRotatedEvent$ sur ce 
+même objet. Lors de la sauvegarde des événements, la version de l'agrégat 
+$mesh1$ est différente chez chacun des deux utilisateurs. Le module détecteur de conflits 
+contient un registre des procédures à suivre en fonction des événements qui sont en conflit entre eux. L'algorithme \ref{algo:conflictregister} 
+présente la fonction utilisée pour détecter des conflits dans une liste d'événements donnée. La fonction permet de savoir si un conflit est 
 levé à partir de la liste d'événements donnée et du registre des conflits.
 
 \begin{algorithm} % enter the algorithm environment
@@ -611,7 +607,7 @@ levé à partir de la liste d'événements donnée et du registre des conflits.
 		\Ensure return true if a conflict is raised
 		\Function{ConflictsWith}{$eventToCheck:Type,  previousEvents:List<Type>$}
 		%// If type not registered assume the worst and say it conflicts
-		\If{$eventToCheck \in conflictRegister}$
+		\If{$eventToCheck \in conflictRegister$}
 		\For{$et \in  previousEvent$}
 		\If {$conflictRegister[eventToCheck] == et$}
 		\State \Return $true$

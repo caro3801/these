@@ -30,7 +30,7 @@ Lors de la phase de \textit{signaling} c'est donc la partie gestion des instance
 serveur qui gère la politique de connexion des données. Dans le prototype réalisé 
 la connectivité minimum entre les différents pairs participant à la même scène est 
 fixée à 2. Cette politique permet de créer un maillage réseau qui n'est pas trop 
-dense en considérant que le nombre maximum d'utilisateur dépassera pas dix.
+dense en considérant que le nombre maximum d'utilisateur ne dépassera pas dix.
 
 \subsubsection{De navigateur à navigateur}
 Lors de la connexion d'un nouveau client à la scène, le serveur effectue la phase 
@@ -51,7 +51,7 @@ du serveur.
 En sachant que le modèle est conçu pour des applications web, 3DEvent a besoin 
 d'un format de données permettant de faire communiquer des acteurs hétérogènes 
 du système.
-Le format \gls{JSON} est assez générique pour être aussi utilisé pour lors de la 
+Le format \gls{JSON} est assez générique pour être aussi utilisé lors de la 
 sérialisation et la désérialisation des 
 événements et plus largement des paquets transmis par RTCDataChannel. 
 L'\acrshort{API} RTCDataChannel supporte beaucoup de types de données 
@@ -61,7 +61,7 @@ hétérogènes (3D, images,
 informations) l'interopérabilité est facilitée.
 
 Le Listing  \ref{jsonstore} représente la structure de données utilisée sur le réseau 
-lorsqu'un événement est transmis. Seule la partie $data$ est utilisé au sein du pair 
+lorsqu'un événement est transmis. Seule la partie $data$ est utilisée au sein du pair 
 pour faire les manipulations en \gls{CQRS} car le type de l'instance d'événement 
 manipulé est connu. 
 
@@ -124,7 +124,7 @@ contenu \gls{3D} : niveaux de détails \cite{Chu2012,Hu2008}, progressif
 \cite{Cheng2009,Limper2014}, mise en cache \cite{Jia2014}, compression / 
 décompression
 \cite{Lavoue2013,Ponchio2015,Maglo2013a}. 
-Une catégorisation plus précise du flux continu peut être donnée selon quand le 
+Une catégorisation plus précise du flux continu peut être donnée selon comment le 
 contenu est généré : 
 en direct (\textit{live} ou \textit{push}) et à la demande (\textit{on-demand} ou 
 \textit{pull}).  

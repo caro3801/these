@@ -240,13 +240,13 @@ La conception d'un modèle événementiel à travers l'implémentation d'une pla
 comme 3DEvent peut servir d'autres applications 
 asynchrones, distribuées et orientées événements.
 \begin{itemize}
-	\item \textit{Git-like app.} Les solutions pour faire de la gestion de version, comme, 
-	par exemple,
+	\item \textit{Git-like app.} Les solutions pour faire de la gestion de version, comme 
+	par exemple
  	Mesh\-Git \cite{Denning2013} qui fait du
 	\textit{diff and merge} de maillages polygonaux pour des données \gls{3D}, 
 	sont rarement implémentées (\textit{a fortiori} en 
-	temps réel) sur des plateformes web à cause du coût et de la complexité que 
-	cela peut induire dans des architectures traditionnelles. 3DEvent peut 
+	temps réel) sur des plateformes web notamment à cause du coût et de la complexité que 
+	cela peut induire dans des architectures traditionnelles. Alors que 3DEvent peut justement
 	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
 	événements et indiquer les différences entre deux états.
 	
@@ -256,7 +256,7 @@ asynchrones, distribuées et orientées événements.
 	laissées par un ou plusieurs utilisateurs. Dans le cas où les utilisateurs ont la 
 	même tâche à réaliser, il est facile de faire la différence entre deux réalisations 
 	pour comparer, analyser et montrer les résultats, pour des raisons 
-	pédagogiques par exemple, ou pour relever des habitudes (de travail). Dans 
+	pédagogiques par exemple, ou pour relever des habitudes de travail. Dans 
 	l'exemple du jeu sérieux, il est possible de comparer la trace utilisateur à la trace experte 
 	et de permettre de rejouer le même scénario plusieurs fois facilement pour 
 	observer l'évolution. Ce type de fonctionnalité est intrinsèque à 3DEvent. 
@@ -342,7 +342,7 @@ couche dédiée au routage par sujet \cite{Baldoni2007} pourrait encourager un
 meilleur équilibre dans la répartition de la charge de transmission.\\
 
 
-Un modèle, en cours d'élaboration, reprend les principes du modèle événementiel 
+Un nouveau ? modèle en cours d'élaboration reprend les principes du modèle événementiel 
 proposé dans cette thèse pour introduire dans l'architecture de communication, le 
 principe de \og n\oe ud responsable\fg{}. En rendant un n\oe ud responsable d'un 
 agrégat, il devient alors l'unique garant de sa cohérence, contrairement au 
