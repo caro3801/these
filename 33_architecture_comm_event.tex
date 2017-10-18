@@ -212,9 +212,10 @@ données, elles sont ignorées par le système.
 
 
 \subsubsection{Gestion de la cohérence}
-La cohérence est gérée à plusieurs niveaux dans le pair. Localement (Section 
-\todo{ref section}), et au niveau du réseau \gls{P2P}.
-C'est l'Event Store qui est en charge des deux niveaux. Les nouvelles données qui 
+La cohérence est gérée par l'Event Store à plusieurs niveaux dans le pair :  
+localement (Section 
+\todo{ref section}) et au niveau du réseau \gls{P2P}.
+ Les nouvelles données qui 
 entrent dans un pair doivent nécessairement être en cohérence avec celle qui sont 
 déjà certifiées cohérentes.
 Pour chaque événement sauvegarder, l’Event Store publie (push) l’événement sur 

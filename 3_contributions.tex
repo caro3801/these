@@ -57,15 +57,22 @@ présenté dans \cite{Desprat2017} pour améliorer la résilience du système.
 \input{32_architecture_communication}
 
 
-\subsubsection{Comparaison des deux architectures}
+\subsection{Bilan comparatif}
 Le Tableau \ref{ta:recap-approche} propose un récapitulatif des deux approches 
 utilisées. HybridEvent correspond à l'architecture hybride \og orientée 
 événements\fg{} tandis qu'HybridState est l'architecture \og orientée états\fg{}.
 Il est important de noter qu'HybridEvent a été conçue après HybridState et que les 
-choix de modélisation ont évoluer avec le temps. Globalement, HybridEvent a une 
+choix de modélisation ont évolué avec le temps. Globalement, HybridEvent a une 
 approche très peu couplée par rapport à HybridState que ce soit concernant la 
 connectivité, le type de transmission ou encore le mode de cohérence choisi.
 
+HybridEvent propose une gestion des données mieux répartie compte tenu de la 
+possibilité de \og composer\fg{} le réseau \gls{P2P} en fonction des besoins avec 
+l'ajout à la volée de nouvelles instances Serveur. Cependant, le choix d'une 
+synchronisation par les pairs rend la garantie de la cohérence plus complexe à 
+faire aboutir contrairement à HybridState. Cette dernière consomme les 
+ressources par à-coups alors qu'HybridEvent repose principalement sur la 
+transmission de flux de données en continu.
 
 \input{33_tableComparaison}
 
