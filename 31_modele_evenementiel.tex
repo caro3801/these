@@ -403,8 +403,9 @@ autre réplique), qui a pour responsabilité de préserver l'ordre causal des
 \begin{figure}
 	\centering
 	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
-	\caption{Représentation d'un Event Store stockant des agrégats versionnés qui 
-	contiennent des instances d'événements}
+	\caption{Représentation d'un journal d'événement}{stockant des agrégats (\og 
+	m1\fg{}, \og m2\fg{}, \og s1\fg{}, \og g1\fg{}, \og u1\fg{}) versionnés (de 1 à n) 
+	qui contiennent des instances d'événements ($ei_{typeEvent}$)} 
 	\label{fig:event-store}
 \end{figure}
 
@@ -476,7 +477,6 @@ d'entrées de réplication. De plus, ces points d'entrée doivent être
 connectés entre eux afin de créer un réseau de réplications. 
 Un journal d'événements répliqué est représenté par un journal d'événements local 
 sur chacun des sites participants.
-
 Les points d'entrée (aussi appelés \glspl{NB})
 permettent de gérer un ou plusieurs journaux d'événements. 
 Ces journaux sont identifiés pour permettre à la réplication de ne s'intéresser 

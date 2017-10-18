@@ -3,9 +3,15 @@
 \label{sec:comm_event}
 
 Cette architecture est une combinaison des contributions présentées dans 
-\cite{Desprat2016,Desprat2017} : elle repose sur les éléments du 
-framework orienté événements (Section \todo{ref modele event}) qui sont également 
-en relation avec la couche réseau (Figure \ref{fig:archievent}).
+\cite{Desprat2016,Desprat2017}. Contrairement à l'architecture précédemment 
+décrite, celle-ci repose sur le paradigme événementiel et fonctionne en accord 
+avec le framework orienté événements présenté dans la Section 
+\ref{sec:modele_event}. Trois aspects de l'architecture de communication hybride 
+orientée événements sont mis en valeurs dans cette thèse : la présentation des 
+composants de l'architecture \gls{P2P} peu couplé, un système de gestion de 
+cohérence ainsi qu'un protocole de 
+synchronisation utilisant un journal d'événements partagé entre les pairs.
+ 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\columnwidth]{eps/archi.pdf}
@@ -51,8 +57,7 @@ auprès des autres instances (notamment en cas de panne).
 Toutes les instances sont coordonnées par l'\gls{IM} qui est responsable de mettre 
 les pairs en relation. Il est notamment le serveur responsable dans le mécanisme 
 de \textit{signalling}. 
-
-L'ensemble des Event Stores forme une grappe (\textit{cluster}) qui gère le 
+L'ensemble des Event Stores forme une grappe qui gère le 
 journal d'événements partagé de manière répartie entre toutes les instances.
 \subsubsection{Gestion du stockage}
 \paragraph{Local avec l'\gls{ESM}}
@@ -68,8 +73,8 @@ source de vérité de l'application. Elle peut également stocker des projection
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
 
 Sur la base du modèle orienté événements, les données à stocker sont les 
-événements. Ils sont immuables et 
-constituent des données purement fonctionnelles\todo{voir section \gls{ES} vs CS}.
+événements. Ils sont immuables et constituent des données purement 
+fonctionnelles (Section \ref{sec:es-vs-cs}).
 L'utilisation d'une base de données fonctionnelle permet de se reposer sur 
 l'immuabilité des événements.
 L'argument souvent opposé à l'utilisation de telles bases est le coût de l'espace de 
@@ -105,7 +110,7 @@ signalisation (offre/demande). Le mécanisme est déclenché par l'instanciation
 \gls{NB} dans l'Event Store de $idA$ puis celui de $idB$. Afin de resynchroniser 
 les deux pairs (après cette série d'échanges asynchrones), $idA$ et $idB$ 
 s'échangent des méta-données sur la situation respective de leurs \gls{ESM} 
-afin de se synchroniser\todo{(see refernece sync mechanism}.
+afin de se synchroniser.
 
 \begin{figure}[h]
 	\noindent
@@ -163,8 +168,6 @@ partiellement maillée (\textit{partial mesh topology}).
 
 \subsubsection{Gestion de la cohérence}
 
-
-
 Pour chaque événement sauvegarder, l’Event Store publie (push) l’événement sur 
 le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme 
 \ref{algo:saveEvent}. \todo{finir explications}
@@ -177,9 +180,9 @@ le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme
 		\Require aggregateId : string, uncommitedEvents : eventMsg[ ], 
 		version : number
 		%\Ensure $y = x^n$
-		\State $expectedVersion \Leftarrow version$
+		\State $expectedVersion \leftarrow version$
 		\For{$eventMsg $ \textbf{in} $uncommitedEvents$}	
-		\State{$newMsg \Leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
+		\State{$newMsg \leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
 			streamId : aggregateId\}$}
 		\State{$publish(aggregateId, newMsg, expectedVersion++)$}
 		\EndFor
@@ -193,7 +196,7 @@ le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme
 	\begin{algorithmic} % enter the algorithmic environment
 		\Require streamId: string, event: EventStoreEvent, version: number
 		\Ensure event
-		\State $stream \Leftarrow streams.getOrCreate(streamId);$
+		\State $stream \leftarrow streams.getOrCreate(streamId);$
 		\If{$ stream.has(version)$}
 		\State $throwExceptionVersion(stream,version)$
 		\EndIf
