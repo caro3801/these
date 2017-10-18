@@ -10,9 +10,9 @@ architecture de communication efficace pour le passage à l'échelle et la rési
 modèle de données dédiée au métier de la modélisation 3D collaborative. 
 
 \section{Discussion}
-Pour répondre aux différentes questions de 
-recherche posées en introduction de cette thèse, plusieurs contributions ont été 
-proposées, implantées et soumises à des expérimentations, voir 
+Pour répondre aux différentes questions de recherche posées en introduction, 
+plusieurs contributions ont été 
+proposées, implantées et soumises à des expérimentations, d'après les travaux 
 \cite{Desprat2015a,Desprat2015b,Desprat2016,Desprat2017}. 
 
 
@@ -330,7 +330,6 @@ système, de l'appareil, de la connexion et de la sémantique du contenu produit
 des contraintes de temps liées au cas d'utilisation.
 
 
-
 \paragraph{Simplification et compression de maillage}
 Si la plateforme web est accessible depuis n'importe quel appareil possédant un navigateur, 
 la transmission (le téléversement ou le téléchargement) de modèles 3D peut s'avérer long et fastidieux.
@@ -340,7 +339,21 @@ compression propre aux événements produits. Grâce au
 réseau \gls{P2P} il est possible de rapprocher les ressources des utilisateurs 
 selon leurs intérêts. Le rendu assisté par les pairs \cite{Zhu2011} couplé avec une 
 couche dédiée au routage par sujet \cite{Baldoni2007} pourrait encourager un 
-meilleur équilibre dans la répartition de la charge de transmission.
+meilleur équilibre dans la répartition de la charge de transmission.\\
+
+
+Un modèle, en cours d'élaboration, reprend les principes du modèle événementiel 
+proposé dans cette thèse pour introduire dans l'architecture de communication, le 
+principe de \og n\oe ud responsable\fg{}. En rendant un n\oe ud responsable d'un 
+agrégat, il devient alors l'unique garant de sa cohérence, contrairement au 
+système de consensus actuellement en place. Toutes les modifications de 
+l'agrégat doivent alors impérativement passer par ce n\oe ud pour être validées 
+(routage basé sur le contenu). 
+En cas de départ du réseau, un nouveau n\oe ud prend la responsabilité de 
+l'agrégat (par exemple : lors de la sélection de l'objet dans la scène). 
+Ce principe de \og n\oe ud responsable\fg{} permettrai, dans une situation où les 
+modifications localisées sur un même objet sont courantes, d'isoler la 
+responsabilité de la cohérence pour chaque agrégat. 
 
 %\paragraph{Modèle de cohérence}\todo{faire?}
 

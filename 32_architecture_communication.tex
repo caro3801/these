@@ -101,7 +101,8 @@ faire de la modélisation \gls{3D} collaborative : serveur, persistance
 et les pairs\footnote{Les pairs sont appelés \og Clients\fg{} dans les premiers 
 travaux}. 
 
-Les contributions portées par Desprat et al. dans \cite{Desprat2015a} et \cite{Desprat2015b} 
+Les contributions portées par Desprat et al. dans 
+\cite{Desprat2015a,Desprat2015b} 
 s'appuient sur des pairs ayant un rôle simple et proposent une transmission des 
 mises à jour en tant que différentiel d'état. Les conflits lors d'opérations 
 concurrentes sont évités grâce à un mécanisme de verrouillage. 
@@ -151,9 +152,21 @@ résiliente.
 
 
 \subsection{Éléments constitutifs d'un pair}
+Un réseau \gls{P2P} pour le calcul ou la transmission d’information est un modèle 
+d’architecture qui permet de distribuer les tâches et la charge de travail entre 
+différents pairs. Chaque pair ou \og n\oe ud\fg{} est à la fois client et serveur, ce 
+qui implique que les pairs sont à la fois fournisseurs et consommateurs de 
+ressources contrairement au traditionnel modèle client-serveur où la production et 
+la consommation sont séparées. Les pairs mettent directement à disposition des 
+autres participants du réseau une partie de leurs ressources (espace de stockage, 
+CPU, GPU) sans nécessiter une coordination centrale par un serveur. En cela, les 
+pairs ont (en général) les mêmes privilèges et participent de façon équipotentielle 
+dans l’application.
+
 Dans un réseau \gls{P2P}, chaque pair est considéré comme un système à part 
 entière qui contient ses propres problématiques d'implémentation. Avant de 
-présenter la contribution liée à l'intergiciel dans 3DEvent, il est nécessaire 
+présenter la contribution liée à l'intergiciel dans 3DEvent\todo{ref section}, il est 
+nécessaire 
 d'introduire les composants et les fonctions clés qui constituent un pair du point de 
 vue strictement réseau en 
 présentant une vue minimaliste d'un pair dédié au partage de contenu 

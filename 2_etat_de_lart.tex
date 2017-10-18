@@ -682,6 +682,7 @@ Windows \cite{Hogg}.
 
 \subsection{WebRTC : le web hypermedia en P2P}
 \label{sec:webrtc}
+
 Le développement de la communication en \gls{P2P} sur le web a 
 débuté en 2011 avec les premiers brouillons du standard \gls{WebRTC} proposé 
 par le \gls{W3C} et l'\gls{IETF}\textsuperscript{\textregistered}. 
@@ -944,13 +945,13 @@ tous les participants.
 	\subsection{Introduction}
 % old evenements et collaboration
 Les systèmes basés événements sont très populaires lorsqu'il s'agit de 
-collaboration \cite{Helmer2011}. Les événements sont utilisés dans la communauté  
-\gls{CSCW} pour la sensibilation aux activités distribuées \cite{Cai2014a} et 
-également l'analyse de conceptions collaboratives \cite{Bang2017}, la spécification 
-d'événements composites pour le support de la collaboration 
-dans la conception logicielle \cite{Yuan2002} ou encore la définition de patrons 
-de conception dédiés à la collaboration dans les architectures basées événements 
-\cite{Verginadis2009}. Dans ce dernier domaine 
+collaboration \cite{Helmer2011}. Les événements sont utilisés dans la 
+communauté  \gls{CSCW} pour la sensibilation aux activités distribuées 
+\cite{Cai2014a} et également l'analyse de conceptions collaboratives 
+\cite{Bang2017}, la spécification d'événements composites pour le support de la 
+collaboration dans la conception logicielle \cite{Yuan2002} ou encore la définition 
+de patrons de conception dédiés à la collaboration dans les architectures basées 
+événements \cite{Verginadis2009}. Dans ce dernier domaine 
 Papageorgiou et al. \cite{Papageorgiou2011} proposent un assistant à la 
 création de ces patrons dédiés à la collaboration. Ils s'appuient sur un système de 
 recommandation basé sur le contexte qui utilise une représentation sémantique 
@@ -1014,12 +1015,13 @@ d'expressivité et d'utilisabilité, un modèle \gls{PubSub} peut s'appuyer sur 
 \end{itemize}
 En spécifiant d'abord le type et ensuite en filtrant sur les attributs des 
 événements, ce modèle rend le routage des données intuitif pour le 
-développement d'applications distribuées à grande échelle comme le commerce en 
-ligne (\textit{e-commerce}). 
-Scribe \cite{Castro2002} et Hermes \cite{Pietzuch2002} sont des exemples de 
-systèmes \gls{PubSub} basés sur les \glspl{DHT}. 
-Le premier se concentre sur la catégorie du sujet (\textit{topic-based}) tandis que le second 
-supporte à la fois la communication orientée sujet et la communication orientée contenu (\textit{content-based}) en utilisant un 
+développement d'applications distribuées à grande échelle comme le commerce 
+en ligne (\textit{e-commerce}). Scribe \cite{Castro2002} et Hermes 
+\cite{Pietzuch2002} sont des exemples de systèmes \gls{PubSub} basés sur les 
+\glspl{DHT}. 
+Le premier se concentre sur la catégorie du sujet (\textit{topic-based}) tandis que 
+le second supporte à la fois la communication orientée sujet et la communication 
+orientée contenu (\textit{content-based}) en utilisant un 
 filtrage par agrégat. Les deux utilisent un n\oe ud \textit{rendezvous} pour chaque 
 sujet ou type d'événement dans la couche réseau et construisent et maintiennent la 
 distribution à partir de ce n\oe ud \textit{rendezvous}. TERA \cite{Baldoni2007} 
@@ -1066,16 +1068,16 @@ principalement effectué par un routage efficace des événements (comme le
 filtrage d'événements). Seuls quelques travaux ont utilisé le concept de grappe  
 par intérêt (\textit{clustering}) comme moyen de réduire le nombre de 
 notifications d'événement et éviter la surcharge. 
-A partir des années 2000, les 
-systèmes \gls{P2P} ont commencé à émerger avec 
-l'apparition de Gnutella\cite{Ripeanu} et consorts, les \glspl{DHT}
-(Chord, Pastry, Kademlia) et  réseaux non-structurés (Cyclon, Scamp, ADH). 
+A partir des années 2000, les systèmes \gls{P2P} ont commencé à émerger avec 
+l'apparition de Gnutella\cite{Ripeanu} et consorts, les \glspl{DHT} (Chord, Pastry, 
+Kademlia) et  réseaux non-structurés (Cyclon, Scamp, ADH). 
 Ces systèmes ont pour objectif de gérer des réseaux massifs, dynamiques 
 (client gagnés / clients perdus), résistants aux erreurs, et offrants des primitives 
 de communications basiques.
 Les réseaux \gls{P2P} promettent alors des propriétés intéressantes pour les 
-infrastructures logicielles comme les systèmes \gls{PubSub} concernant le passage à 
-l'échelle. Cependant, les systèmes \gls{PubSub} d'alors reposent sur une connaissance 
+infrastructures logicielles comme les systèmes \gls{PubSub} concernant le 
+passage à l'échelle. Cependant, les systèmes \gls{PubSub} d'alors reposent sur 
+une connaissance 
 totale du réseau pour être efficaces, du fait de leur taille limitée. À grande échelle, 
 suivre et collecter l'information de chacun devient complexe. 
 Le modèle \gls{PubSub}, très peu couplé est une approche efficace pour collecter et analyser 
