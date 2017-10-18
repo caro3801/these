@@ -19,34 +19,47 @@ collaborations sont routinières, les motifs de collaboration sont bien connus. 
 motifs consistent en des segments de collaborations récurrents qui peuvent être 
 capturés, encapsulés dans des composants distincts et réutilisés comme des 
 solutions pour d'autres problèmes liés à la collaboration. Par exemple, les services 
-de sensibilisation permettent de traiter les événements et de donner des informations 
-à propos du travail collaboratif. En utilisant les événements suivis, les services 
-d'analyse fournissent des statistiques à propos des collaborations passées et 
-présentes.
+de sensibilisation permettent de traiter les événements et de donner des 
+informations à propos du travail collaboratif. En utilisant les événements suivis, 
+les services d'analyse fournissent des statistiques à propos des collaborations 
+passées et présentes.
 
 
-Un système orienté événements a l'avantage d'être découplé. Dès 
-lors, les données produites lors de la collaboration peuvent facilement être 
-réutilisées pour un traitement secondaire comme la sensibilisation aux éléments 
-de l'environnement. 
-Le découpage de la modélisation logicielle et l'abstraction que le système apporte sont aussi l'occasion de s'intéresser à la façon dont sont générées les données produites par 
-les utilisateurs et la façon dont elles sont affichées. 
+Les \gls{EDA} sont par nature des systèmes très peu couplés. Dès lors, les 
+données produites lors de la collaboration peuvent facilement être réutilisées pour 
+un traitement secondaire comme la sensibilisation aux éléments de 
+l'environnement. 
+Le découpage de la modélisation logicielle et l'abstraction que le système apporte 
+sont aussi l'occasion de s'intéresser à la façon dont sont générées les données 
+produites par les utilisateurs et la façon dont elles sont validées, stockées puis 
+affichées par le système. 
 
 L'\gls{EP} est à la base de nombreuses applications informatiques dans les domaines de l'énergie, la santé, l'environnement, les transports, la finance, les services et l'industrie. L'\gls{EP} réunit des méthodes et des outils 
 pour filtrer, transformer et détecter des motifs dans des événements, dans le but 
 de réagir à des conditions qui changent, généralement liées à des contraintes de 
 temps \cite{Chandy2011}. L'\gls{EP} intègre plusieurs fonctionnalités pour :
 \begin{itemize}
-	\item obtenir des données à partir de plusieurs sources en temps (quasi) réel ;
+	\item obtenir des données à partir de plusieurs sources en quasi temps réel ;
 	\item agréger et analyser ces données pour détecter des motifs qui indiquent la 
 	présence de situations critiques qui nécessitent une réponse ;
 	\item déterminer la réponse la plus adaptée à ces situations ;
 	\item et surveiller (\textit{monitor}) l'exécution de cette réponse.
 \end{itemize}
 
-Le panorama d'applications et de technologies, proposé par \cite{Hinze2009},
-permet de définir les termes et les interprétations communes à différents 
-domaines se basant sur le paradigme de l'\gls{EP}. 
+L'\gls{EP} est devenu un paradigme de choix pour les applications proposant des 
+outils de surveillance et des applications réactives \cite{Hinze2009}. La 
+compréhension des événements à travers leur composition, leur abstraction, leur 
+type de traitement et la qualité de service offre un large panorama de domaines 
+d'applications et de technologies possibles. 
+
+C'est pourquoi il est nécessaire de définir un cadre à la modélisation 
+événementielle : une spécification générique des événements, la définition des 
+événements propres à la modélisation 3D collaborative. 
+La validation des règles métiers doit également être introduite dans 
+le processus de traitement des événements. La visualisation des événements doit 
+être assez flexible pour gérer l'arriver des flux d'événements produits ou issus 
+de l'intergiciel \gls{P2P} orienté messages (type \gls{PubSub}) par lequel les 
+pairs se transmettent les notifications d'événement.
 
 
 
@@ -218,12 +231,14 @@ présente les événements de l'agrégat Maillage -- extrait du Tableau
 différents types d'événements de base construits à partir du \gls{framework} et les 
 agrégats auxquels ils sont associés. Parmi ces événements, l'événement 
 \textit{meshAdded} et \textit{meshDropped} semblent très proches, voire 
-identiques quant au résultat que l'utilisateur peut obtenir. Pour \textit{meshAdded}, 
-l'utilisateur va, en cliquant sur l'item de la bibliothèque, voir apparaître 
-un maillage au centre de la scène. Concernant \textit{meshDropped}, 
+identiques quant au résultat que l'utilisateur peut obtenir. Cependant, la 
+sémantique liée à chacun permet de différencier l'intention de l'utilisateur. 
+Pour \textit{meshAdded}, l'utilisateur va, en cliquant sur l'item de la bibliothèque, 
+voir apparaître un maillage au centre de la scène. 
+Concernant \textit{meshDropped}, 
 l'utilisateur effectue un glissé / déposé de l'objet depuis la bibliothèque 
 à l'endroit dans l'environnement 3D où il souhaite que l'objet soit positionné.
-Cependant, la sémantique liée à chacun permet de différencier l'intention de l'utilisateur. 
+
 
 
 \begin{table}[ht]
@@ -238,23 +253,23 @@ Cependant, la sémantique liée à chacun permet de différencier l'intention de
 		Maillage ajouté (*)&     meshAdded                 
 		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
 			partir d'une géométrie\\ de la 
-			bibliothèque \end{tabular}  \\
+			bibliothèque \end{tabular}  \\\hline
 		Maillage déposé (*) &     meshDropped               
 		&      \begin{tabular}[c]{@{}l@{}} Un maillage a été déposé dans 
 			\\l'env. 3D de la Scène à 
-			partir \\d'une géométrie de la bibliothèque \end{tabular} \\
+			partir \\d'une géométrie de la bibliothèque \end{tabular} \\\hline
 		Maillage supprimé & meshRemoved       &        \begin{tabular}[c]{@{}l@{}} 
 			Un maillage a été 
-			supprimé \\de la Scène \end{tabular}      \\
+			supprimé \\de la Scène \end{tabular}      \\\hline
 		Maillage translaté &   meshTranslated  	 &    \begin{tabular}[c]{@{}l@{}} Un 
 			maillage a 
-			subi une translation \\dans la Scène \end{tabular}              \\
+			subi une translation \\dans la Scène \end{tabular}              \\\hline
 		Maillage pivoté &      meshRotated                &    
 		\begin{tabular}[c]{@{}l@{}} Un maillage a 
-			subi une rotation \\dans la Scène \end{tabular}           \\
+			subi une rotation \\dans la Scène \end{tabular}           \\\hline
 		Maillage mis à l'échelle &  meshScaled           &     
 		\begin{tabular}[c]{@{}l@{}} Un maillage a 
-			subi une homothétie    \\dans la Scène \end{tabular}    \\ 
+			subi une homothétie    \\dans la Scène \end{tabular}    \\ \hline
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -350,12 +365,12 @@ les applications :
 	L'état interne dérivé à partir des événements consommés est un modèle 
 	d'écriture 
 	en mémoire (\textit{in-memory}) et contribue à la partie commande (C) du 
-	CQRS\info{reference à la section}.
+	\gls{CQRS}\info{reference à la section}.
 	\item \textit{Vue.} Une vue est un acteur qui ne fait que consommer des 
 	événements à 
 	partir du journal d'événements. L'état interne dérivé à partir des événements 
 	consommés est un modèle de lecture en mémoire et contribue à la partie 
-	requête (Q) du CQRS\info{reference à la section}.
+	requête (Q) du \gls{CQRS}\info{reference à la section}.
 	\item \textit{Producteur.} Un producteur est un acteur qui produit des 
 	événements à partir du journal d'événements pour mettre à jour la base 
 	de données. L'état interne dérivé à partir des événements consommés est 

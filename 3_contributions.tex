@@ -2,47 +2,49 @@
 \chapter{Contributions}
 \chaptertable
 \section{Introduction}
-Les \gls{EVC3D} doivent considérer beaucoup de critères pour 
-proposer un système réactif, robuste et permettant le passage à l'échelle en 
-intégrant les contraintes liées à la gestion de données \gls{3D}. La dimension 
-collaborative ajoute les problématiques de gestion de données concurrentes.
-S'intéresser d'abord aux spécificités liées à 
-l'assemblage d'objets \gls{3D} dans une scène partagée permet de 
-mieux comprendre les fonctionnalités spécifiques à la \gls{3D} (transformations), 
-à l'historisation et à la visualisation des données. De plus, les données générées
-doivent suivre un flux de validation avant d'être intégrées totalement au système.
+Les \gls{EVC3D} doivent considérer beaucoup de critères pour proposer un 
+système réactif, robuste et permettant le passage à l'échelle en intégrant les 
+contraintes liées à la gestion de données \gls{3D}. La dimension collaborative 
+ajoute les problématiques de gestion de données concurrentes.
+S'intéresser d'abord aux spécificités liées à l'assemblage d'objets \gls{3D} dans 
+une scène partagée permet de mieux comprendre les fonctionnalités spécifiques à 
+la \gls{3D} (transformations), à l'historique et à la visualisation des données. 
+De plus, les données générées doivent suivre un flux de validation avant d'être 
+intégrées totalement au système.
 Les ressources nécessaires à la collaboration demandent une haute disponibilité 
 et une forte réactivité qui implique la modélisation d'une architecture 
 de communication répondant aux contraintes fonctionnelles (détection de conflit) 
 et technologiques (web).
 
 Ce chapitre détaille les contributions scientifiques de cette thèse.
-Tout d'abord, il présente le modèle orienté événements pour la 
-visualisation et la manipulation d'objets \gls{3D} dans un environnement web. 
+Tout d'abord, il présente le modèle orienté événements pour la visualisation et la 
+manipulation d'objets \gls{3D} dans un environnement web. 
 Cette première contribution insiste sur l'intégration de la partie métier de la 
-\gls{3D} par l'utilisation de
-patrons de conception (\gls{DDD}, \gls{CQRS}, \gls{ES}). La réflexion concernant 
-le découpage des opérations \gls{3D} liées à la manipulation d'objets \gls{3D} est 
-d'abord expliquée ; puis, pour procurer plus d'autonomie 
-aux utilisateurs, la contribution intègre le fait de déporter le patron \gls{CQRS} 
-uniquement sur le client afin qu'il soit capable de gérer la partie métier seul. 
-La valeur ajoutée par le modèle orienté événements est l'intégration des aspects métiers de la modélisation 3D des actions des utilisateurs à la visualisation. 
+\gls{3D} par l'utilisation des patrons de conception \gls{DDD}, \gls{CQRS} et 
+\gls{ES}. 
+La réflexion concernant le découpage des opérations \gls{3D} liées à la 
+manipulation d'objets \gls{3D} est d'abord expliquée ; puis, pour procurer plus 
+d'autonomie aux utilisateurs, la contribution intègre le fait de déporter le patron 
+\gls{CQRS} uniquement sur le client afin qu'il soit capable de gérer la partie métier 
+seul. La valeur ajoutée par le modèle orienté événements est l'intégration des 
+aspects métiers de la modélisation 3D des actions des utilisateurs à la 
+visualisation. 
 
 La seconde contribution de cette thèse concerne l'architecture de 
-communication dans un environnement web. Celle-ci doit 
-permettre au système d'être résilient, léger et transparent. 
+communication dans un environnement web. Celle-ci doit permettre au système 
+d'être résilient, léger et transparent. 
 L'architecture hybride proposée repose sur une combinaison de l'architecture 
 client-serveur et l'architecture \gls{P2P}. 
-Cela tient à la nécessaire centralisation de l'information dans un 
-contexte industriel et à la haute disponibilité des ressources que permettent les
-propriétés du \gls{P2P}. Cette contribution est découpée en deux parties. La 
-première expose une preuve de concept, sur la base du modèle présenté 
-dans \cite{Desprat2015a}, avec une architecture de communication simple 
-proposant une diffusion des mises à jour par différentiel d'état. La seconde partie 
+Cela tient à la nécessaire centralisation de l'information dans un contexte industriel 
+et à la haute disponibilité des ressources que permettent les propriétés du 
+\gls{P2P}. Cette contribution est découpée en deux parties. 
+
+La première expose une preuve de concept, sur la base du modèle présenté dans 
+\cite{Desprat2015a}, avec une architecture de communication simple proposant 
+une diffusion des mises à jour par différentiel d'état. La seconde partie 
 tire avantage de la mise en place du \gls{framework} orienté événements présenté 
-dans 
-\cite{Desprat2016} et utilise la méthode de distribution des informations présenté 
-dans \cite{Desprat2017} pour améliorer la résilience du système. 
+dans \cite{Desprat2016} et utilise la méthode de distribution des informations 
+présenté dans \cite{Desprat2017} pour améliorer la résilience du système. 
 
 %%%%%%% SECTION %%%%%%%
 %\section{Modèle événementiel pour l'intégration du domaine 3D lors de la 
@@ -57,9 +59,11 @@ dans \cite{Desprat2017} pour améliorer la résilience du système.
 
 
 \section{Conclusion du chapitre}
-Dans ce chapitre, nous avons étudié les différents composants de l'architecture de 
-communication pour la réalisation d'un \gls{EVC3D}. En mettant en avant la 
-technologie WebRTC, nous avons montré qu'il était possible de réaliser une 
+Dans ce chapitre, sont décrites les contributions théoriques de la thèse. 
+Les différents 
+composants de l'architecture de 
+communication pour la réalisation d'un \gls{EVC3D} sont exposés dans la seconde 
+partie. L'utilisation de la technologie WebRTC permet de proposer une 
 architecture qui respecte les standards du web et l'interopérabilité nécessaire aux \glspl{EVC3D}. La mise en place d'une architecture décentralisée dans un 
 environnement distribué permet de mettre à contribution tous les acteurs de la 
 collaboration. De ce fait, l'accessibilité des ressources est renforcée par la 
