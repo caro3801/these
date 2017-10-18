@@ -1379,13 +1379,17 @@ insiste sur le fait que \og l'état du modèle du domain est persisté comme un
 	
 	\begin{figure}[t]
 		\centering
-		
-		\subfloat[Sans la notion de Snapshot]{
-			\includegraphics[width=0.4\textwidth]{without-snapshot.eps}
-			\label{fig:es-without-snapshot}
+				\subfloat[Lecture normale d'un agrégat]{
+			\includegraphics[width=0.5\textwidth]{eps/tikz/streams/aggregate-normal.pdf}
+			\label{fig:es-without-snapshot-aggregate}
 		}
-		\subfloat[Avec la notion de Snapshot]{
-			\includegraphics[width=0.4\textwidth]{snapshot.eps}
+		
+		\subfloat[Reconstruction sans la notion de Snapshot]{
+			\includegraphics[width=0.45\textwidth]{eps/tikz/streams/snapshot-no.pdf}
+			\label{fig:es-without-snapshot}
+		}\hfill
+		\subfloat[Reconstruction avec la notion de Snapshot]{
+			\includegraphics[width=0.45\textwidth]{eps/tikz/streams/snapshot-yes.pdf}
 			\label{fig:es-snapshot}
 		}
 		\caption{Snapshot en \gls{ES}}
@@ -1451,14 +1455,15 @@ l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Stor
 nécessaire de le calculer à partir des événements reçus.
 A chaque événement créé (et stocké), ce processus sera alourdi car ils ne 
 peuvent être supprimés. Plus la pile d'événements est longue, plus cela prend 
-du temps (linéaire), considérant que les commandes ont parfois besoin de connaître une
-partie de l'état courant issu de ces événements pour être déclenchées.
+du temps (linéaire), considérant que les commandes ont parfois besoin de 
+connaître une partie de l'état courant issu de ces événements pour être 
+déclenchées (Figure \ref{fig:es-without-snapshot-aggregate}).
  
 Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
-moment qui correspond à l'empilement d'événements ayant mené à cet état. En 
-créant un \gls{snapshot}, on évite de reconstruire un état à partir du début de la 
-vie de l'agrégat (Figure \ref{fig:es-without-snapshot}) ; on empile les nouveaux 
-événements à partir de ce snapshot (Figure \ref{fig:es-snapshot}). 
+moment qui correspond à l'empilement d'événements ayant mené à cet état. Créer 
+un \gls{snapshot} évite de reconstruire un état à partir du début de la 
+vie de l'agrégat (Figure \ref{fig:es-without-snapshot}) ; les nouveaux 
+événements sont empilés à partir de ce snapshot (Figure \ref{fig:es-snapshot}). 
 L'utilisation du \gls{snapshot} est intéressante à partir du moment où la pile 
 d'événements devient plus lourde que le \gls{snapshot} lui-même. Il est donc 
 important de bien déterminer la périodicité du déclenchement du \gls{snapshot} 

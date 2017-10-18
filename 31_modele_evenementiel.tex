@@ -389,9 +389,11 @@ les applications :
 
 Les événements produits par un des composants présenté ci-dessus
 peuvent être consommés par d'autres de ces composants s'ils partagent un 
-journal d'événements local ou distribué. Un journal d'événements peut 
-fonctionner sur un seul site ou être répliqué 
-sur plusieurs sites. 
+journal d'événements local ou distribué. Un journal d'événements (ou Event Store) 
+est composé d'agrégats versionnés qui contiennent les instances d'événements 
+(Figure \ref{fig:event-store}).
+Un journal d'événements peut fonctionner sur un seul site ou être répliqué sur 
+plusieurs sites. 
 Le site est considéré comme une zone disponible qui accepte 
 l'écriture d'un journal d'événements local, même s'il est partitionné sur plusieurs 
 sites. Les journaux d'événements locaux, situés sur plusieurs sites, peuvent être 
@@ -399,6 +401,13 @@ connectés par le biais d'un journal d'événements dit \og répliqué\fg{} (cop
 autre réplique), qui a pour responsabilité de préserver l'ordre causal des 
 événements.
 %\todo{dessin des journaux}  
+\begin{figure}
+	\centering
+	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
+	\caption{Représentation d'un Event Store stockant des agrégats versionnés qui 
+	contiennent des instances d'événements}
+	\label{fig:event-store}
+\end{figure}
 Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}), ou encore être sur le 
 même nœud mais traités séparément selon les zones 
