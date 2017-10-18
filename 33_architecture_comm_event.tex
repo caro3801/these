@@ -174,15 +174,15 @@ le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme
 	%give the algorithm a caption
 	\label{algo:saveEvent} % and a label for \ref{} commands later in the document
 	\begin{algorithmic} % enter the algorithmic environment
-		\REQUIRE aggregateId : string, uncommitedEvents : eventMsg[ ], 
+		\Require aggregateId : string, uncommitedEvents : eventMsg[ ], 
 		version : number
-		%\ENSURE $y = x^n$
-		\STATE $expectedVersion \Leftarrow version$
-		\FOR{$eventMsg $ \textbf{in} $uncommitedEvents$}	
-		\STATE{$newMsg \Leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
+		%\Ensure $y = x^n$
+		\State $expectedVersion \Leftarrow version$
+		\For{$eventMsg $ \textbf{in} $uncommitedEvents$}	
+		\State{$newMsg \Leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
 			streamId : aggregateId\}$}
-		\STATE{$publish(aggregateId, newMsg, expectedVersion++)$}
-		\ENDFOR
+		\State{$publish(aggregateId, newMsg, expectedVersion++)$}
+		\EndFor
 	\end{algorithmic}
 \end{algorithm}
 \todo{parler de cet algo}
@@ -191,13 +191,13 @@ le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme
 	%give the algorithm a caption
 	\label{algo:addevent} % and a label for \ref{} commands later in the document
 	\begin{algorithmic} % enter the algorithmic environment
-		\REQUIRE streamId: string, event: EventStoreEvent, version: number
-		\ENSURE event
-		\STATE $stream \Leftarrow streams.getOrCreate(streamId);$
-		\IF{$ stream.has(version)$}
-		\STATE $throwExceptionVersion(stream,version)$
-		\ENDIF
-		\STATE $stream.data.set(version,event) $
+		\Require streamId: string, event: EventStoreEvent, version: number
+		\Ensure event
+		\State $stream \Leftarrow streams.getOrCreate(streamId);$
+		\If{$ stream.has(version)$}
+		\State $throwExceptionVersion(stream,version)$
+		\EndIf
+		\State $stream.data.set(version,event) $
 	\end{algorithmic}
 \end{algorithm}
 
@@ -215,24 +215,24 @@ le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme
 	%give the algorithm a caption
 	\label{algo:synchnode} % and a label for \ref{} commands later in the document
 	\begin{algorithmic} % enter the algorithmic environment
-		\REQUIRE $node : ClusterNode$
-		\ENSURE $nodeState == synchronized$
-		\STATE $nodeMetadata \Leftarrow node.getMetadata()$
-		\IF{$nodeMetadata != \{\} $}
-		\STATE $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
-		\WHILE{$streamsToSync > 0$}
-		\STATE $streamToSync \Leftarrow streamsToSync.pop()$
-		\STATE $events \Leftarrow  node.getEvents(streamToSync)$
-		\IF{$! streamToSync.has(version)$}
-		\FOR {$event$ \textbf{in} $events$}
-		\STATE $processEvent(event.streamName, event, 
+		\Require $node : ClusterNode$
+		\Ensure $nodeState == synchronized$
+		\State $nodeMetadata \Leftarrow node.getMetadata()$
+		\If{$nodeMetadata != \{\} $}
+		\State $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
+		\While{$streamsToSync > 0$}
+		\State $streamToSync \Leftarrow streamsToSync.pop()$
+		\State $events \Leftarrow  node.getEvents(streamToSync)$
+		\If{$! streamToSync.has(version)$}
+		\For {$event$ \textbf{in} $events$}
+		\State $processEvent(event.streamName, event, 
 		event.version)$
-		\ENDFOR 
-		\ENDIF
-		\STATE $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
-		\ENDWHILE
-		\ENDIF
-		\STATE $node.endSync()$
+		\EndFor 
+		\EndIf
+		\State $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
+		\EndWhile
+		\EndIf
+		\State $node.endSync()$
 	\end{algorithmic}
 \end{algorithm}
 

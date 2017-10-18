@@ -165,8 +165,11 @@ client possède une réplique locale.
 %directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
 %\todo{reprendre 
 %la partie virtualisation dans la partie P2P}
-La mise en place d'une \gls{EDA} pour faire de la modélisation \gls{3D} engendre des 
-avantages pour tous les métiers engagés (utilisateurs, développeurs, analystes métier).
+
+
+La mise en place d'une \gls{EDA} pour faire de la modélisation \gls{3D} engendre 
+des avantages pour tous les métiers engagés (utilisateurs, développeurs, 
+analystes métier).
 D'une part, la sensibilisation à l'historique des données et aux interactions 
 inter-utilisateurs est partagée par les collaborateurs et les analystes métier. 
 Les utilisateurs sont mieux informés de l'impact de leurs modifications et 
@@ -178,19 +181,20 @@ prenantes du réseau.
 
 Dans 3DEvent, le langage partagé se réfère au domaine de la manipulation 
 d'objets \gls{3D}, mais aussi à celui de la collaboration. Par exemple, le terme 
-de 
-maillage peut se référer à la fois au maillage géométrique ou bien au maillage de 
-l'architecture réseau, d'où l'importance de définir les différents contextes en amont. 
+de maillage peut se référer à la fois au maillage géométrique ou bien au maillage 
+de l'architecture réseau, d'où l'importance de définir les différents contextes en 
+amont. 
 Notons que le contexte de l'application peut faire varier les frontières d'un 
-domaine. Le modèle issu du domaine défini permet de mettre en valeur les 
+domaine. Dans cette thèse le contexte est l'assemblage d'objets 3D dans une 
+scène 3D. Le modèle issu du domaine défini permet de mettre en valeur les 
 aspects métiers liés à l'application.
 
 \subsubsection{Spécification des événements dans le framework}
-Le \gls{framework} étant orienté événements, cette section de thèse introduit la 
-représentation et 
-le vocabulaire utilisé dans la description des événements de 3DEvent. 3DEvent 
-reprend la représentation proposée par Tominski \cite{Doktor-ingenieur2006} 
-illustrée par la Figure \ref{fig:representation_event}, et adapte ses propriétés pour 
+Le \gls{framework} étant orienté événements, cette section introduit la 
+représentation et le vocabulaire utilisé dans la description des événements de 
+3DEvent. 3DEvent reprend la représentation proposée par Tominski 
+\cite{Doktor-ingenieur2006} illustrée par la Figure \ref{fig:representation_event}. 
+Une partie de la contribution est d'adapter les propriétés de cette spécification pour 
 la modélisation \gls{3D} collaborative (visualisation et manipulation). 
 
 \begin{figure}[ht]
@@ -203,8 +207,8 @@ la modélisation \gls{3D} collaborative (visualisation et manipulation).
 
 Pour décrire le cadre de référence dans lequel les événements se produisent, la 
 notion de domaines d'événements est introduite. Un domaine d'événements 
-\textit{ED} (\textit{Event Domain}) contient les événements qui respectent les types 
-d'événements spécifiés. Par analogie avec le \gls{DDD}, cet 
+\textit{ED} (\textit{Event Domain}) contient les événements qui respectent les 
+types d'événements spécifiés. Par analogie avec le \gls{DDD}, cet 
 espace correspond au contexte borné (cadre d'action) d'un agrégat. À un agrégat, 
 sont associés des types d'événements \textit{ET} (\textit{Event Type}) particuliers. 
 Un \textit{ET} est utilisé pour exprimer un intérêt concret envers les entités d'un 
@@ -221,23 +225,22 @@ s'intéresser à tous les types d'événements qui sont utilisés lors de la man
 et la visualisation d'objets \gls{3D} dans un \gls{EVC}. La détection d'événements 
 est un processus qui permet de récupérer les instances d'événements d'un 
 \textit{ET} en particulier. Cela peut être utilisé pour la visualisation de types
-particuliers par exemple. Dans 3DEvent, la spécification des événements est calquée 
-sur les comportements observés lors des expérimentations des premiers travaux 
-\cite{Desprat2015a, Desprat2015b}. 
+particuliers par exemple. Dans 3DEvent, la spécification des événements est 
+calquée sur les comportements observés lors des expérimentations des premiers 
+travaux \cite{Desprat2015a, Desprat2015b}. 
 
-Le Tableau \ref{tab:extraitevent}
-présente les événements de l'agrégat Maillage -- extrait du Tableau 
-\ref{tab:events} qui résume les 
-différents types d'événements de base construits à partir du \gls{framework} et les 
-agrégats auxquels ils sont associés. Parmi ces événements, l'événement 
+Le Tableau \ref{tab:extraitevent} présente les événements de l'agrégat Maillage -- 
+extrait du Tableau \ref{tab:events} qui résume les différents types d'événements 
+de base construits à partir du \gls{framework} et les agrégats auxquels ils sont 
+associés. Parmi ces événements, l'événement 
 \textit{meshAdded} et \textit{meshDropped} semblent très proches, voire 
 identiques quant au résultat que l'utilisateur peut obtenir. Cependant, la 
 sémantique liée à chacun permet de différencier l'intention de l'utilisateur. 
 Pour \textit{meshAdded}, l'utilisateur va, en cliquant sur l'item de la bibliothèque, 
 voir apparaître un maillage au centre de la scène. 
-Concernant \textit{meshDropped}, 
-l'utilisateur effectue un glissé / déposé de l'objet depuis la bibliothèque 
-à l'endroit dans l'environnement 3D où il souhaite que l'objet soit positionné.
+Concernant \textit{meshDropped}, l'utilisateur effectue un glissé / déposé de l'objet 
+depuis la bibliothèque à l'endroit dans l'environnement 3D où il souhaite que l'objet 
+soit positionné.
 
 
 
@@ -294,9 +297,6 @@ d'événements au plus proche des besoins des utilisateurs dans une application 
 modélisation \gls{3D} collaborative (appuyant la sémantique des manipulations).
 
 
-
-
-
 \subsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
 %TODO celle de la validation des 
 %commandes
@@ -322,8 +322,7 @@ inclus dans l'\gls{IU}) récupère les \glspl{DTO}
 contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
 se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
 visualisation \gls{3D} des modifications des collaborateurs en temps réel) ou 
-active -- 
-mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
+active -- mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
 
 \begin{figure}[h]
 	\centering
@@ -400,7 +399,7 @@ sites. Les journaux d'événements locaux, situés sur plusieurs sites, peuvent 
 connectés par le biais d'un journal d'événements dit \og répliqué\fg{} (copié sur une 
 autre réplique), qui a pour responsabilité de préserver l'ordre causal des 
 événements.
-%\todo{dessin des journaux}  
+
 \begin{figure}
 	\centering
 	\inputTikZ{0.9}{eps/tikz/streams/aggregate.tex}
@@ -408,6 +407,7 @@ autre réplique), qui a pour responsabilité de préserver l'ordre causal des
 	contiennent des instances d'événements}
 	\label{fig:event-store}
 \end{figure}
+
 Les sites peuvent être situés à des endroits géographiquement distincts ou sur 
 des nœuds à l'intérieur d'une même grappe (\textit{cluster}), ou encore être sur le 
 même nœud mais traités séparément selon les zones 
@@ -488,7 +488,6 @@ Les journaux répliqués fournissent l'ordre causal des événements stockés : 
 de stockage est le même sur tous les sites, ce qui veut dire que les 
 consommateurs qui lisent les événements du journal local vont toujours voir les 
 effets avant leurs causes.
-
 \subsection{Flexibilité de la visualisation}
 \label{sec:flexviz}
 Dans l'approche \gls{CQRS}, une projection est définie comme une dérivation de 
@@ -551,8 +550,8 @@ L'ordonnancement des événements durant les mises à jour reste identique lorsq
 les événements sont rejoués par la suite car l'ordre issu de l'\gls{ES} est 
 déterminé par l'ordonnancement des événements stockés 
 localement. Au sein d'une réplique, tous les composants \gls{CQRS} respectent 
-cet ordonnancement. Les répliques distantes du journal d'événements sont cohérentes 
-si les évènements respecte l'ordre causale \cite{Lamport1978} : les 
+cet ordonnancement. Les répliques distantes du journal d'événements sont 
+cohérentes si les évènements respecte l'ordre causale \cite{Lamport1978} : les 
 événements liés causalement ont le même ordre sur tous les sites, alors que les 
 événements concurrents peuvent avoir un ordre différent. Cette propriété est 
 importante pour obtenir une cohérence causale forte dans une application qui 
@@ -576,13 +575,55 @@ l'asynchronisme se justifie pour être capable de fournir une explication à
 l'utilisateur en cas d'erreur. 
 La probabilité d'échec peut être réduite en pré-validant la commande. Si personne 
 d'autre que l'utilisateur ne travaille sur l'agrégat, la probabilité d'échec est 
-quasi-nulle. De ce 
-fait, l'asynchronicité rajoute une interaction inutile au flux dans le cas où peu de 
-gens travaillent sur la même instance d'agrégat.
-Par exemple, il est intéressant de rendre l'exécution d'une 
-commande synchrone et la mise à jour de la vue asynchrone. 
+quasi-nulle. 
+De ce fait, l'asynchronicité rajoute une interaction inutile au flux dans le cas où 
+peu de gens travaillent sur la même instance d'agrégat.
+Par exemple, il est intéressant de rendre l'exécution d'une commande synchrone 
+et la mise à jour de la vue asynchrone. 
 Les modèles de cohérence sont des décisions liées au métier car ils ont un 
 impact direct sur l'expérience utilisateur. 
+
+
+
+L'\gls{ES} donne la possibilité de gérer les conflits liés à la concurrence avec une 
+fine granularité. Selon le scenario suivant par exemple $UserA$ a effectué une 
+une translation $MeshTrans\-latedEvent$ sur le maillage 
+$mesh1$ lorsque $UserB$ a effectué une rotation $MeshRotatedEvent$ sur ce 
+même objet. Lorsque les événements sont sauvegardés, la version de l'agrégat 
+$mesh1$ est différente chez chacun des deux utilisateurs (un numéro derrière ce 
+qu'il devrait être). Le module détecteur de conflits est peut contenir un dictionnaire 
+des procédures à suivre en fonction des événements qu'il déclare en conflit en de 
+levant une exception d'après cette situation. L'algorithme \ref{algo:conflictregister} 
+présente la fonction utilisée pour détecter des conflits entre plusieurs types 
+d'événements. Le registre contient la liste des événements avec lequel un 
+événement peut provoquer un conflit. La fonction permet de savoir si un conflit est 
+levé à partir de la liste d'événements donnée et du registre des conflits.
+
+\begin{algorithm} % enter the algorithm environment
+	\caption{Registre de conflits} % 
+	%give the algorithm a caption
+	\label{algo:conflictregister} % and a label for \ref{} commands later in the 
+	%document
+	\begin{algorithmic} % enter the algorithmic environment
+		
+		\Require $eventToCheck \leftarrow$ list of events to check conflict with\\
+		$conflictRegister \leftarrow  Dictionary<Type, List<Type>>$
+		\Ensure return true if a conflict is raised
+		\Function{ConflictsWith}{$eventToCheck:Type,  previousEvents:List<Type>$}
+		%// If type not registered assume the worst and say it conflicts
+		\If{$eventToCheck \in conflictRegister}$
+		\For{$et \in  previousEvent$}
+		\If {$conflictRegister[eventToCheck] == et$}
+		\State \Return $true$
+		\EndIf
+		\EndFor
+		\EndIf
+		\State \Return $false$
+		\EndFunction
+	\end{algorithmic}
+	
+\end{algorithm}
+
 
 %Linéaire (strong consistency)
 %one version replace another -- one parent and one children in the sequence
