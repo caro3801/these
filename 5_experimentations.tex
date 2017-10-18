@@ -6,32 +6,37 @@ d'objets 3D}
 \section{Cas d'étude : Assemblage collaboratif d'objets 3D dans un 
 environnement web}
 \label{sec:use_case}
-Comme nous l'avons vu dans le cadre de la modélisation \gls{3D} collaborative, il existe plusieurs types 
-d'application (\gls{CAO} collaborative, \gls{BIM} \dots). 
+Comme nous l'avons vu dans le cadre de la modélisation \gls{3D} collaborative, il 
+existe plusieurs types d'applications (\gls{CAO} collaborative, \gls{BIM} \dots). 
 Ces domaines d'activité ont un point commun : les fonctionnalités de 
 modélisation \gls{3D} récurrentes sont celles permettant l'assemblage d'objets 
-\gls{3D} de manière collaborative. Dans la mise en situation, les utilisateurs ont déjà une 
-modélisation précise de leur modèle,  
-réalisée par exemple à l'aide de logiciels dédiés. L'utilisateur est responsable de fournir un 
-modèle compatible avec le prototype, notamment concernant le format et la taille 
-du fichier et la sécurité du modèle qu'il partage (tatouage et droits d'accès). Le cas d'étude 
-présente la mise en commun de ces objets pré-conçus dans un environnement 
-web.
+\gls{3D} de manière collaborative. Cette section présente le cas d'étude des 
+expérimentations de cette thèse. Dans la mise en situation, les utilisateurs ont 
+déjà une modélisation précise de leur modèle,  
+réalisée par exemple à l'aide de logiciels dédiés. L'utilisateur est responsable de 
+fournir un modèle compatible avec le prototype, notamment concernant le format 
+et la taille du fichier et la sécurité du modèle qu'il partage (tatouage et droits 
+d'accès). Le cas d'étude présente la mise en commun de ces objets pré-conçus 
+dans un environnement web.
 
 L'\textbf{expérimentation 1} concerne les travaux réalisés dans 
 \cite{Desprat2015a} 
-et \cite{Desprat2015b}. J'utilise le prototype décrit dans la Section \todo{ref 
-section} et je démontre la faisabilité concernant l'architecture 
+et \cite{Desprat2015b}. Le prototype 3DState, sur lequel est effectué cette 
+expérimentation, est décrit dans la Section \ref{sec:3DState}. L'expérimentation 
+s'intéresse à la faisabilité concernant l'architecture 
 de communication décrite dans la section \ref{sec:comm_state}. 
 
  
 L'\textbf{expérimentation 2} concerne les travaux réalisés dans 
 \cite{Desprat2016} et 
-\cite{Desprat2017}. J' utilise le prototype décrit dans la Section \todo{ref section} 
-et je démontre l'intérêt auprès des utilisateurs d'une \gls{EDA} pour la 
-visualisation et la manipulation d'objets \gls{3D} reposant sur le modèle 
-événementiel présenté dans la section \ref{sec:modele_event}, ainsi que l'architecture de 
-communication décrite dans la section \ref{sec:comm_event}.
+\cite{Desprat2017}. Le prototype 3DEvent, sur lequel est effectué cette 
+expérimentation, est décrit dans la Section \ref{sec:3DEvent}. L'expérimentation 
+s'intéresse à démontrer l'intérêt d'utiliser une \gls{EDA} dans le cadre de la 
+collaboration 3D pour la visualisation et la manipulation d'objets \gls{3D} : pour les 
+utilisateurs qui ont accès à une interface dédiée aux tâches à effectuer, pour les 
+expérimentateurs qui peuvent analyser les interactions métier facilement et pour 
+les performances de l'application qui repose sur un système lâchement couplé, 
+où chaque composant concentrent ses efforts sur une tâche précise et isolée. 
 
 Globalement, les objectifs des travaux de cette thèse soulignent plusieurs aspects relatifs à la fiabilité 
 du modèle et à son implantation de deux manières: 
@@ -46,20 +51,23 @@ Les deux expérimentations présentées ont en commun de proposer une enquête
 utilisateur sur l'usage de leur prototype respectif. Le cas d'étude regroupe les 
 résultats des enquêtes utilisateurs menées sur la praticité de l'interface, la réactivité du système et la cohérence des scènes manipulées lors des essais de collaboration. 
 Il est également fait référence à l'impact de l'architecture de communication 
-sur l'expérience utilisateur 
-: est-ce transparent pour l'utilisateur ? adapté ? plus efficace que l'architecture de l'expérimentation 1 ?
+sur l'expérience utilisateur : la collaboration d'un point de vue réseau, était-elle 
+transparente pour l'utilisateur ? adaptée ? plus efficace qu'avec l'architecture de 
+l'expérimentation 1 ?
 
 
 
 
 \section{Expérimentation 1 : preuve de faisabilité}
-
-Les travaux de Desprat et al. \cite{Desprat2015a, Desprat2015b} présentent 
-une preuve de faisabilité concernant l'architecture de communication dans une application d'assemblage d'objets 3D : qu'apporte une architecture hybride à la collaboration temps réel ? Est-il 
-possible techniquement de réaliser une 
+Cette expérimentation s'inspire du cas d'étude présenté dans la section 
+précédente pour proposer l'évaluation du prototype 3DState (Section 
+\ref{sec:3DState}). L'expérimentation est une étude utilisateur qui a pour objectif 
+d'évaluer l'utilisabilité de l'architecture de communication \og orientée états\fg{} 
+dans une application d'assemblage d'objets 3D collaborative : qu'apporte une 
+architecture hybride à la 
+collaboration temps réel ? Est-il possible techniquement de réaliser une 
 architecture pour l'échange de ressources \gls{3D} de manière fiable et 
-efficace 
-uniquement avec des technologies web ? Quels sont les apports pour la 
+efficace uniquement avec des technologies web ? Quels sont les apports pour la 
 collaboration, les utilisateurs et la réalisation de la tâche?
 Un des objectifs de cette expérimentation est de démontrer la faisabilité de notre 
 approche réseau hybride, avec une attention particulière à l'égard de l'expérience 
@@ -72,13 +80,15 @@ utilisateur.
 
 Le cas d'étude présenté dans la section \ref{sec:use_case} est à nouveau utilisé 
 dans le cadre de l'expérimentation 2 : plusieurs 
-participants sont réunis dans l'environnement collaboratif pour assembler différentes parties d'un modèle. Ces travaux sont réalisés sur la base des 
-contributions liées aux \gls{EDA} présentées dans cette thèse \todo{ref section event}: 
-quels sont les 
-apports d'un \gls{EDA} pour les utilisateurs? quelles informations pouvons-nous 
-extraire de la collaboration grâce aux événements? est-ce que l'architecture de 
-communication est adaptée aux échanges (format, fréquence, résilience, 
-robustesse)? 
+participants sont réunis dans l'environnement collaboratif du prototype 3DEvent 
+(Section \ref{sec:3DEvent}) pour assembler différentes parties d'un modèle. Ces 
+travaux sont réalisés sur la base des contributions du modèle événementiel et de 
+l'architecture de communication orientée événements présentées dans cette thèse 
+: quels sont les apports d'un 
+\gls{EDA} pour les utilisateurs? quelles informations pouvons-nous extraire de la 
+collaboration grâce aux événements? est-ce que l'architecture de communication 
+est adaptée aux échanges (format, fréquence, résilience, robustesse)? 
+
 \input{52_xp_debs2017}
 
 

@@ -7,16 +7,21 @@
 
 L'expérimentation propose de répliquer une collaboration réaliste entre 
 différents participants travaillant à distance sur des tâches d'assemblage de 
-modèles \gls{3D}. L'expérimentation reprend le cas d'étude de l'assemblage d'objets 
-\gls{3D} 
-(Section \ref{sec:use_case}). 
+modèles \gls{3D}. L'expérimentation reprend le cas d'étude de l'assemblage 
+d'objets \gls{3D} (Section \ref{sec:use_case}) et propose de répondre aux 
+questions suivante : quel est l'apport d'une architecture hybride dans la 
+collaboration temps réel ? Comment l'utilisateur s'approprie-t-il le prototype mis à 
+disposition ? Est-ce que la collaboration rend la réalisation de la tâche plus rapide 
+et / ou plus effective ? Un des objectifs de cette expérimentation est de montrer 
+que le prototype réaliser sur la base d'une architecture hybride facilite la 
+collaboration (échanges de mises à jour) sans perturber les habitudes des 
+utilisateurs.
 
-L'expérimentation est basée sur un prototype d'application développé selon 
-l'implantation présentée dans la Section \todo{ref section proto}.
+L'expérimentation est basée sur le prototype d'application 3DState développé 
+selon l'implantation présentée dans la Section \ref{sec:3DState}.
 Le prototype est développé sur une plateforme web et consiste en un application 
 de modélisation \gls{3D} collaborative multi-utilisateurs pour démontrer la 
-faisabilité de 
-l'architecture présentée dans \todo{ref section archi state}. 
+faisabilité de l'architecture présentée dans la Section \ref{sec:comm_state}. 
 
 
 \paragraph{Tâches à effectuer.}
@@ -49,8 +54,9 @@ En utilisant les outils de l'éditeur, les informations liées aux collaborateur
 utilisateur de manipuler les pièces 3D (sélection, rotation, translation, 
 homothétie) et les disposer de manière à atteindre l'objectif. 
 \paragraph{Population}
-L'expérience a été conduite sur trois groupes de deux, deux et quatre participants 
-chacun. Une épreuve sur le modèle \textit{Wind Turbine} a été effectuée avec six participants 
+L'expérience a été conduite sur trois groupes de deux, quatre, quatre et quatre 
+participants chacun (cf Tableau \ref{table:models_xp1}). Une épreuve sur le 
+modèle \textit{Wind Turbine} a été effectuée avec six participants 
 en simultané pour observer le comportement du système dans un cas non prévu.
 Durant l'expérimentation, les utilisateurs étaient sur le même réseau que le serveur 
 (\gls{LAN}). 
@@ -61,20 +67,22 @@ communiquer entre eux (oralement, par chat\dots).
 \paragraph{Procédure}
 L'expérimentation consiste en quatre épreuves qui partagent la même procédure:
 \begin{enumerate}
-	\item Phase d'essai 
+	\item Phase d'essai (10 minutes)
 	\begin{enumerate}
 		\item explication du contexte et de l'expérimentation 
 		\item prise en main du système, familiarisation avec 
 		l'interface 
 	\end{enumerate}
-	\item Phase de collaboration : réalisation de l'épreuve (se répète autant de fois 
+	\item Phase de collaboration (10 minutes / collaboration): réalisation de 
+	l'épreuve (se répète autant de fois 
 	que d'épreuves)
 	\begin{enumerate}
 		\item Présentation de l'épreuve et de son objectif
 		\item Initialisation : nettoyage de la scène et chargement des modèles
 		\item Réalisation de l'objectif
 	\end{enumerate}
-	\item Phase de retour d'expérience : remplissage questionnaire et discussion 
+	\item Phase de retour d'expérience (10 minutes) : remplissage questionnaire et 
+	discussion 
 	informelle sur les épreuves.
 \end{enumerate}
 
@@ -93,7 +101,8 @@ Entre chaque épreuve, les
 participants ont exprimé certains retours qualitatifs dont il a été pris note. Les modalités d'interaction entre les participants sont observées lors des épreuves.
 
 \paragraph{Questionnaire}
-Au début de l'expérimentation, les participants reçoivent et prennent connaissance 
+Au début de l'expérimentation, les participants reçoivent et prennent 
+con\-naissance 
 du questionnaire (voir Annexe \ref{q:xp1}). Ce questionnaire est rempli à différents 
 moments au cours de l'expérimentation. Au début, le participant décrit sa situation, 
 sa familiarité avec les environnements \gls{3D}, le type de machine et de 
@@ -107,7 +116,8 @@ collaboration, ainsi que du rendu visuel des assemblages effectués durant les
 épreuves. Cela s'explique principalement par le fait qu'ils ont atteint les 
 objectifs fixés à chaque fois (dans le temps imparti) : réalisation de l'assemblage du modèle \gls{3D} 
 présenté sans frustration. Ils se sont également \og amusés\fg{} sur les épreuves
-avec le \textit{Castle} car ils étaient libres dans la création et souhaitaient même continuer l'épreuve au-delà du temps imparti. 
+avec le \textit{Castle} car ils étaient libres dans la création et ont même souhaité 
+continuer l'épreuve au-delà du temps imparti. 
 
 L'utilisation de canaux de communication 
 externes à l'application a été reportée plusieurs fois, principalement sous la forme 
@@ -122,8 +132,7 @@ s'interpréter comme un manque de sensibilisation à l'environnement collaborati
 L'\gls{IU} a été bien appréciée, parfois jugée \og trop simple\fg{} par certains 
 utilisateurs. Ce choix avait été fait pour faciliter l'usage, l'apprentissage et 
 l'adoption de l'\gls{IU} et s'est révélé anecdotique lors de l'expérimentation car le 
-panel de participants était familier de ce genre 
-d'environnement.
+panel était familier de ce genre d'environnement.
 
 Les fonctionnalités liées à la manipulation d'objets reçoivent une bonne évaluation, 
 à l'exception de l'importation de modèles. Cela est dû, dans ce prototype, au 
@@ -132,7 +141,8 @@ participant a vu sa fenêtre \og geler\fg{} (navigateur Chrome) lors de l'épreu
 \textit{Castle from peer}. Cela l'a mené à quitter la session et à revenir sur la 
 scène pour pouvoir continuer de participer à la session collaborative. Sans 
 perturber la session en cours pour ses collaborateurs, le participant a pu revenir sur 
-l'application, reprenant la collaboration avec les autres participants (rétablissement 
+l'application, reprenant à la volée la collaboration avec les autres participants 
+(rétablissement 
 des connexions après un crash). En cela le participant a apprécié la robustesse de 
 l'application, sans être perturbé très longtemps par l'interruption.
 
@@ -168,7 +178,8 @@ sont à étudier : l'utilisation d'un
 rendu progressif et compressé ainsi qu'une meilleure répartition de la charge entre 
 les pairs pour la distribution des données. Dans ce dernier cas, l'utilisation d'une 
 topologie maillée partiellement et d'une distribution des modèles incluant les pairs 
-permettraient de responsabiliser davantage les pairs en désengorgeant
+permettraient de donner plus de responsabilité aux pairs dans la transmission des 
+données en désengorgeant
 un peu le serveur et surtout le réseau \gls{P2P}.
 
 Concernant l'amélioration des fonctionnalités proposées par l'\gls{IU}, 
