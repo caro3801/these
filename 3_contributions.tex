@@ -60,13 +60,29 @@ présenté dans \cite{Desprat2017} pour améliorer la résilience du système.
 
 \section{Conclusion du chapitre}
 Dans ce chapitre, sont décrites les contributions théoriques de la thèse. 
-Les différents 
-composants de l'architecture de 
-communication pour la réalisation d'un \gls{EVC3D} sont exposés dans la seconde 
-partie. L'utilisation de la technologie WebRTC permet de proposer une 
+Dans un premier temps, le modèle événementiel propose une architecture 
+complète permettant à un client d'intégrer les règles métiers liées à la manipulation 
+et la visualisation d'objets 3D. Le modèle événementiel est utilisé pour traiter les 
+événements à plusieurs niveaux : validation des données en fonction des règles 
+métier, stockage, détection de conflits en interne, visualisation flexible. Tous ces 
+aspects permettent de venir greffer sans difficulter la deuxième contribution : 
+l'architecture de communication hybride combinant client-serveur et \gls{P2P}.
+Cette seconde partie se partage entre une architecture \og orientée états\fg{} et 
+une architecture \og orientée événements\fg{}. Pour chacune, chaque composants 
+est décrit en fonction des spécificités du paradigme utilisé. 
+
+L'utilisation de la 
+technologie WebRTC permet de proposer une 
 architecture qui respecte les standards du web et l'interopérabilité nécessaire aux \glspl{EVC3D}. La mise en place d'une architecture décentralisée dans un 
 environnement distribué permet de mettre à contribution tous les acteurs de la 
 collaboration. De ce fait, l'accessibilité des ressources est renforcée par la 
 présence de nombreuses unités présentes sur le réseau. Cela permet, à la fois 
 de récupérer du contenu rapidement, et d'octroyer une autonomie certaine aux 
 contributeurs. 
+
+Différentes problématiques liés à la cohérence et la synchronisation ont été 
+évoquées. L'architecture semi-décentralisée qui est proposée fourni plusieurs 
+pistes pour la détection de conflits. L'implantation des prototypes liées à ces 
+différentes contributions permet de mieux voir les différents échanges entre tous 
+les composants de chaque modèle et de s'attarder sur les avantages et les 
+inconvénients des choix de modélisation.
