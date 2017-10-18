@@ -65,7 +65,7 @@ collaboration.
 %\ref{fig:protocolstack}) qui lui offre des fonctionnalités similaires (fiabilité, 
 %ordonnancement, sécurité). 
 
-%TODO parler chargeet distribution
+%TOD parler chargeet distribution
 
 
 \paragraph{Contribution}
@@ -144,11 +144,7 @@ ces composants pour que les différents participants d'une session
 collaborative puissent communiquer de manière transparente, cohérente et 
 résiliente.
 
-%TODO reprendre pour partie implantation
-%Les travaux présentés s'inscrivent dans un contexte où les besoins 
-%d'interopérabilité et de standardisation sont élevés pour permettre à des 
-%utilisateurs de prendre le système rapidement en main sans installer autre chose 
-%qu'un navigateur. 
+
 
 
 \subsection{Éléments constitutifs d'un pair}
@@ -165,12 +161,10 @@ dans l’application.
 
 Dans un réseau \gls{P2P}, chaque pair est considéré comme un système à part 
 entière qui contient ses propres problématiques d'implémentation. Avant de 
-présenter la contribution liée à l'intergiciel dans 3DEvent\todo{ref section}, il est 
-nécessaire 
-d'introduire les composants et les fonctions clés qui constituent un pair du point de 
-vue strictement réseau en 
-présentant une vue minimaliste d'un pair dédié au partage de contenu 
-\cite[p.135-136]{Buford2009}. Les 
+présenter la contribution liée à l'intergiciel, il est nécessaire d'introduire les 
+composants et les fonctions clés qui constituent un pair du point de 
+vue strictement réseau en présentant une vue minimaliste d'un pair dédié au 
+partage de contenu \cite[p.135-136]{Buford2009}. Les 
 fonctions sont divisées en trois :
 \begin{itemize}
 	\item la couche de routage et d'échange de messages ;
@@ -200,8 +194,7 @@ L'élément responsable de la couche de routage et d'échange de messages permet
 Un pair possède un mécanisme d'amorçage (\textit{bootstrap}) qui permet de 
 localiser les autres pairs qui lui permettront de rejoindre la couche \gls{P2P}. Les 
 étapes pour rejoindre ou quitter la couche sont proposées par le protocole 
-d'établissement de connexion 
-(cf signaling mecanism\todo{ref section signaling}).
+d'établissement de connexion (incluant le mécanisme de \textit{signaling}).
 La couche applicative permet d'échanger des messages avec les autres pairs 
 dans le réseau en utilisant l'\gls{API} réseau, et les messages reçus peuvent être 
 transférés à leur destination en utilisant la fonction de transfert de messages. 
@@ -236,7 +229,7 @@ Les architectures de communication des contributions se divisent en deux parties
 chacune correspondant au paradigme qu'elles utilisent respectivement : état ou 
 événement. Selon le paradigme auquel elles font référence, elles peuvent 
 être décrites par plusieurs critères:
-\todo{revoir}
+
 \begin{description}
 	\item[Spécificité des composants de l'architecture] Les pairs sont la base de la 
 	dissémination de l'information. La partie serveur 
@@ -307,8 +300,7 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	
 	L'édition concurrente lors de la collaboration peut être gérée de différentes 
 	manières, selon si elle est plutôt pessimiste ou optimiste lors de la réplication 
-	des 
-	données (voir Section \ref{sec:concurrence}). L'intégration d'une solution ou 
+	des données (voir Section \ref{sec:concurrence}). L'intégration d'une solution ou 
 	l'autre 
 	a de lourds impacts sur l'expérience utilisateur (fonctionnalités, interface 
 	utilisateur) et la gestion de la cohérence dans le réseau \gls{P2P}.  

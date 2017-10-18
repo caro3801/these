@@ -65,8 +65,6 @@ Lorsque l'Event Store reçoit de nouveaux événements, l'\gls{ESM} crée ou
 récupère le flux d'événements associé à l'agrégat dans un premier temps. Puis, il 
 stocke l'événement à la suite de ceux présents dans le flux de l'agrégat sur le pair, 
 localement.
-
-
 Par ailleurs, dans un contexte industriel de collaboration, l'information doit être 
 disponible sur le long-terme, facilement accessible par l'entreprise. 
 La persistance à long-terme du système stocke le journal d'événements qui est la 
@@ -121,7 +119,7 @@ afin de se synchroniser.
 	\label{fig:connexionpairs}
 \end{figure}
 
-\paragraph{Cohérence d'un agrégat}
+\paragraph{Cohérence d'un flux d'agrégat}
 Les événements sont considérés comme \og cohérents\fg{}  lorsqu'il n'y a pas 
 d'erreur de cohérence dans l'agrégat, i.e. lorsqu'il n'y a pas de doublon dans les 
 numéros de versions et qu'ils sont bien ordonnés. Lorsqu'un \gls{ESM} ne 
@@ -134,28 +132,53 @@ La cohérence de la version est alors vérifiée en comparant la version attendu
 (exposée dans les méta-données de l'événement) et la version actuelle de 
 l'agrégat. 
 Si les deux numéros de version sont identiques, l'événement est ajouté à la fin du 
-tableau du flux pour être stocké dans l'\gls{ESM}, sinon une exception est levée. 
-La gestion des exceptions est expliquée dans\todo{détails exception}. 
+tableau du flux pour être stocké dans l'\gls{ESM}, sinon une exception indiquant 
+l'incohérence est levée. 
+
 
 \paragraph{Mécanisme de gestion de version}
 3DEvent intègre une procédure de gestion de version dans l'\gls{EventStore} afin 
-de gérer au mieux la cohérence des données (voir Section \todo{ref section}). 
-Pour être cohérent, l'agrégat concerné par ces 
+de gérer au mieux la cohérence des données. 
+Pour être cohérent, le flux de l'agrégat concerné par ces 
 événements doit produire une nouvelle version, sans être en conflit avec la 
 précédente. En passant la version attendue $v_a$ au gestionnaire de conflits, on 
-est à même de la comparer avec la version courante $v_c$. Il existe deux cas où 
-un conflit est levé~: 
+est à même de la comparer avec la version courante $v_c$. Il existe deux cas de 
+conflits~: 
 \begin{enumerate}[label=\alph*)]
-	\item \label{i:vi} La version $v_a$ correspond à la valeur d'initialisation
-	\item \label{i:vdiff} La version $v_a$ est différente de la version $v_c$
+	\item \label{i:vi} $v_a$ correspond à la valeur d'initialisation du flux : après une 
+	action, la version initiale de l'agrégat ne peut être identique ;
+	\item \label{i:vdiff} $v_a$ est différente de la version $v_c$ : l'Event Store 
+	propage une information incohérente si la version attendue est inexacte.
 \end{enumerate}
-Dans \ref{i:vi}, après une action, la version initiale de l'agrégat ne 
-peut être la même. Cet item peut sembler évident mais il est important de le noter 
-car il dépend entièrement de la valeur initiale choisie (-1, 0 \dots) pour les agrégats 
-du \gls{framework}.
-\todo{parler de b), et redite par rapport a au dessus}
 
+La cohérence est gérée par l'Event Store à plusieurs niveaux dans le pair :  
+localement lors de la génération d'événements par le pair et au niveau du réseau 
+\gls{P2P} lors de la réception d'événements.
+Les nouvelles données qui entrent dans un pair doivent nécessairement être en 
+cohérence avec celle qui sont déjà certifiées cohérentes.
 
+L'algorithme \ref{algo:addevent} permet de détecter une incohérence lors de 
+l'arrivée d'un nouvel événement. Cet événement est fournit avec une version qui 
+correspond au numéro de version attendu du flux de l'agrégat 
+(\textit{stream}) auquel il est rattaché. Si le flux n'existe pas, il est créé, sinon il 
+faut vérifier qu'il n'existe pas déjà un événement stocké à la version donnée pour 
+pouvoir ajouter l'événement au flux, sinon une exception indiquant un problème de 
+cohérence est levée.
+
+\begin{algorithm} % enter the algorithm environment
+	\caption{Ajout d'un événement dans l'Event Store} % 
+	%give the algorithm a caption
+	\label{algo:addevent} % and a label for \ref{} commands later in the document
+	\begin{algorithmic} % enter the algorithmic environment
+		\Require streamId: string, event: EventStoreEvent, version: number
+		\Ensure event
+		\State $stream \leftarrow streams.getOrCreate(streamId);$
+		\If{$ stream.has(version)$}
+		\State $throwExceptionVersion(stream,version)$
+		\EndIf
+		\State $stream.data.set(version,event) $
+	\end{algorithmic}
+\end{algorithm}
 
 \subsubsection{Topologie et Protocole d'échange}
 L'architecture hybride orientée \og événements\fg{} tire profit de la présence des 
@@ -211,61 +234,15 @@ données, elles sont ignorées par le système.
 
 
 
-\subsubsection{Gestion de la cohérence}
-La cohérence est gérée par l'Event Store à plusieurs niveaux dans le pair :  
-localement (Section 
-\todo{ref section}) et au niveau du réseau \gls{P2P}.
- Les nouvelles données qui 
-entrent dans un pair doivent nécessairement être en cohérence avec celle qui sont 
-déjà certifiées cohérentes.
-Pour chaque événement sauvegarder, l’Event Store publie (push) l’événement sur 
-le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme 
-\ref{algo:saveEvent}. \todo{finir explications}
 
-\begin{algorithm} % enter the algorithm environment
-	\caption{Sauvegarde d'événements d'un agrégat dans l'Event Store} % 
-	%give the algorithm a caption
-	\label{algo:saveEvent} % and a label for \ref{} commands later in the document
-	\begin{algorithmic} % enter the algorithmic environment
-		\Require aggregateId : string, uncommitedEvents : eventMsg[ ], 
-		version : number
-		%\Ensure $y = x^n$
-		\State $expectedVersion \leftarrow version$
-		\For{$eventMsg $ \textbf{in} $uncommitedEvents$}	
-		\State{$newMsg \leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
-			streamId : aggregateId\}$}
-		\State{$publish(aggregateId, newMsg, expectedVersion++)$}
-		\EndFor
-	\end{algorithmic}
-\end{algorithm}
-\todo{parler de cet algo}
-\begin{algorithm} % enter the algorithm environment
-	\caption{Ajout d'un événement dans l'Event Store} % 
-	%give the algorithm a caption
-	\label{algo:addevent} % and a label for \ref{} commands later in the document
-	\begin{algorithmic} % enter the algorithmic environment
-		\Require streamId: string, event: EventStoreEvent, version: number
-		\Ensure event
-		\State $stream \leftarrow streams.getOrCreate(streamId);$
-		\If{$ stream.has(version)$}
-		\State $throwExceptionVersion(stream,version)$
-		\EndIf
-		\State $stream.data.set(version,event) $
-	\end{algorithmic}
-\end{algorithm}
-
-\todo{categories: type d’agregat
-	c’est un flux liés a une categorie (exemple geometries) tous les events liés à la 
-	categorie.}
-
-\todo{metadata phase sync permet a un nouveau noeud de recup toutes les info 
-	manquantes et de les demander de maniere repartie a tous les noeuds}
-
-
-
-
-
-
+%\tod{categories: type d’agregat
+%	c’est un flux liés a une categorie (exemple geometries) tous les events liés à 
+%la 
+%	categorie.}
+%
+%\tod{metadata phase sync permet a un nouveau noeud de recup toutes les info 
+%	manquantes et de les demander de maniere repartie a tous les noeuds}
+%
 
 \subsubsection{Discussion sur l'architecture de communication \og orientée  
 événements\fg{}}
@@ -292,17 +269,6 @@ prisme des \glspl{CRDT}. Les données 3D telles qu'elles sont modélisées ne
 rentrent pas dans cette catégorie très puissante pour gérer la cohérence. 
 Cependant, le modèle événementiel fournit, avec son approche fonctionnel, proche 
 des  \gls{CRDT} \textit{Grow-only Set} (qui n'autorise que les ajouts).
-
-
-%
-%\subsubsection{Gestion de la cohérence}
-%
-%
-%\subsubsection{Respect de la causalité}
-%\subsubsection{Convergence des répliques}
-%\subsubsection{Préservation de l'intention}
-
-%\paragraph{Connexion des pairs en début de session}
 
 
 

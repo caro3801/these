@@ -160,10 +160,10 @@ Il prend la forme d'un module de détection de conflit basé sur le journal d'é
 client possède une réplique locale.
 
 \subsection{Modèle général}
-%TODO
+%TOD
 %La composition de l'architecture s'est effectuée, avec en arrière pensée, les lignes 
 %directrices  énoncées plus haut\info{ref section} \cite{Xhafa2010}. 
-%\todo{reprendre 
+%\tod{reprendre 
 %la partie virtualisation dans la partie P2P}
 
 
@@ -298,7 +298,7 @@ modélisation \gls{3D} collaborative (appuyant la sémantique des manipulations)
 
 
 \subsection{Adaptation des patrons \gls{ES} et \gls{CQRS}}
-%TODO celle de la validation des 
+%TOD celle de la validation des 
 %commandes
 
 
@@ -310,10 +310,30 @@ l'utilisateur déclenche une commande à partir de l'interface, la commande et s
 paramètres sont récupérés et traités par le domaine pour être validés selon les 
 règles métiers exprimées par ce dernier. Si la modification est validée, le domaine 
 produit ou modifie l'agrégat concerné. Ces modifications sont converties sous 
-forme d'événements. Les événements sont ensuite transmis à l'Event Store où ils 
-sont stockés 
-avant d'être transférés à l'Event Publisher. L'Event Publisher joue le rôle 
-d'interface entre la partie écriture et la partie lecture. 
+forme d'événements. 
+Ces événements qui ne sont alors pas encore sauvegardés dans l'Event Store 
+sont passé en entrée de l'algorithme \ref{algo:saveEvent}.
+Chaque événement est encapsulés dans un événement \og technique\fg{} dédié 
+au stockage dans l'Event Store avant d'être publié sur le bus  via l'Event Publisher.
+
+\begin{algorithm} % enter the algorithm environment
+	\caption{Sauvegarde d'événements d'un agrégat dans l'Event Store} % 
+	%give the algorithm a caption
+	\label{algo:saveEvent} % and a label for \ref{} commands later in the document
+	\begin{algorithmic} % enter the algorithmic environment
+		\Require aggregateId : string, uncommitedEvents : eventMsg[ ], 
+		version : number
+		%\Ensure $y = x^n$
+		\State $expectedVersion \leftarrow version$
+		\For{$eventMsg $ \textbf{in} $uncommitedEvents$}	
+		\State{$newMsg \leftarrow \{type : eventMsg.typeEvt, data : eventMsg, 
+			streamId : aggregateId\}$}
+		\State{$publish(aggregateId, newMsg, expectedVersion++)$}
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+L'Event Publisher joue le rôle d'interface entre la partie écriture et la partie lecture. 
 Il est également responsable de la 
 publication des événements sur le bus d'événements, Event Bus, où sont 
 accrochées les différentes projections. Les projections sont nourries à partir des 
