@@ -60,15 +60,16 @@ de \textit{signalling}.
 L'ensemble des Event Stores forme une grappe qui gère le 
 journal d'événements partagé de manière répartie entre toutes les instances.
 \subsubsection{Gestion du stockage}
-\paragraph{Local avec l'\gls{ESM}}
+
 Lorsque l'Event Store reçoit de nouveaux événements, l'\gls{ESM} crée ou 
 récupère le flux d'événements associé à l'agrégat dans un premier temps. Puis, il 
-stocke l'événement à la suite de ceux présents dans le flux de l'agrégat.
+stocke l'événement à la suite de ceux présents dans le flux de l'agrégat sur le pair, 
+localement.
 
-\paragraph{Long-terme et distant avec une base de données fonctionnelle}
-Dans un contexte industriel de collaboration, l'information doit être disponible sur le 
-long-terme, facilement accessible par l'entreprise. La persistance à 
-long-terme stocke le journal d'événements qui est la 
+
+Par ailleurs, dans un contexte industriel de collaboration, l'information doit être 
+disponible sur le long-terme, facilement accessible par l'entreprise. 
+La persistance à long-terme du système stocke le journal d'événements qui est la 
 source de vérité de l'application. Elle peut également stocker des projections 
 prédéfinies, calculées à la volée ou encore des \textit{snapshots} de l'application.
 
@@ -165,9 +166,57 @@ données directement reliés à la base de données. De ce fait, la politique de
 connectivité entre les pairs peut être réduite, le réseau a une topologie 
 partiellement maillée (\textit{partial mesh topology}). 
 
+Le protocole d'échange est décrit dans l'annexe \ref{annexe:protocole}. En passant 
+de l'instanciation d'une connexion à l'échange de méta-données pour se 
+synchroniser, le pair agit comme une machine à état concernant la transmission 
+des données. La Figure \ref{fig:connexionpairs} présente une partie des échanges 
+liés à ce protocole dans la partie \textit{\gls{P2P} network creation}. Les 
+méta-données échangées permettent aux n\oe uds de savoir \og qui possède 
+quoi\fg{} sur le réseau pour pouvoir ensuite demander les événements qui leur 
+manquent. 
+
+
+\begin{algorithm} % enter the algorithm environment
+	\caption{Synchronisation d'un n\oe ud de l'Event Store partagé} % 
+	%give the algorithm a caption
+	\label{algo:synchnode} % and a label for \ref{} commands later in the document
+	\begin{algorithmic} % enter the algorithmic environment
+		\Require $node : ClusterNode$
+		\Ensure $nodeState == synchronized$
+		\State $nodeMetadata \Leftarrow node.getMetadata()$
+		\If{$nodeMetadata != \{\} $}
+		\State $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
+		\While{$streamsToSync > 0$}
+		\State $streamToSync \Leftarrow streamsToSync.pop()$
+		\State $events \Leftarrow  node.getEvents(streamToSync)$
+		\If{$! streamToSync.has(version)$}
+		\For {$event$ \textbf{in} $events$}
+		\State $processEvent(event.streamName, event, 
+		event.version)$
+		\EndFor 
+		\EndIf
+		\State $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
+		\EndWhile
+		\EndIf
+		\State $node.endSync()$
+	\end{algorithmic}
+\end{algorithm}
+
+Cette étape de synchronisation d'Event Store entre deux n\oe uds est reprise en 
+détail dans l'algorithme \ref{algo:synchnode}. Le n\oe ud courant demande le 
+différentiel (\textit{diff}) entre ses flux et ceux du n\oe ud $node$ pour 
+connaître quels sont les flux à synchroniser. Si un n\oe ud possède les données 
+demandées il les envoie. Si le n\oe ud courant reçoit à nouveau les mêmes 
+données, elles sont ignorées par le système.
+
+
 
 \subsubsection{Gestion de la cohérence}
-
+La cohérence est gérée à plusieurs niveaux dans le pair. Localement (Section 
+\todo{ref section}), et au niveau du réseau \gls{P2P}.
+C'est l'Event Store qui est en charge des deux niveaux. Les nouvelles données qui 
+entrent dans un pair doivent nécessairement être en cohérence avec celle qui sont 
+déjà certifiées cohérentes.
 Pour chaque événement sauvegarder, l’Event Store publie (push) l’événement sur 
 le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme 
 \ref{algo:saveEvent}. \todo{finir explications}
@@ -213,52 +262,35 @@ le bus (Event Publisher). Cette mécanique est expliquée dans l'algorithme
 
 
 
-\begin{algorithm} % enter the algorithm environment
-	\caption{Synchronisation d'un n\oe ud de l'Event Store partagé} % 
-	%give the algorithm a caption
-	\label{algo:synchnode} % and a label for \ref{} commands later in the document
-	\begin{algorithmic} % enter the algorithmic environment
-		\Require $node : ClusterNode$
-		\Ensure $nodeState == synchronized$
-		\State $nodeMetadata \Leftarrow node.getMetadata()$
-		\If{$nodeMetadata != \{\} $}
-		\State $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
-		\While{$streamsToSync > 0$}
-		\State $streamToSync \Leftarrow streamsToSync.pop()$
-		\State $events \Leftarrow  node.getEvents(streamToSync)$
-		\If{$! streamToSync.has(version)$}
-		\For {$event$ \textbf{in} $events$}
-		\State $processEvent(event.streamName, event, 
-		event.version)$
-		\EndFor 
-		\EndIf
-		\State $streamsToSync \Leftarrow metadata.getDiff(nodeMetadata)$
-		\EndWhile
-		\EndIf
-		\State $node.endSync()$
-	\end{algorithmic}
-\end{algorithm}
-
-L'algorithme \ref{algo:synchnode} décrit la synchronisation d'un n\oe ud avec un 
-autre n\oe ud dans l'Event Store partagé. Le n\oe ud courant demande le 
-différentiel (\textit{diff}) entre ses flux et ceux du n\oe ud $node$ pour 
-connaître quels sont les flux à synchroniser. Si un n\oe ud possède les données 
-demandées il les envoie. Si le n\oe ud courant reçoit à nouveau les mêmes 
-données, elles sont ignorées par le système.
 
 
 
 
+\subsubsection{Discussion sur l'architecture de communication \og orientée  
+événements\fg{}}
 
+L'architecture de communication orientée événement utilise un intergiciel réactif : 
+elle consomme des notifications d'événements et permet le traitement asynchrone 
+de messages. Bien que le découplage proposé par ce système offre des 
+avantages important dans un fonctionnement décentralisé, il peut également 
+être à l'origine d'incertitudes causées par les 
+délais des notifications, notamment lors de l'apparition de conflits.
 
-\subsubsection{Discussion des problématiques liées à une architecture de 
-communication orientée \og événements\fg{}}
-Architecture réactive à l'attrition. Tous les éléments qui participent à la gestion de 
-données, actifs dans la distribution ou producteurs de données, sont au même 
-niveau. Le réseau \gls{P2P} est renforcé par la présence de pairs destinés à 
+Tous les pairs qui participent à la gestion de 
+données (producteurs et consommateur) sont au même 
+niveau dans la couche \gls{P2P}. Cette situation ne propose qu'une flexibilité 
+limitée dans le passage à l'échelle et dans la gestion de l'attrition. L'équilibre entre 
+les producteurs 
+et les consommateurs doit être assez stable pour ne pas surcharger certaines 
+partie du réseau. C'est une des raisons pour lesquels le réseau 
+\gls{P2P} est renforcé par la présence de pairs destinés à 
 faire le relais dans la distribution des données. 
 
-La gestion de la cohérence \todo{finir}
+La gestion de la cohérence dans \gls{SEC} massif est souvent étudiée à travers le 
+prisme des \glspl{CRDT}. Les données 3D telles qu'elles sont modélisées ne 
+rentrent pas dans cette catégorie très puissante pour gérer la cohérence. 
+Cependant, le modèle événementiel fournit, avec son approche fonctionnel, proche 
+des  \gls{CRDT} \textit{Grow-only Set} (qui n'autorise que les ajouts).
 
 
 %
