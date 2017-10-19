@@ -28,32 +28,6 @@ besoin dans le cadre de la consultation de données.
 
 \subsubsection{Présentation de l'interface}
 
-
-%\begin{figure}[h!]
-%	\centering
-%	\begingroup
-%	
-%	\subfloat[Rotation (vue \gls{3D}) et outils de manipulation d'objet 
-%	\gls{3D} 
-%	(panneau 
-%	
-%latéral)]{\includegraphics[width=0.75\textwidth]{eps/2rotatedetail.eps}\label{fig:ui2}}\hfill
-%	
-%	\subfloat[Translation (vue \gls{3D}) et visualisation de l'historique 
-%	(panneau 
-%	
-%latéral)]{\includegraphics[width=0.75\textwidth]{eps/1translatehisto.eps}\label{fig:ui1}}\hfill
-%	
-%	\subfloat[Mise à l'échelle (vue \gls{3D}) et liste des collaborateurs 
-%	(panneau 
-%	
-%latéral)]{\includegraphics[width=0.75\textwidth]{eps/3scalecollab.eps}\label{fig:ui3}}\hfill
-%	
-%	\endgroup
-%	\caption{Interface utilisateur pendant une session collaborative (trois 
-%personnes)}
-%	\label{fig:screenshots}
-%\end{figure}
 Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
 (dans un navigateur) qui représente l'espace de travail collaboratif et qui lui 
 permettant 
@@ -295,4 +269,11 @@ d'instances différentes.
 \end{table}
 
 \paragraph{Testabilité}
-\todo{finir}
+La testabilité de l'application est aisément envisageable car tous les composants 
+sont faiblement couplés entre eux. 
+Chaque bloc de l'\gls{IU} est isolé. Le caractère fonctionnel de l'\gls{ES} permet de 
+faire des simulations illimitées \cite{Erb2014} sans perturber le fonctionnement de 
+l'application. De plus l'implantation d'un intergiciel \gls{P2P} en sur-couche sur 
+NodeJS ou le navigateur peut permettre de simuler une multitude de faux 
+utilisateurs pour tester la robustesse et le passage à l'échelle de l'application. 
+

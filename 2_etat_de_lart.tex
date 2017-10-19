@@ -1412,8 +1412,8 @@ la modélisation collaborative de données \gls{3D}.
 L'historique du système est accessible tout au long de la vie de l'application, ce 
 qui implique qu'il est non seulement possible d'accéder à l'état courant du 
 système, mais également à toutes les actions ayant mené jusqu'à cet état. C'est 
-un avantage certain pour les système critiques, les applications d'Informatique 
-Décisionnelle ou les applications collaboratives. La pratique la plus 
+un avantage certain pour les système critiques ou les applications collaboratives. 
+La pratique la plus 
 courante est de proposer un système principal et d'ajouter une multitude de 
 sous-systèmes qui enregistrent les différentes métriques (analyse d'un ou 
 plusieurs axes, \textit{reporting} sur une propriété) du système principal. Avec 
@@ -1438,7 +1438,7 @@ d'observations possibles :
 	\item les spécifications ne sont pas assez claires ;
 	\item deux collaborateurs sont opposés sur la façon de modifier l'objet.
 \end{enumerate*}
-L'origine de ces changements identifiée, le chef de projet pourra alors intervenir 
+L'origine de ces changements identifiée, le chef de projet peut intervenir 
 et clarifier le sujet. 
 
 \paragraph{Résolution} Avec un système classique, la fonctionnalité doit être 
@@ -1455,9 +1455,8 @@ rapport à sa dernière visite.
 \paragraph{Snapshot} 
 \label{sec:snapshot}
 En revanche, les performances de l'application peuvent être affectées par 
-l'utilisation de 
-l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Store, il est 
-nécessaire de le calculer à partir des événements reçus.
+l'utilisation de l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event 
+Store, il est nécessaire de le calculer à partir des événements reçus.
 Le processus  va s'alourdir car chaque événement créé (et stocké) ne sera pas supprimé. Plus la pile d'événements est longue, plus cela va prendre 
 du temps (linéaire), surtout en considérant que les commandes ont parfois besoin 
 de connaître une partie de l'état courant issu de ces événements pour être 
@@ -1490,14 +1489,12 @@ les \gls{snapshot}. Sans les snapshots le modèle peut encore varier
 Le fait de travailler avec des \gls{snapshot} crée une dépendance des 
 snapshots qui doivent intégrer les modifications du domaine. Une solution est 
 de recalculer les snapshots quand le domaine est modifié mais cela reste 
-coûteux (et à éviter).
-%\info{versionning event -> retro compatibilité}
+coûteux (et à éviter).%\info{versionning event -> retro compatibilité}
 
 \paragraph{Event Sourcing versus Command Sourcing}
 \label{sec:es-vs-cs}
 Les patrons de conception \gls{CS} et \gls{ES} sont strictement déterministes pour 
 avoir une exactitude rigoureuse de ce qui se passe dans le système.
-
 Un événement représente quelque chose qui est arrivé dans le domaine. Un 
 événement appliqué sur un état, donne un nouvel état. 
 La condition pour appliquer un pur déterminisme en \gls{ES} est la fonction 
