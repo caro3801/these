@@ -1,4 +1,4 @@
-\subsection{Interface orientée tâche}
+\subsection{Interface orientée tâches}
 \label{sec:task-based-ui}
 Dans le but de proposer une \gls{IU} proche des fonctionnalités métiers liées à la 
 modélisation \gls{3D}, l'éditeur possède une interface orientée \og tâche\fg{}, en 
@@ -10,10 +10,10 @@ interface orientée tâche a tendance à s'attarder sur toutes les nuances que l
 domaine possède en caractérisant chaque action sans subir d'effet de 
 simplification. Cette proximité avec le métier permet de calquer directement 
 l'interface du modèle événementiel sur l'\gls{IU} et de guider l'utilisateur dans ses 
-activités. L'utilisabilité, qualité de l'expérience utilisateur fournit par un système 
+activités. L'utilisabilité, qui correspond à la qualité de l'expérience utilisateur fournit par un système 
 pour réaliser une tâche, est alors maximisée en terme d'efficacité, d'efficience et 
 de satisfaction. 
-Ce type d'\gls{IHM} s'organise autour de cas d'utilisation. Cela permet, 
+Ce type d'\gls{IHM} s'organise autour de cas d'utilisation. Cela permet 
 d'une part, de présenter clairement les 
 actions (\og ajouter une géométrie à la 
 bibliothèque à partir d'un fichier\fg{} plutôt que \og téléverser un fichier\fg{}) : 
@@ -30,7 +30,7 @@ besoin dans le cadre de la consultation de données.
 
 Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface web 
 (dans un navigateur) qui représente l'espace de travail collaboratif et qui lui 
-permettant 
+permet 
 d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont le clavier 
 et la souris. Le premier niveau de cette 
 interface est scindée en deux panneaux~: 
@@ -121,13 +121,12 @@ qui
 modélise le domaine d'un maillage, génère l'événement de translation $e1$ (étape 
 (b)) si tout est valide d'un point de vue métier. L'événement $e1$ est ensuite 
 passé à l'Event Store. 
-Le composant responsable de la détection de conflit permet au développeur 
-d'implémenter ses propres règles de résolution de conflit. Le composant déclenche 
+Le module détecteur de conflits permet au développeur 
+d'implémenter ses propres règles de résolution de conflit (voir Section \ref{sec:cecqrs}). Le module déclenche 
 une exception lorsque le numéro de version reçu et le numéro de version courant 
 de l'agrégat sont identiques (Figure \ref{fig:cqrs-example} étape (c)). Selon les 
 règles métiers définies et les exceptions liées à la cohérence, l'événement peut 
-être 
-rejeté. Ce traitement peut être à l'origine de la génération de nouveaux 
+être rejeté. Ce traitement peut être à l'origine de la génération de nouveaux 
 événements.
 
 
@@ -230,11 +229,11 @@ celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
 \subsection{Bilan}
 
 L'application 3DEvent repose sur les principes et les 
-technologies du web pour permettre de visualiser et manipuler des objets \gls{3D} 
+technologies du web et permet de visualiser et manipuler des objets \gls{3D} 
 de manière collaborative en temps-réel. Son approche orientée événement est très 
-peu couplée. L'interface orientée tâches en est un bon exemple, permettant de 
-mettre à jour facilement les blocs concernés, l'interface optimise les performances 
-de rendu en limitant les rafraîchissements inutiles de l'interface pour l'utilisateur.
+peu couplée. L'interface orientée tâches est un bon exemple car elle  permet de 
+mettre à jour facilement les blocs concernés. L'interface optimise les performances 
+de rendu en limitant les rafraîchissements aux seuls endroits utiles à la réalisation de la tâche.
 Le tableau \ref{tab:technique-3DEvent} propose un récapitulatif des choix 
 techniques effectués pour l'implantation des différents pairs. 3DEvent reprend 
 presque les mêmes choix techniques que 3DState. L'implantation de 

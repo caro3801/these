@@ -13,9 +13,9 @@ RTCDataChannel.
 
 La topologie de l'architecture de communication repose sur la mise en relation 
 automatique des clients par le biais du serveur pour établir une connexion 
-\gls{WebRTC}. Pour ce faire, chaque client envoie son identifiant (ID) lors de sa 
+\gls{WebRTC}. Pour ce faire, chaque client envoie son identifiant lors de sa 
 première requête au serveur qui le stocke. Selon le paramétrage de la connectivité 
-directe minimum établie préalablement, le serveur recherche aléatoirement l'ID 
+directe minimum établie préalablement, le serveur recherche aléatoirement l'identifiant
 d'autres clients qui satisfont la règle de connectivité. Cette règle de connectivité 
 minimum permet d'ajuster la densité du maillage (connectivité élevée: maillage 
 partiel dense, voire complet ; connectivité faible: maillage partiel éparse) et 
@@ -26,8 +26,8 @@ transiter par des intermédiaires pour atteindre tous les pairs et par conséque
 temps de transmission est augmenté (exemple d'une distribution en ligne). 
 
 
- C'est donc la partie gestion des instances du 
-serveur qui gère la politique de connexion des données lors de la phase de \textit{signaling}. Dans le prototype réalisé, 
+C'est le gestionnaire des instances qui gère la politique de connexion des données lors de la 
+phase de \textit{signaling}. Dans le prototype réalisé, 
 la connectivité minimum entre les différents pairs participant à la même scène est 
 fixée à 2. Cette politique permet de créer un maillage réseau qui n'est pas trop 
 dense en considérant que le nombre maximum d'utilisateur ne dépassera pas dix.
@@ -69,8 +69,8 @@ attendue\fg{}
 qui correspond à la version que l'agrégat doit avoir lorsque l'événement lui est 
 appliqué. De cette manière la cohérence interne du pair est maintenu grâce à ce 
 numéro de version.
-Les événements contenant les objets 3D ($importGeometryEvent$) ont une 
-propriété contenant la géométrie sous la forme d'un Blob contenant le fichier. 
+Les événements qui gère les géométries ($importGeometryEvent$) ont une 
+propriété concernant les données 3D sous la forme d'un Blob contenant le fichier. 
 
 \begin{lstlisting}[language=json,firstnumber=1,label=jsonstore,caption=Format
 du Message transitant sur le réseau contenant l'événement MeshAddedToScene 
@@ -133,7 +133,7 @@ les scènes sont récupérées en priorité par rapport aux maillages et aux
 informations des autres utilisateurs. 
 
 Les données sont transmises sous forme de morceaux (\textit{chunk}) de 16 
-octets maximum car Chrome impose une limite sur la taille des messages 
+octets maximum car le navigateur Chrome impose une limite sur la taille des messages 
 envoyés. L'application se charge donc de la création des morceaux et de les 
 envoyer. Ceci a été intégré dans le protocole d'échange de l'application. C'est une 
 des raisons qui a encouragé le choix d'un transport non fiable et non ordonné car 
@@ -142,7 +142,7 @@ réseau. D'autre part, le standard WebRTC n'étant pas implanté de la même
 manière sur tous les navigateurs, le fait déléguer une partie de la gestion des 
 données à l'application permet de mieux gérer le traitement qu'elles subissent. Les 
 effets collatéraux à ce choix sont doubles : la taille des messages qui transitent 
-est allégée, cependant il faut d'envoyer plus de messages pour maintenir la 
+est allégée, ce qui nécessite d'envoyer plus de messages pour maintenir la 
  la cohérence et la synchronisation.
 
 
@@ -160,7 +160,7 @@ Lors de la synchronisation des pairs, les
 événements manquants sont demandés successivement à tous les pairs. Lors 
 qu'un pair reçoit les événements il les stocke dans le flux correspondant à 
 l'agrégat. Si un événement est manquant, les suivants sont quand même stockés 
-en laissant l'espace de l'événement manquant dans le tableau. L'événement est 
+en laissant l'espace de l'événement manquant dans le flux de l'agrégat. L'événement est 
 redemandé jusqu'à son obtention, laquelle provoque le déblocage de l'état de 
 l'agrégat jusqu'au prochain événement manquant (ou la fin du flux). Les 
 événements qui ont été stockés \og en attendant\fg{} permettent à l'application 
