@@ -58,7 +58,7 @@ Lorsqu'un utilisateur se connecte à une scène, il a accès à une interface we
 (dans un navigateur) qui représente l'espace de travail collaboratif et qui lui 
 permettant 
 d'utiliser différentes fonctionnalités. Les deux modalités d'interaction sont le clavier 
-et la souris\info{est ce qu'on parle de mobile?}. Le premier niveau de cette 
+et la souris. Le premier niveau de cette 
 interface est scindée en deux panneaux~: 
 \begin{enumerate}
 	\item L'espace \gls{3D} consacré à la visualisation des objets et à leur 
@@ -120,9 +120,8 @@ l'accès à leur détail. Pour chaque événement, le système est capable de mo
 dans l'espace \gls{3D} la différence entre l'état  après l'événement cliqué $state_x$ 
 et l'état courant $state_n$. L'utilisateur peut à partir de cette visualisation choisir 
 de \og revenir en arrière\fg{} sans perdre les données entre $state_n$ et $state_x$ 
-car dans le système présenté ici, cela s'effectue par compensation (cf 
-Event-Sourcing 
-Section \todo{ref section})\improve{annulation d'un événement ou juste ES}.
+car dans le système présenté ici, cela s'effectue par compensation (rappel cf 
+Figure \ref{fig:es-transaction-delete}).
 
 Dans chaque onglet se trouvent différents blocs \gls{HTML}, avec des 
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
@@ -245,21 +244,55 @@ celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
 	\label{fig:ghostselection}
 \end{figure}
 
-\paragraph{Projections}
-\todo{refomuler}
-chaque partie de l’interface est liée à une proj de la bdd
-les actions user et les actions des autres users passent par le meme cycle
-pas de diff de prise en compte des evnts de l’interaction user ou de la couche 
-reseau
-en CS : les actions users -> actions -> recup info
-action push du servuer qui peuvent etre gerees de maniere diff
+%\paragraph{Projections}
+%\todo{refomuler}
+%Les projections sont des composants importants de l'application 3DEvent. En 
+%effet, chaque partie de l’interface est liée à une projection de la base de 
+%données. 
+%Une projection peut être stockée pour optimiser son temps d'accès et de lecture.
+%Sur un pair, les actions issues d'un utilisateur sont traitées de la même manière 
+%que les actions effectuées par les collaborateurs dans la partie lecture.
+%Les requêtes sur les projections peuvent être discrètes ou continues. 
 \subsection{Bilan}
 
-\todo{refomuler}
 L'application 3DEvent repose sur les principes et les 
 technologies du web pour permettre de visualiser et manipuler des objets \gls{3D} 
-de 
-manière 
-collaborative en temps-réel.
+de manière collaborative en temps-réel. Son approche orientée événement est très 
+peu couplée. L'interface orientée tâches en est un bon exemple, permettant de 
+mettre à jour facilement les blocs concernés, l'interface optimise les performances 
+de rendu en limitant les rafraîchissements inutiles de l'interface pour l'utilisateur.
+Le tableau \ref{tab:technique-3DEvent} propose un récapitulatif des choix 
+techniques effectués pour l'implantation des différents pairs. 3DEvent reprend 
+presque les mêmes choix techniques que 3DState. L'implantation de 
+l'intergiciel a nécessité le développement spécifique de la bibliothèque 
+webrtc-eventstore pour pouvoir proposer une interface homogène dédiée à la 
+synchronisation du journal d'événements en utilisant WebRTC sur deux types 
+d'instances différentes. 
+
+\begin{table}[]
+	\centering
+	\caption{Récapitulatif des choix techniques de 3DEvent}
+	\label{tab:technique-3DEvent}
+	\begin{tabular}{llll}\toprule
+		& \textbf{Plateforme / Service} & \textbf{Bibliothèque (version)} & 
+		\textbf{Développements} \\\midrule
+		\multirow{3}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Instance \\ 
+		Web\end{tabular}}}     & Rendu WebGL                   & Three.JS 
+		(v0.84)                &                         \\
+		& Gestionnaire d'événement      & signal-js (v1.0.0)              & 
+		CQRSBus                 \\
+		& WebRTC                        & peerjs                          & 
+		webrtc-eventstore       \\\hline
+		\multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Instance \\ 
+		Serveur\end{tabular}}} & WebRTC                        & 
+		node-webrtc                     & webrtc-eventstore       \\
+		& NodeJS (v8.7)                 & ExpressJS (v5.0.0)              
+		&                         \\\hline
+		\textbf{BDD}                                                                          
+		&                               & EventStore (v4.0.3)             &       
+		\\\hline\bottomrule                 
+	\end{tabular}
+\end{table}
+
 \paragraph{Testabilité}
-\section{Conclusion du chapitre}
+\todo{finir}

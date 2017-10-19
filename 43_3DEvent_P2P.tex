@@ -41,8 +41,7 @@ qui lui permet de démarrer l'échange de données.
 
 Dans 3DEvent, le choix d'avoir un transport fiable et non ordonné a été fait pour 
 respectivement garantir l'arrivée d'une donnée émise par l'utilisateur au sein de 
-l'application et permettre des échanges asynchrones\todo{add \S sur "en cas de 
-défaillance? }.
+l'application et permettre des échanges asynchrones.
 En cas d'arrêt soudain du serveur, si une connexion a été établie préalablement 
 entre les clients et est toujours en cours, elle n'est pas impactée par la défaillance 
 du serveur.
@@ -124,30 +123,40 @@ contenu \gls{3D} : niveaux de détails \cite{Chu2012,Hu2008}, progressif
 \cite{Cheng2009,Limper2014}, mise en cache \cite{Jia2014}, compression / 
 décompression
 \cite{Lavoue2013,Ponchio2015,Maglo2013a}. 
-Une catégorisation plus précise du flux continu peut être donnée selon la manière dont le 
-contenu est généré : 
-en direct (\textit{live} ou \textit{push}) et à la demande (\textit{on-demand} ou 
-\textit{pull}).  
-\todo{finir: 
-	chaque client receptionne les info qui l’interesse : une scene en priorite?
-	les messages sont stockes localement
-	chaque client s’occupe de maintenir sa coherence
-	et s’interroge les uns les autre pour coherenc e globale.
-	->bcp de messages emis}
+Une catégorisation plus précise du flux continu peut être donnée selon la manière 
+dont le contenu est généré : en direct (\textit{live} ou \textit{push}) et à la demande 
+(\textit{on-demand} ou \textit{pull}).  
 
+Les requêtes sur le contenu que les n\oe uds doivent récupéré sont effectué selon 
+un ordre de priorité déterminé par l'intérêt qu'ils portent au contenu. Par exemple, 
+les scènes sont récupérées en priorité par rapport aux maillages et aux 
+informations des autres utilisateurs. 
+
+Les données sont transmises sous forme de morceaux (\textit{chunk}) de 16 
+octets maximum car Chrome impose une limite sur la taille des messages 
+envoyés. L'application se charge donc de la création des morceaux et de les 
+envoyer. Ceci a été intégré dans le protocole d'échange de l'application. C'est une 
+des raisons qui a encouragé le choix d'un transport non fiable et non ordonné car 
+l'application est déjà en charge de manipuler les données qui vont transiter sur le 
+réseau. D'autre part, le standard WebRTC n'étant pas implanté de la même 
+manière sur tous les navigateurs, le fait déléguer une partie de la gestion des 
+données à l'application permet de mieux gérer le traitement qu'elles subissent. Les 
+effets collatéraux à ce choix sont doubles : la taille des messages qui transitent 
+est allégée, cependant il faut d'envoyer plus de messages pour maintenir la 
+ la cohérence et la synchronisation.
 
 
 \subsubsection{Gestion des événements dans le flux d'un agrégat}
 
 Une connexion RTCDataChannel peut être configurée selon 
-les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancement. 
+les critères de fiabilité et d'ordonnancement. 
 Dans l'intergiciel de 3DEvent, cette configuration est : non fiable et non ordonnée. 
 C'est l'application qui est en charge de \og ré-ordonner\fg{} les événements. En 
 effet, les événements sont associés à des agrégats. Comme chaque agrégat 
 possède un flux d'événements dédié et numéroté il est alors simple pour 
 l'application de les 
 ordonner lorsqu'elle les réceptionne. 
-Lors de la synchronisation (Section \todo{ref section sync}), les 
+Lors de la synchronisation des pairs, les 
 événements manquants sont demandés successivement à tous les pairs. Lors 
 qu'un pair reçoit les événements il les stocke dans le flux correspondant à 
 l'agrégat. Si un événement est manquant, les suivants sont quand même stockés 
@@ -158,7 +167,7 @@ l'agrégat jusqu'au prochain événement manquant (ou la fin du flux). Les
 d'être directement en capacité de poursuivre la construction de l'état de l'agrégat. 
 Cette mécanique tire avantage des Snapshots (présentés dans \ref{sec:snapshot}) 
 qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déjà d'un 
-état avancé.\todo{mettre en avant cette partie}
+état avancé.
 
 
 \begin{figure}
