@@ -4,7 +4,7 @@ L'architecture de communication décrite dans le chapitre précédent nécessite
 l'implémentation d'un intergiciel \gls{P2P} compatible avec les besoins liés à la 
 3D, le web et la collaboration. Cette section décrit les politiques de connexion 
 pour l'éditeur présenté dans la section précédente ainsi que les mécanismes de 
-synchronisation nécessaire à l'échange de données dans l'application. 
+synchronisation nécessaires à l'échange de données dans l'application. 
 
 \subsubsection{\textit{Signaling} et connectivité}
 L'assomption est faite que tous les clients utilisent des navigateurs qui 
@@ -26,8 +26,8 @@ transiter par des intermédiaires pour atteindre tous les pairs et par conséque
 temps de transmission est augmenté (exemple d'une distribution en ligne). 
 
 
-Lors de la phase de \textit{signaling} c'est donc la partie gestion des instances du 
-serveur qui gère la politique de connexion des données. Dans le prototype réalisé 
+ C'est donc la partie gestion des instances du 
+serveur qui gère la politique de connexion des données lors de la phase de \textit{signaling}. Dans le prototype réalisé, 
 la connectivité minimum entre les différents pairs participant à la même scène est 
 fixée à 2. Cette politique permet de créer un maillage réseau qui n'est pas trop 
 dense en considérant que le nombre maximum d'utilisateur ne dépassera pas dix.
@@ -60,7 +60,7 @@ hétérogènes (3D, images,
 informations) l'interopérabilité est facilitée.
 
 Le Listing  \ref{jsonstore} représente la structure de données utilisée sur le réseau 
-lorsqu'un événement est transmis. Seule la partie $data$ est utilisée au sein du pair 
+lorsqu'un événement est transmis. Seule la partie $data$ est utilisée par le client
 pour faire les manipulations en \gls{CQRS} car le type de l'instance d'événement 
 manipulé est connu. 
 
@@ -102,9 +102,9 @@ système de clé / valeur. La configuration du client est également
 stockée localement. Grâce à ce système, il est possible d'avoir une 
 persistance des données à travers les sessions du navigateur. Le contenu stocké 
 correspond aux données générées par un utilisateur et par ses collaborateurs. Les 
-répliques stockées sur chaque navigateur permettent à un utilisateur une plus 
+répliques stockées sur chaque navigateur permettent une plus 
 grande 
-autonomie en cas de déconnexion. C'est également un moyen de distribuer entre 
+autonomie des utilisateurs en cas de déconnexion. C'est également un moyen de distribuer entre 
 les clients les 
 mises à jour qu'ils génèrent grâce au protocole de 
 \gls{streaming3D} (cf. \ref{streamingprotocol}) sans passer par le serveur.
@@ -124,11 +124,11 @@ contenu \gls{3D} : niveaux de détails \cite{Chu2012,Hu2008}, progressif
 décompression
 \cite{Lavoue2013,Ponchio2015,Maglo2013a}. 
 Une catégorisation plus précise du flux continu peut être donnée selon la manière 
-dont le contenu est généré : en direct (\textit{live} ou \textit{push}) et à la demande 
+dont le contenu est généré : en direct (\textit{live} ou \textit{push}) ou à la demande 
 (\textit{on-demand} ou \textit{pull}).  
 
-Les requêtes sur le contenu que les n\oe uds doivent récupéré sont effectué selon 
-un ordre de priorité déterminé par l'intérêt qu'ils portent au contenu. Par exemple, 
+Les requêtes sur le contenu que les n\oe uds doivent récupérer sont effectuées selon 
+un ordre de priorité déterminé par l'intérêt que les n\oe uds portent au contenu. Par exemple, 
 les scènes sont récupérées en priorité par rapport aux maillages et aux 
 informations des autres utilisateurs. 
 
