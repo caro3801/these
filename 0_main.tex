@@ -17,12 +17,14 @@
 %\usepackage[hide=true]{nobibprint}
 \begin{document}
 	\include{glossaire}
-	\frontmatter
-	\begin{titlepage}
-	
+	\pagestyle{empty}
 	\includepdf[pages={1}]{pagedegarde/example.pdf}
+\cleardoublepage
+\includepdf[pages={1}]{pagedegarde/example.pdf}
+\cleardoublepage
 
-	\end{titlepage}
+\pagestyle{fancy}
+\frontmatter
 	%\maketitle
 	\dominitoc
 	\include{resume}
@@ -60,4 +62,7 @@
 \bibliography{mendeley}
 % ----- chapitre Annexes
 \include{7_annexes}
+\clearpage
+		\include{resume_back}
+
 \end{document}

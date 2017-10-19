@@ -1,0 +1,76 @@
+%!TEX root = _main.tex
+\pagestyle{empty} 
+\clearpage
+\pagebreak
+{\centering
+\section*{Résumé}}
+\small 
+L’évolution technologique du web durant ces dernières années a favorisé l’arrivée 
+d’environnements virtuels collaboratifs pour la modélisation 3D à grande échelle. 
+Alors que la collaboration réunit dans un même espace partagé des utilisateurs 
+distants géographiquement pour un objectif de collaboration commun, les 
+ressources 
+matérielles qu'ils apportent (calcul, stockage, 3D ...) avec leurs connaissances 
+sont encore trop rarement utilisées et cela constitue un défi. Il s'agit en effet 
+de proposer un système simple, performant et transparent pour les utilisateurs 
+afin de permettre une collaboration efficace à la fois sur le volet computationnel 
+mais aussi, bien entendu, sur l'aspect métier lié à la modélisation 3D sur le web.
+Pour rendre efficace le passage à l’échelle, de nombreux systèmes utilisent une 
+architecture réseau dite "hybride", combinant client serveur et pair-à-pair. La 
+réplication optimiste s'adapte bien aux propriétés des ces environnements répartis 
+: la dynamicité des utilisateurs et leur nombre, le type de donnée traitées (3D) 
+et leur taille. 
+
+Cette thèse présente un modèle pour les systèmes d’édition collaborative en 3D 
+sur le web. L'architecture cliente (3DEvent) permet de déporter les 
+aspects métiers de la 3D au plus près de l’utilisateur sous la forme d’évènements. 
+Cette architecture orientée événements repose sur le constat 
+d’un fort besoin de traçabilité et d’historique sur les données 3D lors de 
+l’assemblage d’un modèle. Cet aspect est porté intrinsèquement par le patron de 
+conception event-sourcing. Ce modèle est complété par la définition d’un 
+intergiciel en pair-à-pair. Sur ce dernier point, nous proposons d'utiliser la 
+technologie WebRTC qui présente une API familière aux développeurs de services 
+en infonuagique. Une évaluation portant sur deux études utilisateur concernant 
+l’acceptance du modèle proposé a été menée dans le cadre de tâches 
+d’assemblage de 
+modèles 3D sur plusieurs groupes d’utilisateurs.
+
+\textbf{Mot clés :} environnement virtuel collaboratif, réseau pair-à-pair, 
+WebRTC, web 3D, conception 3D, traitement réparti évènementiel, architecture 
+hybride, event-sourcing.
+
+{\centering
+\section*{Abstract}}
+
+Web technologies evolutions during last decades fostered the development of 
+collaborative virtual environments for 3D design at large scale. Despite the fact 
+that collaborative environments gather in a same shared space geographically 
+distant users in a common objective, the hardware ressources of their clients (
+calcul, storage, graphics ...) are often underused because of the challenge it 
+represents. It is indeed a matter of offering an easy-to-use, efficient and 
+transparent collaborative system to the user supporting both computationnal and 
+3D 
+design visualisation and business logic needs in heterogeneous web 
+environments. 
+To scale well, numerous systems use a network architecture called "hybrid",  
+combining both client-server and peer-to-peer. Optimistic 
+replication is well adapted to distributed application such as 3D collaborative 
+envionments : the dynamicity of users and their numbers, the 3D data type 
+used and the large amount and size of it.
+
+This document presents a model for 3D web-based collaborative editing systems. 
+This model integrates 3DEvent, an client-based architecture allowing us to bring 
+3D business logic closer to the user using events. Indeed, the need of traceability 
+and history awareness is required during 3D design especially when several 
+experts are involved during the process. This aspect is intrinsec to event-sourcing 
+design pattern. This architecture is completed by a peer-to-peer middleware 
+responsible for the synchronisation and the consistency of the system. To 
+implement it, we propose to use the recent web standard API called WebRTC, 
+close to cloud development services know by developers. To evaluate the model, 
+two user studies were conducted on several group of users concerning its 
+responsiveness and the acceptance by users in the frame of cooperative 
+assembly tasks of 3D models.
+
+\textbf{Keywords:} collaborative virtual environment, peer-to-peer network, 
+WebRTC, Web 3D, 3D design, distributed event-based system, hybrid 
+architecture, event-sourcing.
