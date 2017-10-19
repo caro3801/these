@@ -56,25 +56,6 @@ Les participants étaient des étudiants de Master ou de Doctorat en Informatiqu
 (pas nécessairement familiers avec les environnements 
 3D). Ils étaient autorisés à communiquer entre eux.
 
-\begin{figure}[ht!]
-	\centering
-	
-	\subfloat[Translation (environnement \gls{3D}) et visualisation de l'historique 
-	(panneau 
-	latéral)]{\includegraphics[width=0.77\textwidth]{eps/1translatehisto.eps}\label{fig:ui1}}\hfill
-	\subfloat[Rotation (environnement \gls{3D}) et outils pour la manipulation d'objet 
-	\gls{3D} 
-	(panneau 
-	latéral)]{\includegraphics[width=0.77\textwidth]{eps/2rotatedetail.eps}\label{fig:ui2}}\hfill
-	\subfloat[Mise à l'échelle (environnement \gls{3D}) et liste des collaborateurs 
-	(panneau 
-	latéral)]{\includegraphics[width=0.77\textwidth]{eps/3scalecollab.eps}\label{fig:ui3}}\hfill
-	\caption{Interface utilisateur pendant une session collaborative (trois 
-	personnes)}{Les boîtes englobantes représentent la sélection des différents 
-	collaborateurs pendant la session.}
-	\label{fig:screenshots}
-\end{figure}
-
 \paragraph{Procédure}
 Les modèles \gls{3D} utilisés lors de l'expérience sont décrits dans le Tableau 
 \ref{table:models_xp2}. L'expérimentation se déroule en trois phases : 
@@ -147,13 +128,35 @@ connexion 4G.
 \label{sec:res}
 
 La Figure \ref{fig:screenshots} montre quelques captures d'écran durant une 
-session collaborative sur le modèle \textit{Rotor} ; et la Figure \ref{fig:ui4} montre 
-les premiers événements enregistrés dans la base de données. 
+session collaborative sur le modèle \textit{Rotor} :  la Figure \ref{fig:ui2} montre 
+l'environnement de l'utilisateur alors qu'il est en train de faire une rotation sur une 
+des pales et la Figure \ref{fig:ui3} montre la réalisation d'une mise à l'échelle dans 
+l'environnement 3D.
+\begin{figure}[ht!]
+	\centering
+	
+	\subfloat[Rotation (environnement \gls{3D}) et outils pour la manipulation d'objet 
+	\gls{3D} 
+	(panneau 
+	latéral)]{\includegraphics[width=0.77\textwidth]{eps/2rotatedetail.eps}\label{fig:ui2}}\hfill
+	\subfloat[Mise à l'échelle (environnement \gls{3D}) et liste des collaborateurs 
+	(panneau 
+	latéral)]{\includegraphics[width=0.77\textwidth]{eps/3scalecollab.eps}\label{fig:ui3}}\hfill
+	\caption{Interface utilisateur pendant une session collaborative (trois 
+		personnes)}{Les boîtes englobantes représentent la sélection des différents 
+		collaborateurs pendant la session.}
+	\label{fig:screenshots}
+\end{figure}
 
+La Figure \ref{fig:ui4} est une capture d'écran de l'interface Event Store qui montre 
+les premiers événements enregistrés dans la base de données. Tous les 
+événement enregistré sont nommés selon la version et le mot clé de l'agrégat 
+concerné (ex: 18@scene-turbine). Cela permet de catégoriser les événements et 
+de faciliter leur requête.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{eps/eventstore.eps}
+	\includegraphics[width=\columnwidth]{eps/eventstore.eps}
 	\caption{Persistance long-terme (Event Store\textsuperscript{\textregistered}), 
 		base de données/outil de monitoring}
 	\label{fig:ui4}

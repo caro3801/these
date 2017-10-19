@@ -4,6 +4,13 @@ rendu 3D dans le navigateur. Le framework ThreeJS a été choisi pour utiliser
 WebGL qui utilise le paradigme impératif, largement adopté dans la communauté 
 du web 3D.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\columnwidth]{eps/editorpresentation.eps}
+	\caption{Interface de 3DState}
+	\label{fig:3Dstateinterface}
+\end{figure}
+
 La Figure \ref{fig:3Dstateinterface} représente l'interface de l'éditeur implanté. 
 l'utilisateur à accès a une liste des scènes. Lorsqu'une scène est sélectionnée elle 
 est présentée ainsi : titre de la scène, nom des collaborateurs présents, outils 
@@ -19,15 +26,18 @@ repère \og local\fg{} ou dans le repère \og monde\fg{} selon l'état de la cas
 cocher \og local\fg{}. L'utilisateur à peu de retours indiquant le résultat de ses 
 actions.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.6\columnwidth]{eps/editorpresentation.eps}
-	\caption{Interface de 3DState}
-	\label{fig:3Dstateinterface}
-\end{figure}
+
 
 \subsection{Gestion de la session}
-\begin{figure}[h]
+
+Lorsqu'un utilisateur rejoint une session, il suit le déroulement des opérations 
+décrit dans la Figure \ref{fig:sequence_state}. 
+Dans un premier temps, afin de récupérer les données liées à l'espace de travail, 
+le client web de l'utilisateur qui se rend sur une scène récupère 
+tous les objets associés à la scène dans la base de données. Les objets de la 
+scène sont renvoyés à l'éditeur pour les afficher. 
+
+\begin{figure}[h!]
 	\centering
 	\includegraphics[trim={0 0 0 3cm},clip,width=0.9\columnwidth]
 	{eps/sequence_wscg.eps}
@@ -35,12 +45,7 @@ actions.
 		architecture \og orientée état\fg{}}
 	\label{fig:sequence_state}
 \end{figure}
-Lorsqu'un utilisateur rejoint une session, il suit le déroulement des opérations 
-décrit dans la Figure \ref{fig:sequence_state}. 
-Dans un premier temps, afin de récupérer les données liées à l'espace de travail, 
-le client web de l'utilisateur qui se rend sur une scène récupère 
-tous les objets associés à la scène dans la base de données. Les objets de la 
-scène sont renvoyés à l'éditeur pour les afficher. 
+
 Dans un second temps, le système établit les connexions \gls{P2P} entre les 
 clients de manière automatique et complète (topologie réseau en maillage 
 complet) après avoir récupéré les identifiants des autres utilisateurs auprès du 
