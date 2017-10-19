@@ -53,7 +53,7 @@ Les fonctionnalités graphiques proposées par WebGL sont un peu réduites par
 rapport à celles d'OpenGL dont l'\gls{API} évolue plus vite et propose plus de 
 flexibilité et d'optimisations. Cependant, les performances graphiques restent très 
 correctes car le navigateur est quand même capable d'utiliser les processeurs 
-graphiques du terminal (GPU) pour les calculs et les rendus \gls{3D}.
+graphiques du terminal (\gls{GPU}) pour les calculs et les rendus \gls{3D}.
 
 Pour faire le lien entre le modèle et l'expérimentation, l'implantation du modèle a 
 pris la forme d'un éditeur pour la modélisation \gls{3D} haut niveau permettant de 
@@ -61,9 +61,10 @@ visualiser et manipuler des objets \gls{3D} de manière collaborative dans un
 environnement web.
 
 Dans chacun des prototypes, les interactions de bases sont les suivantes :
-\begin{description}
+\begin{itemize}
 	
-	\item[Visualiser, naviguer, utiliser les outils de transformation] L'utilisateur peut, 
+	\item \textit{Visualiser, naviguer, utiliser les outils de transformation.} 
+	L'utilisateur peut, 
 	com\-me dans un environnement \gls{3D} classique, interagir avec la vue en 
 	utilisant 
 	la souris (survol, clic) et en bougeant la caméra (déplacements). Il peut 
@@ -71,20 +72,21 @@ Dans chacun des prototypes, les interactions de bases sont les suivantes :
 	translation, de rotation et d'homothétie de trois manières différentes: 
 	directement dans le \textit{viewport}, via le 
 	menu ou via la console du navigateur.
-	\item[Charger des modèles \gls{3D}] L'éditeur gère les formats de 
+	\item \textit{Charger des modèles \gls{3D}.} L'éditeur gère les formats de 
 	fichier 3D les plus populaires (OBJ, PLY, DAE, glTF)
-	\item[Changement de référentiel] La modification des coordonnées de 
+	\item \textit{Changement de référentiel.} La modification des coordonnées de 
 	réfé\-ren\-ces (local/global)  pour les différentes transformations possibles
 	\item[Grid snapping] Cette fonctionnalité permet d'aligner les modèles avec la 
 	grille avec un effet de magnétisme sur les intersection de la grille.
-	\item[Changement de point de vue] L'utilisateur peut à tout moment passer de 
+	\item \textit{Changement de point de vue.} L'utilisateur peut à tout moment 
+	passer de 
 	son point de vue à celui d'un autre utilisateur. Le choix d'implanter ce type de 
 	fonctionnalité s'inscrit dans la perspective de sensibilisation de l'utilisateur au 
 	travail de ses collaborateurs. Ainsi, lors de la session, le fait de prendre le 
 	point de vue d'un collaborateur est une manière de 
 	comprendre son fonctionnement et d'imaginer ses 
 	perspectives de conception à travers l'angle de caméra qu'il aura choisi.
-\end{description}
+\end{itemize}
 
 Ces interactions, communes aux deux prototypes présentés, ne 
 représentent cependant pas l'entièreté des fonctionnalités nécessaires à un 

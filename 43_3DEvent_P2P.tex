@@ -137,7 +137,7 @@ en direct (\textit{live} ou \textit{push}) et à la demande (\textit{on-demand} 
 
 
 
-\subsubsection{Gestion des événements des agrégats}
+\subsubsection{Gestion des événements dans le flux d'un agrégat}
 
 Une connexion RTCDataChannel peut être configurée selon 
 les critères (Section \todo{ref section config}) de fiabilité et d'ordonnancement. 
@@ -156,7 +156,7 @@ redemandé jusqu'à son obtention, laquelle provoque le déblocage de l'état de
 l'agrégat jusqu'au prochain événement manquant (ou la fin du flux). Les 
 événements qui ont été stockés \og en attendant\fg{} permettent à l'application 
 d'être directement en capacité de poursuivre la construction de l'état de l'agrégat. 
-Cette mécanique tire avantage des Snapshots (présentés dans \todo{ref section}) 
+Cette mécanique tire avantage des Snapshots (présentés dans \ref{sec:snapshot}) 
 qui réduisent la taille des flux en mémoire pour chaque agrégat qui part déjà d'un 
 état avancé.\todo{mettre en avant cette partie}
 
