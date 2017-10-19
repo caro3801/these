@@ -393,7 +393,7 @@ Safari depuis v9.3, Android Browser depuis v53 et Chrome for Android depuis v53)
 WebGL 2.0 \cite{Khronos2016} basée sur OpenGL~ES~3.0 \cite{Khronos2008}, 
 déjà publiée en tant que brouillon, est en phase 
 expérimentale\footnote{\url{http://caniuse.com/\#feat=webgl2}. Consulté le 
-	16/10/2017}.\improve{add some example of coviz web} La Figure 
+	16/10/2017}. La Figure 
 \ref{fig:webglstats} montre l'évolution du support de WebGL~1 et WebGL~2 durant 
 ces dernières années sur les différentes plateformes possédant un navigateur 
 web\footnote{Images capturées sur \url{https://webglstats.com/}. Les statistiques 
@@ -417,7 +417,10 @@ chargement), cette exigence varie selon le domaine : elle est prépondérante su
 web en général. 
 Par exemple, dans un domaine connexe comme le e-commerce, une étude réalisée 
 en 2009 explique qu’une grande partie des internautes abandonneraient leurs achats 
-en ligne si les pages mettaient deux secondes ou plus à charger\footnote{\url{https://www.akamai.com/us/en/about/news/press/2009-press/akamai-reveals-2-seconds-as-the-new-threshold-of-acceptability-for-ecommerce-web-page-response-times.jsp}}. De nos jours, ce 
+en ligne si les pages mettaient deux secondes ou plus à 
+charger\footnote{\href{https://www.akamai.com/us/en/about/news/press/2009-press/akamai-reveals-2-
+		seconds-as-the-new-threshold-of-acceptability-for-ecommerce-web-page-response-times.jsp}{www.akamai.com}}.
+De nos jours, ce 
 délai a été réduit au quart de seconde pour les grandes entreprises du web. Jakob 
 Nielsen \cite{Nielsen1993a} indique quatre valeurs limites concernant les 
 temps de réponses :
@@ -944,9 +947,9 @@ tous les participants.
 
 	\subsection{Introduction}
 % old evenements et collaboration
-Les systèmes basés événements sont très populaires lorsqu'il s'agit de 
-collaboration \cite{Helmer2011}. Les événements sont utilisés dans la 
-communauté  \gls{CSCW} pour la sensibilation aux activités distribuées 
+Les systèmes orientés événements (\gls{EDA}) sont très populaires lorsqu'il s'agit 
+de systèmes collaboratifs \cite{Helmer2011}. Les événements sont utilisés dans la 
+communauté  \gls{CSCW} pour la sensibilisation aux activités distribuées 
 \cite{Cai2014a} et également l'analyse de conceptions collaboratives 
 \cite{Bang2017}, la spécification d'événements composites pour le support de la 
 collaboration dans la conception logicielle \cite{Yuan2002} ou encore la définition 
@@ -1225,8 +1228,9 @@ Les notions plus détaillées qui se rapportent au \gls{DDD} sont présentées d
 \cite{Evans2003} et \cite{Vernon2013}\footnote{Les différents ouvrages publiés par 
 Vernon s'attachent également à montrer la nécessité pour les différentes 
 branches de l'informatique à proposer des 
-systèmes d'information plus robustes et flexibles face aux nouvelles demandes.}.\info{source: 
-	http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
+systèmes d'information plus robustes et flexibles face aux nouvelles demandes.}.
+%\info{source: 
+%http://blog.octo.com/domain-driven-design-des-armes-pour-affronter-la-complexite/}
 
 Le \gls{DDD} a également l'avantage de fonctionner en harmonie avec les 
 principes de l'\gls{ES}. L'approche logicielle \gls{DDD} étant conçue pour refléter 
@@ -1413,13 +1417,13 @@ courante est de proposer un système principal et d'ajouter une multitude de
 sous-systèmes qui enregistrent les différentes métriques (analyse d'un ou 
 plusieurs axes, \textit{reporting} sur une propriété) du système principal. Avec 
 l'\gls{ES}, il est toujours possible de regarder \og dans le passé\fg{} et de 
-récupérer les données à partir de ce moment. Par comparaison, les avantages de 
-l'\gls{ES} sur l'Active Record sont:
+récupérer les données à partir de ce moment. Par comparaison, les avantages 
+exprimé par Fowler \cite{Fowler2003} de l'\gls{ES} sur l'Active Record sont :
 \begin{itemize}
 	\item un journal complet de tous les changements d'état,
 	\item une traçabilité et un débogage efficace,
 	\item de très bonnes performances,
-	\item pas de mapping objet-relationnel (ORM)\info{citer fowler's book}.
+	\item pas de mapping objet-relationnel (ORM).
 \end{itemize}
 
 	
@@ -1434,7 +1438,7 @@ d'observations possibles :
 	\item deux collaborateurs sont opposés sur la façon de modifier l'objet.
 \end{enumerate*}
 L'origine de ces changements identifiée, le chef de projet pourra alors intervenir 
-et clarifier le sujet. \improve{style exemple}
+et clarifier le sujet. 
 
 \paragraph{Résolution} Avec un système classique, la fonctionnalité doit être 
 créée pour enregistrer ce traitement, puis être testée et implémentée (dans cet 
@@ -1454,24 +1458,24 @@ l'utilisation de
 l'\gls{ES}. En effet, pour récupérer l'état courant à partir de l'Event Store, il est 
 nécessaire de le calculer à partir des événements reçus.
 Le processus  va s'alourdir car chaque événement créé (et stocké) ne sera pas supprimé. Plus la pile d'événements est longue, plus cela va prendre 
-du temps (linéaire), surtout en considérant que les commandes ont parfois besoin de 
-connaître une partie de l'état courant issu de ces événements pour être 
+du temps (linéaire), surtout en considérant que les commandes ont parfois besoin 
+de connaître une partie de l'état courant issu de ces événements pour être 
 déclenchées (Figure \ref{fig:es-without-snapshot-aggregate}).
  
 Un \gls{snapshot} est une capture de l'état de l'agrégat à un 
 moment qui correspond à l'empilement d'événements ayant mené à cet état. Créer 
 un \gls{snapshot} évite de reconstruire un état à partir du début de la 
 vie de l'agrégat (Figure \ref{fig:es-without-snapshot}) ; les nouveaux 
-événements sont empilés à partir de ce snapshot (Figure \ref{fig:es-snapshot}). 
+événements sont empilés à partir de ce snapshot (Figure \ref{fig:es-snapshot}). La 
+ré-hydratation d'un agrégat est réduite au différentiel qui existe entre le snapshot et 
+l'état courant de la projection. 
 L'utilisation du \gls{snapshot} est intéressante à partir du moment où la pile 
-d'événements devient plus lourde que le \gls{snapshot} lui-même. Il est donc 
-important de bien déterminer la périodicité du déclenchement du \gls{snapshot} 
-(temporelle ou selon le nombre d'événements).
- \info{rehydratation d'un agrégat diff avec projection -> eventually consistence (proj 
- = EC /rehy -> 
-	valides}\unsure{Dans tous les autres cas l'utilisation de \textit{snapshots} 
-	permet de contrer proprement ce problème en offrant une forme dénormalisée 
-	de la donnée. }
+d'événements devient plus lourde que le \gls{snapshot} lui-même.
+Il est donc important de bien déterminer la périodicité du déclenchement du 
+\gls{snapshot} (temporelle ou selon le nombre d'événements).
+
+% \info{rehydratation d'un agrégat diff avec projection -> eventually consistence 
+%(proj  = EC /rehy -> valides}
 
 Le parcours des événements se fait classiquement du premier au dernier 
 (\textit{bottom-up}). Si on utilise les \gls{snapshot}, on peut se permettre de les 
@@ -1485,7 +1489,8 @@ les \gls{snapshot}. Sans les snapshots le modèle peut encore varier
 Le fait de travailler avec des \gls{snapshot} crée une dépendance des 
 snapshots qui doivent intégrer les modifications du domaine. Une solution est 
 de recalculer les snapshots quand le domaine est modifié mais cela reste 
-coûteux (et à éviter).\info{versionning event -> retro compatibilité}
+coûteux (et à éviter).
+%\info{versionning event -> retro compatibilité}
 
 \paragraph{Event Sourcing versus Command Sourcing}
 \label{sec:es-vs-cs}

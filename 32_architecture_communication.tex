@@ -212,12 +212,13 @@ La dernière fonction concerne la manière dont le pair auto-organise, à la foi
 ressources locales et son rôle dans le réseau. Le pair détermine les 
 ressources du système et du réseau disponibles et peut surveiller les 
 changements éventuels régulièrement.
-Le pair a connaissance du rôle qui lui est attribué à sa création dans le réseau. Les 
-rôles des pairs (super pair, relai, producteur\dots) dépendent de 
+Le pair a connaissance du rôle qui lui est attribué à sa création dans le réseau. 
+Les rôles des pairs (super pair, relai, producteur\dots) dépendent de 
 capacités comme les ressources du système et du réseau. Le rôle induit les 
 capacités et la configuration de chaque pair, i.e. un pair actif est configuré 
-uniquement pour produire, stocker et relayer les données tandis qu'un pair passif ne fait que stocker et relayer les données. La stabilité du pair peut être indiquée par son niveau de 
-\textit{churn} (dynamicité : rejoindre et quitter un réseau) par exemple. 
+uniquement pour produire, stocker et relayer les données tandis qu'un pair passif 
+ne fait que stocker et relayer les données. La stabilité du pair peut être indiquée 
+par dynamicité par exemple. 
 La Figure \ref{fig:middleware} peut être affinée en fonction du type de 
 réseaux et d'applications. Chaque pair comprend un protocole pour la gestion
 de sessions (ex: REST API) et pour l'échange de données (ex: RTCDataChannels)  
@@ -230,15 +231,16 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 événement. Selon le paradigme auquel elles font référence, elles peuvent 
 être décrites par plusieurs critères:
 
-\begin{description}
-	\item[Spécificité des composants de l'architecture] Les pairs sont la base de la 
+\begin{itemize}
+	\item \textit{Spécificité des composants de l'architecture.} Les pairs sont la 
+	base de la 
 	dissémination de l'information. La partie serveur 
 	centralise les données liées à la persistance long  terme et
 	décentralise la réplication des données à court terme. Cela évite au 
 	serveur 
 	d'être le point central des échanges en déchargeant les canaux passant par le 
 	serveur.
-	\item [Gestion de la session] 
+	\item \textit{Gestion de la session.} 
 	La gestion de la session suit le cycle de vie des pairs au sein du réseau 
 	lorsqu'ils participent à une session collaborative. 
 	Pour intégrer le réseau \gls{P2P} et participer à l'édition d'une scène \gls{3D} de 
@@ -287,7 +289,7 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	de l'onglet du navigateur) ou involontaire (fausse manipulation, navigateur en 
 	panne, coupure internet) signifiant la fin de la session collaborative.
 	
-	\item [Gestion du stockage et structure des données] 
+	\item \textit{Gestion du stockage et structure des données.}
 	Le stockage peut prendre plusieurs formes : \textit{in-memory}, stockage local, 
 	disque dur\dots selon le type de stockage adapté et disponible. 
 	Dans l'architecture hybride, il existe deux niveaux de stockage : la persistence 
@@ -295,7 +297,8 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	locale -- le navigateur.
 	Le serveur assure, d'une part, la centralisation du stockage à long-terme, et 
 	d'autre part, la mise en relation des différents clients.
-	\item [Gestion de la synchronisation et de la cohérence (détection des conflits)] 
+	\item  \textit{Gestion de la synchronisation et de la cohérence (détection des 
+	conflits).}
 	Il existe différentes possibilités de synchronisation des pairs. 
 	
 	L'édition concurrente lors de la collaboration peut être gérée de différentes 
@@ -305,10 +308,14 @@ chacune correspondant au paradigme qu'elles utilisent respectivement : état ou
 	a de lourds impacts sur l'expérience utilisateur (fonctionnalités, interface 
 	utilisateur) et la gestion de la cohérence dans le réseau \gls{P2P}.  
 	
-	\item [Protocole d'échange]
-	La couche \gls{P2P} fournit une dissémination rapide de l'information et 
-	\todo{finir}
-\end{description}
+	\item \textit{Protocole d'échange.}
+	La couche \gls{P2P} fournit une dissémination rapide de l'information et les 
+	méta information sur les liens entre les collaborateurs. Cela peut permettre au 
+	gestionnaire des connexions de mieux évaluer la charge du réseau. Le 
+	protocole d'échange correspond à l'interface générique pour que les pairs 
+	puissent communiquer entre eux. La définition du protocole est fortement 
+	orientée sur la synchronisation.
+\end{itemize}
 
 
 %

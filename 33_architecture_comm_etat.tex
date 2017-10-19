@@ -96,22 +96,23 @@ naïve du processus de synchronisation. La cohérence est garantie par un systè
 de verrouillage des objets. Cela évite notamment les sélections concurrentes et par 
 conséquent les éditions concurrentes. 
 Lors de la récupération de la scène, elle est considérée comme cohérente. 
-Ensuite, le choix d'avoir des connexions \gls{P2P} ordonnées et fiables, ainsi qu'un 
-maillage de pair complet, implique que toute donnée envoyée par un pair est 
+Ensuite, le choix d'avoir des connexions \gls{P2P} ordonnées et fiables, ainsi 
+qu'un maillage de pair complet, implique que toute donnée envoyée par un pair est 
 forcément reçue par les autres. 
+L'échange des mises à jour entre le client (persistance à court terme) et la 
+base de données (à long terme) leur permet de se synchroniser dans un premier 
+temps. La base de données peut également servir en cas de conflits importants ; 
+elle sert de référence.
 
 Lors de la connexion d'un nouveau client, a lieu la synchronisation des deux 
 systèmes de persistance pour obtenir les mises à jour : 
-\improve{l'échange des mises à jour entre le client (persistance à court terme) et la 
-	base de données (à long terme) afin de synchroniser les deux éléments avec. 
-	La base de données peut également servir en cas de conflits importants ; elle sert 
-	de référent.}
+
 \begin{enumerate}
 	\item depuis le client, où l'on distingue trois cas :
 	\begin{enumerate}
 		\item travail "\textit{offline}" (hors ligne) : l'utilisateur a travaillé hors ligne et 
-		doit maintenant publier "en ligne" son travail. Les mises à jour sont publiées sur la 
-		base de données ; le serveur vérifie si aucun conflit ne survient puis 
+		doit maintenant publier "en ligne" son travail. Les mises à jour sont publiées 
+		sur la base de données ; le serveur vérifie si aucun conflit ne survient puis 
 		fusionne (\textit{merge}) les nouvelles entrées avec l'existant; 
 		
 		\item travail "\textit{serverless}" (en collaboration avec entre pairs sans le 
@@ -119,11 +120,9 @@ systèmes de persistance pour obtenir les mises à jour :
 		de créer en collaborant. Ces données n'étant stockées que sur le client, il est 
 		nécessaire de les transmettre à la base de données dès qu'une connexion 
 		est possible. 
-		Cela peut être fait en une fois ou de manière partagée\improve{ça veut dire 
-			quoi?};
 		
 		\item travail "\textit{online}" (en collaboration entre pairs comprenant la partie
-		serveur) : le client envoie régulièrement \improve{combien de temps} ses 
+		serveur) : le client systématiquement ses 
 		nouvelles modifications pour qu'elles soient intégrées à la base de données.
 	\end{enumerate}
 	\item depuis la base de données :
@@ -153,7 +152,7 @@ Les pairs échangent des différentiels d'état sur les objets. Ces messages ne
 contiennent pas d'information sémantique sur le type d'action effectuée par chaque 
 utilisateur. 
 
-\subsubsection{Discussion des problématiques liées à une architecture de 
+\subsubsection{Discussion sur les architectures de 
 communication orientée \og états\fg{}}
 
 La base de données centralisée est beaucoup sollicitée lors des sessions 

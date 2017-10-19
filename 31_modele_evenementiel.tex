@@ -375,8 +375,8 @@ rejoués pour retrouver l'état de l'application.
 Les événements représentent des faits immuables qui sont ajoutés au journal les
 uns après les autres (sans pouvoir en être supprimés), ce qui permet des taux de 
 transaction élevés et une réplication efficace (cf. Section \ref{sec:es}). 
-Dans 3DEvent, plusieurs composants d'\gls{ES} sont étendus selon 
-les applications :
+Dans 3DEvent, plusieurs composants d'\gls{ES} et du \gls{CQRS} sont étendus 
+selon les applications :
 
 \begin{itemize}
 	\item \textit{Acteur.} Un acteur consomme des événements à partir d'un journal 
@@ -384,22 +384,22 @@ les applications :
 	L'état interne dérivé à partir des événements consommés est un modèle 
 	d'écriture 
 	en mémoire (\textit{in-memory}) et contribue à la partie commande (C) du 
-	\gls{CQRS}\info{reference à la section}.
+	\gls{CQRS}.
 	\item \textit{Vue.} Une vue est un acteur qui ne fait que consommer des 
 	événements à 
 	partir du journal d'événements. L'état interne dérivé à partir des événements 
 	consommés est un modèle de lecture en mémoire et contribue à la partie 
-	requête (Q) du \gls{CQRS}\info{reference à la section}.
+	requête (Q) du \gls{CQRS}.
 	\item \textit{Producteur.} Un producteur est un acteur qui produit des 
 	événements à partir du journal d'événements pour mettre à jour la base 
 	de données. L'état interne dérivé à partir des événements consommés est 
 	un modèle de lecture en mémoire et 
-	contribue à la partie requête (Q) du CQRS (cf. Section \ref{sec:CQRS}).
+	contribue à la partie requête (Q) du \gls{CQRS}.
 	\item \textit{Processeur.} Un processeur est un acteur qui consomme des 
 	événements à partir d'un journal d'événements et produit les événements 
 	traités pour un autre journal d'événements. Les processeurs peuvent être 
 	utilisés pour connecter les journaux d'événements au traitement des 
-	événements.\info{reference à la section}.
+	événements.
 \end{itemize}
 
 %\subsubsection{Collaboration événementielle}
@@ -445,7 +445,6 @@ confondus, ils restent bien distincts conceptuellement.
 Le journal d'événements commun est la base des échanges pour communiquer 
 par le biais d'événements de collaboration. Ce type d'architecture se retrouve dans 
 différents cas d'utilisation :
-\improve{est ce que cette section est nécessaire?}
 \begin{itemize}
 	\item \textit{Processus métier distribués.} Les acteurs de différents types 
 	utilisent des événements pour communiquer et parvenir à résoudre un problème 
@@ -453,13 +452,13 @@ différents cas d'utilisation :
 	réagissent à la réception d'événements (programmation réactive), en 
 	mettant à jour l'état de l'application et en produisant de nouveaux événements. 
 	Cette forme de collaboration est appelée collaboration dirigée par les 
-	événements.\improve{ref}
+	événements.
 	\item\textit{Réplication d'état d'Acteur.} Les acteurs de même type consomment 
 	les événements de chacun pour répliquer l'état interne avec une cohérence 
 	causale. Dans 3DEvent, les opérations concurrentes sont autorisées dans 
 	l'environnement pour mettre à jour l'état des acteurs répliqués et permettre la 
 	résolution interactive de conflits, en cas de mises à jour concurrentes et 
-	conflictuelles. \improve{mieux expliquer}
+	conflictuelles.
 	\item \textit{Agrégation d'événements.} Les vues et les producteurs agrègent des 
 	événements à partir d'autres composants pour générer des vues spécifiques à 
 	l'application.
