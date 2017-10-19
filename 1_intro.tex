@@ -620,42 +620,59 @@ posées :
 \end{description}
 
 \section{Contributions}
+Cette thèse expose plusieurs contributions conceptuelles et pratiques.
+Une des contributions mise en avant est la proposition d'un modèle orienté événements pour la visualisation et la manipulation d'objets \gls{3D} dans un environnement web. 
+Cette première contribution insiste sur l'intégration de la partie métier de la 
+\gls{3D} par l'utilisation des patrons de conception \gls{DDD}, \gls{CQRS} et 
+\gls{ES} qui sont très peu confrontés à ce domaine. 
 
-La principale contribution de cette thèse est la définition et l'implémentation d'un 
-ensemble de pratiques dans la gestion des données pour la manipulation d'objets 
-3D de manière collaborative sur web. Cela est très utile pour la gestion de 
-l'historique d'une scène \gls{3D} en utilisant des contenus \gls{3D} de différentes 
-natures. Dans ce but, j'ai choisi le paradigme événementiel et je l'ai 
-intégré à mon modèle de collaboration grâce à l'utilisation de solutions 
-déjà existantes pour le partage et la diffusion de contenus \gls{3D} dans le cadre 
-d'applications collaboratives sur le web.
+La seconde contribution de cette thèse concerne l'architecture de 
+communication dans un environnement collaboratif web. Celle-ci doit permettre au système 
+d'être résilient, léger et transparent pour l'utilisateur. 
+L'architecture hybride proposée repose sur une combinaison de l'architecture 
+client-serveur et l'architecture \gls{P2P}. 
+Cela tient à la nécessaire centralisation de l'information dans un contexte industriel 
+et à la haute disponibilité des ressources que permettent les propriétés du 
+\gls{P2P}. Cette contribution est découpée en deux parties. 
+La première expose une preuve de concept, sur la base du modèle présenté dans 
+\cite{Desprat2015a, Desprat2015b}, avec une architecture de communication simple proposant 
+une diffusion des mises à jour par différentiel d'état. La seconde partie 
+tire avantage de la mise en place du \gls{framework} orienté événements présenté 
+dans \cite{Desprat2016} et utilise la méthode de distribution des informations 
+présenté dans \cite{Desprat2017} pour améliorer la résilience du système. 
+La gestion de données dans un environnement de modélisation 3D est importante, insistant notamment sur la conservation de l'historique des scènes et des objets \gls{3D}. Le paradigme événementiel qui offre au système l'avantage d'être peu couplé comprend ces informations naturellement en plus des informations métier qui sont générée par les collaborateurs dans l'application. En séparant le traitement de vérification des données de celles à visualiser, l'implantation d'un intergiciel \gls{P2P} est facilité d'autant. 
 
-Le manque important de processus et d'outils qui pourraient réellement supporter la modélisation collaborative \gls{3D} sur le web intégrant l'identification de problèmes spécifiques et leur formulation liés a également été constaté. 
-La recherche, cependant, introduit de nouveaux concepts dans le domaine de la gestion de 
-données \gls{3D}. Les contributions de cette thèse peuvent être résumées comme 
-suit.
+Les processus et les outils actuels sont insuffisants pour réellement supporter la modélisation collaborative \gls{3D} sur le web actuellement. Cela concerne notamment l'identification de problèmes spécifiques à la manipulation d'objets 3D et leur formulation du point de vue expert de l'utilisateur pour enfin être intégrer aux applications. 
 
 
 \subsection{Contributions théoriques}
 
 \begin{itemize}
-	\item \improve{réécrire + introduire ref chapitre}Proposition d'un système de 
-	gestion et de visualisation de contenu \gls{3D} avec un historique non linéaire 
-	orienté événements.
+
+	\item Introduction des concepts d'événements métiers liées à la \gls{3D} 
+	comme moyen d'interagir dans une scène \gls{3D}.
+	\item Modèle événementiel pour la manipulation et la visualisation d'objets 3D de manière collaboration : proposition d'un modèle CQRS ES uniquement sur le client avec un historique fonctionnel et une gestion de la cohérence intégrée.
 	\item Définition d'une architecture hybride (client serveur et \gls{P2P}) adaptée à 
 	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur le web en 
-	temps réel.
-	\item Introduction des concepts d'événements métiers liées à la \gls{3D} 
-	comme moyen d'interagir dans une scène \gls{3D} multi-échelle.
+	temps réel:
+	\begin{itemize}
+		\item proposition d'un architecture hybride orientée état : transmission par différentiels d'état avec une cohérence forte ;
+	    \item proposition d'un architecture hybride orientée événement : transmission de notifications d'événements avec une cohérence éventuelle.
+	\end{itemize}
+	
 \end{itemize}
 \subsection{Contributions pratiques}
 \begin{itemize}
-	\item \improve{réécrire + introduire ref chapitre}Définition d'une API ouverte et 
-	de l'application cliente utilisation les principes et les technologies du web.
-	\item Implémentation d'un prototype 3DEvent Client et de son évaluation 
-	utilisateur. 
-	\item Implémentation d'un prototype 3DEvent Architecture et de son évaluation.
-	
+
+	\item Définition d'un framework dédié à la modélisation 3D collaborative sur le web.
+	\item Définition d'une API ouverte et de l'application cliente utilisant les principes et les technologies du web.
+	\item Implantation du prototype 3DState comme concept applicatif pour la modélisation 3D collaborative.
+	\item Implantation du prototype 3DEvent proposant :
+	\begin{itemize}
+	    \item une interface orientée tâches spécifique à l'assemblage 3D
+    	\item un outil de monitoring de la collaboration
+    	\item un intergiciel P2P web proposant, en plus du navigateur, l'intégration de nouveaux types de pairs pour améliorer la distribution lors de la collaboration.
+	\end{itemize}
 \end{itemize}
 
 %\bibentry{Desprat2017}
@@ -664,21 +681,21 @@ suit.
 
 %\section*{Organisation du manuscrit}
 La \gls{3D} et les environnements virtuels collaboratifs \gls{3D} sont 
-de plus en plus présents dans l'industrie de la \gls{CAO}, ce qui rend nécessaires de nouveaux 
-modèles, outils et méthodes facilitant la mobilité et l'autonomie des utilisateurs. Le contenu multimédia \gls{3D} est également devenu omniprésent dans notre quotidien. De ce fait, développer 
-de nouveaux outils pour créer manipuler et partager du contenu \gls{3D} est crucial.
-Le chapitre \info{ref chapitre} présente une architecture de communication hybride 
-permettant de faciliter la transmission des objets \gls{3D} en temps réel de 
-manière transparente pour l'utilisateur. La création d'\gls{EVC3D} sur le web nécessite de nouvelles architectures tirant partie des nouveaux standards du 
-\gls{W3C}. Puis le chapitre \info{ref cqrs} présente deux \info{2 contrib cqrs à 
-	identifier} contributions reposant sur l'architecture cliente de 3DEvent pour 
-manipuler des objets \gls{3D} avec une grande traçabilité et de manière autonome. 
-%La première contribution propose 
-Finalement, le chapitre\info{ref chap final} aborde le problème spécifique de 
-la transmission du contenu \gls{3D} lors d'une session collaborative en temps réel. 
-En considérant et développant un modèle orienté événements, 3DEvent dérive 
-des 
-stratégies pour délivrer et obtenir une scène \gls{3D} en continu (\textit{streaming} 
-en 
-anglais) en s'appuyant sur les différentes configurations matérielles, utilisateurs et 
-réseaux.
+de plus en plus présents dans l'industrie de la \gls{CAO}, ce qui rend nécessaires de nouveaux
+modèles, outils et méthodes facilitant la mobilité et l'autonomie des utilisateurs. Le contenu multimédia \gls{3D} est également devenu omniprésent dans notre quotidien. De ce fait, développer de nouveaux outils pour créer manipuler et partager du contenu \gls{3D} est crucial.
+
+Le chapitre \ref{sec:chap:eda} présente l'état de l'art dans la collaboration 3D en s'intéressant à la modélisation 3D collaborative sur le web, puis aux problématiques de temps réel dans ce contexte et enfin à l'apport des systèmes événementiels distribués pour la collaboration.
+
+Ensuite, le chapitre \ref{sec:chap:contrib} décrit les contributions conceptuelles concernant le modèle événementiel proposé dans cette thèse ainsi que les deux architectures de communications hybrides (par états et par événements) qui ont été modélisées pour créer et échanger en collaborant sur des modèles 3D de manière synchrone et répartie.
+
+Dans le chapitre \ref{sec:chap:proto} l'implantation des contributions est décrite sous la 
+forme de deux prototypes. Le premier, 3DState, s'appuie sur l'architecture de communication 
+\og orientée états\fg{}. Le second, 3DEvent, utilise à la fois le modèle événementiel pour 
+proposer une interface orientée tâches pour que les utilisateurs puissent manipuler des objets \gls{3D} de manière autonome, et  l'architecture de communication \og orientée 
+événements\fg{} pour proposer un intergiciel \gls{P2P} qui s'adapte à différents types de 
+clients, offrant également une bonne traçabilité des données.
+
+Puis, le chapitre \ref{sec:chap:expe} présente les deux expérimentations qui ont été menées respectivement sur les deux prototypes développés. Chacune propose, sous la forme d'une étude utilisateur, d'évaluer le prototype sur la base du cas d'usage présenté dans la section \ref{sec:use_case} : les utilisateurs doivent effectuer des assemblages de manière collaborative à partir d'un modèle séparé en plusieurs pièces réparties entre eux. 
+Les résultats sont extraits principalement des questionnaires, mais également de l'outil de surveillance pour 3DEvent. Ils sont ensuite analysés et comparés en détail.
+
+Enfin, le chapitre \ref{sec:chap:conclu} contient la conclusion de la thèse présentant les réponses aux \textbf{QR} posées dans cette introduction et ouvrant sur les potentielles applications des contributions portées par cette thèse ainsi que les perspectives de recherche qu'elle ouvre.
