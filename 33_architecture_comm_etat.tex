@@ -42,7 +42,7 @@ Avec une base de données NoSQL utilisant des schémas dynamiques, les
 données sont stockées sous forme de document. Chaque document est 
 auto-descriptif et peut contenir des valeurs qui s'imbriquent sous la forme d'une 
 structure en arbre hiérarchique. Une collection consiste à grouper des documents, 
-équivalent dans une base de données relationnelle à la notion de table. La base de 
+équivalent, dans une base de données relationnelle, à la notion de table. La base de 
 données contient deux types de collections : les scènes et les géométries. Une 
 collection de scènes contient des scènes qui sont décrites par leur identifiant et 
 les méta-données de l'espace virtuel \gls{3D}, ainsi que la liste des contributeurs et 
@@ -184,7 +184,7 @@ utilisateurs.
 Même si l'application peut prendre le relais et permettre la relâche du 
 verrou au bout d'un certain temps, l'expérience utilisateur peut être dégradée 
 pendant cette période.
-Le maintien de la cohérence est à peu près garanti dans ce modèle si l'on 
+Le maintien de la cohérence est garanti dans ce modèle si l'on 
 considère un environnement où la fréquence des modifications n'est pas très 
 élevée, et que tous les clients communiquent leur horloge locale pour établir un 
 référentiel de temps concernant les mises à jour. 

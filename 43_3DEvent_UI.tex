@@ -122,17 +122,17 @@ et l'état courant $state_n$. L'utilisateur peut à partir de cette visualisatio
 de \og revenir en arrière\fg{} sans perdre les données entre $state_n$ et $state_x$ 
 car dans le système présenté ici, cela s'effectue par compensation (cf 
 Event-Sourcing 
-Section X)\improve{annulation d'un événement ou juste ES}.
+Section \todo{ref section})\improve{annulation d'un événement ou juste ES}.
 
 Dans chaque onglet se trouvent différents blocs \gls{HTML}, avec des 
 comportements spécifiques à un agrégat et injectés dynamiquement. Ces blocs 
-correspondent aux vues de ce modèle.
+correspondent à des parties de l'interface (vues) dans le prototype.
 
 Parmi les vues disponibles dans le système, une grande partie est dédiée à 
 l'\gls{IU} de l'application web pour le cas d'utilisation de la modélisation 3D. 
-D'autres views sont disponibles pour un autre type d'utilisation destinée à 
+D'autres vues sont disponibles pour un autre type d'utilisation destinée à 
 l'observation des comportements des utilisateurs, élément primordiale dans 
-une expérimentation.
+cette expérimentation.
 
 
 
@@ -182,7 +182,7 @@ cloné et devient l'objet fantôme ($O_f$). $O_f$ conservent les mêmes proprié
 représenté avec de la 
 transparence d'où le terme \og fantôme\fg{}. 
 L'objet $O_f$ prend alors le focus de sélection pour que l'utilisateur le manipule à 
-la place de l'objet $O_f$. 
+la place de l'objet $O_o$. 
 Lorsque l'utilisateur relâche $O_f$, alors la modification intentée s'applique sur 
 $O_o$ avec le principe du \textit{Last Write Wins} (le dernier gagne).
 La Figure \ref{fig:ghostselection} 
