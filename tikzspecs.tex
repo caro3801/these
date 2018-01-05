@@ -89,18 +89,33 @@ minimum width=2.5cm, minimum height=0.8cm]
 	breaklines=true,
 	frame=lines,
 }
+
+%\lstdefinelanguage{json}{
+%	%backgroundcolor=\color{background},
+%	string=[s]{"}{"},
+%	stringstyle=\color{blue},
+%	comment=[l]{:},
+%	commentstyle=\color{black},
+%	literate= 
+%	{\{}{{{\color{delim}{\{}}}}{1}
+%	{\}}{{{\color{delim}{\}}}}}{1}
+%	{[}{{{\color{delim}{[}}}}{1}
+%	{]}{{{\color{delim}{]}}}}{1}
+%	{,}{{{\color{punct}{,}}}}{1}
+%}
+%% PRINT%%
 \lstdefinelanguage{json}{
 	%backgroundcolor=\color{background},
 	string=[s]{"}{"},
-	stringstyle=\color{blue},
+	stringstyle=\color{bleue},
 	comment=[l]{:},
 	commentstyle=\color{black},
 	literate= 
-	{\{}{{{\color{delim}{\{}}}}{1}
-	{\}}{{{\color{delim}{\}}}}}{1}
-	{[}{{{\color{delim}{[}}}}{1}
-	{]}{{{\color{delim}{]}}}}{1}
-	{,}{{{\color{punct}{,}}}}{1}
+	{\{}{{{\color{black}{\{}}}}{1}
+	{\}}{{{\color{black}{\}}}}}{1}
+	{[}{{{\color{black}{[}}}}{1}
+	{]}{{{\color{black}{]}}}}{1}
+	{,}{{{\color{bleue}{,}}}}{1}
 }
 
 \lstdefinelanguage{javascript}{
