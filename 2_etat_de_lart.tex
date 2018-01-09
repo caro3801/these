@@ -233,7 +233,10 @@ proposer une qualité équivalente des fonctionnalités de modeleurs autonomes
 (\textit{standalone}) professionnels, le tout de manière collaborative. Leur approche 
 de la gestion de version développe le concept de micro version \cite{Baran2015} qui, très 
 similaire à Git, propose un arbre des modifications (dont le n\oe ud racine correspond à 
-la scène vierge) lié à la scène où chaque micro-version stocke uniquement les informations relatives à son parent : deux n\oe ud peuvent être issus du même parent menant à la création d'une nouvelle branche, i.e. nouvel espace de travail séparé.
+la scène vierge) lié à la scène où chaque micro-version stocke uniquement les 
+informations relatives à son parent : deux n\oe uds peuvent être issus du même 
+parent menant à la création d'une nouvelle branche, i.e. nouvel espace de travail 
+séparé.
 Cette approche est employée dans les travaux de Lu et al. \cite{Lu2016} pour 
 gérer l'évolution de productions participatives liées à des tâches de modélisation 
 3D en usant de la créativité, de l'intelligence et du savoir-faire 
@@ -575,8 +578,9 @@ désordre. La livraison de paquets ordonnés est souvent une fonctionnalité
 appréciée dans le 
 cadre des \gls{SEC}. C'est particulièrement le cas en \gls{3D} afin de respecter 
 l'intention de l'utilisateur, car l'ordre des actions en détermine le résultat. Par 
-exemple, le calcul deux rotations consécutives se traduit par l'opération non-commutative
-de la multiplication deux matrices \gls{3D}.
+exemple, le calcul de deux rotations consécutives se traduit par l'opération 
+non-commutative
+de la multiplication de deux matrices \gls{3D}.
 
 \subsection{Les principaux protocoles de transport}
 Les principes de fiabilité et d'ordonnancement décrits plus haut sont souvent 
@@ -1447,7 +1451,8 @@ exemple, il en faudrait deux). Ensuite seulement, un rapport pourra être déliv
 Dans un environnement utilisant l'\gls{ES}, tous les événements existent déjà 
 donc les données sont déjà disponibles et ont seulement à être analysées 
 (dans notre exemple, les informations sont inhérentes aux événements). De plus, 
-les événements étant stockés depuis le début de la vie -- mise en route -- de l'application , beaucoup plus de données peuvent être analysées. Par 
+les événements étant stockés depuis le début de la vie -- mise en route -- de 
+l'application, beaucoup plus de données peuvent être analysées. Par 
 exemple : demander toutes les modifications d'un objet depuis la dernière 
 connexion d'un utilisateur pour lui communiquer visuellement les différences par 
 rapport à sa dernière visite.
@@ -1483,7 +1488,7 @@ parcourir dans l'autre sens (\textit{top-bottom}) jusqu'à trouver un \gls{snaps
 puis appliquer tous les événements qui sont arrivés entre ce \gls{snapshot} et 
 l'état courant. Pour accéder à des données historiques 
 plus anciennes que le dernier \gls{snapshot}, le second parcours fonctionne 
-aussi. Cependant, il doit être évitée pour ne pas créer de dépendance entre 
+aussi. Cependant, il doit être évité pour ne pas créer de dépendance entre 
 les \gls{snapshot}. Sans les snapshots le modèle peut encore varier 
 \og librement \fg{} tant que l'on sait comment lui appliquer un événement passé. 
 Le fait de travailler avec des \gls{snapshot} crée une dépendance des 
@@ -1501,8 +1506,8 @@ La condition pour appliquer un pur déterminisme en \gls{ES} est la fonction
 suivante : \texttt{État~$\rightarrow$~événement~$\rightarrow$~État}. 
 Cette fonction met en correspondance les (mêmes) entrées avec les (mêmes) 
 sorties ; ce qui permet de se reposer dessus pour reconstituer un état à 
-n'important quel moment dans le temps. 
-Le déterminisme est appliqué en assurant à l'événement tous les 
+n'importe quel moment dans le temps. 
+Le déterminisme est appliqué en assurant à l'événement toutes les 
 informations lui permettant de faire la transition (i.e. sans effet de bord). 
 L'événement est alors considéré comme une encapsulation de toutes les 
 informations pertinentes concernant la transition du système d'un état à l'autre.
