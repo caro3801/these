@@ -538,13 +538,13 @@ de la sémantique métier aux données proposée par la modélisation des évén
 \section{Problématique}
 
 
-Cette thèse se situe à l'interface de trois champs de recherches (Figure 
+Cette thèse se situe à l'interface de trois champs de recherche (Figure 
 \ref{fig:problematique}). Le premier concerne les environnements de modélisation 
 \gls{3D}. Souvent commerciaux (Clara.io, OnShape, Verold Studio), les modeleurs 
 utilisent des technologies supportées par les navigateurs web qui leur permettent 
 d'être disponibles sur la plupart des plateformes. 
-Cependant ces dernières reposent sur une gestion centralisée des données qui rend 
-les utilisateurs très dépendants de la disponibilité de ces plateformes et d'une 
+Cependant ces dernières reposent sur une gestion centralisée des données qui 
+rend les utilisateurs très dépendants de la disponibilité de ces plateformes et d'une 
 connexion internet pour la distribution des informations. 
 Mises à part quelques exceptions, les fonctionnalités collaboratives 
 sont souvent présentées comme mineures. Même si le \og partage\fg{} de la 
@@ -557,7 +557,7 @@ doit supporter le passage à l'échelle.
 Un nombre d'utilisateurs élevé implique la mise en place d'un système de 
 distribution de données adapté. Ce système est en plus contraint par la dynamicité
 des arrivées et départs des collaborateurs (\textit{churn}) au cours d'une session. 
-La dynamicité, qui ne permet pas d'avoir de pouvoir compter sur un nombre fixe de 
+La dynamicité, qui ne permet pas de pouvoir compter sur un nombre fixe de 
 ressources, doit s'accorder avec les besoins variables en termes de ressources. 
 Chaque client est porteur de ressources rarement complètement exploitées lors 
 d'épisodes collaboratifs.
@@ -567,18 +567,23 @@ plusieurs problématiques telles que la cohérence des ressources manipulées au
 cours du temps. Dans ce contexte, il existe un fort besoin de gérer l'évolution des 
 versions permettant la revue des modèles \gls{3D}. 
 En s'appuyant sur les ressources disponibles, telles que les clients (navigateurs 
-web) sur lesquels les utilisateurs manipulent les modèles \gls{3D}, la gestion de la charge est 
-plus flexible car les ressources augmentent avec le nombre de clients.
-Cela fournit également plus d'autonomie aux utilisateurs car le système leur permet d'utiliser
-leurs ressources propres, ce qui n'est pas une pratique développée par le tout-infonuagique.
-L'architecture de communication et les contraintes liées aux architectures 
-distribuées et décentralisées correspondent au second axe de recherche. 
-Enfin, le dernier champ 
-s'adresse à la partie que nous appellerons \og métier\fg{} qui se rapporte au 
-domaine de la manipulation d'objets \gls{3D}, lequel inclut la 
+web) sur lesquels les utilisateurs manipulent les modèles \gls{3D}, la gestion de la 
+charge est plus flexible car les ressources augmentent avec le nombre de clients.
+Cela fournit également plus d'autonomie aux utilisateurs car le système leur 
+permet d'utiliser leurs ressources propres, ce qui n'est pas une pratique 
+développée par le tout-infonuagique.
+
+Le second champ de recherche s'intéresse à l'architecture de communication 
+nécessaire dans un \gls{EVC3D} sur le web prenant en compte les contraintes 
+d'un tel environnement distribué. Les aspects liés à la décentralisation du 
+stockage et de la distribution sont également étudiés afin de favoriser le passage 
+à l'échelle du système et l'utilisation optimale de toutes les ressources mises à 
+disposition par les différents utilisateurs lors de la collaboration.
+
+Enfin, le dernier champ s'adresse à la partie que nous appellerons \og métier\fg{} 
+qui se rapporte au domaine de la manipulation d'objets \gls{3D}, lequel inclut la 
 gestion du cycle de vie des données \gls{3D}, de l'interaction utilisateur au 
-stockage 
-en passant par leur distribution. Ces aspects concernent principalement
+stockage en passant par leur distribution. Ces aspects concernent principalement
 l'historique, la traçabilité de l'information et l'expertise embarquée dans le système.
 
 \begin{figure}[hbt]
@@ -601,9 +606,8 @@ L'objectif de cette thèse est triple :
 Dans le but d'atteindre ces objectifs, voici les cinq Questions de Recherche 
 posées :
 \begin{description}
-	\item[QR 1] Quelle architecture réseau est la plus adaptée pour une gestion 
-	efficace, robuste et temps réel des données \gls{3D} dans un environnement 
-	web ?
+	\item[QR 1] Quelles sont architecture réseaux permettant une gestion efficace, 
+	robuste et temps réel des données \gls{3D} dans un environnement web ?
 	
 	\item[QR 2] Quelle architecture logicielle confère une traçabilité des données 
 	conforme aux règles métiers liées à la manipulation d'objets \gls{3D} ? 
@@ -611,12 +615,12 @@ posées :
 	\item[QR 3] Quels sont les mécanismes assurant à l'utilisateur d'être 
 	autonome tout en ayant la possibilité de collaborer ?
 	
-	
 	\item[QR 4] Comment faciliter l'implémentation d'un tel système en garantissant 
 	le respect des règles métiers liées à la manipulation d'objets \gls{3D}?
 	
-	\item[QR 5] Quelles sont les métriques (réseau, collaboration) permettant 
-	d'évaluer un tel système de manière quantitative ? Qualitative ? %Comment les 
+	\item[QR 5] Quelles sont les métriques (réseau, collaboration) et les critères 
+	permettant d'évaluer un tel système de manière quantitative ? Qualitative ? 
+	%Comment les 
 	%utilisateurs recoivent la chose....
 	
 \end{description}
@@ -653,10 +657,13 @@ Les processus et les outils actuels sont insuffisants pour réellement supporter
 
 	\item Introduction des concepts d'événements métiers liés à la \gls{3D} 
 	comme moyen d'interagir dans une scène \gls{3D}.
-	\item Modèle événementiel pour la manipulation et la visualisation d'objets \gls{3D} de manière collaboration : proposition d'un modèle CQRS ES uniquement sur le client avec un historique fonctionnel et une gestion de la cohérence intégrée.
+	\item Modèle événementiel pour la manipulation et la visualisation d'objets 
+	\gls{3D} de manière collaborative : proposition d'un modèle \acrshort{CQRS} 
+	\acrshort{ES} uniquement sur le client avec un historique fonctionnel et une 
+	gestion de la cohérence intégrée.
 	\item Définition d'une architecture hybride (client serveur et \gls{P2P}) adaptée à 
-	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur le web en 
-	temps réel:
+	la distribution de contenus \gls{3D} dans le cadre d'une collaboration sur le web 
+	en temps réel:
 	\begin{itemize}
 		\item proposition d'une architecture hybride \og orientée états\fg{} : transmission par différentiels d'état avec une cohérence forte ;
 	    \item proposition d'une architecture hybride \og orientée événements\fg{} : transmission de notifications d'événements avec une cohérence éventuelle.
