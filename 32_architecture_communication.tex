@@ -106,7 +106,11 @@ Les contributions portées par Desprat et al. dans
 \cite{Desprat2015a,Desprat2015b} 
 s'appuient sur des pairs ayant un rôle simple et proposent une transmission des 
 mises à jour en tant que différentiel d'état. Les conflits lors d'opérations 
-concurrentes sont évités grâce à un mécanisme de verrouillage. 
+concurrentes sont évités grâce à un mécanisme de verrouillage. Le verrouillage 
+est géré de manière centralisée par le serveur et la base de données indiquant le 
+statut de l'objet à l'utilisateur le requérant lors qu'il est sélectionné. En cas 
+d'inter-blocage, les objets sont libérés après un certains temps configuré par le 
+serveur.
 Plus tard, dans \cite{Desprat2016}, les auteurs mettent en place le modèle 
 orienté événements qui impose l'évolution, au niveau réseau, du protocole 
 de transmission (celui-ci reposant sur 

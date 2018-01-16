@@ -21,7 +21,7 @@ que chaque ressource est identifiée et manipulable par des représentations dé
 
 Chaque pair correspond a un client (navigateur web) qui contient l'intergiciel 
 \gls{P2P} offrant des fonctionnalités limitées, l'interface utilisateur contenant 
-l'environnement \gls{3D} et un espace de stockage reposant local (IndexedDB).
+l'environnement \gls{3D} et un espace de stockage local (IndexedDB).
 
 La persistance long terme est une base de données NoSQL. Ce type de bases de 
 données a tendance à être optimisée en lecture (grâce à un 
@@ -59,7 +59,7 @@ C'est également une source pour transférer ses modifications aux autres client
 Les navigateurs permettent désormais de stocker des quantités de données 
 importantes localement avec une durée de vie illimitée. 
 Les paramètres des opérations fondamentales effectuées sur la base de données 
-(\gls{CRUD}) sur les collections sont très bien supportés par les requêtes 
+(\gls{CRUD}) sont transmis par l'usage d'une \gls{API}
 \gls{REST}.
 
 
@@ -119,10 +119,14 @@ systèmes de persistance pour obtenir les mises à jour :
 		serveur) : dans le cas où le serveur est absent, les clients peuvent continuer 
 		de créer en collaborant. Ces données n'étant stockées que sur le client, il est 
 		nécessaire de les transmettre à la base de données dès qu'une connexion 
-		est possible. 
+		est possible. A la reconnexion les conflits sont gérés manuellement par un 
+		utilisateur \textit{master} qui choisit pas-à-pas les opérations à effectuer. Par 
+		défaut, le serveur va automatiquement ignorer les opérations produites après 
+		un conflit. Seule la détection de conflits est prise en 
+		compte, pas leur résolution automatique.
 		
 		\item travail "\textit{online}" (en collaboration entre pairs comprenant la partie
-		serveur) : le client systématiquement ses 
+		serveur) : le client publie systématiquement ses 
 		nouvelles modifications pour qu'elles soient intégrées à la base de données.
 	\end{enumerate}
 	\item depuis la base de données :
@@ -172,21 +176,22 @@ nombre de connexions va croître de manière exponentielle.
 Par ailleurs, les requêtes \gls{CRUD} ne sont pas très expressives concernant le 
 métier. 
 Aucune vérification n'est donc effectuée sur la validité des données transmises 
-dans cette architecture. De plus, il peut arriver, du fait de latences réseaux que les 
+dans cette architecture. De plus, il peut arriver, du fait de latences réseaux, que 
+les 
 modifications des différents utilisateurs s'entrelacent à l'arrivée et ne rendent pas 
 l'intention de l'utilisateur. Cela peut mener à des dé-synchronisations fortes.
 
 Concernant la gestion de la concurrence, l'utilisation d'une solution pessimiste 
 dans un environnement \gls{P2P} peut parfois mener à des inter-blocages si un 
-utilisateur quitte la scène sans avoir relâché l'objet, c'est à dire sans en avoir 
+utilisateur quitte la scène sans avoir relâché l'objet, c'est-à-dire sans en avoir 
 informé la base de données et les autres 
 utilisateurs. 
 Même si l'application peut prendre le relais et permettre la relâche du 
 verrou au bout d'un certain temps, l'expérience utilisateur peut être dégradée 
 pendant cette période.
-Le maintien de la cohérence est garanti dans ce modèle si l'on 
-considère un environnement où la fréquence des modifications n'est pas très 
-élevée, et que tous les clients communiquent leur horloge locale pour établir un 
+Dans ce modèle, la cohérence est maintenu dès lors que la fréquence des 
+modifications un même objet n'est pas très élevée, et que tous les clients 
+communiquent leur horloge locale pour établir un 
 référentiel de temps concernant les mises à jour. 
 
 Enfin, le transfert par différentiel d'état utilisé pour réduire la taille des 

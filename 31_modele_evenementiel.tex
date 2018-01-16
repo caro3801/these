@@ -8,8 +8,9 @@ EVC}
 La méthodologie orientée événements intègre plusieurs aspects souvent laissés 
 de côté dans la littérature concernant le développement des environnements 
 virtuels collaboratifs pour la visualisation et la manipulation d'objets \gls{3D}. 
-Les événements peuvent, en effet, être utilisés dans le cadre de \gls{CSCW} et 
-d'\gls{EVC}, qui ont évolué du simple collecticiel à de plus importantes 
+Les événements peuvent, en effet, être utilisés dans le cadre de \acrshort{CSCW} 
+et 
+d'\acrshortpl{EVC}, qui ont évolué du simple collecticiel à de plus importantes 
 organisations virtuelles comme on peut en retrouver dans des environnements 
 scientifiques et d'ingénierie. L'idée de partager des ressources communes pour 
 travailler sur un projet commun nécessite des outils propres qui implémentent 
@@ -25,7 +26,8 @@ les services d'analyse fournissent des statistiques à propos des collaborations
 passées et présentes.
 
 
-Les \gls{EDA} sont par nature des systèmes très peu couplés. Dès lors, les 
+Les \glspl{AOE} (ou \glspl{EDA} dans la littérature anglophone) sont par nature des 
+systèmes très peu couplés. Dès lors, les 
 données produites lors de la collaboration peuvent facilement être réutilisées pour 
 un traitement secondaire comme la sensibilisation aux éléments de 
 l'environnement. 
@@ -34,7 +36,9 @@ sont aussi l'occasion de s'intéresser à la façon dont sont générées les do
 produites par les utilisateurs et la façon dont elles sont validées, stockées puis 
 affichées par le système. 
 
-L'\gls{EP} est à la base de nombreuses applications informatiques dans les domaines de l'énergie, la santé, l'environnement, les transports, la finance, les services et l'industrie. L'\gls{EP} réunit des méthodes et des outils 
+L'\gls{EP} est à la base de nombreuses applications informatiques dans les 
+domaines de l'énergie, la santé, l'environnement, les transports, la finance et 
+l'industrie. L'\gls{EP} réunit des méthodes et des outils 
 pour filtrer, transformer et détecter des motifs dans des événements, dans le but 
 de réagir à des conditions qui changent, généralement liées à des contraintes de 
 temps \cite{Chandy2011}. L'\gls{EP} intègre plusieurs fonctionnalités pour :
@@ -57,7 +61,7 @@ C'est pourquoi il est nécessaire de définir un cadre à la modélisation
 événements propres à la modélisation 3D collaborative. 
 La validation des règles métiers doit également être introduite dans 
 le processus de traitement des événements. La visualisation des événements doit 
-être assez flexible pour gérer l'arriver des flux d'événements produits ou issus 
+être assez flexible pour gérer l'arrivée des flux d'événements produits ou issus 
 de l'intergiciel \gls{P2P} orienté messages (type \gls{PubSub}) par lequel les 
 pairs se transmettent les notifications d'événement.
 
@@ -112,11 +116,11 @@ la communication client-serveur pour faciliter la gestion des données dans le
 système distribué. C'est pourquoi l'exploitation du patron de conception 
 \gls{CQRS} est traditionnellement développée sur la base d'une architecture client-serveur (pour récupérer les mises à jour). 
 Ce fonctionnement ne permet pas le travail hors ligne.
-
-Côté serveur, le stockage des données est de moins en moins cher : il est possible de 
+Côté serveur, le stockage des données est de moins en moins cher : il est 
+possible de 
 stocker beaucoup de données de manière distante notamment 
-grâce l'infonuagique. Le serveur a une puissance de calcul plus importante (et surtout ajustable).
-
+grâce à l'infonuagique. Le serveur a une puissance de calcul plus importante (et 
+surtout ajustable).
 Côté client, la puissance de calcul des machines sur lesquelles sont installés les 
 navigateurs web évolue rapidement (notamment les appareils mobiles comme les 
 \textit{smartphones} et les tablettes). Les navigateurs suivent cette tendance en 
@@ -134,13 +138,13 @@ appareils participant à la collaboration, au lieu de tout faire reposer sur le 
 Chaque appareil participant à la collaboration doit être autonome et le plus 
 indépendant possible en termes de ressources (données, réseaux, validation 
 experte). 
-
 \paragraph{Contribution}
 Plusieurs aspects de la contribution dans le modèle événementiel sont décrites ci-après. 
 Tout d'abord, il est nécessaire de spécifier les événements qui vont être utilisés
 sous une forme générique. Ces événements, qui représentent ce qui se passe dans l'application, 
 doivent faire ressortir l'expertise de chaque modification. Que ce soit le contexte 
-auquel il est lié, les paramètres qu'il inclus, le type représenté, les informations de chaque événement
+auquel il est lié, les paramètres qu'il inclut, le type représenté, les informations de 
+chaque événement
 sont issues du domaine de la modélisation 3D. 
 Puis, le modèle événementiel propose d'adapter les patrons de conception 
 \gls{ES} et \gls{CQRS} sous un angle nouveau.
@@ -155,7 +159,8 @@ celles-ci. L'idée est de profiter de la puissance du client pour créer une
 architecture assurant l'autonomie de l'utilisateur en cas de déconnexion volontaire 
 (travail hors ligne) ou involontaire (coupure). L'utilisateur a la garantie d'avoir 
 un historique performant qui profite de chaque connexion au réseau  pour mettre à jour le système.
-Le modèle événementiel présenté dans cette thèse inclut également un modèle de cohérence allégé 
+Le modèle événementiel présenté dans cette thèse inclut également un modèle de 
+cohérence allégé.
 Il prend la forme d'un module de détection de conflit basé sur le journal d'événements dont chaque 
 client possède une réplique locale.
 
@@ -215,8 +220,8 @@ Un \textit{ET} est utilisé pour exprimer un intérêt concret envers les entit�
 \textit{ED}. 
 Les événements abstraits \textit{aet} (\textit{abstract event type}) sont 
 compatibles avec l'\textit{ED}. 
-Une instance d'événements \textit{e} -- ou simplement 
-événements -- est composée du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
+Une instance d'événement \textit{e} -- ou simplement 
+événement -- est composée du triplet \textit{ED}, \textit{ET} et \textit{EP}. 
 L'ensemble de toutes les instances d'événements possibles est exprimé par 
 \textit{EI}. \textit{EP} (Event Parameters) correspond à l'ensemble des paramètres 
 que peut avoir l'\textit{EI}. Ainsi, tous les événements sont liés aux intérêts 
@@ -254,11 +259,12 @@ soit positionné.
 		\textbf{Événement}& \textbf{Dénomination} & \textbf{Description} \\ \midrule
 		%\textbf{Agrégat Maillage}  &                      &             \\ \hline
 		Maillage ajouté (*)&     meshAdded                 
-		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été ajouté dans\\  la Scène à 
+		&  \begin{tabular}[c]{@{}l@{}} Un maillage a été \textit{ajouté} dans\\  la 
+		Scène à 
 			partir d'une géométrie\\ de la 
 			bibliothèque \end{tabular}  \\\hline
 		Maillage déposé (*) &     meshDropped               
-		&      \begin{tabular}[c]{@{}l@{}} Un maillage a été déposé dans 
+		&      \begin{tabular}[c]{@{}l@{}} Un maillage a été \textit{déposé} dans 
 			\\l'env. 3D de la Scène à 
 			partir \\d'une géométrie de la bibliothèque \end{tabular} \\\hline
 		Maillage supprimé & meshRemoved       &        \begin{tabular}[c]{@{}l@{}} 
@@ -281,7 +287,7 @@ Ce tableau permet de donner un exemple qui reprend la description qui vient d'ê
 présentée. L'\textit{ED} correspond donc au \og système de modélisation \gls{3D} 
 collaborative\fg{}. Dans ce contexte, l'agrégat \og Maillage\fg{} réagit à un 
 certain nombre de types d'événements comme \textit{meshAdded}, 
-\textit{meshDropped}\dots Les événements typés sont produits par l'agrégat en 
+\textit{meshDropped}\dots~Les événements typés sont produits par l'agrégat en 
 prenant en compte les paramètres nécessaires à leur instanciation. Par exemple, 
 la production d'un événement \textit{meshTranslated} prend en paramètres le 
 vecteur de translation (x,y,z) et la référence de l'identifiant de la scène à laquelle il 
@@ -312,7 +318,7 @@ règles métiers exprimées par ce dernier. Si la modification est validée, le 
 produit ou modifie l'agrégat concerné. Ces modifications sont converties sous 
 forme d'événements. 
 Ces événements qui ne sont alors pas encore sauvegardés dans l'Event Store 
-sont passé en entrée de l'algorithme \ref{algo:saveEvent}.
+sont passés en entrée de l'algorithme \ref{algo:saveEvent}.
 Chaque événement est encapsulés dans un événement \og technique\fg{} dédié 
 au stockage dans l'Event Store avant d'être publié sur le bus  via l'Event Publisher.
 
@@ -406,7 +412,7 @@ selon les applications :
 
 \subsection{Journal des événements}
 
-Les événements produits par un des composants présenté ci-dessus
+Les événements produits par un des composants présentés ci-dessus
 peuvent être consommés par d'autres de ces composants s'ils partagent un 
 journal d'événements local ou distribué. Un journal d'événements (ou Event Store) 
 est composé d'agrégats versionnés qui contiennent les instances d'événements 
@@ -537,13 +543,11 @@ erreur en essayant d'appliquer $eA$ sur un état inadéquat car il n'a pas
 d'information sur la hiérarchie d'application des événements ($eB$ puis $eA$).
 
 Pour pallier à ce problème, l'introduction du système de projection permet d'avoir 
-un mécanisme (comme un automate fini) qui défini les transitions nécessaires 
-pour 
-passer d'un état à l'autre. Les transitions réalisent les actions déterminées en 
-fonction des 
-événements qui arrivent. Par exemple, si un utilisateur essaie d'ajouter un objet 
-dans une 
-scène  ($eA$) sans avoir créer la scène ($eB$) la projection met en attente $eA$ 
+un mécanisme (comme un automate fini) qui définit les transitions nécessaires 
+pour passer d'un état à l'autre. Les transitions réalisent les actions déterminées en 
+fonction des événements qui arrivent. Par exemple, si un utilisateur essaie 
+d'ajouter un objet dans une 
+scène  ($eA$) sans avoir créé la scène ($eB$) la projection met en attente $eA$ 
 jusqu'à recevoir $eB$. Dans le cas où $eB$ n'arrive jamais, la projection ne pourra 
 jamais utiliser $eA$.
 
@@ -570,7 +574,7 @@ les événements sont rejoués par la suite car l'ordre issu de l'\gls{ES} est
 déterminé par l'ordonnancement des événements stockés 
 localement. Au sein d'une réplique, tous les composants \gls{CQRS} respectent 
 cet ordonnancement. Les répliques distantes du journal d'événements sont 
-cohérentes si les évènements respecte l'ordre causale \cite{Lamport1978} : les 
+cohérentes si les évènements respecte l'ordre causal \cite{Lamport1978} : les 
 événements liés causalement ont le même ordre sur tous les sites, alors que les 
 événements concurrents peuvent avoir un ordre différent. Cette propriété est 
 importante pour obtenir une cohérence causale forte dans une application qui 
@@ -585,7 +589,7 @@ cohérence séparément.
 Dans \gls{CQRS}, l'interaction avec plusieurs agents (utilisateurs, services) est 
 découplée et subit un traitement réparti dont résulte la cohérence éventuelle de 
 l'application. Dans la conception d'interaction pour l'interface, la synchronicité peut 
-varier en fonction certains contextes. 
+varier en fonction de certains contextes. 
 Les interactions asynchrones rajoutent souvent des étapes qui polluent l'interface.  
 Par exemple, dans le cas de l'interaction suivante : \texttt{soumission de 
 formulaire -> envoi asynchrone -> message de confirmation}, si l'utilisateur attend 

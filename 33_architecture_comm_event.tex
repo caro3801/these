@@ -158,7 +158,7 @@ Les nouvelles données qui entrent dans un pair doivent nécessairement être en
 cohérence avec celle qui sont déjà certifiées cohérentes.
 
 L'algorithme \ref{algo:addevent} permet de détecter une incohérence lors de 
-l'arrivée d'un nouvel événement. Cet événement est fournit avec une version qui 
+l'arrivée d'un nouvel événement. Cet événement est fourni avec une version qui 
 correspond au numéro de version attendu du flux de l'agrégat 
 (\textit{stream}) auquel il est rattaché. Si le flux n'existe pas, il est créé, sinon il 
 faut vérifier qu'il n'existe pas déjà un événement stocké à la version donnée pour 
@@ -250,7 +250,7 @@ données, elles sont ignorées par le système.
 L'architecture de communication orientée événement utilise un intergiciel réactif : 
 elle consomme des notifications d'événements et permet le traitement asynchrone 
 de messages. Bien que le découplage proposé par ce système offre des 
-avantages important dans un fonctionnement décentralisé, il peut également 
+avantages importants dans un fonctionnement décentralisé, il peut également 
 être à l'origine d'incertitudes causées par les 
 délais des notifications, notamment lors de l'apparition de conflits.
 
@@ -260,15 +260,76 @@ niveau dans la couche \gls{P2P}. Cette situation ne propose qu'une flexibilité
 limitée dans le passage à l'échelle et dans la gestion de l'attrition. L'équilibre entre 
 les producteurs 
 et les consommateurs doit être assez stable pour ne pas surcharger certaines 
-partie du réseau. C'est une des raisons pour lesquels le réseau 
+parties du réseau. C'est une des raisons pour lesquelles le réseau 
 \gls{P2P} est renforcé par la présence de pairs destinés à 
 faire le relais dans la distribution des données. 
 
-La gestion de la cohérence dans \gls{SEC} massif est souvent étudiée à travers le 
-prisme des \glspl{CRDT}. Les données 3D telles qu'elles sont modélisées ne 
-rentrent pas dans cette catégorie très puissante pour gérer la cohérence. 
-Cependant, le modèle événementiel fournit, avec son approche fonctionnel, proche 
-des  \gls{CRDT} \textit{Grow-only Set} (qui n'autorise que les ajouts).
+
+\paragraph{\glspl{CRDT} basés opérations}
+La gestion de la cohérence dans un \gls{SEC} massif est souvent étudiée à 
+travers le prisme des \glsreset{CRDT}\glspl{CRDT}. Les \glspl{CRDT} sont des 
+types de 
+donnés répliqués qui convergent prenant en compte des mises à jours 
+concurrentes. 
+Un \gls{CRDT} peut être mis à jour sans nécessiter la coordination des répliques. 
+Cela rend les \glspl{CRDT} hautement disponibles pour les opérations d'écriture. 
+Les \glspl{CRDT} peuvent être classés selon deux catégories : les \glspl{CRDT} 
+orientés état (CvRDTs ou \textit{\textbf{convergent} replicated data types}) et les 
+\glspl{CRDT} basés opération (CmRDTs ou\textit{ \textbf{commutative} replicated 
+data types}). Les \glspl{CRDT} orientés état sont conçus pour disséminer un 
+état parmi les répliques alors que les \glspl{CRDT} basés opérations sont conçus 
+pour disséminer des opérations.
+
+Les répliques de CmRDT sont garanties de converger si les opérations sont 
+disséminées au travers d'un intergiciel à transmission fiable et causale 
+(\textit{reliable causal broadcast} (RCB)) et si leurs opérations concurrentes sont 
+commutatives.
+Les CvRDTs ne nécessitent pas d'intergiciel de messagerie mais une bande 
+passante croissante dû à l'augmentation de la taille de l'état. La convergence 
+passe par une fonction de fusion définie comme une jointure.
+
+L'exécution d'une opération sur un CmRDT s'effectue en deux phases, 
+\textbf{préparation} et \textbf{effet} (aussi appelées \textit{atSource} et 
+\textit{downstream} \cite{Shapiro2011}. La production du message représentant 
+l'opération se base sur l'opération et éventuellement l'état courant pendant la 
+phase de préparation du CmRDT.
+
+\paragraph{Relation entre \glspl{CRDT} et \acrlong{ES}}
+Les deux phases de mise à jour d'un CmRDT, \textbf{préparation} et \textbf{effet}, 
+sont très proches des phases de mise à jour des entités en \gls{ES}, 
+\textbf{traitement de 
+la commande }(\textit{command handler}) et \textbf{traitement des événements} 
+(\textit{event 
+publisher}). 
+Durant le \textbf{traitement de la commande}, une commande entrante peut être 
+validée en fonction de l'état de l'entité sur lequel elle est appliquée et, si elle l'est, 
+un événement représentant l'effet de la commande est inscrit dans le journal 
+d'événements. Cela correspond à la phase de préparation d'un CmRDT. 
+Durant la 
+phase de \textbf{traitement des événements}, l'événement écrit est consommé à 
+partir du journal d'événements et utilisé pour mettre à jour l'état courant de l'entité. 
+Cela correspond à appliquer la représentation de l'opération produite à l'état du 
+CmRDT local durant la phase \textbf{effet}. Le \gls{CQRS} associé à l'\gls{ES} 
+distingue ces deux phases et fournit une couche d'abstraction supplémentaire 
+permettant à l'application de définir des 
+commandes et des traitements d'événements spécifiques au domaine.
+
+Les CmRDTs et les entités issus de l'\gls{ES} doivent pouvoir à la fois 
+consommer des événements issues d'autres acteurs et produire des événements 
+pour les autres acteurs. Cette collaboration est nécessaire pour déployer plusieurs 
+répliques de la même entité. 
+
+La représentation des données 3D dans cette thèse ne permet pas l'utilisation de 
+CmRDTs comme dans ChainVoxel \cite{Imae2016}. Cette représentation 
+combinée à notre modèle \gls{CQRS} et \gls{ES} pourrait permettre d'améliorer le 
+passage à l'échelle et garantir la convergence des répliques de manière formelle.
+%
+%vers le même état qui peuvent être classé da selon deux catégories
+%Les données 3D telles qu'elles sont 
+%modélisées ne rentrent pas dans cette catégorie très puissante pour gérer la 
+%cohérence. 
+%Cependant, le modèle événementiel fournit, avec son approche fonctionnelle, 
+%proche des \gls{CRDT} \textit{Grow-only Set} (qui n'autorise que les ajouts),.
 
 
 
