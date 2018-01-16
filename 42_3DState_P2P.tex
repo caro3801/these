@@ -11,13 +11,13 @@ l'avantage de simplifier le routage réseau.
 
 		\paragraph{Base de données}
 
-Pour assurer la sauvegarde au long-terme des modifications faite par les 
+Pour assurer la sauvegarde au long-terme des modifications faites par les 
 utilisateurs, la base de données MongoDB stocke l'état de chaque scène de 
 l'application. L'utilisation d'une base de données NoSQL orientée document 
 permet de stocker toutes les données pertinentes ensemble, dans un même 
 document. Un document est auto-descriptif et peut imbriquer des données 
 dans une structure d'arbre hiérarchisé. Une collection regroupe des 
-documents. Dans ce prototype, il existe trois collections : \textit{Scenes} et 
+documents. Dans ce prototype, il existe trois collections : \textit{Scenes},
 \textit{Geometries} et \textit{Meshes}. 
 La collection \textit{Scenes} contient chaque document concernant une 
 scène : identifiant de la scène, métadonnées de l'espace virtuel (nom de la 
@@ -27,22 +27,22 @@ l'application sous la forme de : identifiant de la géométrie, données 3D.
 La collection \textit{Meshes} représente les maillages utilisés dans les 
 scènes : identifiant du maillage, nom du maillage, identifiant de la géométrie.
 Les paramètres liés aux opérations \gls{CRUD} de la base de données sont 
-fournis part la requête \gls{REST}. 
+fournis par la requête \gls{REST}. 
 
 		\paragraph{Couche \gls{P2P}} 
 
 La compatibilité entre navigateurs 
-(cross-plateforme) concernant 
+(\textit{cross-platform}) concernant 
 l'\gls{API} Datachannel issue du standard \gls{WebRTC} n'est pas encore 
 effective. C'est pourquoi ce prototype ne fonctionne que sur les dernières 
 version de Chrome (v49+), Firefox (v55+) et Opera (v47+). 
 PeerJS\footnote{PeerJS  \url{http://peerjs.com}} est une 
-bibliothèque \textit{open source} qui enveloppe WebRTC et fournie une \gls{API} 
+bibliothèque \textit{open source} qui enveloppe WebRTC et fournit une \gls{API} 
 de connexion navigateur-à-navigateur.
 Le client possède un identifiant, donné par le serveur de \textit{signaling} lors 
 de sa première connexion, qui lui permet de se connecter à un pair distant 
 dont il a obtenu l'identifiant par le serveur. Le mécanisme 
-de \textit{signaling} est délégué à PeerJS qui se charge de l'implantation de 
+de \textit{signaling} est délégué à PeerJS qui se charge de l'implantation du 
 \gls{ICEF} et des problématiques \gls{NAT}. 
 
 
@@ -62,7 +62,7 @@ fournissant des fonctionnalités de souscription et de diffusion aux
 En comparaison avec une implémentation \textit{Event 
 emitter / dispatcher} et \gls{PubSub}, le patron de conception 
 Observateur dans \textit{js-signals} n'utilise pas de chaîne de caractère pour 
-décrire les types d'événements \gls{JS} (évite les erreurs).
+décrire les types d'événements \gls{JS} (évite les erreurs de frappe).
 Une instance \textit{signal} enregistre des procédures (événements \gls{JS}, 
 callbacks) qui peuvent être asynchrones. 
 Lorsqu'il est intercepté -- n'importe où dans le contexte de l'application -- les 

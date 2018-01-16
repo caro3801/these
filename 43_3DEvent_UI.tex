@@ -10,7 +10,8 @@ interface orientée tâche a tendance à s'attarder sur toutes les nuances que l
 domaine possède en caractérisant chaque action sans subir d'effet de 
 simplification. Cette proximité avec le métier permet de calquer directement 
 l'interface du modèle événementiel sur l'\gls{IU} et de guider l'utilisateur dans ses 
-activités. L'utilisabilité, qui correspond à la qualité de l'expérience utilisateur fournit par un système 
+activités. L'utilisabilité, qui correspond à la qualité de l'expérience utilisateur 
+fournie par un système 
 pour réaliser une tâche, est alors maximisée en terme d'efficacité, d'efficience et 
 de satisfaction. 
 Ce type d'\gls{IHM} s'organise autour de cas d'utilisation. Cela permet 
@@ -161,7 +162,7 @@ La Figure \ref{fig:ghostselection}
 représente la sélection fantôme lors de la translation du corps du rotor par 
 l'utilisateur Foo : c'est l'objet transparent qui est manipulé alors que l'objet opaque 
 représente sa position originale. 
-En différenciant l'actuel objet que l'utilisateur souhaite sélectionné ($O_{o}$) de 
+En différenciant l'actuel objet que l'utilisateur souhaite sélectionner ($O_{o}$) de 
 celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
 \begin{itemize}
 	\item l'ergonomie dans l'environnement \gls{3D} :
@@ -191,15 +192,16 @@ celui manipulé ($O_f$), l'interaction est mise en valeur sous quatre angles :
 	suite à une intervention concurrente). L'utilisateur n'a un impact sur l'application 
 	que lorsqu'une modification métier est réalisée.
 	
-	\item le réseau : l'information importante à faire transité est l'événement 
-	correspondant à la modification métier pas toutes les positions intermédiaires 
-	même si intuitivement l'idée de temps réel pourrait conduire à cette solution. La 
-	quantité de messages produite surchargerai à la fois le réseau et le fil 
+	\item le réseau : l'information importante à faire transiter est l'événement 
+	correspondant à la modification métier et non pas toutes les positions 
+	intermédiaires même si intuitivement l'idée de temps réel pourrait conduire à 
+	cette solution. La 
+	quantité de messages produite surchargerait à la fois le réseau et le fil 
 	d'exécution principale de l'application. En effet, \gls{WebRTC} a l'inconvénient 
 	pour le 
 	moment de ne pas pouvoir s'exécuter dans un \textit{Web Worker} (fil 
 	d'exécution 
-	parallèle en JavaScript). Cette solution imposerai des 
+	parallèle en JavaScript). Cette solution imposerait des 
 	latences réseau et d'\gls{IU} qui affecteraient gravement l'expérience utilisateur
 	sans apporter d'informations supplémentaires à l'aspect métier de la 
 	collaboration. 

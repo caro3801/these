@@ -6,9 +6,9 @@
 Ce chapitre présente deux prototypes, chacun implanté sur un paradigme différent.
 Le prototype 3DState repose sur des structure de données orientées états pour 
 proposer une preuve de concept concernant principalement l'architecture de 
-communication hybride, tandis que le prototype 3DEvent s'établi sur le paradigme 
+communication hybride, tandis que le prototype 3DEvent s'établit sur le paradigme 
 événementiel pour implanter une approche peu couplée dans l'intergiciel \gls{P2P} 
-et l'interface.orientée tâche par laquelle l'utilisateur interagit avec le système.
+et l'interface orientée tâche par laquelle l'utilisateur interagit avec le système.
 Chaque prototype possède les mêmes blocs : une interface utilisateur (contenant 
 un environnement 3D) et un intergiciel \gls{P2P}.
 
@@ -18,10 +18,10 @@ l'implantation des interfaces graphiques des deux prototypes : les composants
 répondent à des événements qui leur parviennent. 
 Cela s'applique principalement à l'interface graphique mais 
 également au niveau des flux réseaux pour proposer une application disponible 
-(répondre rapidement), résilient (disponible même en cas d'erreur), souple 
-(fonctionnel même surchargé), orienté messages (utiliser des messages 
-asynchrones). Pour conserver ces propriétés, la programmation réactive impose 
-de suivre la variation des valeurs dans le temps, être à l'écoute les événements 
+(répondre rapidement), résiliente (disponible même en cas d'erreur), souple 
+(fonctionnelle même surchargée), orientée messages (asynchrones). Pour 
+conserver ces propriétés, la programmation réactive impose 
+de suivre la variation des valeurs dans le temps, être à l'écoute des événements 
 qui surviennent, suivre les dépendances des variables pour pouvoir propager les 
 mises à jour de valeurs, et enfin propager automatiquement les changements.
 En cela, le langage de programmation \gls{JS} s'adapte bien à la PR car il repose 
@@ -74,7 +74,7 @@ Dans chacun des prototypes, les interactions de bases sont les suivantes :
 	directement dans le \textit{viewport}, via le 
 	menu ou via la console du navigateur.
 	\item \textit{Charger des modèles \gls{3D}.} L'éditeur gère les formats de 
-	fichier 3D les plus populaires (OBJ, PLY, DAE, glTF)
+	fichier 3D les plus populaires (OBJ, PLY, DAE, glTF \dots)
 	\item \textit{Changement de référentiel.} La modification des coordonnées de 
 	réfé\-ren\-ces (local/global)  pour les différentes transformations possibles
 	\item \textit{Grid snapping} Cette fonctionnalité permet d'aligner les modèles 
@@ -138,25 +138,26 @@ Ce chapitre décrit l'implantation des contributions présentées dans le chapit
 précédent.
 Le premier prototype, 3DState, est issu des premiers travaux de cette thèse. Son 
 implantation repose principalement sur la mise en place des technologies 
-nécessaires pour proposer une collaboration basique. L'interface proposé permet 
+nécessaires pour proposer une collaboration basique. L'interface proposée permet 
 de  manipuler simplement des objets 3D dans la scène sans intégrer par d'autres 
 moyen les collaborateurs à l'exception du changement de point de vue. La gestion 
 de la session se concentre principalement sur la mise en relation des utilisateurs 
 et la récupération du contenu. Le client est donc très sollicité à chaque 
-modification. L'utilisateur est assuré que ses messages envoyés sont reçu et 
-grâce au mécanisme de verrouillage des objets sélectionné, les conflits sont nuls. 
+modification. L'utilisateur est assuré que ses messages envoyés sont reçus et 
+grâce au mécanisme de verrouillage des objets sélectionnés, les conflits sont 
+nuls. 
 Le transfert par différentiel d'état relève d'un calcul assez faible pour le client.
 
 Le second prototype, 3DEvent, intègre un intergiciel \gls{P2P} permettant de faire 
-communiquer différent types de plateformes entre elle grâce à l'implantation de 
+communiquer différent types de plateformes entre elles grâce à l'implantation de 
 webrtc-eventstore. Les différences entre les Instances Serveur, qui utilisent  
 node-webrtc sur NodeJS, et les Instances Web, qui utilisent PeerJS sur le 
 navigateur, sont alors abstraites par cette bibliothèque qui fait l'interface et leur 
 permet de communiquer en \gls{P2P}. Cette solution technique ouvre de nouvelles 
-perspectives quand à l'extension du \gls{P2P} dans les navigateurs, les mobiles, 
+perspectives quant à l'extension du \gls{P2P} dans les navigateurs, les mobiles, 
 et les systèmes embarqués. Les propositions liées à l'interface orientée tâches 
 sont en accord avec le modèle événementiel et permettent de focaliser les 
-interactions des utilisateurs directement sur les tâches métier, c'est à dire les 
+interactions des utilisateurs directement sur les tâches métier, c'est-à-dire les 
 tâches de manipulation et de visualisation 3D collaborative. La synchronisation et 
 la gestion de la cohérence dans un environnement décentralisé comme 3DEvent 
 sont mis en place accompagnés de modules de sensibilisation à la collaboration 

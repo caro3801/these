@@ -284,6 +284,7 @@ Les répliques de CmRDT sont garanties de converger si les opérations sont
 disséminées au travers d'un intergiciel à transmission fiable et causale 
 (\textit{reliable causal broadcast} (RCB)) et si leurs opérations concurrentes sont 
 commutatives.
+
 Les CvRDTs ne nécessitent pas d'intergiciel de messagerie mais une bande 
 passante croissante dû à l'augmentation de la taille de l'état. La convergence 
 passe par une fonction de fusion définie comme une jointure.
@@ -301,10 +302,12 @@ sont très proches des phases de mise à jour des entités en \gls{ES},
 la commande }(\textit{command handler}) et \textbf{traitement des événements} 
 (\textit{event 
 publisher}). 
+
 Durant le \textbf{traitement de la commande}, une commande entrante peut être 
 validée en fonction de l'état de l'entité sur lequel elle est appliquée et, si elle l'est, 
 un événement représentant l'effet de la commande est inscrit dans le journal 
 d'événements. Cela correspond à la phase de préparation d'un CmRDT. 
+
 Durant la 
 phase de \textbf{traitement des événements}, l'événement écrit est consommé à 
 partir du journal d'événements et utilisé pour mettre à jour l'état courant de l'entité. 

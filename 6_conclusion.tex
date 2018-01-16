@@ -91,7 +91,7 @@ Côté lecture, les vues matérialisées de l'interface sont issues de projectio
 à partir du flux d'événements traités par le système. Les vues sont spécifiques à 
 l'activité, ce qui permet de présenter une interface orientée tâches plus proche des 
 attentes métiers de l'utilisateur. La projection découple les flux de la base 
-de données des évènements servant une ou plusieurs vues. En effet, son rôle 
+de données des événements servant une ou plusieurs vues. En effet, son rôle 
 d'intermédiaire est de fournir les événements d'intérêts sous une forme 
 dénormalisée pour les vues (mise en cache).
 Le point \ref{item:es} reprend principalement les avantages de l'\gls{ES}, i.e. 
@@ -230,8 +230,8 @@ mais également sur l'apprentissage et la facilité d'utilisation de l'applicati
 qualité de la collaboration est également soumise au questionnaire pour savoir si 
 la coopération améliore l'efficacité et / ou la vitesse de réalisation de la tâche.
 Les contraintes liées à ce type d'expérimentations sont nombreuses : nombre de 
-participants, taille des données 3D, gestion de la cohérence\dots 
-Les métriques quantitatives sont seulement abordée dans cette thèse sous l'angle 
+participants, taille des données 3D, gestion de la cohérence\dots~Les métriques 
+quantitatives sont seulement abordées dans cette thèse sous l'angle 
 de l'implantation d'outils de surveillance.
 
 
@@ -246,7 +246,8 @@ asynchrones, distribuées et orientées événements.
 	\textit{diff and merge} de maillages polygonaux pour des données \gls{3D}, 
 	sont rarement implémentées (\textit{a fortiori} en 
 	temps réel) sur des plateformes web notamment à cause du coût et de la complexité que 
-	cela peut induire dans des architectures traditionnelles. Alors que 3DEvent peut justement
+	cela peut induire dans des architectures traditionnelles ; 3DEvent 
+	permet justement de
 	reconstruire n'importe quel état antérieur grâce à son architecture orientée 
 	événements et indiquer les différences entre deux états.
 	
@@ -351,7 +352,7 @@ l'agrégat doivent alors impérativement passer par ce n\oe ud pour être valid�
 (routage basé sur le contenu). 
 En cas de départ du réseau, un nouveau n\oe ud prend la responsabilité de 
 l'agrégat (par exemple : lors de la sélection de l'objet dans la scène). 
-Ce principe de \og n\oe ud responsable\fg{} permettrai, dans une situation où les 
+Ce principe de \og n\oe ud responsable\fg{} permettrait, dans une situation où les 
 modifications localisées sur un même objet sont courantes, d'isoler la 
 responsabilité de la cohérence pour chaque agrégat. 
 

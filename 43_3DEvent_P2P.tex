@@ -67,9 +67,9 @@ manipulé est connu.
 La structure représentant l'événement transporte un numéro de version \og 
 attendue\fg{} 
 qui correspond à la version que l'agrégat doit avoir lorsque l'événement lui est 
-appliqué. De cette manière la cohérence interne du pair est maintenu grâce à ce 
+appliqué. De cette manière la cohérence interne du pair est maintenue grâce à ce 
 numéro de version.
-Les événements qui gère les géométries ($importGeometryEvent$) ont une 
+Les événements qui gèrent les géométries ($importGeometryEvent$) ont une 
 propriété concernant les données 3D sous la forme d'un Blob contenant le fichier. 
 
 \begin{lstlisting}[language=json,firstnumber=1,label=jsonstore,caption=Format
@@ -115,7 +115,7 @@ mises à jour qu'ils génèrent grâce au protocole de
 Il existe plusieurs méthodes de transmission de contenu au sein d'un réseau 
 \gls{P2P} que l'on peut catégoriser selon deux modes : le téléchargement 
 (\textit{download}) 
-et le flux continu (\textit{streaming}). Le téléchargement requière que le contenu 
+et le flux continu (\textit{streaming}). Le téléchargement requiert que le contenu 
 soit entièrement téléchargé pour pouvoir être lu, tandis que le flux continu peut 
 être lu au fur et à mesure de sa récupération. Ce dernier mode, principalement 
 utilisé pour la lecture de vidéo en ligne, s'applique bien à la transmission de 
@@ -139,7 +139,7 @@ envoyer. Ceci a été intégré dans le protocole d'échange de l'application. C
 des raisons qui a encouragé le choix d'un transport non fiable et non ordonné car 
 l'application est déjà en charge de manipuler les données qui vont transiter sur le 
 réseau. D'autre part, le standard WebRTC n'étant pas implanté de la même 
-manière sur tous les navigateurs, le fait déléguer une partie de la gestion des 
+manière sur tous les navigateurs, le fait de déléguer une partie de la gestion des 
 données à l'application permet de mieux gérer le traitement qu'elles subissent. Les 
 effets collatéraux à ce choix sont doubles : la taille des messages qui transitent 
 est allégée, ce qui nécessite d'envoyer plus de messages pour maintenir la 
