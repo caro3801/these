@@ -19,6 +19,14 @@ synchronisation utilisant un journal d'événements partagé entre les pairs.
 	\label{fig:archievent}
 \end{figure}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{eps/archi_illu.pdf}
+	\caption{Illustration de l'architecture de communication \og orientée 
+	événements\fg{} avec 4 Instances Web et 2 Instances Serveur}
+	\label{fig:archi_illu_event}
+\end{figure}
+
 \subsubsection{Spécificité des composants de l'architecture}
 L'Event Store est un composant clé dans le traitement des événements. Présent 
 sur chaque pair, il prend en entrée des événements de deux natures : ceux qu'il a 
@@ -54,11 +62,24 @@ l'architecture présentée précédemment, sont des \og serveurs\fg{} qui partic
 directement à la couche réseau. En cela, ils aident à la dissémination des données 
 et peuvent rapidement être montés pour garantir une disponibilité des données 
 auprès des autres instances (notamment en cas de panne).
+
 Toutes les instances sont coordonnées par l'\gls{IM} qui est responsable de mettre 
 les pairs en relation. Il est notamment le serveur responsable dans le mécanisme 
-de \textit{signalling}. 
+de \textit{signalling}. L'\gls{IM} centralise toutes les mises en relation des 
+différentes instances ; la connectivité du maillage est paramétrable à partir de 
+l'\gls{IM}. Dans le cas où l'\gls{IM} n'est plus accessible (ex : serveur 
+inaccessible), les différentes instances déjà en relation peuvent continuer à 
+échanger. \gls{WebRTC} offre également la possibilité de gérer manuellement et 
+sans serveur les connexions entre instances. 
+
 L'ensemble des Event Stores forme une grappe qui gère le 
 journal d'événements partagé de manière répartie entre toutes les instances.
+
+La Figure \ref{fig:archi_illu_event} représente un réseau pair-à-pair 
+possible avec cette architecture. Toutes les instances sont au même niveau dans 
+le réseau pair-à-pair. Chaque n\oe ud contribue à la distribution du contenu au sein 
+du réseau.
+
 \subsubsection{Gestion du stockage}
 
 Lorsque l'Event Store reçoit de nouveaux événements, l'\gls{ESM} crée ou 
@@ -98,8 +119,16 @@ rejoindre une session collaborative, il évolue pour se synchroniser et intégre
 nouveaux événements à son journal.
 La Figure \ref{fig:connexionpairs} représente la séquence d'actions nécessaire à 
 une instance 3DEvent ($idA$) pour rejoindre le réseau contenant déjà d'autres 
-instances 3DEvent. L'action \textit{join} est exécutée lorsqu'un utilisateur envoie 
-ses informations de connexion sur un portail de connexion (à partir d'une instance 
+instances 3DEvent ; elle contient trois phases. La première phase (\textit{peer 
+creation}) consiste à prendre connaissance des autres pairs déjà présents, la 
+seconde phase (\textit{P2P network creation}) permet la création et l'établissement 
+des connexions \gls{P2P} entre la nouvelle instance et les autres n\oe uds, puis la 
+troisième (\textit{Real-time collaboration}) correspond au partage en temps-réel 
+des messages entre les différentes instances connectées au réseau \gls{P2P}.
+
+La première phase est déclenchée par l'action \textit{join}, exécutée lorsqu'un 
+utilisateur envoie ses informations de connexion sur un portail de connexion (à 
+partir d'une instance 
 web) ou lorsqu'une instance serveur est lancée. Cette action ajoute le nouveau 
 pair à la liste des pairs présents sur le réseau. Cette liste est gérée par le 
 gestionnaire d'instance, qui la retourne au pair pour lui indiquer les pairs 
@@ -192,12 +221,19 @@ partiellement maillée (\textit{partial mesh topology}).
 Le protocole d'échange est décrit dans l'annexe \ref{annexe:protocole}. En passant 
 de l'instanciation d'une connexion à l'échange de méta-données pour se 
 synchroniser, le pair agit comme une machine à état concernant la transmission 
-des données. La Figure \ref{fig:connexionpairs} présente une partie des échanges 
-liés à ce protocole dans la partie \textit{\gls{P2P} network creation}. Les 
+des données : c'est la seconde phase (\textit{\gls{P2P} network creation}) de la 
+Figure \ref{fig:connexionpairs}. Les 
 méta-données échangées permettent aux n\oe uds de savoir \og qui possède 
 quoi\fg{} sur le réseau pour pouvoir ensuite demander les événements qui leur 
 manquent. 
-
+Dans un premier temps, l'instance $idA$ créer le Network Bridge associé à 
+l'instance à laquelle elle cherche à se connecter. Une fois la connexion établie, les 
+deux instances échangent l'état de leur méta-données et se synchronisent. Les 
+échangent de méta-données se font de manière asynchrone. Il se peut donc 
+qu'une même information soit demandée à différentes instances. La réponse est 
+ignorée si l'information est déjà présente sur l'instance qui a demandé cette 
+information. Cette mécanique permet d'accélérer la récupération des informations 
+à partir de plusieurs instances.
 
 \begin{algorithm} % enter the algorithm environment
 	\caption{Synchronisation d'un n\oe ud de l'Event Store partagé} % 
@@ -279,12 +315,10 @@ orientés état (CvRDTs ou \textit{\textbf{convergent} replicated data types}) e
 data types}). Les \glspl{CRDT} orientés état sont conçus pour disséminer un 
 état parmi les répliques alors que les \glspl{CRDT} basés opérations sont conçus 
 pour disséminer des opérations.
-
 Les répliques de CmRDT sont garanties de converger si les opérations sont 
 disséminées au travers d'un intergiciel à transmission fiable et causale 
 (\textit{reliable causal broadcast} (RCB)) et si leurs opérations concurrentes sont 
 commutatives.
-
 Les CvRDTs ne nécessitent pas d'intergiciel de messagerie mais une bande 
 passante croissante dû à l'augmentation de la taille de l'état. La convergence 
 passe par une fonction de fusion définie comme une jointure.
@@ -302,12 +336,10 @@ sont très proches des phases de mise à jour des entités en \gls{ES},
 la commande }(\textit{command handler}) et \textbf{traitement des événements} 
 (\textit{event 
 publisher}). 
-
 Durant le \textbf{traitement de la commande}, une commande entrante peut être 
 validée en fonction de l'état de l'entité sur lequel elle est appliquée et, si elle l'est, 
 un événement représentant l'effet de la commande est inscrit dans le journal 
 d'événements. Cela correspond à la phase de préparation d'un CmRDT. 
-
 Durant la 
 phase de \textbf{traitement des événements}, l'événement écrit est consommé à 
 partir du journal d'événements et utilisé pour mettre à jour l'état courant de l'entité. 
@@ -316,7 +348,6 @@ CmRDT local durant la phase \textbf{effet}. Le \gls{CQRS} associé à l'\gls{ES}
 distingue ces deux phases et fournit une couche d'abstraction supplémentaire 
 permettant à l'application de définir des 
 commandes et des traitements d'événements spécifiques au domaine.
-
 Les CmRDTs et les entités issus de l'\gls{ES} doivent pouvoir à la fois 
 consommer des événements issues d'autres acteurs et produire des événements 
 pour les autres acteurs. Cette collaboration est nécessaire pour déployer plusieurs 
