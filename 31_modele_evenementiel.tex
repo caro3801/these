@@ -346,13 +346,18 @@ accrochées les différentes projections. Les projections sont nourries à parti
 événements publiés auxquels elles sont abonnées. Enfin, une Vue (composant
 inclus dans l'\gls{IU}) récupère les \glspl{DTO}
 contenant les mises à jour à partir d'une projection. La mise à jour d'une Vue peut 
-se faire de manière passive -- mode \textit{push} -- (ex. : mises à jour liées à la 
-visualisation \gls{3D} des modifications des collaborateurs en temps réel) ou 
-active -- mode \textit{pull} -- (ex : aller sur une autre scène) selon le contexte.
+se faire de manière \textit{passive} ou \textit{active}. La mise à jour passive est 
+utilisée dans le cas des mises à jour liées à la 
+visualisation \gls{3D} des modifications des collaborateurs en temps réel par 
+exemple. La projection va envoyer les nouvelles informations de mise à jour sans 
+attendre de la Vue qu'elle les demande. Concernant le cas par exemple d'un 
+changement de scène, les mises à jour sont demandées de manière active et 
+explicite par la Vue à la projection. L'utilisation de ces deux modes dépend du 
+contexte et des besoins de la vue.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\columnwidth]{eps/cqrs2.pdf}
+	\includegraphics[width=\columnwidth]{eps/cqrs3.png}
 	\caption[Modèle de l'architecture client dans 3DEvent]{Modèle de l'architecture 
 		client dans 3DEvent : la gestion du cycle de vie des données avec 
 		\gls{CQRS} 
@@ -371,8 +376,12 @@ comme \og soumis\fg{} (\textit{uncommitted}) mais pas encore \og publiés\fg{}
 Une commande peut être rejetée pour des raisons variées. Ces raisons sont 
 exprimées par différentes phases de validation de la commande.
 Une première validation se fait en amont de la création de la commande, avec par 
-exemple une vérification de type des paramètres passés à la commande directement
-dans l'\gls{IU}.
+exemple une vérification de type des paramètres passés à la commande 
+directement dans l'\gls{IU}. Cette validation est nécessaire dans le cadre 
+d'application web où un utilisateur malveillant peut altérer les paramètres en 
+modifiant le code dans le navigateur. Il est également nécessaire de faire cette 
+vérification si le service de gestion des commandes est exposé sous la forme 
+d'une \gls{API}, pour garantir la sécurité d'exécution des commandes.
 
 Le patron \glsreset{ES}\gls{ES} permet de capturer tous les changements d'état 
 d'une application sous la forme d'une séquence d'événements. 
@@ -614,7 +623,8 @@ une translation $MeshTrans\-latedEvent$ sur le maillage
 $mesh1$ au moment où $UserB$ a effectué une rotation $MeshRotatedEvent$ sur ce 
 même objet. Lors de la sauvegarde des événements, la version de l'agrégat 
 $mesh1$ est différente chez chacun des deux utilisateurs. Le module détecteur de conflits 
-contient un registre des procédures à suivre en fonction des événements qui sont en conflit entre eux. L'algorithme \ref{algo:conflictregister} 
+contient un registre des procédures à suivre en fonction des événements qui sont 
+en conflit entre eux. L'algorithme \ref{algo:conflictregister} 
 présente la fonction utilisée pour détecter des conflits dans une liste d'événements donnée. La fonction permet de savoir si un conflit est 
 levé à partir de la liste d'événements donnée et du registre des conflits.
 
