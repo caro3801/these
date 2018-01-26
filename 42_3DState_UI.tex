@@ -111,8 +111,17 @@ résume les différents choix techniques effectués dans 3DState.
 \end{table}
 			
 			\paragraph{Testabilité}
-La testabilité de l'application est nulle car tous les composants sont fortement liés 
-entre eux. Cela ne permet pas de tester proprement les différents blocs du 
-prototype. La collaboration est compliquée à observer dans un environnement 
+Les composants de l'application sont fortement liés 
+entre eux, ce qui rend la testabilité de l'application difficile. La testabilité est 
+réduite au test manuel de l'interface car les différents niveaux d'interaction ne sont 
+pas disjoints (local, distant, collaboratif). D'un point de vue réseau, cette 
+architecture ne permet pas de mesurer de manière objective des temps de 
+réponse et d'échange du fait de cette implantation. Cependant, WebRTC intègre 
+une API permettant de récolter des statistiques sur les échanges qui auraient pu 
+être collectée afin d'observer les échanges durant une session collaborative. Ce 
+faisant, l'observation de la collaboration reste compliquée dans un environnement 
 implanté comme 3DState car l'approche orientée états ne rend pas compte des 
 intentions des utilisateurs.
+
+
+

@@ -270,9 +270,13 @@ d'instances différentes.
 \end{table}
 
 \paragraph{Testabilité}
-La testabilité de l'application est aisément envisageable car tous les composants 
-sont faiblement couplés entre eux. 
-Chaque bloc de l'\gls{IU} est isolé. Le caractère fonctionnel de l'\gls{ES} permet de 
+La testabilité des composantes de l'application est aisément envisageable car ils
+sont faiblement couplés entre eux. Tant côté côté traitement que \gls{UI}, chaque 
+composant est isolé des autres. La séparation des responsabilités entre les 
+différents objets du domaine portée par le \gls{DDD} est un avantage conséquent 
+pour tester les différents composants. De plus, le caractère fonctionnel de 
+l'\gls{ES} permet 
+de 
 faire des simulations illimitées \cite{Erb2014} sans perturber le fonctionnement de 
 l'application. De plus l'implantation d'un intergiciel \gls{P2P} en sur-couche sur 
 NodeJS ou le navigateur peut permettre de simuler une multitude de faux 
