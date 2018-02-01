@@ -91,8 +91,8 @@ Les paramètres des opérations fondamentales effectuées sur la base de donnée
 \subsubsection{Gestion de la synchronisation et de la cohérence}
 \label{sec:synchronisation-client-serveur}
 
-Les travaux \cite{Desprat2015a} et \cite{Desprat2015b} présentent une version 
-naïve du processus de synchronisation. La cohérence est garantie par un système 
+Le processus de synchronisation utilisé dans cette architecture reste simple dans 
+sa conception et son implémentation. La cohérence est garantie par un système 
 de verrouillage des objets. Cela évite notamment les sélections concurrentes et par 
 conséquent les éditions concurrentes. 
 Lors de la récupération de la scène, elle est considérée comme cohérente. 

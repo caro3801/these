@@ -94,29 +94,26 @@ est d'obtenir une architecture de communication :
 \end{itemize}
 
 
-Tous les travaux liés à cette thèse, 
-\cite{Desprat2015a,Desprat2015b} ainsi que \cite{Desprat2016,Desprat2017}, 
-s'appuient sur une 
+Tous les travaux liés à cette thèse s'appuient sur une 
 architecture de communication hybride tripartite (Figure \ref{fig:hybrid}) pour 
 faire de la modélisation \gls{3D} collaborative : serveur, persistance 
 et les pairs\footnote{Les pairs sont appelés \og Clients\fg{} dans les premiers 
 travaux}. 
 
-Les contributions portées par Desprat et al. dans 
-\cite{Desprat2015a,Desprat2015b} 
-s'appuient sur des pairs ayant un rôle simple et proposent une transmission des 
+Dans un premier temps, l'architecture s'appuie sur des pairs ayant un rôle simple 
+et proposent une transmission des 
 mises à jour en tant que différentiel d'état. Les conflits lors d'opérations 
 concurrentes sont évités grâce à un mécanisme de verrouillage. Le verrouillage 
 est géré de manière centralisée par le serveur et la base de données indiquant le 
 statut de l'objet à l'utilisateur le requérant lors qu'il est sélectionné. En cas 
 d'inter-blocage, les objets sont libérés après un certains temps configuré par le 
 serveur.
-Plus tard, dans \cite{Desprat2016}, les auteurs mettent en place le modèle 
-orienté événements qui impose l'évolution, au niveau réseau, du protocole 
+Plus tard, la mise en place du modèle 
+orienté événements impose l'évolution, au niveau réseau, du protocole 
 de transmission (celui-ci reposant sur 
 des notifications d'événements et la gestion des flux d'agrégats). 
-Plus récemment, dans \cite{Desprat2017}, est apparue la distinction entre 
-les deux rôles parmi les pairs : la 
+Enfin, la création de deux rôles pour les pairs permet de distinguer leurs 
+responsabilités : la 
 partie serveur se compose désormais de pairs qui ont un rôle de vérification 
 de la cohérence et de relais des données dans la couche \gls{P2P}. Cette 
 contribution intervient dans le but d'encourager la résilience du système et la 
@@ -208,9 +205,9 @@ Le contenu partagé est stocké localement sur le pair -- pour pouvoir être
 accessible par d'autres pairs --, ainsi que l'interface de l'application du pair courant. 
 Le contenu doit être organisé pour la recherche d'informations afin de fournir une 
 indexation et une interface de requête. 
-L'espace de stockage pour les données partagées va correspondre aux différents 
-états des agrégats \cite{Desprat2015a,Desprat2015b} ou au journal d'événements 
-\cite{Desprat2016,Desprat2017}.
+L'espace de stockage pour les données partagées va correspondre, selon le 
+modèle, aux différents 
+états des agrégats ou au journal d'événements.
 
 
 La dernière fonction concerne la manière dont le pair auto-organise, à la fois, ses 
