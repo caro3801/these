@@ -16,7 +16,9 @@
 %
 
 \documentclass{book}
-
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
 % Loading the tlsflyleaf.sty package require some option to define the
 % establishment name, the doctoral school and the PhD speciality.
 % In that aim you have 2 key-value option:
@@ -35,13 +37,13 @@
 % - defence date
 % - laboratory
 % - cotutelle
-\title{\textbf{\large Architecture \'ev\'enementielle pour les environnements virtuels 
-collaboratifs sur le web : Application \`a la manipulation et \`a la visualisation 
+\title{\textbf{\large Architecture événementielle pour les environnements virtuels 
+collaboratifs sur le web : Application à la manipulation et à la visualisation 
 d'objets 3D}}
 \author{Caroline DESPRAT}
 \defencedate{01/12/2017}
 \lab{Institut de Recherche en Informatique de Toulouse (UMR 5505)}
-%\cotutelle{Nom de l'\'etablissement}
+%\cotutelle{Nom de l'établissement}
 
 % ==================
 % Setup people like your boss, the jury team and the referees
@@ -55,33 +57,33 @@ d'objets 3D}}
 %     <number>   is the rank for printing the person. 
 %                Only number <= "\npeople" will be printed
 %     <name>     First name and las name of the people
-%     <status>   Is (s)he a "charg\'e de recher" ou un "professeur d'universit\'e"...
+%     <status>   Is (s)he a "chargé de recher" ou un "professeur d'université"...
 %     <other>    What ever string you want to add (laboratory, jury member place...).
 %% Boss
 \nboss{2}
-\makesomeone{boss}{2}{Jean-Pierre JESSEL}{Professeur d'Universit\'e}{}  % Sera 
+\makesomeone{boss}{2}{Jean-Pierre JESSEL}{Professeur d'Université}{}  % Sera 
 %affiche en second
-\makesomeone{boss}{1}{Herv\'e LUGA}{Professeur d'Universit\'e}{} % Sera afiche 
+\makesomeone{boss}{1}{Hervé LUGA}{Professeur d'Université}{} % Sera afiche 
 %en premier
 %% Referee
 \nreferee{2}
 \makesomeone{referee}{1}{Thierry DUVAL}{}{}
-\makesomeone{referee}{2}{Guillaume LAVOU\'E}{}{}
+\makesomeone{referee}{2}{Guillaume LAVOUÉ}{}{}
 %% Judges
 \njudge{6}
 \makesomeone{judge}{1}{Thierry DUVAL}{Professeur IMT, 
 IMT-Atlantique}{Rapporteur}
 \makesomeone{judge}{2}{Jean-Pierre JESSEL}{Professeur 
-des Universit\'es, Universit\'e de Toulouse}{Co-directeur}
-\makesomeone{judge}{3}{Guillaume LAVOU\'E}{Ma\^itre de 
-	Conf\'erences - HDR, INSA-Lyon}{Rapporteur}
-\makesomeone{judge}{4}{Herv\'e LUGA}{Professeur des Universit\'es, Universit\'e 
+des Universités, Université de Toulouse}{Co-directeur}
+\makesomeone{judge}{3}{Guillaume LAVOUÉ}{Ma\^itre de 
+	Conférences - HDR, INSA-Lyon}{Rapporteur}
+\makesomeone{judge}{4}{Hervé LUGA}{Professeur des Universités, Université 
 de 
 Toulouse}{Directeur}
-\makesomeone{judge}{5}{G\'eraldine MORIN}{Ma\^itre de 
-Conf\'erences - HDR, ENSEEIHT}{Examinatrice}
+\makesomeone{judge}{5}{Géraldine MORIN}{Ma\^itre de 
+Conférences - HDR, ENSEEIHT}{Examinatrice}
 \makesomeone{judge}{6}{Nancy RODRIGUEZ}{Ma\^itre de 
-Conf\'erences, Universit\'e Montpellier}{Examinatrice}
+Conférences, Université Montpellier}{Examinatrice}
 % ============================================================
 % DOCUMENT
 \begin{document}
