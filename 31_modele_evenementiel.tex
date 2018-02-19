@@ -421,10 +421,14 @@ selon les applications :
 
 \subsection{Journal des événements}
 
-Les événements produits par un des composants présentés ci-dessus
-peuvent être consommés par d'autres de ces composants s'ils partagent un 
-journal d'événements local ou distribué. Un journal d'événements (ou Event Store) 
-est composé d'agrégats versionnés qui contiennent les instances d'événements 
+Les événements issus du journal d'événements (ou Event Store), en passant 
+dans la partie \og 
+lecture\fg{} du modèle \gls{CQRS} peuvent être consommés par différentes 
+projections accrochées au bus d'événement. De cette manière, une fois le journal 
+d'événements synchronisé, les projections locales sont identiques (à une 
+cohérence éventuelle près). 
+Un journal d'événements est composé d'agrégats versionnés qui contiennent les 
+instances d'événements 
 (Figure \ref{fig:event-store}).
 Un journal d'événements peut fonctionner sur un seul site ou être répliqué sur 
 plusieurs sites. 
